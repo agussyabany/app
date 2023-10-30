@@ -45,22 +45,20 @@ class AuthController extends Controller
             'password' => 'required|string|confirmed|min:6',
         ]);
 
+
+        if($validator->fails()){
+            return response()->json($validator->errors()->toJson(), 400);
+        }
+        $user = User::create(array_merge(
+                    $validator->validated(),
+                    ['password' => bcrypt($request->password)]
+                ));
         return response()->json([
             'message' => 'User successfully registered',
-            'user' => $request
+            'user' => $user
         ], 201);
-        // if($validator->fails()){
-        //     return response()->json($validator->errors()->toJson(), 400);
-        // }
-        // $user = User::create(array_merge(
-        //             $validator->validated(),
-        //             ['password' => bcrypt($request->password)]
-        //         ));
-        // return response()->json([
-        //     'message' => 'User successfully registered',
-        //     'user' => $user
-        // ], 201);
     }
+
 
     /**
      * Log the user out (Invalidate the token).
