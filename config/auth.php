@@ -14,6 +14,7 @@ return [
     */
 
     'defaults' => [
+        'guard' => 'api',
         'guard' => 'web',
         'passwords' => 'users',
     ],
@@ -97,6 +98,12 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
+    ],
+
+    'api' => [
+        'driver' => 'jwt',
+        'provider' => 'users',
+        'hash' => false,
     ],
 
     /*

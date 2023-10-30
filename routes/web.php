@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProfileController;
 use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
+use Symfony\Component\HttpKernel\Profiler\Profile;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,9 +36,22 @@ Route::get('admin',function (){
 })->middleware('auth','verified','role:admin');
 
 
-Route::get('api',function (){
-    return '<h1>Hello API<h1>';
-})->middleware('auth','verified','role:api|admin');
+// Route::middleware('auth','verified','role:api|admin')->group(function () {
+   
+
+// });
+
+Route::group([
+    'middleware' => 'api',
+    //'prefix' => 'auth'
+], function ($router) {
+    Route::post('/login', [AuthController::class, 'login']);
+    Route::post('/register', [AuthController::class, 'register']);
+    Route::post('/logout', [AuthController::class, 'logout']);
+    Route::post('/refresh', [AuthController::class, 'refresh']);
+    Route::get('/user-profile', [AuthController::class, 'userProfile']);    
+});
+
 
 
 require __DIR__.'/auth.php';
