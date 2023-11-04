@@ -18,7 +18,7 @@ use Symfony\Component\HttpKernel\Profiler\Profile;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('login');
 });
 
 Route::get('/dashboard', function () {
@@ -35,12 +35,10 @@ Route::get('admin',function (){
     return '<h1>Hello Admin<h1>';
 })->middleware('auth','verified','role:admin');
 
+Route::middleware('auth','verified','role:aset')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
 
-// Route::middleware('auth','verified','role:api|admin')->group(function () {
-
-
-// });
-
+});
 
 
 
