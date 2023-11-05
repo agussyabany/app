@@ -1,10 +1,14 @@
 <?php
 
+// use App\Http\Controllers\Aset\AsetController;
+
+use App\Http\Controllers\Aset\AsetDashboardController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProfileController;
 use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 use Symfony\Component\HttpKernel\Profiler\Profile;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -36,7 +40,7 @@ Route::get('admin',function (){
 })->middleware('auth','verified','role:admin');
 
 Route::middleware('auth','verified','role:aset')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::get('/aset.dashboard',[AsetDashboardController::class, 'index']);
 
 });
 

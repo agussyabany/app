@@ -32,8 +32,8 @@ class AuthenticatedSessionController extends Controller
            return redirect('admin');
         }
 
-        if (Auth::user()->hasRole('api')) {
-            return redirect()->to('api');
+        if (Auth::user()->hasRole('aset')) {
+            return redirect()->to('/aset.dashboard');
          }
 
         return redirect()->intended(RouteServiceProvider::HOME);
