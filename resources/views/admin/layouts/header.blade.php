@@ -2,7 +2,7 @@
 
 
 <div class="container-fluid">
-  
+
   <div class="row">
     <header class="bg-primary text-white">
       <div class="container">
@@ -12,7 +12,7 @@
                   <span class="navbar-toggler-icon"></span>
               </button>
               <div class="collapse navbar-collapse" id="navbarNav">
-                 
+
               </div>
           </nav>
       </div>
@@ -47,16 +47,39 @@
               <li class="nav-item">
                   <button type="button" id="bahan" style="width: 100%">Bahan</button>
               </li>
-              <li class="nav-item">
-                  <span class="nav-link text-center disabled">K . I . B</span>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link" href="#">Item 3</a>
-              </li>
+
+
+                <li class="nav-item">
+                    <span class="nav-link text-center disabled">K . I . B</span>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">TANAH</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">PERALATAN DAN MESIN</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">GEDUNG DAN BANGUNAN</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">JALAN , IRIGASI DAN JARINGAN</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">ASET TETAP LAINNYA</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">KONSTRUKSI</a>
+                </li>
+
+                <li class="nav-item">
+                    <span class="nav-link text-center disabled">PENGATURAN</span>
+                </li>
+
+
           </ul>
       </div>
   </nav>
-  
+
 
 
 

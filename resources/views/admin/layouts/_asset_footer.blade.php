@@ -6,3 +6,4 @@
   crossorigin="anonymous">
 </script>
 <script src="{{ asset('assets/boots/js/myjs/menu.js')}}"></script>
+<script src="{{ asset('assets/boots/js/myjs/table.js') }}"></script>

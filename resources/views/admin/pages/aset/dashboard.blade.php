@@ -9,24 +9,23 @@
 
 
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-      <div class="container">
+      {{-- <div class="container"> --}}
         <ul class="nav nav-tabs" id="myTabs" role="tablist">
-            
+
         </ul>
         <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade show" id="tab2" role="tabpanel" aria-labelledby="tab2-tab">
-                <p>Isi Tab 2</p>
+            <div class="container">
+
             </div>
-            
         </div>
     </div>
     </main>
 </div>
-    
 
 
-  
- 
+
+
+
 
 
 @endsection
