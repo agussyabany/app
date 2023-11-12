@@ -5,5 +5,12 @@
   integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
   crossorigin="anonymous">
 </script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
 <script src="{{ asset('assets/boots/js/myjs/menu.js')}}"></script>
-<script src="{{ asset('assets/boots/js/myjs/table.js') }}"></script>
+<script>
+    $(document).ready(function() {
+
+
+        });
+</script>

@@ -39,8 +39,11 @@ Route::get('admin',function (){
     return '<h1>Hello Admin<h1>';
 })->middleware('auth','verified','role:admin');
 
+
+
 Route::middleware('auth','verified','role:aset')->group(function () {
     Route::get('/aset.dashboard',[AsetDashboardController::class, 'index']);
+    Route::get('/barang',[AsetDashboardController::class, 'barang']);
 
 });
 

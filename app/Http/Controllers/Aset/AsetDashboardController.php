@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Aset;
 
 use App\Http\Controllers\Controller;
+use App\Models\Aset\Barang;
 use Illuminate\Http\Request;
 
 class AsetDashboardController extends Controller
@@ -11,4 +12,14 @@ class AsetDashboardController extends Controller
     {
         return view('admin.pages.aset.dashboard');
     }
+
+    public function barang()
+    {
+        $barang = Barang::all();
+        return response()->json([
+            'data' => $barang
+          ]);
+    }
+
+
 }

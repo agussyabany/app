@@ -19,13 +19,59 @@ $(document).ready(function() {
             '</li>'
             );
             $(document).ready(function() {
-                // Menambahkan konten tab setelah dokumen siap
-                $('#myTabContent').append(
-                    '<br><div class="tab-pane fade" id="barang_tab" role="tabpanel" aria-labelledby="tab_barang">' +
-                         '<div class="container"> <div class="card"><div class="card-header">DATA BARANG</div><div class="card-body" id=tbl_barang></div></div>' +
-                    '</div>'
-                );
-            });
+
+                    $('#myTabContent').append(
+                        '<br>' +
+                        '<div class="tab-pane show" id="barang_tab" role="tabpanel" aria-labelledby="tab_barang">' +
+                            '<div class="container">' +
+                                '<div class="card">'+
+                                    '<div class="card-header">DATA BARANG</div>' +
+                                        '<div class="card-body" id=tbl_barang>' +
+                                            '<table class="table table-striped" id="aset">'+
+                                                '<thead>' +
+                                                '<tr>' +
+                                                    // '<th>NO</th>' +
+                                                    '<th>Golongan</th>'+
+                                                    '<th>Nama Barang</th>'+
+                                                    '<th>Kode Barang</th>' +
+
+                                                '<tr>'+
+                                                '</thead>'+
+                                                '<tbody>' +
+
+                                                '</tbody>'+
+                                            '</table>' +
+                                        '</div>' +
+                                    '</div>' +
+                                '</div>'
+                                );
+                            });
+
+
+
+                $.get('/barang', function(data) {
+                     var i = 0;
+                    var table = $("#aset").DataTable();
+                    $.each(data.data, function(index, item) {
+                        table.row.add([
+                             ++i,
+                            item.golongan,
+                            item.nama_barang,
+                            item.kode_barang,
+
+                        ]).draw();
+                    });
+                });
+
+                $('#aset').DataTable({
+                    paging: true,
+                    searching: true,
+                    ordering: true,
+                    info: true,
+                    responsive: true,
+                    // Add other options as needed
+                });
+
         });
         $(document).on('click', '#barang_x', function() {
             $('#tab_barang').parent().remove(); // Hapus tab
@@ -173,7 +219,7 @@ $(document).ready(function() {
                 // Menambahkan konten tab setelah dokumen siap
                 $('#myTabContent').append(
                     '<div class="tab-pane fade" id="dok_tab" role="tabpanel" aria-labelledby="tab_dok">' +
-                        '<div class="container"> <div class="card"><div class="card-header">DATA BARANG</div> </div>' +
+                        '<div class="container"> <div class="card"><div class="card-header">DATA DOKUMEN</div> </div>' +
                     '</div>'
                 );
             });
