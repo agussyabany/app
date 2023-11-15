@@ -13,17 +13,16 @@
 </head>
 
     <body>
-        
-       
+
+
             @include('admin.layouts.header')
             @yield('content')
             @stack('scripts')
             @include('admin.layouts.footer')
+        </body>
+    </html>
             @include('admin.layouts._asset_footer')
-       
-        {{-- //@include('sweetalert::alert') --}}
-       
-    
-</body>
 
-</html>
+        {{-- //@include('sweetalert::alert') --}}
+
+

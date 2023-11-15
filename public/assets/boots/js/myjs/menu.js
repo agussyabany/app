@@ -1,12 +1,12 @@
 $(document).ready(function() {
-    $('#barang').addClass('text-start btn btn-default');
-    $('#divisi').addClass('text-start btn btn-default');
-    $('#departemen').addClass('text-start btn btn-default');
-    $('#ruang').addClass('text-start btn btn-default');
-    $('#sdm').addClass('text-start btn btn-default');
-    $('#lokasi').addClass('text-start btn btn-default');
-    $('#dokumen').addClass('text-start btn btn-default');
-    $('#bahan').addClass('text-start btn btn-default');
+    $('#barang').addClass('text-start btn btn-primary hoverable');
+    $('#divisi').addClass('text-start btn btn-default hoverable');
+    $('#departemen').addClass('text-start btn btn-default hoverable');
+    $('#ruang').addClass('text-start btn btn-default hoverable');
+    $('#sdm').addClass('text-start btn btn-default hoverable');
+    $('#lokasi').addClass('text-start btn btn-default hoverable');
+    $('#dokumen').addClass('text-start btn btn-default hoverable');
+    $('#bahan').addClass('text-start btn btn-default hoverable');
 
     //BARANG
     $('#barang').on('click', function() {
@@ -15,64 +15,63 @@ $(document).ready(function() {
         $('#divisi,#departemen,#ruang,#sdm,#lokasi,#dokumen,#bahan').addClass('btn btn-defult');
         $("#myTabs").append(
             '<li class="nav-item" >' +
-                '<a class="nav-link" id="tab_barang" data-bs-toggle="tab" href="#barang_tab" role="tab" aria-controls="tab2" aria-selected="false">BARANG<button type="submit"  id="barang_x" class="" ></button></a>' +
+                '<a class="nav-link border" id="tab_barang" data-bs-toggle="tab" href="#barang_tab" role="tab" aria-controls="tab2" aria-selected="false">BARANG &nbsp;<button type="submit"  id="barang_x" class="fa-solid fa-x rounded" ></button></a>' +
             '</li>'
             );
             $(document).ready(function() {
 
-                    $('#myTabContent').append(
-                        '<br>' +
-                        '<div class="tab-pane show" id="barang_tab" role="tabpanel" aria-labelledby="tab_barang">' +
-                            '<div class="container">' +
-                                '<div class="card">'+
-                                    '<div class="card-header">DATA BARANG</div>' +
-                                        '<div class="card-body" id=tbl_barang>' +
-                                            '<table class="table table-striped" id="aset">'+
-                                                '<thead>' +
-                                                '<tr>' +
-                                                    // '<th>NO</th>' +
-                                                    '<th>Golongan</th>'+
-                                                    '<th>Nama Barang</th>'+
-                                                    '<th>Kode Barang</th>' +
+                    $('#myTabContent').prepend('<br>' +
+                    '<div class="tab-pane show " id="barang_tab" role="tabpanel" aria-labelledby="tab_barang">'+'<div class="container">'+
+                        '<div class="card">'+
+                            '<div class="card-header">DATA BARANG <div class="position-absolute top-0 end-0"><button class="btn  btn-primary" id="tambah_barang"><i class="fa-solid fa-file-circle-plus"></i></button></div></div>'+
+                                '<div class="card-body" id=tbl_barang>'+
+                                    '<table class="table table-striped" id="aset">'+
+                                        '<thead>'+
+                                            '<tr>'+
+                                                '<th>NO</th>'+
+                                                '<th>Golongan</th>'+
+                                                '<th>Nama Barang</th>'+
+                                                '<th>Kode Barang</th>'+
+                                                '<th>Aksi</th>'+
+                                            '</tr>'+
+                                        '</thead>'+
+                                        '<tbody>'+
+                                        '</tbody>'+
+                                    '</table>'+
+                                '</div>'+
+                            '</div>'+
+                        '</div>' );
 
-                                                '<tr>'+
-                                                '</thead>'+
-                                                '<tbody>' +
+                    $.get('/barang', function(data) {
+                        var i = 0;
+                        var table = $("#aset").DataTable();
+                        $.each(data.data, function(index, item) {
+                            table.row.add([
+                                 ++i,
+                                item.golongan,
+                                item.nama_barang,
+                                item.kode_barang,
+                                item.id
+                                ? '<a class="btn btn-sm btn-warning" data-id="' + item.id + '" id="edit_barang" href="#"><i class="fa-solid fa-edit"></i></a> ' +
+                                  '<a class="btn btn-sm btn-danger" data-id="' + item.id + '" id="hapus_barang" href="#"><i class="fa-solid fa-trash"></i></a>'
+                                : ''
 
-                                                '</tbody>'+
-                                            '</table>' +
-                                        '</div>' +
-                                    '</div>' +
-                                '</div>'
-                                );
-                            });
 
-
-
-                $.get('/barang', function(data) {
-                     var i = 0;
-                    var table = $("#aset").DataTable();
-                    $.each(data.data, function(index, item) {
-                        table.row.add([
-                             ++i,
-                            item.golongan,
-                            item.nama_barang,
-                            item.kode_barang,
-
-                        ]).draw();
+                            ]).draw();
+                        });
                     });
                 });
-
                 $('#aset').DataTable({
                     paging: true,
                     searching: true,
                     ordering: true,
-                    info: true,
+                    info: false,
                     responsive: true,
                     // Add other options as needed
                 });
+            });
 
-        });
+
         $(document).on('click', '#barang_x', function() {
             $('#tab_barang').parent().remove(); // Hapus tab
             $('#barang_tab').remove(); // Hapus konten tab
@@ -86,7 +85,7 @@ $(document).ready(function() {
         $('#barang,#departemen,#ruang,#sdm,#lokasi,#dokumen,#bahan').addClass('btn btn-defult');
         $("#myTabs").append(
             '<li class="nav-item" >' +
-                '<a class="nav-link" id="tab_div" data-bs-toggle="tab" href="#div_tab" role="tab" aria-controls="tab2" aria-selected="false">SDM<button type="submit"  id="div_x" class="" ></button></a>' +
+                '<a class="nav-link" id="tab_div" data-bs-toggle="tab" href="#div_tab" role="tab" aria-controls="tab2" aria-selected="false">SDM &nbsp;<button type="submit"  id="div_x" class="fa-solid fa-x rounded" ></button>/a>' +
             '</li>'
             );
             $(document).ready(function() {
@@ -111,7 +110,7 @@ $(document).ready(function() {
         $('#barang,#ruang,#sdm,#lokasi,#dokumen,#bahan,#divisi').addClass('btn btn-defult');
         $("#myTabs").append(
             '<li class="nav-item" >' +
-                '<a class="nav-link" id="tab_dep" data-bs-toggle="tab" href="#dep_tab" role="tab" aria-controls="tab2" aria-selected="false">DEPARTEMEN<button type="submit"  id="dep_x" class="" ></button></a>' +
+                '<a class="nav-link" id="tab_dep" data-bs-toggle="tab" href="#dep_tab" role="tab" aria-controls="tab2" aria-selected="false">DEPARTEMEN &nbsp;<button type="submit"  id="dep_x" class="fa-solid fa-x rounded" ></button></a>' +
             '</li>'
             );
             $(document).ready(function() {
@@ -137,7 +136,7 @@ $(document).ready(function() {
         $('#divisi,#departemen,#sdm,#lokasi,#dokumen,#bahan,#barang').addClass('btn btn-defult');
         $("#myTabs").append(
             '<li class="nav-item" >' +
-                '<a class="nav-link" id="tab_ruang" data-bs-toggle="tab" href="#ruang_tab" role="tab" aria-controls="tab2" aria-selected="false">RUANGAN<button type="submit"  id="ruang_x" class="" ></button></a>' +
+                '<a class="nav-link" id="tab_ruang" data-bs-toggle="tab" href="#ruang_tab" role="tab" aria-controls="tab2" aria-selected="false">RUANGAN &nbsp;<button type="submit"  id="ruang_x" class="fa-solid fa-x rounded" ></button></a>' +
             '</li>'
             );
             $(document).ready(function() {
@@ -162,7 +161,7 @@ $(document).ready(function() {
         $('#divisi,#departemen,#ruang,#barang,#lokasi,#dokumen,#bahan').addClass('btn btn-defult');
         $("#myTabs").append(
             '<li class="nav-item" >' +
-                '<a class="nav-link" id="tab_sdm" data-bs-toggle="tab" href="#sdm_tab" role="tab" aria-controls="tab2" aria-selected="false">SDM<button type="submit"  id="sdm_x" class="" ></button></a>' +
+                '<a class="nav-link" id="tab_sdm" data-bs-toggle="tab" href="#sdm_tab" role="tab" aria-controls="tab2" aria-selected="false">SDM &nbsp;<button type="submit"  id="sdm_x" class="fa-solid fa-x rounded"></button></a>' +
             '</li>'
             );
             $(document).ready(function() {
@@ -187,7 +186,7 @@ $(document).ready(function() {
         $('#divisi,#departemen,#ruang,#barang,#dokumen,#bahan,#sdm').addClass('btn btn-defult');
         $("#myTabs").append(
             '<li class="nav-item" >' +
-                '<a class="nav-link" id="tab_lokasi" data-bs-toggle="tab" href="#lokasi_tab" role="tab" aria-controls="tab2" aria-selected="false">LOKASI<button type="submit"  id="lokasi_x" class="" ></button></a>' +
+                '<a class="nav-link" id="tab_lokasi" data-bs-toggle="tab" href="#lokasi_tab" role="tab" aria-controls="tab2" aria-selected="false">LOKASI &nbsp;<button type="submit"  id="lokasi_x" class="fa-solid fa-x rounded" ></button></a>' +
             '</li>'
             );
             $(document).ready(function() {
@@ -212,7 +211,7 @@ $(document).ready(function() {
         $('#divisi,#departemen,#ruang,#barang,#lokasi,#bahan,#sdm').addClass('btn btn-defult');
         $("#myTabs").append(
             '<li class="nav-item" >' +
-                '<a class="nav-link" id="tab_dok" data-bs-toggle="tab" href="#dok_tab" role="tab" aria-controls="tab2" aria-selected="false">DOKUMEN<button type="submit"  id="dok_x" class="" ></button></a>' +
+                '<a class="nav-link" id="tab_dok" data-bs-toggle="tab" href="#dok_tab" role="tab" aria-controls="tab2" aria-selected="false">DOKUMEN &nbsp;<button type="submit"  id="dok_x" class="fa-solid fa-x rounded" ></button></a>' +
             '</li>'
             );
             $(document).ready(function() {
@@ -238,7 +237,7 @@ $(document).ready(function() {
         $('#divisi,#departemen,#ruang,#barang,#lokasi,#dokumen,#sdm').addClass('btn btn-defult');
         $("#myTabs").append(
             '<li class="nav-item" >' +
-                '<a class="nav-link" id="tab_bahan" data-bs-toggle="tab" href="#bahan_tab" role="tab" aria-controls="tab2" aria-selected="false">BAHAN<button type="submit"  id="bahan_x" class="" ></button></a>' +
+                '<a class="nav-link" id="tab_bahan" data-bs-toggle="tab" href="#bahan_tab" role="tab" aria-controls="tab2" aria-selected="false">BAHAN &nbsp;<button type="submit"  id="bahan_x" class="fa-solid fa-x rounded" ></button></a>' +
             '</li>'
             );
             $(document).ready(function() {

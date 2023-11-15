@@ -42,6 +42,9 @@ Route::get('admin',function (){
 
 
 Route::middleware('auth','verified','role:aset')->group(function () {
+    Route::get('/', function () {
+        return redirect('/aset.dashboard');
+    });
     Route::get('/aset.dashboard',[AsetDashboardController::class, 'index']);
     Route::get('/barang',[AsetDashboardController::class, 'barang']);
 
