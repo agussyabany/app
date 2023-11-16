@@ -3,6 +3,7 @@
 // use App\Http\Controllers\Aset\AsetController;
 
 use App\Http\Controllers\Aset\AsetDashboardController;
+use App\Http\Controllers\Aset\BarangController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProfileController;
 use GuzzleHttp\Middleware;
@@ -47,6 +48,7 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     });
     Route::get('/aset.dashboard',[AsetDashboardController::class, 'index']);
     Route::get('/barang',[AsetDashboardController::class, 'barang']);
+    Route::post('/barang.save',[BarangController::class,'save']);
 
 });
 

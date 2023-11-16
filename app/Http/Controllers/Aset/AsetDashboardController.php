@@ -15,7 +15,7 @@ class AsetDashboardController extends Controller
 
     public function barang()
     {
-        $barang = Barang::orderBy('id','ASC')->get();
+        $barang = Barang::orderBy('id','DESC')->get();
         return response()->json([
             'data' => $barang
           ]);
