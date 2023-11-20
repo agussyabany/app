@@ -22,137 +22,197 @@ $(document).ready(function() {
         //Dan Tombol lain menjadi notSelected
         $('#divisi,#departemen,#ruang,#sdm,#lokasi,#dokumen,#bahan').removeClass('btn btn-primary');
         $('#divisi,#departemen,#ruang,#sdm,#lokasi,#dokumen,#bahan').addClass('btn btn-defult');
+
         //Menampilkan Header Tab BARANG
         $("#myTabs").append(
             '<li class="nav-item" >' +
                 '<a class="nav-link border" id="tab_barang" data-bs-toggle="tab" href="#barang_tab" role="tab" aria-controls="tab2" aria-selected="false">BARANG &nbsp;<button type="submit"  id="barang_x" class="fa-solid fa-x rounded" ></button></a>' +
             '</li>'
             );
-            //Menampilkan Konten berupa HEAD tabel pada body TAB
+
+            $('#tab_barang').on('click', function() {
+                $('.tab-content').attr('id', 'konten_barang');
+                //Menampilkan Konten berupa HEAD tabel pada body TAB
             $(document).ready(function() {
 
-                    $('#myTabContent').prepend('<br>' +
-                    '<div class="tab-pane show " id="barang_tab" role="tabpanel" aria-labelledby="tab_barang">'+'<div class="container">'+
-                        '<div class="card">'+
-                            '<div class="card-header">DATA BARANG <div class="position-absolute top-0 end-0"><button class="btn  btn-primary" id="tambah_barang"><i class="fa-solid fa-file-circle-plus"></i></button></div></div>'+
-                                '<div class="card-body" id=tbl_barang>'+
-                                    '<table class="table table-striped" id="aset">'+
-                                        '<thead>'+
-                                            '<tr>'+
-                                                '<th>NO</th>'+
-                                                '<th>Golongan</th>'+
-                                                '<th>Nama Barang</th>'+
-                                                '<th>Kode Barang</th>'+
-                                                '<th>Aksi</th>'+
-                                            '</tr>'+
-                                        '</thead>'+
-                                        '<tbody>'+
-                                        '</tbody>'+
-                                    '</table>'+
-                                '</div>'+
+                $('#konten_barang').prepend('<br>' +
+                '<div class="tab-pane show " id="barang_tab" role="tabpanel" aria-labelledby="tab_barang">'+'<div class="container">'+
+                    '<div class="card">'+
+                        '<div class="card-header">DATA BARANG <div class="position-absolute top-0 end-0"><button class="btn  btn-primary" id="tambah_barang"><i class="fa-solid fa-file-circle-plus"></i></button></div></div>'+
+                            '<div class="card-body" id=tbl_barang>'+
+                                '<table class="table table-striped" id="aset">'+
+                                    '<thead>'+
+                                        '<tr>'+
+                                            '<th>NO</th>'+
+                                            '<th>Golongan</th>'+
+                                            '<th>Nama Barang</th>'+
+                                            '<th>Kode Barang</th>'+
+                                            '<th>Aksi</th>'+
+                                        '</tr>'+
+                                    '</thead>'+
+                                    '<tbody>'+
+                                    '</tbody>'+
+                                '</table>'+
                             '</div>'+
-                        '</div>' );
-                    //Menambahakan data ROW pada body tabel dari database
-                    $.get('/barang', function(data) {
-                        var i = 0;
-                        var table = $("#aset").DataTable();
-                        $.each(data.data, function(index, item) {
-                            var editButton = '<a class="btn btn-sm btn-warning edit-btn" data-id="' + item.id + '" href="#"><i class="fa-solid fa-edit"></i></a>';
-                            var deleteButton = '<a class="btn btn-sm btn-danger delete-btn" data-id="' + item.id + '" href="#"><i class="fa-solid fa-trash"></i></a>';
-                            table.row.add([
-                                 ++i,
-                                item.golongan,
-                                item.nama_barang,
-                                item.kode_barang,
-                                item.id ? editButton + '' + deleteButton : ''
-                            ]).draw();
-                         });
-                         //Jika klik <a class="btn btn-sm btn-warning edit-btn" data-id="' + item.id + '" href="#"><i class="fa-solid fa-edit"></i></a>maka menampilkan modal EDIT DATA
-                         $('#aset').on('click', '.edit-btn', function() {
+                        '</div>'+
+                    '</div>' );
+                //Menambahakan data ROW pada body tabel dari database
+                $.get('/barang', function(data) {
+                    var i = 0;
+                    var table = $("#aset").DataTable();
+                    $.each(data.data, function(index, item) {
+                        var editButton = '<a class="btn btn-sm btn-warning edit-btn" data-id="' + item.id + '" href="#"><i class="fa-solid fa-edit"></i></a>';
+                        var deleteButton = '<a class="btn btn-sm btn-danger delete-btn" data-id="' + item.id + '" href="#"><i class="fa-solid fa-trash"></i></a>';
+                        table.row.add([
+                             ++i,
+                            item.golongan,
+                            item.nama_barang,
+                            item.kode_barang,
+                            item.id ? editButton + '' + deleteButton : ''
+                        ]).draw();
+                     });
+
+                     $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            }
+                        });
+                     //Jika klik <a class="btn btn-sm btn-warning edit-btn" data-id="' + item.id + '" href="#"><i class="fa-solid fa-edit"></i></a>maka menampilkan modal EDIT DATA
+                     $('#aset').on('click', '.edit-btn', function() {
+                        var id = $(this).data('id');
+                        $.ajax({
+                            type: "GET",
+                            url: "/barang.edit/"+ id,
+                            success: function (data) {
+                                $.each(data.data, function (index, item) {
+                                $('#myModal').modal('show');
+                                $('#judul_modal').html('UPDATE BARANG');
+                                $('#modal_body').html('');
+                                $('.tombol').attr('id', 'edit_submit');
+                                $('#modal_body').prepend(
+                                    '<form action="" id="edit_barang">' +
+                                        '<input type="hidden" name="id" value = " ' + item.id + ' ">' +
+                                        '<select name="gol"  id="" class="form-control">' +
+                                            '<option value=" ' + item.golongan + ' ">' + item.golongan + '  </option>' +
+                                            '<option value="1">TANAH</option>' +
+                                            '<option value="2">PERALATAN DAN MESIN</option>' +
+                                            '<option value="3">GEDUNG DAN BANGUNAN</option>' +
+                                            '<option value="4">JALAN,IRIGASI DAN JARINGAN</option>' +
+                                            '<option value="5">KONSTRUKSI DALAM PENGERJAAN</option>' +
+                                            '<option value="6">KIR</option>' +
+                                        '</select><br>' +
+                                        '<input type="text" class="form-control" id="nama" name="nama" value=" ' + item.nama_barang + ' " placeholder="Nama Barang"><br>' +
+                                        '<input type="text" class="form-control" id="kode" name="kode" placeholder="Kode Barang" value = "' + item.kode_barang + '">' +
+                                    '</form>');
+                                })
+                            },
+                            error: function (data) {
+                                console.log('Error:', data);
+                            }
+                        });
+                     });
+                    //Hapus Data
+                     $('#aset').on('click', '.delete-btn', function() {
+                        var id = $(this).data('id');
+                        var del = confirm("Anda yakin menghapus data ini ?");
+                        if (del) {
                             $.ajax({
-                                type: "GET",
-                                url: "/barang.edit/"+ product_id,
-                                success: function (data) {
-                                    $('#myModal').modal('show');
-                                    $('#judul_modal').html('UPDATE BARANG');
-                                    $('#modal_body').html('');
-                                    $('#modal_body').prepend(
-                                        '<form action="" id="edit_barang">' +
-                                            '<select name="gol"  id="" class="form-control">' +
-                                                '<option value="">-PILIH GOLONGAN-</option>' +
-                                                '<option value="1">TANAH</option>' +
-                                                '<option value="2">PERALATAN DAN MESIN</option>' +
-                                                '<option value="3">GEDUNG DAN BANGUNAN</option>' +
-                                                '<option value="4">JALAN,IRIGASI DAN JARINGAN</option>' +
-                                                '<option value="5">KONSTRUKSI DALAM PENGERJAAN</option>' +
-                                                '<option value="6">KIR</option>' +
-                                            '</select><br>' +
-                                            '<input type="text" class="form-control" id="nama" name="nama" placeholder="Nama Barang"><br>' +
-                                            '<input type="text" class="form-control" id="kode" placeholder="Kode Barang">' +
-                                        '</form>');
+                                url: "/barang.hapus/" + id,
+                                type: "POST",
+                                dataType: 'json',
+                                beforeSend: function () {
+
                                 },
-                                error: function (data) {
-                                    console.log('Error:', data);
-                                }
+                                success: function (data) {
+                                    alert('Data berhasil Dihapus')
+                                    refreshTable();
+                                },
+                                error: function (xhr, textStatus, errorThrown) {
+                                    alert('Data gagal dihapus');
+                                },
+
                             });
+                        }
+
+                    })
+                });
+
+
+
+                        //Klik pada tombol tambah barang, makam menampilkan modal TAMBAH DATA BARANG
+                            $('#tambah_barang').on('click', function() {
+                                $('#myModal').modal('show');
+                                $('#judul_modal').html('TAMBAH BARANG');
+                                $('#modal_body').html('');
+                                $('#modal_body').prepend(
+                            '<form action="" id="form_barang">'+
+                                    '<select name="gol"  id="" class="form-control">'+
+                                        '<option value="">-PILIH GOLONGAN-</option>' +
+                                        '<option value="1">TANAH</option>'+
+                                        '<option value="2">PERALATAN DAN MESIN</option>'+
+                                        '<option value="3">GEDUNG DAN BANGUNAN</option>'+
+                                        '<option value="4">JALAN,IRIGASI DAN JARINGAN</option>'+
+                                        '<option value="5">KONSTRUKSI DALAM PENGERJAAN</option>'+
+                                        '<option value="6">KIR</option>'+
+                                    '</select><br>'+
+                                '<input type="text" class="form-control" id="nama" name="nama" placeholder="Nama Barang"><br>' +
+                                '<input type="text" class="form-control" id="kode" name="kode" placeholder="Kode Barang">' +
+
+                            '</form>');
+                            //Memberikan atribut id pada tombol submit modal
+                            $('.tombol').attr('id', 'submit_barang');
                          });
-                    });
+                        //Klik Untuk menyimpan data barang ke database
+                        $(document).on('click', '#submit_barang', function (event) {
+                            event.preventDefault();
+                            $.ajax({
+                                data: $('#form_barang').serialize(),
+                                url: "/barang.save",
+                                type: "POST",
+                                dataType: 'json',
+                                beforeSend: function () {
 
-
-                                $.ajaxSetup({
-                                    headers: {
-                                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                                        }
-                                    });
-                            //Klik pada tombol tambah barang, makam menampilkan modal TAMBAH DATA BARANG
-                                $('#tambah_barang').on('click', function() {
-                                    $('#myModal').modal('show');
-                                    $('#judul_modal').html('TAMBAH BARANG');
+                                },
+                                success: function (data) {
                                     $('#modal_body').html('');
-                                    $('#modal_body').prepend(
-                                '<form action="" id="form_barang">'+
+                                    $('#myModal').modal('hide');
+                                    refreshTable();
+                                },
+                                error: function (xhr, textStatus, errorThrown) {
+                                    alert('Failed to submit the form');
+                                },
 
-                                        '<select name="gol"  id="" class="form-control">'+
-                                            '<option value="">-PILIH GOLONGAN-</option>' +
-                                            '<option value="1">TANAH</option>'+
-                                            '<option value="2">PERALATAN DAN MESIN</option>'+
-                                            '<option value="3">GEDUNG DAN BANGUNAN</option>'+
-                                            '<option value="4">JALAN,IRIGASI DAN JARINGAN</option>'+
-                                            '<option value="5">KONSTRUKSI DALAM PENGERJAAN</option>'+
-                                            '<option value="6">KIR</option>'+
-                                        '</select><br>'+
-                                    '<input type="text" class="form-control" id="nama" name="nama" placeholder="Nama Barang"><br>' +
-                                    '<input type="text" class="form-control" id="kode" name="kode" placeholder="Kode Barang">' +
-
-                                '</form>');
-                                //Memberikan atribut id pada tombol submit modal
-                                $('.tombol').attr('id', 'submit_barang');
-                             });
-                            //Klik Untuk menyimpan data barang ke database
-                            $(document).on('click', '#submit_barang', function (event) {
-                                event.preventDefault();
-                                $.ajax({
-                                    data: $('#form_barang').serialize(),
-                                    url: "/barang.save",
-                                    type: "POST",
-                                    dataType: 'json',
-                                    beforeSend: function () {
-
-                                    },
-                                    success: function (data) {
-                                        $('#modal_body').html('');
-                                        $('#myModal').modal('hide');
-                                        refreshTable();
-                                    },
-                                    error: function (xhr, textStatus, errorThrown) {
-                                        alert('Failed to submit the form');
-                                    },
-
-                                });
                             });
+                        });
+                         //Klik Untuk update data barang ke database
+                        $(document).on('click', '#edit_submit', function (event) {
+                            event.preventDefault();
+                            $.ajax({
+                                data: $('#edit_barang').serialize(),
+                                url: "/barang.update",
+                                type: "POST",
+                                dataType: 'json',
+                                beforeSend: function () {
+
+                                },
+                                success: function (data) {
+                                    alert('Data berhasil diUpdate')
+                                    $('#modal_body').html('');
+                                    $('#myModal').modal('hide');
+                                    refreshTable();
+                                },
+                                error: function (xhr, textStatus, errorThrown) {
+                                    alert('Failed to submit the form');
+                                },
+
+                            });
+                        });
 
 
-                         });
+                     });
+
+            });
+
 
                 $('#aset').DataTable({
                     paging: true,
@@ -201,18 +261,112 @@ $(document).ready(function() {
         $('#departemen').addClass('btn btn-primary');
         $('#barang,#ruang,#sdm,#lokasi,#dokumen,#bahan,#divisi').removeClass('btn btn-primary');
         $('#barang,#ruang,#sdm,#lokasi,#dokumen,#bahan,#divisi').addClass('btn btn-defult');
+        $('.tab-content').attr('id', 'konten_dep');//
         $("#myTabs").append(
             '<li class="nav-item" >' +
                 '<a class="nav-link" id="tab_dep" data-bs-toggle="tab" href="#dep_tab" role="tab" aria-controls="tab2" aria-selected="false">DEPARTEMEN &nbsp;<button type="submit"  id="dep_x" class="fa-solid fa-x rounded" ></button></a>' +
             '</li>'
             );
-            $(document).ready(function() {
-                $('#myTabContent').append(
-                    '<div class="tab-pane fade" id="dep_tab" role="tabpanel" aria-labelledby="tab_dep">' +
-                        '<p>DATA DEPARTEMEN</p>' +
-                    '</div>'
-                );
+            $('#tab_barang').on('click', function() {
+                $('.tab-content').attr('id', 'konten_dep');
+
+                $(document).ready(function() {
+                    $('#konten_dep').append(
+                        '<br>' +
+                        '<div class="tab-pane show " id="dep_tab" role="tabpanel" aria-labelledby="tab_dep">'+'<div class="container">'+
+                            '<div class="card">'+
+                                '<div class="card-header">DATA DEPARTEMEN <div class="position-absolute top-0 end-0"><button class="btn  btn-primary" id="tambah_dep"><i class="fa-solid fa-file-circle-plus"></i></button></div></div>'+
+                                    '<div class="card-body" id=tbl_dep>'+
+                                        '<table class="table table-striped" id="aset">'+
+                                            '<thead>'+
+                                                '<tr>'+
+                                                    '<th>NO</th>'+
+                                                    '<th>Nama Depatemen</th>'+
+                                                    '<th>Kode Departemen</th>'+
+                                                    '<th>Aksi</th>'+
+                                                '</tr>'+
+                                            '</thead>'+
+                                            '<tbody>'+
+                                            '</tbody>'+
+                                        '</table>'+
+                                    '</div>'+
+                                '</div>'+
+                            '</div>');
+
+                            $.get('/departemen', function(data) {
+                                var i = 0;
+                                var table = $("#aset").DataTable();
+                                $.each(data.data, function(index, item) {
+                                    var editButton = '<a class="btn btn-sm btn-warning edit-btn" data-id="' + item.id + '" href="#"><i class="fa-solid fa-edit"></i></a>';
+                                    var deleteButton = '<a class="btn btn-sm btn-danger delete-btn" data-id="' + item.id + '" href="#"><i class="fa-solid fa-trash"></i></a>';
+                                    table.row.add([
+                                         ++i,
+                                        item.nama_dep,
+                                        item.kode_dep,
+                                        item.id ? editButton + '' + deleteButton : ''
+                                    ]).draw();
+                                 });
+
+                                 $.ajaxSetup({
+                                    headers: {
+                                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                        }
+                                    });
+                                 //Jika klik <a class="btn btn-sm btn-warning edit-btn" data-id="' + item.id + '" href="#"><i class="fa-solid fa-edit"></i></a>maka menampilkan modal EDIT DATA
+                                 $('#aset').on('click', '.edit-btn', function() {
+                                    var id = $(this).data('id');
+                                    $.ajax({
+                                        type: "GET",
+                                        url: "/barang.edit/"+ id,
+                                        success: function (data) {
+                                            $.each(data.data, function (index, item) {
+                                            $('#myModal').modal('show');
+                                            $('#judul_modal').html('UPDATE DEPARTEMEN');
+                                            $('#modal_body').html('');
+                                            $('.tombol').attr('id', 'edit_submit');
+                                            $('#modal_body').prepend(
+                                                '<form action="" id="edit_dep">' +
+                                                    '<input type="hidden" name="id" value = " ' + item.id + ' ">' +
+
+                                                    '<input type="text" class="form-control" id="nama" name="nama" value=" ' + item.nama_dep + ' " placeholder="Nama Barang"><br>' +
+                                                    '<input type="text" class="form-control" id="kode" name="kode" placeholder="Kode Barang" value = "' + item.kode_dep + '">' +
+                                                '</form>');
+                                            })
+                                        },
+                                        error: function (data) {
+                                            console.log('Error:', data);
+                                        }
+                                    });
+                                 });
+                                //Hapus Data
+                                 $('#aset').on('click', '.delete-btn', function() {
+                                    var id = $(this).data('id');
+                                    var del = confirm("Anda yakin menghapus data ini ?");
+                                    if (del) {
+                                        $.ajax({
+                                            url: "/barang.hapus/" + id,
+                                            type: "POST",
+                                            dataType: 'json',
+                                            beforeSend: function () {
+
+                                            },
+                                            success: function (data) {
+                                                alert('Data berhasil Dihapus')
+                                                refreshTable();
+                                            },
+                                            error: function (xhr, textStatus, errorThrown) {
+                                                alert('Data gagal dihapus');
+                                            },
+                                        });
+                                    }
+
+                                })
+                            });
+
+                });
+
             });
+
         });
 
             //del

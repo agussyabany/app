@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Aset;
 
 use App\Http\Controllers\Controller;
 use App\Models\Aset\Barang;
+use App\Models\Aset\Departemen;
 use Illuminate\Http\Request;
 
 class AsetDashboardController extends Controller
@@ -18,6 +19,14 @@ class AsetDashboardController extends Controller
         $barang = Barang::orderBy('id','DESC')->get();
         return response()->json([
             'data' => $barang
+          ]);
+    }
+
+    public function departemen()
+    {
+        $dep = Departemen::orderBy('id','DESC')->get();
+        return response()->json([
+            'data' => $dep
           ]);
     }
 

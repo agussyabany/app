@@ -23,4 +23,33 @@ class BarangController extends Controller
 
         return response()->json(['message' => 'Data inserted successfully']);
     }
+
+    public function edit($id)
+    {
+        $barang = Barang::where('id',$id)->get();
+        return response()->json(['data' => $barang]);
+    }
+
+    public function update (Request $request)
+    {
+        $id = $request->input('id');
+        $golongan = $request->input('gol');
+        $nama_barang = $request->input('nama');
+        $kode_barang = $request->input('kode');
+        Barang::where('id',$id)
+                ->update([
+                    'golongan' => $golongan,
+                    'nama_barang' =>$nama_barang,
+                    'kode_barang' =>$kode_barang
+                ]);
+
+                return response()->json(['data' => 'update Data Sukses']);
+
+    }
+
+    public function destroy ($id)
+    {
+        Barang::where('id', $id)->delete();
+        return response()->json(['message' => 'Data deleted successfully']);
+    }
 }

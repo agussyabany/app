@@ -48,7 +48,14 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     });
     Route::get('/aset.dashboard',[AsetDashboardController::class, 'index']);
     Route::get('/barang',[AsetDashboardController::class, 'barang']);
+    Route::get('/departemen',[AsetDashboardController::class, 'departemen']);
+
+
+
     Route::post('/barang.save',[BarangController::class,'save']);
+    Route::get('barang.edit/{id}',[BarangController::class,'edit']);
+    Route::post('barang.update',[BarangController::class,'update']);
+    Route::post('barang.hapus/{id}',[BarangController::class,'destroy']);
 
 });
 
