@@ -10,8 +10,11 @@ use Illuminate\Http\Request;
 class AsetDashboardController extends Controller
 {
     public function index()
+
     {
-        return view('admin.pages.aset.dashboard');
+        $no = 1;
+        $barang = Barang::all();
+        return view('admin.pages.aset.dashboard',compact(['barang','no']));
     }
 
     public function barang()
