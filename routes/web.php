@@ -4,6 +4,7 @@
 
 use App\Http\Controllers\Aset\AsetDashboardController;
 use App\Http\Controllers\Aset\BarangController;
+use App\Http\Controllers\Aset\DepartemenController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProfileController;
 use GuzzleHttp\Middleware;
@@ -56,6 +57,12 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::get('barang.edit/{id}',[BarangController::class,'edit']);
     Route::post('barang.update',[BarangController::class,'update']);
     Route::post('barang.hapus/{id}',[BarangController::class,'destroy']);
+
+
+    Route::post('/dep.save',[DepartemenController::class,'save']);
+    Route::get('dep.edit/{id}',[DepartemenController::class,'edit']);
+    Route::post('dep.update',[DepartemenController::class,'update']);
+    Route::post('dep.hapus/{id}',[DepartemenController::class,'destroy']);
 
 });
 
