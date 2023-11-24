@@ -26,7 +26,7 @@ $(document).ready(function() {
         //Menampilkan Header Tab BARANG
         $("#myTabs").append(
             '<li class="nav-item" >' +
-                '<a class="nav-link border" id="tab_barang" data-bs-toggle="tab" href="#barang_tab" role="tab" aria-controls="tab2" aria-selected="false">BARANG &nbsp;<button type="submit"  id="barang_x" class="fa-solid fa-x rounded" ></button></a>' +
+                '<a class="nav-link border" id="tab_barang" data-bs-toggle="tab" href="#barang_tab" role="tab" aria-controls="tab2" aria-selected="false">BARANG &nbsp;<button style="border:none;background-color: white;color: grey;" type="submit"  id="barang_x" class="fa-regular fa-circle-xmark" ></button></a>' +
             '</li>'
             );
            //Menampilkan Konten berupa HEAD tabel pada body TAB
@@ -212,7 +212,7 @@ $(document).ready(function() {
         $('#barang,#ruang,#sdm,#lokasi,#dokumen,#bahan,#divisi').addClass('btn btn-defult');
         $("#myTabs").append(
             '<li class="nav-item" >' +
-                '<a class="nav-link" id="tab_dep" data-bs-toggle="tab" href="#dep_tab" role="tab" aria-controls="tab2" aria-selected="false">DEPARTEMEN &nbsp;<button type="submit"  id="dep_x" class="fa-solid fa-x rounded" ></button></a>' +
+                '<a class="nav-link" id="tab_dep" data-bs-toggle="tab" href="#dep_tab" role="tab" aria-controls="tab2" aria-selected="false">DEPARTEMEN &nbsp;<button style="border:none;background-color: white; type="submit"  id="dep_x" class="fa-regular fa-circle-xmark" ></button></a>' +
             '</li>'
             );
             //Menampilkan Konten berupa HEAD tabel pada body TAB
@@ -263,7 +263,7 @@ $(document).ready(function() {
                         '</form>');
                         //Memberikan atribut id pada tombol submit modal
                         $('.tombol').attr('id', 'submit_dep');
-                           //Klik Untuk menyimpan data barang ke database
+                           //Klik Untuk menyimpan data departemen ke database
                         $(document).on('click', '#submit_dep', function (event) {
                             event.preventDefault();
                             $.ajax({
@@ -357,6 +357,8 @@ $(document).ready(function() {
                 })
             });
 
+        });
+
             //del
             $(document).on('click', '#dep_x', function() {
                 $('#tab_dep').parent().remove();
@@ -371,16 +373,160 @@ $(document).ready(function() {
         $('#barang,#departemen,#ruang,#sdm,#lokasi,#dokumen,#bahan').addClass('btn btn-defult');
         $("#myTabs").append(
             '<li class="nav-item" >' +
-                '<a class="nav-link" id="tab_div" data-bs-toggle="tab" href="#div_tab" role="tab" aria-controls="tab2" aria-selected="false">DIVISI &nbsp;<button type="submit"  id="div_x" class="fa-solid fa-x rounded" ></button></a>' +
+                '<a class="nav-link" id="tab_div" data-bs-toggle="tab" href="#div_tab" role="tab" aria-controls="tab2" aria-selected="false">DIVISI &nbsp;<button style="border:none;background-color: white; type="submit"  id="div_x" class="fa-regular fa-circle-xmark" ></button></a>' +
             '</li>'
             );
             $(document).ready(function() {
                 // Menambahkan konten tab setelah dokumen siap
                 $('#myTabContent').append(
-                    '<div class="tab-pane fade" id="div_tab" role="tabpanel" aria-labelledby="tab_div">' +
-                        '<p>DATA SDM PENDUKUNG</p>' +
+
+                    '<div class="tab-pane show" id="div_tab" role="tabpanel" aria-labelledby="tab_div">'+'<div class="container">'+
+                        '<div class="card">'+
+                            '<div class="card-header">DATA DIVISI <div class="position-absolute top-0 end-0"><button class="btn  btn-primary" id="tambah_div"><i class="fa-solid fa-file-circle-plus"></i></button></div></div>'+
+                                '<div class="card-body">'+
+                                    '<table class="table table-striped" id="tbl_div">'+
+                                        '<thead>'+
+                                            '<tr>'+
+                                                '<th>NO</th>'+
+                                                '<th>Kode Divisi</th>'+
+                                                '<th>Nama Divisi</th>'+
+                                                '<th>Aksi</th>'+
+                                            '</tr>'+
+                                        '</thead>'+
+                                        '<tbody>'+
+                                        '</tbody>'+
+                                    '</table>'+
+                                '</div>'+
+                            '</div>'+
+                        '</div>' +
                     '</div>'
                 );
+                refDiv();
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+
+                    //Klik pada tombol tambah divisi, maka menampilkan modal TAMBAH DATA BARANG
+                    $('#tambah_div').on('click', function() {
+                        $('#myModal').modal('show');
+                        $('#judul_modal').html('TAMBAH DIVISI');
+                        $('#modal_body').html('');
+                        $('#modal_body').prepend(
+                            '<form action="" id="form_div">'+
+                                '<select name="dep"  id="selectDivisi" class="select2 form-control">' +
+                                '</select><br>' +
+                                '<input type="text" class="form-control" id="nama" name="nama" placeholder="Nama Divisi"><br>' +
+                                '<input type="text" class="form-control" id="kode" name="kode" placeholder="Kode Divisi">' +
+                            '</form>');
+                            //$('.select2').select2();
+                            //Load option dari data depatemen
+                            $.get('/departemen', function (data) {
+                                $.each(data.data, function (index, item) {
+                                    $('#selectDivisi').append('<option value="' + item.id + '">' + item.kode_dep + '</option>');
+                                });
+                            });
+
+                        });
+
+
+                    //Memberikan atribut id pada tombol submit modal
+                    $('.tombol').attr('id', 'submit_div');
+                       //Klik Untuk menyimpan data divisi ke database
+                    $(document).on('click', '#submit_div', function (event) {
+                        event.preventDefault();
+                        $.ajax({
+                            data: $('#form_div').serialize(),
+                            url: "/div.save",
+                            type: "POST",
+                            dataType: 'json',
+                            success: function (data) {
+                                $('#modal_body').html('');
+                                $('#myModal').modal('hide');
+                                refDiv();
+                            },
+                            error: function (xhr, textStatus, errorThrown) {
+                                alert('Failed to submit the form');
+                            },
+
+                        });
+                    });
+                    //Jika klik <a class="btn btn-sm btn-warning edit-btn" data-id="' + item.id + '" href="#"><i class="fa-solid fa-edit"></i></a>maka menampilkan modal EDIT DATA
+                    $('#tbl_div').on('click', '.edit-div', function() {
+                        var id = $(this).data('id');
+                        $.ajax({
+                            type: "GET",
+                            url: "/div.edit/"+ id,
+                            success: function (data) {
+                                $.each(data.data, function (index, item) {
+                                $('#myModal').modal('show');
+                                $('#judul_modal').html('UPDATE DIVISI');
+                                $('#modal_body').html('');
+                                $('.tombol').attr('id', 'edit_submit');
+                                $('#modal_body').prepend(
+                                    '<form action="" id="edit_div_submit">' +
+                                        '<input type="hidden" name="id" value = " ' + item.id + ' ">' +
+                                        '<select name="dep"  id="selectDivisi" class="select2 form-control">' +
+                                        '<option value=" '+ item.id_dep +'">"'+ item.id_dep +'" </option> ' +
+                                        '</select><br>' +
+                                        '<input type="text" class="form-control" id="nama" name="nama" value=" ' + item.nama_div + ' " placeholder="Nama Departemen"><br>' +
+                                        '<input type="text" class="form-control" id="kode" name="kode" placeholder="Kode Departemen" value = "' + item.kode_div + '">' +
+                                    '</form>');
+
+                                    $.get('/departemen', function (data) {
+                                        $.each(data.data, function (index, item) {
+                                            $('#selectDivisi').append('<option value="' + item.id + '">' + item.kode_dep + '</option>');
+                                        });
+                                    });
+                                })
+                            },
+                            error: function (data) {
+                                console.log('Error:', data);
+                            }
+                        });
+                    });
+                    //Klik Untuk update data divisi ke database
+                    $(document).on('click', '#edit_submit', function (event) {
+                        event.preventDefault();
+                        $.ajax({
+                            data: $('#edit_div_submit').serialize(),
+                            url: "/div.update",
+                            type: "POST",
+                            dataType: 'json',
+                            success: function (data) {
+                                alert('Data berhasil diUpdate')
+                                $('#modal_body').html('');
+                                $('#myModal').modal('hide');
+                                refDiv();
+                            },
+                            error: function (xhr, textStatus, errorThrown) {
+                                alert('Failed to submit the form');
+                            },
+
+                        });
+                    });
+                    //Hapus Data
+                    $('#tbl_div').on('click', '.delete-div', function() {
+                        var id = $(this).data('id');
+                        var del = confirm("Anda yakin menghapus data ini ?");
+                        if (del) {
+                            $.ajax({
+                                url: "/div.hapus/" + id,
+                                type: "POST",
+                                dataType: 'json',
+                                    success: function (data) {
+                                    alert('Data berhasil Dihapus')
+                                    refDiv();
+                                },
+                                error: function (xhr, textStatus, errorThrown) {
+                                    alert('Data gagal dihapus');
+                                },
+                            });
+                        }
+                        })
+
+
             });
      });
         $(document).on('click', '#div_x', function() {
@@ -398,16 +544,142 @@ $(document).ready(function() {
         $('#divisi,#departemen,#sdm,#lokasi,#dokumen,#bahan,#barang').addClass('btn btn-defult');
         $("#myTabs").append(
             '<li class="nav-item" >' +
-                '<a class="nav-link" id="tab_ruang" data-bs-toggle="tab" href="#ruang_tab" role="tab" aria-controls="tab2" aria-selected="false">RUANGAN &nbsp;<button type="submit"  id="ruang_x" class="fa-solid fa-x rounded" ></button></a>' +
+                '<a class="nav-link" id="tab_ruang" data-bs-toggle="tab" href="#ruang_tab" role="tab" aria-controls="tab2" aria-selected="false">RUANGAN &nbsp;<button style="border:none;background-color: white; type="submit"  id="ruang_x" class="fa-regular fa-circle-xmark" ></button></a>' +
             '</li>'
             );
             $(document).ready(function() {
                 // Menambahkan konten tab setelah dokumen siap
                 $('#myTabContent').append(
-                    '<div class="tab-pane fade" id="ruang_tab" role="tabpanel" aria-labelledby="tab_ruang">' +
-                        '<p>DATA RUANGAN</p>' +
+                    '<br>'+
+                    '<div class="tab-pane show" id="ruang_tab" role="tabpanel" aria-labelledby="tab_ruang">'+'<div class="container">'+
+                        '<div class="card">'+
+                            '<div class="card-header">DATA RUANGAN <div class="position-absolute top-0 end-0"><button class="btn  btn-primary" id="tambah_ruang"><i class="fa-solid fa-file-circle-plus"></i></button></div></div>'+
+                                '<div class="card-body">'+
+                                    '<table class="table table-striped" id="tbl_ruang">'+
+                                        '<thead>'+
+                                            '<tr>'+
+                                                '<th>NO</th>'+
+                                                '<th>Kode Ruangan</th>'+
+                                                '<th>Nama Ruangan</th>'+
+                                                '<th>Aksi</th>'+
+                                            '</tr>'+
+                                        '</thead>'+
+                                        '<tbody>'+
+                                        '</tbody>'+
+                                    '</table>'+
+                                '</div>'+
+                            '</div>'+
+                        '</div>' +
                     '</div>'
                 );
+                refRuang();
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+                //Klik pada tombol tambah ruang, maka menampilkan modal TAMBAH DATA RUANGAN
+                $('#tambah_ruang').on('click', function() {
+                    $('#myModal').modal('show');
+                    $('#judul_modal').html('TAMBAH RUANGAN');
+                    $('#modal_body').html('');
+                    $('#modal_body').prepend(
+                        '<form action="" id="form_ruang">'+
+
+                            '<input type="text" class="form-control" id="nama" name="nama" placeholder="Nama Ruangan"><br>' +
+                            '<input type="text" class="form-control" id="kode" name="kode" placeholder="Kode Ruangan">' +
+                        '</form>');
+                    });
+
+                //Memberikan atribut id pada tombol submit modal
+                $('.tombol').attr('id', 'submit_ruang');
+
+                //Klik Untuk menyimpan data divisi ke database
+                $(document).on('click', '#submit_ruang', function (event) {
+                 event.preventDefault();
+                 $.ajax({
+                     data: $('#form_ruang').serialize(),
+                     url: "/ruang.save",
+                     type: "POST",
+                     dataType: 'json',
+                     success: function (data) {
+                         $('#modal_body').html('');
+                         $('#myModal').modal('hide');
+                         refRuang();
+                     },
+                     error: function (xhr, textStatus, errorThrown) {
+                         alert('Failed to submit the form');
+                     },
+
+                 });
+             });
+             //Jika klik <a class="btn btn-sm btn-warning edit-btn" data-id="' + item.id + '" href="#"><i class="fa-solid fa-edit"></i></a>maka menampilkan modal EDIT DATA
+             $('#tbl_ruang').on('click', '.edit', function() {
+                var id = $(this).data('id');
+                $.ajax({
+                    type: "GET",
+                    url: "/ruang.edit/"+ id,
+                    success: function (data) {
+                        $.each(data.data, function (index, item) {
+                        $('#myModal').modal('show');
+                        $('#judul_modal').html('UPDATE RUANGAN');
+                        $('#modal_body').html('');
+                        $('.tombol').attr('id', 'edit_submit');
+                        $('#modal_body').prepend(
+                            '<form action="" id="edit_ruang_submit">' +
+                                '<input type="hidden" name="id" value = " ' + item.id + ' ">' +
+
+                                '<input type="text" class="form-control" id="nama" name="nama" value=" ' + item.nama_ruang + ' " placeholder="Nama Departemen"><br>' +
+                                '<input type="text" class="form-control" id="kode" name="kode" placeholder="Kode Departemen" value = "' + item.kode + '">' +
+                            '</form>');
+
+                        })
+                    },
+                    error: function (data) {
+                        console.log('Error:', data);
+                    }
+                });
+            });
+            //Klik Untuk update data ruangan ke database
+            $(document).on('click', '#edit_submit', function (event) {
+                event.preventDefault();
+                $.ajax({
+                    data: $('#edit_ruang_submit').serialize(),
+                    url: "/ruang.update",
+                    type: "POST",
+                    dataType: 'json',
+                    success: function (data) {
+                        alert('Data berhasil diUpdate')
+                        $('#modal_body').html('');
+                        $('#myModal').modal('hide');
+                        refRuang();
+                    },
+                    error: function (xhr, textStatus, errorThrown) {
+                        alert('Failed to submit the form');
+                    },
+
+                });
+            });
+            //Hapus Data
+            $('#tbl_ruang').on('click', '.delete', function() {
+                var id = $(this).data('id');
+                var del = confirm("Anda yakin menghapus data ini ?");
+                if (del) {
+                    $.ajax({
+                        url: "/ruang.hapus/" + id,
+                        type: "POST",
+                        dataType: 'json',
+                            success: function (data) {
+                            alert('Data berhasil Dihapus')
+                            refRuang();
+                        },
+                        error: function (xhr, textStatus, errorThrown) {
+                            alert('Data gagal dihapus');
+                        },
+                    });
+                }
+            })
+
             });
      });
         $(document).on('click', '#ruang_x', function() {
@@ -423,7 +695,7 @@ $(document).ready(function() {
         $('#divisi,#departemen,#ruang,#barang,#lokasi,#dokumen,#bahan').addClass('btn btn-defult');
         $("#myTabs").append(
             '<li class="nav-item" >' +
-                '<a class="nav-link" id="tab_sdm" data-bs-toggle="tab" href="#sdm_tab" role="tab" aria-controls="tab2" aria-selected="false">SDM &nbsp;<button type="submit"  id="sdm_x" class="fa-solid fa-x rounded"></button></a>' +
+                '<a class="nav-link" id="tab_sdm" data-bs-toggle="tab" href="#sdm_tab" role="tab" aria-controls="tab2" aria-selected="false">SDM &nbsp;<button style="border:none;background-color: white; type="submit"  id="sdm_x" class="fa-regular fa-circle-xmark"></button></a>' +
             '</li>'
             );
             $(document).ready(function() {
@@ -448,7 +720,7 @@ $(document).ready(function() {
         $('#divisi,#departemen,#ruang,#barang,#dokumen,#bahan,#sdm').addClass('btn btn-defult');
         $("#myTabs").append(
             '<li class="nav-item" >' +
-                '<a class="nav-link" id="tab_lokasi" data-bs-toggle="tab" href="#lokasi_tab" role="tab" aria-controls="tab2" aria-selected="false">LOKASI &nbsp;<button type="submit"  id="lokasi_x" class="fa-solid fa-x rounded" ></button></a>' +
+                '<a class="nav-link" id="tab_lokasi" data-bs-toggle="tab" href="#lokasi_tab" role="tab" aria-controls="tab2" aria-selected="false">LOKASI &nbsp;<button style="border:none;background-color: white; type="submit"  id="lokasi_x" class="fa-regular fa-circle-xmark" ></button></a>' +
             '</li>'
             );
             $(document).ready(function() {
@@ -473,7 +745,7 @@ $(document).ready(function() {
         $('#divisi,#departemen,#ruang,#barang,#lokasi,#bahan,#sdm').addClass('btn btn-defult');
         $("#myTabs").append(
             '<li class="nav-item" >' +
-                '<a class="nav-link" id="tab_dok" data-bs-toggle="tab" href="#dok_tab" role="tab" aria-controls="tab2" aria-selected="false">DOKUMEN &nbsp;<button type="submit"  id="dok_x" class="fa-solid fa-x rounded" ></button></a>' +
+                '<a class="nav-link" id="tab_dok" data-bs-toggle="tab" href="#dok_tab" role="tab" aria-controls="tab2" aria-selected="false">DOKUMEN &nbsp;<button style="border:none;background-color: white; type="submit"  id="dok_x" class="fa-regular fa-circle-xmark" ></button></a>' +
             '</li>'
             );
             $(document).ready(function() {
@@ -499,7 +771,7 @@ $(document).ready(function() {
         $('#divisi,#departemen,#ruang,#barang,#lokasi,#dokumen,#sdm').addClass('btn btn-defult');
         $("#myTabs").append(
             '<li class="nav-item" >' +
-                '<a class="nav-link" id="tab_bahan" data-bs-toggle="tab" href="#bahan_tab" role="tab" aria-controls="tab2" aria-selected="false">BAHAN &nbsp;<button type="submit"  id="bahan_x" class="fa-solid fa-x rounded" ></button></a>' +
+                '<a class="nav-link" id="tab_bahan" data-bs-toggle="tab" href="#bahan_tab" role="tab" aria-controls="tab2" aria-selected="false">BAHAN &nbsp;<button style="border:none;background-color: white; type="submit"  id="bahan_x" class="fa-regular fa-circle-xmark" ></button></a>' +
             '</li>'
             );
             $(document).ready(function() {
@@ -518,5 +790,5 @@ $(document).ready(function() {
     //END OF BAHAN
 
 
-});
+
 });
