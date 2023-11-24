@@ -21,7 +21,7 @@
     </main>
 
 
-    <div class="modal" tabindex="-1" id="myModal">
+    <div class="modal"  id="myModal">
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header">
