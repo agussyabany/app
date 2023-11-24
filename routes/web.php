@@ -5,6 +5,8 @@
 use App\Http\Controllers\Aset\AsetDashboardController;
 use App\Http\Controllers\Aset\BarangController;
 use App\Http\Controllers\Aset\DepartemenController;
+use App\Http\Controllers\Aset\Divisicontroller;
+use App\Http\Controllers\Aset\RuangController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProfileController;
 use GuzzleHttp\Middleware;
@@ -50,6 +52,8 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::get('/aset.dashboard',[AsetDashboardController::class, 'index']);
     Route::get('/barang',[AsetDashboardController::class, 'barang']);
     Route::get('/departemen',[AsetDashboardController::class, 'departemen']);
+    Route::get('/divisi',[AsetDashboardController::class, 'divisi']);
+    Route::get('/ruang',[AsetDashboardController::class, 'ruang']);
 
 
 
@@ -63,6 +67,16 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::get('dep.edit/{id}',[DepartemenController::class,'edit']);
     Route::post('dep.update',[DepartemenController::class,'update']);
     Route::post('dep.hapus/{id}',[DepartemenController::class,'destroy']);
+
+    Route::post('/div.save',[Divisicontroller::class,'save']);
+    Route::get('div.edit/{id}',[Divisicontroller::class,'edit']);
+    Route::post('div.update',[Divisicontroller::class,'update']);
+    Route::post('div.hapus/{id}',[Divisicontroller::class,'destroy']);
+
+    Route::post('/ruang.save',[RuangController::class,'save']);
+    Route::get('ruang.edit/{id}',[RuangController::class,'edit']);
+    Route::post('ruang.update',[RuangController::class,'update']);
+    Route::post('ruang.hapus/{id}',[RuangController::class,'destroy']);
 
 });
 
