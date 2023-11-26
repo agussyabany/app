@@ -3,10 +3,13 @@
 // use App\Http\Controllers\Aset\AsetController;
 
 use App\Http\Controllers\Aset\AsetDashboardController;
+use App\Http\Controllers\Aset\BahanController;
 use App\Http\Controllers\Aset\BarangController;
 use App\Http\Controllers\Aset\DepartemenController;
 use App\Http\Controllers\Aset\Divisicontroller;
+use App\Http\Controllers\Aset\LokasiController;
 use App\Http\Controllers\Aset\RuangController;
+use App\Http\Controllers\Aset\SdmController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProfileController;
 use GuzzleHttp\Middleware;
@@ -54,6 +57,9 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::get('/departemen',[AsetDashboardController::class, 'departemen']);
     Route::get('/divisi',[AsetDashboardController::class, 'divisi']);
     Route::get('/ruang',[AsetDashboardController::class, 'ruang']);
+    Route::get('/sdm',[AsetDashboardController::class, 'sdm']);
+    Route::get('/lok',[AsetDashboardController::class, 'lokasi']);
+    Route::get('/bahan',[AsetDashboardController::class, 'bahan']);
 
 
 
@@ -77,6 +83,21 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::get('ruang.edit/{id}',[RuangController::class,'edit']);
     Route::post('ruang.update',[RuangController::class,'update']);
     Route::post('ruang.hapus/{id}',[RuangController::class,'destroy']);
+
+    Route::post('/sdm.save',[SdmController::class,'save']);
+    Route::get('sdm.edit/{id}',[SdmController::class,'edit']);
+    Route::post('sdm.update',[SdmController::class,'update']);
+    Route::post('sdm.hapus/{id}',[SdmController::class,'destroy']);
+
+    Route::post('/lok.save',[LokasiController::class,'save']);
+    Route::get('lok.edit/{id}',[LokasiController::class,'edit']);
+    Route::post('lok.update',[LokasiController::class,'update']);
+    Route::post('lok.hapus/{id}',[LokasiController::class,'destroy']);
+
+    Route::post('/bahan.save',[BahanController::class,'save']);
+    Route::get('bahan.edit/{id}',[BahanController::class,'edit']);
+    Route::post('bahan.update',[BahanController::class,'update']);
+    Route::post('bahan.hapus/{id}',[BahanController::class,'destroy']);
 
 });
 

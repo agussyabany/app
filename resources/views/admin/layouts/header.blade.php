@@ -5,19 +5,25 @@
 
   <div class="row">
     <header class="bg-primary text-white">
+        <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+            <i class="fa-solid fa-list"></i>
+          </button>
       <div class="container">
           <nav class="navbar navbar-expand-lg navbar-light">
-              <a class="navbar-brand" href="#">Sistem Informasi Aset</a>
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              {{-- <a class="navbar-brand" href="#">Sistem Informasi Aset</a> --}}
+              
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
                   <span class="navbar-toggler-icon"></span>
               </button>
               <div class="collapse navbar-collapse" id="navbarNav">
 
               </div>
+              
           </nav>
       </div>
     </header>
-    <nav  style="background-image: url('{{asset('assets/img/side3.jpg')}}');background-size: cover; background-repeat: no-repeat;font-family: 'Bahnschrift-SemiLight', sans-serif;" id="sidebar" class="col-md-3 col-lg-2 d-md-block sidebar">
+    
+    <nav  style="background-image: url('{{asset('assets/img/side3.jpg')}}');background-size: cover; background-repeat: no-repeat;font-family: 'Bahnschrift-SemiLight', sans-serif;"  class="col-md-3 col-lg-2 d-md-block offcanvas offcanvas-start sidebar" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
       <div class="position-sticky">
           <ul class="nav flex-column" id="menuTabs">
               <li class="nav-item">
@@ -53,22 +59,25 @@
                     <span class="nav-link text-center disabled"><strong>K . I . B</strong></span>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">TANAH</a>
+                    <a type="button"  class="hoverable" id="a" style="width: 100%"><i class="fa-regular fa-map"></i>&nbsp;TANAH</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">PERALATAN DAN MESIN</a>
+                    <a type="button"  class="hoverable" id="b" style="width: 100%"><i class="fa-solid fa-gears"></i>&nbsp;PERALATAN DAN MESIN</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">GEDUNG DAN BANGUNAN</a>
+                    <a type="button"  class="hoverable" id="c" style="width: 100%"><i class="fa-solid fa-building"></i>&nbsp;GEDUNG DAN BANGUNAN</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">JALAN , IRIGASI DAN JARINGAN</a>
+                    <a type="button"  class="hoverable" id="d" style="width: 100%"><i class="fa-solid fa-road"></i>&nbsp;JALAN , IRIGASI DAN JARINGAN</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">ASET TETAP LAINNYA</a>
+                    <a type="button"  class="hoverable" id="e" style="width: 100%"><i class="fa-solid fa-marker"></i>&nbsp;ASET TETAP LAINNYA</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">KONSTRUKSI</a>
+                    <a type="button"  class="hoverable" id="f" style="width: 100%"><i class="fa-solid fa-trowel-bricks"></i>&nbsp;KONSTRUKSI</a>
+                </li>
+                <li class="nav-item">
+                    <a type="button"  class="hoverable" id="kir" style="width: 100%"><i class="fa-solid fa-list"></i>&nbsp;K.I.R</a>
                 </li>
 
                 <li class="nav-item">
@@ -82,6 +91,7 @@
           </ul>
       </div>
   </nav>
+
 
 
 
