@@ -5,14 +5,14 @@
 
   <div class="row">
     <header class="bg-primary text-white">
-        <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample">
             <i class="fa-solid fa-list"></i>
           </button>
       <div class="container">
           <nav class="navbar navbar-expand-lg navbar-light">
               {{-- <a class="navbar-brand" href="#">Sistem Informasi Aset</a> --}}
               
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
+              <button class="navbar-toggler" type="button" >
                   <span class="navbar-toggler-icon"></span>
               </button>
               <div class="collapse navbar-collapse" id="navbarNav">
@@ -23,8 +23,8 @@
       </div>
     </header>
     
-    <nav  style="background-image: url('{{asset('assets/img/side3.jpg')}}');background-size: cover; background-repeat: no-repeat;font-family: 'Bahnschrift-SemiLight', sans-serif;"  class="col-md-3 col-lg-2 d-md-block offcanvas offcanvas-start sidebar" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-      <div class="position-sticky">
+    <nav class="col-md-3 col-lg-2">
+        <div class="collapse collapse-horizontal"  id="collapseWidthExample"   style="background-image: url('{{asset('assets/img/side3.jpg')}}');background-size: cover; background-repeat: no-repeat;font-family: 'Bahnschrift-SemiLight', sans-serif; width:100%">
           <ul class="nav flex-column" id="menuTabs">
               <li class="nav-item">
                   <span class="nav-link text-center disabled"><strong>DATA MASTER</strong></span>
@@ -91,6 +91,8 @@
           </ul>
       </div>
   </nav>
+ 
+
 
 
 
