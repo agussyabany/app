@@ -1218,7 +1218,7 @@ $(document).ready(function() {
         $('#divisi,#departemen,#ruang,#barang,#lokasi,#dokumen,#bahan,#sdm,#nilai,#a,#b,#c,#d,#e,#f,#kir').addClass('btn btn-defult');
         $("#myTabs").append(
             '<li class="nav-item" >' +
-                '<a class="nav-link" id="tab_aktiva" data-bs-toggle="tab" href="#aktiva_tab" role="tab" aria-controls="tab2" aria-selected="false">KODE AKTIVA &nbsp;<button style="border:none;background-color: white; type="submit"  id="bahan_x" class="fa-regular fa-circle-xmark" ></button></a>' +
+                '<a class="nav-link" id="tab_aktiva" data-bs-toggle="tab" href="#aktiva_tab" role="tab" aria-controls="tab2" aria-selected="false">KODE AKTIVA &nbsp;<button style="border:none;background-color: white; type="submit"  id="aktiva_x" class="fa-regular fa-circle-xmark" ></button></a>' +
             '</li>'
             );
             $(document).ready(function() {
@@ -1235,7 +1235,7 @@ $(document).ready(function() {
                                                 '<th>NO</th>'+
                                                 '<th>Kode</th>'+
                                                 '<th>Nama Aktiva</th>'+
-                                                '<th>Golongan</th>'+
+                                                '<th>Sub Aktiva</th>'+
                                                 '<th>KIB</th>'+
                                                 '<th>-</th>'+
                                             '</tr>'+
@@ -1352,9 +1352,9 @@ $(document).ready(function() {
             // })
             });
      });
-        $(document).on('click', '#bahan_x', function() {
-            $('#tab_bahan').parent().remove(); // Hapus tab
-            $('#bahan_tab').remove(); // Hapus konten tab
+        $(document).on('click', '#aktiva_x', function() {
+            $('#tab_aktiva').parent().remove(); // Hapus tab
+            $('#aktiva_tab').remove(); // Hapus konten tab
         });
 
 

@@ -346,6 +346,7 @@ $(document).ready(function() {
                                                 '<th>No Voucher</th>'+
                                                 '<th>Tgl Voucher</th>'+
                                                 '<th>Aktiva</th>'+
+                                                '<th>KIB</th>'+
                                                 '<th>Nilai</th>'+
                                                 '<th>Uraian</th>'+
                                                 '<th>Aksi</th>'+
