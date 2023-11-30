@@ -143,7 +143,7 @@ function refBah()
         $.each(data.data, function(index, item) {
             var editButton = '<a class="btn btn-sm btn-warning edit" data-id="' + item.id + '" href="#"><i class="fa-solid fa-edit"></i></a>';
             var deleteButton = '<a class="btn btn-sm btn-danger delete" data-id="' + item.id + '" href="#"><i class="fa-solid fa-trash"></i></a>';
-           
+
             table.row.add([
                  ++i,
                 item.nama,
@@ -152,4 +152,52 @@ function refBah()
          });
         })
 }
+
+function refAkt()
+{
+    $.get('/aktiva', function(data) {
+        var i = 0;
+        var table = $("#tbl_aktiva").DataTable();
+        table.clear().draw();
+        $('#modal_body').html('');
+        $.each(data.data, function(index, item) {
+            var editButton = '<a class="btn btn-sm btn-warning edit" data-id="' + item.id + '" href="#"><i class="fa-solid fa-edit"></i></a>';
+            var deleteButton = '<a class="btn btn-sm btn-danger delete" data-id="' + item.id + '" href="#"><i class="fa-solid fa-trash"></i></a>';
+
+            table.row.add([
+                 ++i,
+                item.kode,
+                item.aktiva,
+                item.gol,
+                item.kib,
+                item.id ? editButton + '' + deleteButton : ''
+            ]).draw();
+         });
+        })
+}
+
+function refNil()
+{
+    $.get('/nilai', function(data) {
+        var i = 0;
+        var table = $("#tbl_nilai").DataTable();
+        table.clear().draw();
+        $('#modal_body').html('');
+        $.each(data.data, function(index, item) {
+            var editButton = '<a class="btn btn-sm btn-warning edit" data-id="' + item.id + '" href="#"><i class="fa-solid fa-edit"></i></a>';
+            var deleteButton = '<a class="btn btn-sm btn-danger delete" data-id="' + item.id + '" href="#"><i class="fa-solid fa-trash"></i></a>';
+
+            table.row.add([
+                 ++i,
+                item.no_voucher,
+                item.tgl_voucher,
+                item.id_aktiva,
+                item.nilai,
+                item.urai,
+                item.id ? editButton + '' + deleteButton : ''
+            ]).draw();
+         });
+        })
+}
+
 

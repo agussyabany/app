@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    
+
     $('#barang').addClass('text-start btn btn-primary hoverable');
     $('#divisi').addClass('text-start btn btn-default hoverable');
     $('#departemen').addClass('text-start btn btn-default hoverable');
@@ -8,6 +8,7 @@ $(document).ready(function() {
     $('#lokasi').addClass('text-start btn btn-default hoverable');
     $('#dokumen').addClass('text-start btn btn-default hoverable');
     $('#bahan').addClass('text-start btn btn-default hoverable');
+    $('#aktiva').addClass('text-start btn btn-default hoverable');
     $('#a').addClass('text-start btn btn-default hoverable');
     $('#b').addClass('text-start btn btn-default hoverable');
     $('#c').addClass('text-start btn btn-default hoverable');
@@ -15,6 +16,7 @@ $(document).ready(function() {
     $('#e').addClass('text-start btn btn-default hoverable');
     $('#f').addClass('text-start btn btn-default hoverable');
     $('#kir').addClass('text-start btn btn-default hoverable');
+    $('#nilai').addClass('text-start btn btn-default hoverable');
 
 
 
@@ -26,8 +28,8 @@ $(document).ready(function() {
         //membuat tombol menu SideBar menjadi selected
         $('#barang').addClass('btn btn-primary');
         //Dan Tombol lain menjadi notSelected
-        $('#divisi,#departemen,#ruang,#sdm,#lokasi,#dokumen,#bahan,#a,#b,#c,#d,#e,#f,#kir').removeClass('btn btn-primary');
-        $('#divisi,#departemen,#ruang,#sdm,#lokasi,#dokumen,#bahan,#a,#b,#c,#d,#e,#f,#kir').addClass('btn btn-defult');
+        $('#divisi,#departemen,#ruang,#sdm,#lokasi,#dokumen,#bahan,#aktiva,#nilai,#a,#b,#c,#d,#e,#f,#kir').removeClass('btn btn-primary');
+        $('#divisi,#departemen,#ruang,#sdm,#lokasi,#dokumen,#bahan,#aktiva,#nilai,#a,#b,#c,#d,#e,#f,#kir').addClass('btn btn-defult');
         //Menampilkan Header Tab BARANG
         $("#myTabs").append(
             '<li class="nav-item" >' +
@@ -208,8 +210,8 @@ $(document).ready(function() {
         // DEPARTEMEN
     $('#departemen').on('click', function() {
         $('#departemen').addClass('btn btn-primary');
-        $('#barang,#ruang,#sdm,#lokasi,#dokumen,#bahan,#divisi,#a,#b,#c,#d,#e,#f,#kir').removeClass('btn btn-primary');
-        $('#barang,#ruang,#sdm,#lokasi,#dokumen,#bahan,#divisi,#a,#b,#c,#d,#e,#f,#kir').addClass('btn btn-defult');
+        $('#barang,#ruang,#sdm,#lokasi,#dokumen,#bahan,#divisi,#aktiva,#nilai,#a,#b,#c,#d,#e,#f,#kir').removeClass('btn btn-primary');
+        $('#barang,#ruang,#sdm,#lokasi,#dokumen,#bahan,#divisi,#aktiva,#nilai,#a,#b,#c,#d,#e,#f,#kir').addClass('btn btn-defult');
         $("#myTabs").append(
             '<li class="nav-item" >' +
                 '<a class="nav-link" id="tab_dep" data-bs-toggle="tab" href="#dep_tab" role="tab" aria-controls="tab2" aria-selected="false">DEPARTEMEN &nbsp;<button style="border:none;background-color: white; type="submit"  id="dep_x" class="fa-regular fa-circle-xmark" ></button></a>' +
@@ -369,8 +371,8 @@ $(document).ready(function() {
     // DIVISI
     $('#divisi').on('click', function() {
         $('#divisi').addClass('btn btn-primary');
-        $('#barang,#departemen,#ruang,#sdm,#lokasi,#dokumen,#bahan,#a,#b,#c,#d,#e,#f,#kir').removeClass('btn btn-primary');
-        $('#barang,#departemen,#ruang,#sdm,#lokasi,#dokumen,#bahan,#a,#b,#c,#d,#e,#f,#kir').addClass('btn btn-defult');
+        $('#barang,#departemen,#ruang,#sdm,#lokasi,#dokumen,#bahan,#aktiva,#nilai,#a,#b,#c,#d,#e,#f,#kir').removeClass('btn btn-primary');
+        $('#barang,#departemen,#ruang,#sdm,#lokasi,#dokumen,#bahan,#aktiva,#nilai,#a,#b,#c,#d,#e,#f,#kir').addClass('btn btn-defult');
         $("#myTabs").append(
             '<li class="nav-item" >' +
                 '<a class="nav-link" id="tab_div" data-bs-toggle="tab" href="#div_tab" role="tab" aria-controls="tab2" aria-selected="false">DIVISI &nbsp;<button style="border:none;background-color: white; type="submit"  id="div_x" class="fa-regular fa-circle-xmark" ></button></a>' +
@@ -540,8 +542,8 @@ $(document).ready(function() {
     //RUANGAN
     $('#ruang').on('click', function() {
         $('#ruang').addClass('btn btn-primary');
-        $('#divisi,#departemen,#sdm,#lokasi,#dokumen,#bahan,#barang,#a,#b,#c,#d,#e,#f,#kir').removeClass('btn btn-primary');
-        $('#divisi,#departemen,#sdm,#lokasi,#dokumen,#bahan,#barang,#a,#b,#c,#d,#e,#f,#kir').addClass('btn btn-defult');
+        $('#divisi,#departemen,#sdm,#lokasi,#dokumen,#bahan,#barang,#aktiva,#nilai,#a,#b,#c,#d,#e,#f,#kir').removeClass('btn btn-primary');
+        $('#divisi,#departemen,#sdm,#lokasi,#dokumen,#bahan,#barang,#aktiva,#nilai,#a,#b,#c,#d,#e,#f,#kir').addClass('btn btn-defult');
         $("#myTabs").append(
             '<li class="nav-item" >' +
                 '<a class="nav-link" id="tab_ruang" data-bs-toggle="tab" href="#ruang_tab" role="tab" aria-controls="tab2" aria-selected="false">RUANGAN &nbsp;<button style="border:none;background-color: white; type="submit"  id="ruang_x" class="fa-regular fa-circle-xmark" ></button></a>' +
@@ -690,8 +692,8 @@ $(document).ready(function() {
     //SDM
     $('#sdm').on('click', function() {
         $('#sdm').addClass('btn btn-primary');
-        $('#divisi,#departemen,#ruang,#barang,#lokasi,#dokumen,#bahan,#a,#b,#c,#d,#e,#f,#kir').removeClass('btn btn-primary');
-        $('#divisi,#departemen,#ruang,#barang,#lokasi,#dokumen,#bahan,#a,#b,#c,#d,#e,#f,#kir').addClass('btn btn-defult');
+        $('#divisi,#departemen,#ruang,#barang,#lokasi,#dokumen,#bahan,#aktiva,#nilai,#a,#b,#c,#d,#e,#f,#kir').removeClass('btn btn-primary');
+        $('#divisi,#departemen,#ruang,#barang,#lokasi,#dokumen,#bahan,#aktiva,#nilai,#a,#b,#c,#d,#e,#f,#kir').addClass('btn btn-defult');
         $("#myTabs").append(
             '<li class="nav-item" >' +
                 '<a class="nav-link" id="tab_sdm" data-bs-toggle="tab" href="#sdm_tab" role="tab" aria-controls="tab2" aria-selected="false">SDM &nbsp;<button style="border:none;background-color: white; type="submit"  id="sdm_x" class="fa-regular fa-circle-xmark"></button></a>' +
@@ -869,8 +871,8 @@ $(document).ready(function() {
     //LOKASI
     $('#lokasi').on('click', function() {
         $('#lokasi').addClass('btn btn-primary');
-        $('#divisi,#departemen,#ruang,#barang,#dokumen,#bahan,#sdm,#a,#b,#c,#d,#e,#f,#kir').removeClass('btn btn-primary');
-        $('#divisi,#departemen,#ruang,#barang,#dokumen,#bahan,#sdm,#a,#b,#c,#d,#e,#f,#kir').addClass('btn btn-defult');
+        $('#divisi,#departemen,#ruang,#barang,#dokumen,#bahan,#sdm,#aktiva,#nilai,#a,#b,#c,#d,#e,#f,#kir').removeClass('btn btn-primary');
+        $('#divisi,#departemen,#ruang,#barang,#dokumen,#bahan,#sdm,#aktiva,#nilai,#a,#b,#c,#d,#e,#f,#kir').addClass('btn btn-defult');
         $("#myTabs").append(
             '<li class="nav-item" >' +
                 '<a class="nav-link" id="tab_lok" data-bs-toggle="tab" href="#lok_tab" role="tab" aria-controls="tab2" aria-selected="false">LOKASI &nbsp;<button style="border:none;background-color: white; type="submit"  id="lokasi_x" class="fa-regular fa-circle-xmark" ></button></a>' +
@@ -937,7 +939,7 @@ $(document).ready(function() {
                     var reader = new FileReader();
                      reader.onload = function (e) {
                         var base64Image = e.target.result.split(',')[1]; // Extract base64 data
-                
+
                         // Send the base64 encoded image data in the AJAX request
                         $.ajax({
                             data: {
@@ -961,7 +963,7 @@ $(document).ready(function() {
                             },
                         });
                     };
-                
+
                     // Read the selected file as a data URL
                     reader.readAsDataURL(fileInput);
                 });
@@ -1043,8 +1045,8 @@ $(document).ready(function() {
     //DOKUMEN
     $('#dokumen').on('click', function() {
         $('#dokumen').addClass('btn btn-primary');
-        $('#divisi,#departemen,#ruang,#barang,#lokasi,#bahan,#sdm,#a,#b,#c,#d,#e,#f,#kir').removeClass('btn btn-primary');
-        $('#divisi,#departemen,#ruang,#barang,#lokasi,#bahan,#sdm,#a,#b,#c,#d,#e,#f,#kir').addClass('btn btn-defult');
+        $('#divisi,#departemen,#ruang,#barang,#lokasi,#bahan,#sdm,#aktiva,#nilai,#a,#b,#c,#d,#e,#f,#kir').removeClass('btn btn-primary');
+        $('#divisi,#departemen,#ruang,#barang,#lokasi,#bahan,#sdm,#aktiva,#nilai,#a,#b,#c,#d,#e,#f,#kir').addClass('btn btn-defult');
         $("#myTabs").append(
             '<li class="nav-item" >' +
                 '<a class="nav-link" id="tab_dok" data-bs-toggle="tab" href="#dok_tab" role="tab" aria-controls="tab2" aria-selected="false">DOKUMEN &nbsp;<button style="border:none;background-color: white; type="submit"  id="dok_x" class="fa-regular fa-circle-xmark" ></button></a>' +
@@ -1069,8 +1071,8 @@ $(document).ready(function() {
     //BAHAN
     $('#bahan').on('click', function() {
         $('#bahan').addClass('btn btn-primary');
-        $('#divisi,#departemen,#ruang,#barang,#lokasi,#dokumen,#sdm,#a,#b,#c,#d,#e,#f,#kir').removeClass('btn btn-primary');
-        $('#divisi,#departemen,#ruang,#barang,#lokasi,#dokumen,#sdm,#a,#b,#c,#d,#e,#f,#kir').addClass('btn btn-defult');
+        $('#divisi,#departemen,#ruang,#barang,#lokasi,#dokumen,#sdm,#aktiva,#nilai,#a,#b,#c,#d,#e,#f,#kir').removeClass('btn btn-primary');
+        $('#divisi,#departemen,#ruang,#barang,#lokasi,#dokumen,#sdm,#aktiva,#nilai,#a,#b,#c,#d,#e,#f,#kir').addClass('btn btn-defult');
         $("#myTabs").append(
             '<li class="nav-item" >' +
                 '<a class="nav-link" id="tab_bahan" data-bs-toggle="tab" href="#bahan_tab" role="tab" aria-controls="tab2" aria-selected="false">BAHAN &nbsp;<button style="border:none;background-color: white; type="submit"  id="bahan_x" class="fa-regular fa-circle-xmark" ></button></a>' +
@@ -1207,8 +1209,153 @@ $(document).ready(function() {
         $(document).on('click', '#bahan_x', function() {
             $('#tab_bahan').parent().remove(); // Hapus tab
             $('#bahan_tab').remove(); // Hapus konten tab
-        });;
+        });
     //END OF BAHAN
+
+    $('#aktiva').on('click', function() {
+        $('#aktiva').addClass('btn btn-primary');
+        $('#divisi,#departemen,#ruang,#barang,#lokasi,#dokumen,#bahan,#sdm,#nilai,#a,#b,#c,#d,#e,#f,#kir').removeClass('btn btn-primary');
+        $('#divisi,#departemen,#ruang,#barang,#lokasi,#dokumen,#bahan,#sdm,#nilai,#a,#b,#c,#d,#e,#f,#kir').addClass('btn btn-defult');
+        $("#myTabs").append(
+            '<li class="nav-item" >' +
+                '<a class="nav-link" id="tab_aktiva" data-bs-toggle="tab" href="#aktiva_tab" role="tab" aria-controls="tab2" aria-selected="false">KODE AKTIVA &nbsp;<button style="border:none;background-color: white; type="submit"  id="bahan_x" class="fa-regular fa-circle-xmark" ></button></a>' +
+            '</li>'
+            );
+            $(document).ready(function() {
+                // Menambahkan konten tab setelah dokumen siap
+                $('#myTabContent').append(
+                    '<br>'+
+                    '<div class="tab-pane show" id="aktiva_tab" role="tabpanel" aria-labelledby="tab_aktiva">'+'<div class="container">'+
+                        '<div class="card">'+
+                            '<div class="card-header">DATA AKTIVA <div class="position-absolute top-0 end-0"><button class="btn  btn-primary" id="tambah_aktiva"><i class="fa-solid fa-file-circle-plus"></i></button></div></div>'+
+                                '<div class="card-body">'+
+                                    '<table class="table table-striped" id="tbl_aktiva">'+
+                                        '<thead>'+
+                                            '<tr>'+
+                                                '<th>NO</th>'+
+                                                '<th>Kode</th>'+
+                                                '<th>Nama Aktiva</th>'+
+                                                '<th>Golongan</th>'+
+                                                '<th>KIB</th>'+
+                                                '<th>-</th>'+
+                                            '</tr>'+
+                                        '</thead>'+
+                                        '<tbody>'+
+                                        '</tbody>'+
+                                    '</table>'+
+                                '</div>'+
+                            '</div>'+
+                        '</div>' +
+                    '</div>'
+                );
+                refAkt();
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+                //Klik pada tombol tambah bahan, maka menampilkan modal TAMBAH DATA BAHAN
+                $('#tambah_bahan').on('click', function() {
+                    $('#myModal').modal('show');
+                    $('#judul_modal').html('TAMBAH BAHAN');
+                    $('#modal_body').html('');
+                    $('#modal_body').prepend(
+                        '<form action="" id="form_bahan">'+
+                            '<input type="text" class="form-control" id="nama" name="nama" placeholder="Nama Bahan"><br>' +
+                        '</form>');
+                    });
+                    //Memberikan atribut id pada tombol submit modal
+                $('.tombol').attr('id', 'submit_bahan');
+
+                //Klik Untuk menyimpan data bahan ke database
+            //     $(document).on('click', '#submit_bahan', function (event) {
+            //      event.preventDefault();
+            //      $.ajax({
+            //          data: $('#form_bahan').serialize(),
+            //          url: "/bahan.save",
+            //          type: "POST",
+            //          dataType: 'json',
+            //          success: function (data) {
+            //              $('#modal_body').html('');
+            //              $('#myModal').modal('hide');
+            //              refBah();
+            //          },
+            //          error: function (xhr, textStatus, errorThrown) {
+            //              alert('Failed to submit the form');
+            //          },
+
+            //      });
+            //  });
+            //Modal EDIT show
+            //  $('#tbl_bahan').on('click', '.edit', function() {
+            //     var id = $(this).data('id');
+            //     $.ajax({
+            //         type: "GET",
+            //         url: "/bahan.edit/"+ id,
+            //         success: function (data) {
+            //             $.each(data.data, function (index, item) {
+            //             $('#myModal').modal('show');
+            //             $('#judul_modal').html('UPDATE BAHAN');
+            //             $('#modal_body').html('');
+            //             $('.tombol').attr('id', 'edit_submit');
+            //             $('#modal_body').prepend(
+            //                 '<form action="" id="edit_bahan_submit">' +
+            //                     '<input type="hidden" name="id" value = " ' + item.id + ' ">' +
+            //                     '<input type="text" class="form-control" id="nama" name="nama" value=" ' + item.nama + ' " placeholder="Nama Departemen"><br>' +
+            //                 '</form>');
+
+            //             })
+            //         },
+            //         error: function (data) {
+            //             console.log('Error:', data);
+            //         }
+            //     });
+            // });
+             //Klik Untuk update data bahan ke database
+            //  $(document).on('click', '#edit_submit', function (event) {
+            //     event.preventDefault();
+            //     $.ajax({
+            //         data: $('#edit_bahan_submit').serialize(),
+            //         url: "/bahan.update",
+            //         type: "POST",
+            //         dataType: 'json',
+            //         success: function (data) {
+            //             alert('Data berhasil diUpdate')
+            //             $('#modal_body').html('');
+            //             $('#myModal').modal('hide');
+            //             refBah();
+            //         },
+            //         error: function (xhr, textStatus, errorThrown) {
+            //             alert('Failed to submit the form');
+            //         },
+
+            //     });
+            // });
+             //Hapus Data
+            //  $('#tbl_bahan').on('click', '.delete', function() {
+            //     var id = $(this).data('id');
+            //     var del = confirm("Anda yakin menghapus data ini ?");
+            //     if (del) {
+            //         $.ajax({
+            //             url: "/bahan.hapus/" + id,
+            //             type: "POST",
+            //             dataType: 'json',
+            //                 success: function (data) {
+            //                 alert('Data berhasil Dihapus')
+            //                 refBah();
+            //             },
+            //             error: function (xhr, textStatus, errorThrown) {
+            //                 alert('Data gagal dihapus');
+            //             },
+            //         });
+            //     }
+            // })
+            });
+     });
+        $(document).on('click', '#bahan_x', function() {
+            $('#tab_bahan').parent().remove(); // Hapus tab
+            $('#bahan_tab').remove(); // Hapus konten tab
+        });
 
 
 

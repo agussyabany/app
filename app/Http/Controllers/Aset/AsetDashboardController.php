@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Aset;
 
 use App\Http\Controllers\Controller;
+use App\Models\Aset\Aktiva;
 use App\Models\Aset\Bahan;
 use App\Models\Aset\Barang;
 use App\Models\Aset\Departemen;
 use App\Models\Aset\Divisi;
 use App\Models\Aset\lokasi;
+use App\Models\Aset\NilaiAktiva;
 use App\Models\Aset\Ruangan;
 use App\Models\Aset\Sdm;
 use Illuminate\Http\Request;
@@ -79,6 +81,20 @@ class AsetDashboardController extends Controller
             'data' => $bahan
           ]);
     }
-    //RUANGAN
-    //BAHAN
+
+    public function aktiva()
+    {
+        $aktiva = Aktiva::orderBy('id','DESC')->get();
+        return response()->json([
+            'data' => $aktiva
+          ]);
+    }
+
+    public function nilai()
+    {
+        $nilai = NilaiAktiva::orderBy('id','DESC')->get();
+        return response()->json([
+            'data' => $nilai
+          ]);
+    }
 }

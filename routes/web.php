@@ -8,6 +8,7 @@ use App\Http\Controllers\Aset\BarangController;
 use App\Http\Controllers\Aset\DepartemenController;
 use App\Http\Controllers\Aset\Divisicontroller;
 use App\Http\Controllers\Aset\LokasiController;
+use App\Http\Controllers\Aset\NilaiController;
 use App\Http\Controllers\Aset\RuangController;
 use App\Http\Controllers\Aset\SdmController;
 use App\Http\Controllers\AuthController;
@@ -60,6 +61,8 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::get('/sdm',[AsetDashboardController::class, 'sdm']);
     Route::get('/lok',[AsetDashboardController::class, 'lokasi']);
     Route::get('/bahan',[AsetDashboardController::class, 'bahan']);
+    Route::get('/aktiva',[AsetDashboardController::class, 'aktiva']);
+    Route::get('/nilai',[AsetDashboardController::class, 'nilai']);
 
 
 
@@ -98,6 +101,11 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::get('bahan.edit/{id}',[BahanController::class,'edit']);
     Route::post('bahan.update',[BahanController::class,'update']);
     Route::post('bahan.hapus/{id}',[BahanController::class,'destroy']);
+
+    Route::post('/nilai.save',[NilaiController::class,'save']);
+    Route::get('nilai.edit/{id}',[NilaiController::class,'edit']);
+    Route::post('nilai.update',[NilaiController::class,'update']);
+    Route::post('nilai.hapus/{id}',[NilaiController::class,'destroy']);
 
 });
 

@@ -11,18 +11,18 @@
       <div class="container">
           <nav class="navbar navbar-expand-lg navbar-light">
               {{-- <a class="navbar-brand" href="#">Sistem Informasi Aset</a> --}}
-              
+
               <button class="navbar-toggler" type="button" >
                   <span class="navbar-toggler-icon"></span>
               </button>
               <div class="collapse navbar-collapse" id="navbarNav">
 
               </div>
-              
+
           </nav>
       </div>
     </header>
-    
+
     <nav class="col-md-3 col-lg-2">
         <div class="collapse collapse-horizontal"  id="collapseWidthExample"   style="background-image: url('{{asset('assets/img/side3.jpg')}}');background-size: cover; background-repeat: no-repeat;font-family: 'Bahnschrift-SemiLight', sans-serif; width:100%">
           <ul class="nav flex-column" id="menuTabs">
@@ -53,6 +53,9 @@
               <li class="nav-item">
                   <button type="button" class="hoverable" id="bahan" style="width: 100%"><i class="fa-solid fa-atom"></i>&nbsp;Bahan</button>
               </li>
+              <li class="nav-item">
+                <button type="button" class="hoverable" id="aktiva" style="width: 100%"><i class="fa-solid fa-atom"></i>&nbsp;Kode Aktiva</button>
+            </li>
 
 
                 <li class="nav-item">
@@ -80,6 +83,15 @@
                     <a type="button"  class="hoverable" id="kir" style="width: 100%"><i class="fa-solid fa-list"></i>&nbsp;K.I.R</a>
                 </li>
 
+
+                <li class="nav-item">
+                    <span class="nav-link text-center disabled"><strong>NILAI ASET</strong></span>
+                </li>
+
+                <li class="nav-item">
+                    <a type="button"  class="hoverable" id="nilai" style="width: 100%"><i class="fa-regular fa-heart"></i>&nbsp;PENAMBAHAN NILAI ASET</a>
+                </li>
+
                 <li class="nav-item">
                     <span class="nav-link text-center disabled"><strong>PENGATURAN</strong></span>
                 </li>
@@ -88,10 +100,13 @@
                 </li>
 
 
+
+
+
           </ul>
       </div>
   </nav>
- 
+
 
 
 

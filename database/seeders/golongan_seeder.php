@@ -13,34 +13,34 @@ class golongan_seeder extends Seeder
      */
     public function run(): void
     {
-        $gol = 
+        $gol =
         [
             [
-                'id' =>"1",
+                'id' =>1,
                 'nama'=>'TANAH'
             ],
             [
-                'id' =>'2',
+                'id' =>2,
                 'nama'=>'PERALATAN DAN MESIN'
             ],
             [
-                'id' =>'3',
+                'id' =>3,
                 'nama'=>'GEDUNG DAN BANGUNAN'
             ],
             [
-                'id' =>'4',
+                'id' =>4,
                 'nama'=>'JALAN,IRIGASI DAN JARINGAN'
             ],
             [
-                'id' =>'5',
+                'id' =>5,
                 'nama'=>'ASET TETAP LAINNYA'
             ],
             [
-                'id' =>'6',
+                'id' =>6,
                 'nama'=>'KONSTRUKSI'
             ],
             [
-                'id' =>'7',
+                'id' =>7,
                 'nama'=>'KIR'
             ]
         ];
