@@ -184,17 +184,15 @@ function refNil()
         table.clear().draw();
         $('#modal_body').html('');
         $.each(data.data, function(index, item) {
-            var editButton = '<a class="btn btn-sm btn-warning edit" data-id="' + item.id_ak + '" href="#"><i class="fa-solid fa-edit"></i></a>';
-            var deleteButton = '<a class="btn btn-sm btn-danger delete" data-id="' + item.id_ak + '" href="#"><i class="fa-solid fa-trash"></i></a>';
-
+            var editButton = '<a class="btn btn-sm btn-warning edit" data-id="' + item.id_nilai + '" href="#"><i class="fa-solid fa-edit"></i></a>';
+            var deleteButton = '<a class="btn btn-sm btn-danger delete" data-id="' + item.id_nilai + '" href="#"><i class="fa-solid fa-trash"></i></a>';
             table.row.add([
                  ++i,
                 item.no_voucher,
                 item.tgl_voucher,
                 item.aktiva,
-               
-,                item.nilai,
                 item.kib,
+                item.nilai,
                 item.urai,
                 item.id ? editButton + '' + deleteButton : ''
             ]).draw();
