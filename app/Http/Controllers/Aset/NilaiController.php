@@ -7,6 +7,7 @@ use App\Models\Aset\NilaiAktiva;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Psy\Command\WhereamiCommand;
 
 class NilaiController extends Controller
 {
@@ -39,10 +40,8 @@ class NilaiController extends Controller
     {
         $aktiva = NilaiAktiva::select('nilai_aktivas.id as idn','aktivas.id as idA','no_voucher','tgl_voucher','kode','aktiva','nilai','urai','tahun')
                             ->join('aktivas','nilai_aktivas.id_aktiva','=','aktivas.id')
+                            ->where('nilai_aktivas.id',$id)
                             ->get();
-
-
-
         return response()->json(['data' => $aktiva]);
     }
 

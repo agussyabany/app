@@ -35,10 +35,12 @@ $(document).ready(function() {
                                         '<thead>'+
                                             '<tr>'+
                                                 '<th>NO</th>'+
-                                                '<th>Golongan</th>'+
-                                                '<th>Nama Barang</th>'+
-                                                '<th>Kode Barang</th>'+
-                                                '<th>Aksi</th>'+
+                                                '<th>Nama Aset</th>'+
+                                                '<th>Penggunaan</th>'+
+                                                '<th>Alamat</th>'+
+                                                '<th>No Dokumen</th>'+
+                                                '<th>Foto</th>'+
+                                                '<th><i class="fa-regular fa-cog"></i></th>'+
                                             '</tr>'+
                                         '</thead>'+
                                         '<tbody>'+
@@ -49,6 +51,45 @@ $(document).ready(function() {
                         '</div>' +
                     '</div>'
                 );
+                refA();
+                //Modal EDIT show
+                $('#tbl_a').on('click', '.edit', function() {
+                    var id = $(this).data('id');
+                    $.ajax({
+                        type: "GET",
+                        url: "/nilai.edit/"+ id,
+                        success: function (data) {
+                            $.each(data.data, function (index, item) {
+                            $('#myModal').modal('show');
+                            $('#judul_modal').html('UPDATE NILAI');
+                            $('#modal_body').html('');
+                            $('.tombol').attr('id', 'edit_submit');
+                            $('#modal_body').prepend(
+                                '<form action="" id="edit_nilai_submit">' +
+                                    '<input type="hidden" name="id" value = "' + item.idn + '">' +
+                                    '<input type="text" class="form-control" id="no" name="no" value="' + item.no_voucher + '" placeholder="Nomer Voucher"><br>' +
+                                    '<input type="date" class="form-control" id="tgl" name="tgl" value="' + item.tgl_voucher +  '" placeholder="Tgl Voucher"><br>' +
+                                    '<input type="number" class="form-control" id="tahun" name="tahun" value="' + item.tahun +  '" placeholder="Tahun"><br>' +
+                                    '<select class="form-control" id="kode_aktiva" name="kode_aktiva">'+
+                                    '<option value="' + item.idA + '">' + item.kode + ' | ' +  item.aktiva + '</option>'+
+                                    '</select><br>'+
+                                    '<input type="number" class="form-control" name="nilai" value="' + item.nilai +  '"><br>'+
+                                    '<textarea name="urai" class="form-control">' + item.urai +  '</textarea>' +
+                                '</form>');
+                                $.get('/aktiva', function (data) {
+                                    $.each(data.data, function (index, item) {
+                                        $('#kode_aktiva').append('<option value="' + item.id + '">' + item.kode + ' | ' +  item.aktiva + '</option>');
+                                    });
+                                });
+
+                            })
+
+                        },
+                        error: function (data) {
+                            console.log('Error:', data);
+                        }
+                    });
+                });
 
         });
     });
@@ -331,7 +372,7 @@ $(document).ready(function() {
             '</li>'
             );
             $(document).ready(function() {
-                // Menambahkan konten tab setelah dokumen siap
+        // Menambahkan konten tab setelah dokumen siap
                 $('#myTabContent').append(
                     '<br>'+
                     '<div class="tab-pane show" id="nilai_tab" role="tabpanel" aria-labelledby="tab_nilai">'+
@@ -493,10 +534,4 @@ $(document).ready(function() {
             $('#nilai_tab').remove(); // Hapus konten tab
         });
     //END OF DOK
-
-
-
-
-
-
 });

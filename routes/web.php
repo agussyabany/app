@@ -9,6 +9,7 @@ use App\Http\Controllers\Aset\DepartemenController;
 use App\Http\Controllers\Aset\Divisicontroller;
 use App\Http\Controllers\Aset\LokasiController;
 use App\Http\Controllers\Aset\NilaiController;
+use App\Http\Controllers\Aset\PdfController;
 use App\Http\Controllers\Aset\RuangController;
 use App\Http\Controllers\Aset\SdmController;
 use App\Http\Controllers\AuthController;
@@ -63,6 +64,7 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::get('/bahan',[AsetDashboardController::class, 'bahan']);
     Route::get('/aktiva',[AsetDashboardController::class, 'aktiva']);
     Route::get('/nilai',[AsetDashboardController::class, 'nilai']);
+    Route::get('/tanah',[AsetDashboardController::class, 'tanah']);
 
 
 
@@ -106,6 +108,8 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::get('nilai.edit/{id}',[NilaiController::class,'edit']);
     Route::post('nilai.update',[NilaiController::class,'update']);
     Route::post('nilai.hapus/{id}',[NilaiController::class,'destroy']);
+
+    Route::get('/show/{id}',[PdfController::class,'show']);
 
 });
 

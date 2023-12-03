@@ -194,8 +194,61 @@ function refNil()
                 item.kib,
                 item.nilai,
                 item.urai,
-                item.id ? editButton + '' + deleteButton : ''
+                item.id_nilai ? editButton + '' + deleteButton : ''
             ]).draw();
+         });
+        })
+}
+
+function refA()
+{
+    $.get('/tanah', function(data) {
+        var i = 0;
+        var table = $("#tbl_a").DataTable();
+        table.clear().draw();
+        $('#modal_body').html('');
+        $.each(data.data, function(index, item) {
+            var editButton = 
+            '<div class="btn-group">'+
+                '<button class="btn btn-default border border-secondary btn-sm" type="button">AKSI</button>'+
+                '<button type="button" class="btn btn-sm btn-default border border-secondary  dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"><span class="visually-hidden">Toggle Dropdown</span></button>'+
+                '<ul class="dropdown-menu">'+
+                    '<li><a class="dropdown-item  edit" data-id="' + item.id_tanah + '" href="#"><i class="fa-solid fa-edit"></i>&nbsp;EDIT</a></li>'+
+                    '<li><a class="dropdown-item delete" data-id="' + item.id_tanah + '" href="#"><i class="fa-solid fa-trash"></i>&nbsp;DELETE</a></li>'+
+                    '<li><hr class="dropdown-divider"></li>'+
+                    '<div class="dropdown" >'+
+                        '<li><a class="dropdown-item dropbtn" href="#" id="click_dok">Dokumen</a></li>'+
+                        '<div class="dropdown-menu dropdown-content" id="dok' + item.id_tanah + '">'+
+                        '<a href="#"></a>'+
+                        '</div>'+
+                        
+                    '<div/>'+
+                '</ul>'+
+            '</div>';
+            $(document).ready(function() {
+                var id = item.id_tanah;
+                $.get('/show/' + id, function (data) {
+                    $.each(data.data, function (index, items) {
+                       $('#dok'+id).html('');
+                       $('#dok'+id).html('<a href="#">' + items.dok + '</a>');
+                    });
+                });
+
+
+            })
+            
+           
+            var img = '<img src="http://127.0.0.1:8000/assets/img/lokasi/'+item.img+'" height="100px" width="100px"></img>';
+            table.row.add([
+                 ++i,
+                item.nama_barang,
+                item.guna,
+                item.lokasi,
+                item.no_tunjuk,
+                img,
+                editButton
+            ]).draw();
+           
          });
         })
 }

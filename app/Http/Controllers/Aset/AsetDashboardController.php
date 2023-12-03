@@ -12,6 +12,7 @@ use App\Models\Aset\lokasi;
 use App\Models\Aset\NilaiAktiva;
 use App\Models\Aset\Ruangan;
 use App\Models\Aset\Sdm;
+use App\Models\Aset\Tanah;
 use Illuminate\Http\Request;
 
 class AsetDashboardController extends Controller
@@ -97,6 +98,17 @@ class AsetDashboardController extends Controller
                                 ->orderBy('nilai_aktivas.id','DESC')->get();
         return response()->json([
             'data' => $nilai
+          ]);
+    }
+
+    public function tanah()
+    {
+        $tanah = Tanah::select('tanahs.id as id_tanah','lokasi','nama_barang','guna','alamat','no_tunjuk','tgl_tunjuk','img')
+                        ->join('lokasis','tanahs.id_lokasi','=','lokasis.id')
+                        ->join('barangs','tanahs.id_barang','=','barangs.id')
+                        ->get();
+        return response()->json([
+            'data' => $tanah
           ]);
     }
 }
