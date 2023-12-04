@@ -31,5 +31,23 @@
           </div>
         </div>
       </div>
+
+      <div class="modal"  id="lgModal">
+        <div class="modal-dialog  modal-xl">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="judul_modalLG">Modal title</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="modal_bodyLG">
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="tombol btn btn-primary" id="">SUBMIT</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 @endsection

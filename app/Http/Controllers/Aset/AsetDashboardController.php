@@ -106,6 +106,7 @@ class AsetDashboardController extends Controller
         $tanah = Tanah::select('tanahs.id as id_tanah','lokasi','nama_barang','guna','alamat','no_tunjuk','tgl_tunjuk','img')
                         ->join('lokasis','tanahs.id_lokasi','=','lokasis.id')
                         ->join('barangs','tanahs.id_barang','=','barangs.id')
+                        ->orderBy('tanahs.id','DESC')
                         ->get();
         return response()->json([
             'data' => $tanah

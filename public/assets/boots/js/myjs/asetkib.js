@@ -52,44 +52,202 @@ $(document).ready(function() {
                     '</div>'
                 );
                 refA();
-                //Modal EDIT show
-                $('#tbl_a').on('click', '.edit', function() {
-                    var id = $(this).data('id');
-                    $.ajax({
-                        type: "GET",
-                        url: "/nilai.edit/"+ id,
-                        success: function (data) {
-                            $.each(data.data, function (index, item) {
-                            $('#myModal').modal('show');
-                            $('#judul_modal').html('UPDATE NILAI');
-                            $('#modal_body').html('');
-                            $('.tombol').attr('id', 'edit_submit');
-                            $('#modal_body').prepend(
-                                '<form action="" id="edit_nilai_submit">' +
-                                    '<input type="hidden" name="id" value = "' + item.idn + '">' +
-                                    '<input type="text" class="form-control" id="no" name="no" value="' + item.no_voucher + '" placeholder="Nomer Voucher"><br>' +
-                                    '<input type="date" class="form-control" id="tgl" name="tgl" value="' + item.tgl_voucher +  '" placeholder="Tgl Voucher"><br>' +
-                                    '<input type="number" class="form-control" id="tahun" name="tahun" value="' + item.tahun +  '" placeholder="Tahun"><br>' +
-                                    '<select class="form-control" id="kode_aktiva" name="kode_aktiva">'+
-                                    '<option value="' + item.idA + '">' + item.kode + ' | ' +  item.aktiva + '</option>'+
-                                    '</select><br>'+
-                                    '<input type="number" class="form-control" name="nilai" value="' + item.nilai +  '"><br>'+
-                                    '<textarea name="urai" class="form-control">' + item.urai +  '</textarea>' +
-                                '</form>');
-                                $.get('/aktiva', function (data) {
-                                    $.each(data.data, function (index, item) {
-                                        $('#kode_aktiva').append('<option value="' + item.id + '">' + item.kode + ' | ' +  item.aktiva + '</option>');
-                                    });
-                                });
-
-                            })
-
-                        },
-                        error: function (data) {
-                            console.log('Error:', data);
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         }
                     });
-                });
+                    //Klik pada tombol tambah bahan, maka menampilkan modal TAMBAH DATA BAHAN
+                $('#tambah_a').on('click', function() {
+                    $('#lgModal').modal('show');
+                    $('#judul_modalLG').html('TAMBAH KIB A -  TANAH');
+                    $('#modal_bodyLG').html('');
+                    $('#modal_bodyLG').prepend(
+                        '<form action="" id="form_a">'+
+                            '<div class="container">'+
+                                    '<div class="row  border border-primary rounded">'+
+                                        '<div class="container"><br>'+
+                                            '<table class="table table-striped table-bordered">'+
+                                                '<thead>'+
+                                                    '<tr class="text-center">'+
+                                                        '<th>Alamat</th>'+
+                                                        '<th>Kode</th>'+
+                                                    ' <th>Tahun</th>'+
+                                                        '<th>Nama</th>'+
+                                                        '<th>Penggunaan</th>'+
+                                                ' </tr>'+
+                                            ' </thead>'+
+                                            ' <tbody>'+
+                                                    '<tr>'+
+                                                        '<td>'+
+                                                            '<div class="input-group input-group-sm mb-1">'+
+                                                                '<select class="form-control">'+
+                                                                    '<option>Muhammad agus syabany</option>'+
+                                                                    '<option>Muhammad agus syabany</option>'+
+                                                                    '<option>sfasf</option>'+
+                                                                '</select>'+
+                                                            '</div>'+
+                                                        '</td>'+
+                                                        '<td>'+
+                                                            '<div class="input-group input-group-sm mb-1">'+
+                                                                '<input type="text" class="form-control">'+
+                                                            '</div>'+
+                                                        '</td>'+
+                                                        '<td>'+
+                                                            '<div class="input-group input-group-sm mb-1">'+
+                                                            '<input type="number" value="2023" class="form-control">'+
+                                                            '</div><br>'+
+                                                        '</td>'+
+                                                        '<td>'+
+                                                            '<div class="input-group input-group-sm mb-1">'+
+
+                                                                '<select class="form-control">'+
+                                                                    '<option>Muhammad agus syabany</option>'+
+                                                                    '<option>Muhammad agus syabany</option>'+
+                                                                    '<option>sfasf</option>'+
+                                                                '</select>'+
+                                                            '</div>'+
+                                                        '</td>'+
+                                                        '<td>'+
+                                                            '<div class="input-group input-group-sm mb-1">'+
+                                                                '<input type="text" class="form-control">'+
+                                                            '</div>'+
+                                                        '</td>'+
+                                                ' </tr>'+
+                                                '<tbody/>'+
+                                            '</table>'+
+                                        '</div>'+
+                                    '</div><br>'+
+
+
+
+
+
+                                    '<fieldset class="border border-secondary rounded-3 p-2 row">'+
+                                        '<legend class="float-none w-auto px-3 border border-secondary rounded">'+
+                                            '<div style="font-size: 15px;"><strong>PENUNJUKAN</strong></div>'+
+                                        '</legend>'+
+                                            '<div class="col">'+
+                                                '<div class="input-group input-group-sm mb-1">'+
+                                                    '<span class="input-group-text col-sm-3">No Surat</span><input type="text" placeholder="Penunjukan" class="form-control">'+
+                                                '</div>'+
+                                            '</div>'+
+                                            '<div class="col">'+
+                                                '<div class="input-group input-group-sm mb-1">'+
+                                                    '<span class="input-group-text col-sm-3">Tgl Surat</span><input type="date" placeholder="Penunjukan" class="form-control">'+
+                                                '</div>'+
+                                            '</div>'+
+                                            '<div class="col">'+
+                                                '<div class="input-group input-group-sm mb-1">'+
+                                                    '<span class="input-group-text col-sm-3">Luas</span><input type="text" placeholder="Penunjukan" class="form-control">'+
+                                                '</div>'+
+                                            '</div>'+
+                                     ' </fieldset><br>'+
+
+                                     '<fieldset class="border border-secondary rounded-3 p-2 row">'+
+                                        '<legend class="float-none w-auto px-1 border border-secondary rounded">'+
+                                        '<div style="font-size: 15px;"><strong>SURAT SPPT/SPHAT/SPJBT</strong></div>'+
+                                        '</legend>'+
+                                            '<div class="col">'+
+                                                '<div class="input-group input-group-sm mb-1">'+
+                                                    '<span class="input-group-text col-sm-3">No Surat</span><input type="text" placeholder="SURAT SPPT/SPHAT/SPJBT" class="form-control">'+
+                                                '</div>'+
+                                            '</div>'+
+                                            '<div class="col">'+
+                                                '<div class="input-group input-group-sm mb-1">'+
+                                                    '<span class="input-group-text col-sm-3">Tgl Surat</span><input type="date" placeholder="SURAT SPPT/SPHAT/SPJBT" class="form-control">'+
+                                                '</div>'+
+                                            '</div>'+
+                                            '<div class="col">'+
+                                                '<div class="input-group input-group-sm mb-1">'+
+                                                    '<span class="input-group-text col-sm-3">Luas</span><input type="text" placeholder="SURAT SPPT/SPHAT/SPJBT" class="form-control">'+
+                                                '</div>'+
+                                            '</div>'+
+                                     ' </fieldset><br>'+
+
+                                     '<fieldset class="border border-secondary rounded-3 p-2 row">'+
+                                        '<legend class="float-none w-auto px-3 border border-secondary rounded">'+
+                                        '<div style="font-size: 15px;"><strong>GAMBAR SITUASI</strong></div>'+
+                                        '</legend>'+
+                                            '<div class="col">'+
+                                                '<div class="input-group input-group-sm mb-1">'+
+                                                    '<span class="input-group-text col-sm-3">No Surat</span><input type="text" placeholder="GAMBAR SITUASI" class="form-control">'+
+                                                '</div>'+
+                                            '</div>'+
+                                            '<div class="col">'+
+                                                '<div class="input-group input-group-sm mb-1">'+
+                                                    '<span class="input-group-text col-sm-3">Tgl Surat</span><input type="date" placeholder="GAMBAR SITUASI" class="form-control">'+
+                                                '</div>'+
+                                            '</div>'+
+                                            '<div class="col">'+
+                                                '<div class="input-group input-group-sm  mb-1">'+
+                                                    '<span class="input-group-text col-sm-3">Luas</span><input type="text" placeholder="GAMBAR SITUASI" class="form-control">'+
+                                                '</div>'+
+                                            '</div>'+
+                                     ' </fieldset><br>'+
+
+
+                                     '<div class="row  border border-primary rounded">'+
+
+                                            '<div class="col"><br>'+
+                                                '<div class="input-group input-group-sm mb-1">'+
+                                                    '<span class="input-group-text col-sm-3">Hak</span>'+
+                                                    '<select class="form-control">'+
+                                                        '<option>sfasf</option>'+
+                                                        '<option>sfasf</option>'+
+                                                        '<option>sfasf</option>'+
+                                                    '</select>'+
+                                                '</div>'+
+                                                '<div class="input-group input-group-sm mb-1">'+
+                                                    '<span class="input-group-text col-sm-3">Pemilik Asal</span><input type="text" class="form-control">'+
+                                                '</div>'+
+                                                '<div class="input-group input-group-sm mb-1">'+
+                                                    '<span class="input-group-text col-sm-3">Asal</span><input type="number" value="2023" class="form-control">'+
+                                                '</div>'+
+                                                '<div class="input-group input-group-sm mb-1">'+
+                                                    '<span class="input-group-text col-sm-3">Nilai perolehan</span>'+
+                                                    '<select class="form-control">'+
+                                                        '<option>sfasf</option>'+
+                                                        '<option>sfasf</option>'+
+                                                        '<option>sfasf</option>'+
+                                                    '</select>'+
+                                                '</div>'+
+                                                '<div class="input-group input-group-sm mb-1">'+
+                                                    '<span class="input-group-text col-sm-3">Nilai saat ini</span><input type="text" class="form-control">'+
+                                                '</div>'+
+                                            '</div><br>'+
+
+                                            '<div class="col"><br>'+
+
+                                                '<div class="input-group input-group-sm mb-1">'+
+                                                    '<span class="input-group-text col-sm-3">Foto</span><input type="text" class="form-control">'+
+                                                '</div>'+
+                                                '<div class="input-group input-group-sm mb-1">'+
+                                                    '<span class="input-group-text col-sm-3">Dokumen</span><input type="text" class="form-control">'+
+                                                '</div>'+
+                                                '<div class="input-group input-group-sm mb-1">'+
+                                                    '<span class="input-group-text col-sm-3">Keterangan</span><textarea class="form-control"></textarea>'+
+                                                '</div>'+
+                                            '</div>'+
+
+                                    '</div><br>'+
+
+
+
+
+                          '</div>'+
+                        '</form >');
+                        $.get('/aktiva', function (data) {
+                            $.each(data.data, function (index, item) {
+                                $('#kode_aktiva').append('<option value="' + item.id + '">' + item.kode + ' | ' +  item.aktiva + '</option>');
+                            });
+                        });
+
+                    });
+
+
+
+
 
         });
     });

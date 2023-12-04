@@ -10,7 +10,7 @@ class PdfController extends Controller
 {
     public function show($id)
     {
-        $pdf = Pdf::where('id_tanah',$id)->where('gol','a')->orderBy('id_tanah','DESC')->get();
+        $pdf = Pdf::where('id_tanah',$id)->where('gol','a')->get();
         return response()->json([
             'data' => $pdf
           ]);
