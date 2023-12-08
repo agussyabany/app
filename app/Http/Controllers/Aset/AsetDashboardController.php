@@ -93,7 +93,7 @@ class AsetDashboardController extends Controller
 
     public function nilai()
     {
-        $nilai = NilaiAktiva::select('nilai_aktivas.id as id_nilai','aktivas.id as as id_aktiva','no_voucher','tgl_voucher','aktiva','tahun','nilai','urai','kib')
+        $nilai = NilaiAktiva::select('nilai_aktivas.id as id_nilai','aktivas.id as as id_aktiva','no_voucher','tgl_voucher','aktiva','tahun','nilai','urai','kib','kode')
                                 ->join('aktivas','nilai_aktivas.id_aktiva','aktivas.id')
                                 ->orderBy('nilai_aktivas.id','DESC')->get();
         return response()->json([

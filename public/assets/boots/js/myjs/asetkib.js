@@ -1,11 +1,5 @@
 $(document).ready(function() {
 
-
-
-
-
-
-
     //TANAH
 
     //Klik menu TANAH Sidebar
@@ -67,50 +61,49 @@ $(document).ready(function() {
                             '<div class="container">'+
                                     '<div class="row  border border-primary rounded">'+
                                         '<div class="container"><br>'+
-                                            '<table class="table table-striped table-bordered">'+
+                                            '<table class="table table-striped table-bordered rounded">'+
                                                 '<thead>'+
                                                     '<tr class="text-center">'+
                                                         '<th>Alamat</th>'+
                                                         '<th>Kode</th>'+
-                                                    ' <th>Tahun</th>'+
+                                                        ' <th>Tahun</th>'+
                                                         '<th>Nama</th>'+
                                                         '<th>Penggunaan</th>'+
-                                                ' </tr>'+
-                                            ' </thead>'+
+                                                      '</tr>'+
+                                                '</thead>'+
                                             ' <tbody>'+
                                                     '<tr>'+
                                                         '<td>'+
                                                             '<div class="input-group input-group-sm mb-1">'+
-                                                                '<select class="form-control">'+
-                                                                    '<option>Muhammad agus syabany</option>'+
-                                                                    '<option>Muhammad agus syabany</option>'+
-                                                                    '<option>sfasf</option>'+
+                                                                '<select class="select2 form-control" name="lokasi" id="lokasi_a">'+
+                                                                    '<option>- PILIH LOKASI -</option>'+
+
+
                                                                 '</select>'+
                                                             '</div>'+
                                                         '</td>'+
                                                         '<td>'+
                                                             '<div class="input-group input-group-sm mb-1">'+
-                                                                '<input type="text" class="form-control">'+
+                                                                '<input name="kode" id="kode" type="text" class="form-control">'+
                                                             '</div>'+
                                                         '</td>'+
                                                         '<td>'+
                                                             '<div class="input-group input-group-sm mb-1">'+
-                                                            '<input type="number" value="2023" class="form-control">'+
+                                                                '<input type="number" name="tahun" id="tahun" value="2023" class="form-control">'+
                                                             '</div><br>'+
                                                         '</td>'+
                                                         '<td>'+
                                                             '<div class="input-group input-group-sm mb-1">'+
 
-                                                                '<select class="form-control">'+
-                                                                    '<option>Muhammad agus syabany</option>'+
-                                                                    '<option>Muhammad agus syabany</option>'+
-                                                                    '<option>sfasf</option>'+
+                                                                '<select class="select2 form-control" style"width:100%;"  id="nama" name="nama">'+
+                                                                    '<option> -NAMA BARANG- </option>'+
+
                                                                 '</select>'+
                                                             '</div>'+
                                                         '</td>'+
                                                         '<td>'+
                                                             '<div class="input-group input-group-sm mb-1">'+
-                                                                '<input type="text" class="form-control">'+
+                                                                '<input type="text" nama="guna" id="guna" class="form-control">'+
                                                             '</div>'+
                                                         '</td>'+
                                                 ' </tr>'+
@@ -129,17 +122,17 @@ $(document).ready(function() {
                                         '</legend>'+
                                             '<div class="col">'+
                                                 '<div class="input-group input-group-sm mb-1">'+
-                                                    '<span class="input-group-text col-sm-3">No Surat</span><input type="text" placeholder="Penunjukan" class="form-control">'+
+                                                    '<span class="input-group-text col-sm-3">No Surat</span><input nama="no_tunjuk" id="no_tunjuk" type="text" placeholder="Penunjukan" class="form-control">'+
                                                 '</div>'+
                                             '</div>'+
                                             '<div class="col">'+
                                                 '<div class="input-group input-group-sm mb-1">'+
-                                                    '<span class="input-group-text col-sm-3">Tgl Surat</span><input type="date" placeholder="Penunjukan" class="form-control">'+
+                                                    '<span class="input-group-text col-sm-3">Tgl Surat</span><input type="date" placeholder="Penunjukan" nama="tgl_tunjuk" id="tgl_tunjuk" class="form-control">'+
                                                 '</div>'+
                                             '</div>'+
                                             '<div class="col">'+
                                                 '<div class="input-group input-group-sm mb-1">'+
-                                                    '<span class="input-group-text col-sm-3">Luas</span><input type="text" placeholder="Penunjukan" class="form-control">'+
+                                                    '<span class="input-group-text col-sm-3">Luas</span><input type="text" nama="luas_tunjuk" placeholder="Penunjukan" class="form-control">'+
                                                 '</div>'+
                                             '</div>'+
                                      ' </fieldset><br>'+
@@ -150,17 +143,17 @@ $(document).ready(function() {
                                         '</legend>'+
                                             '<div class="col">'+
                                                 '<div class="input-group input-group-sm mb-1">'+
-                                                    '<span class="input-group-text col-sm-3">No Surat</span><input type="text" placeholder="SURAT SPPT/SPHAT/SPJBT" class="form-control">'+
+                                                    '<span class="input-group-text col-sm-3">No Surat</span><input type="text" nama="sertifikat" id="sertifikat" placeholder="SURAT SPPT/SPHAT/SPJBT" class="form-control">'+
                                                 '</div>'+
                                             '</div>'+
                                             '<div class="col">'+
                                                 '<div class="input-group input-group-sm mb-1">'+
-                                                    '<span class="input-group-text col-sm-3">Tgl Surat</span><input type="date" placeholder="SURAT SPPT/SPHAT/SPJBT" class="form-control">'+
+                                                    '<span class="input-group-text col-sm-3">Tgl Surat</span><input type="date" name="tgl_sertifikat" id="tgl_sertifikat" placeholder="SURAT SPPT/SPHAT/SPJBT" class="form-control">'+
                                                 '</div>'+
                                             '</div>'+
                                             '<div class="col">'+
                                                 '<div class="input-group input-group-sm mb-1">'+
-                                                    '<span class="input-group-text col-sm-3">Luas</span><input type="text" placeholder="SURAT SPPT/SPHAT/SPJBT" class="form-control">'+
+                                                    '<span class="input-group-text col-sm-3">Luas</span><input type="text" name="luas_sertifikat" id="luas_sertifikat" placeholder="SURAT SPPT/SPHAT/SPJBT" class="form-control">'+
                                                 '</div>'+
                                             '</div>'+
                                      ' </fieldset><br>'+
@@ -171,17 +164,17 @@ $(document).ready(function() {
                                         '</legend>'+
                                             '<div class="col">'+
                                                 '<div class="input-group input-group-sm mb-1">'+
-                                                    '<span class="input-group-text col-sm-3">No Surat</span><input type="text" placeholder="GAMBAR SITUASI" class="form-control">'+
+                                                    '<span class="input-group-text col-sm-3">No Surat</span><input type="text" name="no_gambar" id="no_gambar" placeholder="GAMBAR SITUASI" class="form-control">'+
                                                 '</div>'+
                                             '</div>'+
                                             '<div class="col">'+
                                                 '<div class="input-group input-group-sm mb-1">'+
-                                                    '<span class="input-group-text col-sm-3">Tgl Surat</span><input type="date" placeholder="GAMBAR SITUASI" class="form-control">'+
+                                                    '<span class="input-group-text col-sm-3">Tgl Surat</span><input type="date" name="tgl_gambar" id="tgl_gambar" placeholder="GAMBAR SITUASI" class="form-control">'+
                                                 '</div>'+
                                             '</div>'+
                                             '<div class="col">'+
                                                 '<div class="input-group input-group-sm  mb-1">'+
-                                                    '<span class="input-group-text col-sm-3">Luas</span><input type="text" placeholder="GAMBAR SITUASI" class="form-control">'+
+                                                    '<span class="input-group-text col-sm-3">Luas</span><input type="text" name="luas_gambar" id="luas_gambar" placeholder="GAMBAR SITUASI" class="form-control">'+
                                                 '</div>'+
                                             '</div>'+
                                      ' </fieldset><br>'+
@@ -191,59 +184,140 @@ $(document).ready(function() {
 
                                             '<div class="col"><br>'+
                                                 '<div class="input-group input-group-sm mb-1">'+
-                                                    '<span class="input-group-text col-sm-3">Hak</span>'+
-                                                    '<select class="form-control">'+
-                                                        '<option>sfasf</option>'+
-                                                        '<option>sfasf</option>'+
-                                                        '<option>sfasf</option>'+
+                                                    // '<span class="input-group-text col-sm-3">Hak</span>'+
+                                                    '<select name="hak" id="hak" class="select2 form-control">'+
+                                                        '<option>-HAK-</option>'+
+                                                        '<option>SHM</option>'+
+                                                        '<option>Tanah Milik Perumdam</option>'+
+                                                        '<option>Tanah Milik Negara</option>'+
+                                                        '<option>Tanah Milik Pemda</option>'+
+                                                        '<option>Hibah</option>'+
+                                                        '<option>SPHAT</option>'+
+                                                        '<option>Hak Pakai</option>'+
+                                                        '<option>HGB</option>'+
+                                                        '<option>SPPT</option>'+
                                                     '</select>'+
                                                 '</div>'+
                                                 '<div class="input-group input-group-sm mb-1">'+
-                                                    '<span class="input-group-text col-sm-3">Pemilik Asal</span><input type="text" class="form-control">'+
+                                                    '<span class="input-group-text col-sm-3">Pemilik Asal</span><input name="asal" id="asal" type="text" class="form-control">'+
                                                 '</div>'+
                                                 '<div class="input-group input-group-sm mb-1">'+
-                                                    '<span class="input-group-text col-sm-3">Asal</span><input type="number" value="2023" class="form-control">'+
+                                                    '<span class="input-group-text col-sm-3">Asal</span><input type="number" name="pemilik" id="pemilik" value="2023" class="form-control">'+
                                                 '</div>'+
                                                 '<div class="input-group input-group-sm mb-1">'+
-                                                    '<span class="input-group-text col-sm-3">Nilai perolehan</span>'+
-                                                    '<select class="form-control">'+
-                                                        '<option>sfasf</option>'+
-                                                        '<option>sfasf</option>'+
-                                                        '<option>sfasf</option>'+
+                                                    // '<span class="input-group-text col-sm-3">Nilai perolehan</span>'+
+                                                    '<select class="select2 form-control" name="nilai_a" id="nilai_a">'+
+                                                        '<option> -PILH NILAI AKTIVA- </option>'+
                                                     '</select>'+
                                                 '</div>'+
                                                 '<div class="input-group input-group-sm mb-1">'+
-                                                    '<span class="input-group-text col-sm-3">Nilai saat ini</span><input type="text" class="form-control">'+
+                                                    '<span class="input-group-text col-sm-3">Nilai saat ini</span><input name="nilai_now" id="nilai_now" type="text" class="form-control">'+
                                                 '</div>'+
                                             '</div><br>'+
 
                                             '<div class="col"><br>'+
 
                                                 '<div class="input-group input-group-sm mb-1">'+
-                                                    '<span class="input-group-text col-sm-3">Foto</span><input type="text" class="form-control">'+
+                                                    '<span class="input-group-text col-sm-3">Foto</span><input name="img" id="img" type="file" class="form-control" multiple>'+
                                                 '</div>'+
                                                 '<div class="input-group input-group-sm mb-1">'+
-                                                    '<span class="input-group-text col-sm-3">Dokumen</span><input type="text" class="form-control">'+
+                                                    '<span class="input-group-text col-sm-3">Dokumen</span><input name="dok" id="dok" type="file" class="form-control">'+
                                                 '</div>'+
                                                 '<div class="input-group input-group-sm mb-1">'+
-                                                    '<span class="input-group-text col-sm-3">Keterangan</span><textarea class="form-control"></textarea>'+
+                                                    '<span class="input-group-text col-sm-3">Keterangan</span><textarea name="ket" id="ket" class="form-control"></textarea>'+
                                                 '</div>'+
                                             '</div>'+
 
                                     '</div><br>'+
 
-
-
-
-                          '</div>'+
+                             '</div>'+
                         '</form >');
-                        $.get('/aktiva', function (data) {
+
+                        $('.select2').select2({
+                            dropdownParent: $('#lgModal')
+                        });
+
+                        $.get('/lok', function (data) {
                             $.each(data.data, function (index, item) {
-                                $('#kode_aktiva').append('<option value="' + item.id + '">' + item.kode + ' | ' +  item.aktiva + '</option>');
+                                $('#lokasi_a').append('<option value="' + item.id + '">' + item.alamat + ' | ' +  item.lokasi + '</option>');
+                            });
+                        });
+                        $.get('/barang.tanah', function (data) {
+                            $.each(data.data, function (index, item) {
+                                $('#nama').append('<option value="' + item.id + '"> ' +  item.nama_barang + '</option>');
+                            });
+                        });
+
+                        $.get('/nilai', function (data) {
+                            $.each(data.data, function (index, item) {
+                                $('#nilai_a').append('<option value="' + item.id + '"> ' +  item.kode + ' | ' + item.nilai + ' </option>');
                             });
                         });
 
                     });
+                    //Memberikan atribut id pada tombol submit modal
+                 $('.tombol').attr('id', 'submit_a');
+
+                 $(document).on('click', '#submit_a', function (event) {
+                    event.preventDefault();
+                    var fileInput = $('#img')[0].files[0];
+                    if (!fileInput || fileInput.length === 0) {
+                        alert('Please select at least one image.');
+                        return;
+                    }
+
+
+                    for (var i = 0; i < fileInput.length; i++) {
+                        var currentFile = fileInput[i];
+                        var reader = new FileReader();
+
+                        reader.onload = function (e) {
+                            var base64Image = e.target.result.split(',')[1]; // Extract base64 data
+
+                            // Send the base64 encoded image data in the AJAX request
+                            $.ajax({
+                                data: {
+                                    lokasi: $('#lokasi_a').val(),
+                                    kode: $('#kode').val(),
+                                    tahun: $('#tahun').val(),
+                                    nama: $('#nama').val(),
+                                    guna: $('#guna').val(),
+                                    no_tunjuk: $('#no_tunjuk').val(),
+                                    tgl_tunjuk: $('#tgl_tunjuk').val(),
+                                    luas_tunjuk: $('#luas_tunjuk').val(),
+                                    sertifikat: $('#sertifikat').val(),
+                                    tgl_sertifikat: $('#tgl_sertifikat').val(),
+                                    luas_sertifikat: $('#luas_sertifikat').val(),
+                                    no_gambar: $('#no_gambar').val(),
+                                    tgl_gambar: $('#tgl_gambar').val(),
+                                    luas_gambar: $('#luas_gambar').val(),
+                                    hak: $('#hak').val(),
+                                    asal: $('#asal').val(),
+                                    pemilik: $('#pemilik').val(),
+                                    nilai_a: $('#nilai_a').val(),
+                                    nilai_now: $('#nilai_now').val(),
+                                    ket: $('#ket').val(),
+                                    img: base64Image
+                                },
+                                url: "/lok.save",
+                                type: "POST",
+                                dataType: 'json',
+                                success: function (data) {
+                                    $('#modal_body').html('');
+                                    $('#myModal').modal('hide');
+                                    alert('Data berhasil Disimpan');
+                                    refLok();
+                                },
+                                error: function (xhr, textStatus, errorThrown) {
+                                    alert('Failed to submit the form');
+                                },
+                            });
+                        };
+
+                        // Read the selected file as a data URL
+                        reader.readAsDataURL(currentFile);
+                    }
+                });
 
 
 

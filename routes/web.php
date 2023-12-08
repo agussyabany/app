@@ -72,6 +72,7 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::get('barang.edit/{id}',[BarangController::class,'edit']);
     Route::post('barang.update',[BarangController::class,'update']);
     Route::post('barang.hapus/{id}',[BarangController::class,'destroy']);
+    Route::get('barang.tanah',[BarangController::class,'tanah']);
 
 
     Route::post('/dep.save',[DepartemenController::class,'save']);

@@ -52,4 +52,10 @@ class BarangController extends Controller
         Barang::where('id', $id)->delete();
         return response()->json(['message' => 'Data deleted successfully']);
     }
+
+    public function tanah()
+    {
+        $tanah = Barang::where('golongan','TANAH')->get();
+        return response()->json(['data' => $tanah]);
+    }
 }
