@@ -9,6 +9,7 @@ use App\Models\Aset\Barang;
 use App\Models\Aset\Departemen;
 use App\Models\Aset\Divisi;
 use App\Models\Aset\lokasi;
+use App\Models\Aset\Mesin;
 use App\Models\Aset\NilaiAktiva;
 use App\Models\Aset\Ruangan;
 use App\Models\Aset\Sdm;
@@ -110,6 +111,17 @@ class AsetDashboardController extends Controller
                         ->get();
         return response()->json([
             'data' => $tanah
+          ]);
+    }
+
+    public function mesin()
+    {
+        $mesin = Mesin::select('id_lokasi','lokasi','alamat','lokasis.img as img_lok')
+                        ->distinct('id_lokasi')
+                        ->join('lokasis','mesins.id_lokasi','=','lokasis.id')
+                        ->get();
+        return response()->json([
+            'data' => $mesin
           ]);
     }
 }

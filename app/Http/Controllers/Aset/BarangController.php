@@ -55,7 +55,7 @@ class BarangController extends Controller
 
     public function tanah()
     {
-        $tanah = Barang::where('golongan','TANAH')->get();
+        $tanah = Barang::where('golongan',1)->get();
         return response()->json(['data' => $tanah]);
     }
 }

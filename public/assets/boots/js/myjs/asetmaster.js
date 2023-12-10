@@ -943,7 +943,7 @@ $(document).ready(function() {
                         // Send the base64 encoded image data in the AJAX request
                         $.ajax({
                             data: {
-                                nama_lokasi: $('#nama_lokasi').val(), // Assuming you have input fields with the ids 'nama' and 'nip'
+                                nama_lokasi: $('#nama_lokasi').val(),
                                 alamat: $('#alamat').val(),
                                 lat:$('#lat').val(),
                                 long:$('#long').val(),

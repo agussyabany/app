@@ -214,6 +214,7 @@ function refA()
                 '<button class="btn btn-default border border-secondary btn-sm" type="button">AKSI</button>'+
                 '<button type="button" class="btn btn-sm btn-default border border-secondary  dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"><span class="visually-hidden">Toggle Dropdown</span></button>'+
                 '<ul class="dropdown-menu">'+
+                    '<li><a class="dropdown-item  detail" data-id="' + item.id_tanah + '" href="#"><i class="fa-solid fa-circle-info"></i>&nbsp;DETAIL</a></li>'+
                     '<li><a class="dropdown-item  edit" data-id="' + item.id_tanah + '" href="#"><i class="fa-solid fa-edit"></i>&nbsp;EDIT</a></li>'+
                     '<li><a class="dropdown-item delete" data-id="' + item.id_tanah + '" href="#"><i class="fa-solid fa-trash"></i>&nbsp;DELETE</a></li>'+
                     '<li><hr class="dropdown-divider"></li>'+
@@ -233,6 +234,33 @@ function refA()
                 item.guna,
                 item.lokasi,
                 item.no_tunjuk,
+                img,
+                editButton
+            ]).draw();
+
+
+         });
+        })
+}
+
+function refB()
+{
+    $.get('/mesin', function(data) {
+        var i = 0;
+        var table = $("#tbl_b").DataTable();
+        table.clear().draw();
+        $('#modal_body').html('');
+
+        $.each(data.data, function(index, item) {
+            var editButton =
+            '<div class="btn-group">'+
+                '<button class="btn btn-default border border-secondary btn-sm tree" data-id="' + item.id_lokasi + '" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">AKSI</button>'+
+            '</div>';
+            var img = '<img src="http://127.0.0.1:8000/assets/img/lokasi/'+item.img_lok+'" height="100px" width="100px"></img>';
+            table.row.add([
+                 ++i,
+                item.lokasi,
+                item.alamat,
                 img,
                 editButton
             ]).draw();
