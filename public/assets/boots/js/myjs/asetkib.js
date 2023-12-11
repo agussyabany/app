@@ -809,7 +809,9 @@ $(document).ready(function() {
                         '<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>'+
                     '</div>'+
                     '<div class="offcanvas-body">'+
-                    '<div class="container border border-primary rounded"  id="canvas_body"></div>'+
+                    '<div class="container border border-primary rounded" style="width=100%"><br>'+
+                        '<ol class="tree" id="canvas_body"></ol>'+
+                    '</div>'+
                     '</div>'+
                 '</div>'
                 );
@@ -824,9 +826,21 @@ $(document).ready(function() {
                     success: function (data) {
                         $.each(data.data, function (index, item) {
                             
-                            $('#canvas_body').append('<p>' + item.kode_dep + '</p>');
-
+                            $('#canvas_body').append(
+                                '<li><span class="border border-primary">' + item.kode_dep +  '</span>'+
+                                        '<ol id="mesin_div'+ item.id_departemen +'"></ol>'+
+                                    '</li>');
+                            var dep = item.id_departemen;
+                            $.get("/mesin.div/"+ dep, function(data) {
+                                var i = 0;
+                                $.each(data.data, function(index, item) {
+                                    $("#mesin_div" + item.id_departemen).append('<li><span>'+ item.nama_div +'</span></li>')
+                                });
+                            })
                         })
+                            
+
+
                     },
                     error: function (data) {
                         console.log('Error:', data);

@@ -120,6 +120,7 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::get('/tanah.detail/{id}',[TanahController::class,'detail']);
 
     Route::get('/mesin.group/{id}',[MesinController::class,'show']);
+    Route::get('/mesin.div/{dep}',[MesinController::class,'div']);
 
 });
 
