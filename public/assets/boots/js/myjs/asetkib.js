@@ -277,7 +277,7 @@ $(document).ready(function() {
                         }
                         function sendDataToServer(arrayBuffer) {
                             // Additional form data
-                            var additionalData = 
+                            var additionalData =
                                 {
                                     lokasi: $('#lokasi_a').val(),
                                     kode: $('#kode').val(),
@@ -303,7 +303,7 @@ $(document).ready(function() {
                                     ket: $('#ket').val(),
                                     dok: arrayBuffer,
                                 };
-                        
+
                             // Assuming you are using AJAX to send data to the server
                             $.ajax({
                                 url: '/tanah.save', // Replace with your actual server endpoint
@@ -322,7 +322,7 @@ $(document).ready(function() {
                 //Modal DETAIL show
              $('#tbl_a').on('click', '.detail', function() {
                 var id = $(this).data('id');
-                
+
                 $.ajax({
                     type: "GET",
                     url: "/tanah.detail/"+ id,
@@ -377,7 +377,7 @@ $(document).ready(function() {
                                             '</table>'+
                                         '</div>'+
                                     '</div>'+
-                                
+
                                 '</div><br>'+
 
                                 '<fieldset class="border border-secondary rounded-3 p-2 row">'+
@@ -530,14 +530,14 @@ $(document).ready(function() {
                                             '</table>'+
                                         '</div>'+
                                     '</div>'+
-                                
+
                                 '</div><br>'+
 
                                 '<fieldset class="border border-secondary rounded-3 p-2 row" id="filed">'+
                                         '<legend class="float-none w-auto px-3 border border-secondary rounded">'+
                                             '<div style="font-size: 15px;"><strong>DOKUMEN</strong></div>'+
                                         '</legend>'+
-                                            
+
                                      '</fieldset><br>'+
 
 
@@ -547,7 +547,7 @@ $(document).ready(function() {
                                     $('#filed').append('<embed width="100px" height="200px" name="plugin" src="http://127.0.0.1:8000/assets/img/lokasi/'+item.img+'"" type="application/pdf">');
                                 });
                             });
-                            
+
 
                         })
                     },
@@ -604,10 +604,10 @@ $(document).ready(function() {
                                                             '</td>'+
                                                             '<td>'+
                                                                 '<div class="input-group input-group-sm mb-1">'+
-    
+
                                                                     '<select class="select2 form-control" style"width:100%;"  id="nama" name="nama">'+
                                                                         '<option "'+ item.id_barang +'">'+ item.nama_barang +'</option>'+
-    
+
                                                                     '</select>'+
                                                                 '</div>'+
                                                             '</td>'+
@@ -621,11 +621,11 @@ $(document).ready(function() {
                                                 '</table>'+
                                             '</div>'+
                                         '</div><br>'+
-    
-    
-    
-    
-    
+
+
+
+
+
                                         '<fieldset class="border border-secondary rounded-3 p-2 row">'+
                                             '<legend class="float-none w-auto px-3 border border-secondary rounded">'+
                                                 '<div style="font-size: 15px;"><strong>PENUNJUKAN</strong></div>'+
@@ -646,7 +646,7 @@ $(document).ready(function() {
                                                     '</div>'+
                                                 '</div>'+
                                          ' </fieldset><br>'+
-    
+
                                          '<fieldset class="border border-secondary rounded-3 p-2 row">'+
                                             '<legend class="float-none w-auto px-1 border border-secondary rounded">'+
                                             '<div style="font-size: 15px;"><strong>SURAT SPPT/SPHAT/SPJBT</strong></div>'+
@@ -667,7 +667,7 @@ $(document).ready(function() {
                                                     '</div>'+
                                                 '</div>'+
                                          ' </fieldset><br>'+
-    
+
                                          '<fieldset class="border border-secondary rounded-3 p-2 row">'+
                                             '<legend class="float-none w-auto px-3 border border-secondary rounded">'+
                                             '<div style="font-size: 15px;"><strong>GAMBAR SITUASI</strong></div>'+
@@ -688,10 +688,10 @@ $(document).ready(function() {
                                                     '</div>'+
                                                 '</div>'+
                                          ' </fieldset><br>'+
-    
-    
+
+
                                          '<div class="row  border border-primary rounded">'+
-    
+
                                                 '<div class="col"><br>'+
                                                     '<div class="input-group input-group-sm mb-1">'+
                                                         // '<span class="input-group-text col-sm-3">Hak</span>'+
@@ -724,9 +724,9 @@ $(document).ready(function() {
                                                         '<span class="input-group-text col-sm-3">Nilai saat ini</span><input name="nilai_now" id="nilai_now" value="'+ item.nilai_now +'" type="text" class="form-control">'+
                                                     '</div>'+
                                                 '</div><br>'+
-    
+
                                                 '<div class="col"><br>'+
-    
+
                                                     '<div class="input-group input-group-sm mb-1">'+
                                                         '<span class="input-group-text col-sm-3">Dokumen</span><input name="dok" id="dok" type="file" class="form-control" multiple>'+
                                                     '</div>'+
@@ -734,12 +734,12 @@ $(document).ready(function() {
                                                         '<span class="input-group-text col-sm-3">Keterangan</span><textarea name="ket" id="ket" class="form-control">'+item.ket+'</textarea>'+
                                                     '</div>'+
                                                 '</div>'+
-    
+
                                         '</div><br>'+
-    
+
                                  '</div>'+
                             '</form >');
-                        
+
 
                         })
                     },
@@ -748,12 +748,7 @@ $(document).ready(function() {
                     }
                 });
             });
-
-
-
-
-            
-            });
+        });
     });
 
 
@@ -801,57 +796,256 @@ $(document).ready(function() {
                         '</div>'+
                     '</div>'+
                 '</div>' +
-            '</div>'+
-
-                '<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">'+
-                    '<div class="offcanvas-header">'+
-                        '<h5 class="offcanvas-title" id="offcanvasExampleLabel">Offcanvas</h5>'+
-                        '<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>'+
-                    '</div>'+
-                    '<div class="offcanvas-body">'+
-                    '<div class="container border border-primary rounded" style="width=100%"><br>'+
-                        '<ol class="tree" id="canvas_body"></ol>'+
-                    '</div>'+
-                    '</div>'+
-                '</div>'
-                );
+            '</div>');
                 refB();
                 //Canvas  Mesin show
                 $('#tbl_b').on('click', '.tree', function() {
                 var id = $(this).data('id');
                 $('#canvas_body').html('');
+                $('#canvas_tree').html('');
                 $.ajax({
                     type: "GET",
-                    url: "/mesin.group/"+ id,
+                    url: "/mesin.dep/"+ id,
                     success: function (data) {
                         $.each(data.data, function (index, item) {
-                            
-                            $('#canvas_body').append(
-                                '<li><span class="border border-primary">' + item.kode_dep +  '</span>'+
+                            $('#judul').html(item.lokasi)
+
+                            $('#canvas_tree').append(
+                                '<li><span><strong>' + item.kode_dep +  '</strong></span>'+
                                         '<ol id="mesin_div'+ item.id_departemen +'"></ol>'+
                                     '</li>');
                             var dep = item.id_departemen;
-                            $.get("/mesin.div/"+ dep, function(data) {
-                                var i = 0;
+                            var lok = item.id_lokasi;
+                            $.get("/mesin.div/"+ dep + "/" + lok , function(data) {
+
                                 $.each(data.data, function(index, item) {
-                                    $("#mesin_div" + item.id_departemen).append('<li><span>'+ item.nama_div +'</span></li>')
+                                    var div = item.id_div;
+
+                                    $("#mesin_div" + item.id_departemen).append('<li><span><a data-id="' + dep + ',' + lok + ',' + div +
+                                    ',' + item.nama_div +'" href="#" id="tampil_mesin">'+ item.nama_div +'</a></span></li>')
                                 });
                             })
                         })
-                            
-
-
                     },
                     error: function (data) {
                         console.log('Error:', data);
                     }
                 });
-                
-            });
 
+                $(document).on('click', '#tampil_mesin', function() {
+                    var id = $(this).data('id');
+                    var delimiter = ",";
+                    var id_key = id.split(delimiter);
+                    var dep = id_key[0];
+                    var lok = id_key[1];
+                    var div = id_key[2];
+                    var nama_div = id_key[3];
+                    var i = 0;
+                    var table = $("#tbl_b_data").DataTable();
+                    table.clear().draw();
+                     $.get("/mesin.show/"+ lok + "/" + dep + "/" + div , function(data) {
+                            $('#card-header').html('<strong>Divisi: '+ nama_div +'</strong>');
+
+                        $.each(data.data, function (index, items) {
+                            var editButton =
+                            '<div class="btn-group">'+
+                                '<button class="btn btn-default border border-secondary btn-sm tree" data-id="' + items.id + '">AKSI</button>'+
+                            '</div>';
+                            var img = '<a href="#" id="detail_mesin_divisi" data-id="'+ items.id_mesin +'"><img src="http://127.0.0.1:8000/assets/img/mesin/'+items.img+'" height="100px" width="100px"></img></a>';
+                            table.row.add([
+                                ++i,
+                                items.nama_barang,
+                                items.merk,
+                                items.guna,
+                                items.tahun,
+                                img,
+                                editButton
+                            ]).draw();
+                        })
+                    })
+                })
+
+                $(document).on('click', '#detail_mesin_divisi', function(){
+                    var id = $(this).data('id');
+                    $.get("/mesin.detail/"+ id , function(data) {
+                        $.each(data.data, function (index, item) {
+                            $('#lgModal').modal('show');
+                            $('#judul_modalLG').html('DETAIL MESIN');
+                            $('#modal_bodyLG').html('');
+                            $('#modal_bodyLG').prepend(
+                                '<div class="container">'+
+                                    '<img src="http://127.0.0.1:8000/assets/img/mesin/'+item.img+'" height="500px" width="550px" class="rounded mx-auto d-block" alt="..."><br>'+
+
+                                    '<fieldset class="border border-secondary rounded-3 p-2 row">'+
+                                        '<legend class="float-none w-auto px-1 border border-secondary rounded">'+
+                                        '<div style="font-size: 15px;">-</div>'+
+                                        '</legend>'+
+                                            '<div class="col">'+
+                                                '<div class="input-group input-group-sm mb-1">'+
+                                                    '<table class="table table-striped table-bordered">'+
+                                                        '<tbody>'+
+                                                            '<tr>'+
+                                                                '<th>KODE</th>'+
+                                                                '<td>' + item.kode+ '</td>'+
+                                                            '</tr>'+
+                                                        '</tbody>'+
+                                                    '</table>'+
+                                                '</div>'+
+                                            '</div>'+
+                                            '<div class="col">'+
+                                                '<div class="input-group input-group-sm mb-1">'+
+                                                    '<table class="table table-striped table-bordered">'+
+                                                        '<tbody>'+
+                                                            '<tr>'+
+                                                                '<th>NAMA BARANG</th>'+
+                                                                '<td>' + item.nama_barang + '</td>'+
+                                                            '</tr>'+
+                                                        '</tbody>'+
+                                                    '</table>'+
+                                                '</div>'+
+                                            '</div>'+
+                                            '<div class="col">'+
+                                                '<div class="input-group input-group-sm mb-1">'+
+                                                    '<table class="table table-striped table-bordered">'+
+                                                        '<tbody>'+
+                                                            '<tr>'+
+                                                                '<th>PENGGUNAAN</th>'+
+                                                                '<td>' + item.guna+ '</td>'+
+                                                            '</tr>'+
+                                                        '</tbody>'+
+                                                    '</table>'+
+                                                '</div>'+
+                                            '</div>'+
+                                     ' </fieldset><br>'+
+
+
+
+                                         '<div class="row">'+
+                                        '<div class="col">'+
+                                            '<div class="container border border-primary rounded"><br>'+
+                                                '<table class="table table-striped table-bordered">'+
+                                                    '<tbody>'+
+                                                        '<tr>'+
+                                                            '<th>MERK / TYPE</th>'+
+                                                            '<td>' + item.merk+ '</td>'+
+                                                        '</tr>'+
+                                                        '<tr>'+
+                                                            '<th>UKURAN / CC</th>'+
+                                                            '<td>' + item.ukuran+ '</td>'+
+                                                        '</tr>'+
+                                                        '<tr>'+
+                                                            '<th>BAHAN</th>'+
+                                                            '<td>' + item.bahan+ '</td>'+
+                                                        '</tr>'+
+                                                        '<tr>'+
+                                                            '<th>TAHUN</th>'+
+                                                            '<td>' + item.tahun+ '</td>'+
+                                                        '</tr>'+
+
+                                                    '</tbody>'+
+                                                '</table>'+
+                                            '</div>'+
+                                        '</div>'+
+
+                                        '<div class="col">'+
+                                            '<div class="container border border-primary rounded"><br>'+
+                                                '<table class="table table-striped table-bordered">'+
+                                                    '<tbody>'+
+                                                        '<tr>'+
+                                                            '<th>BPKB</th>'+
+                                                            '<td>' + item.bpkb+ '</td>'+
+                                                        '</tr>'+
+                                                        '<tr>'+
+                                                            '<th>PABRIK</th>'+
+                                                            '<td>' + item.pabrik+ '</td>'+
+                                                        '</tr>'+
+                                                        '<tr>'+
+                                                            '<th>RANGKA</th>'+
+                                                            '<td>' + item.rangka+ '</td>'+
+                                                        '</tr>'+
+                                                        '<tr>'+
+                                                            '<th>MESIN</th>'+
+                                                            '<td>' + item.mesin+ '</td>'+
+                                                        '</tr>'+
+                                                        '<tr>'+
+                                                            '<th>POLISI</th>'+
+                                                            '<td>' + item.polisi+ '</td>'+
+                                                        '</tr>'+
+                                                    '</tbody>'+
+                                                '</table>'+
+                                            '</div>'+
+                                        '</div>'+
+
+                                    '</div><br>'+
+
+                                    '<fieldset class="border border-secondary rounded-3 p-2 row">'+
+                                        '<legend class="float-none w-auto px-1 border border-secondary rounded">'+
+                                        '<div style="font-size: 15px;">-</div>'+
+                                        '</legend>'+
+                                            '<div class="col">'+
+                                                '<div class="input-group input-group-sm mb-1">'+
+                                                    '<table class="table table-striped table-bordered">'+
+                                                        '<tbody>'+
+                                                            '<tr>'+
+                                                                '<th>ASAL USUL</th>'+
+                                                                '<td>' + item.asal+ '</td>'+
+                                                            '</tr>'+
+                                                        '</tbody>'+
+                                                    '</table>'+
+                                                '</div>'+
+                                            '</div>'+
+                                            '<div class="col">'+
+                                                '<div class="input-group input-group-sm mb-1">'+
+                                                    '<table class="table table-striped table-bordered">'+
+                                                        '<tbody>'+
+                                                            '<tr>'+
+                                                                '<th>NILAI PEROLEHAN</th>'+
+                                                                '<td>' + item.harga+ '</td>'+
+                                                            '</tr>'+
+                                                        '</tbody>'+
+                                                    '</table>'+
+                                                '</div>'+
+                                            '</div>'+
+                                            '<div class="col">'+
+                                                '<div class="input-group input-group-sm mb-1">'+
+                                                    '<table class="table table-striped table-bordered">'+
+                                                        '<tbody>'+
+                                                            '<tr>'+
+                                                                '<th>NILAI PENYUSUTAN</th>'+
+                                                                '<td>' + item.susut+ '</td>'+
+                                                            '</tr>'+
+                                                        '</tbody>'+
+                                                    '</table>'+
+                                                '</div>'+
+                                            '</div>'+
+                                            '<div class="col">'+
+                                                '<div class="input-group input-group-sm mb-1">'+
+                                                    '<table class="table table-striped table-bordered">'+
+                                                        '<tbody>'+
+                                                            '<tr>'+
+                                                                '<th>KET</th>'+
+                                                                '<td>' + item.ket   + '</td>'+
+                                                            '</tr>'+
+                                                        '</tbody>'+
+                                                    '</table>'+
+                                                '</div>'+
+                                            '</div>'+
+                                     ' </fieldset><br>'+
+
+                                    '<fieldset class="border border-secondary rounded-3 p-2 row" id="filed">'+
+                                            '<legend class="float-none w-auto px-3 border border-secondary rounded">'+
+                                                '<div style="font-size: 15px;"><strong>DOKUMEN</strong></div>'+
+                                            '</legend>'+
+
+                                         '</fieldset><br>'+
+
+
+                                '</div>');
+                            })
+                        })
+                    })
+                });
             })
-             
-
         });
 
             //del
@@ -883,9 +1077,10 @@ $(document).ready(function() {
                                         '<thead>'+
                                             '<tr>'+
                                                 '<th>NO</th>'+
-                                                '<th>Kode Divisi</th>'+
-                                                '<th>Nama Divisi</th>'+
-                                                '<th>Aksi</th>'+
+                                                '<th>LOKASI</th>'+
+                                                '<th>ALAMAT</th>'+
+                                                '<th>FOTO</th>'+
+                                                '<th>DETAIL</th>'+
                                             '</tr>'+
                                         '</thead>'+
                                         '<tbody>'+
@@ -894,13 +1089,93 @@ $(document).ready(function() {
                                 '</div>'+
                             '</div>'+
                         '</div>' +
-                    '</div>'
-                );
+                    '</div>');
+                    refC();
+                    $('#tbl_c').on('click', '.tree', function() {
+                        var id = $(this).data('id');
+                        $('#canvas_body').html('');
+                        $('#canvas_tree').html('');
+                        $.ajax({
+                            type: "GET",
+                            url: "/gedung.dep/"+ id,
+                            success: function (data) {
+                                $.each(data.data, function (index, item) {
+                                    $('#judul').html(item.lokasi)
 
+                                    $('#canvas_tree').append(
+                                        '<li><span><strong>' + item.kode_dep +  '</strong></span>'+
+                                                '<ol id="mesin_div'+ item.id_departemen +'"></ol>'+
+                                            '</li>');
+                                    var dep = item.id_departemen;
+                                    var lok = item.id_lokasi;
+                                    $.get("/gedung.div/"+ dep + "/" + lok , function(data) {
 
+                                        $.each(data.data, function(index, item) {
+                                            var div = item.id_div;
 
-            });
-     });
+                                            $("#mesin_div" + item.id_departemen).append('<li><span><a data-id="' + dep + ',' + lok + ',' + div +
+                                            ',' + item.nama_div +'" href="#" id="tampil_gedung">'+ item.nama_div +'</a></span></li>')
+                                        });
+                                    })
+                                })
+                            },
+                            error: function (data) {
+                                console.log('Error:', data);
+                            }
+                        });
+
+                    })
+
+                    $(document).on('click', '#tampil_gedung', function() {
+                        $('#card-body').html('');
+                        $('#card-body').append(
+
+                           ' <table class="table table-striped table-border" id="tbl_c_data">'+
+                                        '<thead>'+
+                                            '<tr>'+
+                                                '<th>NO</th>'+
+                                                '<th>Nama Aset</th>'+
+                                                '<th>Penggunaan</th>'+
+                                                '<th>FOTO</th>'+
+                                                '<th>Detail</th>'+
+                                            '</tr>'+
+                                        '</thead>'+
+                                        '<tbody>'+
+                                       '</tbody>'+
+                                    '</table>'
+                        );
+                        var id = $(this).data('id');
+                        var delimiter = ",";
+                        var id_key = id.split(delimiter);
+                        var dep = id_key[0];
+                        var lok = id_key[1];
+                        var div = id_key[2];
+                        var nama_div = id_key[3];
+                        var i = 0;
+                        var table = $("#tbl_c_data").DataTable();
+                        table.clear().draw();
+                         $.get("/gedung.show/"+ lok + "/" + dep + "/" + div , function(data) {
+                                $('#card-header').html('<strong>Divisi: '+ nama_div +'</strong>');
+
+                            $.each(data.data, function (index, items) {
+                                var editButton =
+                                '<div class="btn-group">'+
+                                    '<button class="btn btn-default border border-secondary btn-sm tree" data-id="' + items.id + '">AKSI</button>'+
+                                '</div>';
+                                var img = '<a href="#" id="detail_mesin_divisi" data-id="'+ items.id_gedung +'"><img src="http://127.0.0.1:8000/assets/img/gedung/'+items.img+'" height="100px" width="100px"></img></a>';
+                                table.row.add([
+                                    ++i,
+                                    items.nama_barang,
+                                    items.guna,
+                                    img,
+                                    editButton
+                                ]).draw();
+                            })
+                        })
+                    })
+                });
+             });
+
         $(document).on('click', '#c_x', function() {
             $('#tab_c').parent().remove(); // Hapus tab
             $('#c_tab').remove(); // Hapus konten tab-+

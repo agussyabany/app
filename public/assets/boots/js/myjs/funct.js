@@ -254,7 +254,7 @@ function refB()
         $.each(data.data, function(index, item) {
             var editButton =
             '<div class="btn-group">'+
-                '<button class="btn btn-default border border-secondary btn-sm tree" data-id="' + item.id_lokasi + '" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">AKSI</button>'+
+                '<button class="btn btn-default border border-secondary btn-sm tree" data-id="' + item.id_lokasi + '" data-bs-toggle="offcanvas" href="#data" role="button" aria-controls="offcanvasExample">AKSI</button>'+
             '</div>';
             var img = '<img src="http://127.0.0.1:8000/assets/img/lokasi/'+item.img_lok+'" height="100px" width="100px"></img>';
             table.row.add([
@@ -268,6 +268,55 @@ function refB()
 
          });
         })
+}
+function refBData()
+{
+    $.get('/mesin', function(data) {
+        var i = 0;
+        var table = $("#tbl_b").DataTable();
+        table.clear().draw();
+        $('#modal_body').html('');
+
+        $.each(data.data, function(index, item) {
+            var editButton =
+            '<div class="btn-group">'+
+                '<button class="btn btn-default border border-secondary btn-sm tree" data-id="' + item.id_lokasi + '" data-bs-toggle="offcanvas" href="#data" role="button" aria-controls="offcanvasExample">AKSI</button>'+
+            '</div>';
+            var img = '<img src="http://127.0.0.1:8000/assets/img/lokasi/'+item.img_lok+'" height="100px" width="100px"></img>';
+            table.row.add([
+                 ++i,
+                item.lokasi,
+                item.alamat,
+                img,
+                editButton
+            ]).draw();
+        });
+    })
+}
+
+function refC()
+{
+    $.get('/gedung', function(data) {
+        var i = 0;
+        var table = $("#tbl_c").DataTable();
+        table.clear().draw();
+        $('#modal_body').html('');
+
+        $.each(data.data, function(index, item) {
+            var editButton =
+            '<div class="btn-group">'+
+                '<button class="btn btn-default border border-secondary btn-sm tree" data-id="' + item.id_lokasi + '" data-bs-toggle="offcanvas" href="#data" role="button" aria-controls="offcanvasExample">AKSI</button>'+
+            '</div>';
+            var img = '<img src="http://127.0.0.1:8000/assets/img/lokasi/'+item.img_lok+'" height="100px" width="100px"></img>';
+            table.row.add([
+                 ++i,
+                item.lokasi,
+                item.alamat,
+                img,
+                editButton
+            ]).draw();
+        });
+    })
 }
 
 

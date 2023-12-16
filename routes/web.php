@@ -7,6 +7,7 @@ use App\Http\Controllers\Aset\BahanController;
 use App\Http\Controllers\Aset\BarangController;
 use App\Http\Controllers\Aset\DepartemenController;
 use App\Http\Controllers\Aset\Divisicontroller;
+use App\Http\Controllers\Aset\GedungController;
 use App\Http\Controllers\Aset\LokasiController;
 use App\Http\Controllers\Aset\MesinController;
 use App\Http\Controllers\Aset\NilaiController;
@@ -68,6 +69,7 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::get('/nilai',[AsetDashboardController::class, 'nilai']);
     Route::get('/tanah',[AsetDashboardController::class, 'tanah']);
     Route::get('/mesin',[AsetDashboardController::class, 'mesin']);
+    Route::get('/gedung',[AsetDashboardController::class, 'gedung']);
 
 
 
@@ -119,8 +121,14 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::post('/tanah.save',[TanahController::class,'save']);
     Route::get('/tanah.detail/{id}',[TanahController::class,'detail']);
 
-    Route::get('/mesin.group/{id}',[MesinController::class,'show']);
-    Route::get('/mesin.div/{dep}',[MesinController::class,'div']);
+    Route::get('/mesin.dep/{id}',[MesinController::class,'dep']);
+    Route::get('/mesin.div/{dep}/{lok}',[MesinController::class,'div']);
+    Route::get('/mesin.show/{lok}/{dep}/{div}',[MesinController::class,'show']);
+    Route::get('/mesin.detail/{id}',[MesinController::class,'detail']);
+
+    Route::get('/gedung.dep/{id}',[GedungController::class,'dep']);
+    Route::get('/gedung.div/{dep}/{lok}',[GedungController::class,'div']);
+    Route::get('/gedung.show/{lok}/{dep}/{div}',[GedungController::class,'show']);
 
 });
 

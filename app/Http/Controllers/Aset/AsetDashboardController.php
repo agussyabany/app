@@ -8,6 +8,7 @@ use App\Models\Aset\Bahan;
 use App\Models\Aset\Barang;
 use App\Models\Aset\Departemen;
 use App\Models\Aset\Divisi;
+use App\Models\Aset\Gedung;
 use App\Models\Aset\lokasi;
 use App\Models\Aset\Mesin;
 use App\Models\Aset\NilaiAktiva;
@@ -124,4 +125,16 @@ class AsetDashboardController extends Controller
             'data' => $mesin
           ]);
     }
+
+    public function gedung()
+    {
+        $mesin = Gedung::select('id_lokasi','lokasi','alamat','lokasis.img as img_lok')
+                        ->distinct('id_lokasi')
+                        ->join('lokasis','gedungs.id_lokasi','=','lokasis.id')
+                        ->get();
+        return response()->json([
+            'data' => $mesin
+          ]);
+    }
+
 }
