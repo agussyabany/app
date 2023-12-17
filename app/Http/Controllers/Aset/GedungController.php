@@ -47,4 +47,13 @@ class GedungController extends Controller
             'data' => $gedung_full
           ]);
     }
+    public function detail($id)
+    {
+        $gedung_full = Gedung::where('gedungs.id',$id)
+                            ->join('barangs','gedungs.id_barang','barangs.id')
+                            ->get();
+        return response()->json([
+            'data' => $gedung_full
+          ]);
+    }
 }

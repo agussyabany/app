@@ -8,6 +8,7 @@ use App\Http\Controllers\Aset\BarangController;
 use App\Http\Controllers\Aset\DepartemenController;
 use App\Http\Controllers\Aset\Divisicontroller;
 use App\Http\Controllers\Aset\GedungController;
+use App\Http\Controllers\Aset\KirController;
 use App\Http\Controllers\Aset\LokasiController;
 use App\Http\Controllers\Aset\MesinController;
 use App\Http\Controllers\Aset\NilaiController;
@@ -70,6 +71,7 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::get('/tanah',[AsetDashboardController::class, 'tanah']);
     Route::get('/mesin',[AsetDashboardController::class, 'mesin']);
     Route::get('/gedung',[AsetDashboardController::class, 'gedung']);
+    Route::get('/kir',[AsetDashboardController::class, 'kir']);
 
 
 
@@ -129,6 +131,10 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::get('/gedung.dep/{id}',[GedungController::class,'dep']);
     Route::get('/gedung.div/{dep}/{lok}',[GedungController::class,'div']);
     Route::get('/gedung.show/{lok}/{dep}/{div}',[GedungController::class,'show']);
+    Route::get('/gedung.detail/{id}',[GedungController::class,'detail']);
+
+    Route::get('/kir.dep/{id}',[KirController::class,'dep']);
+    Route::get('/kir.div/{dep}/{lok}',[KirController::class,'div']);
 
 });
 

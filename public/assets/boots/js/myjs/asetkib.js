@@ -1162,7 +1162,7 @@ $(document).ready(function() {
                                 '<div class="btn-group">'+
                                     '<button class="btn btn-default border border-secondary btn-sm tree" data-id="' + items.id + '">AKSI</button>'+
                                 '</div>';
-                                var img = '<a href="#" id="detail_mesin_divisi" data-id="'+ items.id_gedung +'"><img src="http://127.0.0.1:8000/assets/img/gedung/'+items.img+'" height="100px" width="100px"></img></a>';
+                                var img = '<a href="#" id="detail_gedung_divisi" data-id="'+ items.id_gedung +'"><img src="http://127.0.0.1:8000/assets/img/gedung/'+items.img+'" height="100px" width="100px"></img></a>';
                                 table.row.add([
                                     ++i,
                                     items.nama_barang,
@@ -1173,6 +1173,190 @@ $(document).ready(function() {
                             })
                         })
                     })
+
+                    $(document).on('click', '#detail_gedung_divisi', function(){
+                        var id = $(this).data('id');
+                        $.get("/gedung.detail/"+ id , function(data) {
+                            $.each(data.data, function (index, item) {
+                                $('#lgModal').modal('show');
+                                $('#judul_modalLG').html('DETAIL GEDUNG');
+                                $('#modal_bodyLG').html('');
+                                $('#modal_bodyLG').prepend(
+                                    '<div class="container">'+
+                                        '<img src="http://127.0.0.1:8000/assets/img/gedung/'+item.img+'" height="500px" width="550px" class="rounded mx-auto d-block" alt="..."><br>'+
+    
+                                        '<fieldset class="border border-secondary rounded-3 p-2 row">'+
+                                            '<legend class="float-none w-auto px-1 border border-secondary rounded">'+
+                                            '<div style="font-size: 15px;">-</div>'+
+                                            '</legend>'+
+                                                '<div class="col">'+
+                                                    '<div class="input-group input-group-sm mb-1">'+
+                                                        '<table class="table table-striped table-bordered">'+
+                                                            '<tbody>'+
+                                                                '<tr>'+
+                                                                    '<th>KODE</th>'+
+                                                                    '<td>' + item.kode+ '</td>'+
+                                                                '</tr>'+
+                                                            '</tbody>'+
+                                                        '</table>'+
+                                                    '</div>'+
+                                                '</div>'+
+                                                '<div class="col">'+
+                                                    '<div class="input-group input-group-sm mb-1">'+
+                                                        '<table class="table table-striped table-bordered">'+
+                                                            '<tbody>'+
+                                                                '<tr>'+
+                                                                    '<th>NAMA BARANG</th>'+
+                                                                    '<td>' + item.nama_barang + '</td>'+
+                                                                '</tr>'+
+                                                            '</tbody>'+
+                                                        '</table>'+
+                                                    '</div>'+
+                                                '</div>'+
+                                                '<div class="col">'+
+                                                    '<div class="input-group input-group-sm mb-1">'+
+                                                        '<table class="table table-striped table-bordered">'+
+                                                            '<tbody>'+
+                                                                '<tr>'+
+                                                                    '<th>PENGGUNAAN</th>'+
+                                                                    '<td>' + item.guna+ '</td>'+
+                                                                '</tr>'+
+                                                            '</tbody>'+
+                                                        '</table>'+
+                                                    '</div>'+
+                                                '</div>'+
+                                         ' </fieldset><br>'+
+    
+    
+    
+                                             '<div class="row">'+
+                                            '<div class="col">'+
+                                                '<div class="container border border-primary rounded"><br>'+
+                                                    '<table class="table table-striped table-bordered">'+
+                                                        '<tbody>'+
+                                                            '<tr>'+
+                                                                '<th>REGISTER</th>'+
+                                                                '<td>' + item.reg+ '</td>'+
+                                                            '</tr>'+
+                                                            '<tr>'+
+                                                                '<th>KONDISI BANGUNAN</th>'+
+                                                                '<td>' + item.kondisi+ '</td>'+
+                                                            '</tr>'+
+                                                            '<tr>'+
+                                                                '<th>KONSTRUKSI</th>'+
+                                                                '<td>' + item.konstruksi+ '</td>'+
+                                                            '</tr>'+
+                                                            '<tr>'+
+                                                                '<th>BAHAN</th>'+
+                                                                '<td>' + item.materi+ '</td>'+
+                                                            '</tr>'+
+                                                            '<tr>'+
+                                                                '<th>TGL SURAT</th>'+
+                                                                '<td>' + item.tgl_imb+ '</td>'+
+                                                            '</tr>'+
+    
+                                                        '</tbody>'+
+                                                    '</table>'+
+                                                '</div>'+
+                                            '</div>'+
+    
+                                            '<div class="col">'+
+                                                '<div class="container border border-primary rounded"><br>'+
+                                                    '<table class="table table-striped table-bordered">'+
+                                                        '<tbody>'+
+                                                            '<tr>'+
+                                                                '<th>LUAS</th>'+
+                                                                '<td>' + item.luas+ '</td>'+
+                                                            '</tr>'+
+                                                            '<tr>'+
+                                                                '<th>SATATUS TANAH</th>'+
+                                                                '<td>' + item.status+ '</td>'+
+                                                            '</tr>'+
+                                                            '<tr>'+
+                                                                '<th>LUAS LANTAI</th>'+
+                                                                '<td>' + item.luastanah+ '</td>'+
+                                                            '</tr>'+
+                                                            '<tr>'+
+                                                                '<th>NO KODE TANAH</th>'+
+                                                                '<td>' + item.kode_tanah+ '</td>'+
+                                                            '</tr>'+
+                                                            '<tr>'+
+                                                                '<th>NO SURAT</th>'+
+                                                                '<td>' + item.no_imb+ '</td>'+
+                                                            '</tr>'+
+                                                        '</tbody>'+
+                                                    '</table>'+
+                                                '</div>'+
+                                            '</div>'+
+    
+                                        '</div><br>'+
+    
+                                        '<fieldset class="border border-secondary rounded-3 p-2 row">'+
+                                            '<legend class="float-none w-auto px-1 border border-secondary rounded">'+
+                                            '<div style="font-size: 15px;">-</div>'+
+                                            '</legend>'+
+                                                '<div class="col">'+
+                                                    '<div class="input-group input-group-sm mb-1">'+
+                                                        '<table class="table table-striped table-bordered">'+
+                                                            '<tbody>'+
+                                                                '<tr>'+
+                                                                    '<th>ASAL USUL</th>'+
+                                                                    '<td>' + item.asal+ '</td>'+
+                                                                '</tr>'+
+                                                            '</tbody>'+
+                                                        '</table>'+
+                                                    '</div>'+
+                                                '</div>'+
+                                                '<div class="col">'+
+                                                    '<div class="input-group input-group-sm mb-1">'+
+                                                        '<table class="table table-striped table-bordered">'+
+                                                            '<tbody>'+
+                                                                '<tr>'+
+                                                                    '<th>NILAI PEROLEHAN</th>'+
+                                                                    '<td>' + item.nilai+ '</td>'+
+                                                                '</tr>'+
+                                                            '</tbody>'+
+                                                        '</table>'+
+                                                    '</div>'+
+                                                '</div>'+
+                                                '<div class="col">'+
+                                                    '<div class="input-group input-group-sm mb-1">'+
+                                                        '<table class="table table-striped table-bordered">'+
+                                                            '<tbody>'+
+                                                                '<tr>'+
+                                                                    '<th>NILAI PENYUSUTAN</th>'+
+                                                                    '<td>' + item.susut+ '</td>'+
+                                                                '</tr>'+
+                                                            '</tbody>'+
+                                                        '</table>'+
+                                                    '</div>'+
+                                                '</div>'+
+                                                '<div class="col">'+
+                                                    '<div class="input-group input-group-sm mb-1">'+
+                                                        '<table class="table table-striped table-bordered">'+
+                                                            '<tbody>'+
+                                                                '<tr>'+
+                                                                    '<th>KET</th>'+
+                                                                    '<td>' + item.ket   + '</td>'+
+                                                                '</tr>'+
+                                                            '</tbody>'+
+                                                        '</table>'+
+                                                    '</div>'+
+                                                '</div>'+
+                                         ' </fieldset><br>'+
+    
+                                        '<fieldset class="border border-secondary rounded-3 p-2 row" id="filed">'+
+                                                '<legend class="float-none w-auto px-3 border border-secondary rounded">'+
+                                                    '<div style="font-size: 15px;"><strong>DOKUMEN</strong></div>'+
+                                                '</legend>'+
+    
+                                             '</fieldset><br>'+
+    
+    
+                                    '</div>');
+                                })
+                            })
+                        })
                 });
              });
 
@@ -1334,19 +1518,74 @@ $(document).ready(function() {
             $(document).ready(function() {
                 // Menambahkan konten tab setelah dokumen siap
                 $('#myTabContent').append(
-                    '<div class="tab-pane fade" id="kir_tab" role="tabpanel" aria-labelledby=tab_kir">' +
-                        '<div class="container"> <div class="card"><div class="card-header">DATA KARTU INVENTARIS RUANGAN</div> </div>' +
+                    '<br>'+
+                    '<div class="tab-pane show" id="kir_tab" role="tabpanel" aria-labelledby="tab_kir">'+
+                     '<div class="container">'+
+                        '<div class="card">'+
+                            '<div class="card-header">DATA NILAI AKTIVA <div class="position-absolute top-0 end-0"><button class="btn  btn-primary" id="tambah_nilai"><i class="fa-solid fa-file-circle-plus"></i></button></div></div>'+
+                                '<div class="card-body">'+
+                                    '<table class="table table-striped" id="tbl_kir">'+
+                                        '<thead>'+
+                                            '<tr>'+
+                                                '<th>NO</th>'+
+                                                '<th>LOKASI</th>'+
+                                                '<th>ALAMAT</th>'+
+                                                '<th>FOTO</th>'+
+                                                '<th>DETAIL</th>'+
+                                            '</tr>'+
+                                        '</thead>'+
+                                        '<tbody>'+
+                                        '</tbody>'+
+                                    '</table>'+
+                                '</div>'+
+                            '</div>'+
+                        '</div>' +
                     '</div>'
                 );
+                refKir();
+                $('#tbl_kir').on('click', '.tree', function() {
+                    var id = $(this).data('id');
+                    $('#canvas_body').html('');
+                    $('#canvas_tree').html('');
+                    $.ajax({
+                        type: "GET",
+                        url: "/kir.dep/"+ id,
+                        success: function (data) {
+                            $.each(data.data, function (index, item) {
+                                $('#judul').html(item.lokasi)
+
+                                $('#canvas_tree').append(
+                                    '<li><span><strong>' + item.kode_dep +  '</strong></span>'+
+                                            '<ol id="kir_div'+ item.id_departemen +'"></ol>'+
+                                        '</li>');
+                                var dep = item.id_departemen;
+                                var lok = item.id_lokasi;
+                                $.get("/kir.div/"+ dep + "/" + lok , function(data) {
+
+                                    $.each(data.data, function(index, item) {
+                                        var div = item.id_div;
+
+                                        $("#kir_div" + item.id_departemen).append('<li><span><a data-id="' + dep + ',' + lok + ',' + div +
+                                        ',' + item.nama_div +'"  id="tampil_kir">'+ item.nama_div +'</a></span></li>')
+                                    });
+                                })
+                            })
+                        },
+                        error: function (data) {
+                            console.log('Error:', data);
+                        }
+                    });
+
+                })
             });
      });
     $(document).on('click', '#kir_x', function() {
             $('#tab_kir').parent().remove(); // Hapus tab
             $('#kir_tab').remove(); // Hapus konten tab
         });
-    //END OF DOK
+    //END OF KIR
 
-    //KIR
+    //NILAI
     $('#nilai').on('click', function() {
         $('#nilai').addClass('btn btn-primary');
         $('#barang,#divisi,#departemen,#ruang,#sdm,#lokasi,#dokumen,#bahan,#aktiva,#a,#b,#c,#d,#e,#f').removeClass('btn btn-primary');
