@@ -33,4 +33,31 @@ class KirController extends Controller
             'data' => $kir
           ]);
     }
+
+    public function gedung($lok,$dep,$div)
+    {
+        $gedung_full = Kir::select('gedung')
+                            ->where('id_departemen',$dep)
+                            ->where('id_lokasi',$lok)
+                            ->where('id_div',$div)
+                            ->distinct('gedung')
+                            ->get();
+        return response()->json([
+            'data' => $gedung_full
+          ]);
+    }
+
+    public function ruang($lok,$dep,$div,$ged)
+    {
+        $gedung_full = Kir::select('ruangan')
+                            ->where('id_departemen',$dep)
+                            ->where('id_lokasi',$lok)
+                            ->where('id_div',$div)
+                            ->where('gedung',$ged)
+                            ->distinct('ruangan')
+                            ->get();
+        return response()->json([
+            'data' => $gedung_full
+          ]);
+    }
 }

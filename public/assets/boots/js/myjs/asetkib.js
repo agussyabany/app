@@ -1564,9 +1564,23 @@ $(document).ready(function() {
 
                                     $.each(data.data, function(index, item) {
                                         var div = item.id_div;
+                                        $("#kir_div" + item.id_departemen).append('<li ><span style="color:red;">'+ item.nama_div +'</span>'+
+                                                '<ol id="kir_ged'+ item.id_div +'"></ol>'+
+                                            '</li>')
 
-                                        $("#kir_div" + item.id_departemen).append('<li><span><a data-id="' + dep + ',' + lok + ',' + div +
-                                        ',' + item.nama_div +'"  id="tampil_kir">'+ item.nama_div +'</a></span></li>')
+                                        $.get("/kir.gedung/"+ lok + "/" + dep + "/" + div, function(data){
+                                            $.each(data.data,function(index,items) {
+                                               $("#kir_ged" + item.id_div).append('<li><span style="color:green;">Gedung '+ items.gedung +'</span>'+
+                                                        '<ol id="kir_ruang'+ item.id_div +'"></ol>'+
+                                                '</li>')
+                                            var ged = items.gedung;
+                                            $.get("/kir.ruang/"+ lok + "/" + dep + "/" + div + "/" + ged, function(data){
+                                                $.each(data.data,function(index,itemz) {
+                                                    $("#kir_ruang" + item.id_div).append('<li><span><a href="#">Ruang '+ itemz.ruangan +'</a></span></li>')
+                                                })
+                                            })
+                                          })
+                                        })
                                     });
                                 })
                             })
