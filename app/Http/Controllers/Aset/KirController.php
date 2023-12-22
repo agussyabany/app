@@ -60,4 +60,18 @@ class KirController extends Controller
             'data' => $gedung_full
           ]);
     }
+
+    public function detail($lok,$dep,$div,$ged,$ruang)
+    {
+        $ruang_detail = Kir::join('barangs','kirs.id_barang','=','barangs.id')
+                            ->where('id_departemen',$dep)
+                            ->where('id_lokasi',$lok)
+                            ->where('id_div',$div)
+                            ->where('gedung',$ged)
+                            ->where('ruangan',$ruang)
+                            ->get();
+        return response()->json([
+            'data' => $ruang_detail
+          ]);
+    }
 }

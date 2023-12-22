@@ -137,6 +137,7 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::get('/kir.div/{dep}/{lok}',[KirController::class,'div']);
     Route::get('/kir.gedung/{lok}/{dep}/{div}',[KirController::class,'gedung']);
     Route::get('/kir.ruang/{lok}/{dep}/{div}/{ged}',[KirController::class,'ruang']);
+    Route::get('/kir.detail/{lok}/{dep}/{div}/{ged}/{ruang}',[KirController::class,'detail']);
 
 });
 
