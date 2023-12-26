@@ -80,6 +80,7 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::post('barang.update',[BarangController::class,'update']);
     Route::post('barang.hapus/{id}',[BarangController::class,'destroy']);
     Route::get('barang.tanah',[BarangController::class,'tanah']);
+    Route::get('barang.mesin',[BarangController::class,'mesin']);
 
 
     Route::post('/dep.save',[DepartemenController::class,'save']);
@@ -127,6 +128,11 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::get('/mesin.div/{dep}/{lok}',[MesinController::class,'div']);
     Route::get('/mesin.show/{lok}/{dep}/{div}',[MesinController::class,'show']);
     Route::get('/mesin.detail/{id}',[MesinController::class,'detail']);
+    Route::get('/mesin.edit/{id}',[MesinController::class,'edit']);
+    Route::post('/mesin.save',[MesinController::class,'save']);
+    Route::get('/mesin.input',[MesinController::class,'input']);
+    Route::post('/mesin.clear',[MesinController::class,'clear']);
+    Route::post('/mesin.hapus/{id}',[MesinController::class,'hapus']);
 
     Route::get('/gedung.dep/{id}',[GedungController::class,'dep']);
     Route::get('/gedung.div/{dep}/{lok}',[GedungController::class,'div']);

@@ -56,7 +56,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.84.0">
-    <title>Signin Template · Bootstrap v5.0</title>
+    <title>Sitem Informasi Aset</title>
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/sign-in/">
     <!-- Bootstrap core CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -78,15 +78,26 @@
                 <!-- Custom styles for this template -->
                 <link href="{{asset('assets/boots/css/signin.css')}}" rel="stylesheet">
             </head>
-            <body class="text-center">
+            <body class="text-center" style="background-image: url('{{asset('assets/img/bg.jpg')}}');background-size: cover; background-repeat: no-repeat;font-family: 'Bahnschrift-SemiLight', sans-serif; width:100%; height:100%">
 
             <main class="form-signin">
+           
             <form method="post" action="{{ route('login') }}">
                 @csrf
                 <img class="mb-4" src="{{asset('assets/img/pdam.png')}}" alt="" width="300" height="57">
                 <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 
                 <div class="form-floating">
+                    @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $item)
+                                    <li>{{ $item }}</li>                        
+                            @endforeach
+                        </ul>
+                    </div>
+                     @endif
+                     
                 <input class="form-control" placeholder="name@example.com" id="email" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" >
                 <label for="floatingInput">Email address</label>
                 </div>
@@ -95,17 +106,7 @@
                 <label for="floatingPassword">Password</label>
                 </div>
 
-                {{-- @if ($errors->has($username))
-                    <div class="alert alert-danger">
-                        {{ $errors->get('password')}}
-                    </div>
-                @endif
-
-                @if ($errors->has($username))
-                    <div class="alert alert-danger">
-                        {{ $errors->get('password')}}
-                    </div>
-                @endif --}}
+               
 
                 <div class="checkbox mb-3">
                 <label>

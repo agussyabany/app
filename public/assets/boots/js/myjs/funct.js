@@ -121,7 +121,7 @@ function refLok()
             var deleteButton = '<a class="btn btn-sm btn-danger delete" data-id="' + item.id + '" href="#"><i class="fa-solid fa-trash"></i></a>';
             var img = '<img src="http://127.0.0.1:8000/assets/img/lokasi/'+item.img+'" height="100px" width="100px"></img>';
             table.row.add([
-                 ++i,
+                 item.id,
                 item.lokasi,
                 item.alamat,
                 item.lat,
@@ -165,7 +165,7 @@ function refAkt()
             var deleteButton = '<a class="btn btn-sm btn-danger delete" data-id="' + item.id + '" href="#"><i class="fa-solid fa-trash"></i></a>';
 
             table.row.add([
-                 ++i,
+                item.id,
                 item.kode,
                 item.aktiva,
                 item.gol,
@@ -211,20 +211,14 @@ function refA()
         $.each(data.data, function(index, item) {
             var editButton =
             '<div class="btn-group">'+
-                '<button class="btn btn-default border border-secondary btn-sm" type="button">AKSI</button>'+
+                '<button class="btn btn-default border border-secondary btn-sm" type="button"><i class="fa-solid fa-ellipsis-vertical"></i></button>'+
                 '<button type="button" class="btn btn-sm btn-default border border-secondary  dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"><span class="visually-hidden">Toggle Dropdown</span></button>'+
                 '<ul class="dropdown-menu">'+
                     '<li><a class="dropdown-item  detail" data-id="' + item.id_tanah + '" href="#"><i class="fa-solid fa-circle-info"></i>&nbsp;DETAIL</a></li>'+
                     '<li><a class="dropdown-item  edit" data-id="' + item.id_tanah + '" href="#"><i class="fa-solid fa-edit"></i>&nbsp;EDIT</a></li>'+
                     '<li><a class="dropdown-item delete" data-id="' + item.id_tanah + '" href="#"><i class="fa-solid fa-trash"></i>&nbsp;DELETE</a></li>'+
                     '<li><hr class="dropdown-divider"></li>'+
-                    '<div class="dropdown" >'+
-                        '<li><a class="dropdown-item dropbtn" href="#" id="click_dok">Dokumen</a></li>'+
-                        '<div class="dropdown-menu dropdown-content" id="dok">'+
-
-                        '</div>'+
-
-                    '<div/>'+
+                    
                 '</ul>'+
             '</div>';
             var img = '<img src="http://127.0.0.1:8000/assets/img/lokasi/'+item.img+'" height="100px" width="100px"></img>';
@@ -237,10 +231,15 @@ function refA()
                 img,
                 editButton
             ]).draw();
-
-
-         });
-        })
+            //var id =item.id_tanah 
+            // $.get('/show/' + id, function (data) {
+            //     $.each(data.data, function (index, items) {
+            //         $('#dok'+ id).append('<li><a class="dropdown-item">'+ items.dok +'</a></li>');
+            //     });
+            // });
+        });
+        
+    })
 }
 
 function refB()
@@ -254,7 +253,7 @@ function refB()
         $.each(data.data, function(index, item) {
             var editButton =
             '<div class="btn-group">'+
-                '<button class="btn btn-default border border-secondary btn-sm tree" data-id="' + item.id_lokasi + '" data-bs-toggle="offcanvas" href="#data" role="button" aria-controls="offcanvasExample">AKSI</button>'+
+                '<button class="badge bg-primary border border-secondary btn-sm tree" data-id="' + item.id_lokasi + '" data-bs-toggle="offcanvas" href="#data" role="button" aria-controls="offcanvasExample"><i class="fa-solid fa-eye"></i></button>'+
             '</div>';
             var img = '<img src="http://127.0.0.1:8000/assets/img/lokasi/'+item.img_lok+'" height="100px" width="100px"></img>';
             table.row.add([
@@ -305,7 +304,7 @@ function refC()
         $.each(data.data, function(index, item) {
             var editButton =
             '<div class="btn-group">'+
-                '<button class="btn btn-default border border-secondary btn-sm tree" data-id="' + item.id_lokasi + '" data-bs-toggle="offcanvas" href="#data" role="button" aria-controls="offcanvasExample">AKSI</button>'+
+                '<button class="badge bg-primary border border-secondary btn-sm tree" data-id="' + item.id_lokasi + '" data-bs-toggle="offcanvas" href="#data" role="button" aria-controls="offcanvasExample"><i class="fa-solid fa-eye"></i></button>'+
             '</div>';
             var img = '<img src="http://127.0.0.1:8000/assets/img/lokasi/'+item.img_lok+'" height="100px" width="100px"></img>';
             table.row.add([
@@ -330,7 +329,7 @@ function refKir()
         $.each(data.data, function(index, item) {
             var editButton =
             '<div class="btn-group">'+
-                '<button class="btn btn-default border border-secondary btn-sm tree" data-id="' + item.id_lokasi + '" data-bs-toggle="offcanvas" href="#data" role="button" aria-controls="offcanvasExample">AKSI</button>'+
+                '<button class="badge bg-primary border border-secondary btn-sm tree" data-id="' + item.id_lokasi + '" data-bs-toggle="offcanvas" href="#data" role="button" aria-controls="offcanvasExample"><i class="fa-solid fa-eye"></i></button>'+
             '</div>';
             var img = '<img src="http://127.0.0.1:8000/assets/img/lokasi/'+item.img_lok+'" height="100px" width="100px"></img>';
             table.row.add([
@@ -342,6 +341,65 @@ function refKir()
             ]).draw();
         });
     })
+}
+
+function refMesinInput()
+{
+    $.get('/mesin.input', function(data) {
+        var i = 0;
+        var table = $("#tbl_mesin_input").DataTable();
+        table.clear().draw();
+        //$('#modal_body').html('');
+
+        $.each(data.data, function(index, item) {
+            // var editButton =
+            // '<div class="btn-group">'+
+            //     '<button class="badge bg-primary border border-secondary btn-sm tree" data-id="' + item.id_lokasi + '" data-bs-toggle="offcanvas" href="#data" role="button" aria-controls="offcanvasExample"><i class="fa-solid fa-eye"></i></button>'+
+            // '</div>';
+            // var img = '<img src="http://127.0.0.1:8000/assets/img/lokasi/'+item.img_lok+'" height="100px" width="100px"></img>';
+            table.row.add([
+                 ++i,
+                item.lokasi,
+                item.nama_div,
+                item.nama_barang,
+                item.merk,
+                // img,
+                // editButton
+            ]).draw();
+        });
+    })
+}
+
+function pilih()
+{
+    $.get('/lok', function (data) {
+        $.each(data.data, function (index, item) {
+            $('#lokasi_b').append('<option value="' + item.id + '">' + item.alamat + ' | ' +  item.lokasi + '</option>');
+        });
+    });
+    $.get('/departemen', function (data) {
+        $.each(data.data, function (index, item) {
+            $('#dep').append('<option value="' + item.id + '"> ' +  item.kode_dep + '</option>');
+        });
+    });
+
+    $.get('/divisi', function (data) {
+        $.each(data.data, function (index, item) {
+            $('#div').append('<option value="' + item.id + '"> ' +  item.nama_div + ' </option>');
+        });
+    });
+
+    $.get('/barang.mesin', function (data) {
+        $.each(data.data, function (index, item) {
+            $('#nama_aset').append('<option value="' + item.id + '"> ' +  item.nama_barang + ' </option>');
+        });
+    });
+
+    $.get('/bahan', function (data) {
+        $.each(data.data, function (index, item) {
+            $('#bahan_mesin').append('<option value="' + item.id + '"> ' +  item.nama + ' </option>');
+        });
+    });
 }
 
 

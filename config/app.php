@@ -171,6 +171,7 @@ return [
         Spatie\Permission\PermissionServiceProvider::class,
         Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
+        
     ])->toArray(),
 
     /*
@@ -188,6 +189,7 @@ return [
         //'Jwt' => Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
         'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
         'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
+        
     ])->toArray(),
 
 ];

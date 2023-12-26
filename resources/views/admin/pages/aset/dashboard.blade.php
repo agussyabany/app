@@ -5,14 +5,16 @@
 @endsection
 
 @section('content')
-<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-        <ul class="nav nav-tabs" id="myTabs" role="tablist"></ul>
-        <div class="tab-content" id="myTabContent">
-            <div class="container">
-
-            </div>
-        </div>
-    </main>
+    <div class="col">
+        <main id="start">
+                <ul class="nav nav-tabs" id="myTabs" role="tablist"></ul>
+                <div class="tab-content" id="myTabContent">
+                   
+                    
+                </div>
+        </main>
+    </div>
+</div>
     {{-- MODAL MASTER --}}
     <div class="modal"  id="myModal">
         <div class="modal-dialog modal-dialog-centered">
@@ -76,5 +78,5 @@
                 </div>
             </div>
           </div>
-      </div>
+      
 @endsection

@@ -1,5 +1,7 @@
 $(document).ready(function() {
-
+    const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
+    const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
+    // $('#myTabContent').append(' <h3 class="text-center">DASHBOARD SISTEM INFORMASI ASET</h3>')
     $('#barang').addClass('text-start btn btn-primary hoverable');
     $('#divisi').addClass('text-start btn btn-default hoverable');
     $('#departemen').addClass('text-start btn btn-default hoverable');
@@ -38,6 +40,7 @@ $(document).ready(function() {
             );
            //Menampilkan Konten berupa HEAD tabel pada body TAB
             $(document).ready(function() {
+               
                 $('#myTabContent').append(
                     '<div class="tab-pane fade" id="barang_tab" role="tabpanel" aria-labelledby="tab_div">' +
                     '<br>' +
@@ -209,6 +212,7 @@ $(document).ready(function() {
 
         // DEPARTEMEN
     $('#departemen').on('click', function() {
+       
         $('#departemen').addClass('btn btn-primary');
         $('#barang,#ruang,#sdm,#lokasi,#dokumen,#bahan,#divisi,#aktiva,#nilai,#a,#b,#c,#d,#e,#f,#kir').removeClass('btn btn-primary');
         $('#barang,#ruang,#sdm,#lokasi,#dokumen,#bahan,#divisi,#aktiva,#nilai,#a,#b,#c,#d,#e,#f,#kir').addClass('btn btn-defult');
@@ -219,6 +223,7 @@ $(document).ready(function() {
             );
             //Menampilkan Konten berupa HEAD tabel pada body TAB
             $(document).ready(function() {
+                
                 $('#myTabContent').append(
 
                     '<br>' +
