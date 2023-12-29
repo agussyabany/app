@@ -133,6 +133,7 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::get('/mesin.input',[MesinController::class,'input']);
     Route::post('/mesin.clear',[MesinController::class,'clear']);
     Route::post('/mesin.hapus/{id}',[MesinController::class,'hapus']);
+    Route::post('/mesin.update',[MesinController::class,'update']);
 
     Route::get('/gedung.dep/{id}',[GedungController::class,'dep']);
     Route::get('/gedung.div/{dep}/{lok}',[GedungController::class,'div']);
@@ -144,6 +145,11 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::get('/kir.gedung/{lok}/{dep}/{div}',[KirController::class,'gedung']);
     Route::get('/kir.ruang/{lok}/{dep}/{div}/{ged}',[KirController::class,'ruang']);
     Route::get('/kir.detail/{lok}/{dep}/{div}/{ged}/{ruang}',[KirController::class,'detail']);
+    Route::get('/opsi.gedung',[KirController::class,'opsi']);
+    Route::post('/kir.save',[KirController::class,'save']);
+    Route::get('/kir.input',[KirController::class,'input']);
+    Route::post('/kir.clear',[KirController::class,'clear']);
+
 
 });
 

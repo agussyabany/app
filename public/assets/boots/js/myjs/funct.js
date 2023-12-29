@@ -218,7 +218,7 @@ function refA()
                     '<li><a class="dropdown-item  edit" data-id="' + item.id_tanah + '" href="#"><i class="fa-solid fa-edit"></i>&nbsp;EDIT</a></li>'+
                     '<li><a class="dropdown-item delete" data-id="' + item.id_tanah + '" href="#"><i class="fa-solid fa-trash"></i>&nbsp;DELETE</a></li>'+
                     '<li><hr class="dropdown-divider"></li>'+
-                    
+
                 '</ul>'+
             '</div>';
             var img = '<img src="http://127.0.0.1:8000/assets/img/lokasi/'+item.img+'" height="100px" width="100px"></img>';
@@ -231,14 +231,14 @@ function refA()
                 img,
                 editButton
             ]).draw();
-            //var id =item.id_tanah 
+            //var id =item.id_tanah
             // $.get('/show/' + id, function (data) {
             //     $.each(data.data, function (index, items) {
             //         $('#dok'+ id).append('<li><a class="dropdown-item">'+ items.dok +'</a></li>');
             //     });
             // });
         });
-        
+
     })
 }
 
@@ -374,7 +374,7 @@ function pilih()
 {
     $.get('/lok', function (data) {
         $.each(data.data, function (index, item) {
-            $('#lokasi_b').append('<option value="' + item.id + '">' + item.alamat + ' | ' +  item.lokasi + '</option>');
+            $('#lokasi_kir').append('<option value="' + item.id + '">' + item.alamat + ' | ' +  item.lokasi + '</option>');
         });
     });
     $.get('/departemen', function (data) {
@@ -397,9 +397,50 @@ function pilih()
 
     $.get('/bahan', function (data) {
         $.each(data.data, function (index, item) {
-            $('#bahan_mesin').append('<option value="' + item.id + '"> ' +  item.nama + ' </option>');
+            $('#bahan_kir').append('<option value="' + item.id + '"> ' +  item.nama + ' </option>');
         });
     });
+
+    $.get('/opsi.gedung', function (data) {
+        $.each(data.data, function (index, item) {
+            $('#gedung').append('<option value="' + item.gedung + '"> ' +  item.gedung + ' </option>');
+        });
+    });
+
+    $.get('/ruang', function (data) {
+        $.each(data.data, function (index, item) {
+            $('#ruang_kir').append('<option value="' + item.nama_ruang + '"> ' +  item.nama_ruang + ' </option>');
+        });
+    });
+}
+
+function refKirInput()
+{
+    $.get('/kir.input', function(data) {
+        var i = 0;
+        var table = $("#tbl_kir_input").DataTable();
+        table.clear().draw();
+        //$('#modal_body').html('');
+
+        $.each(data.data, function(index, item) {
+            // var editButton =
+            // '<div class="btn-group">'+
+            //     '<button class="badge bg-primary border border-secondary btn-sm tree" data-id="' + item.id_lokasi + '" data-bs-toggle="offcanvas" href="#data" role="button" aria-controls="offcanvasExample"><i class="fa-solid fa-eye"></i></button>'+
+            // '</div>';
+            // var img = '<img src="http://127.0.0.1:8000/assets/img/lokasi/'+item.img_lok+'" height="100px" width="100px"></img>';
+            table.row.add([
+                 ++i,
+                item.lokasi,
+                item.nama_div,
+                item.gedung,
+                item.ruangan,
+                item.nama_barang,
+                item.merk,
+                // img,
+                // editButton
+            ]).draw();
+        });
+    })
 }
 
 

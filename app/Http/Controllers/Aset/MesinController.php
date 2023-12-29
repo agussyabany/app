@@ -63,7 +63,7 @@ class MesinController extends Controller
 
     public function edit($id)
     {
-        $mesin_full = Mesin::select('barangs.id as idBar','nama_barang','kode_dep','nama_div','lokasi','id_lokasi','id_departemen','id_div','kode','reg','tahun','harga','susut','bahan','asal','ukuran','merk','pabrik','rangka','mesin','polisi','bpkb','ket','mesins.img as imgMes','guna')
+        $mesin_full = Mesin::select('barangs.id as idBar','nama_barang','kode_dep','nama_div','lokasi','id_lokasi','id_departemen','id_div','kode','reg','tahun','harga','susut','bahan','asal','ukuran','merk','pabrik','rangka','mesin','polisi','bpkb','ket','mesins.id as id_mesin','guna')
                             ->where('mesins.id',$id)
                             ->join('barangs','mesins.id_barang','barangs.id')
                             ->join('divisis','mesins.id_div','divisis.id')
@@ -87,7 +87,7 @@ class MesinController extends Controller
             'jenis' => 'required',
             'tahun' => 'required|numeric',
             'batas' => 'required|numeric',
-            
+
             'susut' => 'required|numeric',
             'bahan' => 'required',
             'guna' => 'required',
@@ -100,9 +100,9 @@ class MesinController extends Controller
             'bpkb' => 'required',
             'asal' => 'required',
             'ket' => 'required',
-            
+
         ];
-    
+
         // Custom error messages
         $messages = [
             'required' => 'The :attribute field is required.',
@@ -111,10 +111,10 @@ class MesinController extends Controller
             'mimes' => 'The :attribute must be a file of type: jpeg, png, jpg, gif.',
             'max' => 'The :attribute may not be greater than :max kilobytes.',
         ];
-    
+
         // Validate the request
         $validator = Validator::make($request->all(), $rules, $messages);
-    
+
         // If validation fails, return the errors
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()], 400);
@@ -150,7 +150,7 @@ class MesinController extends Controller
 
         $imageData = base64_decode($img);
 
-        
+
         $imageName = time() . '_' . uniqid() . '.jpg';
         file_put_contents(public_path('assets/img/mesin/' . $imageName), $imageData);
 
@@ -209,5 +209,102 @@ class MesinController extends Controller
     {
         Mesin::where('id', $id)->delete();
         return response()->json(['message' => 'Data deleted successfully']);
+    }
+
+    public function update(Request $request)
+    {
+        $rules = [
+            'lokasi' => 'required',
+            'dep' => 'required',
+            'div' => 'required',
+            'nama_aset' => 'required',
+            'kode_aset' => 'required',
+            'reg' => 'required',
+            'jenis' => 'required',
+            'tahun' => 'required|numeric',
+            'batas' => 'required|numeric',
+            'susut' => 'required|numeric',
+            'bahan' => 'required',
+            'guna' => 'required',
+            'ukuran' => 'required',
+            'merk' => 'required',
+            'pabrik' => 'required',
+            'rangka' => 'required',
+            'mesin' => 'required',
+            'nopol' => 'required',
+            'bpkb' => 'required',
+            'asal' => 'required',
+            'ket' => 'required',
+        ];
+
+        // Custom error messages
+        $messages = [
+            'required' => 'The :attribute field is required.',
+            'numeric' => 'The :attribute must be a number.',
+            'image' => 'The :attribute must be an image.',
+            'mimes' => 'The :attribute must be a file of type: jpeg, png, jpg, gif.',
+            'max' => 'The :attribute may not be greater than :max kilobytes.',
+        ];
+
+        // Validate the request
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        // If validation fails, return the errors
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 400);
+        }
+
+        $user = Auth::user()->id;
+        $id = $request->input('id');
+        $lokasi = $request->input('lokasi');
+        $dep = $request->input('dep');
+        $div = $request->input('div');
+        $nama_aset = $request->input('nama_aset');
+        $kode_aset = $request->input('kode_aset');
+        $reg = $request->input('reg');
+        $jenis = $request->input('jenis');
+        $tahun = $request->input('tahun');
+        $batas = $request->input('batas');
+        $nilai = $request->input('nilai');
+        $susut = $request->input('susut');
+        $bahan = $request->input('bahan');
+        $guna = $request->input('guna');
+        $ukuran = $request->input('ukuran');
+        $merk = $request->input('merk');
+        $pabrik = $request->input('pabrik');
+        $rangka = $request->input('rangka');
+        $mesin = $request->input('mesin');
+        $nopol = $request->input('nopol');
+        $bpkb = $request->input('bpkb');
+        $asal = $request->input('asal');
+        $ket = $request->input('ket');
+        $batas = $request->input('batas');
+
+        Mesin::where('id',$id)
+        ->update(
+            [
+                'id_barang' => $nama_aset,
+                'id_departemen' => $dep,
+                'id_div' => $div,
+                'id_lokasi' => $lokasi,
+                'kode' => $kode_aset,
+                'reg' => $reg,
+                'tahun' => $tahun,
+                'harga' => $nilai,
+                'susut' => $susut,
+                'ukuran' => $ukuran,
+                'merk' => $merk,
+                'pabrik' => $pabrik,
+                'rangka' => $rangka,
+                'mesin' => $mesin,
+                'polisi' => $nopol,
+                'bpkb' => $bpkb,
+                'ket' => $ket,
+                'guna' => $guna,
+                'id_user' => $user,
+                'bahan' => $bahan,
+                'asal' => $asal,
+            ]);
+        return response()->json(['message' => 'Data updated successfully']);
     }
 }

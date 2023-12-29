@@ -61,7 +61,7 @@ class BarangController extends Controller
 
     public function mesin()
     {
-        $mesin = Barang::where('golongan',3)->get();
+        $mesin = Barang::where('golongan',2)->get();
         return response()->json(['data' => $mesin]);
     }
 }
