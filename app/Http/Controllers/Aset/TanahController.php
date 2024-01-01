@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Aset;
 
 use App\Http\Controllers\Controller;
 use App\Models\Aset\Tanah;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class TanahController extends Controller
 {
@@ -63,5 +66,24 @@ class TanahController extends Controller
         return response()->json([
             'data' => $tanah
           ]);
+    }
+
+    public function print()
+    {
+        $tanah = Tanah::select('tanahs.id as id_tanah','id_lokasi','id_lokasi','lokasi','nama_barang','guna','alamat','no_tunjuk','tgl_tunjuk','img','asal','tahun','no_tunjuk','tgl_tunjuk','luas_tunjuk','sertifikat','tgl_sertifikat','luas_sertifikat','no_gambar','tgl_gambar','luas_gambar','hak','asal','pemilik','nilai','nilai_now','ket','kode_barang')
+        ->join('lokasis','tanahs.id_lokasi','=','lokasis.id')
+        ->join('barangs','tanahs.id_barang','=','barangs.id')
+        ->orderBy('tanahs.id','DESC')
+        ->get();
+        $total_luasTunjuk = Tanah::sum(DB::raw('CAST(luas_tunjuk AS integer)'));
+        $total_luasSrtfkt = Tanah::sum(DB::raw('CAST(luas_sertifikat AS integer)'));
+        $total_luasGambar = Tanah::sum(DB::raw('CAST(luas_gambar AS integer)'));
+        $total_nilai = Tanah::sum('nilai');
+        $i = 1;
+        $date = Carbon::now();
+        $tglIndo = $date->locale('id_ID')->format('d F Y');
+        $nama = Auth::user()->name;
+        $nip = Auth::user()->nip;
+        return view('admin.pages.aset.print.printTanah',compact(['tanah','i','total_luasTunjuk','total_luasSrtfkt','total_luasGambar','total_nilai','tglIndo','nama','nip']));
     }
 }

@@ -4,7 +4,7 @@ $(document).ready(function() {
 
     //Klik menu TANAH Sidebar
     $('#a').on('click', function() {
-
+        $('#db_body').remove();
         //membuat tombol menu SideBar menjadi selected
         $('#a').addClass('btn btn-primary');
         //Dan Tombol lain menjadi notSelected
@@ -25,7 +25,7 @@ $(document).ready(function() {
                     '<br>' +
                     '<div class="tab-pane show" id="a_tab" role="tabpanel" aria-labelledby="tab_a">'+'<div class="container">'+
                         '<div class="card">'+
-                            '<div class="card-header">DATA TANAH <div class="position-absolute top-0 end-0"><button class="btn  btn-primary" id="tambah_a"><i class="fa-solid fa-file-circle-plus"></i></button></div></div>'+
+                            '<div class="card-header text-center">DATA TANAH <div class="position-absolute top-0 end-0"><button class="btn  btn-primary btn-outline me-1" id="tambah_a"><i class="fa-solid fa-circle-plus"></i></button><button class="btn  btn-danger mt-1 mb-1 me-1" id="print_a"><i class="fa-solid fa-print"></i></button></div></div>'+
                                 '<div class="card-body">'+
                                     '<table class="table table-striped" id="tbl_a">'+
                                         '<thead>'+
@@ -53,6 +53,10 @@ $(document).ready(function() {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         }
                     });
+
+                    $('#print_a').on('click', function() {
+                        openNewWindow();
+                    })
                     //Klik pada tombol tambah bahan, maka menampilkan modal TAMBAH DATA BAHAN
                 $('#tambah_a').on('click', function() {
                     $('#lgModal').modal('show');
@@ -780,6 +784,7 @@ $(document).ready(function() {
 
         // PERALATAN DAN MESIN
     $('#b').on('click', function() {
+        $('#db_body').remove();
         $('#b').addClass('btn btn-primary');
         $('#barang,#divisi,#departemen,#ruang,#sdm,#lokasi,#dokumen,#bahan,#aktiva,#nilai,#a,#c,#d,#e,#f,#kir').removeClass('btn btn-primary');
         $('#barang,#divisi,#departemen,#ruang,#sdm,#lokasi,#dokumen,#bahan,#aktiva,#nilai,#a,#c,#d,#e,#f,#kir').addClass('btn btn-defult');
@@ -1138,7 +1143,7 @@ $(document).ready(function() {
                                     var div = item.id_div;
 
                                     $("#mesin_div" + item.id_departemen).append('<li><span><a data-id="' + dep + ',' + lok + ',' + div +
-                                    ',' + item.nama_div +'" href="#" id="tampil_mesin">'+ item.nama_div +'</a></span></li>')
+                                    ',' + item.nama_div +'" href="#" style="text-decoration: none;" id="tampil_mesin">'+ item.nama_div +'</a></span></li>')
                                 });
                             })
                         })
@@ -1181,7 +1186,7 @@ $(document).ready(function() {
                                     var table = $("#tbl_b_data").DataTable();
                                     table.clear().draw();
                                     $.get("/mesin.show/"+ lok + "/" + dep + "/" + div , function(data) {
-                                        $('#card-header').html('<strong>Divisi: '+ nama_div +'</strong>');
+                                        $('#card-header').html('<strong>Divisi: '+ nama_div +'</strong><button class="btn btn-sm btn-primary float-end" id="print_b" data-id="' + lok + "," + dep + "," + div + '"><i class="fa-solid fa-print"></i></button>');
 
                                     $.each(data.data, function (index, items) {
                                         var editButton =
@@ -1208,7 +1213,18 @@ $(document).ready(function() {
                                         ]).draw();
                                     })
                                 })
-                    //Hapus Data Mesin
+                                $(document).on('click', '#print_b', function (event) {
+                                    var id = $(this).data('id');
+                                    var delimiter = ",";
+                                    var id_key = id.split(delimiter);
+                                    var lok = id_key[0];
+                                    var dep = id_key[1];
+                                    var div = id_key[2];
+                                    var url = "/mesin.print/"+ lok +"/"+ dep + "/" + div ;
+                                    var features = 'width=800,height=600';
+                                    window.open(url, '_blank', features);
+                                })
+                                //Hapus Data Mesin
                                 $('#tbl_b_data').on('click', '.deleteB', function() {
 
                                     var id = $(this).data('id');
@@ -1719,6 +1735,7 @@ $(document).ready(function() {
 
     // GEDUNG DAN BANGUNAN
     $('#c').on('click', function() {
+        $('#db_body').remove();
         $('#c').addClass('btn btn-primary');
         $('#barang,#divisi,#departemen,#ruang,#sdm,#lokasi,#dokumen,#bahan,#aktiva,#nilai,#a,#b,#d,#e,#f,#kir').removeClass('btn btn-primary');
         $('#barang,#divisi,#departemen,#ruang,#sdm,#lokasi,#dokumen,#bahan,#aktiva,#nilai,#a,#b,#d,#e,#f,#kir').addClass('btn btn-defult');
@@ -1755,6 +1772,7 @@ $(document).ready(function() {
                     refC();
                     $('#tbl_c').on('click', '.tree', function() {
                         var id = $(this).data('id');
+                        $('#card-body').html('');
                         $('#canvas_body').html('');
                         $('#canvas_tree').html('');
                         $.ajax({
@@ -1776,7 +1794,7 @@ $(document).ready(function() {
                                             var div = item.id_div;
 
                                             $("#mesin_div" + item.id_departemen).append('<li><span><a data-id="' + dep + ',' + lok + ',' + div +
-                                            ',' + item.nama_div +'" href="#" id="tampil_gedung">'+ item.nama_div +'</a></span></li>')
+                                            ',' + item.nama_div +'" href="#" style="text-decoration: none;" id="tampil_gedung">'+ item.nama_div +'</a></span></li>')
                                         });
                                     })
                                 })
@@ -1817,7 +1835,7 @@ $(document).ready(function() {
                         var table = $("#tbl_c_data").DataTable();
                         table.clear().draw();
                          $.get("/gedung.show/"+ lok + "/" + dep + "/" + div , function(data) {
-                                $('#card-header').html('<strong>Divisi: '+ nama_div +'</strong>');
+                                $('#card-header').html('<strong>Divisi: '+ nama_div +'</strong><button class="btn btn-sm btn-primary float-end" id="print_c" data-id="' + lok + "," + dep + "," + div + '"><i class="fa-solid fa-print"></i></button>');
 
                             $.each(data.data, function (index, items) {
                                 var editButton =
@@ -1841,6 +1859,17 @@ $(document).ready(function() {
                                     editButton
                                 ]).draw();
                             })
+                        })
+                        $(document).on('click', '#print_c', function (event) {
+                            var id = $(this).data('id');
+                            var delimiter = ",";
+                            var id_key = id.split(delimiter);
+                            var lok = id_key[0];
+                            var dep = id_key[1];
+                            var div = id_key[2];
+                            var url = "/gedung.print/"+ lok +"/"+ dep + "/" + div ;
+                            var features = 'width=800,height=600';
+                            window.open(url, '_blank', features);
                         })
                     })
 
@@ -2040,6 +2069,7 @@ $(document).ready(function() {
 
     //JALAN IRIGASI DAN JARINGAN D
     $('#d').on('click', function() {
+        $('#db_body').remove();
         $('#d').addClass('btn btn-primary');
         $('#barang,#divisi,#departemen,#ruang,#sdm,#lokasi,#dokumen,#bahan,#aktiva,#nilai,#a,#b,#c,#e,#f,#kir').removeClass('btn btn-primary');
         $('#barang,#divisi,#departemen,#ruang,#sdm,#lokasi,#dokumen,#bahan,#aktiva,#nilai,#a,#b,#c,#e,#f,#kir').addClass('btn btn-defult');
@@ -2084,6 +2114,7 @@ $(document).ready(function() {
 
     //ASET TETAP LAINNYA E
     $('#e').on('click', function() {
+        $('#db_body').remove();
         $('#e').addClass('btn btn-primary');
         $('#barang,#divisi,#departemen,#ruang,#sdm,#lokasi,#dokumen,#bahan,#aktiva,#nilai,#a,#b,#c,#d,#f,#kir').removeClass('btn btn-primary');
         $('#barang,#divisi,#departemen,#ruang,#sdm,#lokasi,#dokumen,#bahan,#aktiva,#nilai,#a,#b,#c,#d,#f,#kir').addClass('btn btn-defult');
@@ -2130,6 +2161,7 @@ $(document).ready(function() {
 
     //KONSTRUKSI
     $('#f').on('click', function() {
+        $('#db_body').remove();
         $('#f').addClass('btn btn-primary');
         $('#barang,#divisi,#departemen,#ruang,#sdm,#lokasi,#dokumen,#bahan,#aktiva,#nilai,#a,#b,#c,#d,#e,#kir').removeClass('btn btn-primary');
         $('#barang,#divisi,#departemen,#ruang,#sdm,#lokasi,#dokumen,#bahan,#aktiva,#nilai,#a,#b,#c,#d,#e,#kir').addClass('btn btn-defult');
@@ -2177,6 +2209,7 @@ $(document).ready(function() {
 
     //KIR
     $('#kir').on('click', function() {
+        $('#db_body').remove();
         $('#kir').addClass('btn btn-primary');
         $('#barang,#divisi,#departemen,#ruang,#sdm,#lokasi,#dokumen,#bahan,#aktiva,#nilai,#a,#b,#c,#d,#e,#f').removeClass('btn btn-primary');
         $('#barang,#divisi,#departemen,#ruang,#sdm,#lokasi,#dokumen,#bahan,#aktiva,#nilai,#a,#b,#c,#d,#e,#f').addClass('btn btn-defult');
@@ -2192,7 +2225,7 @@ $(document).ready(function() {
                     '<div class="tab-pane show" id="kir_tab" role="tabpanel" aria-labelledby="tab_kir">'+
                      '<div class="container">'+
                         '<div class="card">'+
-                            '<div class="card-header">DATA NILAI AKTIVA <div class="position-absolute top-0 end-0"><button class="btn  btn-primary" id="tambah_kir"><i class="fa-solid fa-file-circle-plus"></i></button></div></div>'+
+                            '<div class="card-header">DATA KIR <div class="position-absolute top-0 end-0"><button class="btn  btn-primary" id="tambah_kir"><i class="fa-solid fa-file-circle-plus"></i></button></div></div>'+
                                 '<div class="card-body">'+
                                     '<table class="table table-striped" id="tbl_kir">'+
                                         '<thead>'+
@@ -2453,6 +2486,7 @@ $(document).ready(function() {
 
                 $('#tbl_kir').on('click', '.tree', function() {
                     var id = $(this).data('id');
+                    $('#card-body').html('');
                     $('#canvas_body').html('');
                     $('#canvas_tree').html('');
                     $.ajax({
@@ -2478,7 +2512,7 @@ $(document).ready(function() {
 
                                         $.get("/kir.gedung/"+ lok + "/" + dep + "/" + div, function(data){
                                             $.each(data.data,function(index,items) {
-                                               $("#kir_ged" + item.id_div).append('<li><a href="#" id="kir_ruang" data-id="' + dep + ',' + lok + ',' + div + ',' + items.gedung + ',' + item.nama_div + '"><span">Gedung '+ items.gedung +'</a></span>'+
+                                               $("#kir_ged" + item.id_div).append('<li><a href="#" id="kir_ruang" style="text-decoration: none;" data-id="' + dep + ',' + lok + ',' + div + ',' + items.gedung + ',' + item.nama_div + '"><span">Gedung '+ items.gedung +'</a></span>'+
 
                                                 '</li>')
                                              })
@@ -2487,8 +2521,8 @@ $(document).ready(function() {
                                 })
                             })
                             $(document).on('click', '#kir_ruang', function() {
+                                
                                 $('#card-body').html('');
-
                                 $('#card-body').append(
 
                                 ' <table class="table table-striped table-border" id="tbl_kir_data">'+
@@ -2531,11 +2565,21 @@ $(document).ready(function() {
                                         ]).draw();
                                     })
                                 })
+                                
                             })
-
+                            
                             $(document).on('click', '#kir_detail', function() {
-                                $('#lgModal').modal('show');
-
+                                        var id = $(this).data('id');
+                                        var delimiter = ",";
+                                        var id_key = id.split(delimiter);
+                                        var lok = id_key[0];
+                                        var dep = id_key[1];
+                                        var div = id_key[2];
+                                        var ged = id_key[3];
+                                        var ruang = id_key[4];
+                                        var nama_div = id_key[5];
+                                        var i = 0;
+                                        $('#lgModal').modal('show');
                                         $('#modal_bodyLG').html('');
                                         $('#modal_bodyLG').prepend(
                                             '<table class="table table-striped table-border" id="tbl_kir_detail">'+
@@ -2556,17 +2600,9 @@ $(document).ready(function() {
                                                 '<tbody>'+
                                             '</tbody>'+
                                         '</table>');
-                                    var id = $(this).data('id');
-                                    var delimiter = ",";
-                                    var id_key = id.split(delimiter);
-                                    var lok = id_key[0];
-                                    var dep = id_key[1];
-                                    var div = id_key[2];
-                                    var ged = id_key[3];
-                                    var ruang = id_key[4];
-                                    var nama_div = id_key[5];
-                                    var i = 0;
-                                    $('#judul_modalLG').html('<strong>Divisi:</strong> '+ nama_div +'<br><strong>Gedung:</strong> '+ ged +'<br><strong>Ruang: </strong>' + ruang  );
+                                   
+                                    
+                                    $('#judul_modalLG').html('<strong>Divisi:</strong> '+ nama_div +'<br><strong>Gedung:</strong> '+ ged +'<br><strong>Ruang: </strong>' + ruang +'<button class="btn btn-sm btn-primary float-end" id="print_kir" data-id="' + lok + "," + dep + "," + div + "," + ged + "," + ruang + '"><i class="fa-solid fa-print"></i></button>' );
                                     var table = $("#tbl_kir_detail").DataTable();
                                     table.clear().draw();
 
@@ -2590,13 +2626,32 @@ $(document).ready(function() {
 
                                     })
                                 })
+
+                                
+                                
                             })
+
+
+                            
                         },
                         error: function (data) {
                             console.log('Error:', data);
                         }
                     });
 
+                })
+                $(document).on('click', '#print_kir', function() {
+                    var id = $(this).data('id');
+                    var delimiter = ",";
+                    var id_key = id.split(delimiter);
+                    var lok = id_key[0];
+                    var dep = id_key[1];
+                    var div = id_key[2];
+                    var ged = id_key[3];
+                    var ruang = id_key[4];
+                    var url = "/kir.print/"+ lok +"/"+ dep +"/"+ div +"/"+ ged +"/"+ ruang;
+                    var features = 'width=800,height=600';
+                    window.open(url, '_blank', features);
                 })
             });
      });
@@ -2608,6 +2663,7 @@ $(document).ready(function() {
 
     //NILAI
     $('#nilai').on('click', function() {
+        $('#db_body').remove();
         $('#nilai').addClass('btn btn-primary');
         $('#barang,#divisi,#departemen,#ruang,#sdm,#lokasi,#dokumen,#bahan,#aktiva,#a,#b,#c,#d,#e,#f').removeClass('btn btn-primary');
         $('#barang,#divisi,#departemen,#ruang,#sdm,#lokasi,#dokumen,#bahan,#aktiva,#a,#b,#c,#d,#e,#f').addClass('btn btn-defult');

@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Aset;
 
 use App\Http\Controllers\Controller;
+use App\Models\Aset\Departemen;
+use App\Models\Aset\Divisi;
 use App\Models\Aset\Mesin;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class MesinController extends Controller
@@ -306,5 +309,25 @@ class MesinController extends Controller
                 'asal' => $asal,
             ]);
         return response()->json(['message' => 'Data updated successfully']);
+    }
+    public function print($lok,$dep,$div)
+    {
+        $mesin = Mesin::select('nama_barang','merk','guna','tahun','mesins.id as id_mesin','nama_div','img','pabrik','rangka','polisi','bpkb','asal','kode','reg','harga')
+                        ->join('barangs','mesins.id_barang','barangs.id')
+                        ->join('divisis','mesins.id_div','divisis.id')
+                        ->where('id_departemen',$dep)
+                        ->where('id_lokasi',$lok)
+                        ->where('id_div',$div)
+                        ->get();
+                        $i = 0;
+                        $dept = Departemen::select('kode_dep')->where('id',$dep)->first();
+                        $divi = Divisi::select('nama_div')->where('id',$div)->first();
+                        $divisi = $divi['nama_div'];
+                        $departemen = $dept['kode_dep'];
+                        $date = Carbon::now();
+                        $tglIndo = $date->locale('id_ID')->format('d F Y');
+                        $nama = Auth::user()->name;
+                        $nip = Auth::user()->nip;
+                        return view('admin.pages.aset.print.printMesin',compact(['mesin','i','departemen','divisi','nama','tglIndo','nip']));
     }
 }

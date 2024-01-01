@@ -4,7 +4,7 @@
 <div class="">
 
   <div class="row">
-    <header class="bg-primary text-white" style="background-image: url('{{asset('assets/img/head.jpg')}}');background-size: cover; background-repeat: no-repeat;font-family: 'Bahnschrift-SemiLight', sans-serif; width:100%;">
+    <header class="bg-primary text-white kop" style="background-image: url('{{asset('assets/img/head.jpg')}}');background-size: cover; background-repeat: no-repeat; width:100%;">
         <div class="row">
         <div class="col-2  collapse-horizontal in"   id="collapseWidthExample">
             <div class="text-center float-start">
@@ -22,15 +22,15 @@
             <div class="text-center float-end">
                 {{Auth::user()->name}}
                 <a href="#" type="button" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="<div class='container text-center border rounded'>
-                    <p>{{Auth::user()->name}}<br>Staf Divisi Aset<br>{{Auth::user()->id}}<br><a href='{{route('logout')}}' class='btn btn-danger btn-sm'>LOGOUT</a></p>
-            </div>" data-bs-html="true" data-bs-title="USER ACCOUNT"><img src="{{asset('assets/img/14.jpg')}}" width="40px" width="40px" alt="" class="rounded-circle mt-1 me-1 border border-default" ></a>
+                    <p>{{Auth::user()->name}}<br>{{ $jabat }} Divisi {{ $divisi }}<br>{{Auth::user()->nip}}<br><a href='{{route('logout')}}' class='btn btn-danger btn-sm'>LOGOUT</a></p>
+            </div>" data-bs-html="true" data-bs-title="USER ACCOUNT"><img src="http://127.0.0.1:8000/assets/img/user/{{ Auth::user()->img }}" width="40px" width="40px" alt="" class="rounded-circle mt-1 me-1 border border-default" ></a>
             </div>
 
         </div>
         </div>
     </header>
 
-    <nav class="col-2 " id="collapseWidthExample">
+    <nav class="col-2 nav" id="collapseWidthExample">
         <div class=" collapse-horizontal in"  id="collapseWidthExample"   style="background-image: url('{{asset('assets/img/side3.jpg')}}');background-size: cover; background-repeat: no-repeat;font-family: 'Bahnschrift-SemiLight', sans-serif; width:100%; height:100%">
             <div class="container">
                 <ul class="nav flex-column" id="menuTabs">
@@ -97,15 +97,10 @@
                       </li>
 
                       <li class="nav-item">
-                          <a type="button"  class="hoverable" id="nilai" style="width: 100%"><i class="fa-regular fa-heart"></i>&nbsp;PENAMBAHAN NILAI ASET</a>
+                          <a type="button"  class="hoverable" id="nilai" style="width: 100%"><i class="fa-solid fa-heart"></i>&nbsp;NILAI ASET</a>
                       </li>
 
-                      <li class="nav-item">
-                          <span class="nav-link text-center disabled"><strong>PENGATURAN</strong></span>
-                      </li>
-                      <li class="nav-item">
-                          <a class="nav-link" href="{{route('logout')}}">LOGOUT</a>
-                      </li>
+                      
                     </ul>
                 </div>
 

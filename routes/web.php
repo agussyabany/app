@@ -123,6 +123,8 @@ Route::middleware('auth','verified','role:aset')->group(function () {
 
     Route::post('/tanah.save',[TanahController::class,'save']);
     Route::get('/tanah.detail/{id}',[TanahController::class,'detail']);
+    Route::get('/tanah.print',[TanahController::class,'print']);
+    
 
     Route::get('/mesin.dep/{id}',[MesinController::class,'dep']);
     Route::get('/mesin.div/{dep}/{lok}',[MesinController::class,'div']);
@@ -134,11 +136,13 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::post('/mesin.clear',[MesinController::class,'clear']);
     Route::post('/mesin.hapus/{id}',[MesinController::class,'hapus']);
     Route::post('/mesin.update',[MesinController::class,'update']);
+    Route::get('/mesin.print/{lok}/{dep}/{div}',[MesinController::class,'print']);
 
     Route::get('/gedung.dep/{id}',[GedungController::class,'dep']);
     Route::get('/gedung.div/{dep}/{lok}',[GedungController::class,'div']);
     Route::get('/gedung.show/{lok}/{dep}/{div}',[GedungController::class,'show']);
     Route::get('/gedung.detail/{id}',[GedungController::class,'detail']);
+    Route::get('/gedung.print/{lok}/{dep}/{div}',[GedungController::class,'print']);
 
     Route::get('/kir.dep/{id}',[KirController::class,'dep']);
     Route::get('/kir.div/{dep}/{lok}',[KirController::class,'div']);
@@ -149,6 +153,7 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::post('/kir.save',[KirController::class,'save']);
     Route::get('/kir.input',[KirController::class,'input']);
     Route::post('/kir.clear',[KirController::class,'clear']);
+    Route::get('/kir.print/{lok}/{dep}/{div}/{ged}/{ruang}',[KirController::class,'print']);
 
 
 });

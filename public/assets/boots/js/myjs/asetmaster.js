@@ -20,13 +20,26 @@ $(document).ready(function() {
     $('#kir').addClass('text-start btn btn-default hoverable');
     $('#nilai').addClass('text-start btn btn-default hoverable');
 
+    $("#myTabs").append(
+        '<li class="nav-item" >' +
+            '<a class="nav-link border" id="tab_dashboard" data-bs-toggle="tab" href="#dashboard_tab" role="tab" aria-controls="tab2" aria-selected="false">DASHBOARD &nbsp;<button style="border:none;background-color: white;color: grey;" type="submit"  id="dashboard_x" class="fa-regular fa-circle-xmark" ></button></a>' +
+        '</li>'
+        );
 
-
+        $('#myTabContent').append('<div class="conatianer" id="db_body">'+
+                                    '<h1 class="text-center">USER DASHBOARD</h1><br>'+
+                                    '<h3 class="text-center">Selamat Datang di Sistem Informasi Aset Perumdam Tirta Kencana Kota Samarinda</h3><br>'+
+                                  '</div>')
+        $(document).on('click', '#dashboard_x', function() {
+            $('#tab_dashboard').parent().remove(); // Hapus tab
+            $('#db_body').remove(); // Hapus konten tab
+        });
 
     //BARANG
 
     //Klik menu BARANG Sidebar
     $('#barang').on('click', function() {
+        $('#db_body').remove();
         //membuat tombol menu SideBar menjadi selected
         $('#barang').addClass('btn btn-primary');
         //Dan Tombol lain menjadi notSelected
@@ -212,7 +225,7 @@ $(document).ready(function() {
 
         // DEPARTEMEN
     $('#departemen').on('click', function() {
-       
+        $('#db_body').remove();
         $('#departemen').addClass('btn btn-primary');
         $('#barang,#ruang,#sdm,#lokasi,#dokumen,#bahan,#divisi,#aktiva,#nilai,#a,#b,#c,#d,#e,#f,#kir').removeClass('btn btn-primary');
         $('#barang,#ruang,#sdm,#lokasi,#dokumen,#bahan,#divisi,#aktiva,#nilai,#a,#b,#c,#d,#e,#f,#kir').addClass('btn btn-defult');
@@ -375,6 +388,7 @@ $(document).ready(function() {
 
     // DIVISI
     $('#divisi').on('click', function() {
+        $('#db_body').remove();
         $('#divisi').addClass('btn btn-primary');
         $('#barang,#departemen,#ruang,#sdm,#lokasi,#dokumen,#bahan,#aktiva,#nilai,#a,#b,#c,#d,#e,#f,#kir').removeClass('btn btn-primary');
         $('#barang,#departemen,#ruang,#sdm,#lokasi,#dokumen,#bahan,#aktiva,#nilai,#a,#b,#c,#d,#e,#f,#kir').addClass('btn btn-defult');
@@ -546,6 +560,7 @@ $(document).ready(function() {
 
     //RUANGAN
     $('#ruang').on('click', function() {
+        $('#db_body').remove();
         $('#ruang').addClass('btn btn-primary');
         $('#divisi,#departemen,#sdm,#lokasi,#dokumen,#bahan,#barang,#aktiva,#nilai,#a,#b,#c,#d,#e,#f,#kir').removeClass('btn btn-primary');
         $('#divisi,#departemen,#sdm,#lokasi,#dokumen,#bahan,#barang,#aktiva,#nilai,#a,#b,#c,#d,#e,#f,#kir').addClass('btn btn-defult');
@@ -696,6 +711,7 @@ $(document).ready(function() {
 
     //SDM
     $('#sdm').on('click', function() {
+        $('#db_body').remove();
         $('#sdm').addClass('btn btn-primary');
         $('#divisi,#departemen,#ruang,#barang,#lokasi,#dokumen,#bahan,#aktiva,#nilai,#a,#b,#c,#d,#e,#f,#kir').removeClass('btn btn-primary');
         $('#divisi,#departemen,#ruang,#barang,#lokasi,#dokumen,#bahan,#aktiva,#nilai,#a,#b,#c,#d,#e,#f,#kir').addClass('btn btn-defult');
@@ -875,6 +891,7 @@ $(document).ready(function() {
 
     //LOKASI
     $('#lokasi').on('click', function() {
+        $('#db_body').remove();
         $('#lokasi').addClass('btn btn-primary');
         $('#divisi,#departemen,#ruang,#barang,#dokumen,#bahan,#sdm,#aktiva,#nilai,#a,#b,#c,#d,#e,#f,#kir').removeClass('btn btn-primary');
         $('#divisi,#departemen,#ruang,#barang,#dokumen,#bahan,#sdm,#aktiva,#nilai,#a,#b,#c,#d,#e,#f,#kir').addClass('btn btn-defult');
@@ -1049,6 +1066,7 @@ $(document).ready(function() {
 
     //DOKUMEN
     $('#dokumen').on('click', function() {
+        $('#db_body').remove();
         $('#dokumen').addClass('btn btn-primary');
         $('#divisi,#departemen,#ruang,#barang,#lokasi,#bahan,#sdm,#aktiva,#nilai,#a,#b,#c,#d,#e,#f,#kir').removeClass('btn btn-primary');
         $('#divisi,#departemen,#ruang,#barang,#lokasi,#bahan,#sdm,#aktiva,#nilai,#a,#b,#c,#d,#e,#f,#kir').addClass('btn btn-defult');
@@ -1075,6 +1093,7 @@ $(document).ready(function() {
 
     //BAHAN
     $('#bahan').on('click', function() {
+        $('#db_body').remove();
         $('#bahan').addClass('btn btn-primary');
         $('#divisi,#departemen,#ruang,#barang,#lokasi,#dokumen,#sdm,#aktiva,#nilai,#a,#b,#c,#d,#e,#f,#kir').removeClass('btn btn-primary');
         $('#divisi,#departemen,#ruang,#barang,#lokasi,#dokumen,#sdm,#aktiva,#nilai,#a,#b,#c,#d,#e,#f,#kir').addClass('btn btn-defult');
@@ -1218,6 +1237,7 @@ $(document).ready(function() {
     //END OF BAHAN
 
     $('#aktiva').on('click', function() {
+        $('#db_body').remove();
         $('#aktiva').addClass('btn btn-primary');
         $('#divisi,#departemen,#ruang,#barang,#lokasi,#dokumen,#bahan,#sdm,#nilai,#a,#b,#c,#d,#e,#f,#kir').removeClass('btn btn-primary');
         $('#divisi,#departemen,#ruang,#barang,#lokasi,#dokumen,#bahan,#sdm,#nilai,#a,#b,#c,#d,#e,#f,#kir').addClass('btn btn-defult');

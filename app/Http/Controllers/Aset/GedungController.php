@@ -3,8 +3,14 @@
 namespace App\Http\Controllers\Aset;
 
 use App\Http\Controllers\Controller;
+use App\Models\Aset\Departemen;
+use App\Models\Aset\Divisi;
 use App\Models\Aset\Gedung;
+use App\Models\Aset\lokasi;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use PhpParser\Node\Expr\AssignOp\Div;
 
 class GedungController extends Controller
 {
@@ -55,5 +61,28 @@ class GedungController extends Controller
         return response()->json([
             'data' => $gedung_full
           ]);
+    }
+
+    public function print($lok,$dep,$div)
+    {
+        $gedung = Gedung::join('barangs','gedungs.id_barang','barangs.id')
+                        ->join('divisis','gedungs.id_div','divisis.id')
+                        ->where('id_departemen',$dep)
+                        ->where('id_lokasi',$lok)
+                        ->where('id_div',$div)
+                        ->get();
+                        $i = 0;
+                        $dept = Departemen::select('kode_dep')->where('id',$dep)->first();
+                        $divi = Divisi::select('nama_div','kode_div')->where('id',$div)->first();
+                        $loks = lokasi::select('lokasi')->where('id',$lok)->first();
+                        $lokasi = $loks['lokasi'];
+                        $divisi = $divi['nama_div'];
+                        $struktur = $divi['kode_div'];
+                        $departemen = $dept['kode_dep'];
+                        $date = Carbon::now();
+                        $tglIndo = $date->locale('id_ID')->format('d F Y');
+                        $nama = Auth::user()->name;
+                        $nip = Auth::user()->nip;
+                        return view('admin.pages.aset.print.printGedung',compact(['gedung','i','lokasi','departemen','divisi','nama','tglIndo','struktur','nip']));
     }
 }

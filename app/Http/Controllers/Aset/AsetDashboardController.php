@@ -16,7 +16,9 @@ use App\Models\Aset\NilaiAktiva;
 use App\Models\Aset\Ruangan;
 use App\Models\Aset\Sdm;
 use App\Models\Aset\Tanah;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AsetDashboardController extends Controller
 {
@@ -25,7 +27,14 @@ class AsetDashboardController extends Controller
     {
         $no = 1;
         $barang = Barang::all();
-        return view('admin.pages.aset.dashboard',compact(['barang','no']));
+        $idUSer = Auth::user()->id;
+        $user = User::join('divisis','users.divisi','=','divisis.id')
+                    ->join('jabatans','users.jabat','=','jabatans.id')
+                    ->where('users.id',$idUSer)
+                    ->first();
+        $jabat = $user['jabat'];
+        $divisi = $user['nama_div'];
+        return view('admin.pages.aset.dashboard',compact(['barang','no','jabat','divisi']));
     }
 
     public function barang()
