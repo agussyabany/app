@@ -119,7 +119,7 @@ function refLok()
         $.each(data.data, function(index, item) {
             var editButton = '<a class="btn btn-sm btn-warning edit" data-id="' + item.id + '" href="#"><i class="fa-solid fa-edit"></i></a>';
             var deleteButton = '<a class="btn btn-sm btn-danger delete" data-id="' + item.id + '" href="#"><i class="fa-solid fa-trash"></i></a>';
-            var img = '<img src="http://127.0.0.1:8000/assets/img/lokasi/'+item.img+'" height="100px" width="100px"></img>';
+            var img = '<img src="http://app.perumdamtirtakencana.id/assets/img/lokasi/'+item.img+'" height="100px" width="100px"></img>';
             table.row.add([
                  item.id,
                 item.lokasi,
@@ -221,7 +221,7 @@ function refA()
 
                 '</ul>'+
             '</div>';
-            var img = '<img src="http://127.0.0.1:8000/assets/img/lokasi/'+item.img+'" height="100px" width="100px"></img>';
+            var img = '<img src="http://app.perumdamtirtakencana.id/assets/img/lokasi/'+item.img+'" height="100px" width="100px"></img>';
             table.row.add([
                  ++i,
                 item.nama_barang,
@@ -255,7 +255,7 @@ function refB()
             '<div class="btn-group">'+
                 '<button class="badge bg-primary border border-secondary btn-sm tree" data-id="' + item.id_lokasi + '" data-bs-toggle="offcanvas" href="#data" role="button" aria-controls="offcanvasExample"><i class="fa-solid fa-eye"></i></button>'+
             '</div>';
-            var img = '<img src="http://127.0.0.1:8000/assets/img/lokasi/'+item.img_lok+'" height="100px" width="100px"></img>';
+            var img = '<img src="http://app.perumdamtirtakencana.id/assets/img/lokasi/'+item.img_lok+'" height="100px" width="100px"></img>';
             table.row.add([
                  ++i,
                 item.lokasi,
@@ -281,7 +281,7 @@ function refBData()
             '<div class="btn-group">'+
                 '<button class="btn btn-default border border-secondary btn-sm tree" data-id="' + item.id_lokasi + '" data-bs-toggle="offcanvas" href="#data" role="button" aria-controls="offcanvasExample">AKSI</button>'+
             '</div>';
-            var img = '<img src="http://127.0.0.1:8000/assets/img/lokasi/'+item.img_lok+'" height="100px" width="100px"></img>';
+            var img = '<img src="http://app.perumdamtirtakencana.id/assets/img/lokasi/'+item.img_lok+'" height="100px" width="100px"></img>';
             table.row.add([
                  ++i,
                 item.lokasi,
@@ -306,7 +306,7 @@ function refC()
             '<div class="btn-group">'+
                 '<button class="badge bg-primary border border-secondary btn-sm tree" data-id="' + item.id_lokasi + '" data-bs-toggle="offcanvas" href="#data" role="button" aria-controls="offcanvasExample"><i class="fa-solid fa-eye"></i></button>'+
             '</div>';
-            var img = '<img src="http://127.0.0.1:8000/assets/img/lokasi/'+item.img_lok+'" height="100px" width="100px"></img>';
+            var img = '<img src="http://app.perumdamtirtakencana.id/assets/img/lokasi/'+item.img_lok+'" height="100px" width="100px"></img>';
             table.row.add([
                  ++i,
                 item.lokasi,
@@ -331,7 +331,7 @@ function refKir()
             '<div class="btn-group">'+
                 '<button class="badge bg-primary border border-secondary btn-sm tree" data-id="' + item.id_lokasi + '" data-bs-toggle="offcanvas" href="#data" role="button" aria-controls="offcanvasExample"><i class="fa-solid fa-eye"></i></button>'+
             '</div>';
-            var img = '<img src="http://127.0.0.1:8000/assets/img/lokasi/'+item.img_lok+'" height="100px" width="100px"></img>';
+            var img = '<img src="http://app.perumdamtirtakencana.id/assets/img/lokasi/'+item.img_lok+'" height="100px" width="100px"></img>';
             table.row.add([
                  ++i,
                 item.lokasi,
@@ -356,7 +356,7 @@ function refMesinInput()
             // '<div class="btn-group">'+
             //     '<button class="badge bg-primary border border-secondary btn-sm tree" data-id="' + item.id_lokasi + '" data-bs-toggle="offcanvas" href="#data" role="button" aria-controls="offcanvasExample"><i class="fa-solid fa-eye"></i></button>'+
             // '</div>';
-            // var img = '<img src="http://127.0.0.1:8000/assets/img/lokasi/'+item.img_lok+'" height="100px" width="100px"></img>';
+            // var img = '<img src="http://app.perumdamtirtakencana.id/assets/img/lokasi/'+item.img_lok+'" height="100px" width="100px"></img>';
             table.row.add([
                  ++i,
                 item.lokasi,
@@ -427,7 +427,7 @@ function refKirInput()
             // '<div class="btn-group">'+
             //     '<button class="badge bg-primary border border-secondary btn-sm tree" data-id="' + item.id_lokasi + '" data-bs-toggle="offcanvas" href="#data" role="button" aria-controls="offcanvasExample"><i class="fa-solid fa-eye"></i></button>'+
             // '</div>';
-            // var img = '<img src="http://127.0.0.1:8000/assets/img/lokasi/'+item.img_lok+'" height="100px" width="100px"></img>';
+            // var img = '<img src="http://app.perumdamtirtakencana.id/assets/img/lokasi/'+item.img_lok+'" height="100px" width="100px"></img>';
             table.row.add([
                  ++i,
                 item.lokasi,

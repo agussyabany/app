@@ -23,7 +23,7 @@
                 {{Auth::user()->name}}
                 <a href="#" type="button" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="<div class='container text-center border rounded'>
                     <p>{{Auth::user()->name}}<br>{{ $jabat }} Divisi {{ $divisi }}<br>{{Auth::user()->nip}}<br><a href='{{route('logout')}}' class='btn btn-danger btn-sm'>LOGOUT</a></p>
-            </div>" data-bs-html="true" data-bs-title="USER ACCOUNT"><img src="http://127.0.0.1:8000/assets/img/user/{{ Auth::user()->img }}" width="40px" width="40px" alt="" class="rounded-circle mt-1 me-1 border border-default" ></a>
+            </div>" data-bs-html="true" data-bs-title="USER ACCOUNT"><img src="http://app.perumdamtirtakencana.id/assets/img/user/{{ Auth::user()->img }}" width="40px" width="40px" alt="" class="rounded-circle mt-1 me-1 border border-default" ></a>
             </div>
 
         </div>
