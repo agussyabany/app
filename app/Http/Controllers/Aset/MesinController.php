@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Aset\Departemen;
 use App\Models\Aset\Divisi;
 use App\Models\Aset\Mesin;
+use App\Models\Aset\NilaiAktiva;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -329,5 +330,26 @@ class MesinController extends Controller
                         $nama = Auth::user()->name;
                         $nip = Auth::user()->nip;
                         return view('admin.pages.aset.print.printMesin',compact(['mesin','i','departemen','divisi','nama','tglIndo','nip']));
+    }
+
+    public function nilaiSum($lok)
+    {
+        $mesin = NilaiAktiva::where('id_lokasi', $lok)
+                ->where('cat',2)
+                ->sum('nilai');
+        return response()->json([
+            'data' => $mesin
+          ]);
+    }
+
+    public function nilaimesin($lok)
+    {
+        $mesin = NilaiAktiva::join('aktivas','nilai_aktivas.id_aktiva','=','aktivas.id',)
+                ->where('id_lokasi', $lok)
+                ->where('cat',2)
+                ->get();
+        return response()->json([
+            'data' => $mesin
+          ]);
     }
 }

@@ -19,6 +19,7 @@ use App\Models\Aset\Tanah;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class AsetDashboardController extends Controller
 {
@@ -106,6 +107,7 @@ class AsetDashboardController extends Controller
     public function nilai()
     {
         $nilai = NilaiAktiva::select('nilai_aktivas.id as id_nilai','aktivas.id as as id_aktiva','no_voucher','tgl_voucher','aktiva','tahun','nilai','urai','kib','kode')
+                                ->join('lokasis','nilai_aktivas.id_lokasi','lokasis.id')
                                 ->join('aktivas','nilai_aktivas.id_aktiva','aktivas.id')
                                 ->orderBy('nilai_aktivas.id','DESC')->get();
         return response()->json([
@@ -115,10 +117,13 @@ class AsetDashboardController extends Controller
 
     public function tanah()
     {
-        $tanah = Tanah::select('tanahs.id as id_tanah','lokasi','nama_barang','guna','alamat','no_tunjuk','tgl_tunjuk','img')
+        $tanah = Tanah::select('tanahs.id as id_tanah','lokasi','nama_barang','guna','alamat','no_tunjuk','tgl_tunjuk','img','tanahs.id_lokasi as idLok')
                         ->join('lokasis','tanahs.id_lokasi','=','lokasis.id')
+                        // ->join('nilai_aktivas','tanahs.id_lokasi','=','nilai_aktivas.id_lokasi')
                         ->join('barangs','tanahs.id_barang','=','barangs.id')
-                        ->orderBy('tanahs.id','DESC')
+                        // ->where('nilai_aktivas.cat',1)
+                        ->orderBy('tanahs.id', 'DESC')
+                        // ->groupBy('tanahs.id', 'lokasi', 'nama_barang', 'guna', 'alamat', 'no_tunjuk', 'tgl_tunjuk', 'img', 'tanahs.id_lokasi','id_aktiva')
                         ->get();
         return response()->json([
             'data' => $tanah

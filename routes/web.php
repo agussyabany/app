@@ -117,6 +117,7 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::get('nilai.edit/{id}',[NilaiController::class,'edit']);
     Route::post('nilai.update',[NilaiController::class,'update']);
     Route::post('nilai.hapus/{id}',[NilaiController::class,'destroy']);
+   
 
     Route::get('/show/{id}',[PdfController::class,'show']);
 
@@ -124,6 +125,8 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::post('/tanah.save',[TanahController::class,'save']);
     Route::get('/tanah.detail/{id}',[TanahController::class,'detail']);
     Route::get('/tanah.print',[TanahController::class,'print']);
+    Route::get('/tanah.nilai/{lok}',[TanahController::class,'nilaiSum']);
+    Route::get('/nilaiTanah.detail/{lok}',[TanahController::class,'nilaiTanah']);
     
 
     Route::get('/mesin.dep/{id}',[MesinController::class,'dep']);
@@ -137,12 +140,16 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::post('/mesin.hapus/{id}',[MesinController::class,'hapus']);
     Route::post('/mesin.update',[MesinController::class,'update']);
     Route::get('/mesin.print/{lok}/{dep}/{div}',[MesinController::class,'print']);
+    Route::get('/mesin.nilai/{lok}',[MesinController::class,'nilaiSum']);
+    Route::get('/nilaiMesin.detail/{lok}',[MesinController::class,'nilaimesin']);
 
     Route::get('/gedung.dep/{id}',[GedungController::class,'dep']);
     Route::get('/gedung.div/{dep}/{lok}',[GedungController::class,'div']);
     Route::get('/gedung.show/{lok}/{dep}/{div}',[GedungController::class,'show']);
     Route::get('/gedung.detail/{id}',[GedungController::class,'detail']);
     Route::get('/gedung.print/{lok}/{dep}/{div}',[GedungController::class,'print']);
+    Route::get('/gedung.nilai/{lok}',[GedungController::class,'nilaiSum']);
+    Route::get('/nilaiGedung.detail/{lok}',[GedungController::class,'nilaigedung']);
 
     Route::get('/kir.dep/{id}',[KirController::class,'dep']);
     Route::get('/kir.div/{dep}/{lok}',[KirController::class,'div']);
@@ -154,6 +161,8 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::get('/kir.input',[KirController::class,'input']);
     Route::post('/kir.clear',[KirController::class,'clear']);
     Route::get('/kir.print/{lok}/{dep}/{div}/{ged}/{ruang}',[KirController::class,'print']);
+    Route::get('/kir.nilai/{loks}',[KirController::class,'nilaiSum']);
+    Route::get('/nilaiKir.detail/{lok}',[KirController::class,'nilaikir']);
 
 
 });

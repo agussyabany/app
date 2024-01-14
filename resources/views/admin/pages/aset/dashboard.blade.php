@@ -55,9 +55,8 @@
 
 
         <div class="offcanvas offcanvas-end" style=" width: 90%;"  tabindex="-1" id="data" aria-labelledby="offcanvasBottomLabel">
-            <div class="offcanvas-header">
-              <h5 class="offcanvas-title" id="judul">Offcanvas bottom</h5>
-              <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            <div class="offcanvas-header" id="kepala">
+              
             </div>
             <div class="offcanvas-body large" id="canvas_body_tampil">
                 <div class="row">

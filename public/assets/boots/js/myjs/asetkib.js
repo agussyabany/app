@@ -35,6 +35,7 @@ $(document).ready(function() {
                                                 '<th>Penggunaan</th>'+
                                                 '<th>Alamat</th>'+
                                                 '<th>No Dokumen</th>'+
+                                                
                                                 '<th>Foto</th>'+
                                                 '<th>Aksi</th>'+
                                             '</tr>'+
@@ -334,14 +335,7 @@ $(document).ready(function() {
                     url: "/tanah.detail/"+ id,
                     success: function (data) {
                         $.each(data.data, function (index, item) {
-                            var nilai = new Intl.NumberFormat('en-US', {
-                                style: 'currency',
-                                currency: 'IDR' // Change 'USD' to the appropriate currency code
-                            }).format(item.nilai);
-                            var nilai_now = new Intl.NumberFormat('en-US', {
-                                style: 'currency',
-                                currency: 'IDR' // Change 'USD' to the appropriate currency code
-                            }).format(item.nilai_now);
+                        
                         $('#lgModal').modal('show');
                         $('#judul_modalLG').html('DETAIL KIB A TANAH '+item.lokasi );
                         $('#modal_bodyLG').html('');
@@ -529,12 +523,12 @@ $(document).ready(function() {
                                             '<table class="table table-striped table-bordered">'+
                                                 '<tbody>'+
                                                     '<tr>'+
-                                                        '<th>Nilai Perolehan</th>'+
-                                                        '<td>' + nilai + '</td>'+
+                                                        '<th>Nilai</th>'+
+                                                        '<td><a data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"><h5 id="sumNilai"></h5></a></td>'+
                                                     '</tr>'+
                                                     '<tr>'+
-                                                        '<th>Nilai Perolehan Saat Ini</th>'+
-                                                        '<td>' + nilai_now + '</td>'+
+                                                        '<th></th>'+
+                                                        '<td></td>'+
                                                     '</tr>'+
                                                     '<tr>'+
                                                         '<th>Keterangan</th>'+
@@ -546,7 +540,31 @@ $(document).ready(function() {
                                     '</div>'+
 
                                 '</div><br>'+
-
+                                '<fieldset class="border border-secondary rounded-3 p-2 row">'+
+                                        '<legend class="float-none w-auto px-3 border border-secondary rounded">'+
+                                            '<div style="font-size: 15px;"><strong>DETAIL NILAI</strong></div>'+
+                                        '</legend>'+
+                                        
+                                            ' <div class="container">'+
+                                                '<div class="collapse" id="collapseExample">'+
+                                                    '<table class="table table-striped table-border" id="tbl_detailNilai">'+
+                                                        '<thead>'+
+                                                            '<tr>'+
+                                                                '<th>NO</th>'+
+                                                                '<th>Kode Perkiraan</th>'+
+                                                                '<th>Nama Aktiva</th>'+
+                                                                '<th>Tanggal</th>'+
+                                                                '<th>Tahun</th>'+
+                                                                '<th>Nilai</th>'+
+                                                                '<th>Uraian</th>'+
+                                                            '</tr>'+
+                                                        '</thead>'+
+                                                        '<tbody>'+
+                                                        '</tbody>'+
+                                                '</table>'+
+                                            '</div>'+
+                                        '</div>'+
+                                     '</fieldset><br>'+
                                 '<fieldset class="border border-secondary rounded-3 p-2 row" id="filed">'+
                                         '<legend class="float-none w-auto px-3 border border-secondary rounded">'+
                                             '<div style="font-size: 15px;"><strong>DOKUMEN</strong></div>'+
@@ -556,6 +574,35 @@ $(document).ready(function() {
 
 
                             '</div>');
+                            var lok = item.id_lokasi;
+                            $.get('/tanah.nilai/' + lok, function(data) {
+                                var nilaiAk = new Intl.NumberFormat('id-ID', {
+                                    style: 'currency',
+                                    currency: 'IDR',
+                                }).format(data.data);
+                                $('#sumNilai').html(nilaiAk);
+                            })
+                                var i = 0;
+                                var table = $("#tbl_detailNilai").DataTable();
+                                table.clear().draw();
+                                $.get("/nilaiTanah.detail/"+ lok , function(data) {
+                                    $('#card-header').html('<strong>Divisi:'+ lokasi +' </strong>');
+                                    $.each(data.data, function (index, items) {
+                                        var nilaiAk = new Intl.NumberFormat('id-ID', {
+                                            style: 'currency',
+                                            currency: 'IDR',
+                                        }).format(items.nilai);
+                                        table.row.add([
+                                            ++i,
+                                            items.kode,
+                                            items.aktiva,
+                                            items.tgl_voucher,
+                                            items.tahun,
+                                            nilaiAk,
+                                            items.urai,
+                                        ]).draw();
+                                    })
+                                })
                             $.get('/show/' + id, function (data) {
                                 $.each(data.data, function (index, items) {
                                     var thumbnail = $(
@@ -1119,7 +1166,7 @@ $(document).ready(function() {
 
                 //Canvas  Mesin show
                 $('#tbl_b').on('click', '.tree', function() {
-                // var id = "";
+                $('#kepala').html('')
                 var id = $(this).data('id');
                 $('#card-body').html('');
                 $('#canvas_body').html('');
@@ -1129,8 +1176,78 @@ $(document).ready(function() {
                     url: "/mesin.dep/"+ id,
                     success: function (data) {
                         $.each(data.data, function (index, item) {
-                            $('#judul').html(item.lokasi)
+                            //intip mesin
+                            $('#kepala').html('<table class="table table-bordered">'+
+                                                    '<thead>'+
+                                                        '<tr>'+
+                                                            '<th class="text-center">LOKASI</th>'+
+                                                            '<th class="text-center">NILAI</th>'+
+                                                        '</tr>'+
+                                                    '</thead>'+
+                                                    '<tbody>'+
+                                                        '<tr>'+
+                                                            '<td class="text-center">' + item.lokasi + '</td>'+
+                                                            '<td class="text-center"><a href="#" id="nilaiMesin" data-id="'+ item.id_lokasi + '"></a></td>'+
+                                                        '</tr>'+
+                                                    '</tbody>'+
+                                              '</table>'+
+                                        '<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>')
+                                        var lok = item.id_lokasi;
+                                       
+                                        $.get('/mesin.nilai/' + lok, function(data) {
+                                            var nilaiAk = new Intl.NumberFormat('id-ID', {
+                                                style: 'currency',
+                                                currency: 'IDR',
+                                            }).format(data.data);
+                                            $('#nilaiMesin').html(nilaiAk);
+                                        })
+                                        $(document).on('click', '#nilaiMesin', function (event) {
+                                            var lok = $(this).data('id');
+                                           
+                                            $('#lgModal').modal('show');
+                                            $('#judul_modalLG').html('DETAIL NILAI MESIN '+item.lokasi );
+                                            $('#modal_bodyLG').html('');
+                                            $('#modal_bodyLG').html('<div class="container">'+
+                                                                    
+                                                                        '<table class="table table-striped table-border" id="tbl_detailNilai">'+
+                                                                            '<thead>'+
+                                                                                '<tr>'+
+                                                                                    '<th>NO</th>'+
+                                                                                    '<th>Kode Perkiraan</th>'+
+                                                                                    '<th>Nama Aktiva</th>'+
+                                                                                    '<th>Tanggal</th>'+
+                                                                                    '<th>Tahun</th>'+
+                                                                                    '<th>Nilai</th>'+
+                                                                                    '<th>Uraian</th>'+
+                                                                                '</tr>'+
+                                                                            '</thead>'+
+                                                                            '<tbody>'+
+                                                                            '</tbody>'+
+                                                                    '</table>'+
+                                                            '</div>');
+                                            var i = 0;
+                                            var table = $("#tbl_detailNilai").DataTable();
+                                            table.clear().draw();
+                                            $.get("/nilaiMesin.detail/"+ lok , function(data) {
+                                                $('#card-header').html('<strong>Lokasi:'+ lokasi +' </strong>');
+                                                $.each(data.data, function (index, items) {
+                                                    var nilaiAk = new Intl.NumberFormat('id-ID', {
+                                                        style: 'currency',
+                                                        currency: 'IDR',
+                                                    }).format(items.nilai);
+                                                    table.row.add([
+                                                        ++i,
+                                                        items.kode,
+                                                        items.aktiva,
+                                                        items.tgl_voucher,
+                                                        items.tahun,
+                                                        nilaiAk,
+                                                        items.urai,
+                                                    ]).draw();
+                                                })
+                                            })
 
+                                        })
                             $('#canvas_tree').append(
                                 '<li><span><strong>' + item.kode_dep +  '</strong></span>'+
                                         '<ol id="mesin_div'+ item.id_departemen +'"></ol>'+
@@ -1770,7 +1887,8 @@ $(document).ready(function() {
                         '</div>' +
                     '</div>');
                     refC();
-                    $('#tbl_c').on('click', '.tree', function() {
+                    $('#tbl_c').on('click', '.tree', function() {//gedung tree
+                        $('#kepala').html('')
                         var id = $(this).data('id');
                         $('#card-body').html('');
                         $('#canvas_body').html('');
@@ -1780,7 +1898,76 @@ $(document).ready(function() {
                             url: "/gedung.dep/"+ id,
                             success: function (data) {
                                 $.each(data.data, function (index, item) {
-                                    $('#judul').html(item.lokasi)
+                                    $('#kepala').html('<table class="table table-bordered">'+
+                                                    '<thead>'+
+                                                        '<tr>'+
+                                                            '<th class="text-center">LOKASI</th>'+
+                                                            '<th class="text-center">NILAI</th>'+
+                                                        '</tr>'+
+                                                    '</thead>'+
+                                                    '<tbody>'+
+                                                        '<tr>'+
+                                                            '<td class="text-center">' + item.lokasi + '</td>'+
+                                                            '<td class="text-center"><a href="#" id="nilaiGedung" data-id="'+ item.id_lokasi + '"></a></td>'+
+                                                        '</tr>'+
+                                                    '</tbody>'+
+                                              '</table>'+
+                                        '<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>')
+                                        var lok = item.id_lokasi;
+                                       
+                                        $.get('/gedung.nilai/' + lok, function(data) {
+                                            var nilaiAk = new Intl.NumberFormat('id-ID', {
+                                                style: 'currency',
+                                                currency: 'IDR',
+                                            }).format(data.data);
+                                            $('#nilaiGedung').html(nilaiAk);
+                                        })
+                                        $(document).on('click', '#nilaiGedung', function (event) {
+                                            var lok = $(this).data('id');
+                                            $('#lgModal').modal('show');
+                                            $('#judul_modalLG').html('DETAIL NILAI GEDUNG '+item.lokasi );
+                                            $('#modal_bodyLG').html('');
+                                            $('#modal_bodyLG').html('<div class="container">'+
+                                                                    
+                                                                        '<table class="table table-striped table-border" id="tbl_detailNilai">'+
+                                                                            '<thead>'+
+                                                                                '<tr>'+
+                                                                                    '<th>NO</th>'+
+                                                                                    '<th>Kode Perkiraan</th>'+
+                                                                                    '<th>Nama Aktiva</th>'+
+                                                                                    '<th>Tanggal</th>'+
+                                                                                    '<th>Tahun</th>'+
+                                                                                    '<th>Nilai</th>'+
+                                                                                    '<th>Uraian</th>'+
+                                                                                '</tr>'+
+                                                                            '</thead>'+
+                                                                            '<tbody>'+
+                                                                            '</tbody>'+
+                                                                    '</table>'+
+                                                            '</div>');
+                                            var i = 0;
+                                            var table = $("#tbl_detailNilai").DataTable();
+                                            table.clear().draw();
+                                            $.get("/nilaiGedung.detail/"+ lok , function(data) {
+                                                $('#card-header').html('<strong>Lokasi:'+ lokasi +' </strong>');
+                                                $.each(data.data, function (index, items) {
+                                                    var nilaiAk = new Intl.NumberFormat('id-ID', {
+                                                        style: 'currency',
+                                                        currency: 'IDR',
+                                                    }).format(items.nilai);
+                                                    table.row.add([
+                                                        ++i,
+                                                        items.kode,
+                                                        items.aktiva,
+                                                        items.tgl_voucher,
+                                                        items.tahun,
+                                                        nilaiAk,
+                                                        items.urai,
+                                                    ]).draw();
+                                                })
+                                            })
+
+                                        })
 
                                     $('#canvas_tree').append(
                                         '<li><span><strong>' + item.kode_dep +  '</strong></span>'+
@@ -2207,7 +2394,7 @@ $(document).ready(function() {
         });
     //END OF LOKASI
 
-    //KIR
+    
     $('#kir').on('click', function() {
         $('#db_body').remove();
         $('#kir').addClass('btn btn-primary');
@@ -2485,6 +2672,7 @@ $(document).ready(function() {
                 });
 
                 $('#tbl_kir').on('click', '.tree', function() {
+                    $('#kepala').html('') //kir
                     var id = $(this).data('id');
                     $('#card-body').html('');
                     $('#canvas_body').html('');
@@ -2494,7 +2682,76 @@ $(document).ready(function() {
                         url: "/kir.dep/"+ id,
                         success: function (data) {
                             $.each(data.data, function (index, item) {
-                                $('#judul').html(item.lokasi)
+                                $('#kepala').html('<table class="table table-bordered">'+
+                                                    '<thead>'+
+                                                        '<tr>'+
+                                                            '<th class="text-center">LOKASI</th>'+
+                                                            '<th class="text-center">NILAI</th>'+
+                                                        '</tr>'+
+                                                    '</thead>'+
+                                                    '<tbody>'+
+                                                        '<tr>'+
+                                                            '<td class="text-center">' + item.lokasi + '</td>'+
+                                                            '<td class="text-center"><a href="#" id="nilaiKir" data-id="'+ item.id_lokasi + '"></a></td>'+
+                                                        '</tr>'+
+                                                    '</tbody>'+
+                                              '</table>'+
+                                        '<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>')
+                                        var loks = item.id_lokasi;
+                                       
+                                        $.get('/kir.nilai/' + loks, function(data) {
+                                            var nilaiAk = new Intl.NumberFormat('id-ID', {
+                                                style: 'currency',
+                                                currency: 'IDR',
+                                            }).format(data.data);
+                                            $('#nilaiKir').html(nilaiAk);
+                                        })
+                                        $(document).on('click', '#nilaiKir', function (event) {
+                                            var lok = $(this).data('id');
+                                            $('#lgModal').modal('show');
+                                            $('#judul_modalLG').html('DETAIL NILAI KIR '+item.lokasi );
+                                            $('#modal_bodyLG').html('');
+                                            $('#modal_bodyLG').html('<div class="container">'+
+                                                                    
+                                                                        '<table class="table table-striped table-border" id="tbl_detailNilai">'+
+                                                                            '<thead>'+
+                                                                                '<tr>'+
+                                                                                    '<th>NO</th>'+
+                                                                                    '<th>Kode Perkiraan</th>'+
+                                                                                    '<th>Nama Aktiva</th>'+
+                                                                                    '<th>Tanggal</th>'+
+                                                                                    '<th>Tahun</th>'+
+                                                                                    '<th>Nilai</th>'+
+                                                                                    '<th>Uraian</th>'+
+                                                                                '</tr>'+
+                                                                            '</thead>'+
+                                                                            '<tbody>'+
+                                                                            '</tbody>'+
+                                                                    '</table>'+
+                                                            '</div>');
+                                            var i = 0;
+                                            var table = $("#tbl_detailNilai").DataTable();
+                                            table.clear().draw();
+                                            $.get("/nilaiKir.detail/"+ lok , function(data) {
+                                                $('#card-header').html('<strong>Lokasi:'+ lokasi +' </strong>');
+                                                $.each(data.data, function (index, items) {
+                                                    var nilaiAk = new Intl.NumberFormat('id-ID', {
+                                                        style: 'currency',
+                                                        currency: 'IDR',
+                                                    }).format(items.nilai);
+                                                    table.row.add([
+                                                        ++i,
+                                                        items.kode,
+                                                        items.aktiva,
+                                                        items.tgl_voucher,
+                                                        items.tahun,
+                                                        nilaiAk,
+                                                        items.urai,
+                                                    ]).draw();
+                                                })
+                                            })
+
+                                        })
 
                                 $('#canvas_tree').append(
                                     '<li><span><strong>' + item.kode_dep +  '</strong></span>'+

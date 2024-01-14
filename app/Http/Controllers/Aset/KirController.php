@@ -7,6 +7,7 @@ use App\Models\Aset\Departemen;
 use App\Models\Aset\Divisi;
 use App\Models\Aset\Kir;
 use App\Models\Aset\lokasi;
+use App\Models\Aset\NilaiAktiva;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -221,5 +222,26 @@ class KirController extends Controller
                         $nama = Auth::user()->name;
                         $nip = Auth::user()->nip;
                         return view('admin.pages.aset.print.printKir',compact(['kir','i','lokasi','departemen','divisi','nama','tglIndo','struktur','ged','ruang','nip']));
+    }
+
+    public function nilaiSum($loks)
+    {
+        $gedung = NilaiAktiva::where('id_lokasi', $loks)
+                ->where('cat',7)
+                ->sum('nilai');
+        return response()->json([
+            'data' => $gedung
+          ]);
+    }
+
+    public function nilaikir($lok)
+    {
+        $gedung = NilaiAktiva::join('aktivas','nilai_aktivas.id_aktiva','=','aktivas.id',)
+                ->where('id_lokasi', $lok)
+                ->where('cat',7)
+                ->get();
+        return response()->json([
+            'data' => $gedung
+          ]);
     }
 }
