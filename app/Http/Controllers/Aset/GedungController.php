@@ -7,6 +7,7 @@ use App\Models\Aset\Departemen;
 use App\Models\Aset\Divisi;
 use App\Models\Aset\Gedung;
 use App\Models\Aset\lokasi;
+use App\Models\Aset\NilaiAktiva;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -84,5 +85,26 @@ class GedungController extends Controller
                         $nama = Auth::user()->name;
                         $nip = Auth::user()->nip;
                         return view('admin.pages.aset.print.printGedung',compact(['gedung','i','lokasi','departemen','divisi','nama','tglIndo','struktur','nip']));
+    }
+
+    public function nilaiSum($lok)
+    {
+        $gedung = NilaiAktiva::where('id_lokasi', $lok)
+                ->where('cat',3)
+                ->sum('nilai');
+        return response()->json([
+            'data' => $gedung
+          ]);
+    }
+
+    public function nilaigedung($lok)
+    {
+        $gedung = NilaiAktiva::join('aktivas','nilai_aktivas.id_aktiva','=','aktivas.id',)
+                ->where('id_lokasi', $lok)
+                ->where('cat',3)
+                ->get();
+        return response()->json([
+            'data' => $gedung
+          ]);
     }
 }

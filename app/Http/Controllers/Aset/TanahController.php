@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Aset;
 
 use App\Http\Controllers\Controller;
+use App\Models\Aset\NilaiAktiva;
 use App\Models\Aset\Tanah;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -57,7 +58,7 @@ class TanahController extends Controller
 
     public function detail($id)
     {
-        $tanah = Tanah::select('tanahs.id as id_tanah','id_lokasi','id_lokasi','lokasi','nama_barang','guna','alamat','no_tunjuk','tgl_tunjuk','img','asal','tahun','no_tunjuk','tgl_tunjuk','luas_tunjuk','sertifikat','tgl_sertifikat','luas_sertifikat','no_gambar','tgl_gambar','luas_gambar','hak','asal','pemilik','nilai','nilai_now','ket','kode_barang')
+        $tanah = Tanah::select('tanahs.id as id_tanah','id_lokasi','lokasi','nama_barang','guna','alamat','no_tunjuk','tgl_tunjuk','img','asal','tahun','no_tunjuk','tgl_tunjuk','luas_tunjuk','sertifikat','tgl_sertifikat','luas_sertifikat','no_gambar','tgl_gambar','luas_gambar','hak','asal','pemilik','nilai','nilai_now','ket','kode_barang')
                         ->join('lokasis','tanahs.id_lokasi','=','lokasis.id')
                         ->join('barangs','tanahs.id_barang','=','barangs.id')
                         ->where('tanahs.id',$id)
@@ -85,5 +86,26 @@ class TanahController extends Controller
         $nama = Auth::user()->name;
         $nip = Auth::user()->nip;
         return view('admin.pages.aset.print.printTanah',compact(['tanah','i','total_luasTunjuk','total_luasSrtfkt','total_luasGambar','total_nilai','tglIndo','nama','nip']));
+    }
+
+   
+    public function nilaitanah($lok)
+    {
+        $tanah = NilaiAktiva::join('aktivas','nilai_aktivas.id_aktiva','=','aktivas.id',)
+                ->where('id_lokasi', $lok)
+                ->where('cat',1)
+                ->get();
+        return response()->json([
+            'data' => $tanah
+          ]);
+    }
+    public function nilaiSum($lok)
+    {
+        $tanah = NilaiAktiva::where('id_lokasi', $lok)
+                ->where('cat',1)
+                ->sum('nilai');
+        return response()->json([
+            'data' => $tanah
+          ]);
     }
 }

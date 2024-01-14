@@ -211,32 +211,33 @@ function refA()
         $.each(data.data, function(index, item) {
             var editButton =
             '<div class="btn-group">'+
-                '<button class="btn btn-default border border-secondary btn-sm" type="button"><i class="fa-solid fa-ellipsis-vertical"></i></button>'+
+                '<button class="btn btn-default border border-secondary btn-sm detail" data-id="' + item.id_tanah + '"type="button">DETAIL</button>'+
                 '<button type="button" class="btn btn-sm btn-default border border-secondary  dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"><span class="visually-hidden">Toggle Dropdown</span></button>'+
                 '<ul class="dropdown-menu">'+
-                    '<li><a class="dropdown-item  detail" data-id="' + item.id_tanah + '" href="#"><i class="fa-solid fa-circle-info"></i>&nbsp;DETAIL</a></li>'+
                     '<li><a class="dropdown-item  edit" data-id="' + item.id_tanah + '" href="#"><i class="fa-solid fa-edit"></i>&nbsp;EDIT</a></li>'+
                     '<li><a class="dropdown-item delete" data-id="' + item.id_tanah + '" href="#"><i class="fa-solid fa-trash"></i>&nbsp;DELETE</a></li>'+
+                    '<li><a class="dropdown-item nilai" data-id="' + item.idLok + ',1,' + item.lokasi +'" href="#"><i class="fa-solid fa-trash"></i>&nbsp;NILAI</a></li>'+
                     '<li><hr class="dropdown-divider"></li>'+
 
                 '</ul>'+
             '</div>';
             var img = '<img src="http://127.0.0.1:8000/assets/img/lokasi/'+item.img+'" height="100px" width="100px"></img>';
+            // var nilaiAk = new Intl.NumberFormat('id-ID', {
+            //     style: 'currency',
+            //     currency: 'IDR',
+            // }).format(item.nilaiak);
+            // var detailNilai = '<td><a href="#" id="detailNilai" data-id="' + item.idLok + ',' + item.id_aktiva + ',' + item.lokasi +'">'+ nilaiAk +'</a></td>'
+            
             table.row.add([
                  ++i,
                 item.nama_barang,
                 item.guna,
                 item.lokasi,
                 item.no_tunjuk,
+                // detailNilai,
                 img,
                 editButton
             ]).draw();
-            //var id =item.id_tanah
-            // $.get('/show/' + id, function (data) {
-            //     $.each(data.data, function (index, items) {
-            //         $('#dok'+ id).append('<li><a class="dropdown-item">'+ items.dok +'</a></li>');
-            //     });
-            // });
         });
 
     })
