@@ -1008,7 +1008,7 @@ $(document).ready(function() {
                                 '<input type="text" class="form-control" id="alamat" name="alamat" value="'+item.alamat+'" placeholder="Alamat"><br>' +
                                 '<input type="text" class="form-control" id="lat" name="lat" value="'+item.lat+'" placeholder="Latitude"><br>' +
                                 '<input type="text" class="form-control" id="long" name="long" value="'+item.long+'" placeholder="Longitude"><br>' +
-                                '<div class="text-center"><img  src="http://127.0.0.1:8000/assets/img/lokasi/'+item.img+'" height="300px" width="300px"</img><br></div>' +
+                                '<div class="text-center"><img  src="http://app.perumdamtirtakencana.id/assets/img/lokasi/'+item.img+'" height="300px" width="300px"</img><br></div>' +
                             '</form>');
                         })
                     },

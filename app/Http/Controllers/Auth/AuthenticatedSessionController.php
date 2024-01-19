@@ -28,15 +28,18 @@ class AuthenticatedSessionController extends Controller
         try {
             $request->authenticate();
             $request->session()->regenerate();
-    
+
             if (Auth::user()->hasRole('admin')) {
                 return redirect('admin');
             }
-    
+
             if (Auth::user()->hasRole('aset')) {
                 return redirect()->to('/aset.dashboard');
             }
-    
+            if (Auth::user()->hasRole('diklat')) {
+                return redirect()->to('/diklat.dashboard');
+            }
+
             return redirect()->intended(RouteServiceProvider::HOME);
         } catch (\Illuminate\Auth\AuthenticationException $e) {
             // Authentication failed

@@ -341,7 +341,7 @@ $(document).ready(function() {
                         $('#modal_bodyLG').html('');
                         $('#modal_bodyLG').prepend(
                             '<div class="container">'+
-                                '<img src="http://127.0.0.1:8000/assets/img/lokasi/'+item.img+'" height="500px" width="500px" class="rounded mx-auto d-block" alt="..."><br>'+
+                                '<img src="http://app.perumdamtirtakencana.id/assets/img/lokasi/'+item.img+'" height="500px" width="500px" class="rounded mx-auto d-block" alt="..."><br>'+
 
                                 '<div class="row">'+
                                     '<div class="col">'+
@@ -607,8 +607,8 @@ $(document).ready(function() {
                                 $.each(data.data, function (index, items) {
                                     var thumbnail = $(
                                         '<div class="pdf-thumbnail col ">' +
-                                            '<embed width="150px" height="200px ; overflow: hidden;" name="plugin" src="http://127.0.0.1:8000/assets/img/lokasi/' + items.dok + '" type="application/pdf" border border-secondary rounded>' +
-                                            '<p><a href="#" onclick="window.open(\'http://127.0.0.1:8000/assets/img/lokasi/' + items.dok + '\', \'_blank\'); return false;">' + items.dok + '</p>' +
+                                            '<embed width="150px" height="200px ; overflow: hidden;" name="plugin" src="http://app.perumdamtirtakencana.id/assets/img/lokasi/' + items.dok + '" type="application/pdf" border border-secondary rounded>' +
+                                            '<p><a href="#" onclick="window.open(\'http://app.perumdamtirtakencana.id/assets/img/lokasi/' + items.dok + '\', \'_blank\'); return false;">' + items.dok + '</p>' +
                                         '</div>'
                                     );
 
@@ -1318,7 +1318,7 @@ $(document).ready(function() {
 
                                             '</ul>'+
                                         '</div>';
-                                        var img = '<a href="#" id="detail_mesin_divisi" data-id="'+ items.id_mesin +'"><img src="http://127.0.0.1:8000/assets/img/mesin/'+items.img+'" height="100px" width="100px"></img></a>';
+                                        var img = '<a href="#" id="detail_mesin_divisi" data-id="'+ items.id_mesin +'"><img src="http://app.perumdamtirtakencana.id/assets/img/mesin/'+items.img+'" height="100px" width="100px"></img></a>';
                                         table.row.add([
                                             ++i,
                                             items.nama_barang,
@@ -1576,8 +1576,8 @@ $(document).ready(function() {
                                             $.each(data.data, function (index, items) {
                                                 var thumbnail = $(
                                                     '<div class="pdf-thumbnail col ">' +
-                                                        '<embed width="150px" height="200px ; overflow: hidden;" name="plugin" src="http://127.0.0.1:8000/assets/img/mesin/' + items.dok + '" type="application/pdf" border border-secondary rounded>' +
-                                                        '<p><a href="#" onclick="window.open(\'http://127.0.0.1:8000/assets/img/mesin/' + items.dok + '\', \'_blank\'); return false;">' + items.dok + '</p>' +
+                                                        '<embed width="150px" height="200px ; overflow: hidden;" name="plugin" src="http://app.perumdamtirtakencana.id/assets/img/mesin/' + items.dok + '" type="application/pdf" border border-secondary rounded>' +
+                                                        '<p><a href="#" onclick="window.open(\'http://app.perumdamtirtakencana.id/assets/img/mesin/' + items.dok + '\', \'_blank\'); return false;">' + items.dok + '</p>' +
                                                     '</div>'
                                                 );
 
@@ -1654,7 +1654,7 @@ $(document).ready(function() {
                             $('#modal_bodyLG').html('');
                             $('#modal_bodyLG').prepend(
                                 '<div class="container">'+
-                                    '<img src="http://127.0.0.1:8000/assets/img/mesin/'+item.img+'" height="500px" width="550px" class="rounded mx-auto d-block" alt="..."><br>'+
+                                    '<img src="http://app.perumdamtirtakencana.id/assets/img/mesin/'+item.img+'" height="500px" width="550px" class="rounded mx-auto d-block" alt="..."><br>'+
 
                                     '<fieldset class="border border-secondary rounded-3 p-2 row">'+
                                         '<legend class="float-none w-auto px-1 border border-secondary rounded">'+
@@ -1828,8 +1828,8 @@ $(document).ready(function() {
                             $.each(data.data, function (index, items) {
                                 var thumbnail = $(
                                     '<div class="pdf-thumbnail col ">' +
-                                        '<embed width="150px" height="200px ; overflow: hidden;" name="plugin" src="http://127.0.0.1:8000/assets/img/mesin/' + items.dok + '" type="application/pdf" border border-secondary rounded>' +
-                                        '<p><a href="#" onclick="window.open(\'http://127.0.0.1:8000/assets/img/mesin/' + items.dok + '\', \'_blank\'); return false;">' + items.dok + '</p>' +
+                                        '<embed width="150px" height="200px ; overflow: hidden;" name="plugin" src="http://app.perumdamtirtakencana.id/assets/img/mesin/' + items.dok + '" type="application/pdf" border border-secondary rounded>' +
+                                        '<p><a href="#" onclick="window.open(\'http://app.perumdamtirtakencana.id/assets/img/mesin/' + items.dok + '\', \'_blank\'); return false;">' + items.dok + '</p>' +
                                     '</div>'
                                 );
 
@@ -2037,7 +2037,7 @@ $(document).ready(function() {
 
                                     '</ul>'+
                                 '</div>';
-                                var img = '<a href="#" id="detail_gedung_divisi" data-id="'+ items.id_gedung +'"><img src="http://127.0.0.1:8000/assets/img/gedung/'+items.img+'" height="100px" width="100px"></img></a>';
+                                var img = '<a href="#" id="detail_gedung_divisi" data-id="'+ items.id_gedung +'"><img src="http://app.perumdamtirtakencana.id/assets/img/gedung/'+items.img+'" height="100px" width="100px"></img></a>';
                                 table.row.add([
                                     ++i,
                                     items.nama_barang,
@@ -2069,7 +2069,7 @@ $(document).ready(function() {
                                 $('#modal_bodyLG').html('');
                                 $('#modal_bodyLG').prepend(
                                     '<div class="container">'+
-                                        '<img src="http://127.0.0.1:8000/assets/img/gedung/'+item.img+'" height="500px" width="550px" class="rounded mx-auto d-block" alt="..."><br>'+
+                                        '<img src="http://app.perumdamtirtakencana.id/assets/img/gedung/'+item.img+'" height="500px" width="550px" class="rounded mx-auto d-block" alt="..."><br>'+
 
                                         '<fieldset class="border border-secondary rounded-3 p-2 row">'+
                                             '<legend class="float-none w-auto px-1 border border-secondary rounded">'+
@@ -2866,7 +2866,7 @@ $(document).ready(function() {
                                 $.get("/kir.detail/"+ lok +"/"+ dep +"/"+ div +"/"+ ged +"/"+ ruang, function(data){
 
                                     $.each(data.data, function (index, items) {
-                                        var img = '<a href="#" id="detail_gedung_divisi"><img src="http://127.0.0.1:8000/assets/img/kir/'+items.img+'" height="100px" width="100px"></img></a>';
+                                        var img = '<a href="#" id="detail_gedung_divisi"><img src="http://app.perumdamtirtakencana.id/assets/img/kir/'+items.img+'" height="100px" width="100px"></img></a>';
                                         table.row.add([
                                         ++i,
                                         items.nama_barang,

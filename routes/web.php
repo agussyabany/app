@@ -17,6 +17,7 @@ use App\Http\Controllers\Aset\RuangController;
 use App\Http\Controllers\Aset\SdmController;
 use App\Http\Controllers\Aset\TanahController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Diklat\Diklatcontroller;
 use App\Http\Controllers\ProfileController;
 use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
@@ -117,7 +118,7 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::get('nilai.edit/{id}',[NilaiController::class,'edit']);
     Route::post('nilai.update',[NilaiController::class,'update']);
     Route::post('nilai.hapus/{id}',[NilaiController::class,'destroy']);
-   
+
 
     Route::get('/show/{id}',[PdfController::class,'show']);
 
@@ -127,7 +128,7 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::get('/tanah.print',[TanahController::class,'print']);
     Route::get('/tanah.nilai/{lok}',[TanahController::class,'nilaiSum']);
     Route::get('/nilaiTanah.detail/{lok}',[TanahController::class,'nilaiTanah']);
-    
+
 
     Route::get('/mesin.dep/{id}',[MesinController::class,'dep']);
     Route::get('/mesin.div/{dep}/{lok}',[MesinController::class,'div']);
@@ -164,6 +165,14 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::get('/kir.nilai/{loks}',[KirController::class,'nilaiSum']);
     Route::get('/nilaiKir.detail/{lok}',[KirController::class,'nilaikir']);
 
+
+});
+
+Route::middleware('auth','verified','role:diklat')->group(function () {
+    Route::get('/', function () {
+        return redirect('/diklat.dashboard');
+    });
+    Route::get('/diklat.dashboard',[Diklatcontroller::class, 'index']);
 
 });
 
