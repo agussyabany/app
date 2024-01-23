@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-<div class="container"><h1>SERVICE AND OPERATION CENTER</h1></div>
+<div id="mapid"></div>
 
 
 @endsection
