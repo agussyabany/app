@@ -3,21 +3,22 @@
 
         <head>
             <meta charset="utf-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <meta http-equiv="x-ua-compatible" content="ie=edge">
+            <title>simAset</title>
+            <link rel="shortcut icon" type="image/x-icon" href="../pic/favicon.ico" />
             <meta name="description" content="">
-            <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-            <meta name="generator" content="Hugo 0.118.2">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
             <title>Aset PDAM</title>
-            @include('admin.layouts._asset_header')
+            @include('admin.landingPage.layouts._asset_header')
             <meta name="theme-color" content="#712cf9">
         </head>
         <body>
-            @include('admin.layouts.header')
+            @include('admin.landingPage.layouts.header')
             @yield('content')
             @stack('scripts')
-            @include('admin.layouts.footer')
+            @include('admin.landingPage.layouts.footer')
         </body>
 </html>
-@include('admin.layouts._asset_footer')
+@include('admin.landingPage.layouts._asset_footer')
 
 

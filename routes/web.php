@@ -16,6 +16,7 @@ use App\Http\Controllers\Aset\PdfController;
 use App\Http\Controllers\Aset\RuangController;
 use App\Http\Controllers\Aset\SdmController;
 use App\Http\Controllers\Aset\TanahController;
+use App\Http\Controllers\Aset\Webcontroller;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Diklat\Diklatcontroller;
 use App\Http\Controllers\ProfileController;
@@ -40,8 +41,9 @@ Route::get('/', function () {
 });
 
 Route::get('/aset', function () {
-    return 'weba aset';
+    return redirect('/aset');
 });
+Route::get('/aset',[Webcontroller::class, 'index']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -77,14 +79,14 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::get('/mesin',[AsetDashboardController::class, 'mesin']);
     Route::get('/gedung',[AsetDashboardController::class, 'gedung']);
     Route::get('/kir',[AsetDashboardController::class, 'kir']);
-    
+
     Route::post('/barang.save',[BarangController::class,'save']);
     Route::get('barang.edit/{id}',[BarangController::class,'edit']);
     Route::post('barang.update',[BarangController::class,'update']);
     Route::post('barang.hapus/{id}',[BarangController::class,'destroy']);
     Route::get('barang.tanah',[BarangController::class,'tanah']);
     Route::get('barang.mesin',[BarangController::class,'mesin']);
-    
+
     Route::post('/dep.save',[DepartemenController::class,'save']);
     Route::get('dep.edit/{id}',[DepartemenController::class,'edit']);
     Route::post('dep.update',[DepartemenController::class,'update']);
@@ -119,15 +121,15 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::get('nilai.edit/{id}',[NilaiController::class,'edit']);
     Route::post('nilai.update',[NilaiController::class,'update']);
     Route::post('nilai.hapus/{id}',[NilaiController::class,'destroy']);
-    
+
     Route::get('/show/{id}',[PdfController::class,'show']);
-    
+
     Route::post('/tanah.save',[TanahController::class,'save']);
     Route::get('/tanah.detail/{id}',[TanahController::class,'detail']);
     Route::get('/tanah.print',[TanahController::class,'print']);
     Route::get('/tanah.nilai/{lok}',[TanahController::class,'nilaiSum']);
     Route::get('/nilaiTanah.detail/{lok}',[TanahController::class,'nilaiTanah']);
-    
+
     Route::get('/mesin.dep/{id}',[MesinController::class,'dep']);
     Route::get('/mesin.div/{dep}/{lok}',[MesinController::class,'div']);
     Route::get('/mesin.show/{lok}/{dep}/{div}',[MesinController::class,'show']);

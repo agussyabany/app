@@ -1,116 +1,152 @@
 
+    {{-- <div id="loading">
+			<div id="loading-center">
+				<div id="loading-center-absolute">
+				<div class="object" id="object_one"></div>
+				<div class="object" id="object_two"></div>
+				<div class="object" id="object_three"></div>
+				<div class="object" id="object_four"></div>
+				<div class="object" id="object_five"></div>
+				<div class="object" id="object_six"></div>
+				<div class="object" id="object_seven"></div>
+				<div class="object" id="object_eight"></div>
+				<div class="object" id="object_big"></div>
+				</div>
+			</div>
+		</div> --}}
+		<!-- Header Section -->
+		<header id="header-style-two">
+			<div class="header-welcome">
+				<div class="container">
+				    <div class="row">
+				        <div class="welcome-text">
+				            <p>SISTEM INFORMASI MANAJEMEN ASET</p>
+				        </div>
+				        <div class="welcome-social">
+                            <ul>
+                                <li><a href="#"></a></li>
+                                <li><a href="#"></a></li>
+                                <li><a href="#"></a></li>
+                                <li><a href="#"></a></li>
+                                <li></li>
+                            </ul>
+				        </div>
+				    </div>
+				</div>
+			</div>
+
+			<div class="mainmenu-area" id="sohag">
+				<div class="container">
+					<div class="row">
+						<a href="index.html"><img src="../img/logoL.png" alt="" /></a>
+						<div class="nav-menu">
+						<nav class="navbar navbar-default">
+							<!-- Brand and toggle get grouped for better mobile display -->
+							<div class="navbar-header">
+							  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+								<span class="sr-only">Toggle navigation</span>
+								<span class="icon-bar-one bar-stick"></span>
+								<span class="icon-bar-two bar-stick"></span>
+								<span class="icon-bar-three bar-stick"></span>
+							  </button>
+							</div>
+
+							<!-- Collect the nav links, forms, and other content for toggling -->
+						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+							<ul class="nav navbar-nav">
+
+								<li class="dropdown active">
+								  <a href="index.php?dash=main" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false"><span>Home</span></a>
+								  <!-- <ul class="dropdown-menu">
+									<li><a href="index.html">Homepage One</a></li>
+									<li class="active"><a href="index2.html">Homepage Two</a></li>
+									<li><a href="index3.html">Homepage Three</a></li>
+                                    <li><a href="one-page.html">One Page</a></li>
+                                    <li><a href="box-style.html">Box Layout</a></li>
+								  </ul> -->
+								</li>
+                                <li class="dropdown active">
+								  <a href="index.php?dash=struk" class="dropdown-toggle"  role="button" aria-haspopup="true" aria-expanded="false"><span>Struktur</span></a>
+								  <ul class="dropdown-menu">
+
+								  </ul>
+								</li>
+								</ul>
+						</div><!-- /.navbar-collapse -->
+							</nav>
+							<div class="mainmenu-right">
+									<div class="search-box">
+										<i class="fa fa-search first_click" aria-hidden="true"></i>
+										<i class="fa fa-times second_click" aria-hidden="true"></i>
+									</div>
+									<div class="chart-icon">
+
+										<p>AKUN</p>
+										<i class="" aria-hidden="true">
+
+										</i>
+										<ul class="cart-list">
+											<li>
+												<div class="cart-selected-product">
+													<h3><i class="fa fa-user"></i>&nbsp;<a href="../auth/login.php">LOGIN</a></h3>
+												</div>
+											</li>
+											<li>
+												<div class="cart-selected-product">
+													<h3><i class="fa fa-user"></i>&nbsp;<a href="#">REGISTER</a></h3>
+												</div>
+											</li>
+
+											<li class="cart-select-total">
+												<a href="">LOGOUT</a>
+											</li>
+										</ul>
+									</div>
+								</div>
+                            </ul>
+						</div><!-- /.navbar-collapse -->
+					</nav>
+				</div>
+						<div class="mainmenu-right">
+							{{-- <div class="search-box">
+								<i class="fa fa-search first_click" aria-hidden="true"></i>
+								<i class="fa fa-times second_click" aria-hidden="true"></i>
+							</div> --}}
+							<div class="chart-icon">
 
 
-<div class="">
+							    <p></p>
+								<i class="" aria-hidden="true">
 
-  <div class="row">
-    <header class="bg-primary text-white kop" style="background-image: url('{{asset('assets/img/head.jpg')}}');background-size: cover; background-repeat: no-repeat; width:100%;">
-        <div class="row">
-        <div class="col-2  collapse-horizontal in"   id="collapseWidthExample">
-            <div class="text-center float-start">
+								</i>
+								<ul class="cart-list">
+									<li>
+										<div class="cart-selected-product">
+											<h3><i class="fa fa-user"></i>&nbsp;<a href="../auth/login.php">LOGIN</a></h3>
+										</div>
+									</li>
+									<li>
+										<div class="cart-selected-product">
+											<h3><i class="fa fa-user"></i>&nbsp;<a href="#">REGISTER</a></h3>
+										</div>
+									</li>
 
-                <a href=""><img src="{{asset('assets/img/perumdam.png')}}" width="35px" width="35px" alt="" class="rounded-circle mt-1 mb-1 ms-1 "></a>
-                SISTEM INFORMASI ASET
-            </div>
-        </div>
-        <div class="col">
-            <div class="float-start">
-                <button class="btn mt-1" type="button" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample">
-                    <i class="fa-solid fa-list"></i>
-                </button>
-            </div>
-            <div class="text-center float-end">
-                {{Auth::user()->name}}
-                <a href="#" type="button" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="<div class='container text-center border rounded'>
-                    <p>{{Auth::user()->name}}<br>{{ $jabat }} Divisi {{ $divisi }}<br>{{Auth::user()->nip}}<br><a href='{{route('logout')}}' class='btn btn-danger btn-sm'>LOGOUT</a></p>
-            </div>" data-bs-html="true" data-bs-title="USER ACCOUNT"><img src="http://app.perumdamtirtakencana.id/assets/img/user/{{ Auth::user()->img }}" width="40px" width="40px" alt="" class="rounded-circle mt-1 me-1 border border-default" ></a>
-            </div>
-
-        </div>
-        </div>
-    </header>
-
-    <nav class="col-2 nav" id="collapseWidthExample">
-        <div class=" collapse-horizontal in"  id="collapseWidthExample"   style="background-image: url('{{asset('assets/img/side3.jpg')}}');background-size: cover; background-repeat: no-repeat;font-family: 'Bahnschrift-SemiLight', sans-serif; width:100%; height:100%">
-            <div class="container">
-                <ul class="nav flex-column" id="menuTabs">
-                    <li class="nav-item">
-                        <span class="nav-link text-center disabled"><strong>DATA MASTER</strong></span>
-                    </li>
-                    <li class="nav-item pb-1">
-                        <a type="button" id="barang" class="hoverable" style="width: 100%" data-tab-target="tab1" href="#"><i class="fa-solid fa-boxes-stacked"></i>&nbsp;Barang</a>
-                    </li>
-                    <li class="nav-item">
-                        <button type="button" class="hoverable" id="departemen" style="width: 100%" data-tab-target="tab2" href="#"><i class="fa-solid fa-user-tie"></i>&nbsp;Departemen</button>
-                    </li>
-                    <li class="nav-item">
-                        <button type="button" class="hoverable" id="divisi" style="width: 100%"><i class="fa-solid fa-users"></i>&nbsp;Divisi</button>
-                    </li>
-                    <li class="nav-item">
-                        <button type="button" class="hoverable" id="ruang" style="width: 100%"><i class="fa-solid fa-door-open"></i>&nbsp;Ruangan</button>
-                    </li>
-                    <li class="nav-item">
-                        <button type="button" class="hoverable" id="sdm" style="width: 100%"><i class="fa-solid fa-people-arrows"></i>&nbsp;SDM Pendukung</button>
-                    </li>
-                    <li class="nav-item">
-                        <button type="button" class="hoverable" id="lokasi" style="width: 100%"><i class="fa-solid fa-location-dot"></i>&nbsp;Lokasi</button>
-                    </li>
-                    <li class="nav-item">
-                        <button type="button" class="hoverable" id="dokumen" style="width: 100%"><i class="fa-regular fa-folder-open"></i>&nbsp;Dokumen</button>
-                    </li>
-                    <li class="nav-item">
-                        <button type="button" class="hoverable" id="bahan" style="width: 100%"><i class="fa-solid fa-atom"></i>&nbsp;Bahan</button>
-                    </li>
-                    <li class="nav-item">
-                      <button type="button" class="hoverable" id="aktiva" style="width: 100%"><i class="fa-solid fa-barcode"></i>&nbsp;Kode Aktiva</button>
-                  </li>
-
-
-                      <li class="nav-item">
-                          <span class="nav-link text-center disabled"><strong>K . I . B</strong></span>
-                      </li>
-                      <li class="nav-item">
-                          <a type="button" href="#"  class="hoverable" id="a" style="width: 100%"><i class="fa-regular fa-map"></i>&nbsp;TANAH</a>
-                      </li>
-                      <li class="nav-item">
-                          <a type="button"  class="hoverable" id="b" style="width: 100%"><i class="fa-solid fa-gears"></i>&nbsp;PERALATAN DAN MESIN</a>
-                      </li>
-                      <li class="nav-item">
-                          <a type="button"  class="hoverable" id="c" style="width: 100%"><i class="fa-solid fa-building"></i>&nbsp;GEDUNG DAN BANGUNAN</a>
-                      </li>
-                      <li class="nav-item">
-                          <a type="button"  class="hoverable" id="d" style="width: 100%"><i class="fa-solid fa-road"></i>&nbsp;JALAN , IRIGASI DAN JARINGAN</a>
-                      </li>
-                      <li class="nav-item">
-                          <a type="button"  class="hoverable" id="e" style="width: 100%"><i class="fa-solid fa-marker"></i>&nbsp;ASET TETAP LAINNYA</a>
-                      </li>
-                      <li class="nav-item">
-                          <a type="button"  class="hoverable" id="f" style="width: 100%"><i class="fa-solid fa-trowel-bricks"></i>&nbsp;KONSTRUKSI</a>
-                      </li>
-                      <li class="nav-item">
-                          <a type="button"  class="hoverable" id="kir" style="width: 100%"><i class="fa-solid fa-list"></i>&nbsp;K.I.R</a>
-                      </li>
-
-
-                      <li class="nav-item">
-                          <span class="nav-link text-center disabled"><strong>NILAI ASET</strong></span>
-                      </li>
-
-                      <li class="nav-item">
-                          <a type="button"  class="hoverable" id="nilai" style="width: 100%"><i class="fa-solid fa-heart"></i>&nbsp;NILAI ASET</a>
-                      </li>
-
-                      
-                    </ul>
-                </div>
-
-      </div>
-  </nav>
+									<li class="cart-select-total">
+										<a href="">LOGOUT</a>
+									</li>
+								</ul>
+							</div>
+						</div>
 
 
 
-
-
-
-
-
+						{{-- <div class="search-box-text">
+							<form action="search">
+								<input type="text" name="search" id="all-search" placeholder="Search Here"/>
+							</form>
+						</div> --}}
+					</div>
+				</div>
+			</div>
+			<div id="sticky-anchor"></div>
+		</header>

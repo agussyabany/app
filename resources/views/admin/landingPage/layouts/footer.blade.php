@@ -1,8 +1,13 @@
-<footer style="background-color: darkgray" class="footer mt-auto py-3 ">
-    <div class="container">
-      <span class="text-body-secondary">Perumdam Tirta Kencana Samarinda</span>
-    </div>
-  </footer>
+<footer class="footer-section">
 
-  </div>
-</div>
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="copyright-text">
+                    <p>&copy; 2023.  By <a href="#">Perumdam Tirta Kencana Kota Samarinda</a></p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</footer>
