@@ -40,6 +40,10 @@ class AuthenticatedSessionController extends Controller
                 return redirect()->to('/diklat.dashboard');
             }
 
+            if (Auth::user()->hasRole('soc')) {
+                return redirect()->to('/soc.dashboard');
+            }
+
             return redirect()->intended(RouteServiceProvider::HOME);
         } catch (\Illuminate\Auth\AuthenticationException $e) {
             // Authentication failed

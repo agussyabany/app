@@ -20,6 +20,7 @@ use App\Http\Controllers\Aset\Webcontroller;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Diklat\Diklatcontroller;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Soc\Soccontroller;
 use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 use Symfony\Component\HttpKernel\Profiler\Profile;
@@ -176,7 +177,11 @@ Route::middleware('auth','verified','role:diklat')->group(function () {
 
 });
 
-
-
+Route::middleware('auth','verified','role:soc')->group(function () {
+    Route::get('/', function () {
+        return redirect('/soc.dashboard');
+    });
+    Route::get('/soc.dashboard',[Soccontroller::class, 'index']);
+});
 
 require __DIR__.'/auth.php';
