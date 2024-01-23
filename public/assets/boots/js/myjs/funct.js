@@ -221,9 +221,6 @@ function refA()
 
                 '</ul>'+
             '</div>';
-<<<<<<< HEAD
-            var img = '<img src="http://app.perumdamtirtakencana.id/assets/img/lokasi/'+item.img+'" height="100px" width="100px"></img>';
-=======
             var img = '<img src="http://127.0.0.1:8000/assets/img/lokasi/'+item.img+'" height="100px" width="100px"></img>';
             // var nilaiAk = new Intl.NumberFormat('id-ID', {
             //     style: 'currency',
@@ -231,7 +228,6 @@ function refA()
             // }).format(item.nilaiak);
             // var detailNilai = '<td><a href="#" id="detailNilai" data-id="' + item.idLok + ',' + item.id_aktiva + ',' + item.lokasi +'">'+ nilaiAk +'</a></td>'
             
->>>>>>> 3ffc33e4368d8220905bd12dc8535d80107e0e3d
             table.row.add([
                  ++i,
                 item.nama_barang,
