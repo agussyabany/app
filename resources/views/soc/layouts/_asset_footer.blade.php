@@ -10,54 +10,50 @@
 <script src="{{ asset('assets/boots/js/myjs/funct.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-     crossorigin="">
-</script>
+<script src='https://unpkg.com/leaflet@1.8.0/dist/leaflet.js' crossorigin=''></script>
 
 <script>
-ACCESS_TOKEN = 'pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw';
-  MB_ATTR = 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
-    'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>';
-  MB_URL = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=' + ACCESS_TOKEN;
-  OSM_URL = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
-  OSM_ATTRIB = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
-    const map = L.map('mapid').setView([51.505, -0.09], 13);
+    let map, markers = [];
 
-const tiles = L.tileLayer( MB_URL, {
-    maxZoom: 19,
-    attribution: OSM_ATTRIB
-}).addTo(map);
+    /* ----------------------------- Initialize Map ----------------------------- */
+    function initMap() {
+        map = L.map('map', {
+            center: {
+                lat: -0.4951403071438513,
+                lng: 117.14425132443439
+            },
+            zoom: 13
+        });
 
-const marker = L.marker([51.5, -0.09]).addTo(map)
-    .bindPopup('<b>Hello world!</b><br />I am a popup.').openPopup();
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap'
+        }).addTo(map);
+    }
+    initMap();
 
-const circle = L.circle([51.508, -0.11], {
-    color: 'red',
-    fillColor: '#f03',
-    fillOpacity: 0.5,
-    radius: 500
-}).addTo(map).bindPopup('I am a circle.');
+    $.get('/marker', function (data) {
+        data.forEach(function (markerData) {
 
-const polygon = L.polygon([
-    [51.509, -0.08],
-    [51.503, -0.06],
-    [51.51, -0.047]
-]).addTo(map).bindPopup('I am a polygon.');
+            let lat = parseFloat(markerData.lat);
+            let long = parseFloat(markerData.long);
 
 
-const popup = L.popup()
-    .setLatLng([51.513, -0.09])
-    .setContent('I am a standalone popup.')
-    .openOn(map);
+            if (!isNaN(lat) && !isNaN(long)) {
+                let popupContent = '<div class="container">'+
 
-function onMapClick(e) {
-    popup
-        .setLatLng(e.latlng)
-        .setContent(`You clicked the map at ${e.latlng.toString()}`)
-        .openOn(map);
-}
+                                            '<div><img src="http://127.0.0.1:8000/assets/img/lokasi/' + markerData.img + '" alt="" widht="100px" height="100px">'+
+                                            '<div><h6>' + markerData.lokasi + '</h6></div>'+
 
-map.on('click', onMapClick);
-</script>
+                                    '</div>';
+
+                let newMarker = L.marker([lat, long]).addTo(map).bindPopup(popupContent);
+                markers.push(newMarker);
+            } else {
+                console.error('Invalid latitude or longitude:', markerData.lat, markerData.long);
+            }
+        });
+    });
+
+
+    </script>
 
