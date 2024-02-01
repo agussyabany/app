@@ -24,3 +24,4 @@
     <link rel="stylesheet" href="{{asset('assets/landingpage/css/responsive.css')}}" />
     <script src="{{asset('assets/landingpage/js/vendor/modernizr-2.8.3.min.js')}}"></script>
     <script src="{{asset('assets/landingpage/plugins/chart.js/Chart.min.js')}}"></script>
+    <link rel='stylesheet' href='https://unpkg.com/leaflet@1.8.0/dist/leaflet.css' crossorigin='' />

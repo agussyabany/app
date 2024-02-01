@@ -75,7 +75,7 @@
                 <div class="single-feature text-center">
                     <img src="{{ asset('assets/landingpage/pic/tanah.png')}}" width="100px" height="100px" alt=""/>
                     <h3>TANAH</h3><br>
-                    <h2 class="counter"></h2><br>
+                    <h2 class="counter">{{ $tanah }}</h2><br>
                     <h4>Total Nilai Perolehan<br>Rp 14.904.112.922</h4>
                 </div>
             </div>
@@ -84,7 +84,7 @@
                 <div class="text-center single-feature">
                     <img src="{{ asset('assets/landingpage/pic/mesin.png')}}" width="100px" height="100px" alt=""/>
                     <h3>PERALATAN DAN MESIN</h3>
-                    <h2 class="counter"></h2><br>
+                    <h2 class="counter">{{ $mesin }}</h2><br>
                     <h4>Total Nilai Perolehan<br>Rp  219.019.734.637 </h4>
                 </div>
             </div>
@@ -93,7 +93,7 @@
                 <div class="text-center single-feature">
                     <img src="{{ asset('assets/landingpage/pic/gedung.png')}}" width="100px" height="100px" alt="" />
                     <h3>GEDUNG DAN BANGUNAN</h3>
-                    <h2 class="counter"></h2><br>
+                    <h2 class="counter">{{ $gedung }}</h2><br>
                     <h4>Total Nilai Perolehan<br>Rp  37.049.269.638</h4>
                 </div>
             </div>
@@ -111,7 +111,7 @@
                 <div class="text-center single-feature">
                     <img src="{{ asset('assets/landingpage/pic/kir.png')}}" width="100px" height="100px" alt="" />
                     <h3 class="text-center">INVENTARIS/PERANGAKAT KANTOR</h3>
-                    <h2 class="counter">2515</h2><br>
+                    <h2 class="counter">{{ $kir }}</h2><br>
                     <h4>Total Nilai Perolehan<br>Rp  22.508.069.841</h4>
                 </div>
             </div>
@@ -119,7 +119,7 @@
         <div class="row">
             <div class="col-md-2 col-sm-6">
                     <div class="text-center">
-                        <!-- <img src="{{ asset('assets/landingpage/pic/jaring.png')}}" width="50px" height="50px" alt="" />
+                        <!-- <img src="" width="50px" height="50px" alt="" />
                         <h3>INI</h3>
                         <h3 class="counter">12345</h3><br>
                         <h4>Total Nilai Perolehan<br>Rp.123.456.789</h4> -->
@@ -135,7 +135,7 @@
                 </div>
                 <div class="col-md-2 col-sm-6">
                     <div class="text-center single-feature">
-                        <!-- <img src="{{ asset('assets/landingpage/pic/konstruksi.png')}}"width="100px" height="100px" alt="" />
+                        <!-- <img src=""width="100px" height="100px" alt="" />
                         <h3>KONSTRUKSI DALAM PENGERJAAN</h3>
                         <h2 class="counter"></h2><br>
                         <h4>Total Nilai Perolehan<br>Rp </h4> -->
@@ -151,7 +151,7 @@
                 </div>
                 <div class="col-md-2 col-sm-6">
                     <div class="text-center single-feature">
-                            <!-- <img src="{{ asset('assets/landingpage/pic/konstruksi.png')}}"width="100px" height="100px" alt="" />
+                            <!-- <img src=""width="100px" height="100px" alt="" />
                             <h3>KONSTRUKSI DALAM PENGERJAAN</h3>
                             <h2 class="counter"></h2><br>
                             <h4>Total Nilai Perolehan<br>Rp </h4> -->
@@ -171,7 +171,8 @@
 
                         <div class="single-counter-box">
                             <h1>TOTAL NILAI  ASET</h1>
-                            <span><h1>Rp 951.238.105.647</h1></span><span class="plus"></span>
+                            {{-- <span><h1>Rp 951.238.105.647</h1></span><span class="plus"></span> --}}
+                            <span><h1>{{ number_format($total, 0, ".", ".") }}</h1></span><span class="plus"></span>
                             <h3></h3>
                         </div>
                     </div>
@@ -198,57 +199,92 @@
                     <th class="text-center">s/d</th>
                     <th class="text-center">Tambahan</th>
                     <th class="text-center">Harga Perolehan s/d Juni 2023</th>
-                    <th class="text-center">Akumulasi Depresiasi</th>
-                    <th class="text-center">Nilai Buku</th>
-                    <th class="text-center">Biaya</th>
-                    <th class="text-center">Akumulasi Penyusutan</th>
-                    <th class="text-center">Nilai Buku</th>
+
                 </tr>
                 </thead>
                 <tbody>
                     <tr>
-                    <th></th>
-                    <th></th>
-                    <th class="text-center">31/05/23</th>
-                    <th class="text-center">30/06/23</th>
-                    <th class="text-center"></th>
-                    <th class="text-center">31/05/23</th>
-                    <th class="text-center">31/05/23</th>
-                    <th class="text-center">30/06/23</th>
-                    <th class="text-center">30/06/23</th>
-                    <th class="text-center">30/06/23</th>
+                        <th></th>
+                        <th></th>
+                        <th class="text-center">31/05/23</th>
+                        <th class="text-center">30/06/23</th>
+                        <th class="text-center"></th>
                     </tr>
 
 
 
                     <tr>
-                    <td ></th>
-                    <td ></th>
-                    <td ></td>
-                    <td ></td>
-                    <td ></td>
-                    <td ></td>
-                    <td ></td>
-                    <td ></td>
-                    <td ></td>
-                    <td ></td>
-
+                        <td class="text-center">1</th>
+                        <td >TANAH DAN PENYEMPURNAAN TANAH (31.01)</th>
+                        <td >{{ number_format($a, 2, ".", ".") }}</td>
+                        <td >{{ number_format($aJuni, 0, ".", ".") }}</td>
+                        <td >{{ number_format($aJuni + $a, 0, ".", ".") }}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">2</th>
+                        <td >INSTALASI PENGOLAHAN AIR</th>
+                        <td >{{ number_format($b, 2, ".", ".") }}</td>
+                        <td >{{ number_format($bJuni, 2, ".", ".") }}</td>
+                        <td >{{ number_format($bJuni + $b, 2, ".", ".") }}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">3</th>
+                        <td >INSTALASI SUMBER AIR</th>
+                        <td >{{ number_format($c, 2, ".", ".") }}</td>
+                        <td >{{ number_format($cJuni, 2, ".", ".") }}</td>
+                        <td >{{ number_format($cJuni + $c, 2, ".", ".") }}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">4</th>
+                        <td >INSTALASI POMPA</th>
+                            <td >{{ number_format($d, 2, ".", ".") }}</td>
+                            <td >{{ number_format($dJuni, 2, ".", ".") }}</td>
+                            <td >{{ number_format($dJuni + $d, 2, ".", ".") }}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">5</th>
+                        <td >BANGUNAN GEDUNG</th>
+                            <td >{{ number_format($e, 2, ".", ".") }}</td>
+                            <td >{{ number_format($eJuni, 2, ".", ".") }}</td>
+                            <td >{{ number_format($eJuni + $e, 2, ".", ".") }}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">6</th>
+                        <td >TRANSMISI DAN DISTIRBUSI</th>
+                            <td >{{ number_format($f, 2, ".", ".") }}</td>
+                            <td >{{ number_format($fJuni, 2, ".", ".") }}</td>
+                            <td >{{ number_format($fJuni + $f, 2, ".", ".") }}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">7</th>
+                        <td >PERALATAN DAN PERLENGKAPAN</th>
+                            <td >{{ number_format($g, 2, ".", ".") }}</td>
+                            <td >{{ number_format($gJuni, 2, ".", ".") }}</td>
+                            <td >{{ number_format($gJuni + $g, 2, ".", ".") }}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">8</th>
+                        <td >INVENTARIS DAN PERABOT KANTOR</th>
+                        <<td >{{ number_format($h, 2, ".", ".") }}</td>
+                        <td >{{ number_format($hJuni, 2, ".", ".") }}</td>
+                        <td >{{ number_format($hJuni + $h, 2, ".", ".") }}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">9</th>
+                        <td >KENDARAAN DAN ANGKUTAN</th>
+                            <td >{{ number_format($i, 2, ".", ".") }}</td>
+                            <td >{{ number_format($iJuni, 2, ".", ".") }}</td>
+                            <td >{{ number_format($iJuni + $i, 2, ".", ".") }}</td>
                     </tr>
 
                     <tr class="table-active">
-                    <th colspan="2" class="text-center">TOTAL</th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
+                        <th colspan="2" class="text-center">TOTAL</th>
+                        <th>{{ number_format($total2023, 2, ".", ".") }}</th>
+                        <th>{{ number_format($juni2023, 2, ".", ".") }}</th>
+                        <th>{{ number_format($total2023 + $juni2023, 2, ".", ".") }}</th>
                     </tr>
-
-                </tbody>
-                </table>
+                 </tbody>
+            </table>
         </div>
 
     </div>
@@ -317,7 +353,8 @@
                         <p class="section-content"></p>
                     </div>
                 </div>
-            <div id="map" style="width:100%;height:800px;"></div>
+                <div class="container"><div id="map" style="width:100%;height:800px;"></div></div>
+
     </div>
 </section>
 

@@ -22,15 +22,7 @@
 				        <div class="welcome-text">
 				            <p>SISTEM INFORMASI MANAJEMEN ASET</p>
 				        </div>
-				        <div class="welcome-social">
-                            <ul>
-                                <li><a href="#"></a></li>
-                                <li><a href="#"></a></li>
-                                <li><a href="#"></a></li>
-                                <li><a href="#"></a></li>
-                                <li></li>
-                            </ul>
-				        </div>
+
 				    </div>
 				</div>
 			</div>
@@ -71,7 +63,7 @@
 
 								  </ul>
 								</li>
-								</ul>
+							</ul>
 						</div><!-- /.navbar-collapse -->
 							</nav>
 							<div class="mainmenu-right">
@@ -113,12 +105,8 @@
 								<i class="fa fa-times second_click" aria-hidden="true"></i>
 							</div> --}}
 							<div class="chart-icon">
-
-
-							    <p></p>
-								<i class="" aria-hidden="true">
-
-								</i>
+                                <p></p>
+								<i class="" aria-hidden="true"></i>
 								<ul class="cart-list">
 									<li>
 										<div class="cart-selected-product">

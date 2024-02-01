@@ -45,6 +45,9 @@ Route::get('/aset', function () {
     return redirect('/aset');
 });
 Route::get('/aset',[Webcontroller::class, 'index']);
+Route::get('/nilai.dashboard',[Webcontroller::class, 'nilai']);
+Route::get('/jumlah.dashboard',[Webcontroller::class, 'jumlah']);
+Route::get('/marker',[Webcontroller::class, 'marker']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');

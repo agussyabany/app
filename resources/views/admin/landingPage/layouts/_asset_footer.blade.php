@@ -3,7 +3,7 @@
 		{{-- <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyDx9gauyP9SYtIjrQU-1S50tO9aijSRRMY"></script> --}}
 
         <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
-        {{-- <script>window.jQuery || document.write('<script src="{{ asset('assets/landingpage/js/vendor/jquery-1.12.0.min.js')}}"></script>')</script> --}}
+        <script src="http://127.0.0.1:8000/assets/landingpage/js/vendor/jquery-1.12.0.min.js"></script>
 		<!-- Bootstarp Min js file -->
         <script src="{{ asset('assets/landingpage/js/bootstrap.min.js')}}"></script>
 		<!-- Paralux -->
@@ -30,6 +30,155 @@
         <script src="{{ asset('assets/landingpage/js/plugins.js')}}"></script>
 		<!-- Main js code here -->
         <script src="{{ asset('assets/landingpage/js/main.js')}}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
+        <script src='https://unpkg.com/leaflet@1.8.0/dist/leaflet.js' crossorigin=''></script>
+
+        <script>
+            // Make a GET request to the Laravel backend endpoint using jQuery
+                    $.get('/nilai.dashboard', function(response) {
+                    const { $sum8085, $sum8590, $sum9095, $sum9520, $sum200205,$sum205210,$sum210215,$sum215220,$sum220223 } = response;
+                    const data = [$sum8085, $sum8590, $sum9095, $sum9520, $sum200205,$sum205210,$sum210215,$sum215220,$sum220223 ];
+                    const ctx = document.getElementById('myChart').getContext('2d');
+
+                    console.log(response);
+
+                    const myChart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: ["1980-1985", "1985-1990", "1990-1995", "1995-2000", "2000-2005", "2005-2010","2010-2015","2015-2020","2020-2023"],
+                            datasets: [{
+                                label: 'Total Values',
+                                data: data,
+                                backgroundColor: [
+                                                    'rgba(255, 99, 132, 0.5)',
+                                                    'rgba(54, 162, 235, 0.5)',
+                                                    'rgba(255, 206, 86, 0.5)',
+                                                    'rgba(75, 192, 192, 0.5)',
+                                                    'rgba(153, 102, 255, 0.5)',
+                                                    'rgba(255, 159, 64,0.5)',
+                                                    'rgba(255, 159, 64,0.5)',
+                                                    'rgba(255, 159, 64,0.5)',
+                                                    'rgba(255, 159, 64,0.5)'
+                                                ],
+                                    borderColor: [
+                                                    'rgba(255,99,132,1)',
+                                                    'rgba(54, 162, 235, 1)',
+                                                    'rgba(255, 206, 86, 1)',
+                                                    'rgba(75, 192, 192, 1)',
+                                                    'rgba(153, 102, 255, 1)',
+                                                    'rgba(255, 159, 64, 1)',
+                                                    'rgba(255, 159, 64, 1)',
+                                                    'rgba(255, 159, 64, 1)',
+                                                    'rgba(255, 159, 64, 1)'
+                                                ],
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+
+                                }
+                            }
+                        }
+                    });
+                })
+            .fail(function(error) {
+                // Handle errors if any
+                console.error('Error fetching data:', error);
+            });
+
+            $.get('/jumlah.dashboard', function(response) {
+                const { totalA, totalB, totalC, totalD, totalE } = response;
+                const data = [totalA, totalB, totalC, totalD, totalE];
+                const ctx = document.getElementById('myChart2').getContext('2d');
+                console.log(response)
+                const myChart = new Chart(ctx, {
+			type: 'doughnut',
+			data: {
+				labels: ["TANAH", "MESIN", "GEDUNG", "PIPA", "DLL", "KONSTRUKSI"],
+				datasets: [{
+					label: '# of Votes',
+					data: data,
+					backgroundColor: [
+					'rgba(255, 99, 132, 0.5)',
+					'rgba(54, 162, 235, 0.5)',
+					'rgba(255, 206, 86, 0.5)',
+					'rgba(75, 192, 192, 0.5)',
+					'rgba(153, 102, 255, 0.5)',
+					'rgba(255, 159, 64,0.5)'
+					],
+					borderColor: [
+					'rgba(255,99,132,1)',
+					'rgba(54, 162, 235, 1)',
+					'rgba(255, 206, 86, 1)',
+					'rgba(75, 192, 192, 1)',
+					'rgba(153, 102, 255, 1)',
+					'rgba(255, 159, 64, 1)'
+					],
+					borderWidth: 1
+				}]
+			},
+			options: {
+				scales: {
+					yAxes: [{
+						ticks: {
+							beginAtZero:true
+						}
+					}]
+				}
+			}
+		});
+
+    })
+</script>
+<script>
+let map, markers = [];
+
+/* ----------------------------- Initialize Map ----------------------------- */
+function initMap() {
+    map = L.map('map', {
+        center: {
+            lat: -0.5096839,
+            lng: 117.0107155
+        },
+        zoom: 11
+    });
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap'
+    }).addTo(map);
+}
+initMap();
+
+$.get('/marker', function (data) {
+    data.forEach(function (markerData) {
+
+        let lat = parseFloat(markerData.lat);
+        let long = parseFloat(markerData.long);
+
+
+        if (!isNaN(lat) && !isNaN(long)) {
+            let popupContent = '<div class="container">'+
+
+                                        '<div><img src="http://127.0.0.1:8000/assets/img/lokasi/' + markerData.img + '" alt="" widht="100px" height="100px">'+
+                                        '<div><h6>' + markerData.lokasi + '</h6></div>'+
+
+                                '</div>';
+
+            let newMarker = L.marker([lat, long]).addTo(map).bindPopup(popupContent);
+            markers.push(newMarker);
+        } else {
+            console.error('Invalid latitude or longitude:', markerData.lat, markerData.long);
+        }
+    });
+});
+
+
+</script>
+
+
 
 
 
