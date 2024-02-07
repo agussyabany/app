@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Aset;
 
 use App\Http\Controllers\Controller;
+use App\Models\Aset\Departemen;
+use App\Models\Aset\Divisi;
 use App\Models\Aset\Gedung;
 use App\Models\Aset\Kir;
 use App\Models\Aset\lokasi;
@@ -16,6 +18,7 @@ class Webcontroller extends Controller
     public function index()
 
     {
+
         $tanah = Tanah::count('id');
         $mesin = Mesin::count('id');
         $gedung = Gedung::count('id');
@@ -144,5 +147,61 @@ class Webcontroller extends Controller
         return response()->json($marker);
     }
 
+    public function struktur()
 
+    {
+        return view('admin.landingPage.pages.struktur');
+    }
+
+    public function direksi($id)
+
+    {
+        if ($id == 'dirut')
+            {
+                $judul='DIREKTUR UTAMA';
+                $ruang = 'dirut.jpeg';
+                $rapat = 'rapatdu.jpeg';
+                $loby = 'dumloby.jpeg';
+                $sekre = 'sekredu.jpeg';
+                $role = 1;
+
+            }
+            if ($id == 'dirum')
+            {
+                $judul='DIREKTUR BIDANG UMUM';
+                $ruang = 'dirum.jpeg';
+                $rapat = 'dumrapat.jpeg';
+                $loby = 'lobydu.jpeg';
+                $sekre = 'sekredu.jpeg';
+                $role = 2;
+            }
+
+                $nRuang = 'RUANG  UTAMA';
+                $nRapat = 'RUANG RAPAT ';
+                $nLoby = 'LOBY ';
+                $nSekre = 'RUANG SEKRETARIS';
+
+
+
+                // $query="SELECT * FROM master_departemen WHERE role = $ruang[9]";
+                // $sql_kir=mysqli_query($con, $query)or die(mysqli_error($con));
+                // if(mysqli_num_rows($sql_kir)> 0) {
+                // while($data = mysqli_fetch_array($sql_kir))
+
+                $dept = Departemen::where('role',$role)->get();
+
+                // <?php
+                // $dep = $data['id_departemen'];
+                // $queryD="SELECT * FROM divisi WHERE id_departemen = $dep";
+                // $sql_div=mysqli_query($con, $queryD)or die(mysqli_error($con));
+                // if(mysqli_num_rows($sql_div)> 0) {
+                // while($divisi = mysqli_fetch_array($sql_div)){
+
+
+
+
+            return view('admin.landingPage.pages.direksi',compact(['judul','nRuang','nRapat','nLoby','nSekre','ruang','rapat','loby','sekre','dept']));
+
+
+        }
 }

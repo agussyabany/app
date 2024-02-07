@@ -48,6 +48,8 @@ Route::get('/aset',[Webcontroller::class, 'index']);
 Route::get('/nilai.dashboard',[Webcontroller::class, 'nilai']);
 Route::get('/jumlah.dashboard',[Webcontroller::class, 'jumlah']);
 Route::get('/marker',[Webcontroller::class, 'marker']);
+Route::get('/struktur',[Webcontroller::class, 'struktur']);
+Route::get('/direksi/{id}',[Webcontroller::class, 'direksi']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');

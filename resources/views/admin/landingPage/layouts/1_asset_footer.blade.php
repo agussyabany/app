@@ -1,12 +1,16 @@
+<!-- <div class="scrollToTop')}}"><i class="fa fa-angle-up')}}"></i></div> -->
+		<!-- End Footer section -->
+		{{-- <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyDx9gauyP9SYtIjrQU-1S50tO9aijSRRMY"></script> --}}
+
         <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
-        {{-- <script>window.jQuery || document.write('<script src="{{ asset('assets/landingpage/js/vendor/jquery-1.12.0.min.js')}}"><\/script>')</script> --}}
+        <script src="http://127.0.0.1:8000/assets/landingpage/js/vendor/jquery-1.12.0.min.js"></script>
 		<!-- Bootstarp Min js file -->
         <script src="{{ asset('assets/landingpage/js/bootstrap.min.js')}}"></script>
 		<!-- Paralux -->
 		<script src="{{ asset('assets/landingpage/js/simpleparallax.js')}}"></script>
 		<!-- My Custom slider js -->
-		<script type='text/javascript' src='{{ asset("assets/landingpage/js/jquery.easing.1.3.js")}}'></script>
-		<script type='text/javascript' src="{{ asset('assets/landingpage/js/camera.min.js')}}"></script>
+		<script type='text/javascript' src='{{ asset('assets/landingpage/js/jquery.easing.1.3.js') }}'></script>
+		<script type='text/javascript' src='{{ asset('assets/landingpage/js/camera.min.js') }}'></script>
 		<!-- Counter Up js -->
 		<script src="{{ asset('assets/landingpage/js/waypoints.min.js')}}"></script>
 		<script src="{{ asset('assets/landingpage/js/jquery.countup.js')}}"></script>
@@ -17,10 +21,7 @@
 		<!--for skill chat jquary-->
 		<script src="{{ asset('assets/landingpage/js/jquery.easypiechart.js')}}"></script>
 		<!-- google map js -->
-		{{-- <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
-		<script src="{{ asset('assets/landingpage/js/gmap3.min.js')}}"></script> --}}
-		<!-- Flex Slider js -->
-		<script src="{{ asset('assets/landingpage/js/jquery.flexslider.js')}}"></script>
+        <script src="{{ asset('assets/landingpage/js/jquery.flexslider.js')}}"></script>
 		<!-- Filtering js -->
 		<script src="{{ asset('assets/landingpage/js/jquery.nstSlider.min.js')}}"></script>
 		<!-- Smoth scroll js -->
@@ -156,15 +157,14 @@ $.get('/marker', function (data) {
 
         let lat = parseFloat(markerData.lat);
         let long = parseFloat(markerData.long);
-        var lokasi = markerData.lokasi;
+
 
         if (!isNaN(lat) && !isNaN(long)) {
             let popupContent = '<div class="container">'+
-                                    '<div class="row">'+
-                                            '<div class="col">'+
-                                                '<img src="http://127.0.0.1:8000/assets/img/lokasi/' + markerData.img + '" alt="" widht="100px" height="100px">'+
-                                            '</div>'+
-                                    '<div><h6><a href="#" type="button" id="lok" data-id=' + lat +','+ long +',' + lokasi + '>' + lokasi + '</h6></a></div>'+
+
+                                        '<div><img src="http://127.0.0.1:8000/assets/img/lokasi/' + markerData.img + '" alt="" widht="100px" height="100px">'+
+                                        '<div><h6>' + markerData.lokasi + '</h6></div>'+
+
                                 '</div>';
 
             let newMarker = L.marker([lat, long]).addTo(map).bindPopup(popupContent);
@@ -177,18 +177,9 @@ $.get('/marker', function (data) {
 
 
 </script>
-<script>
-    $(document).on('click', '#lok', function(){
-        var id = $(this).data('id');
-        var delimiter = ",";
-        var id_key = id.split(delimiter);
-        var lat = id_key[0];
-        var long = id_key[1];
-        var lokasi = id_key[2];
-        event.preventDefault();
-        $('#modalLok').modal('show');
-        $('#judul_modalLG').html('DETAIL LOKASI');
-        $('#modal_bodyLG').append('<a href="http://maps.google.com/maps?q=&layer=c&cbll=' + lat + ',' + long + '&cbp=11,0,0,0,0 " target="_blank"><b>' + lokasi + ' </b> </a>');
 
-    })
-</script>
+
+
+
+
+

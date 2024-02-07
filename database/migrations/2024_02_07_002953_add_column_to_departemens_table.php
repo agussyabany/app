@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('nilai_aktivas', function (Blueprint $table) {
-            $table->integer('cat')->nullable(true);
+        Schema::table('departemens', function (Blueprint $table) {
+            $table->string('img')->nullable(true);
         });
     }
 
@@ -21,7 +21,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('nilai_aktivas', function (Blueprint $table) {
+        Schema::table('departemens', function (Blueprint $table) {
             //
         });
     }
