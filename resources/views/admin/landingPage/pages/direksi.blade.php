@@ -37,7 +37,7 @@ use App\Models\Aset\Divisi;
                     <div class="row">
                         <div class="single-portfolio">
                             <div class="single-portfolio-inner">
-                                <img src="http://127.0.0.1:8000/assets/landingpage/images/{{ $ruang }}" alt="" />
+                                <img src="http://app.perumdamtirtakencana.id/assets/landingpage/images/{{ $ruang }}" alt="" />
                                 <div class="round-overlay"></div>
                                 <a class="kir" data-toggle="modal" id="" data-target="#modalKIBA" href="#">
                                     <div class="light-box-icon">
@@ -80,7 +80,7 @@ use App\Models\Aset\Divisi;
                     <div class="row">
                         <div class="single-portfolio">
                             <div class="single-portfolio-inner">
-                                <img src="http://127.0.0.1:8000/assets/landingpage/images/{{ $loby }}" alt="" />
+                                <img src="http://app.perumdamtirtakencana.id/assets/landingpage/images/{{ $loby }}" alt="" />
                                 <div class="round-overlay"></div>
                                 <a class="kir" data-toggle="modal" id="" data-target="#modalKIBA" href="#">
                                     <div class="light-box-icon">
@@ -100,7 +100,7 @@ use App\Models\Aset\Divisi;
                     <div class="row">
                         <div class="single-portfolio">
                             <div class="single-portfolio-inner">
-                                <img src="http://127.0.0.1:8000/assets/landingpage/images/{{ $sekre }}" alt="" />
+                                <img src="http://app.perumdamtirtakencana.id/assets/landingpage/images/{{ $sekre }}" alt="" />
                                 <div class="round-overlay"></div>
                                 <a class="kir" data-toggle="modal" id="" data-target="#modalKIBA" href="#">
                                     <div class="light-box-icon">
@@ -120,7 +120,7 @@ use App\Models\Aset\Divisi;
                     <div class="row">
                         <div class="single-portfolio">
                             <div class="single-portfolio-inner">
-                                <img src="http://127.0.0.1:8000/assets/landingpage/images/{{ $rapat }}" alt="" />
+                                <img src="http://app.perumdamtirtakencana.id/assets/landingpage/images/{{ $rapat }}" alt="" />
                                 <div class="round-overlay"></div>
                                 <a class="kir" data-toggle="modal" id="" data-target="#modalKIBA" href="#">
                                     <div class="light-box-icon">
@@ -163,7 +163,7 @@ use App\Models\Aset\Divisi;
                     <div class="single-offer-item row">
                         <div class="offer-icon">
                             <div class="offer-icon-animate">
-                                <img src="http://127.0.0.1:8000/assets/landingpage/images/icon/{{ $item->img }}" width="50px" height="50px" alt="" />
+                                <img src="http://app.perumdamtirtakencana.id/assets/landingpage/images/icon/{{ $item->img }}" width="50px" height="50px" alt="" />
                             </div>
                         </div>
                         <div class="">
