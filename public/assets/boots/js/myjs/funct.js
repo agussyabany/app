@@ -444,12 +444,14 @@ function refKirInput()
     })
 }
 
-function openNewWindow() {
+function openNewWindow() 
+{
     var url = '/tanah.print';
     var features = 'width=800,height=600';
     window.open(url, '_blank', features);
 }
 
-function printB() {
+function printB() 
+{
     
 }
