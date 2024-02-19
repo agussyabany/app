@@ -16,8 +16,11 @@ use App\Http\Controllers\Aset\PdfController;
 use App\Http\Controllers\Aset\RuangController;
 use App\Http\Controllers\Aset\SdmController;
 use App\Http\Controllers\Aset\TanahController;
+use App\Http\Controllers\Aset\Webcontroller;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Diklat\Diklatcontroller;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Soc\Soccontroller;
 use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 use Symfony\Component\HttpKernel\Profiler\Profile;
@@ -37,6 +40,16 @@ use Symfony\Component\HttpKernel\Profiler\Profile;
 Route::get('/', function () {
     return redirect('login');
 });
+
+Route::get('/aset', function () {
+    return redirect('/aset');
+});
+Route::get('/aset',[Webcontroller::class, 'index']);
+Route::get('/nilai.dashboard',[Webcontroller::class, 'nilai']);
+Route::get('/jumlah.dashboard',[Webcontroller::class, 'jumlah']);
+Route::get('/marker',[Webcontroller::class, 'marker']);
+Route::get('/struktur',[Webcontroller::class, 'struktur']);
+Route::get('/direksi/{id}',[Webcontroller::class, 'direksi']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -73,15 +86,12 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::get('/gedung',[AsetDashboardController::class, 'gedung']);
     Route::get('/kir',[AsetDashboardController::class, 'kir']);
 
-
-
     Route::post('/barang.save',[BarangController::class,'save']);
     Route::get('barang.edit/{id}',[BarangController::class,'edit']);
     Route::post('barang.update',[BarangController::class,'update']);
     Route::post('barang.hapus/{id}',[BarangController::class,'destroy']);
     Route::get('barang.tanah',[BarangController::class,'tanah']);
     Route::get('barang.mesin',[BarangController::class,'mesin']);
-
 
     Route::post('/dep.save',[DepartemenController::class,'save']);
     Route::get('dep.edit/{id}',[DepartemenController::class,'edit']);
@@ -117,17 +127,14 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::get('nilai.edit/{id}',[NilaiController::class,'edit']);
     Route::post('nilai.update',[NilaiController::class,'update']);
     Route::post('nilai.hapus/{id}',[NilaiController::class,'destroy']);
-   
 
     Route::get('/show/{id}',[PdfController::class,'show']);
-
 
     Route::post('/tanah.save',[TanahController::class,'save']);
     Route::get('/tanah.detail/{id}',[TanahController::class,'detail']);
     Route::get('/tanah.print',[TanahController::class,'print']);
     Route::get('/tanah.nilai/{lok}',[TanahController::class,'nilaiSum']);
     Route::get('/nilaiTanah.detail/{lok}',[TanahController::class,'nilaiTanah']);
-    
 
     Route::get('/mesin.dep/{id}',[MesinController::class,'dep']);
     Route::get('/mesin.div/{dep}/{lok}',[MesinController::class,'div']);
@@ -167,7 +174,19 @@ Route::middleware('auth','verified','role:aset')->group(function () {
 
 });
 
+Route::middleware('auth','verified','role:diklat')->group(function () {
+    Route::get('/', function () {
+        return redirect('/diklat.dashboard');
+    });
+    Route::get('/diklat.dashboard',[Diklatcontroller::class, 'index']);
 
+});
 
+Route::middleware('auth','verified','role:soc')->group(function () {
+    Route::get('/', function () {
+        return redirect('/soc.dashboard');
+    });
+    Route::get('/soc.dashboard',[Soccontroller::class, 'index']);
+});
 
 require __DIR__.'/auth.php';
