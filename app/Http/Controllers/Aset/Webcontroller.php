@@ -102,27 +102,36 @@ class Webcontroller extends Controller
     public function nilai()
     {
 
-        $sum8085 = NilaiAktiva::whereBetween('tgl_voucher', ['1980-01-01','1985-12-31'])->sum('nilai');
-        $sum8590 = NilaiAktiva::whereBetween('tgl_voucher', ['1985-01-01','1990-12-31'])->sum('nilai');
-        $sum9095 = NilaiAktiva::whereBetween('tgl_voucher', ['1990-01-01','1995-12-31'])->sum('nilai');
-        $sum9520 = NilaiAktiva::whereBetween('tgl_voucher', ['1995-01-01','2000-12-31'])->sum('nilai');
-        $sum200205 = NilaiAktiva::whereBetween('tgl_voucher', ['2000-01-01','2005-12-31'])->sum('nilai');
-        $sum205210 = NilaiAktiva::whereBetween('tgl_voucher', ['2005-01-01','2010-12-31'])->sum('nilai');
-        $sum210215 = NilaiAktiva::whereBetween('tgl_voucher', ['2010-01-01','2015-12-31'])->sum('nilai');
-        $sum215220 = NilaiAktiva::whereBetween('tgl_voucher', ['2015-01-01','2020-12-31'])->sum('nilai');
+        $sum8085 = NilaiAktiva::whereBetween('tgl_voucher', ['1980-01-01','1984-12-31'])->sum('nilai');
+        $sum8590 = NilaiAktiva::whereBetween('tgl_voucher', ['1985-01-01','1989-12-31'])->sum('nilai');
+        $sum9095 = NilaiAktiva::whereBetween('tgl_voucher', ['1990-01-01','1994-12-31'])->sum('nilai');
+        $sum9520 = NilaiAktiva::whereBetween('tgl_voucher', ['1995-01-01','1999-12-31'])->sum('nilai');
+        $sum200205 = NilaiAktiva::whereBetween('tgl_voucher', ['2000-01-01','2004-12-31'])->sum('nilai');
+        $sum205210 = NilaiAktiva::whereBetween('tgl_voucher', ['2004-01-01','2008-12-31'])->sum('nilai');
+        $sum210215 = NilaiAktiva::whereBetween('tgl_voucher', ['2009-01-01','2014-12-31'])->sum('nilai');
+        $sum215220 = NilaiAktiva::whereBetween('tgl_voucher', ['2015-01-01','2019-12-31'])->sum('nilai');
         $sum220223 = NilaiAktiva::whereBetween('tgl_voucher', ['2020-01-01','2023-12-31'])->sum('nilai');
+
+        $dek2 =  $sum8085 + $sum8590;
+        $dek3 = $dek2 + $sum9095;
+        $dek4 = $dek3 + $sum9520;
+        $dek5 = $dek4 + $sum200205;
+        $dek6 = $dek5 + $sum205210;
+        $dek7 = $dek6 + $sum210215;
+        $dek8 = $dek7 + $sum215220;
+        $dek9 = $dek8 + $sum220223;
 
         return response()->json([
 
             'sum8085' => intval($sum8085),
-            'sum8590'=> intval($sum8590),
-            'sum9095'=> intval($sum9095),
-            'sum9520'=> intval($sum9520),
-            'sum200205' => intval($sum200205),
-            'sum205210' => intval($sum205210),
-            'sum210215' => intval($sum210215),
-            'sum215220'=> intval($sum215220),
-            'sum220223'=>intval($sum220223)
+            'sum8590'=> intval($dek2),
+            'sum9095'=> intval($dek3),
+            'sum9520'=> intval($dek4),
+            'sum200205' => intval($dek5),
+            'sum205210' => intval($dek6),
+            'sum210215' => intval($dek7),
+            'sum215220'=> intval($dek8),
+            'sum220223'=>intval($dek9)
 
         ]);
     }

@@ -186,7 +186,7 @@
     <div class="container">
     <div class="row">
             <div class="section-heading">
-                <h2 class="section-title">DAFTAR ASET TETAP DAN AKUMULASI PENYUSUTAN</h2>
+                <h2 class="section-title">DAFTAR NILAI ASET TETAP</h2>
                 <p class="section-content"></p>
             </div>
         </div>
@@ -303,7 +303,7 @@
         <div class="col-lg-6 col-9">
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">GRAFIK NILAI ASET PERUMDAM TIRTA KENCANA SAMARINDA</h3>
+                            <h3 class="card-title"> PERTUMBUHAN NILAI ASET 1980 s/d 2023</h3>
 
                         </div>
                         <div class="card-body" style="display: block;">
@@ -323,7 +323,7 @@
                 <div class="col-lg-6 col-9">
                 <div class="card card-success">
                         <div class="card-header">
-                            <h3 class="card-title">GRAFIK DATA JUMLAH ASET PERUMDAM TIRTA KENCANA SAMARINDA</h3>
+                            <h3 class="card-title">JUMLAH ASET</h3>
 
                         </div>
                         <div class="card-body" style="display: block;">

@@ -35,8 +35,8 @@
         <script>
             // Make a GET request to the Laravel backend endpoint using jQuery
                     $.get('/nilai.dashboard', function(response) {
-                    const { $sum8085, $sum8590, $sum9095, $sum9520, $sum200205,$sum205210,$sum210215,$sum215220,$sum220223 } = response;
-                    const data = [$sum8085, $sum8590, $sum9095, $sum9520, $sum200205,$sum205210,$sum210215,$sum215220,$sum220223 ];
+                    const { sum8085, sum8590, sum9095, sum9520, sum200205,sum205210,sum210215,sum215220,sum220223 } = response;
+                    const data = [sum8085, sum8590, sum9095, sum9520, sum200205,sum205210,sum210215,sum215220,sum220223 ];
                     const ctx = document.getElementById('myChart').getContext('2d');
 
                     console.log(response);
@@ -92,7 +92,7 @@
                 const { totalA, totalB, totalC, totalD, totalE } = response;
                 const data = [totalA, totalB, totalC, totalD, totalE];
                 const ctx = document.getElementById('myChart2').getContext('2d');
-                console.log(response)
+                //console.log(response)
                 const myChart = new Chart(ctx, {
 			type: 'doughnut',
 			data: {
@@ -162,7 +162,7 @@ $.get('/marker', function (data) {
             let popupContent = '<div class="container">'+
                                     '<div class="row">'+
                                             '<div class="col">'+
-                                                '<img src="http://127.0.0.1:8000/assets/img/lokasi/' + markerData.img + '" alt="" widht="100px" height="100px">'+
+                                                '<img src="http://app.perumdamtirtakencana.id/assets/img/lokasi/' + markerData.img + '" alt="" widht="100px" height="100px">'+
                                             '</div>'+
                                     '<div><h6><a href="#" type="button" id="lok" data-id=' + lat +','+ long +',' + lokasi + '>' + lokasi + '</h6></a></div>'+
                                 '</div>';
@@ -188,7 +188,7 @@ $.get('/marker', function (data) {
         event.preventDefault();
         $('#modalLok').modal('show');
         $('#judul_modalLG').html('DETAIL LOKASI');
-        $('#modal_bodyLG').append('<a href="http://maps.google.com/maps?q=&layer=c&cbll=' + lat + ',' + long + '&cbp=11,0,0,0,0 " target="_blank"><b>' + lokasi + ' </b> </a>');
+        $('#modal_bodyLG').html('<a href="http://maps.google.com/maps?q=&layer=c&cbll=' + lat + ',' + long + '&cbp=11,0,0,0,0" target="_blank"><b>' + lokasi + ' </b> </a>');
 
     })
 </script>
