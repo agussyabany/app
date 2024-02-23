@@ -152,7 +152,7 @@ class Webcontroller extends Controller
     public function marker()
 
     {
-        $marker = lokasi::select('lat','long','lokasi','img')->get();
+        $marker = lokasi::select('lat','long','lokasi','img','cat')->whereIn('cat',[2,4,3,1,6])->get();
         return response()->json($marker);
     }
 

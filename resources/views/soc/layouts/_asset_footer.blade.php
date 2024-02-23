@@ -31,29 +31,75 @@
     }
     initMap();
 
-    $.get('/marker', function (data) {
-        data.forEach(function (markerData) {
+    let markersCat1 = [];
+    let markersCat2 = [];
+    let markersCat3 = [];
 
-            let lat = parseFloat(markerData.lat);
-            let long = parseFloat(markerData.long);
+    $.get('/marker', function(data) {
+    data.forEach(function(markerData) {
+        let lat = parseFloat(markerData.lat);
+        let long = parseFloat(markerData.long);
+        console.log(markerData.cat);
 
-
-            if (!isNaN(lat) && !isNaN(long)) {
-                let popupContent = '<div class="container">'+
-
-                                            '<div><img src="http://127.0.0.1:8000/assets/img/lokasi/' + markerData.img + '" alt="" widht="100px" height="100px">'+
-                                            '<div><h6>' + markerData.lokasi + '</h6></div>'+
-
-                                    '</div>';
-
-                let newMarker = L.marker([lat, long]).addTo(map).bindPopup(popupContent);
-                markers.push(newMarker);
-            } else {
-                console.error('Invalid latitude or longitude:', markerData.lat, markerData.long);
+        if (!isNaN(lat) && !isNaN(long)) {
+            let iconUrl;
+            if (markerData.cat === 2) {
+                iconUrl = 'http://127.0.0.1:8000/assets/img/marker/IPA2.png'; // Ganti dengan lokasi file PNG ikon kategori 1 Anda
+            }else if (markerData.cat === 4) {
+                iconUrl = 'http://127.0.0.1:8000/assets/img/marker/IPA1.png'; // Ganti dengan lokasi file PNG ikon kategori 2 Anda
+            }else if (markerData.cat === 3) {
+                iconUrl = 'http://127.0.0.1:8000/assets/img/marker/BOOST2.png'; // Ganti dengan lokasi file PNG ikon kategori 2 Anda
             }
-        });
+            else {
+                iconUrl = 'http://127.0.0.1:8000/assets/img/marker/logo.png'; // Ganti dengan lokasi file PNG ikon default jika diperlukan
+            }
+
+            let customIcon = L.icon({
+                iconUrl: iconUrl,
+                iconSize: [32, 32], // Sesuaikan dengan ukuran ikon Anda
+                iconAnchor: [16, 32], // Sesuaikan dengan titik anchor ikon Anda
+                popupAnchor: [0, -32] // Sesuaikan dengan posisi pop-up ikon Anda
+            });
+
+            let popupContent = '<div class="container">' +
+                '<div><img src="http://127.0.0.1:8000/assets/img/lokasi/' + markerData.img + '" alt="" width="100px" height="100px">' +
+                '<div><h6>' + markerData.lokasi + '</h6></div>' +
+                '</div>';
+
+            let newMarker = L.marker([lat, long], { icon: customIcon }).addTo(map).bindPopup(popupContent);
+
+            // Kategorisasi marker
+            if (markerData.cat === 2) {
+                markersCat1.push(newMarker);
+            } else if (markerData.cat === 4) {
+                markersCat2.push(newMarker);
+            } else if (markerData.cat === 3) {
+                markersCat3.push(newMarker);
+            }
+            // Tambahkan logika kategori lain jika diperlukan
+
+        } else {
+            console.error('Invalid latitude or longitude:', markerData.lat, markerData.long);
+        }
     });
 
+    let baseMaps = {
+        "OpenStreetMap": L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap'
+        })
+        // Tambahkan layer dasar lain jika diperlukan
+    };
 
-    </script>
+    let overlayMaps = {
+        "IPA": L.layerGroup(markersCat1),
+        "BOOSTER": L.layerGroup(markersCat2),
+        "INTAKE": L.layerGroup(markersCat3)
+        // Tambahkan layer marker untuk kategori lain jika diperlukan
+    };
+
+    L.control.layers(baseMaps, overlayMaps).addTo(map);
+
+
+});
+</script>
 
