@@ -13,6 +13,8 @@ use App\Models\Aset\NilaiAktiva;
 use App\Models\Aset\Tanah;
 use Illuminate\Http\Request;
 
+use function Laravel\Prompts\table;
+
 class Webcontroller extends Controller
 {
     public function index()
@@ -152,7 +154,7 @@ class Webcontroller extends Controller
     public function marker()
 
     {
-        $marker = lokasi::select('lat','long','lokasi','img','cat')->whereIn('cat',[2,4,3,1,6])->get();
+        $marker = lokasi::select('lat','long','lokasi','img','cat')->whereIn('cat',[2,4,3,1,6,0])->get();
         return response()->json($marker);
     }
 
