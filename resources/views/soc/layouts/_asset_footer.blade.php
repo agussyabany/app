@@ -74,13 +74,13 @@
             if (!isNaN(lat) && !isNaN(long)) {
                 let iconUrl;
                 if (markerData.cat === 2) {
-                    iconUrl = 'http://127.0.0.1:8000/assets/img/marker/IPA2.png'; // Ganti dengan lokasi file PNG ikon kategori 1 Anda
+                    iconUrl = 'http://app.perumdamtirtakencana.id/assets/img/marker/IPA2.png'; // Ganti dengan lokasi file PNG ikon kategori 1 Anda
                 } else if (markerData.cat === 4) {
-                    iconUrl = 'http://127.0.0.1:8000/assets/img/marker/IPA1.png'; // Ganti dengan lokasi file PNG ikon kategori 2 Anda
+                    iconUrl = 'http://app.perumdamtirtakencana.id/assets/img/marker/IPA1.png'; // Ganti dengan lokasi file PNG ikon kategori 2 Anda
                 } else if (markerData.cat === 3) {
-                    iconUrl = 'http://127.0.0.1:8000/assets/img/marker/BOOST2.png'; // Ganti dengan lokasi file PNG ikon kategori 2 Anda
+                    iconUrl = 'http://app.perumdamtirtakencana.id/assets/img/marker/BOOST2.png'; // Ganti dengan lokasi file PNG ikon kategori 2 Anda
                 } else {
-                    iconUrl = 'http://127.0.0.1:8000/assets/img/marker/logo.png'; // Ganti dengan lokasi file PNG ikon default jika diperlukan
+                    iconUrl = 'http://app.perumdamtirtakencana.id/assets/img/marker/logo.png'; // Ganti dengan lokasi file PNG ikon default jika diperlukan
                 }
 
                 let customIcon = L.icon({
