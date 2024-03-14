@@ -29,6 +29,13 @@ class KirController extends Controller
           ]);
     }
 
+    public function del($id)
+    {
+        Kir::where('id', $id)->delete();
+        return response()->json(['massage' => 'Data deleted successfully']);
+
+    }
+
     public function div($dep,$lok)
     {
         $kir = Kir::select('nama_div','id_div','id_departemen')
@@ -182,11 +189,13 @@ class KirController extends Controller
 
     public function input()
     {
-        $kir = Kir::select('lokasi','nama_div','gedung','ruangan','nama_barang','merk')
+        $user = Auth::user()->id;
+        $kir = Kir::select('kirs.id as idKir','lokasi','nama_div','gedung','ruangan','nama_barang','merk')
                         ->join('barangs','kirs.id_barang','barangs.id')
                         ->join('divisis','kirs.id_div','divisis.id')
                         ->join('lokasis','kirs.id_lokasi','=','lokasis.id')
                         ->where('input',0)
+                        ->where('id_user',$user)
                         ->get();
         return response()->json([
             'data' => $kir
@@ -195,7 +204,9 @@ class KirController extends Controller
 
     public function clear()
     {
+        $user = Auth::user()->id;
         Kir::where('input',0)
+        ->where('id_user',$user)
         ->update(['input' => 1]);
         return response()->json(['message' => 'Data updated successfully']);
     }

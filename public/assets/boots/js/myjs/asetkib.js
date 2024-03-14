@@ -35,7 +35,7 @@ $(document).ready(function() {
                                                 '<th>Penggunaan</th>'+
                                                 '<th>Alamat</th>'+
                                                 '<th>No Dokumen</th>'+
-                                                
+
                                                 '<th>Foto</th>'+
                                                 '<th>Aksi</th>'+
                                             '</tr>'+
@@ -335,7 +335,7 @@ $(document).ready(function() {
                     url: "/tanah.detail/"+ id,
                     success: function (data) {
                         $.each(data.data, function (index, item) {
-                        
+
                         $('#lgModal').modal('show');
                         $('#judul_modalLG').html('DETAIL KIB A TANAH '+item.lokasi );
                         $('#modal_bodyLG').html('');
@@ -544,7 +544,7 @@ $(document).ready(function() {
                                         '<legend class="float-none w-auto px-3 border border-secondary rounded">'+
                                             '<div style="font-size: 15px;"><strong>DETAIL NILAI</strong></div>'+
                                         '</legend>'+
-                                        
+
                                             ' <div class="container">'+
                                                 '<div class="collapse" id="collapseExample">'+
                                                     '<table class="table table-striped table-border" id="tbl_detailNilai">'+
@@ -1193,7 +1193,7 @@ $(document).ready(function() {
                                               '</table>'+
                                         '<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>')
                                         var lok = item.id_lokasi;
-                                       
+
                                         $.get('/mesin.nilai/' + lok, function(data) {
                                             var nilaiAk = new Intl.NumberFormat('id-ID', {
                                                 style: 'currency',
@@ -1203,12 +1203,12 @@ $(document).ready(function() {
                                         })
                                         $(document).on('click', '#nilaiMesin', function (event) {
                                             var lok = $(this).data('id');
-                                           
+
                                             $('#lgModal').modal('show');
                                             $('#judul_modalLG').html('DETAIL NILAI MESIN '+item.lokasi );
                                             $('#modal_bodyLG').html('');
                                             $('#modal_bodyLG').html('<div class="container">'+
-                                                                    
+
                                                                         '<table class="table table-striped table-border" id="tbl_detailNilai">'+
                                                                             '<thead>'+
                                                                                 '<tr>'+
@@ -1914,7 +1914,7 @@ $(document).ready(function() {
                                               '</table>'+
                                         '<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>')
                                         var lok = item.id_lokasi;
-                                       
+
                                         $.get('/gedung.nilai/' + lok, function(data) {
                                             var nilaiAk = new Intl.NumberFormat('id-ID', {
                                                 style: 'currency',
@@ -1928,7 +1928,7 @@ $(document).ready(function() {
                                             $('#judul_modalLG').html('DETAIL NILAI GEDUNG '+item.lokasi );
                                             $('#modal_bodyLG').html('');
                                             $('#modal_bodyLG').html('<div class="container">'+
-                                                                    
+
                                                                         '<table class="table table-striped table-border" id="tbl_detailNilai">'+
                                                                             '<thead>'+
                                                                                 '<tr>'+
@@ -2394,7 +2394,7 @@ $(document).ready(function() {
         });
     //END OF LOKASI
 
-    
+
     $('#kir').on('click', function() {
         $('#db_body').remove();
         $('#kir').addClass('btn btn-primary');
@@ -2578,6 +2578,7 @@ $(document).ready(function() {
                                                         '<th>Gedung</th>'+
                                                         '<th>Ruang</th>'+
                                                         '<th>Merk</th>'+
+                                                        '<th>Hapus</th>'+
                                                       '</tr>'+
                                                 '</thead>'+
                                                 ' <tbody>'+
@@ -2596,6 +2597,24 @@ $(document).ready(function() {
                         refKirInput();
 
                 })
+                $(document).on('click', '#del', function (event) {
+                    var id = $(this).data('id');
+                    var del = confirm("HAPUS DATA ?");
+                    if (del) {
+                        $.ajax({
+                            url: "/kir.del/" + id,
+                            type: "POST",
+                            dataType: 'json',
+                                success: function (data) {
+                                alert('Data berhasil Dihapus')
+                                refKirInput();
+                            },
+                            error: function (xhr, textStatus, errorThrown) {
+                                alert('Data gagal dihapus');
+                            },
+                        });
+                    }
+            })
                 $(document).on('click', '#proses_kir', function (event) {
                     $.ajax({
                         url: "/kir.clear",
@@ -2698,7 +2717,7 @@ $(document).ready(function() {
                                               '</table>'+
                                         '<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>')
                                         var loks = item.id_lokasi;
-                                       
+
                                         $.get('/kir.nilai/' + loks, function(data) {
                                             var nilaiAk = new Intl.NumberFormat('id-ID', {
                                                 style: 'currency',
@@ -2712,7 +2731,7 @@ $(document).ready(function() {
                                             $('#judul_modalLG').html('DETAIL NILAI KIR '+item.lokasi );
                                             $('#modal_bodyLG').html('');
                                             $('#modal_bodyLG').html('<div class="container">'+
-                                                                    
+
                                                                         '<table class="table table-striped table-border" id="tbl_detailNilai">'+
                                                                             '<thead>'+
                                                                                 '<tr>'+
@@ -2778,7 +2797,7 @@ $(document).ready(function() {
                                 })
                             })
                             $(document).on('click', '#kir_ruang', function() {
-                                
+
                                 $('#card-body').html('');
                                 $('#card-body').append(
 
@@ -2822,9 +2841,9 @@ $(document).ready(function() {
                                         ]).draw();
                                     })
                                 })
-                                
+
                             })
-                            
+
                             $(document).on('click', '#kir_detail', function() {
                                         var id = $(this).data('id');
                                         var delimiter = ",";
@@ -2857,8 +2876,8 @@ $(document).ready(function() {
                                                 '<tbody>'+
                                             '</tbody>'+
                                         '</table>');
-                                   
-                                    
+
+
                                     $('#judul_modalLG').html('<strong>Divisi:</strong> '+ nama_div +'<br><strong>Gedung:</strong> '+ ged +'<br><strong>Ruang: </strong>' + ruang +'<button class="btn btn-sm btn-primary float-end" id="print_kir" data-id="' + lok + "," + dep + "," + div + "," + ged + "," + ruang + '"><i class="fa-solid fa-print"></i></button>' );
                                     var table = $("#tbl_kir_detail").DataTable();
                                     table.clear().draw();
@@ -2884,12 +2903,12 @@ $(document).ready(function() {
                                     })
                                 })
 
-                                
-                                
+
+
                             })
 
 
-                            
+
                         },
                         error: function (data) {
                             console.log('Error:', data);

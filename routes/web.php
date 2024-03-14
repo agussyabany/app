@@ -170,6 +170,7 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::get('/kir.print/{lok}/{dep}/{div}/{ged}/{ruang}',[KirController::class,'print']);
     Route::get('/kir.nilai/{loks}',[KirController::class,'nilaiSum']);
     Route::get('/nilaiKir.detail/{lok}',[KirController::class,'nilaikir']);
+    Route::post('/kir.del/{id}',[KirController::class,'del']);
 
 
 });

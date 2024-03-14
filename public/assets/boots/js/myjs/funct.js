@@ -227,7 +227,7 @@ function refA()
             //     currency: 'IDR',
             // }).format(item.nilaiak);
             // var detailNilai = '<td><a href="#" id="detailNilai" data-id="' + item.idLok + ',' + item.id_aktiva + ',' + item.lokasi +'">'+ nilaiAk +'</a></td>'
-            
+
             table.row.add([
                  ++i,
                 item.nama_barang,
@@ -419,15 +419,17 @@ function refKirInput()
 {
     $.get('/kir.input', function(data) {
         var i = 0;
-        var table = $("#tbl_kir_input").DataTable();
+        var table = $("#tbl_kir_input").DataTable({
+            searching: false
+        });
         table.clear().draw();
         //$('#modal_body').html('');
 
         $.each(data.data, function(index, item) {
-            // var editButton =
-            // '<div class="btn-group">'+
-            //     '<button class="badge bg-primary border border-secondary btn-sm tree" data-id="' + item.id_lokasi + '" data-bs-toggle="offcanvas" href="#data" role="button" aria-controls="offcanvasExample"><i class="fa-solid fa-eye"></i></button>'+
-            // '</div>';
+            var editButton =
+            '<div class="btn-group">'+
+                '<button class="text-center badge bg-danger border border-secondary btn-sm del" id="del" data-id="' + item.idKir + '"><i class="fa-solid fa-trash"></i></button>'+
+            '</div>';
             // var img = '<img src="http://app.perumdamtirtakencana.id/assets/img/lokasi/'+item.img_lok+'" height="100px" width="100px"></img>';
             table.row.add([
                  ++i,
@@ -436,22 +438,21 @@ function refKirInput()
                 item.gedung,
                 item.ruangan,
                 item.nama_barang,
-                item.merk,
                 // img,
-                // editButton
+                 editButton
             ]).draw();
         });
     })
 }
 
-function openNewWindow() 
+function openNewWindow()
 {
     var url = '/tanah.print';
     var features = 'width=800,height=600';
     window.open(url, '_blank', features);
 }
 
-function printB() 
+function printB()
 {
-    
+
 }
