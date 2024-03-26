@@ -2597,7 +2597,7 @@ $(document).ready(function() {
                         refKirInput();
 
                 })
-                $(document).on('click', '#del', function (event) {
+                $(document).on('click', '#haps', function (event) {
                     var id = $(this).data('id');
                     var del = confirm("HAPUS DATA ?");
                     if (del) {

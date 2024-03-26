@@ -428,7 +428,7 @@ function refKirInput()
         $.each(data.data, function(index, item) {
             var editButton =
             '<div class="btn-group">'+
-                '<button class="text-center badge bg-danger border border-secondary btn-sm del" id="del" data-id="' + item.idKir + '"><i class="fa-solid fa-trash"></i></button>'+
+                '<button class="text-center badge bg-danger border border-secondary btn-sm del" id="haps" data-id="' + item.idKir + '"><i class="fa-solid fa-trash"></i></button>'+
             '</div>';
             // var img = '<img src="http://app.perumdamtirtakencana.id/assets/img/lokasi/'+item.img_lok+'" height="100px" width="100px"></img>';
             table.row.add([
