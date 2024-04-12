@@ -8,6 +8,8 @@ use App\Models\Aset\Divisi;
 use App\Models\Aset\Kir;
 use App\Models\Aset\lokasi;
 use App\Models\Aset\NilaiAktiva;
+use App\Models\Aset\Sdm;
+use App\Models\Soc\Nilai;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -34,6 +36,15 @@ class KirController extends Controller
         Kir::where('id', $id)->delete();
         return response()->json(['massage' => 'Data deleted successfully']);
 
+    }
+
+    public function voucher()
+    {
+        $vKir = NilaiAktiva::select('nilai_aktivas.id as idNilai','kode')
+                ->where('cat', 7)
+                ->join('aktivas','nilai_aktivas.id_aktiva','=','aktivas.id')
+                ->get();
+        return response()->json(['data' => $vKir]);
     }
 
     public function div($dep,$lok)
@@ -107,6 +118,7 @@ class KirController extends Controller
             'dep' => 'required',
             'div' => 'required',
             'gedung' => 'required',
+            'nilai_v'=>'required',
             'ruang_kir' => 'required',
             'nama_aset' => 'required',
             'kode_aset' => 'required',
@@ -145,6 +157,7 @@ class KirController extends Controller
         $div = $request->input('div');
         $gedung = $request->input('gedung');
         $ruang = $request->input('ruang_kir');
+        $nilai_v = $request->input('nilai_v');
         $nama_aset = $request->input('nama_aset');
         $kode_aset = $request->input('kode_aset');
         $merk = $request->input('merk');
@@ -171,6 +184,7 @@ class KirController extends Controller
         $kir->id_lokasi = $lokasi;
         $kir->gedung = $gedung;
         $kir->ruangan = $ruang;
+        $kir->nilai_v = $nilai_v;
         $kir->merk = $merk;
         $kir->bahan = $bahan;
         $kir->jumlah = $jumlah;
@@ -221,6 +235,7 @@ class KirController extends Controller
                         ->where('ruangan',$ruang)
                         ->get();
                         $i = 0;
+                        $sdms = Sdm::select('nama_sdm')->where('id_div',$div)->first();
                         $dept = Departemen::select('kode_dep')->where('id',$dep)->first();
                         $divi = Divisi::select('nama_div','kode_div')->where('id',$div)->first();
                         $loks = lokasi::select('lokasi')->where('id',$lok)->first();
@@ -228,11 +243,12 @@ class KirController extends Controller
                         $divisi = $divi['nama_div'];
                         $struktur = $divi['kode_div'];
                         $departemen = $dept['kode_dep'];
+                        $sdm = $sdms['nama_sdm'];
                         $date = Carbon::now();
                         $tglIndo = $date->locale('id_ID')->format('d F Y');
                         $nama = Auth::user()->name;
                         $nip = Auth::user()->nip;
-                        return view('admin.pages.aset.print.printKir',compact(['kir','i','lokasi','departemen','divisi','nama','tglIndo','struktur','ged','ruang','nip']));
+                        return view('admin.pages.aset.print.printKir',compact(['kir','i','lokasi','departemen','divisi','nama','tglIndo','struktur','ged','ruang','nip','sdm']));
     }
 
     public function nilaiSum($loks)
