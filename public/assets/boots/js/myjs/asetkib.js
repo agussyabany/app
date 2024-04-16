@@ -2506,10 +2506,14 @@ $(document).ready(function() {
 
                                             '<div class="col"><br>'+
                                                 '<div class="input-group input-group-sm mb-1">'+
+                                                    '<select name="nilai_v" id="nilai_v" class="select2 form-control">'+
+                                                        '<option>-NILAI-</option>'+
+                                                    '</select>'+
+                                                '</div>'+
+                                                '<div class="input-group input-group-sm mb-1">'+
                                                     '<select name="nama_aset" id="nama_aset" class="select2 form-control">'+
                                                         '<option>-NAMA ASET-</option>'+
                                                     '</select>'+
-
                                                 '</div>'+
                                                 '<span style="color:red;" id="lokasi_error"></span>'+
                                                 '<div class="input-group input-group-sm mb-1">'+
@@ -2597,7 +2601,7 @@ $(document).ready(function() {
                         refKirInput();
 
                 })
-                $(document).on('click', '#del', function (event) {
+                $(document).on('click', '#haps', function (event) {
                     var id = $(this).data('id');
                     var del = confirm("HAPUS DATA ?");
                     if (del) {
@@ -2614,7 +2618,8 @@ $(document).ready(function() {
                             },
                         });
                     }
-            })
+                })
+
                 $(document).on('click', '#proses_kir', function (event) {
                     $.ajax({
                         url: "/kir.clear",
@@ -2648,6 +2653,7 @@ $(document).ready(function() {
                                 dep: $('#dep').val(),
                                 div:$('#div').val(),
                                 gedung:$('#gedung').val(),
+                                nilai_v:$('#nilai_v').val(),
                                 ruang_kir:$('#ruang_kir').val(),
                                 nama_aset:$('#nama_aset').val(),
                                 kode_aset:$('#kode_aset').val(),
@@ -2664,10 +2670,11 @@ $(document).ready(function() {
                             type: "POST",
                             dataType: 'json',
                             success: function (data) {
+                                alert(data);
                                 refKirInput();
                                 // $('#modal_body').html('');
                                 // $('#myModal').modal('hide');
-                                // alert('Data berhasil Disimpan');
+
                                 // refLok();
                             },
                             error: function(xhr) {
@@ -2902,13 +2909,7 @@ $(document).ready(function() {
 
                                     })
                                 })
-
-
-
                             })
-
-
-
                         },
                         error: function (data) {
                             console.log('Error:', data);

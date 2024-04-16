@@ -390,6 +390,12 @@ function pilih()
         });
     });
 
+    $.get('/voucher.kir', function (data) {
+        $.each(data.data, function (index, item) {
+            $('#nilai_v').append('<option value="' + item.idNilai + '"> ' +  item.kode + ' </option>');
+        });
+    });
+
     $.get('/barang.mesin', function (data) {
         $.each(data.data, function (index, item) {
             $('#nama_aset').append('<option value="' + item.id + '"> ' +  item.nama_barang + ' </option>');
@@ -428,7 +434,7 @@ function refKirInput()
         $.each(data.data, function(index, item) {
             var editButton =
             '<div class="btn-group">'+
-                '<button class="text-center badge bg-danger border border-secondary btn-sm del" id="del" data-id="' + item.idKir + '"><i class="fa-solid fa-trash"></i></button>'+
+                '<a href="#"class="text-center badge bg-danger border border-secondary btn-sm" id="haps" data-id="' + item.idKir + '"><i class="fa-solid fa-trash"></i></a>'+
             '</div>';
             // var img = '<img src="http://app.perumdamtirtakencana.id/assets/img/lokasi/'+item.img_lok+'" height="100px" width="100px"></img>';
             table.row.add([
