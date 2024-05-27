@@ -46,6 +46,15 @@ class KirController extends Controller
                 ->get();
         return response()->json(['data' => $vKir]);
     }
+    
+    public function v_kir()
+    {
+        $v_kir = NilaiAktiva::select('no_voucher')
+                ->distinct()
+                ->where('cat', 7)
+                ->get();
+        return response()->json(['data' => $v_kir]);
+    }
 
     public function div($dep,$lok)
     {

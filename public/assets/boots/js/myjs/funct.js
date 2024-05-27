@@ -38,7 +38,7 @@ function refDep()
             var editButton = '<a class="btn btn-sm btn-warning edit-btn" data-id="' + item.id + '" href="#"><i class="fa-solid fa-edit"></i></a>';
             var deleteButton = '<a class="btn btn-sm btn-danger delete-btn" data-id="' + item.id + '" href="#"><i class="fa-solid fa-trash"></i></a>';
             table.row.add([
-                 ++i,
+                item.id,
                 item.nama_dep,
                 item.kode_dep,
                 item.id ? editButton + '' + deleteButton : ''
@@ -373,6 +373,14 @@ function refMesinInput()
 
 function pilih()
 {
+    $.get('/v_kir', function (data) {
+        $.each(data.data, function (index, item) {
+            $('#voucher_kir').append('<option value="' + item.no_voucher + '">' + item.no_voucher + '</option>');
+        });
+    });
+
+    
+
     $.get('/lok', function (data) {
         $.each(data.data, function (index, item) {
             $('#lokasi_kir').append('<option value="' + item.id + '">' + item.alamat + ' | ' +  item.lokasi + '</option>');

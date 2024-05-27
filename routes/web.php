@@ -172,6 +172,7 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::get('/nilaiKir.detail/{lok}',[KirController::class,'nilaikir']);
     Route::post('/kir.del/{id}',[KirController::class,'del']);
     Route::get('/voucher.kir',[KirController::class,'voucher']);
+    Route::get('/v_kir',[KirController::class,'v_kir']);
 
 
 });

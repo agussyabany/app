@@ -2448,6 +2448,52 @@ $(document).ready(function() {
                     $('#modal_bodyLG').prepend(
                         '<form action="" id="form_a" enctype="multipart/form-data">'+
                             '<div class="container">'+
+                            '<div class="row  border border-primary rounded">'+
+                                        '<div class="container"><br>'+
+                                            '<table class="table table-striped table-bordered rounded">'+
+                                                '<thead>'+
+                                                    '<tr class="text-center">'+
+                                                        '<th>No Voucher</th>'+
+                                                        '<th>Kode Aktiva</th>'+
+                                                        '<th>Bulan</th>'+
+                                                        '<th>Uraian</th>'+
+                                                      '</tr>'+
+                                                '</thead>'+
+                                            ' <tbody>'+
+                                                    '<tr>'+
+                                                        '<td>'+
+                                                            '<div class="input-group input-group-sm mb-1">'+
+                                                                '<select class="select2 form-control" name="voucher_kir" id="voucher_kir" style="width:100%;">'+
+                                                                    '<option>- NO VOUCHER -</option>'+
+                                                                '</select>'+
+                                                            '</div>'+
+                                                        '</td>'+
+                                                        '<td>'+
+                                                            '<div class="input-group input-group-sm mb-1">'+
+                                                                '<select class="select2 form-control" name="kode_aktiva" id="kode_aktiva">'+
+                                                                    '<option>- PILIH KODE AKTIVA -</option>'+
+                                                                '</select>'+
+                                                            '</div>'+
+                                                        '</td>'+
+                                                        '<td>'+
+                                                            '<div class="input-group input-group-sm mb-1">'+
+                                                                '<select class="select2 form-control" name="bulan_voc" id="bulan_voc">'+
+                                                                    '<option>- PILIH BULAN -</option>'+
+                                                                '</select>'+
+                                                            '</div>'+
+                                                        '</td>'+
+                                                        '<td>'+
+                                                            '<div class="input-group input-group-sm mb-1">'+
+                                                                '<input type="text" class="form-control" disabled value="text">'+
+                                                            '</div>'+
+                                                        '</td>'+
+                                                        
+                                                    ' </tr>'+
+                                                '</tbody>'+
+                                            '</table>'+
+                                        '</div>'+
+                                    '</div><br>'+
+
                                     '<div class="row  border border-primary rounded">'+
                                         '<div class="container"><br>'+
                                             '<table class="table table-striped table-bordered rounded">'+
@@ -2505,11 +2551,7 @@ $(document).ready(function() {
                                     '<div class="row  border border-primary rounded">'+
 
                                             '<div class="col"><br>'+
-                                                '<div class="input-group input-group-sm mb-1">'+
-                                                    '<select name="nilai_v" id="nilai_v" class="select2 form-control">'+
-                                                        '<option>-NILAI-</option>'+
-                                                    '</select>'+
-                                                '</div>'+
+                                                
                                                 '<div class="input-group input-group-sm mb-1">'+
                                                     '<select name="nama_aset" id="nama_aset" class="select2 form-control">'+
                                                         '<option>-NAMA ASET-</option>'+
@@ -2598,6 +2640,23 @@ $(document).ready(function() {
                             dropdownParent: $('#modal_bodyLG')
                         });
                         pilih();
+                        $('body').on('change', '#voucher_kir', function (event) {
+                            event.preventDefault();
+                            var no_voucher = $(this).val();
+                            alert(no_voucher);
+                        //     $.ajax({
+                        //       data: $('#filter').serialize(),
+                        //       url: "/pembelian",
+                        //       type: "GET",
+                        //       dataType: 'json',
+                        //       success: function (data) {
+                        //         console.log(data);
+                        //       },
+                        //         error: function(xhr, textStatus, errorThrown) {
+                        //           console.log('Error:', xhr.responseText);
+                        //         }
+                        //   });
+                        });
                         refKirInput();
 
                 })
