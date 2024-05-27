@@ -437,14 +437,13 @@ function refKirInput()
             searching: false
         });
         table.clear().draw();
-        //$('#modal_body').html('');
+
 
         $.each(data.data, function(index, item) {
             var editButton =
             '<div class="btn-group">'+
                 '<a href="#"class="text-center badge bg-danger border border-secondary btn-sm" id="haps" data-id="' + item.idKir + '"><i class="fa-solid fa-trash"></i></a>'+
             '</div>';
-            // var img = '<img src="http://app.perumdamtirtakencana.id/assets/img/lokasi/'+item.img_lok+'" height="100px" width="100px"></img>';
             table.row.add([
                  ++i,
                 item.lokasi,
@@ -452,8 +451,7 @@ function refKirInput()
                 item.gedung,
                 item.ruangan,
                 item.nama_barang,
-                // img,
-                 editButton
+                editButton
             ]).draw();
         });
     })
