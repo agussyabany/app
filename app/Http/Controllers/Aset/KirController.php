@@ -31,6 +31,32 @@ class KirController extends Controller
           ]);
     }
 
+    
+
+    public function kir_aktiva($idv)
+    {
+        $kir_aktiva = NilaiAktiva::select('aktivas.aktiva','aktivas.kode','nilai_aktivas.id','nilai_aktivas.tgl_voucher','nilai_aktivas.urai')
+            ->join('aktivas', 'nilai_aktivas.id_aktiva', '=', 'aktivas.id')
+            ->where('nilai_aktivas.no_voucher', $idv)
+            ->get();
+    
+        return response()->json([
+            'data' => $kir_aktiva
+        ]);
+    }
+
+    public function kir_tgl($id)
+    {
+        $kir_tgl = NilaiAktiva::select('tgl_voucher','urai')
+            ->where('id', $id)
+            ->get();
+    
+        return response()->json([
+            'data' => $kir_tgl
+        ]);
+    }
+    
+
     public function del($id)
     {
         Kir::where('id', $id)->delete();
@@ -68,6 +94,8 @@ class KirController extends Controller
             'data' => $kir
           ]);
     }
+
+
 
     public function gedung($lok,$dep,$div)
     {
@@ -127,7 +155,7 @@ class KirController extends Controller
             'dep' => 'required',
             'div' => 'required',
             'gedung' => 'required',
-            'nilai_v'=>'required',
+            // 'nilai_v'=>'required',
             'ruang_kir' => 'required',
             'nama_aset' => 'required',
             'kode_aset' => 'required',
@@ -138,6 +166,7 @@ class KirController extends Controller
             'ringan' => 'required|numeric',
             'berat' => 'required|numeric',
             'ket' => 'required',
+            'aktiva'=>'required'
 
         ];
 
@@ -166,7 +195,7 @@ class KirController extends Controller
         $div = $request->input('div');
         $gedung = $request->input('gedung');
         $ruang = $request->input('ruang_kir');
-        $nilai_v = $request->input('nilai_v');
+        //$nilai_v = $request->input('nilai_v');
         $nama_aset = $request->input('nama_aset');
         $kode_aset = $request->input('kode_aset');
         $merk = $request->input('merk');
@@ -177,7 +206,7 @@ class KirController extends Controller
         $berat = $request->input('berat');
         $ket = $request->input('ket');
         $img = $request->input('img');
-
+        $aktiva = $request->input('aktiva');
         $imageData = base64_decode($img);
 
 
@@ -193,7 +222,7 @@ class KirController extends Controller
         $kir->id_lokasi = $lokasi;
         $kir->gedung = $gedung;
         $kir->ruangan = $ruang;
-        $kir->nilai_v = $nilai_v;
+        //$kir->nilai_v = $nilai_v;
         $kir->merk = $merk;
         $kir->bahan = $bahan;
         $kir->jumlah = $jumlah;
@@ -204,8 +233,8 @@ class KirController extends Controller
         $kir->id_user = $user;
         $kir->created_at = $now;
         $kir->img = $imageName;
+        $kir->nilai_v= $aktiva;
         $kir->input = 0;
-
         $kir->save();
         return response()->json(['message' => 'Data inserted successfully']);
     }
@@ -253,6 +282,8 @@ class KirController extends Controller
                         $struktur = $divi['kode_div'];
                         $departemen = $dept['kode_dep'];
                         $sdm = $sdms['nama_sdm'];
+                    
+                        
                         $date = Carbon::now();
                         $tglIndo = $date->locale('id_ID')->format('d F Y');
                         $nama = Auth::user()->name;

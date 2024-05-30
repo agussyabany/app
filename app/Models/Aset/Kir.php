@@ -26,7 +26,8 @@ class Kir extends Model
         'ket',
         'id_user',
         'img',
-        'input',//tambah ini di db
+        'input',
+        'nilai_v',//tambah ini di db
     ];
     public static function maxId()
     {

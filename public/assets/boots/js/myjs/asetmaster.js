@@ -736,7 +736,7 @@ $(document).ready(function() {
                                                 '<th>Nip</th>'+
                                                 '<th>Jabatan</th>'+
                                                 '<th>Divisi/Departemen</th>'+
-                                                '<th>-</th>'+
+                                                '<th>Aksi</th>'+
                                             '</tr>'+
                                         '</thead>'+
                                         '<tbody>'+
@@ -748,6 +748,7 @@ $(document).ready(function() {
                     '</div>'
                 );
                 refSdm();
+                
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

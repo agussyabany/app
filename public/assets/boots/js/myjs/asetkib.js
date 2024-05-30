@@ -2470,21 +2470,19 @@ $(document).ready(function() {
                                                         '</td>'+
                                                         '<td>'+
                                                             '<div class="input-group input-group-sm mb-1">'+
-                                                                '<select class="select2 form-control" name="kode_aktiva" id="kode_aktiva">'+
+                                                                '<select class="select2 form-control" name="kode_aktiva" id="kode_aktiva" style="width:100%;">'+
                                                                     '<option>- PILIH KODE AKTIVA -</option>'+
                                                                 '</select>'+
                                                             '</div>'+
                                                         '</td>'+
                                                         '<td>'+
                                                             '<div class="input-group input-group-sm mb-1">'+
-                                                                '<select class="select2 form-control" name="bulan_voc" id="bulan_voc">'+
-                                                                    '<option>- PILIH BULAN -</option>'+
-                                                                '</select>'+
+                                                                '<input type="text" class="form-control" name="bulan_voc" id="bulan_voc" disabled>'+
                                                             '</div>'+
                                                         '</td>'+
                                                         '<td>'+
                                                             '<div class="input-group input-group-sm mb-1">'+
-                                                                '<input type="text" class="form-control" disabled value="text">'+
+                                                                '<input type="text" class="form-control" disabled value="text" id="urai_voc">'+
                                                             '</div>'+
                                                         '</td>'+
                                                         
@@ -2640,26 +2638,10 @@ $(document).ready(function() {
                             dropdownParent: $('#modal_bodyLG')
                         });
                         pilih();
-                        $('body').on('change', '#voucher_kir', function (event) {
-                            event.preventDefault();
-                            var no_voucher = $(this).val();
-                            alert(no_voucher);
-                        //     $.ajax({
-                        //       data: $('#filter').serialize(),
-                        //       url: "/pembelian",
-                        //       type: "GET",
-                        //       dataType: 'json',
-                        //       success: function (data) {
-                        //         console.log(data);
-                        //       },
-                        //         error: function(xhr, textStatus, errorThrown) {
-                        //           console.log('Error:', xhr.responseText);
-                        //         }
-                        //   });
-                        });
                         refKirInput();
+                        
+                    })
 
-                })
                 $(document).on('click', '#haps', function (event) {
                     var id = $(this).data('id');
                     var del = confirm("HAPUS DATA ?");
@@ -2723,16 +2705,24 @@ $(document).ready(function() {
                                 ringan:$('#ringan').val(),
                                 berat:$('#berat').val(),
                                 ket:$('#ket').val(),
+                                aktiva:$('#kode_aktiva').val(),
                                 img: base64Image
                             },
                             url: "/kir.save",
                             type: "POST",
                             dataType: 'json',
                             success: function (data) {
-                                alert(data);
+                                //alert(data);
                                 refKirInput();
-                                // $('#modal_body').html('');
-                                // $('#myModal').modal('hide');
+                                $('#nama_aset').val('');
+                                $('#kode_aset').html('');
+                                $('#merk').html('');
+                                $('#bahan_kir').val('');
+                                $('#jumlah').html('');
+                                $('#baik').html('');
+                                $('#ringan').html('');
+                                $('#berat').html('');
+                                $('#ket').html('');
 
                                 // refLok();
                             },

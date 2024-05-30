@@ -173,6 +173,9 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::post('/kir.del/{id}',[KirController::class,'del']);
     Route::get('/voucher.kir',[KirController::class,'voucher']);
     Route::get('/v_kir',[KirController::class,'v_kir']);
+    Route::get('/kir_aktiva/{idv}',[KirController::class,'kir_aktiva']);
+    Route::get('/kir_tgl/{id}',[KirController::class,'kir_tgl']);
+    
 
 
 });

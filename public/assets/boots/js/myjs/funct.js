@@ -107,7 +107,7 @@ function refSdm()
             ]).draw();
          });
         })
-}
+    }
 
 function refLok()
 {
@@ -373,12 +373,25 @@ function refMesinInput()
 
 function pilih()
 {
+    $('body').on('change', '#voucher_kir', function (event) {
+        event.preventDefault();
+        var idv = $(this).val();
+        $('#kode_aktiva').empty().append('<option value="">Select an aktiva</option>');
+        $.get('/kir_aktiva/' + idv , function (data) {
+            $.each(data.data, function (index, item) {
+                $('#kode_aktiva').append('<option value="' + item.id + '">'+  item.kode +' | ' + item.aktiva + '</option>');
+                $('#bulan_voc').val(item.tgl_voucher);
+                $('#urai_voc').val(item.urai);
+          }
+          )})
+    });
+    
     $.get('/v_kir', function (data) {
         $.each(data.data, function (index, item) {
             $('#voucher_kir').append('<option value="' + item.no_voucher + '">' + item.no_voucher + '</option>');
         });
     });
-
+    
     
 
     $.get('/lok', function (data) {
@@ -456,6 +469,18 @@ function refKirInput()
         });
     })
 }
+// function clearField()
+// {
+//     $('#nama_aset').val();
+//     $('#kode_aset').html();
+//     $('#merk').html();
+//     $('#bahan_kir').val();
+//     $('#jumlah').html();
+//     $('#baik').html();
+//     $('#ringan').html();
+//     $('#berat').html();
+//     $('#ket').html();
+// }
 
 function openNewWindow()
 {
