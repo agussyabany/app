@@ -1,27 +1,107 @@
-<br>
-<div class="tab-pane show" id="barang_tab" role="tabpanel" aria-labelledby="tab_barang">
-    <div class="container">
-        <div class="card">
-            <div class="card-header">DATA BARANG</div>
-            <div class="card-body" id=tbl_barang>
-                <table class="table table-striped" id="aset">
-                    <thead>
-                        <tr>
-                            <th>NO</th>
-                            <th>Golongan</th>
-                            <th>Nama Barang</th>
-                            <th>Kode Barang</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>KIB</td>
-                            <td>Pompa Distribusi</td>
-                            <td>12.1214.14</td>
-                        </tr>
-                    </tbody>
-                </table>
+@extends('admin.layouts.main')
+
+@section('title')
+  ASET | BARANG
+@endsection
+
+@section('content')
+
+    <div class="col container" id="barang_tab" role="tabpanel" aria-labelledby="tab_div">
+        <br>
+
+                <div class="container card">
+                    <div class="card-header">DATA BARANG <div class="position-absolute top-0 end-0">
+                        <button class="btn  btn-primary" id="tambah_barang"><i class="fa-solid fa-file-circle-plus"></i></button>
+                </div>
+                    </div>
+                            <div class="card-body">
+                                <table class="table table-striped" id="tbl_barang">
+                                    <thead>
+                                        <tr>
+                                            <th>NO</th>
+                                            <th>Golongan</th>
+                                            <th>Nama Barang</th>
+                                            <th>Kode Barang</th>
+                                            <th>Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
+                {{-- MODAL MASTER --}}
+    <div class="modal"  id="myModal">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="judul_modal">Modal title</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+            <div class="modal-body" id="modal_body">
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="tombol btn btn-primary" id="">SUBMIT</button>
+            </div>
+          </div>
         </div>
-    </div>
+      </div>
+      {{-- MODAL KIB --}}
+      <div class="modal"  id="lgModal">
+        <div class="modal-dialog  modal-xl">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="judul_modalLG">Modal title</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="modal_bodyLG">
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="tombol btn btn-primary" id="">SUBMIT</button>
+            </div>
+          </div>
+        </div>
+      </div>
+        {{-- OFFCANVAS TREE --}}
+
+
+        <div class="offcanvas offcanvas-end" style=" width: 90%;"  tabindex="-1" id="data" aria-labelledby="offcanvasBottomLabel">
+            <div class="offcanvas-header" id="kepala">
+
+            </div>
+            <div class="offcanvas-body large" id="canvas_body_tampil">
+                <div class="row">
+                    <div class="col-3 border border-primary rounded" id="canvas_tree">
+
+
+                    </div>
+                    <div class="col border border-primary rounded"><br>
+                        <div class="container">
+                            <div class="card">
+                                <div class="card-header" id="card-header"></div>
+                                <div class="card-body" id="card-body">
+
+
+                                </div>
+                            </div><br>
+                         </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+
+@endsection

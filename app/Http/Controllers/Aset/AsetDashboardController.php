@@ -38,6 +38,20 @@ class AsetDashboardController extends Controller
         return view('admin.pages.aset.dashboard',compact(['barang','no','jabat','divisi']));
     }
 
+
+    public function barangs()
+
+    {
+        $idUSer = Auth::user()->id;
+        $user = User::join('divisis','users.divisi','=','divisis.id')
+                    ->join('jabatans','users.jabat','=','jabatans.id')
+                    ->where('users.id',$idUSer)
+                    ->first();
+        $jabat = $user['jabat'];
+        $divisi = $user['nama_div'];
+        return view('admin.pages.aset.master.barang',compact(['jabat','divisi']));
+    }
+
     public function barang()
     {
         $barang = Barang::orderBy('id','DESC')->get();

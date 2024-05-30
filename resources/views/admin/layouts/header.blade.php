@@ -1,11 +1,11 @@
 
 
 
-<div class="">
 
-  <div class="row">
+
+
     <header class="bg-primary text-white kop" style="background-image: url('{{asset('assets/img/head.jpg')}}');background-size: cover; background-repeat: no-repeat; width:100%;">
-        <div class="row">
+    <div class="row">
         <div class="col-2  collapse-horizontal in"   id="collapseWidthExample">
             <div class="text-center float-start">
 
@@ -27,9 +27,11 @@
             </div>
 
         </div>
-        </div>
+    </div>
     </header>
-
+    <div class="row">
+        <div class="col-0.5"></div>
+        {{-- main-nav --}}
     <nav class="col-2 nav" id="collapseWidthExample">
         <div class=" collapse-horizontal in"  id="collapseWidthExample"   style="background-image: url('{{asset('assets/img/side3.jpg')}}');background-size: cover; background-repeat: no-repeat;font-family: 'Bahnschrift-SemiLight', sans-serif; width:100%; height:100%">
             <div class="container">
@@ -38,31 +40,31 @@
                         <span class="nav-link text-center disabled"><strong>DATA MASTER</strong></span>
                     </li>
                     <li class="nav-item pb-1">
-                        <a type="button" id="barang" class="hoverable" style="width: 100%" data-tab-target="tab1" href="#"><i class="fa-solid fa-boxes-stacked"></i>&nbsp;Barang</a>
+                        <a type="button" id="barang" class="hoverable text-start btn" style="width: 100%" data-tab-target="tab1" href="/barangs"><i class="fa-solid fa-boxes-stacked"></i>&nbsp;Barang</a>
                     </li>
                     <li class="nav-item">
-                        <button type="button" class="hoverable" id="departemen" style="width: 100%" data-tab-target="tab2" href="#"><i class="fa-solid fa-user-tie"></i>&nbsp;Departemen</button>
+                        <button type="button" class="hoverable text-start btn" id="departemen" style="width: 100%" data-tab-target="tab2" href="#"><i class="fa-solid fa-user-tie"></i>&nbsp;Departemen</button>
                     </li>
                     <li class="nav-item">
-                        <button type="button" class="hoverable" id="divisi" style="width: 100%"><i class="fa-solid fa-users"></i>&nbsp;Divisi</button>
+                        <button type="button" class="hoverable text-start btn" id="divisi" style="width: 100%"><i class="fa-solid fa-users"></i>&nbsp;Divisi</button>
                     </li>
                     <li class="nav-item">
-                        <button type="button" class="hoverable" id="ruang" style="width: 100%"><i class="fa-solid fa-door-open"></i>&nbsp;Ruangan</button>
+                        <button type="button" class="hoverable text-start btn" id="ruang" style="width: 100%"><i class="fa-solid fa-door-open"></i>&nbsp;Ruangan</button>
                     </li>
                     <li class="nav-item">
-                        <button type="button" class="hoverable" id="sdm" style="width: 100%"><i class="fa-solid fa-people-arrows"></i>&nbsp;SDM Pendukung</button>
+                        <button type="button" class="hoverable text-start btn" id="sdm" style="width: 100%"><i class="fa-solid fa-people-arrows"></i>&nbsp;SDM Pendukung</button>
                     </li>
                     <li class="nav-item">
-                        <button type="button" class="hoverable" id="lokasi" style="width: 100%"><i class="fa-solid fa-location-dot"></i>&nbsp;Lokasi</button>
+                        <button type="button" class="hoverable text-start btn" id="lokasi" style="width: 100%"><i class="fa-solid fa-location-dot"></i>&nbsp;Lokasi</button>
                     </li>
                     <li class="nav-item">
-                        <button type="button" class="hoverable" id="dokumen" style="width: 100%"><i class="fa-regular fa-folder-open"></i>&nbsp;Dokumen</button>
+                        <button type="button" class="hoverable text-start btn" id="dokumen" style="width: 100%"><i class="fa-regular fa-folder-open"></i>&nbsp;Dokumen</button>
                     </li>
                     <li class="nav-item">
-                        <button type="button" class="hoverable" id="bahan" style="width: 100%"><i class="fa-solid fa-atom"></i>&nbsp;Bahan</button>
+                        <button type="button" class="hoverable text-start btn" id="bahan" style="width: 100%"><i class="fa-solid fa-atom"></i>&nbsp;Bahan</button>
                     </li>
                     <li class="nav-item">
-                      <button type="button" class="hoverable" id="aktiva" style="width: 100%"><i class="fa-solid fa-barcode"></i>&nbsp;Kode Aktiva</button>
+                      <button type="button" class="hoverable text-start btn" id="aktiva" style="width: 100%"><i class="fa-solid fa-barcode"></i>&nbsp;Kode Aktiva</button>
                   </li>
 
 
@@ -70,25 +72,25 @@
                           <span class="nav-link text-center disabled"><strong>K . I . B</strong></span>
                       </li>
                       <li class="nav-item">
-                          <a type="button" href="#"  class="hoverable" id="a" style="width: 100%"><i class="fa-regular fa-map"></i>&nbsp;TANAH</a>
+                          <a type="button" href="#"  class="hoverable text-start btn" id="a" style="width: 100%"><i class="fa-regular fa-map"></i>&nbsp;TANAH</a>
                       </li>
                       <li class="nav-item">
-                          <a type="button"  class="hoverable" id="b" style="width: 100%"><i class="fa-solid fa-gears"></i>&nbsp;PERALATAN DAN MESIN</a>
+                          <a type="button"  class="hoverable text-start btn" id="b" style="width: 100%"><i class="fa-solid fa-gears"></i>&nbsp;PERALATAN DAN MESIN</a>
                       </li>
                       <li class="nav-item">
-                          <a type="button"  class="hoverable" id="c" style="width: 100%"><i class="fa-solid fa-building"></i>&nbsp;GEDUNG DAN BANGUNAN</a>
+                          <a type="button"  class="hoverable text-start btn" id="c" style="width: 100%"><i class="fa-solid fa-building"></i>&nbsp;GEDUNG DAN BANGUNAN</a>
                       </li>
                       <li class="nav-item">
-                          <a type="button"  class="hoverable" id="d" style="width: 100%"><i class="fa-solid fa-road"></i>&nbsp;JALAN , IRIGASI DAN JARINGAN</a>
+                          <a type="button"  class="hoverable text-start btn" id="d" style="width: 100%"><i class="fa-solid fa-road"></i>&nbsp;JALAN , IRIGASI DAN JARINGAN</a>
                       </li>
                       <li class="nav-item">
-                          <a type="button"  class="hoverable" id="e" style="width: 100%"><i class="fa-solid fa-marker"></i>&nbsp;ASET TETAP LAINNYA</a>
+                          <a type="button"  class="hoverable text-start btn" id="e" style="width: 100%"><i class="fa-solid fa-marker"></i>&nbsp;ASET TETAP LAINNYA</a>
                       </li>
                       <li class="nav-item">
-                          <a type="button"  class="hoverable" id="f" style="width: 100%"><i class="fa-solid fa-trowel-bricks"></i>&nbsp;KONSTRUKSI</a>
+                          <a type="button"  class="hoverable text-start btn" id="f" style="width: 100%"><i class="fa-solid fa-trowel-bricks"></i>&nbsp;KONSTRUKSI</a>
                       </li>
                       <li class="nav-item">
-                          <a type="button"  class="hoverable" id="kir" style="width: 100%"><i class="fa-solid fa-list"></i>&nbsp;K.I.R</a>
+                          <a type="button"  class="hoverable text-start btn" id="kir" style="width: 100%"><i class="fa-solid fa-list"></i>&nbsp;K.I.R</a>
                       </li>
 
 
@@ -97,10 +99,10 @@
                       </li>
 
                       <li class="nav-item">
-                          <a type="button"  class="hoverable" id="nilai" style="width: 100%"><i class="fa-solid fa-heart"></i>&nbsp;NILAI ASET</a>
+                          <a type="button"  class="hoverable text-start btn" id="nilai" style="width: 100%"><i class="fa-solid fa-heart"></i>&nbsp;NILAI ASET</a>
                       </li>
 
-                      
+
                     </ul>
                 </div>
 

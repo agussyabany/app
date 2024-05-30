@@ -71,7 +71,14 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::get('/', function () {
         return redirect('/aset.dashboard');
     });
+
     Route::get('/aset.dashboard',[AsetDashboardController::class, 'index']);
+    Route::get('/barangs',[AsetDashboardController::class, 'barangs']);
+
+
+
+
+
     Route::get('/barang',[AsetDashboardController::class, 'barang']);
     Route::get('/departemen',[AsetDashboardController::class, 'departemen']);
     Route::get('/divisi',[AsetDashboardController::class, 'divisi']);
@@ -175,7 +182,7 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::get('/v_kir',[KirController::class,'v_kir']);
     Route::get('/kir_aktiva/{idv}',[KirController::class,'kir_aktiva']);
     Route::get('/kir_tgl/{id}',[KirController::class,'kir_tgl']);
-    
+
 
 
 });
