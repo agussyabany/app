@@ -11,7 +11,7 @@
 
                 <div class="container card">
                     <div class="card-header">DATA BARANG <div class="position-absolute top-0 end-0">
-                        <button class="btn  btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="fa-solid fa-file-circle-plus"></i></button>
+                        <button class="btn  btn-primary" id="tambah_barang"><i class="fa-solid fa-file-circle-plus"></i></button>
                 </div>
                     </div>
                             <div class="card-body">
@@ -19,19 +19,17 @@
                                     <thead>
                                         <tr>
                                             <th>NO</th>
-                                            <th>Golongan</th>
-                                            <th>Nama Barang</th>
-                                            <th>Kode Barang</th>
-                                            <th>Aksi</th>
+                                            <th>DEPARTEMEN</th>
+                                            <th>KODE DEPARTEMEN</th>
+                                            <th>AKSI</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($barang as $item)
+                                        @foreach($dept as $item)
                                             <tr>
                                                 <td>{{ $no++ }}</td>
-                                                <td>{{ $item->golongan }}</td>
-                                                <td>{{ $item->nama_barang }}</td>
-                                                <td>{{ $item->kode_barang }}</td>
+                                                <td>{{ $item->kode_dep }}</td>
+                                                <td>{{ $item->nama_dep }}</td>
                                                 <td>
                                                     <!-- Add action buttons/links here -->
                                                     <a href="" class="btn btn-outline-primary btn-sm"><i class="fas fa-edit"></i></a>
@@ -58,23 +56,23 @@
 
 
                 {{-- MODAL MASTER --}}
-                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                          ...
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                          <button type="button" class="btn btn-primary">Understood</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+    <div class="modal"  id="myModal">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="judul_modal">Modal title</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="modal_body">
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="tombol btn btn-primary" id="">SUBMIT</button>
+            </div>
+          </div>
+        </div>
+      </div>
       {{-- MODAL KIB --}}
       <div class="modal"  id="lgModal">
         <div class="modal-dialog  modal-xl">

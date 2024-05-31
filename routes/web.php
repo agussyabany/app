@@ -74,11 +74,13 @@ Route::middleware('auth','verified','role:aset')->group(function () {
 
     Route::get('/aset.dashboard',[AsetDashboardController::class, 'index']);
     Route::get('/barangs',[AsetDashboardController::class, 'barangs']);
-
-
-
-
-
+    Route::get('/depts',[AsetDashboardController::class, 'depts']);
+    Route::get('/divs',[AsetDashboardController::class, 'divs']);
+    Route::get('/ruangs',[AsetDashboardController::class, 'ruangs']);
+    Route::get('/sumber',[AsetDashboardController::class, 'sumber']);
+    Route::get('/lokasis',[AsetDashboardController::class, 'lokasis']);
+    Route::get('/bahans',[AsetDashboardController::class, 'bahans']);
+    Route::get('/aktivas',[AsetDashboardController::class, 'aktivas']);
     Route::get('/barang',[AsetDashboardController::class, 'barang']);
     Route::get('/departemen',[AsetDashboardController::class, 'departemen']);
     Route::get('/divisi',[AsetDashboardController::class, 'divisi']);
@@ -88,10 +90,13 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::get('/bahan',[AsetDashboardController::class, 'bahan']);
     Route::get('/aktiva',[AsetDashboardController::class, 'aktiva']);
     Route::get('/nilai',[AsetDashboardController::class, 'nilai']);
+
+
     Route::get('/tanah',[AsetDashboardController::class, 'tanah']);
     Route::get('/mesin',[AsetDashboardController::class, 'mesin']);
     Route::get('/gedung',[AsetDashboardController::class, 'gedung']);
     Route::get('/kir',[AsetDashboardController::class, 'kir']);
+
 
     Route::post('/barang.save',[BarangController::class,'save']);
     Route::get('barang.edit/{id}',[BarangController::class,'edit']);

@@ -5,8 +5,29 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.12.313/pdf.min.js"></script>
 {{-- <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script> --}}
-{{-- <script src="{{ asset('assets/boots/js/myjs/asetmaster.js')}}"></script> --}}
+<script src="{{ asset('assets/boots/js/myjs/asetmaster.js')}}"></script>
 {{-- <script src="{{ asset('assets/boots/js/myjs/asetkib.js') }}"></script>
 <script src="{{ asset('assets/boots/js/myjs/funct.js') }}"></script> --}}
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-
+<script>
+    $(document).ready(function() {
+        var on =  JSON.parse("{{ json_encode($on) }}");
+            if (on === 1) {$('#barang').addClass('text-start btn btn-primary hoverable');}
+            if (on === 2) {$('#departemen').addClass('text-start btn btn-primary hoverable');}
+            if (on === 3) {$('#divisi').addClass('text-start btn btn-primary hoverable');}
+            if (on === 4) {$('#ruang').addClass('text-start btn btn-primary hoverable');}
+            if (on === 5) {$('#sdm').addClass('text-start btn btn-primary hoverable');}
+            if (on === 6) {$('#lokasi').addClass('text-start btn btn-primary hoverable');}
+            if (on === 7) {$('#dokumen').addClass('text-start btn btn-primary hoverable');}
+            if (on === 8) {$('#bahan').addClass('text-start btn btn-primary hoverable');}
+            if (on === 9) {$('#aktiva').addClass('text-start btn btn-primary hoverable');}
+            if (on === 10) {$('#tanah').addClass('text-start btn btn-primary hoverable');}
+            if (on === 11) {$('#mesin').addClass('text-start btn btn-primary hoverable');}
+            if (on === 12) {$('#gedung').addClass('text-start btn btn-primary hoverable');}
+            if (on === 13) {$('#jalan').addClass('text-start btn btn-primary hoverable');}
+            if (on === 14) {$('#tetap').addClass('text-start btn btn-primary hoverable');}
+            if (on === 15) {$('#konstruksi').addClass('text-start btn btn-primary hoverable');}
+            if (on === 16) {$('#kir').addClass('text-start btn btn-primary hoverable');}
+            if (on === 17) {$('#nilai').addClass('text-start btn btn-primary hoverable');}
+        });
+</script>
