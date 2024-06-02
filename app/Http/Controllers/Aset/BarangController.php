@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Aset;
 use App\Http\Controllers\Controller;
 use App\Models\Aset\Barang;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class BarangController extends Controller
 {
@@ -20,14 +22,19 @@ class BarangController extends Controller
             'nama_barang' => $nama_barang,
             'kode_barang' => $kode_barang,
         ]);
-
-        return response()->json(['message' => 'Data inserted successfully']);
+        Alert::success('BERHASIL','Data Berhasil Dismpan');
+        return redirect('/barangs');
     }
 
     public function edit($id)
     {
-        $barang = Barang::where('id',$id)->get();
-        return response()->json(['data' => $barang]);
+            $barang = Barang::leftJoin('golongans', function($join) {
+                $join->on(DB::raw('CAST(barangs.golongan AS bigint)'), '=', 'golongans.id');
+            })
+            ->where('barangs.id', $id)
+            ->select('barangs.id as barId', 'golongans.id as golID','nama_barang','kode_barang','golongan','golongans.nama as nama')
+            ->get();
+            return response()->json(['data' => $barang]);
     }
 
     public function update (Request $request)
@@ -42,15 +49,22 @@ class BarangController extends Controller
                     'nama_barang' =>$nama_barang,
                     'kode_barang' =>$kode_barang
                 ]);
-
-                return response()->json(['data' => 'update Data Sukses']);
+                Alert::success('BERHASIL','Data Berhasil Diupdate');
+                return redirect('/barangs');
+                //return response()->json(['data' => 'update Data Sukses']);
 
     }
 
     public function destroy ($id)
     {
         Barang::where('id', $id)->delete();
-        return response()->json(['message' => 'Data deleted successfully']);
+
+        $title = 'Delete User!';
+        $text = "Are you sure you want to delete?";
+        confirmDelete($title, $text);
+
+        return redirect('/barangs');
+        //return response()->json(['message' => 'Data deleted successfully']);
     }
 
     public function tanah()

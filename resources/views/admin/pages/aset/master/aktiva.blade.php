@@ -11,7 +11,7 @@
 
                 <div class="container card">
                     <div class="card-header">DATA RUANG <div class="position-absolute top-0 end-0">
-                        <button class="btn  btn-primary" id="tambah_barang"><i class="fa-solid fa-file-circle-plus"></i></button>
+                      <button class="btn  btn-primary"  data-bs-toggle="modal" data-bs-target="#modal_aktiva"><i class="fa-solid fa-file-circle-plus"></i></button>
                 </div>
                     </div>
                             <div class="card-body">
@@ -36,7 +36,7 @@
                                                 <td>{{ $item->kib }}</td>
                                                 <td>
                                                     <!-- Add action buttons/links here -->
-                                                    <a href="" class="btn btn-outline-primary btn-sm"><i class="fas fa-edit"></i></a>
+                                                    <button type="button" class="btn btn-outline-primary btn-sm" id="edit_aktiva" data-id="{{ $item->id }}"><i class="fas fa-edit"></i></button>
                                                     <form action="" method="POST" style="display:inline-block;">
                                                         @csrf
                                                         @method('DELETE')
@@ -60,11 +60,11 @@
 
 
                 {{-- MODAL MASTER --}}
-    <div class="modal"  id="myModal">
+    <div class="modal"  id="modal_aktiva">
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="judul_modal">Modal title</h5>
+              <h5 class="modal-title" id="judul_modal">TAMBAH AKTIVA</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body" id="modal_body">
@@ -72,7 +72,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="tombol btn btn-primary" id="">SUBMIT</button>
+              <button type="submit" class="tombol btn btn-primary" id="">SUBMIT</button>
             </div>
           </div>
         </div>

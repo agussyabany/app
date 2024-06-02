@@ -342,10 +342,10 @@ class MesinController extends Controller
           ]);
     }
 
-    public function nilaimesin($lok)
+    public function nilaimesin($id)
     {
         $mesin = NilaiAktiva::join('aktivas','nilai_aktivas.id_aktiva','=','aktivas.id',)
-                ->where('id_lokasi', $lok)
+                ->where('id_lokasi', $id)
                 ->where('cat',2)
                 ->get();
         return response()->json([

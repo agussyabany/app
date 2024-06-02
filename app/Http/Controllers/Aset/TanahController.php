@@ -89,10 +89,10 @@ class TanahController extends Controller
     }
 
    
-    public function nilaitanah($lok)
+    public function nilaitanah($id)
     {
         $tanah = NilaiAktiva::join('aktivas','nilai_aktivas.id_aktiva','=','aktivas.id',)
-                ->where('id_lokasi', $lok)
+                ->where('id_lokasi', $id)
                 ->where('cat',1)
                 ->get();
         return response()->json([

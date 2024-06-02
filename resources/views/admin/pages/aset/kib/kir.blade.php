@@ -1,3 +1,7 @@
+@php
+use App\Models\Aset\NilaiAktiva;
+$no = 0;
+@endphp
 @extends('admin.layouts.main')
 
 @section('title')
@@ -21,6 +25,7 @@
                                             <th>NO</th>
                                             <th>LOKASI</th>
                                             <th>ALAMAT</th>
+                                            <th>NILAI</th>
                                             <th>AKSI</th>
                                         </tr>
                                     </thead>
@@ -30,6 +35,7 @@
                                                 <td>{{ $no++ }}</td>
                                                 <td>{{ $item->lokasi }}</td>
                                                 <td>{{ $item->alamat }}</td>
+                                                <td ><STRONG><a id="klik_nilai_kir" style="text-decoration: none;" href="#" data-id="{{ $item->id_lokasi }}" data-bs-toggle="modal" data-bs-target="#modal_kir_nilai">{{number_format (NilaiAktiva::where('id_lokasi', $item->id_lokasi)->where('cat', 7)->sum('nilai'),0,',','.') }}</a></STRONG></td>
 
 
 
@@ -81,7 +87,7 @@
         </div>
       </div>
       {{-- MODAL KIB --}}
-      <div class="modal"  id="lgModal">
+      <div class="modal"  id="modal_kir_nilai">
         <div class="modal-dialog  modal-xl">
           <div class="modal-content">
             <div class="modal-header">
@@ -89,7 +95,21 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body" id="modal_bodyLG">
-
+              <table class="table table-striped table-border" id="tbl_detailNilai_kir">
+                <thead>
+                    <tr>
+                        <th>NO</th>
+                        <th>Kode Perkiraan</th>
+                        <th>Nama Aktiva</th>
+                        <th>Tanggal</th>
+                        <th>Tahun</th>
+                        <th>Nilai</th>
+                        <th>Uraian</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

@@ -97,10 +97,10 @@ class GedungController extends Controller
           ]);
     }
 
-    public function nilaigedung($lok)
+    public function nilaigedung($id)
     {
         $gedung = NilaiAktiva::join('aktivas','nilai_aktivas.id_aktiva','=','aktivas.id',)
-                ->where('id_lokasi', $lok)
+                ->where('id_lokasi', $id)
                 ->where('cat',3)
                 ->get();
         return response()->json([

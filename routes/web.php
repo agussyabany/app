@@ -100,20 +100,21 @@ Route::middleware('auth','verified','role:aset')->group(function () {
 
     Route::post('/barang.save',[BarangController::class,'save']);
     Route::get('barang.edit/{id}',[BarangController::class,'edit']);
-    Route::post('barang.update',[BarangController::class,'update']);
-    Route::post('barang.hapus/{id}',[BarangController::class,'destroy']);
+    Route::post('/barang.update',[BarangController::class,'update']);
+    //Route::get('barang.hapus/{id}',[BarangController::class,'destroy']);
+    Route::delete('barang.hapus/{id}', [BarangController::class, 'destroy'])->name('barang.destroy');
     Route::get('barang.tanah',[BarangController::class,'tanah']);
     Route::get('barang.mesin',[BarangController::class,'mesin']);
 
     Route::post('/dep.save',[DepartemenController::class,'save']);
     Route::get('dep.edit/{id}',[DepartemenController::class,'edit']);
     Route::post('dep.update',[DepartemenController::class,'update']);
-    Route::post('dep.hapus/{id}',[DepartemenController::class,'destroy']);
+    Route::get('dep.hapus/{id}',[DepartemenController::class,'destroy']);
 
     Route::post('/div.save',[Divisicontroller::class,'save']);
     Route::get('div.edit/{id}',[Divisicontroller::class,'edit']);
     Route::post('div.update',[Divisicontroller::class,'update']);
-    Route::post('div.hapus/{id}',[Divisicontroller::class,'destroy']);
+    Route::get('div.hapus/{id}',[Divisicontroller::class,'destroy']);
 
     Route::post('/ruang.save',[RuangController::class,'save']);
     Route::get('ruang.edit/{id}',[RuangController::class,'edit']);
@@ -146,7 +147,7 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::get('/tanah.detail/{id}',[TanahController::class,'detail']);
     Route::get('/tanah.print',[TanahController::class,'print']);
     Route::get('/tanah.nilai/{lok}',[TanahController::class,'nilaiSum']);
-    Route::get('/nilaiTanah.detail/{lok}',[TanahController::class,'nilaiTanah']);
+    Route::get('/nilaiTanah.detail/{id}',[TanahController::class,'nilaiTanah']);
 
     Route::get('/mesin.dep/{id}',[MesinController::class,'dep']);
     Route::get('/mesin.div/{dep}/{lok}',[MesinController::class,'div']);
@@ -160,7 +161,7 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::post('/mesin.update',[MesinController::class,'update']);
     Route::get('/mesin.print/{lok}/{dep}/{div}',[MesinController::class,'print']);
     Route::get('/mesin.nilai/{lok}',[MesinController::class,'nilaiSum']);
-    Route::get('/nilaiMesin.detail/{lok}',[MesinController::class,'nilaimesin']);
+    Route::get('/nilaiMesin.detail/{id}',[MesinController::class,'nilaimesin']);
 
     Route::get('/gedung.dep/{id}',[GedungController::class,'dep']);
     Route::get('/gedung.div/{dep}/{lok}',[GedungController::class,'div']);
@@ -168,7 +169,7 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::get('/gedung.detail/{id}',[GedungController::class,'detail']);
     Route::get('/gedung.print/{lok}/{dep}/{div}',[GedungController::class,'print']);
     Route::get('/gedung.nilai/{lok}',[GedungController::class,'nilaiSum']);
-    Route::get('/nilaiGedung.detail/{lok}',[GedungController::class,'nilaigedung']);
+    Route::get('/nilaiGedung.detail/{id}',[GedungController::class,'nilaigedung']);
 
     Route::get('/kir.dep/{id}',[KirController::class,'dep']);
     Route::get('/kir.div/{dep}/{lok}',[KirController::class,'div']);
@@ -181,7 +182,7 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::post('/kir.clear',[KirController::class,'clear']);
     Route::get('/kir.print/{lok}/{dep}/{div}/{ged}/{ruang}',[KirController::class,'print']);
     Route::get('/kir.nilai/{loks}',[KirController::class,'nilaiSum']);
-    Route::get('/nilaiKir.detail/{lok}',[KirController::class,'nilaikir']);
+    Route::get('/nilaiKir.detail/{id}',[KirController::class,'nilaikir']);
     Route::post('/kir.del/{id}',[KirController::class,'del']);
     Route::get('/voucher.kir',[KirController::class,'voucher']);
     Route::get('/v_kir',[KirController::class,'v_kir']);

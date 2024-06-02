@@ -11,7 +11,7 @@
 
                 <div class="container card">
                     <div class="card-header">DATA LOKASI <div class="position-absolute top-0 end-0">
-                        <button class="btn  btn-primary" id="tambah_barang"><i class="fa-solid fa-file-circle-plus"></i></button>
+                      <button class="btn  btn-primary"  data-bs-toggle="modal" data-bs-target="#modal_lokasi"><i class="fa-solid fa-file-circle-plus"></i></button>
                 </div>
                     </div>
                             <div class="card-body">
@@ -35,10 +35,11 @@
                                                 <td>{{ $item->alamat }}</td>
                                                 <td>{{ $item->lat }}</td>
                                                 <td>{{ $item->long }}</td>
-                                                <td><img height="80px" width="80px" src="http://app.perumdamtirtakencana.id/assets/img/lokasi/{{$item->img }}" alt=""></td>
+                                                <td><img height="80px" width="80px" src="http://127.0.0.1:8000/assets/img/lokasi/{{$item->img }}" alt=""></td>
                                                 <td>
                                                     <!-- Add action buttons/links here -->
-                                                    <a href="" class="btn btn-outline-primary btn-sm"><i class="fas fa-edit"></i></a>
+                                                    <!-- Add action buttons/links here -->
+                                                    <button type="button" class="btn btn-outline-primary btn-sm" id="edit_lokasi" data-id="{{ $item->id }}"><i class="fas fa-edit"></i></button>
                                                     <form action="" method="POST" style="display:inline-block;">
                                                         @csrf
                                                         @method('DELETE')
@@ -62,23 +63,38 @@
 
 
                 {{-- MODAL MASTER --}}
-    <div class="modal"  id="myModal">
+    <div class="modal"  id="modal_lokasi">
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="judul_modal">Modal title</h5>
+              <h5 class="modal-title" id="judul_modal">TAMBAH LOKASI</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body" id="modal_body">
+            <div class="modal-body" id="modal_bodyLG">
+              <form action="/lok.save" id="form_lokasi" method="post" enctype="multipart/form-data">
+                @csrf
+                <input type="text" id="id" name="id">
+                <input type="text" class="form-control" id="nama_lokasi" name="lokasi" placeholder="Nama Lokasi"><br>
+                <input type="text" class="form-control" id="alamat" name="alamat" placeholder="Alamat"><br>
+                <input type="text" class="form-control" id="lat" name="lat" placeholder="Latitude"><br>
+                <input type="text" class="form-control" id="long" name="long" placeholder="Longitude"><br>
+                <input type="file" class="form-control" id="img" name="img"><br>
+             
 
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="tombol btn btn-primary" id="">SUBMIT</button>
+              <button type="submit" class="tombol btn btn-primary" id="">SUBMIT</button>
+            </form>
             </div>
           </div>
         </div>
       </div>
+
+
+
+
+
       {{-- MODAL KIB --}}
       <div class="modal"  id="lgModal">
         <div class="modal-dialog  modal-xl">

@@ -10,8 +10,8 @@
         <br>
 
                 <div class="container card">
-                    <div class="card-header">DATA BARANG <div class="position-absolute top-0 end-0">
-                        <button class="btn  btn-primary" id="tambah_barang"><i class="fa-solid fa-file-circle-plus"></i></button>
+                    <div class="card-header">DATA DEPARTEMEN <div class="position-absolute top-0 end-0">
+                      <button class="btn  btn-primary"  data-bs-toggle="modal" data-bs-target="#modal_dep"><i class="fa-solid fa-file-circle-plus"></i></button>
                 </div>
                     </div>
                             <div class="card-body">
@@ -32,12 +32,8 @@
                                                 <td>{{ $item->nama_dep }}</td>
                                                 <td>
                                                     <!-- Add action buttons/links here -->
-                                                    <a href="" class="btn btn-outline-primary btn-sm"><i class="fas fa-edit"></i></a>
-                                                    <form action="" method="POST" style="display:inline-block;">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn btn-outline-danger btn-sm"><i class="fas fa-trash"></i></button>
-                                                    </form>
+                                                    <button type="button" data-id="{{ $item->id }}" id="edit_departemen" class="btn btn-outline-primary btn-sm"><i class="fas fa-edit"></i></button>
+                                                    <a href="/dep.hapus/{{ $item->id }}" class="btn btn-outline-danger" data-confirm-delete="true"><i class="fas fa-trash"></i></a>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -56,23 +52,30 @@
 
 
                 {{-- MODAL MASTER --}}
-    <div class="modal"  id="myModal">
-        <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="judul_modal">Modal title</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body" id="modal_body">
+                <div class="modal fade" id="modal_dep" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="judul_modal">TAMBAH DEPARTEMEN</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body" id="modal_bodyLG">
+                        <form id="form_departemen" action="/dep.save" method="post">
+                          @csrf
+                          <input type="hidden" id="id" value="" name="id">
+                          <input type="text" class="form-control" id="nama" name="nama" placeholder="Nama Departemen"><br> <input type="text" class="form-control" id="kode" name="kode" placeholder="Kode Departemen">
+                        
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" id="add" class="btn btn-primary">Save changes</button>
+                      </div>
+                    </form>
+                    </div>
+                  </div>
+                </div>
 
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="tombol btn btn-primary" id="">SUBMIT</button>
-            </div>
-          </div>
-        </div>
-      </div>
+                
       {{-- MODAL KIB --}}
       <div class="modal"  id="lgModal">
         <div class="modal-dialog  modal-xl">

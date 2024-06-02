@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Aset;
 use App\Http\Controllers\Controller;
 use App\Models\Aset\Bahan;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class BahanController extends Controller
 {
@@ -13,12 +14,13 @@ class BahanController extends Controller
 
         $nama_bahan = $request->input('nama');
 
-        // Insert data into the 'barang' table
         Bahan::insert([
             'nama' => $nama_bahan
         ]);
 
-        return response()->json(['message' => 'Data inserted successfully']);
+        Alert::success('BERHASIL','DATA BERHASIL DITAMBAH');
+        return redirect('/bahans');
+        //return response()->json(['message' => 'Data inserted successfully']);
     }
 
     public function edit($id)
@@ -39,7 +41,9 @@ class BahanController extends Controller
                     'nama' => $nama_bahan,
                 ]);
 
-                return response()->json(['data' => 'update Data Sukses']);
+                Alert::success('BERHASIL','DATA BERHASIL DIUPDATE');
+                return redirect('/bahans');
+                //return response()->json(['data' => 'update Data Sukses']);
 
     }
 

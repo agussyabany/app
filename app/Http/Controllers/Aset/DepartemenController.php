@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Aset\Departemen;
 use Illuminate\Http\Request;
 use PHPUnit\Framework\Attributes\Depends;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class DepartemenController extends Controller
 {
@@ -20,7 +21,10 @@ class DepartemenController extends Controller
             'kode_dep' => $kode_dep,
         ]);
 
-        return response()->json(['message' => 'Data inserted successfully']);
+       
+        Alert::success('BERHASIL','DATA BERHASIL DITAMBAH');
+        return redirect('/depts');
+        //return response()->json(['message' => 'Data inserted successfully']);
     }
 
     public function edit($id)
@@ -40,14 +44,19 @@ class DepartemenController extends Controller
                     'nama_dep' =>$nama_dep,
                     'kode_dep' =>$kode_dep
                 ]);
-
-                return response()->json(['data' => 'update Data Sukses']);
+        Alert::success('BERHASIL','DATA BERHASIL DIUPDATE');
+        return redirect('/depts');
+                //return response()->json(['data' => 'update Data Sukses']);
 
     }
 
     public function destroy ($id)
     {
         Departemen::where('id', $id)->delete();
-        return response()->json(['message' => 'Data deleted successfully']);
+        $title = 'HAPUS DEPARTEMEN!';
+        $text = "Apakah Kamu Yakin?";
+        confirmDelete($title, $text);
+        return redirect('/depts');
+        //return response()->json(['message' => 'Data deleted successfully']);
     }
 }

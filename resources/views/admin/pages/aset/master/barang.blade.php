@@ -11,7 +11,7 @@
 
                 <div class="container card">
                     <div class="card-header">DATA BARANG <div class="position-absolute top-0 end-0">
-                        <button class="btn  btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="fa-solid fa-file-circle-plus"></i></button>
+                        <button class="btn  btn-primary"  data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-file-circle-plus"></i></button>
                 </div>
                     </div>
                             <div class="card-body">
@@ -34,12 +34,12 @@
                                                 <td>{{ $item->kode_barang }}</td>
                                                 <td>
                                                     <!-- Add action buttons/links here -->
-                                                    <a href="" class="btn btn-outline-primary btn-sm"><i class="fas fa-edit"></i></a>
-                                                    <form action="" method="POST" style="display:inline-block;">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn btn-outline-danger btn-sm"><i class="fas fa-trash"></i></button>
-                                                    </form>
+                                                    <button type="button" id="edit" data-id="{{ $item->id }}" class="btn btn-outline-primary btn-sm"><i class="fas fa-edit"></i></button>
+                                                    <form action="{{ route('barang.destroy', $item->id) }}" method="POST" class="d-inline">
+                                                      @csrf
+                                                      @method('DELETE')
+                                                      <button type="submit" class="btn btn-outline-danger btn-sm" data-confirm-delete="true"><i class="fas fa-trash"></i></button>
+                                                  </form>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -58,23 +58,41 @@
 
 
                 {{-- MODAL MASTER --}}
-                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                          ...
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                          <button type="button" class="btn btn-primary">Understood</button>
+                
+
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="judul_modal">Modal title</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body" id="modal_bodyLG">
+                            <form id="form_barang" action="/barang.save" method="post">
+                              @csrf
+                              <input type="hidden" val="" id="id" name="id"> 
+                              <select name="gol"  id="gol" class="select2 form-control" style="width:100%;">
+                                <option value="">-PILIH GOLONGAN-</option>
+                                <option value="1">TANAH</option>
+                                <option value="2">PERALATAN DAN MESIN</option>
+                                <option value="3">GEDUNG DAN BANGUNAN</option>
+                                <option value="4">JALAN,IRIGASI DAN JARINGAN</option>
+                                <option value="5">KONSTRUKSI DALAM PENGERJAAN</option>
+                                <option value="6">KIR</option>
+                              </select><br><br>
+                              <input type="text" class="form-control" id="nama" name="nama" placeholder="Nama Barang"><br>
+                              <input type="text" class="form-control" id="kode" name="kode" placeholder="Kode Barang">
+                            
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" id="add" class="btn btn-primary">Save changes</button>
+                          </div>
+                        </form>
                         </div>
                       </div>
                     </div>
-                  </div>
+
       {{-- MODAL KIB --}}
       <div class="modal"  id="lgModal">
         <div class="modal-dialog  modal-xl">

@@ -26,6 +26,7 @@ class AsetDashboardController extends Controller
     public function index()
 
     {
+        $on = 1;
         $no = 1;
         $barang = Barang::all();
         $idUSer = Auth::user()->id;
@@ -35,7 +36,7 @@ class AsetDashboardController extends Controller
                     ->first();
         $jabat = $user['jabat'];
         $divisi = $user['nama_div'];
-        return view('admin.pages.aset.dashboard',compact(['barang','no','jabat','divisi']));
+        return view('admin.pages.aset.dashboard',compact(['barang','no','jabat','divisi','no','on']));
     }
 
 
@@ -81,10 +82,12 @@ class AsetDashboardController extends Controller
                     ->join('jabatans','users.jabat','=','jabatans.id')
                     ->where('users.id',$idUSer)
                     ->first();
-        $div = Divisi::select('kode_div','nama_div','kode_dep',)->join('departemens','divisis.id_dep','=','departemens.id')->get();
+        $div = Divisi::select('divisis.id as idDiv','kode_div','nama_div','kode_dep',)->join('departemens','divisis.id_dep','=','departemens.id')->get();
         $jabat = $user['jabat'];
         $divisi = $user['nama_div'];
-        return view('admin.pages.aset.master.div',compact(['jabat','divisi','div','no','on']));
+        $dep = Departemen::all();
+        return view('admin.pages.aset.master.div',compact(['jabat','divisi','div','no','on','dep']));
+        //return $dep;
     }
 
     public function ruangs()
@@ -114,13 +117,14 @@ class AsetDashboardController extends Controller
 
                     ->where('users.id',$idUSer)
                     ->first();
-        $sdm = sdm::select('nama_sdm','nip','nama_div','jabat')
+        $sdm = sdm::select('sdms.id as idSdm','nama_sdm','nip','nama_div','jabat')
                         ->join('divisis','sdms.id_div','=','divisis.id')
                         ->join('jabatans','sdms.id_jabat','=','jabatans.id')
                         ->get();
         $jabat = $user['jabat'];
         $divisi = $user['nama_div'];
-        return view('admin.pages.aset.master.sdm',compact(['jabat','divisi','sdm','no','on']));
+        $div = Divisi::all();
+        return view('admin.pages.aset.master.sdm',compact(['jabat','divisi','sdm','no','on','div']));
     }
 
     public function lokasis()

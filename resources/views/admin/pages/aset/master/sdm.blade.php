@@ -11,7 +11,7 @@
 
                 <div class="container card">
                     <div class="card-header">DATA SDM PENDUKUNG<div class="position-absolute top-0 end-0">
-                        <button class="btn  btn-primary" id="tambah_barang"><i class="fa-solid fa-file-circle-plus"></i></button>
+                      <button class="btn  btn-primary"  data-bs-toggle="modal" data-bs-target="#modal_sdm"><i class="fa-solid fa-file-circle-plus"></i></button>
                 </div>
                     </div>
                             <div class="card-body">
@@ -36,7 +36,7 @@
                                                 <td>{{ $item->nama_div }}</td>
                                                 <td>
                                                     <!-- Add action buttons/links here -->
-                                                    <a href="" class="btn btn-outline-primary btn-sm"><i class="fas fa-edit"></i></a>
+                                                    <button type="button" class="btn btn-outline-primary btn-sm" id="edit_sdm" data-id="{{ $item->idSdm }}"><i class="fas fa-edit"></i></button>
                                                     <form action="" method="POST" style="display:inline-block;">
                                                         @csrf
                                                         @method('DELETE')
@@ -60,23 +60,41 @@
 
 
                 {{-- MODAL MASTER --}}
-    <div class="modal"  id="myModal">
+    <div class="modal"  id="modal_sdm">
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="judul_modal">Modal title</h5>
+              <h5 class="modal-title" id="judul_modal">TAMBAH SDM</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body" id="modal_body">
-
+            <div class="modal-body" id="modal_bodyLG">
+              <form action="/sdm.save" id="form_sdm" method="post">
+                @csrf
+                <input type="hidden" id="id" name="id" value="">
+                <input type="text" class="form-control" id="nama" name="nama" placeholder="Nama SDM"><br>
+                <input type="text" class="form-control" id="nip" name="nip" placeholder="NIP"><br>
+                <select name="jabat" class="select2 form-control" id="jabat" style="width:100%;">
+                  <option value="1">MANAJER</option>
+                  <option value="2">ASISTEN MANAJER</option>
+                <select>
+                <br><br>
+                <select name="div" class="select2 form-control" id="select_div" style="width:100%;">
+                  @foreach ($div as $item)
+                    <option value="{{ $item->id }}">{{ $item->nama_div }}</option>
+                    @endforeach
+                <select>
+              
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="tombol btn btn-primary" id="">SUBMIT</button>
+              <button type="submit" class="tombol btn btn-primary" id="">SUBMIT</button>
+            </form>
             </div>
           </div>
         </div>
       </div>
+
+
       {{-- MODAL KIB --}}
       <div class="modal"  id="lgModal">
         <div class="modal-dialog  modal-xl">

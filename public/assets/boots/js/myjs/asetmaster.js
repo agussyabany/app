@@ -1,12 +1,146 @@
 //DATA TABLE UNTUK TABEL MASTER
-
 $('#tbl').DataTable();
+//FUNGSI SELECT2 SELECT-OPTION
+$('.select2').select2({
+    dropdownParent: $('#modal_bodyLG')
+});
 
-
-
-
-
-
+//BARANG
+$(document).on('click', '#edit', function() {
+    var id = $(this).data('id');
+    $('#exampleModal').modal('show');
+    $('#judul_modal').html('EDIT BARANG');
+    $.ajax({
+            type: "GET",
+            url: "/barang.edit/"+ id,
+            success: function (data) {
+            $.each(data.data, function (index, item) {
+                $('#nama').val(item.nama_barang);
+                $('#kode').val(item.kode_barang);
+                $('#id').val(item.barId);
+                $('#gol option[value="' + item.golongan + '"]').remove();
+                $('#gol').prepend('<option value="' + item.golongan + '" selected="selected">' + item.nama + '</option>');
+                $('#form_barang').attr('action', '/barang.update');
+            });
+        }
+    });
+})
+//DEPARTEMEN
+$(document).on('click', '#edit_departemen', function() {    
+    var id = $(this).data('id');
+    $('#modal_dep').modal('show');
+    $('#judul_modal').html('EDIT DEPARTEMEN');
+    $.ajax({
+            type: "GET",
+            url: "/dep.edit/"+ id,
+            success: function (data) {
+            $.each(data.data, function (index, item) {
+                $('#nama').val(item.nama_dep);
+                $('#kode').val(item.kode_dep);
+                $('#id').val(id);
+                $('#form_departemen').attr('action', '/dep.update');
+            });
+        }
+    });
+})
+//DIVISI
+$(document).on('click', '#edit_divisi', function() {    
+    var id = $(this).data('id');
+    $('#modal_div').modal('show');
+    $('#judul_modal').html('EDIT DIVISI');
+    $.ajax({
+            type: "GET",
+            url: "/div.edit/"+ id,
+            success: function (data) {
+            $.each(data.data, function (index, item) {
+                $('#nama').val(item.nama_div);
+                $('#kode').val(item.kode_div);
+                $('#id').val(id);
+                $('#dep_select option[value="' + item.golongan + '"]').remove();
+                $('#dep_select').prepend('<option value="' + item.id_dep + '" selected="selected">' + item.kode_dep + '</option>');
+                $('#form_div').attr('action', '/div.update');
+            });
+        }
+    });
+})
+//RUANG
+$(document).on('click', '#edit_ruang', function() {    
+    var id = $(this).data('id');
+    $('#modal_ruang').modal('show');
+    $('#judul_modal').html('EDIT RUANG');
+    $.ajax({
+            type: "GET",
+            url: "/ruang.edit/"+ id,
+            success: function (data) {
+            $.each(data.data, function (index, item) {
+                $('#nama').val(item.nama_ruang);
+                $('#kode').val(item.kode);
+                $('#id').val(id);
+                $('#form_ruang').attr('action', '/ruang.update');
+            });
+        }
+    });
+})
+//SDM
+$(document).on('click', '#edit_sdm', function() {    
+    var id = $(this).data('id');
+    $('#modal_sdm').modal('show');
+    $('#judul_modal').html('EDIT SDM');
+    $.ajax({
+            type: "GET",
+            url: "/sdm.edit/"+ id,
+            success: function (data) {
+            $.each(data.data, function (index, item) {
+                $('#nama').val(item.nama_sdm);
+                $('#nip').val(item.nip);
+                $('#jabat option[value="' + item.jabat + '"]').remove();
+                $('#jabat').prepend('<option value="' + item.idJabat + '" selected="selected">' + item.jabat + '</option>');
+                $('#select_div option[value="' + item.jabat + '"]').remove();
+                $('#select_div').prepend('<option value="' + item.idDiv + '" selected="selected">' + item.nama_div + '</option>');
+                $('#id').val(id);
+                $('#form_sdm').attr('action', '/sdm.update');
+            });
+        }
+    });
+})
+//LOKASI
+$(document).on('click', '#edit_lokasi', function() {    
+    var id = $(this).data('id');
+    $('#modal_lokasi').modal('show');
+    $('#judul_modal').html('EDIT LOKASI');
+    $.ajax({
+            type: "GET",
+            url: "/lok.edit/"+ id,
+            success: function (data) {
+            $.each(data.data, function (index, item) {
+                $('#img').remove();
+                $('#nama_lokasi').val(item.lokasi);
+                $('#alamat').val(item.alamat);
+                $('#lat').val(item.lat);
+                $('#long').val(item.long);
+                $('#id').val(id);
+                $('#form_lokasi').attr('action', '/lok.update');
+            });
+        }
+    });
+})
+//BAHAN
+$(document).on('click', '#edit_bahan', function() {    
+    var id = $(this).data('id');
+    $('#modal_bahan').modal('show');
+    $('#judul_modal').html('EDIT BAHAN');
+    $.ajax({
+            type: "GET",
+            url: "/bahan.edit/"+ id,
+            success: function (data) {
+            $.each(data.data, function (index, item) {
+                $('#nama').val(item.nama);
+                $('#id').val(id);
+                $('#form_bahan').attr('action', '/bahan.update');
+            });
+        }
+    });
+})
 
 
 

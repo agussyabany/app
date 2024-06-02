@@ -6,35 +6,74 @@ use App\Http\Controllers\Controller;
 use App\Models\Aset\lokasi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class LokasiController extends Controller
 {
+    // public function save(Request $request)
+    // {
+    //     $nama_lokasi = $request->input('nama_lokasi');
+    //     $alamat = $request->input('alamat');
+    //     $lat = $request->input('lat');
+    //     $long = $request->input('long');
+    //     $img = $request->input('img');
+
+    //     $imageData = base64_decode($img);
+
+        
+    //     $imageName = time() . '_' . uniqid() . '.jpg';
+    //     file_put_contents(public_path('assets/img/lokasi/' . $imageName), $imageData);
+
+    //     // Save other form data to the database
+    //     $lokasi = new lokasi();
+    //     $lokasi->lokasi = $nama_lokasi;
+    //     $lokasi->alamat = $alamat;
+    //     $lokasi->lat = $lat;
+    //     $lokasi->long = $long;
+    //     $lokasi->img = $imageName;
+    //     $lokasi->save();
+
+
+    //     return response()->json(['message' => 'Data inserted successfully']);
+    // }
+
     public function save(Request $request)
     {
-        $nama_lokasi = $request->input('nama_lokasi');
+        $request->validate([
+            'lokasi' => 'required|string|max:255',
+            'alamat' => 'required|string|max:255',
+            'lat' => 'required|numeric',
+            'long' => 'required|numeric',
+            'img' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        $nama_lokasi = $request->input('lokasi');
         $alamat = $request->input('alamat');
         $lat = $request->input('lat');
         $long = $request->input('long');
-        $img = $request->input('img');
-
-        $imageData = base64_decode($img);
-
         
-        $imageName = time() . '_' . uniqid() . '.jpg';
-        file_put_contents(public_path('assets/img/lokasi/' . $imageName), $imageData);
+        if ($request->hasFile('img')) {
+            $image = $request->file('img');
+            $imageName = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('assets/img/lokasi'), $imageName);
 
-        // Save other form data to the database
-        $lokasi = new lokasi();
-        $lokasi->lokasi = $nama_lokasi;
-        $lokasi->alamat = $alamat;
-        $lokasi->lat = $lat;
-        $lokasi->long = $long;
-        $lokasi->img = $imageName;
-        $lokasi->save();
+            // Save other form data to the database
+            $lokasi = new Lokasi();
+            $lokasi->lokasi = $nama_lokasi;
+            $lokasi->alamat = $alamat;
+            $lokasi->lat = $lat;
+            $lokasi->long = $long;
+            $lokasi->img = $imageName;
+            $lokasi->save();
 
+                Alert::success('BERHASIL','DATA BERHASIL DITAMBAH');
+                return redirect('/lokasis');
+                //return response()->json(['message' => 'Data inserted successfully']);
+        }
 
-        return response()->json(['message' => 'Data inserted successfully']);
+        return response()->json(['message' => 'Image upload failed'], 400);
     }
+
 
     public function edit($id)
     {
@@ -44,12 +83,18 @@ class LokasiController extends Controller
 
     public function update(Request $request)
     {
+        $request->validate([
+            'lokasi' => 'required|string|max:255',
+            'alamat' => 'required|string|max:255',
+            'lat' => 'required|numeric',
+            'long' => 'required|numeric',
+        ]);
         $id = $request->input('id');
-        $nama_lokasi = $request->input('nama_lokasi');
+        $nama_lokasi = $request->input('lokasi');
         $alamat = $request->input('alamat');
         $lat = $request->input('lat');
         $long = $request->input('long');
-        $img = $request->input('img');
+        //$img = $request->input('img');
 
         Lokasi::where('id',$id)
         ->update([
@@ -59,7 +104,10 @@ class LokasiController extends Controller
             'lat' => $lat,
             'long'=> $long
         ]);
-        return response()->json(['message' => 'Data updated successfully']);
+
+        Alert::success('BERHASIL','DATA BERHASIL DIUPDATE');
+        return redirect('/lokasis');
+        //return response()->json(['message' => 'Data updated successfully']);
     }
     public function destroy ($id)
     {

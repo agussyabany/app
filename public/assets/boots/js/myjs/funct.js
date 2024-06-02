@@ -379,7 +379,7 @@ function pilih()
         $('#kode_aktiva').empty().append('<option value="">Select an aktiva</option>');
         $.get('/kir_aktiva/' + idv , function (data) {
             $.each(data.data, function (index, item) {
-                $('#kode_aktiva').append('<option value="' + item.id + '">'+  item.kode +' | ' + item.aktiva + '</option>');
+                $('#kode_aktiva').prepend('<option value="' + item.id + '">'+  item.kode +' | ' + item.aktiva + '</option>');
                 $('#bulan_voc').val(item.tgl_voucher);
                 $('#urai_voc').val(item.urai);
           }

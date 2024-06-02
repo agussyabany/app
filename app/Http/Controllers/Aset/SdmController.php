@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Aset;
 use App\Http\Controllers\Controller;
 use App\Models\Aset\Sdm;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class SdmController extends Controller
 {
@@ -23,13 +24,19 @@ class SdmController extends Controller
             'id_div'=> $div
         ]);
 
-        return response()->json(['message' => 'Data inserted successfully']);
+                Alert::success('BERHASIL','DATA BERHASIL DITAMBAH');
+                return redirect('/sumber');
+                //return response()->json(['message' => 'Data inserted successfully']);
     }
 
     public function edit($id)
     {
-        $ruang = Sdm::where('id',$id)->get();
-        return response()->json(['data' => $ruang]);
+        $sdm = sdm::select('jabatans.id as idJabat','divisis.id as idDiv','nama_sdm','nip','nama_div','jabat')
+                    ->join('divisis','sdms.id_div','=','divisis.id')
+                    ->join('jabatans','sdms.id_jabat','=','jabatans.id')
+                    ->where('sdms.id',$id)
+                    ->get();
+        return response()->json(['data' => $sdm]);
 
     }
 
@@ -49,7 +56,9 @@ class SdmController extends Controller
                     'id_div'=> $div
                 ]);
 
-                return response()->json(['data' => 'update Data Sukses']);
+                Alert::success('BERHASIL','DATA BERHASIL DIUPDATE');
+                return redirect('/sumber');
+                //return response()->json(['data' => 'update Data Sukses']);
 
     }
     public function destroy ($id)

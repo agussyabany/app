@@ -301,10 +301,10 @@ class KirController extends Controller
           ]);
     }
 
-    public function nilaikir($lok)
+    public function nilaikir($id)
     {
         $gedung = NilaiAktiva::join('aktivas','nilai_aktivas.id_aktiva','=','aktivas.id',)
-                ->where('id_lokasi', $lok)
+                ->where('id_lokasi', $id)
                 ->where('cat',7)
                 ->get();
         return response()->json([

@@ -10,8 +10,10 @@
             <title>Aset PDAM</title>
             @include('admin.layouts._asset_header')
             <meta name="theme-color" content="#712cf9">
+            <meta name="csrf-token" content="{{ csrf_token() }}">
         </head>
         <body>
+            @include('sweetalert::alert')
             @include('admin.layouts.header')
             @yield('content')
             @stack('scripts')

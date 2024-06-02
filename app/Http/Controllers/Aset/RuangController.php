@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Aset;
 use App\Http\Controllers\Controller;
 use App\Models\Aset\Ruangan;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class RuangController extends Controller
 {
@@ -21,7 +22,9 @@ class RuangController extends Controller
             'kode' => $kode_ruang,
         ]);
 
-        return response()->json(['message' => 'Data inserted successfully']);
+        Alert::success('BERHASIL','DATA BERHASIL DITAMBAH');
+        return redirect('/ruangs');
+        //return response()->json(['message' => 'Data inserted successfully']);
     }
 
     public function edit($id)
@@ -44,7 +47,9 @@ class RuangController extends Controller
                     'kode' => $kode_ruang,
                 ]);
 
-                return response()->json(['data' => 'update Data Sukses']);
+                Alert::success('BERHASIL','DATA BERHASIL DIUPDATE');
+                return redirect('/ruangs');
+        //return response()->json(['data' => 'update Data Sukses']);
 
     }
 
