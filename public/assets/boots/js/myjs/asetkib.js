@@ -33,7 +33,7 @@ $(document).ready(function() {
                 });
 
                 $.get('/show/' + id, function (data) {
-                    $('#filed_D').empty();
+                    $('#filed').empty();
                     $.each(data.data, function (index, items) {
                         var thumbnail = $(
                             '<div class="pdf-thumbnail col ">' +
@@ -41,7 +41,7 @@ $(document).ready(function() {
                                 '<p><a href="#" onclick="window.open(\'http://app.perumdamtirtakencana.id/assets/img/tanah/' + items.dok + '\', \'_blank\'); return false;">' + items.dok + '</p>' +
                             '</div>'
                         );
-                    $('#filed_D').append(thumbnail);
+                    $('#filed').append(thumbnail);
                     });
                 });
             }
