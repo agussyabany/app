@@ -36,7 +36,7 @@ $no = 0;
                                                 <td>{{ $item->lokasi }}</td>
                                                 <td>{{ $item->alamat }}</td>
                                                 <td ><STRONG><a id="klik_nilai_mesin" style="text-decoration: none;" href="#" data-id="{{ $item->id_lokasi }}" data-bs-toggle="modal" data-bs-target="#modal_mesin_nilai">{{number_format (NilaiAktiva::where('id_lokasi', $item->id_lokasi)->where('cat', 2)->sum('nilai'),0,',','.') }}</a></STRONG></td>
-                                              
+
 
                                                 <td>
                                                     <!-- Add action buttons/links here modal_mesin_detail -->
@@ -107,11 +107,178 @@ $no = 0;
         <div class="modal-dialog  modal-xl">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="judul_modalLG">DETAIL  PERALATAN DAN MESIN</h5>
+              <h5 class="modal-title" id="judul_modal_detail">DETAIL  PERALATAN DAN MESIN</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body" id="modal_bodyLG">
+                <div class="container">
+                    <img id="gambar_D" src="" height="500px" width="550px" class="rounded mx-auto d-block" alt="..."><br>
 
+                    <fieldset class="border border-secondary rounded-3 p-2 row">
+                        <legend class="float-none w-auto px-1 border border-secondary rounded">
+                        <div style="font-size: 15px;">-</div>
+                        </legend>
+                            <div class="col">
+                                <div class="input-group input-group-sm mb-1">
+                                    <table class="table table-striped table-bordered">
+                                        <tbody>
+                                            <tr>
+                                                <th>KODE</th>
+                                                <td id="kode_D"> + item.kode+ </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="input-group input-group-sm mb-1">
+                                    <table class="table table-striped table-bordered">
+                                        <tbody>
+                                            <tr>
+                                                <th>NAMA BARANG</th>
+                                                <td id="nama_barang_D"> + item.nama_barang + </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="input-group input-group-sm mb-1">
+                                    <table class="table table-striped table-bordered">
+                                        <tbody>
+                                            <tr>
+                                                <th>PENGGUNAAN</th>
+                                                <td id="guna_D"> + item.guna+ </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                     </fieldset><br>
+
+
+
+                         <div class="row">
+                        <div class="col">
+                            <div class="container border border-primary rounded"><br>
+                                <table class="table table-striped table-bordered">
+                                    <tbody>
+                                        <tr>
+                                            <th>MERK / TYPE</th>
+                                            <td id="merk_D"> + item.merk+ </td>
+                                        </tr>
+                                        <tr>
+                                            <th>UKURAN / CC</th>
+                                            <td id="ukuran_D"> + item.ukuran+ </td>
+                                        </tr>
+                                        <tr>
+                                            <th>BAHAN</th>
+                                            <td id="bahan_D"> + item.bahan+ </td>
+                                        </tr>
+                                        <tr>
+                                            <th>TAHUN</th>
+                                            <td id="tahun_D"> + item.tahun+ </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="container border border-primary rounded"><br>
+                                <table class="table table-striped table-bordered">
+                                    <tbody>
+                                        <tr>
+                                            <th>BPKB</th>
+                                            <td id="bpkb_D"> + item.bpkb+ </td>
+                                        </tr>
+                                        <tr>
+                                            <th>PABRIK</th>
+                                            <td id="pabrik_D"> + item.pabrik+ </td>
+                                        </tr>
+                                        <tr>
+                                            <th>RANGKA</th>
+                                            <td id="rangka_D"> + item.rangka+ </td>
+                                        </tr>
+                                        <tr>
+                                            <th>MESIN</th>
+                                            <td id="mesin_D"> + item.mesin+ </td>
+                                        </tr>
+                                        <tr>
+                                            <th>POLISI</th>
+                                            <td id="polisi_D"> + item.polisi+ </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div><br>
+
+                    <fieldset class="border border-secondary rounded-3 p-2 row">
+                        <legend class="float-none w-auto px-1 border border-secondary rounded">
+                        <div style="font-size: 15px;">-</div>
+                        </legend>
+                            <div class="col">
+                                <div class="input-group input-group-sm mb-1">
+                                    <table class="table table-striped table-bordered">
+                                        <tbody>
+                                            <tr>
+                                                <th>ASAL USUL</th>
+                                                <td id="asal_D"> + item.asal+ </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="input-group input-group-sm mb-1">
+                                    <table class="table table-striped table-bordered">
+                                        <tbody>
+                                            <tr>
+                                                <th>NILAI PEROLEHAN</th>
+                                                <td id=""> + formattedCurrency + </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="input-group input-group-sm mb-1">
+                                    <table class="table table-striped table-bordered">
+                                        <tbody>
+                                            <tr>
+                                                <th>NILAI PENYUSUTAN</th>
+                                                <td id="susut_D"> + item.susut+ </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="input-group input-group-sm mb-1">
+                                    <table class="table table-striped table-bordered">
+                                        <tbody>
+                                            <tr>
+                                                <th>KET</th>
+                                                <td id="ket_D"> + item.ket   + </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                     ' </fieldset><br>
+
+                    <fieldset class="border border-secondary rounded-3 p-2 row" id="filed">
+                            <legend class="float-none w-auto px-3 border border-secondary rounded">
+                                <div style="font-size: 15px;"><strong>DOKUMEN</strong></div>
+                            </legend>
+
+                         </fieldset><br>
+
+
+                </div>'
 
             </div>
             <div class="modal-footer">
@@ -141,6 +308,21 @@ $no = 0;
                             <div class="card">
                                 <div class="card-header" id="card-header"></div>
                                 <div class="card-body" id="card-body">
+                                    <table class="table table-striped table-border" id="tbl_b_data">
+                                        <thead>
+                                            <tr>
+                                                <th>NO</th>
+                                                <th>Nama Aset</th>
+                                                <th>Merk</th>
+                                                <th>Penggunaan</th>
+                                                <th>Tahun</th>
+                                                <th>Foto/Detail</th>
+                                                <th>Aksi</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                    </tbody>
+                                    </table>
 
 
                                 </div>
