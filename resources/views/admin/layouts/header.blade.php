@@ -100,6 +100,14 @@
                           <a type="button"  class="hoverable text-start btn" id="nilai" style="width: 100%" href="/nilai"><i class="fa-solid fa-heart"></i>&nbsp;NILAI ASET</a>
                       </li>
 
+                      <li class="nav-item">
+                        <span class="nav-link text-center disabled"><strong>SETTING</strong></span>
+                    </li>
+
+                    <li class="nav-item">
+                        <a type="button"  class="hoverable text-start btn" id="nilai" style="width: 100%" href="/logout"><i class="fa-solid fa-sign-out"></i>&nbsp;LOGOUT</a>
+                    </li>
+
 
                     </ul>
                 </div>
