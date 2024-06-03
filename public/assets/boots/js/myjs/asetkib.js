@@ -37,8 +37,8 @@ $(document).ready(function() {
                     $.each(data.data, function (index, items) {
                         var thumbnail = $(
                             '<div class="pdf-thumbnail col ">' +
-                                '<embed width="150px" height="200px ; overflow: hidden;" name="plugin" src="http://app.perumdamtirtakencana.id/assets/img/tanah/' + items.dok + '" type="application/pdf" border border-secondary rounded>' +
-                                '<p><a href="#" onclick="window.open(\'http://app.perumdamtirtakencana.id/assets/img/tanah/' + items.dok + '\', \'_blank\'); return false;">' + items.dok + '</p>' +
+                                '<embed width="150px" height="200px ; overflow: hidden;" name="plugin" src="http://127.0.0.1:8000/assets/img/lokasi/' + items.dok + '" type="application/pdf" border border-secondary rounded>' +
+                                '<p><a href="#" onclick="window.open(\'http://app.perumdamtirtakencana.id/assets/img/lokasi/' + items.dok + '\', \'_blank\'); return false;">' + items.dok + '</p>' +
                             '</div>'
                         );
                     $('#filed').append(thumbnail);
