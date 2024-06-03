@@ -52,7 +52,7 @@ Route::get('/struktur',[Webcontroller::class, 'struktur']);
 Route::get('/direksi/{id}',[Webcontroller::class, 'direksi']);
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return redirect('/aset');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
