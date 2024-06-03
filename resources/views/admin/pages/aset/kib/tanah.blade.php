@@ -41,13 +41,13 @@ $no = 0;
                                                 <td>{{ $item->guna }}</td>
                                                 <td ><STRONG><a id="klik_nilai" style="text-decoration: none;" href="#" data-id="{{ $item->idLok }}" data-bs-toggle="modal" data-bs-target="#modal_tanah_nilai">{{number_format (NilaiAktiva::where('id_lokasi', $item->idLok)->where('cat', 1)->sum('nilai'),0,',','.') }}</a></STRONG></td>
                                                 <td><img height="80px" width="80px" src="http://app.perumdamtirtakencana.id/assets/img/lokasi/{{$item->img }}" alt=""></td>
-                                                
-                                                
-                                                  
-                                              
-                                                
-                                                
-                                                
+
+
+
+
+
+
+
                                                 <td>
                                                     <!-- Add action buttons/links here -->
                                                     <div class="btn-group">
@@ -78,7 +78,7 @@ $no = 0;
 
 
 
-   
+
       {{-- MODAL KIB --}}
       <div class="modal"  id="modal_tanah">
         <div class="modal-dialog  modal-xl">
@@ -88,7 +88,7 @@ $no = 0;
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body" id="modal_bodyLG">
-              
+
               <form action="" id="form_a" enctype="multipart/form-data">
                 <div class="container">
                   <div class="row  border border-primary rounded">
@@ -128,7 +128,7 @@ $no = 0;
                                             <input type="text" class="form-control" disabled value="text" id="urai_voc">
                                         </div>
                                     </td>
-                                    
+
                                 </tr>
                             </tbody>
                         </table>
@@ -259,7 +259,7 @@ $no = 0;
 
                                 <div class="col"><br>
                                     <div class="input-group input-group-sm mb-1">
-                                         
+
                                         <select name="hak" id="hak" class="select2 form-control" style="width:100%;">
                                             <option>-HAK-</option>
                                             <option>SHM</option>
@@ -524,8 +524,8 @@ $no = 0;
                     </div>
 
                 </div><br>
-                
-                <fieldset class="border border-secondary rounded-3 p-2 row" id="filed_D">
+
+                <fieldset class="border border-secondary rounded-3 p-2 row" id="filed">
                         <legend class="float-none w-auto px-3 border border-secondary rounded">
                             <div style="font-size: 15px;"><strong>DOKUMEN</strong></div>
                         </legend>

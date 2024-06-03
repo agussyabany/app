@@ -241,17 +241,16 @@ $no = 0;
                                     </table>
                                 </div>
                             </div>
-                     ' </fieldset><br>
+                     </fieldset><br>
 
                     <fieldset class="border border-secondary rounded-3 p-2 row" id="filed">
                             <legend class="float-none w-auto px-3 border border-secondary rounded">
                                 <div style="font-size: 15px;"><strong>DOKUMEN</strong></div>
                             </legend>
+                    </fieldset><br>
 
-                         </fieldset><br>
 
-
-                </div>'
+                </div>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
