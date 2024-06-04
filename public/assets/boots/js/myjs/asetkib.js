@@ -389,6 +389,111 @@ $(document).on('click', '#detail_gedung_divisi', function(){
              })
             })
         })
+        $(document).on('click', '#data_kir', function() {
+            var id = $(this).data('id');
+             $.ajax({
+                type: "GET",
+                url: "/kir.dep/"+ id,
+                success: function (data) {
+                $.each(data.data, function (index, item) {
+                    $('#canvas_tree').append(
+                        '<li><span><strong>' + item.kode_dep +  '</strong></span>'+
+                                '<ol id="kir_div'+ item.id_departemen +'"></ol>'+
+                            '</li>');
+                    var dep = item.id_departemen;
+                    var lok = item.id_lokasi;
+                    $.get("/kir.div/"+ dep + "/" + lok , function(data) {
+
+                        $.each(data.data, function(index, item) {
+                            var div = item.id_div;
+                            $("#kir_div" + item.id_departemen).append('<li ><strong><span style="color:green;">'+ item.nama_div +'</span></strong>'+
+                                    '<ol id="kir_ged'+ item.id_div +'"></ol>'+
+                                '</li>')
+
+                            $.get("/kir.gedung/"+ lok + "/" + dep + "/" + div, function(data){
+                                $.each(data.data,function(index,items) {
+                                   $("#kir_ged" + item.id_div).append('<li><a href="#" id="kir_ruang" style="text-decoration: none;" data-id="' + dep + ',' + lok + ',' + div + ',' + items.gedung + ',' + item.nama_div + '"><span">Gedung '+ items.gedung +'</a></span>'+
+
+                                    '</li>')
+                                 })
+                            })
+                        });
+                    })
+                });
+             }
+        });
+    })
+
+    $(document).on('click', '#kir_ruang', function() {
+        var id = $(this).data('id');
+
+        var delimiter = ",";
+        var id_key = id.split(delimiter);
+        var dep = id_key[0];
+        var lok = id_key[1];
+        var div = id_key[2];
+        var ged = id_key[3];
+        var nama_div = id_key[4];
+        var i = 0;
+
+        var table = $("#tbl_kir_data").DataTable();
+        table.clear().draw();
+        $.get("/kir.ruang/"+ lok + "/" + dep + "/" + div + "/" + ged, function(data){
+            $('#card-header').html('<strong>Divisi:</strong> '+ nama_div +'<br><strong>Gedung: </strong>' + ged  );
+                $.each(data.data, function (index, items) {
+                var ruang = items.ruangan
+                var editButton =
+                '<div class="btn-group">'+
+                    '<button class="badge bg-success border border-secondary btn-sm tree" data-id="' + lok + ',' + dep + ',' + div + ',' + ged + ',' + ruang + ',' + nama_div + '" id="kir_detail" data-bs-toggle="modal" data-bs-target="#modal_kir_detail"><i class="fa-solid fa-eye"></i></button>'+
+                '</div>';
+                table.row.add([
+                    ++i,
+                    items.ruangan,
+                    editButton
+                ]).draw();
+            })
+        })
+    })
+
+    $(document).on('click', '#kir_detail', function() {
+
+        var id = $(this).data('id');
+        console.log(id);
+        var delimiter = ",";
+        var id_key = id.split(delimiter);
+        var lok = id_key[0];
+        var dep = id_key[1];
+        var div = id_key[2];
+        var ged = id_key[3];
+        var ruang = id_key[4];
+        var nama_div = id_key[5];
+        var i = 0;
+
+    $('#judul_modalLG').html('<strong>Divisi:</strong> '+ nama_div +'<br><strong>Gedung:</strong> '+ ged +'<br><strong>Ruang: </strong>' + ruang +'<button class="btn btn-sm btn-primary float-end" id="print_kir" data-id="' + lok + "," + dep + "," + div + "," + ged + "," + ruang + '"><i class="fa-solid fa-print"></i></button>' );
+    var table = $("#tbl_kir_detail").DataTable();
+    table.clear().draw();
+
+$.get("/kir.detail/"+ lok +"/"+ dep +"/"+ div +"/"+ ged +"/"+ ruang, function(data){
+    $.each(data.data, function (index, items) {
+        var img = '<a href="#" id="detail_gedung_divisi"><img src="http://app.perumdamtirtakencana.id/assets/img/kir/'+items.img+'" height="100px" width="100px"></img></a>';
+        table.row.add([
+        ++i,
+        items.nama_barang,
+        items.merk,
+        items.bahan,
+        items.jumlah,
+        items.satuan,
+        items.baik,
+        items.ringan,
+        items.berat,
+        img
+
+    ]).draw();
+
+    })
+})
+})
+
 // $(document).ready(function() {
 
 //     //TANAH
@@ -3174,125 +3279,126 @@ $(document).on('click', '#detail_gedung_divisi', function(){
 //                                             }).format(data.data);
 //                                             $('#nilaiKir').html(nilaiAk);
 //                                         })
-//                                         $(document).on('click', '#nilaiKir', function (event) {
-//                                             var lok = $(this).data('id');
-//                                             $('#lgModal').modal('show');
-//                                             $('#judul_modalLG').html('DETAIL NILAI KIR '+item.lokasi );
-//                                             $('#modal_bodyLG').html('');
-//                                             $('#modal_bodyLG').html('<div class="container">'+
+// //                                         $(document).on('click', '#nilaiKir', function (event) {
+// //                                             var lok = $(this).data('id');
+// //                                             $('#lgModal').modal('show');
+// //                                             $('#judul_modalLG').html('DETAIL NILAI KIR '+item.lokasi );
+// //                                             $('#modal_bodyLG').html('');
+// //                                             $('#modal_bodyLG').html('<div class="container">'+
 
-//                                                                         '<table class="table table-striped table-border" id="tbl_detailNilai">'+
-//                                                                             '<thead>'+
-//                                                                                 '<tr>'+
-//                                                                                     '<th>NO</th>'+
-//                                                                                     '<th>Kode Perkiraan</th>'+
-//                                                                                     '<th>Nama Aktiva</th>'+
-//                                                                                     '<th>Tanggal</th>'+
-//                                                                                     '<th>Tahun</th>'+
-//                                                                                     '<th>Nilai</th>'+
-//                                                                                     '<th>Uraian</th>'+
-//                                                                                 '</tr>'+
-//                                                                             '</thead>'+
-//                                                                             '<tbody>'+
-//                                                                             '</tbody>'+
-//                                                                     '</table>'+
-//                                                             '</div>');
-//                                             var i = 0;
-//                                             var table = $("#tbl_detailNilai").DataTable();
-//                                             table.clear().draw();
-//                                             $.get("/nilaiKir.detail/"+ lok , function(data) {
-//                                                 $('#card-header').html('<strong>Lokasi:'+ lokasi +' </strong>');
-//                                                 $.each(data.data, function (index, items) {
-//                                                     var nilaiAk = new Intl.NumberFormat('id-ID', {
-//                                                         style: 'currency',
-//                                                         currency: 'IDR',
-//                                                     }).format(items.nilai);
-//                                                     table.row.add([
-//                                                         ++i,
-//                                                         items.kode,
-//                                                         items.aktiva,
-//                                                         items.tgl_voucher,
-//                                                         items.tahun,
-//                                                         nilaiAk,
-//                                                         items.urai,
-//                                                     ]).draw();
-//                                                 })
-//                                             })
+// //                                                                         '<table class="table table-striped table-border" id="tbl_detailNilai">'+
+// //                                                                             '<thead>'+
+// //                                                                                 '<tr>'+
+// //                                                                                     '<th>NO</th>'+
+// //                                                                                     '<th>Kode Perkiraan</th>'+
+// //                                                                                     '<th>Nama Aktiva</th>'+
+// //                                                                                     '<th>Tanggal</th>'+
+// //                                                                                     '<th>Tahun</th>'+
+// //                                                                                     '<th>Nilai</th>'+
+// //                                                                                     '<th>Uraian</th>'+
+// //                                                                                 '</tr>'+
+// //                                                                             '</thead>'+
+// //                                                                             '<tbody>'+
+// //                                                                             '</tbody>'+
+// //                                                                     '</table>'+
+// //                                                             '</div>');
+// //                                             var i = 0;
+// //                                             var table = $("#tbl_detailNilai").DataTable();
+// //                                             table.clear().draw();
+// //                                             $.get("/nilaiKir.detail/"+ lok , function(data) {
+// //                                                 $('#card-header').html('<strong>Lokasi:'+ lokasi +' </strong>');
+// //                                                 $.each(data.data, function (index, items) {
+// //                                                     var nilaiAk = new Intl.NumberFormat('id-ID', {
+// //                                                         style: 'currency',
+// //                                                         currency: 'IDR',
+// //                                                     }).format(items.nilai);
+// //                                                     table.row.add([
+// //                                                         ++i,
+// //                                                         items.kode,
+// //                                                         items.aktiva,
+// //                                                         items.tgl_voucher,
+// //                                                         items.tahun,
+// //                                                         nilaiAk,
+// //                                                         items.urai,
+// //                                                     ]).draw();
+// //                                                 })
+// //                                             })
 
-//                                         })
+// //                                         })
 
-//                                 $('#canvas_tree').append(
-//                                     '<li><span><strong>' + item.kode_dep +  '</strong></span>'+
-//                                             '<ol id="kir_div'+ item.id_departemen +'"></ol>'+
-//                                         '</li>');
-//                                 var dep = item.id_departemen;
-//                                 var lok = item.id_lokasi;
-//                                 $.get("/kir.div/"+ dep + "/" + lok , function(data) {
+                                // $('#canvas_tree').append(
+                                //     '<li><span><strong>' + item.kode_dep +  '</strong></span>'+
+                                //             '<ol id="kir_div'+ item.id_departemen +'"></ol>'+
+                                //         '</li>');
+                                // var dep = item.id_departemen;
+                                // var lok = item.id_lokasi;
+                                // $.get("/kir.div/"+ dep + "/" + lok , function(data) {
 
-//                                     $.each(data.data, function(index, item) {
-//                                         var div = item.id_div;
-//                                         $("#kir_div" + item.id_departemen).append('<li ><strong><span style="color:green;">'+ item.nama_div +'</span></strong>'+
-//                                                 '<ol id="kir_ged'+ item.id_div +'"></ol>'+
-//                                             '</li>')
+                                //     $.each(data.data, function(index, item) {
+                                //         var div = item.id_div;
+                                //         $("#kir_div" + item.id_departemen).append('<li ><strong><span style="color:green;">'+ item.nama_div +'</span></strong>'+
+                                //                 '<ol id="kir_ged'+ item.id_div +'"></ol>'+
+                                //             '</li>')
 
-//                                         $.get("/kir.gedung/"+ lok + "/" + dep + "/" + div, function(data){
-//                                             $.each(data.data,function(index,items) {
-//                                                $("#kir_ged" + item.id_div).append('<li><a href="#" id="kir_ruang" style="text-decoration: none;" data-id="' + dep + ',' + lok + ',' + div + ',' + items.gedung + ',' + item.nama_div + '"><span">Gedung '+ items.gedung +'</a></span>'+
+                                //         $.get("/kir.gedung/"+ lok + "/" + dep + "/" + div, function(data){
+                                //             $.each(data.data,function(index,items) {
+                                //                $("#kir_ged" + item.id_div).append('<li><a href="#" id="kir_ruang" style="text-decoration: none;" data-id="' + dep + ',' + lok + ',' + div + ',' + items.gedung + ',' + item.nama_div + '"><span">Gedung '+ items.gedung +'</a></span>'+
 
-//                                                 '</li>')
-//                                              })
-//                                         })
-//                                     });
-//                                 })
-//                             })
-//                             $(document).on('click', '#kir_ruang', function() {
+                                //                 '</li>')
+                                //              })
+                                //         })
+                                //     });
+                                // })
+                            //})
+                            //isi kir
+                            // $(document).on('click', '#kir_ruang', function() {
 
-//                                 $('#card-body').html('');
-//                                 $('#card-body').append(
+                            //     $('#card-body').html('');
+                            //     $('#card-body').append(
 
-//                                 ' <table class="table table-striped table-border" id="tbl_kir_data">'+
-//                                                 '<thead>'+
-//                                                     '<tr>'+
-//                                                         '<th>NO</th>'+
-//                                                         '<th>Nama Ruangan</th>'+
-//                                                         '<th>KIR</th>'+
-//                                                     '</tr>'+
-//                                                 '</thead>'+
-//                                                 '<tbody>'+
-//                                             '</tbody>'+
-//                                             '</table>'
-//                                 );
-//                                 var id = $(this).data('id');
-//                                 var delimiter = ",";
-//                                 var id_key = id.split(delimiter);
-//                                 var dep = id_key[0];
-//                                 var lok = id_key[1];
-//                                 var div = id_key[2];
-//                                 var ged = id_key[3];
-//                                 var nama_div = id_key[4];
-//                                 var i = 0;
+                            //     ' <table class="table table-striped table-border" id="tbl_kir_data">'+
+                            //                     '<thead>'+
+                            //                         '<tr>'+
+                            //                             '<th>NO</th>'+
+                            //                             '<th>Nama Ruangan</th>'+
+                            //                             '<th>KIR</th>'+
+                            //                         '</tr>'+
+                            //                     '</thead>'+
+                            //                     '<tbody>'+
+                            //                 '</tbody>'+
+                            //                 '</table>'
+                            //     );
+                            //     var id = $(this).data('id');
+                            //     var delimiter = ",";
+                            //     var id_key = id.split(delimiter);
+                            //     var dep = id_key[0];
+                            //     var lok = id_key[1];
+                            //     var div = id_key[2];
+                            //     var ged = id_key[3];
+                            //     var nama_div = id_key[4];
+                            //     var i = 0;
 
-//                                 var table = $("#tbl_kir_data").DataTable();
-//                                 table.clear().draw();
-//                                 $.get("/kir.ruang/"+ lok + "/" + dep + "/" + div + "/" + ged, function(data){
-//                                     $('#card-header').html('<strong>Divisi:</strong> '+ nama_div +'<br><strong>Gedung: </strong>' + ged  );
-//                                         $.each(data.data, function (index, items) {
-//                                         var ruang = items.ruangan
-//                                         var editButton =
-//                                         '<div class="btn-group">'+
-//                                             '<button class="badge bg-success border border-secondary btn-sm tree" data-id="' + lok + ',' + dep + ',' + div + ',' + ged + ',' + ruang + ',' + nama_div + '" id="kir_detail"><i class="fa-solid fa-eye"></i></button>'+
-//                                         '</div>';
+                            //     var table = $("#tbl_kir_data").DataTable();
+                            //     table.clear().draw();
+                            //     $.get("/kir.ruang/"+ lok + "/" + dep + "/" + div + "/" + ged, function(data){
+                            //         $('#card-header').html('<strong>Divisi:</strong> '+ nama_div +'<br><strong>Gedung: </strong>' + ged  );
+                            //             $.each(data.data, function (index, items) {
+                            //             var ruang = items.ruangan
+                            //             var editButton =
+                            //             '<div class="btn-group">'+
+                            //                 '<button class="badge bg-success border border-secondary btn-sm tree" data-id="' + lok + ',' + dep + ',' + div + ',' + ged + ',' + ruang + ',' + nama_div + '" id="kir_detail"><i class="fa-solid fa-eye"></i></button>'+
+                            //             '</div>';
 
-//                                         table.row.add([
-//                                             ++i,
-//                                             items.ruangan,
-//                                             editButton
-//                                         ]).draw();
-//                                     })
-//                                 })
+                            //             table.row.add([
+                            //                 ++i,
+                            //                 items.ruangan,
+                            //                 editButton
+                            //             ]).draw();
+                            //         })
+                            //     })
 
-//                             })
-
+                            // })
+                            //isi kir
 //                             $(document).on('click', '#kir_detail', function() {
 //                                         var id = $(this).data('id');
 //                                         var delimiter = ",";
@@ -3326,7 +3432,7 @@ $(document).on('click', '#detail_gedung_divisi', function(){
 //                                             '</tbody>'+
 //                                         '</table>');
 
-
+// // balik kir
 //                                     $('#judul_modalLG').html('<strong>Divisi:</strong> '+ nama_div +'<br><strong>Gedung:</strong> '+ ged +'<br><strong>Ruang: </strong>' + ruang +'<button class="btn btn-sm btn-primary float-end" id="print_kir" data-id="' + lok + "," + dep + "," + div + "," + ged + "," + ruang + '"><i class="fa-solid fa-print"></i></button>' );
 //                                     var table = $("#tbl_kir_detail").DataTable();
 //                                     table.clear().draw();
@@ -3352,11 +3458,11 @@ $(document).on('click', '#detail_gedung_divisi', function(){
 //                                     })
 //                                 })
 //                             })
-//                         },
-//                         error: function (data) {
-//                             console.log('Error:', data);
-//                         }
-//                     });
+                    //     },
+                    //     error: function (data) {
+                    //         console.log('Error:', data);
+                    //     }
+                    // });
 
 //                 })
 //                 $(document).on('click', '#print_kir', function() {

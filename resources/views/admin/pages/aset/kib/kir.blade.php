@@ -42,7 +42,12 @@ $no = 0;
                                                 <td>
                                                     <!-- Add action buttons/links here -->
                                                     <div class="btn-group">
-                                                        <button class="btn btn-default border border-secondary btn-sm detail" data-id="' + item.id_tanah + '"type="button">DETAIL</button>
+
+
+                                                        <button class="btn btn-default border border-secondary btn-sm detail" data-id="{{ $item->id_lokasi }}" type="button" data-bs-toggle="offcanvas"  aria-controls="offcanvasExample" href="#data" id="data_kir">DETAIL</button>
+
+
+
                                                         <button type="button" class="btn btn-sm btn-default border border-secondary  dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"><span class="visually-hidden">Toggle Dropdown</span></button>
                                                         <ul class="dropdown-menu">
                                                             <li><a class="dropdown-item  edit" data-id="" href="#"><i class="fa-solid fa-edit"></i>&nbsp;EDIT</a></li>
@@ -69,14 +74,32 @@ $no = 0;
 
 
                 {{-- MODAL MASTER --}}
-    <div class="modal"  id="myModal">
-        <div class="modal-dialog modal-dialog-centered">
+    <div class="modal"  id="modal_kir_detail">
+        <div class="modal-dialog modal-xl">
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="judul_modal">Modal title</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body" id="modal_body">
+                <table class="table table-striped table-border" id="tbl_kir_detail">
+                    <thead>
+                        <tr>
+                            <th>NO</th>
+                            <th>Nama Aktiva</th>
+                            <th>Merk/Type</th>
+                            <th>Bahan</th>
+                            <th>Jumlah</th>
+                            <th>Satuan</th>
+                            <th>Baik</th>
+                            <th>Rusak Ringan</th>
+                            <th>Rusak Berat</th>
+                            <th>Foto</th>
+                        </tr>
+                    </thead>
+                <tbody>
+            </tbody>
+        </table>
 
             </div>
             <div class="modal-footer">
@@ -136,7 +159,17 @@ $no = 0;
                             <div class="card">
                                 <div class="card-header" id="card-header"></div>
                                 <div class="card-body" id="card-body">
-
+                                    <table class="table table-striped table-border" id="tbl_kir_data">
+                                        <thead>
+                                        <tr>
+                                        <th>NO</th>
+                                        <th>Nama Ruangan</th>
+                                        <th>KIR</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
 
                                 </div>
                             </div><br>
