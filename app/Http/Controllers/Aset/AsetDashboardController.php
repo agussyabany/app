@@ -197,6 +197,14 @@ class AsetDashboardController extends Controller
           ]);
     }
 
+    public function divDep($id)
+    {
+        $div = Divisi::where('id_dep',$id)->orderBy('id','DESC')->get();
+        return response()->json([
+            'data' => $div
+          ]);
+    }
+
     public function ruang()
     {
         $ruang = Ruangan::orderBy('id','DESC')->get();
