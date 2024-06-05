@@ -101,6 +101,7 @@ $no = 0;
                                                                     <select class="select2 form-control" name="voucher_kir" id="voucher_kir" style="width:100%;">
                                                                         <option>- NO VOUCHER -</option>
                                                                     </select>
+                                                                    <span style="color:red;" id="voucher_kir_error"></span>
                                                                 </div>
                                                             </td>
                                                             <td>
@@ -108,25 +109,28 @@ $no = 0;
                                                                     <select class="select2 form-control" name="kode_aktiva" id="kode_aktiva" style="width:100%;">
                                                                         <option>- PILIH KODE AKTIVA -</option>
                                                                     </select>
+                                                                    <span style="color:red;" id="kode_aktiva_error"></span>
                                                                 </div>
                                                             </td>
                                                             <td>
                                                                 <div class="input-group input-group-sm mb-1">
                                                                     <input type="text" class="form-control" name="bulan_voc" id="bulan_voc" disabled>
                                                                 </div>
+
                                                             </td>
                                                             <td>
                                                                 <div class="input-group input-group-sm mb-1">
                                                                     <input type="text" class="form-control" disabled value="text" id="urai_voc">
                                                                 </div>
+
                                                             </td>
-    
+
                                                          </tr>
                                                     </tbody>
                                                 </table>
                                             </div>
                                         </div><br>
-    
+
                                         <div class="row  border border-primary rounded">
                                             <div class="container"><br>
                                                 <table class="table table-striped table-bordered rounded">
@@ -139,95 +143,100 @@ $no = 0;
                                                             <th>Ruangan</th>
                                                           </tr>
                                                     </thead>
-                                                ' <tbody>
+                                                <tbody>
                                                         <tr>
                                                             <td>
                                                                 <div class="input-group input-group-sm mb-1">
-                                                                    <select class="select2 form-control" name="lokasi" id="lokasi_kir" style="width:100%;">
+                                                                    <select class="select2 form-control" name="lokasi" id="lokasi_kir" style="width:100%;" >
                                                                         <option>- PILIH LOKASI -</option>
                                                                     </select>
+                                                                    <span style="color:red;" id="lokasi_error"></span>
                                                                 </div>
                                                             </td>
                                                             <td>
                                                                 <div class="input-group input-group-sm mb-1">
-                                                                    <select class="select2 form-control" name="dep" id="dep" style="width:100%;">
+                                                                    <select class="select2 form-control" name="dep" id="dep" style="width:100%;" >
                                                                         <option>- PILIH DEPARTEMEN -</option>
                                                                     </select>
+                                                                    <span style="color:red;" id="dep_error"></span>
                                                                 </div>
                                                             </td>
                                                             <td>
                                                                 <div class="input-group input-group-sm mb-1">
-                                                                    <select class="select2 form-control" name="div" id="div" style="width:100%;">
+                                                                    <select class="select2 form-control" name="div" id="div" style="width:100%;" >
                                                                         <option>- PILIH DIVISI -</option>
                                                                     </select>
+                                                                    <span style="color:red;" id="div_error"></span>
                                                                 </div>
                                                             </td>
                                                             <td>
                                                                 <div class="input-group input-group-sm mb-1">
-                                                                    <select class="select2 form-control" name="gedung" id="gedung_kir" style="width:100%;">
+                                                                    <select class="select2 form-control" name="gedung" id="gedung_kir" style="width:100%;" >
                                                                         <option>- PILIH GEDUNG -</option>
                                                                     </select>
+                                                                    <span style="color:red;" id="gedung_kir_error"></span>
                                                                 </div>
                                                             </td>
                                                             <td>
                                                                 <div class="input-group input-group-sm mb-1">
-                                                                    <select class="select2 form-control" name="ruang" id="ruang_kir" style="width:100%;"> 
+                                                                    <select class="select2 form-control" name="ruang" id="ruang_kir" style="width:100%;" >
                                                                         <option>- PILIH RUANGAN -</option>
                                                                     </select>
+                                                                    <span style="color:red;" id="ruang_kir_error"></span>
                                                                 </div>
                                                             </td>
-                                                        ' </tr>
+                                                        </tr>
                                                     </tbody>
                                                 </table>
                                             </div>
                                         </div><br>
                                         <div class="row  border border-primary rounded">
-    
+
                                                 <div class="col"><br>
-    
+
                                                     <div class="input-group input-group-sm mb-1">
-                                                        <select name="nama_aset" id="nama_aset" class="select2 form-control" style="width:100%;">
+                                                        <select name="nama_aset" id="nama_aset" class="select2 form-control" style="width:100%;" >
                                                             <option>-NAMA ASET-</option>
                                                         </select>
                                                     </div>
                                                     <span style="color:red;" id="lokasi_error"></span>
                                                     <div class="input-group input-group-sm mb-1">
-                                                        <span class="input-group-text col-sm-3">Kode Aset</span><input name="kode_aset" id="kode_aset" type="text" class="form-control">
+                                                        <span class="input-group-text col-sm-3">Kode Aset</span><input name="kode_aset" id="kode_aset" type="text" class="form-control" >
                                                     </div>
                                                     <span style="color:red;" id="kode_aset_error"></span>
-    
+
                                                     <div class="input-group input-group-sm mb-1">
-                                                        <span class="input-group-text col-sm-3">Merk/Type</span><input type="text" name="merk" id="merk" value="" class="form-control">
+                                                        <span class="input-group-text col-sm-3">Merk/Type</span><input type="text" name="merk" id="merk" value="" class="form-control" >
                                                     </div>
                                                     <span style="color:red;" id="reg_error"></span>
-    
+
                                                     <div class="input-group input-group-sm mb-1">
-                                                        <select class="select2 form-control" name="bahan" id="bahan_kir" style="width:100%;">
+                                                        <select class="select2 form-control" name="bahan" id="bahan_kir" style="width:100%;" >
                                                             <option> - BAHAN - </option>
                                                         </select>
                                                     </div>
                                                     <div class="input-group input-group-sm mb-1">
-                                                        <span class="input-group-text col-sm-3">Jumlah</span><input name="jumlah" id="jumlah" type="number" class="form-control">
+                                                        <span class="input-group-text col-sm-3">Jumlah</span><input name="jumlah" id="jumlah" type="number" class="form-control" >
                                                     </div>
                                                     <span style="color:red;" id="jumlah_error"></span>
                                                 </div><br>
-    
+
                                                 <div class="col"><br>
                                                     <div class="input-group input-group-sm mb-1">
-                                                        <span class="input-group-text col-sm-3">Baik</span><input name="baik" id="baik" type="number" class="form-control">
+                                                        <span class="input-group-text col-sm-3">Baik</span><input name="baik" id="baik" type="number" class="form-control" >
                                                     </div>
                                                     <span style="color:red;" id="baik_error"></span>
-    
+
                                                     <div class="input-group input-group-sm mb-1">
-                                                        <span class="input-group-text col-sm-3">Rusak Ringan</span><input name="merk" id="ringan" type="text" class="form-control">
+                                                        <span class="input-group-text col-sm-3">Rusak Ringan</span><input name="merk" id="ringan" type="text" class="form-control" >
                                                     </div>
                                                     <span style="color:red;" id="merk_error"></span>
-    
+
                                                     <div class="input-group input-group-sm mb-1">
-                                                        <span class="input-group-text col-sm-3">Rusak Berat</span><input name="berat" id="berat" type="text" class="form-control">
+                                                        <span class="input-group-text col-sm-3">Rusak Berat</span><input name="berat" id="berat" type="text" class="form-control" >
                                                     </div>
                                                     <span style="color:red;" id="pabrik_error"></span>
-    
+
                                                     <div class="input-group input-group-sm mb-1">
                                                         <span class="input-group-text col-sm-3">Foto</span><input name="img" id="img" type="file" class="form-control" multiple>
                                                     </div>
@@ -236,16 +245,16 @@ $no = 0;
                                                     </div>
                                                     <span style="color:red;" id="ket_error"></span>
                                                 </div>
-    
+
                                         </div>
-    
+
                                         <div class="row border border-primary rounded mt-1">
                                             <br><div class="float-end">
                                                 <button type="button" id="submit_kir" class="btn btn-sm btn-primary float-end mt-1 mb-1">SUBMIT</button>
                                             </div>
                                         </div><br>
-    
-    
+
+
                                         <div class="row border border-primary rounded">
                                             <div class="container"><br>
                                                 <table  class="table table-bordered" id="tbl_kir_input">
@@ -265,14 +274,14 @@ $no = 0;
                                                 </table>
                                             </div>
                                         </div><br>
-    
+
                                     </div>
-                                </form >'   
-            
+                                </form >
+
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                          <button type="button" class="tombol btn btn-primary" id="">SUBMIT</button>
+                          <button type="button" class="tombol btn btn-primary" id="proses">SUBMIT</button>
                         </div>
                       </div>
                     </div>
@@ -299,6 +308,7 @@ $no = 0;
                             <th>Rusak Ringan</th>
                             <th>Rusak Berat</th>
                             <th>Foto</th>
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                 <tbody>

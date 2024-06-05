@@ -40,7 +40,7 @@ function selectOptKir()
             $('#bahan_kir').append('<option value="' + item.id + '">' + item.nama + '</option>');
         });
     });
-    
+
 }
 
 function selectOptAll()
@@ -50,7 +50,7 @@ function selectOptAll()
             $('#lokasi_kir').append('<option value="' + item.id + '">' + item.lokasi + '</option>');
         });
     });
-    
+
     $.get('/departemen', function (data) {
         $.each(data.data, function (index, item) {
             $('#dep').append('<option value="' + item.id + '">' + item.kode_dep + '</option>');
@@ -67,6 +67,34 @@ function selectOptAll()
           )})
     });
 
+}
+
+function refKirInput()
+{
+    $.get('/kir.input', function(data) {
+        var i = 0;
+        var table = $("#tbl_kir_input").DataTable({
+            searching: false
+        });
+        table.clear().draw();
+
+
+        $.each(data.data, function(index, item) {
+            var editButton =
+            '<div class="btn-group">'+
+                '<a href="#"class="text-center badge bg-danger border border-secondary btn-sm" id="haps" data-id="' + item.idKir + '"><i class="fa-solid fa-trash"></i></a>'+
+            '</div>';
+            table.row.add([
+                 ++i,
+                item.lokasi,
+                item.nama_div,
+                item.gedung,
+                item.ruangan,
+                item.nama_barang,
+                editButton
+            ]).draw();
+        });
+    })
 }
 
 
@@ -457,14 +485,14 @@ function pilih()
           }
           )})
     });
-    
+
     $.get('/v_kir', function (data) {
         $.each(data.data, function (index, item) {
             $('#voucher_kir').append('<option value="' + item.no_voucher + '">' + item.no_voucher + '</option>');
         });
     });
-    
-    
+
+
 
     $.get('/lok', function (data) {
         $.each(data.data, function (index, item) {
@@ -514,33 +542,7 @@ function pilih()
     });
 }
 
-function refKirInput()
-{
-    $.get('/kir.input', function(data) {
-        var i = 0;
-        var table = $("#tbl_kir_input").DataTable({
-            searching: false
-        });
-        table.clear().draw();
 
-
-        $.each(data.data, function(index, item) {
-            var editButton =
-            '<div class="btn-group">'+
-                '<a href="#"class="text-center badge bg-danger border border-secondary btn-sm" id="haps" data-id="' + item.idKir + '"><i class="fa-solid fa-trash"></i></a>'+
-            '</div>';
-            table.row.add([
-                 ++i,
-                item.lokasi,
-                item.nama_div,
-                item.gedung,
-                item.ruangan,
-                item.nama_barang,
-                editButton
-            ]).draw();
-        });
-    })
-}
 // function clearField()
 // {
 //     $('#nama_aset').val();

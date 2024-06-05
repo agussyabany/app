@@ -1,4 +1,10 @@
 $(document).ready(function() {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
     //TANAH
     $(document).on('click', '#detail_tanah', function() {
         var id = $(this).data('id');
@@ -471,13 +477,15 @@ $(document).on('click', '#detail_gedung_divisi', function(){
         var nama_div = id_key[5];
         var i = 0;
 
-    $('#judul_modal').html('<strong>Divisi:</strong> '+ nama_div +'<br><strong>Gedung:</strong> '+ ged +'<br><strong>Ruang: </strong>' + ruang +'<button class="btn btn-sm btn-primary float-end" id="print_kir" data-id="' + lok + "," + dep + "," + div + "," + ged + "," + ruang + '"><i class="fa-solid fa-print"></i></button>' );
+$('#judul_modal').html('<strong>Divisi:</strong> '+ nama_div +'<br><strong>Gedung:</strong> '+ ged +'<br><strong>Ruang: </strong>' + ruang +'<button class="btn btn-sm btn-primary float-end" id="print_kir" data-id="' + lok + "," + dep + "," + div + "," + ged + "," + ruang + '"><i class="fa-solid fa-print"></i></button>' );
     var table = $("#tbl_kir_detail").DataTable();
     table.clear().draw();
 
 $.get("/kir.detail/"+ lok +"/"+ dep +"/"+ div +"/"+ ged +"/"+ ruang, function(data){
     $.each(data.data, function (index, items) {
         var img = '<a href="#" id="detail_gedung_divisi"><img src="http://app.perumdamtirtakencana.id/assets/img/kir/'+items.img+'" height="100px" width="100px"></img></a>';
+        var editButton = '<button type="button" id="edit" data-id="' + items.id + '" class="btn btn-outline-primary btn-sm"><i class="fas fa-edit"></i></button>';
+
         table.row.add([
         ++i,
         items.nama_barang,
@@ -488,7 +496,8 @@ $.get("/kir.detail/"+ lok +"/"+ dep +"/"+ div +"/"+ ged +"/"+ ruang, function(da
         items.baik,
         items.ringan,
         items.berat,
-        img
+        img,
+        editButton
 
     ]).draw();
 
@@ -500,8 +509,98 @@ $.get("/kir.detail/"+ lok +"/"+ dep +"/"+ div +"/"+ ged +"/"+ ruang, function(da
 $(document).on('click', '#tambah_kir', function() {
     selectOptKir();
     selectOptAll();
+    refKirInput()
 
 })
+
+$(document).on('click', '#submit_kir', function (event) {
+        event.preventDefault();
+        var fileInput = $('#img')[0].files[0];
+        if (!fileInput) {
+            alert('Please select an image.');
+            return;
+        }
+        var reader = new FileReader();
+         reader.onload = function (e) {
+            var base64Image = e.target.result.split(',')[1]; // Extract base64 data
+
+            // Send the base64 encoded image data in the AJAX request
+            $.ajax({
+                data: {
+                    lokasi: $('#lokasi_kir').val(),
+                    dep: $('#dep').val(),
+                    div:$('#div').val(),
+                    gedung:$('#gedung_kir').val(),
+                    nilai_v:$('#nilai_v').val(),
+                    ruang_kir:$('#ruang_kir').val(),
+                    nama_aset:$('#nama_aset').val(),
+                    kode_aset:$('#kode_aset').val(),
+                    merk:$('#merk').val(),
+                    bahan:$('#bahan_kir').val(),
+                    jumlah:$('#jumlah').val(),
+                    baik:$('#baik').val(),
+                    ringan:$('#ringan').val(),
+                    berat:$('#berat').val(),
+                    ket:$('#ket').val(),
+                    aktiva:$('#kode_aktiva').val(),
+                    img: base64Image
+                },
+                url: "/kir.save",
+                type: "POST",
+                dataType: 'json',
+                success: function (data) {
+                    //alert(data);
+                    refKirInput();
+                    $('#nama_aset').val('');
+                    $('#kode_aset').html('');
+                    $('#merk').html('');
+                    $('#bahan_kir').val('');
+                    $('#jumlah').html('');
+                    $('#baik').html('');
+                    $('#ringan').html('');
+                    $('#berat').html('');
+                    $('#ket').html('');
+
+                    // refLok();
+                },
+                error: function(xhr) {
+                    if (xhr.status === 400) {
+                        // Validation error, handle it
+                        var errors = xhr.responseJSON.errors;
+                        $.each(errors, function(field, messages) {
+                            // Display each error message for the specific field
+                            $('#'+field+'_error').text(messages[0]); // Assume you have an element with an ID like 'reg_error'
+                        });
+                    } else {
+                        // Handle other errors
+                        console.error('An error occurred:', xhr.responseText);
+                    }
+                }
+            });
+        };
+
+        // Read the selected file as a data URL
+        reader.readAsDataURL(fileInput);
+    });
+    $(document).on('click', '#haps', function (event) {
+        var id = $(this).data('id');
+        var del = confirm("HAPUS DATA ?");
+        if (del) {
+            $.ajax({
+                url: "/kir.del/" + id,
+                type: "POST",
+                dataType: 'json',
+                    success: function (data) {
+                    alert('Data berhasil Dihapus')
+                    refKirInput();
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    alert('Data gagal dihapus');
+                },
+            });
+        }
+    })
+
 
 
 
@@ -2942,11 +3041,11 @@ $(document).on('click', '#tambah_kir', function() {
 //                     '</div>'
 //                 );
 //                 refKir();
-//                 $.ajaxSetup({
-//                     headers: {
-//                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-//                         }
-//                     });
+                // $.ajaxSetup({
+                //     headers: {
+                //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                //         }
+                //     });
 
 
 //                 $(document).on('click', '#tambah_kir', function() {
@@ -3151,24 +3250,24 @@ $(document).on('click', '#tambah_kir', function() {
 
 //                     })
 
-//                 $(document).on('click', '#haps', function (event) {
-//                     var id = $(this).data('id');
-//                     var del = confirm("HAPUS DATA ?");
-//                     if (del) {
-//                         $.ajax({
-//                             url: "/kir.del/" + id,
-//                             type: "POST",
-//                             dataType: 'json',
-//                                 success: function (data) {
-//                                 alert('Data berhasil Dihapus')
-//                                 refKirInput();
-//                             },
-//                             error: function (xhr, textStatus, errorThrown) {
-//                                 alert('Data gagal dihapus');
-//                             },
-//                         });
-//                     }
-//                 })
+                // $(document).on('click', '#haps', function (event) {
+                //     var id = $(this).data('id');
+                //     var del = confirm("HAPUS DATA ?");
+                //     if (del) {
+                //         $.ajax({
+                //             url: "/kir.del/" + id,
+                //             type: "POST",
+                //             dataType: 'json',
+                //                 success: function (data) {
+                //                 alert('Data berhasil Dihapus')
+                //                 refKirInput();
+                //             },
+                //             error: function (xhr, textStatus, errorThrown) {
+                //                 alert('Data gagal dihapus');
+                //             },
+                //         });
+                //     }
+                // })
 
 //                 $(document).on('click', '#proses_kir', function (event) {
 //                     $.ajax({
@@ -3185,75 +3284,75 @@ $(document).on('click', '#tambah_kir', function() {
 //                 });
 //             })
 //                 //SUBMIT KIR
-//                 $(document).on('click', '#submit_kir', function (event) {
-//                     event.preventDefault();
-//                     var fileInput = $('#img')[0].files[0];
-//                     if (!fileInput) {
-//                         alert('Please select an image.');
-//                         return;
-//                     }
-//                     var reader = new FileReader();
-//                      reader.onload = function (e) {
-//                         var base64Image = e.target.result.split(',')[1]; // Extract base64 data
+                // $(document).on('click', '#submit_kir', function (event) {
+                //     event.preventDefault();
+                //     var fileInput = $('#img')[0].files[0];
+                //     if (!fileInput) {
+                //         alert('Please select an image.');
+                //         return;
+                //     }
+                //     var reader = new FileReader();
+                //      reader.onload = function (e) {
+                //         var base64Image = e.target.result.split(',')[1]; // Extract base64 data
 
-//                         // Send the base64 encoded image data in the AJAX request
-//                         $.ajax({
-//                             data: {
-//                                 lokasi: $('#lokasi_kir').val(),
-//                                 dep: $('#dep').val(),
-//                                 div:$('#div').val(),
-//                                 gedung:$('#gedung').val(),
-//                                 nilai_v:$('#nilai_v').val(),
-//                                 ruang_kir:$('#ruang_kir').val(),
-//                                 nama_aset:$('#nama_aset').val(),
-//                                 kode_aset:$('#kode_aset').val(),
-//                                 merk:$('#merk').val(),
-//                                 bahan:$('#bahan_kir').val(),
-//                                 jumlah:$('#jumlah').val(),
-//                                 baik:$('#baik').val(),
-//                                 ringan:$('#ringan').val(),
-//                                 berat:$('#berat').val(),
-//                                 ket:$('#ket').val(),
-//                                 aktiva:$('#kode_aktiva').val(),
-//                                 img: base64Image
-//                             },
-//                             url: "/kir.save",
-//                             type: "POST",
-//                             dataType: 'json',
-//                             success: function (data) {
-//                                 //alert(data);
-//                                 refKirInput();
-//                                 $('#nama_aset').val('');
-//                                 $('#kode_aset').html('');
-//                                 $('#merk').html('');
-//                                 $('#bahan_kir').val('');
-//                                 $('#jumlah').html('');
-//                                 $('#baik').html('');
-//                                 $('#ringan').html('');
-//                                 $('#berat').html('');
-//                                 $('#ket').html('');
+                //         // Send the base64 encoded image data in the AJAX request
+                //         $.ajax({
+                //             data: {
+                //                 lokasi: $('#lokasi_kir').val(),
+                //                 dep: $('#dep').val(),
+                //                 div:$('#div').val(),
+                //                 gedung:$('#gedung').val(),
+                //                 nilai_v:$('#nilai_v').val(),
+                //                 ruang_kir:$('#ruang_kir').val(),
+                //                 nama_aset:$('#nama_aset').val(),
+                //                 kode_aset:$('#kode_aset').val(),
+                //                 merk:$('#merk').val(),
+                //                 bahan:$('#bahan_kir').val(),
+                //                 jumlah:$('#jumlah').val(),
+                //                 baik:$('#baik').val(),
+                //                 ringan:$('#ringan').val(),
+                //                 berat:$('#berat').val(),
+                //                 ket:$('#ket').val(),
+                //                 aktiva:$('#kode_aktiva').val(),
+                //                 img: base64Image
+                //             },
+                //             url: "/kir.save",
+                //             type: "POST",
+                //             dataType: 'json',
+                //             success: function (data) {
+                //                 //alert(data);
+                //                 refKirInput();
+                //                 $('#nama_aset').val('');
+                //                 $('#kode_aset').html('');
+                //                 $('#merk').html('');
+                //                 $('#bahan_kir').val('');
+                //                 $('#jumlah').html('');
+                //                 $('#baik').html('');
+                //                 $('#ringan').html('');
+                //                 $('#berat').html('');
+                //                 $('#ket').html('');
 
-//                                 // refLok();
-//                             },
-//                             error: function(xhr) {
-//                                 if (xhr.status === 400) {
-//                                     // Validation error, handle it
-//                                     var errors = xhr.responseJSON.errors;
-//                                     $.each(errors, function(field, messages) {
-//                                         // Display each error message for the specific field
-//                                         $('#'+field+'_error').text(messages[0]); // Assume you have an element with an ID like 'reg_error'
-//                                     });
-//                                 } else {
-//                                     // Handle other errors
-//                                     console.error('An error occurred:', xhr.responseText);
-//                                 }
-//                             }
-//                         });
-//                     };
+                //                 // refLok();
+                //             },
+                //             error: function(xhr) {
+                //                 if (xhr.status === 400) {
+                //                     // Validation error, handle it
+                //                     var errors = xhr.responseJSON.errors;
+                //                     $.each(errors, function(field, messages) {
+                //                         // Display each error message for the specific field
+                //                         $('#'+field+'_error').text(messages[0]); // Assume you have an element with an ID like 'reg_error'
+                //                     });
+                //                 } else {
+                //                     // Handle other errors
+                //                     console.error('An error occurred:', xhr.responseText);
+                //                 }
+                //             }
+                //         });
+                //     };
 
-//                     // Read the selected file as a data URL
-//                     reader.readAsDataURL(fileInput);
-//                 });
+                //     // Read the selected file as a data URL
+                //     reader.readAsDataURL(fileInput);
+                // });
 
 //                 $('#tbl_kir').on('click', '.tree', function() {
 //                     $('#kepala').html('') //kir
