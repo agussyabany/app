@@ -83,6 +83,7 @@ $no = 0;
                         <div class="modal-body" id="modal_bodyLG">
                             <form action="" id="form_a" enctype="multipart/form-data">
                                 <div class="container">
+                                <div id="head-off">
                                 <div class="row  border border-primary rounded">
                                             <div class="container"><br>
                                                 <table class="table table-striped table-bordered rounded">
@@ -190,6 +191,8 @@ $no = 0;
                                                 </table>
                                             </div>
                                         </div><br>
+                                    </div>
+                                        {{-- MULTI HEAD --}}
                                         <div class="row  border border-primary rounded">
 
                                                 <div class="col"><br>
@@ -256,7 +259,7 @@ $no = 0;
 
 
                                         <div class="row border border-primary rounded">
-                                            <div class="container"><br>
+                                            <div class="container" id="tabel_tambah"><br>
                                                 <table  class="table table-bordered" id="tbl_kir_input">
                                                     <thead>
                                                         <tr class="text-center">
@@ -269,7 +272,7 @@ $no = 0;
                                                             <th>Hapus</th>
                                                           </tr>
                                                     </thead>
-                                                    ' <tbody>
+                                                    <tbody>
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -281,7 +284,7 @@ $no = 0;
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                          <button type="button" class="tombol btn btn-primary" id="proses">SUBMIT</button>
+                          <button type="button" id="proses_kir" class="tombol btn btn-primary" id="proses">SUBMIT</button>
                         </div>
                       </div>
                     </div>
@@ -379,6 +382,7 @@ $no = 0;
                                         <th>NO</th>
                                         <th>Nama Ruangan</th>
                                         <th>KIR</th>
+                                        <th>TAMBAH KIR</th>
                                         </tr>
                                         </thead>
                                         <tbody>

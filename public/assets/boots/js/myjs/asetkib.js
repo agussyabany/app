@@ -454,15 +454,20 @@ $(document).on('click', '#detail_gedung_divisi', function(){
                 '<div class="btn-group">'+
                     '<button class="badge bg-success border border-secondary btn-sm tree" data-id="' + lok + ',' + dep + ',' + div + ',' + ged + ',' + ruang + ',' + nama_div + '" id="kir_detail" data-bs-toggle="modal" data-bs-target="#modal_kir_detail"><i class="fa-solid fa-eye"></i></button>'+
                 '</div>';
+                var tambahButton =
+                '<div class="btn-group">'+
+                    '<button class="badge bg-primary border border-secondary btn-sm tree" data-id="' + lok + ',' + dep + ',' + div + ',' + ged + ',' + ruang + ',' + nama_div + '" id="kir_tambah_detail"><i class="fa-solid fa-plus"></i></button>'+
+                '</div>';
                 table.row.add([
                     ++i,
                     items.ruangan,
-                    editButton
+                    editButton,
+                    tambahButton
                 ]).draw();
             })
         })
     })
-
+//KIR DETAIL
     $(document).on('click', '#kir_detail', function() {
 
         var id = $(this).data('id');
@@ -501,18 +506,21 @@ $.get("/kir.detail/"+ lok +"/"+ dep +"/"+ div +"/"+ ged +"/"+ ruang, function(da
 
     ]).draw();
 
+        })
     })
-})
 })
 //Tambah Kir
 
 $(document).on('click', '#tambah_kir', function() {
+    $('.select2').select2({
+        dropdownParent: $('#modal_bodyLG')
+    });
     selectOptKir();
     selectOptAll();
     refKirInput()
 
 })
-
+//MASUKAN KE KERANJANG KIR
 $(document).on('click', '#submit_kir', function (event) {
         event.preventDefault();
         var fileInput = $('#img')[0].files[0];
@@ -530,7 +538,7 @@ $(document).on('click', '#submit_kir', function (event) {
                     lokasi: $('#lokasi_kir').val(),
                     dep: $('#dep').val(),
                     div:$('#div').val(),
-                    gedung:$('#gedung_kir').val(),
+                    gedung_kir:$('#gedung_kir').val(),
                     nilai_v:$('#nilai_v').val(),
                     ruang_kir:$('#ruang_kir').val(),
                     nama_aset:$('#nama_aset').val(),
@@ -582,6 +590,7 @@ $(document).on('click', '#submit_kir', function (event) {
         // Read the selected file as a data URL
         reader.readAsDataURL(fileInput);
     });
+    //HAPUS KERANJANG KIR
     $(document).on('click', '#haps', function (event) {
         var id = $(this).data('id');
         var del = confirm("HAPUS DATA ?");
@@ -600,7 +609,68 @@ $(document).on('click', '#submit_kir', function (event) {
             });
         }
     })
+    //PROSES KIR
+    $(document).on('click', '#proses_kir', function (event) {
+        $.ajax({
+            url: "/kir.clear",
+            type: "POST",
+            dataType: 'json',
+                success: function (data) {
+                alert('Data berhasil Diproses')
+                refKirInput();
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                alert('Data gagal Diproses');
+            },
+    });
+})
+//TABAH BARANG PADA KIR RUANG EXISTING
+$(document).on('click', '#kir_tambah_detail', function (event) {
+        var id = $(this).data('id');
+        $('#modal_tambah').modal('show');
+        console.log(id);
+        var delimiter = ",";
+        var id_key = id.split(delimiter);
+        var lok = id_key[0];
+        var dep = id_key[1];
+        var div = id_key[2];
+        var ged = id_key[3];
+        var ruang = id_key[4];
+        var nama_div = id_key[5];
+        var i = 0;
 
+$('#judul_modal').html('<strong>Divisi:</strong> '+ nama_div +'<br><strong>Gedung:</strong> '+ ged +'<br><strong>Ruang: </strong>' + ruang +'<button class="btn btn-sm btn-primary float-end" id="print_kir" data-id="' + lok + "," + dep + "," + div + "," + ged + "," + ruang + '"><i class="fa-solid fa-print"></i></button>' );
+
+$('#submit_kir').attr('id','submit_tambah_kir')
+$('#head-off').empty();
+$('#head-off').append('<input type="hidden" value="'+ lok +'" id="#lokasi_kir">'+
+                      '<input type="hidden" value="'+ dep +'" id="dep">'+
+                      '<input type="hidden" value="'+ div +'" id="div">'+
+                      '<input type="hidden" value="'+ ged +'" id="gedung_kir">'+
+                      '<input type="hidden" value="'+ ruang +'" id="ruang_kir">'+
+                      '<input type="hidden" value="" id="nilai_v">');
+$('#tabel_tambah').empty();
+$('#tabel_tambah').append('<table class="table table-striped table-border" id="tbl_kir_input">'+
+                            '<thead>'+
+                                '<tr>'+
+                                    '<th>NO</th>'+
+                                    '<th>Nama Aktiva</th>'+
+                                    '<th>Merk/Type</th>'+
+                                    '<th>Bahan</th>'+
+                                    '<th>Jumlah</th>'+
+                                    '<th>Satuan</th>'+
+                                    '<th>Baik</th>'+
+                                    '<th>Rusak Ringan</th>'+
+                                    '<th>Rusak Berat</th>'+
+                                    '<th>Aksi</th>'+
+                                '</tr>'+
+                            '</thead>'+
+                            '<tbody>'+
+                            '</tbody>'+
+                            '</table>');
+selectOptKir();
+kirTambah(lok,dep,div,ged,ruang);
+})
 
 
 
@@ -3269,20 +3339,20 @@ $(document).on('click', '#submit_kir', function (event) {
                 //     }
                 // })
 
-//                 $(document).on('click', '#proses_kir', function (event) {
-//                     $.ajax({
-//                         url: "/kir.clear",
-//                         type: "POST",
-//                         dataType: 'json',
-//                             success: function (data) {
-//                             alert('Data berhasil Diproses')
-//                             refKirInput();
-//                         },
-//                         error: function (xhr, textStatus, errorThrown) {
-//                             alert('Data gagal Diproses');
-//                         },
-//                 });
-//             })
+            //     $(document).on('click', '#proses_kir', function (event) {
+            //         $.ajax({
+            //             url: "/kir.clear",
+            //             type: "POST",
+            //             dataType: 'json',
+            //                 success: function (data) {
+            //                 alert('Data berhasil Diproses')
+            //                 refKirInput();
+            //             },
+            //             error: function (xhr, textStatus, errorThrown) {
+            //                 alert('Data gagal Diproses');
+            //             },
+            //     });
+            // })
 //                 //SUBMIT KIR
                 // $(document).on('click', '#submit_kir', function (event) {
                 //     event.preventDefault();

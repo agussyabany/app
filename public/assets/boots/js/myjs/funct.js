@@ -19,13 +19,13 @@ function selectOptKir()
     });
     $.get('/barang.gedung', function (data) {
         $.each(data.data, function (index, item) {
-            $('#gedung_kir').append('<option value="' + item.id + '">' + item.nama_barang + '</option>');
+            $('#gedung_kir').append('<option value="' + item.nama_barang + '">' + item.nama_barang + '</option>');
         });
     });
 
     $.get('/ruang', function (data) {
         $.each(data.data, function (index, item) {
-            $('#ruang_kir').append('<option value="' + item.id + '">' + item.nama_ruang + '</option>');
+            $('#ruang_kir').append('<option value="' + item.nama_ruang + '">' + item.nama_ruang + '</option>');
         });
     });
 
@@ -94,6 +94,35 @@ function refKirInput()
                 editButton
             ]).draw();
         });
+    })
+}
+
+function kirTambah(lok,dep,div,ged,ruang)
+{
+var i =0;
+var table = $("#tbl_kir_input").DataTable({
+    searching: false
+});
+table.clear().draw();
+    $.get("/kir.detail/"+ lok +"/"+ dep +"/"+ div +"/"+ ged +"/"+ ruang, function(data){
+        $.each(data.data, function (index, items) {
+            var editButton = '<button type="button" id="edit" data-id="' + items.id + '" class="btn btn-outline-primary btn-sm"><i class="fas fa-edit"></i></button>';
+
+            table.row.add([
+            ++i,
+            items.nama_barang,
+            items.merk,
+            items.bahan,
+            items.jumlah,
+            items.satuan,
+            items.baik,
+            items.ringan,
+            items.berat,
+            editButton
+
+        ]).draw();
+
+        })
     })
 }
 
