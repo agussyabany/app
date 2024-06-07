@@ -166,7 +166,7 @@ class KirController extends Controller
             'ringan' => 'required|numeric',
             'berat' => 'required|numeric',
             'ket' => 'required',
-            'aktiva'=>'required'
+            //'aktiva'=>'required'
 
         ];
 
@@ -252,6 +252,15 @@ class KirController extends Controller
         return response()->json([
             'data' => $kir
           ]);
+        // $user = Auth::user()->id;
+        // $kir = Kir::join('barangs','kirs.id_barang','=','barangs.id')
+        //                 ->where('input',0)
+        //                 ->where('id_user',$user)
+        //                 ->get();
+        // return response()->json([
+        //     'data' => $kir
+        //   ]);
+
     }
 
     public function clear()

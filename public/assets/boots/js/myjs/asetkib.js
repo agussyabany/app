@@ -512,9 +512,11 @@ $.get("/kir.detail/"+ lok +"/"+ dep +"/"+ div +"/"+ ged +"/"+ ruang, function(da
 //Tambah Kir
 
 $(document).on('click', '#tambah_kir', function() {
+
     $('.select2').select2({
         dropdownParent: $('#modal_bodyLG')
     });
+    $('#jenis_input').val(1);
     selectOptKir();
     selectOptAll();
     refKirInput()
@@ -523,6 +525,13 @@ $(document).on('click', '#tambah_kir', function() {
 //MASUKAN KE KERANJANG KIR
 $(document).on('click', '#submit_kir', function (event) {
         event.preventDefault();
+        var lok =$('#lokasi_kir').val();
+        var dep =$('#dep').val();
+        var div =$('#div').val();
+        var ged =$('#gedung_kir').val();
+        var ruang =$('#ruang_kir').val();
+        var jenis =$('#jenis_input').val();
+
         var fileInput = $('#img')[0].files[0];
         if (!fileInput) {
             alert('Please select an image.');
@@ -557,19 +566,17 @@ $(document).on('click', '#submit_kir', function (event) {
                 type: "POST",
                 dataType: 'json',
                 success: function (data) {
-                    //alert(data);
-                    refKirInput();
-                    $('#nama_aset').val('');
-                    $('#kode_aset').html('');
-                    $('#merk').html('');
-                    $('#bahan_kir').val('');
-                    $('#jumlah').html('');
-                    $('#baik').html('');
-                    $('#ringan').html('');
-                    $('#berat').html('');
-                    $('#ket').html('');
 
-                    // refLok();
+                    if (jenis == 1) {
+                        refKirInput();
+                    } else {
+                        kirTambah(lok,dep,div,ged,ruang);
+                    }
+
+
+
+
+
                 },
                 error: function(xhr) {
                     if (xhr.status === 400) {
@@ -624,10 +631,11 @@ $(document).on('click', '#submit_kir', function (event) {
             },
     });
 })
-//TABAH BARANG PADA KIR RUANG EXISTING
+//TAMBAH BARANG PADA KIR RUANG EXISTING
 $(document).on('click', '#kir_tambah_detail', function (event) {
         var id = $(this).data('id');
         $('#modal_tambah').modal('show');
+        $('#jenis_input').val(2);
         console.log(id);
         var delimiter = ",";
         var id_key = id.split(delimiter);
@@ -641,16 +649,17 @@ $(document).on('click', '#kir_tambah_detail', function (event) {
 
 $('#judul_modal').html('<strong>Divisi:</strong> '+ nama_div +'<br><strong>Gedung:</strong> '+ ged +'<br><strong>Ruang: </strong>' + ruang +'<button class="btn btn-sm btn-primary float-end" id="print_kir" data-id="' + lok + "," + dep + "," + div + "," + ged + "," + ruang + '"><i class="fa-solid fa-print"></i></button>' );
 
-$('#submit_kir').attr('id','submit_tambah_kir')
+
 $('#head-off').empty();
-$('#head-off').append('<input type="hidden" value="'+ lok +'" id="#lokasi_kir">'+
+$('#head-off').append('<input type="hidden" value="'+ lok +'" id="lokasi_kir">'+
                       '<input type="hidden" value="'+ dep +'" id="dep">'+
                       '<input type="hidden" value="'+ div +'" id="div">'+
                       '<input type="hidden" value="'+ ged +'" id="gedung_kir">'+
                       '<input type="hidden" value="'+ ruang +'" id="ruang_kir">'+
-                      '<input type="hidden" value="" id="nilai_v">');
+                      '<input type="hidden" value="" id="kode_aktiva">');
+
 $('#tabel_tambah').empty();
-$('#tabel_tambah').append('<table class="table table-striped table-border" id="tbl_kir_input">'+
+$('#tabel_tambah').append('<table class="table table-striped table-border" id="tbl_kir_input_tambah">'+
                             '<thead>'+
                                 '<tr>'+
                                     '<th>NO</th>'+
@@ -662,12 +671,11 @@ $('#tabel_tambah').append('<table class="table table-striped table-border" id="t
                                     '<th>Baik</th>'+
                                     '<th>Rusak Ringan</th>'+
                                     '<th>Rusak Berat</th>'+
-                                    '<th>Aksi</th>'+
                                 '</tr>'+
                             '</thead>'+
                             '<tbody>'+
                             '</tbody>'+
-                            '</table>');
+                            '</table>')
 selectOptKir();
 kirTambah(lok,dep,div,ged,ruang);
 })

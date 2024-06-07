@@ -100,7 +100,7 @@ function refKirInput()
 function kirTambah(lok,dep,div,ged,ruang)
 {
 var i =0;
-var table = $("#tbl_kir_input").DataTable({
+var table = $("#tbl_kir_input_tambah").DataTable({
     searching: false
 });
 table.clear().draw();

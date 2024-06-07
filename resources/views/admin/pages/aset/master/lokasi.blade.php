@@ -21,6 +21,7 @@
                                             <th>NO</th>
                                             <th>LOKASI</th>
                                             <th>ALAMAT</th>
+                                            <th>WILAYAH</th>
                                             <th>LATITUDE</th>
                                             <th>LONGITUDE</th>
                                             <th>GAMBAR</th>
@@ -33,6 +34,7 @@
                                                 <td>{{ $no++ }}</td>
                                                 <td>{{ $item->lokasi }}</td>
                                                 <td>{{ $item->alamat }}</td>
+                                                <td>{{ $item->wilayah }}</td>
                                                 <td>{{ $item->lat }}</td>
                                                 <td>{{ $item->long }}</td>
                                                 <td><img height="80px" width="80px" src="http://127.0.0.1:8000/assets/img/lokasi/{{$item->img }}" alt=""></td>
@@ -73,13 +75,20 @@
             <div class="modal-body" id="modal_bodyLG">
               <form action="/lok.save" id="form_lokasi" method="post" enctype="multipart/form-data">
                 @csrf
-                <input type="text" id="id" name="id">
+                <input type="hidden" id="id" name="id">
                 <input type="text" class="form-control" id="nama_lokasi" name="lokasi" placeholder="Nama Lokasi"><br>
                 <input type="text" class="form-control" id="alamat" name="alamat" placeholder="Alamat"><br>
+                <select class="select2 form-control" name="wil" id="wil" style="width:100%;">
+                    <option>- WILAYAH -</option>
+                    <option value="1">UNIT PELAYANAN WILAYAH I</option>
+                    <option value="2">UNIT PELAYANAN WILAYAH II</option>
+                    <option value="3">UNIT PELAYANAN WILAYAH III</option>
+                    <option value="4">UNIT PELAYANAN WILAYAH IV</option>
+                </select><br><br>
                 <input type="text" class="form-control" id="lat" name="lat" placeholder="Latitude"><br>
                 <input type="text" class="form-control" id="long" name="long" placeholder="Longitude"><br>
                 <input type="file" class="form-control" id="img" name="img"><br>
-             
+
 
             </div>
             <div class="modal-footer">

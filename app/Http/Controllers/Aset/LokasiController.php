@@ -20,7 +20,7 @@ class LokasiController extends Controller
 
     //     $imageData = base64_decode($img);
 
-        
+
     //     $imageName = time() . '_' . uniqid() . '.jpg';
     //     file_put_contents(public_path('assets/img/lokasi/' . $imageName), $imageData);
 
@@ -42,6 +42,7 @@ class LokasiController extends Controller
         $request->validate([
             'lokasi' => 'required|string|max:255',
             'alamat' => 'required|string|max:255',
+            'wil' => 'required|numeric',
             'lat' => 'required|numeric',
             'long' => 'required|numeric',
             'img' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
@@ -49,9 +50,10 @@ class LokasiController extends Controller
 
         $nama_lokasi = $request->input('lokasi');
         $alamat = $request->input('alamat');
+        $wilayah = $request->input('wil');
         $lat = $request->input('lat');
         $long = $request->input('long');
-        
+
         if ($request->hasFile('img')) {
             $image = $request->file('img');
             $imageName = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
@@ -61,6 +63,7 @@ class LokasiController extends Controller
             $lokasi = new Lokasi();
             $lokasi->lokasi = $nama_lokasi;
             $lokasi->alamat = $alamat;
+            $lokasi->wilayah = $wilayah;
             $lokasi->lat = $lat;
             $lokasi->long = $long;
             $lokasi->img = $imageName;
@@ -86,21 +89,24 @@ class LokasiController extends Controller
         $request->validate([
             'lokasi' => 'required|string|max:255',
             'alamat' => 'required|string|max:255',
+            'wil' => 'required|numeric',
             'lat' => 'required|numeric',
             'long' => 'required|numeric',
         ]);
         $id = $request->input('id');
         $nama_lokasi = $request->input('lokasi');
         $alamat = $request->input('alamat');
+        $wilayah = $request->input('wil');
         $lat = $request->input('lat');
         $long = $request->input('long');
         //$img = $request->input('img');
 
         Lokasi::where('id',$id)
         ->update([
-            
+
             'lokasi' => $nama_lokasi,
             'alamat' => $alamat,
+            'wilayah'=> $wilayah,
             'lat' => $lat,
             'long'=> $long
         ]);

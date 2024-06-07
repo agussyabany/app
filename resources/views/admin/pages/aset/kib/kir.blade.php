@@ -81,6 +81,7 @@ $no = 0;
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body" id="modal_bodyLG">
+                            <input type="hidden" value="" id="jenis_input">
                             <form action="" id="form_a" enctype="multipart/form-data">
                                 <div class="container">
                                 <div id="head-off">
