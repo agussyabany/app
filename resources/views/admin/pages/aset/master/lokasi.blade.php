@@ -37,7 +37,7 @@
                                                 <td>{{ $item->wilayah }}</td>
                                                 <td>{{ $item->lat }}</td>
                                                 <td>{{ $item->long }}</td>
-                                                <td><img height="80px" width="80px" src="http://127.0.0.1:8000/assets/img/lokasi/{{$item->img }}" alt=""></td>
+                                                <td><img height="80px" width="80px" src="http://app.perumdamtirtakencana.id/assets/img/lokasi/{{$item->img }}" alt=""></td>
                                                 <td>
                                                     <!-- Add action buttons/links here -->
                                                     <!-- Add action buttons/links here -->
