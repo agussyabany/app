@@ -12,6 +12,7 @@ class lokasi extends Model
         'id',
         'lokasi',
         'alamat',
+        'wilayah',
         'lat',
         'long',
         'img'

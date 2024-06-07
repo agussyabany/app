@@ -1,4 +1,10 @@
 $(document).ready(function() {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
     //TANAH
     $(document).on('click', '#detail_tanah', function() {
         var id = $(this).data('id');
@@ -390,12 +396,14 @@ $(document).on('click', '#detail_gedung_divisi', function(){
             })
         })
         $(document).on('click', '#data_kir', function() {
+            $('#canvas_tree').empty();
             var id = $(this).data('id');
              $.ajax({
                 type: "GET",
                 url: "/kir.dep/"+ id,
                 success: function (data) {
                 $.each(data.data, function (index, item) {
+                    $('#kepala').html('DATA KIR LOKASI <strong>'+ item.lokasi + '<strong>');
                     $('#canvas_tree').append(
                         '<li><span><strong>' + item.kode_dep +  '</strong></span>'+
                                 '<ol id="kir_div'+ item.id_departemen +'"></ol>'+
@@ -446,15 +454,20 @@ $(document).on('click', '#detail_gedung_divisi', function(){
                 '<div class="btn-group">'+
                     '<button class="badge bg-success border border-secondary btn-sm tree" data-id="' + lok + ',' + dep + ',' + div + ',' + ged + ',' + ruang + ',' + nama_div + '" id="kir_detail" data-bs-toggle="modal" data-bs-target="#modal_kir_detail"><i class="fa-solid fa-eye"></i></button>'+
                 '</div>';
+                var tambahButton =
+                '<div class="btn-group">'+
+                    '<button class="badge bg-primary border border-secondary btn-sm tree" data-id="' + lok + ',' + dep + ',' + div + ',' + ged + ',' + ruang + ',' + nama_div + '" id="kir_tambah_detail"><i class="fa-solid fa-plus"></i></button>'+
+                '</div>';
                 table.row.add([
                     ++i,
                     items.ruangan,
-                    editButton
+                    editButton,
+                    tambahButton
                 ]).draw();
             })
         })
     })
-
+//KIR DETAIL
     $(document).on('click', '#kir_detail', function() {
 
         var id = $(this).data('id');
@@ -469,13 +482,15 @@ $(document).on('click', '#detail_gedung_divisi', function(){
         var nama_div = id_key[5];
         var i = 0;
 
-    $('#judul_modalLG').html('<strong>Divisi:</strong> '+ nama_div +'<br><strong>Gedung:</strong> '+ ged +'<br><strong>Ruang: </strong>' + ruang +'<button class="btn btn-sm btn-primary float-end" id="print_kir" data-id="' + lok + "," + dep + "," + div + "," + ged + "," + ruang + '"><i class="fa-solid fa-print"></i></button>' );
+$('#judul_modal').html('<strong>Divisi:</strong> '+ nama_div +'<br><strong>Gedung:</strong> '+ ged +'<br><strong>Ruang: </strong>' + ruang +'<button class="btn btn-sm btn-primary float-end" id="print_kir" data-id="' + lok + "," + dep + "," + div + "," + ged + "," + ruang + '"><i class="fa-solid fa-print"></i></button>' );
     var table = $("#tbl_kir_detail").DataTable();
     table.clear().draw();
 
 $.get("/kir.detail/"+ lok +"/"+ dep +"/"+ div +"/"+ ged +"/"+ ruang, function(data){
     $.each(data.data, function (index, items) {
         var img = '<a href="#" id="detail_gedung_divisi"><img src="http://app.perumdamtirtakencana.id/assets/img/kir/'+items.img+'" height="100px" width="100px"></img></a>';
+        var editButton = '<button type="button" id="edit" data-id="' + items.id + '" class="btn btn-outline-primary btn-sm"><i class="fas fa-edit"></i></button>';
+
         table.row.add([
         ++i,
         items.nama_barang,
@@ -486,13 +501,186 @@ $.get("/kir.detail/"+ lok +"/"+ dep +"/"+ div +"/"+ ged +"/"+ ruang, function(da
         items.baik,
         items.ringan,
         items.berat,
-        img
+        img,
+        editButton
 
     ]).draw();
 
+        })
     })
 })
+//Tambah Kir
+
+$(document).on('click', '#tambah_kir', function() {
+
+    $('.select2').select2({
+        dropdownParent: $('#modal_bodyLG')
+    });
+    $('#jenis_input').val(1);
+    selectOptKir();
+    selectOptAll();
+    refKirInput()
+
 })
+//MASUKAN KE KERANJANG KIR
+$(document).on('click', '#submit_kir', function (event) {
+        event.preventDefault();
+        var lok =$('#lokasi_kir').val();
+        var dep =$('#dep').val();
+        var div =$('#div').val();
+        var ged =$('#gedung_kir').val();
+        var ruang =$('#ruang_kir').val();
+        var jenis =$('#jenis_input').val();
+
+        var fileInput = $('#img')[0].files[0];
+        if (!fileInput) {
+            alert('Please select an image.');
+            return;
+        }
+        var reader = new FileReader();
+         reader.onload = function (e) {
+            var base64Image = e.target.result.split(',')[1]; // Extract base64 data
+
+            // Send the base64 encoded image data in the AJAX request
+            $.ajax({
+                data: {
+                    lokasi: $('#lokasi_kir').val(),
+                    dep: $('#dep').val(),
+                    div:$('#div').val(),
+                    gedung_kir:$('#gedung_kir').val(),
+                    nilai_v:$('#nilai_v').val(),
+                    ruang_kir:$('#ruang_kir').val(),
+                    nama_aset:$('#nama_aset').val(),
+                    kode_aset:$('#kode_aset').val(),
+                    merk:$('#merk').val(),
+                    bahan:$('#bahan_kir').val(),
+                    jumlah:$('#jumlah').val(),
+                    baik:$('#baik').val(),
+                    ringan:$('#ringan').val(),
+                    berat:$('#berat').val(),
+                    ket:$('#ket').val(),
+                    aktiva:$('#kode_aktiva').val(),
+                    img: base64Image
+                },
+                url: "/kir.save",
+                type: "POST",
+                dataType: 'json',
+                success: function (data) {
+
+                    if (jenis == 1) {
+                        refKirInput();
+                    } else {
+                        kirTambah(lok,dep,div,ged,ruang);
+                    }
+
+
+
+
+
+                },
+                error: function(xhr) {
+                    if (xhr.status === 400) {
+                        // Validation error, handle it
+                        var errors = xhr.responseJSON.errors;
+                        $.each(errors, function(field, messages) {
+                            // Display each error message for the specific field
+                            $('#'+field+'_error').text(messages[0]); // Assume you have an element with an ID like 'reg_error'
+                        });
+                    } else {
+                        // Handle other errors
+                        console.error('An error occurred:', xhr.responseText);
+                    }
+                }
+            });
+        };
+
+        // Read the selected file as a data URL
+        reader.readAsDataURL(fileInput);
+    });
+    //HAPUS KERANJANG KIR
+    $(document).on('click', '#haps', function (event) {
+        var id = $(this).data('id');
+        var del = confirm("HAPUS DATA ?");
+        if (del) {
+            $.ajax({
+                url: "/kir.del/" + id,
+                type: "POST",
+                dataType: 'json',
+                    success: function (data) {
+                    alert('Data berhasil Dihapus')
+                    refKirInput();
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    alert('Data gagal dihapus');
+                },
+            });
+        }
+    })
+    //PROSES KIR
+    $(document).on('click', '#proses_kir', function (event) {
+        $.ajax({
+            url: "/kir.clear",
+            type: "POST",
+            dataType: 'json',
+                success: function (data) {
+                alert('Data berhasil Diproses')
+                refKirInput();
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                alert('Data gagal Diproses');
+            },
+    });
+})
+//TAMBAH BARANG PADA KIR RUANG EXISTING
+$(document).on('click', '#kir_tambah_detail', function (event) {
+        var id = $(this).data('id');
+        $('#modal_tambah').modal('show');
+        $('#jenis_input').val(2);
+        console.log(id);
+        var delimiter = ",";
+        var id_key = id.split(delimiter);
+        var lok = id_key[0];
+        var dep = id_key[1];
+        var div = id_key[2];
+        var ged = id_key[3];
+        var ruang = id_key[4];
+        var nama_div = id_key[5];
+        var i = 0;
+
+$('#judul_modal').html('<strong>Divisi:</strong> '+ nama_div +'<br><strong>Gedung:</strong> '+ ged +'<br><strong>Ruang: </strong>' + ruang +'<button class="btn btn-sm btn-primary float-end" id="print_kir" data-id="' + lok + "," + dep + "," + div + "," + ged + "," + ruang + '"><i class="fa-solid fa-print"></i></button>' );
+
+
+$('#head-off').empty();
+$('#head-off').append('<input type="hidden" value="'+ lok +'" id="lokasi_kir">'+
+                      '<input type="hidden" value="'+ dep +'" id="dep">'+
+                      '<input type="hidden" value="'+ div +'" id="div">'+
+                      '<input type="hidden" value="'+ ged +'" id="gedung_kir">'+
+                      '<input type="hidden" value="'+ ruang +'" id="ruang_kir">'+
+                      '<input type="hidden" value="" id="kode_aktiva">');
+
+$('#tabel_tambah').empty();
+$('#tabel_tambah').append('<table class="table table-striped table-border" id="tbl_kir_input_tambah">'+
+                            '<thead>'+
+                                '<tr>'+
+                                    '<th>NO</th>'+
+                                    '<th>Nama Aktiva</th>'+
+                                    '<th>Merk/Type</th>'+
+                                    '<th>Bahan</th>'+
+                                    '<th>Jumlah</th>'+
+                                    '<th>Satuan</th>'+
+                                    '<th>Baik</th>'+
+                                    '<th>Rusak Ringan</th>'+
+                                    '<th>Rusak Berat</th>'+
+                                '</tr>'+
+                            '</thead>'+
+                            '<tbody>'+
+                            '</tbody>'+
+                            '</table>')
+selectOptKir();
+kirTambah(lok,dep,div,ged,ruang);
+})
+
+
 
 // $(document).ready(function() {
 
@@ -2931,11 +3119,11 @@ $.get("/kir.detail/"+ lok +"/"+ dep +"/"+ div +"/"+ ged +"/"+ ruang, function(da
 //                     '</div>'
 //                 );
 //                 refKir();
-//                 $.ajaxSetup({
-//                     headers: {
-//                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-//                         }
-//                     });
+                // $.ajaxSetup({
+                //     headers: {
+                //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                //         }
+                //     });
 
 
 //                 $(document).on('click', '#tambah_kir', function() {
@@ -2944,193 +3132,193 @@ $.get("/kir.detail/"+ lok +"/"+ dep +"/"+ div +"/"+ ged +"/"+ ruang, function(da
 //                     $('#judul_modalLG').html('TAMBAH DATA KIR');
 //                     $('#modal_bodyLG').html('');
 //                     $('#modal_bodyLG').prepend(
-//                         '<form action="" id="form_a" enctype="multipart/form-data">'+
-//                             '<div class="container">'+
-//                             '<div class="row  border border-primary rounded">'+
-//                                         '<div class="container"><br>'+
-//                                             '<table class="table table-striped table-bordered rounded">'+
-//                                                 '<thead>'+
-//                                                     '<tr class="text-center">'+
-//                                                         '<th>No Voucher</th>'+
-//                                                         '<th>Kode Aktiva</th>'+
-//                                                         '<th>Bulan</th>'+
-//                                                         '<th>Uraian</th>'+
-//                                                       '</tr>'+
-//                                                 '</thead>'+
-//                                             ' <tbody>'+
-//                                                     '<tr>'+
-//                                                         '<td>'+
-//                                                             '<div class="input-group input-group-sm mb-1">'+
-//                                                                 '<select class="select2 form-control" name="voucher_kir" id="voucher_kir" style="width:100%;">'+
-//                                                                     '<option>- NO VOUCHER -</option>'+
-//                                                                 '</select>'+
-//                                                             '</div>'+
-//                                                         '</td>'+
-//                                                         '<td>'+
-//                                                             '<div class="input-group input-group-sm mb-1">'+
-//                                                                 '<select class="select2 form-control" name="kode_aktiva" id="kode_aktiva" style="width:100%;">'+
-//                                                                     '<option>- PILIH KODE AKTIVA -</option>'+
-//                                                                 '</select>'+
-//                                                             '</div>'+
-//                                                         '</td>'+
-//                                                         '<td>'+
-//                                                             '<div class="input-group input-group-sm mb-1">'+
-//                                                                 '<input type="text" class="form-control" name="bulan_voc" id="bulan_voc" disabled>'+
-//                                                             '</div>'+
-//                                                         '</td>'+
-//                                                         '<td>'+
-//                                                             '<div class="input-group input-group-sm mb-1">'+
-//                                                                 '<input type="text" class="form-control" disabled value="text" id="urai_voc">'+
-//                                                             '</div>'+
-//                                                         '</td>'+
+                        // '<form action="" id="form_a" enctype="multipart/form-data">'+
+                        //     '<div class="container">'+
+                        //     '<div class="row  border border-primary rounded">'+
+                        //                 '<div class="container"><br>'+
+                        //                     '<table class="table table-striped table-bordered rounded">'+
+                        //                         '<thead>'+
+                        //                             '<tr class="text-center">'+
+                        //                                 '<th>No Voucher</th>'+
+                        //                                 '<th>Kode Aktiva</th>'+
+                        //                                 '<th>Bulan</th>'+
+                        //                                 '<th>Uraian</th>'+
+                        //                               '</tr>'+
+                        //                         '</thead>'+
+                        //                     ' <tbody>'+
+                        //                             '<tr>'+
+                        //                                 '<td>'+
+                        //                                     '<div class="input-group input-group-sm mb-1">'+
+                        //                                         '<select class="select2 form-control" name="voucher_kir" id="voucher_kir" style="width:100%;">'+
+                        //                                             '<option>- NO VOUCHER -</option>'+
+                        //                                         '</select>'+
+                        //                                     '</div>'+
+                        //                                 '</td>'+
+                        //                                 '<td>'+
+                        //                                     '<div class="input-group input-group-sm mb-1">'+
+                        //                                         '<select class="select2 form-control" name="kode_aktiva" id="kode_aktiva" style="width:100%;">'+
+                        //                                             '<option>- PILIH KODE AKTIVA -</option>'+
+                        //                                         '</select>'+
+                        //                                     '</div>'+
+                        //                                 '</td>'+
+                        //                                 '<td>'+
+                        //                                     '<div class="input-group input-group-sm mb-1">'+
+                        //                                         '<input type="text" class="form-control" name="bulan_voc" id="bulan_voc" disabled>'+
+                        //                                     '</div>'+
+                        //                                 '</td>'+
+                        //                                 '<td>'+
+                        //                                     '<div class="input-group input-group-sm mb-1">'+
+                        //                                         '<input type="text" class="form-control" disabled value="text" id="urai_voc">'+
+                        //                                     '</div>'+
+                        //                                 '</td>'+
 
-//                                                     ' </tr>'+
-//                                                 '</tbody>'+
-//                                             '</table>'+
-//                                         '</div>'+
-//                                     '</div><br>'+
+                        //                             ' </tr>'+
+                        //                         '</tbody>'+
+                        //                     '</table>'+
+                        //                 '</div>'+
+                        //             '</div><br>'+
 
-//                                     '<div class="row  border border-primary rounded">'+
-//                                         '<div class="container"><br>'+
-//                                             '<table class="table table-striped table-bordered rounded">'+
-//                                                 '<thead>'+
-//                                                     '<tr class="text-center">'+
-//                                                         '<th>Lokasi</th>'+
-//                                                         '<th>Departemen</th>'+
-//                                                         '<th>Divisi</th>'+
-//                                                         '<th>Gedung</th>'+
-//                                                         '<th>Ruangan</th>'+
-//                                                       '</tr>'+
-//                                                 '</thead>'+
-//                                             ' <tbody>'+
-//                                                     '<tr>'+
-//                                                         '<td>'+
-//                                                             '<div class="input-group input-group-sm mb-1">'+
-//                                                                 '<select class="select2 form-control" name="lokasi" id="lokasi_kir" style="width:100%;">'+
-//                                                                     '<option>- PILIH LOKASI -</option>'+
-//                                                                 '</select>'+
-//                                                             '</div>'+
-//                                                         '</td>'+
-//                                                         '<td>'+
-//                                                             '<div class="input-group input-group-sm mb-1">'+
-//                                                                 '<select class="select2 form-control" name="dep" id="dep">'+
-//                                                                     '<option>- PILIH DEPARTEMEN -</option>'+
-//                                                                 '</select>'+
-//                                                             '</div>'+
-//                                                         '</td>'+
-//                                                         '<td>'+
-//                                                             '<div class="input-group input-group-sm mb-1">'+
-//                                                                 '<select class="select2 form-control" name="div" id="div">'+
-//                                                                     '<option>- PILIH DIVISI -</option>'+
-//                                                                 '</select>'+
-//                                                             '</div>'+
-//                                                         '</td>'+
-//                                                         '<td>'+
-//                                                             '<div class="input-group input-group-sm mb-1">'+
-//                                                                 '<select class="select2 form-control" name="gedung" id="gedung">'+
-//                                                                     '<option>- PILIH GEDUNG -</option>'+
-//                                                                 '</select>'+
-//                                                             '</div>'+
-//                                                         '</td>'+
-//                                                         '<td>'+
-//                                                             '<div class="input-group input-group-sm mb-1">'+
-//                                                                 '<select class="select2 form-control" name="ruang" id="ruang_kir">'+
-//                                                                     '<option>- PILIH RUANGAN -</option>'+
-//                                                                 '</select>'+
-//                                                             '</div>'+
-//                                                         '</td>'+
-//                                                     ' </tr>'+
-//                                                 '</tbody>'+
-//                                             '</table>'+
-//                                         '</div>'+
-//                                     '</div><br>'+
-//                                     '<div class="row  border border-primary rounded">'+
+                        //             '<div class="row  border border-primary rounded">'+
+                        //                 '<div class="container"><br>'+
+                        //                     '<table class="table table-striped table-bordered rounded">'+
+                        //                         '<thead>'+
+                        //                             '<tr class="text-center">'+
+                        //                                 '<th>Lokasi</th>'+
+                        //                                 '<th>Departemen</th>'+
+                        //                                 '<th>Divisi</th>'+
+                        //                                 '<th>Gedung</th>'+
+                        //                                 '<th>Ruangan</th>'+
+                        //                               '</tr>'+
+                        //                         '</thead>'+
+                        //                     ' <tbody>'+
+                        //                             '<tr>'+
+                        //                                 '<td>'+
+                        //                                     '<div class="input-group input-group-sm mb-1">'+
+                        //                                         '<select class="select2 form-control" name="lokasi" id="lokasi_kir" style="width:100%;">'+
+                        //                                             '<option>- PILIH LOKASI -</option>'+
+                        //                                         '</select>'+
+                        //                                     '</div>'+
+                        //                                 '</td>'+
+                        //                                 '<td>'+
+                        //                                     '<div class="input-group input-group-sm mb-1">'+
+                        //                                         '<select class="select2 form-control" name="dep" id="dep">'+
+                        //                                             '<option>- PILIH DEPARTEMEN -</option>'+
+                        //                                         '</select>'+
+                        //                                     '</div>'+
+                        //                                 '</td>'+
+                        //                                 '<td>'+
+                        //                                     '<div class="input-group input-group-sm mb-1">'+
+                        //                                         '<select class="select2 form-control" name="div" id="div">'+
+                        //                                             '<option>- PILIH DIVISI -</option>'+
+                        //                                         '</select>'+
+                        //                                     '</div>'+
+                        //                                 '</td>'+
+                        //                                 '<td>'+
+                        //                                     '<div class="input-group input-group-sm mb-1">'+
+                        //                                         '<select class="select2 form-control" name="gedung" id="gedung">'+
+                        //                                             '<option>- PILIH GEDUNG -</option>'+
+                        //                                         '</select>'+
+                        //                                     '</div>'+
+                        //                                 '</td>'+
+                        //                                 '<td>'+
+                        //                                     '<div class="input-group input-group-sm mb-1">'+
+                        //                                         '<select class="select2 form-control" name="ruang" id="ruang_kir">'+
+                        //                                             '<option>- PILIH RUANGAN -</option>'+
+                        //                                         '</select>'+
+                        //                                     '</div>'+
+                        //                                 '</td>'+
+                        //                             ' </tr>'+
+                        //                         '</tbody>'+
+                        //                     '</table>'+
+                        //                 '</div>'+
+                        //             '</div><br>'+
+                        //             '<div class="row  border border-primary rounded">'+
 
-//                                             '<div class="col"><br>'+
+                        //                     '<div class="col"><br>'+
 
-//                                                 '<div class="input-group input-group-sm mb-1">'+
-//                                                     '<select name="nama_aset" id="nama_aset" class="select2 form-control">'+
-//                                                         '<option>-NAMA ASET-</option>'+
-//                                                     '</select>'+
-//                                                 '</div>'+
-//                                                 '<span style="color:red;" id="lokasi_error"></span>'+
-//                                                 '<div class="input-group input-group-sm mb-1">'+
-//                                                     '<span class="input-group-text col-sm-3">Kode Aset</span><input name="kode_aset" id="kode_aset" type="text" class="form-control">'+
-//                                                 '</div>'+
-//                                                 '<span style="color:red;" id="kode_aset_error"></span>'+
+                        //                         '<div class="input-group input-group-sm mb-1">'+
+                        //                             '<select name="nama_aset" id="nama_aset" class="select2 form-control">'+
+                        //                                 '<option>-NAMA ASET-</option>'+
+                        //                             '</select>'+
+                        //                         '</div>'+
+                        //                         '<span style="color:red;" id="lokasi_error"></span>'+
+                        //                         '<div class="input-group input-group-sm mb-1">'+
+                        //                             '<span class="input-group-text col-sm-3">Kode Aset</span><input name="kode_aset" id="kode_aset" type="text" class="form-control">'+
+                        //                         '</div>'+
+                        //                         '<span style="color:red;" id="kode_aset_error"></span>'+
 
-//                                                 '<div class="input-group input-group-sm mb-1">'+
-//                                                     '<span class="input-group-text col-sm-3">Merk/Type</span><input type="text" name="merk" id="merk" value="" class="form-control">'+
-//                                                 '</div>'+
-//                                                 '<span style="color:red;" id="reg_error"></span>'+
+                        //                         '<div class="input-group input-group-sm mb-1">'+
+                        //                             '<span class="input-group-text col-sm-3">Merk/Type</span><input type="text" name="merk" id="merk" value="" class="form-control">'+
+                        //                         '</div>'+
+                        //                         '<span style="color:red;" id="reg_error"></span>'+
 
-//                                                 '<div class="input-group input-group-sm mb-1">'+
-//                                                     '<select class="select2 form-control" name="bahan" id="bahan_kir">'+
-//                                                         '<option> - BAHAN - </option>'+
-//                                                     '</select>'+
-//                                                 '</div>'+
-//                                                 '<div class="input-group input-group-sm mb-1">'+
-//                                                     '<span class="input-group-text col-sm-3">Jumlah</span><input name="jumlah" id="jumlah" type="number" class="form-control">'+
-//                                                 '</div>'+
-//                                                 '<span style="color:red;" id="jumlah_error"></span>'+
-//                                             '</div><br>'+
+                        //                         '<div class="input-group input-group-sm mb-1">'+
+                        //                             '<select class="select2 form-control" name="bahan" id="bahan_kir">'+
+                        //                                 '<option> - BAHAN - </option>'+
+                        //                             '</select>'+
+                        //                         '</div>'+
+                        //                         '<div class="input-group input-group-sm mb-1">'+
+                        //                             '<span class="input-group-text col-sm-3">Jumlah</span><input name="jumlah" id="jumlah" type="number" class="form-control">'+
+                        //                         '</div>'+
+                        //                         '<span style="color:red;" id="jumlah_error"></span>'+
+                        //                     '</div><br>'+
 
-//                                             '<div class="col"><br>'+
-//                                                 '<div class="input-group input-group-sm mb-1">'+
-//                                                     '<span class="input-group-text col-sm-3">Baik</span><input name="baik" id="baik" type="number" class="form-control">'+
-//                                                 '</div>'+
-//                                                 '<span style="color:red;" id="baik_error"></span>'+
+                        //                     '<div class="col"><br>'+
+                        //                         '<div class="input-group input-group-sm mb-1">'+
+                        //                             '<span class="input-group-text col-sm-3">Baik</span><input name="baik" id="baik" type="number" class="form-control">'+
+                        //                         '</div>'+
+                        //                         '<span style="color:red;" id="baik_error"></span>'+
 
-//                                                 '<div class="input-group input-group-sm mb-1">'+
-//                                                     '<span class="input-group-text col-sm-3">Rusak Ringan</span><input name="merk" id="ringan" type="text" class="form-control">'+
-//                                                 '</div>'+
-//                                                 '<span style="color:red;" id="merk_error"></span>'+
+                        //                         '<div class="input-group input-group-sm mb-1">'+
+                        //                             '<span class="input-group-text col-sm-3">Rusak Ringan</span><input name="merk" id="ringan" type="text" class="form-control">'+
+                        //                         '</div>'+
+                        //                         '<span style="color:red;" id="merk_error"></span>'+
 
-//                                                 '<div class="input-group input-group-sm mb-1">'+
-//                                                     '<span class="input-group-text col-sm-3">Rusak Berat</span><input name="berat" id="berat" type="text" class="form-control">'+
-//                                                 '</div>'+
-//                                                 '<span style="color:red;" id="pabrik_error"></span>'+
+                        //                         '<div class="input-group input-group-sm mb-1">'+
+                        //                             '<span class="input-group-text col-sm-3">Rusak Berat</span><input name="berat" id="berat" type="text" class="form-control">'+
+                        //                         '</div>'+
+                        //                         '<span style="color:red;" id="pabrik_error"></span>'+
 
-//                                                 '<div class="input-group input-group-sm mb-1">'+
-//                                                     '<span class="input-group-text col-sm-3">Foto</span><input name="img" id="img" type="file" class="form-control" multiple>'+
-//                                                 '</div>'+
-//                                                 '<div class="input-group input-group-sm mb-1">'+
-//                                                     '<span class="input-group-text col-sm-3">Keterangan</span><textarea name="ket" id="ket" class="form-control"></textarea>'+
-//                                                 '</div>'+
-//                                                 '<span style="color:red;" id="ket_error"></span>'+
-//                                             '</div>'+
+                        //                         '<div class="input-group input-group-sm mb-1">'+
+                        //                             '<span class="input-group-text col-sm-3">Foto</span><input name="img" id="img" type="file" class="form-control" multiple>'+
+                        //                         '</div>'+
+                        //                         '<div class="input-group input-group-sm mb-1">'+
+                        //                             '<span class="input-group-text col-sm-3">Keterangan</span><textarea name="ket" id="ket" class="form-control"></textarea>'+
+                        //                         '</div>'+
+                        //                         '<span style="color:red;" id="ket_error"></span>'+
+                        //                     '</div>'+
 
-//                                     '</div>'+
+                        //             '</div>'+
 
-//                                     '<div class="row border border-primary rounded mt-1">'+
-//                                         '<br><div class="float-end">'+
-//                                             '<button type="button" id="submit_kir" class="btn btn-sm btn-primary float-end mt-1 mb-1">SUBMIT</button>'+
-//                                         '</div>'+
-//                                     '</div><br>'+
+                        //             '<div class="row border border-primary rounded mt-1">'+
+                        //                 '<br><div class="float-end">'+
+                        //                     '<button type="button" id="submit_kir" class="btn btn-sm btn-primary float-end mt-1 mb-1">SUBMIT</button>'+
+                        //                 '</div>'+
+                        //             '</div><br>'+
 
 
-//                                     '<div class="row border border-primary rounded">'+
-//                                         '<div class="container"><br>'+
-//                                             '<table  class="table table-bordered" id="tbl_kir_input">'+
-//                                                 '<thead>'+
-//                                                     '<tr class="text-center">'+
-//                                                         '<th>No</th>'+
-//                                                         '<th>Lokasi</th>'+
-//                                                         '<th>Divisi</th>'+
-//                                                         '<th>Gedung</th>'+
-//                                                         '<th>Ruang</th>'+
-//                                                         '<th>Merk</th>'+
-//                                                         '<th>Hapus</th>'+
-//                                                       '</tr>'+
-//                                                 '</thead>'+
-//                                                 ' <tbody>'+
-//                                                 '</tbody>'+
-//                                             '</table>'+
-//                                         '</div>'+
-//                                     '</div><br>'+
+                        //             '<div class="row border border-primary rounded">'+
+                        //                 '<div class="container"><br>'+
+                        //                     '<table  class="table table-bordered" id="tbl_kir_input">'+
+                        //                         '<thead>'+
+                        //                             '<tr class="text-center">'+
+                        //                                 '<th>No</th>'+
+                        //                                 '<th>Lokasi</th>'+
+                        //                                 '<th>Divisi</th>'+
+                        //                                 '<th>Gedung</th>'+
+                        //                                 '<th>Ruang</th>'+
+                        //                                 '<th>Merk</th>'+
+                        //                                 '<th>Hapus</th>'+
+                        //                               '</tr>'+
+                        //                         '</thead>'+
+                        //                         ' <tbody>'+
+                        //                         '</tbody>'+
+                        //                     '</table>'+
+                        //                 '</div>'+
+                        //             '</div><br>'+
 
-//                                 '</div>'+
-//                             '</form >');
+                        //         '</div>'+
+                        //     '</form >');
 
 //                         $('.select2').select2({
 //                             dropdownParent: $('#modal_bodyLG')
@@ -3140,109 +3328,109 @@ $.get("/kir.detail/"+ lok +"/"+ dep +"/"+ div +"/"+ ged +"/"+ ruang, function(da
 
 //                     })
 
-//                 $(document).on('click', '#haps', function (event) {
-//                     var id = $(this).data('id');
-//                     var del = confirm("HAPUS DATA ?");
-//                     if (del) {
-//                         $.ajax({
-//                             url: "/kir.del/" + id,
-//                             type: "POST",
-//                             dataType: 'json',
-//                                 success: function (data) {
-//                                 alert('Data berhasil Dihapus')
-//                                 refKirInput();
-//                             },
-//                             error: function (xhr, textStatus, errorThrown) {
-//                                 alert('Data gagal dihapus');
-//                             },
-//                         });
-//                     }
-//                 })
+                // $(document).on('click', '#haps', function (event) {
+                //     var id = $(this).data('id');
+                //     var del = confirm("HAPUS DATA ?");
+                //     if (del) {
+                //         $.ajax({
+                //             url: "/kir.del/" + id,
+                //             type: "POST",
+                //             dataType: 'json',
+                //                 success: function (data) {
+                //                 alert('Data berhasil Dihapus')
+                //                 refKirInput();
+                //             },
+                //             error: function (xhr, textStatus, errorThrown) {
+                //                 alert('Data gagal dihapus');
+                //             },
+                //         });
+                //     }
+                // })
 
-//                 $(document).on('click', '#proses_kir', function (event) {
-//                     $.ajax({
-//                         url: "/kir.clear",
-//                         type: "POST",
-//                         dataType: 'json',
-//                             success: function (data) {
-//                             alert('Data berhasil Diproses')
-//                             refKirInput();
-//                         },
-//                         error: function (xhr, textStatus, errorThrown) {
-//                             alert('Data gagal Diproses');
-//                         },
-//                 });
-//             })
+            //     $(document).on('click', '#proses_kir', function (event) {
+            //         $.ajax({
+            //             url: "/kir.clear",
+            //             type: "POST",
+            //             dataType: 'json',
+            //                 success: function (data) {
+            //                 alert('Data berhasil Diproses')
+            //                 refKirInput();
+            //             },
+            //             error: function (xhr, textStatus, errorThrown) {
+            //                 alert('Data gagal Diproses');
+            //             },
+            //     });
+            // })
 //                 //SUBMIT KIR
-//                 $(document).on('click', '#submit_kir', function (event) {
-//                     event.preventDefault();
-//                     var fileInput = $('#img')[0].files[0];
-//                     if (!fileInput) {
-//                         alert('Please select an image.');
-//                         return;
-//                     }
-//                     var reader = new FileReader();
-//                      reader.onload = function (e) {
-//                         var base64Image = e.target.result.split(',')[1]; // Extract base64 data
+                // $(document).on('click', '#submit_kir', function (event) {
+                //     event.preventDefault();
+                //     var fileInput = $('#img')[0].files[0];
+                //     if (!fileInput) {
+                //         alert('Please select an image.');
+                //         return;
+                //     }
+                //     var reader = new FileReader();
+                //      reader.onload = function (e) {
+                //         var base64Image = e.target.result.split(',')[1]; // Extract base64 data
 
-//                         // Send the base64 encoded image data in the AJAX request
-//                         $.ajax({
-//                             data: {
-//                                 lokasi: $('#lokasi_kir').val(),
-//                                 dep: $('#dep').val(),
-//                                 div:$('#div').val(),
-//                                 gedung:$('#gedung').val(),
-//                                 nilai_v:$('#nilai_v').val(),
-//                                 ruang_kir:$('#ruang_kir').val(),
-//                                 nama_aset:$('#nama_aset').val(),
-//                                 kode_aset:$('#kode_aset').val(),
-//                                 merk:$('#merk').val(),
-//                                 bahan:$('#bahan_kir').val(),
-//                                 jumlah:$('#jumlah').val(),
-//                                 baik:$('#baik').val(),
-//                                 ringan:$('#ringan').val(),
-//                                 berat:$('#berat').val(),
-//                                 ket:$('#ket').val(),
-//                                 aktiva:$('#kode_aktiva').val(),
-//                                 img: base64Image
-//                             },
-//                             url: "/kir.save",
-//                             type: "POST",
-//                             dataType: 'json',
-//                             success: function (data) {
-//                                 //alert(data);
-//                                 refKirInput();
-//                                 $('#nama_aset').val('');
-//                                 $('#kode_aset').html('');
-//                                 $('#merk').html('');
-//                                 $('#bahan_kir').val('');
-//                                 $('#jumlah').html('');
-//                                 $('#baik').html('');
-//                                 $('#ringan').html('');
-//                                 $('#berat').html('');
-//                                 $('#ket').html('');
+                //         // Send the base64 encoded image data in the AJAX request
+                //         $.ajax({
+                //             data: {
+                //                 lokasi: $('#lokasi_kir').val(),
+                //                 dep: $('#dep').val(),
+                //                 div:$('#div').val(),
+                //                 gedung:$('#gedung').val(),
+                //                 nilai_v:$('#nilai_v').val(),
+                //                 ruang_kir:$('#ruang_kir').val(),
+                //                 nama_aset:$('#nama_aset').val(),
+                //                 kode_aset:$('#kode_aset').val(),
+                //                 merk:$('#merk').val(),
+                //                 bahan:$('#bahan_kir').val(),
+                //                 jumlah:$('#jumlah').val(),
+                //                 baik:$('#baik').val(),
+                //                 ringan:$('#ringan').val(),
+                //                 berat:$('#berat').val(),
+                //                 ket:$('#ket').val(),
+                //                 aktiva:$('#kode_aktiva').val(),
+                //                 img: base64Image
+                //             },
+                //             url: "/kir.save",
+                //             type: "POST",
+                //             dataType: 'json',
+                //             success: function (data) {
+                //                 //alert(data);
+                //                 refKirInput();
+                //                 $('#nama_aset').val('');
+                //                 $('#kode_aset').html('');
+                //                 $('#merk').html('');
+                //                 $('#bahan_kir').val('');
+                //                 $('#jumlah').html('');
+                //                 $('#baik').html('');
+                //                 $('#ringan').html('');
+                //                 $('#berat').html('');
+                //                 $('#ket').html('');
 
-//                                 // refLok();
-//                             },
-//                             error: function(xhr) {
-//                                 if (xhr.status === 400) {
-//                                     // Validation error, handle it
-//                                     var errors = xhr.responseJSON.errors;
-//                                     $.each(errors, function(field, messages) {
-//                                         // Display each error message for the specific field
-//                                         $('#'+field+'_error').text(messages[0]); // Assume you have an element with an ID like 'reg_error'
-//                                     });
-//                                 } else {
-//                                     // Handle other errors
-//                                     console.error('An error occurred:', xhr.responseText);
-//                                 }
-//                             }
-//                         });
-//                     };
+                //                 // refLok();
+                //             },
+                //             error: function(xhr) {
+                //                 if (xhr.status === 400) {
+                //                     // Validation error, handle it
+                //                     var errors = xhr.responseJSON.errors;
+                //                     $.each(errors, function(field, messages) {
+                //                         // Display each error message for the specific field
+                //                         $('#'+field+'_error').text(messages[0]); // Assume you have an element with an ID like 'reg_error'
+                //                     });
+                //                 } else {
+                //                     // Handle other errors
+                //                     console.error('An error occurred:', xhr.responseText);
+                //                 }
+                //             }
+                //         });
+                //     };
 
-//                     // Read the selected file as a data URL
-//                     reader.readAsDataURL(fileInput);
-//                 });
+                //     // Read the selected file as a data URL
+                //     reader.readAsDataURL(fileInput);
+                // });
 
 //                 $('#tbl_kir').on('click', '.tree', function() {
 //                     $('#kepala').html('') //kir

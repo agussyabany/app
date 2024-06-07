@@ -1,4 +1,133 @@
+function selectOptKir()
+{
+    $.get('/v_kir', function (data) {
+        $.each(data.data, function (index, item) {
+            $('#voucher_kir').append('<option value="' + item.no_voucher + '">' + item.no_voucher + '</option>');
+        });
+    });
+    $('body').on('change', '#voucher_kir', function (event) {
+        event.preventDefault();
+        var idv = $(this).val();
+        $('#kode_aktiva').empty().append('<option value="">Select an aktiva</option>');
+        $.get('/kir_aktiva/' + idv , function (data) {
+            $.each(data.data, function (index, item) {
+                $('#kode_aktiva').prepend('<option value="' + item.id + '">'+  item.kode +' | ' + item.aktiva + '</option>');
+                $('#bulan_voc').val(item.tgl_voucher);
+                $('#urai_voc').val(item.urai);
+          }
+          )})
+    });
+    $.get('/barang.gedung', function (data) {
+        $.each(data.data, function (index, item) {
+            $('#gedung_kir').append('<option value="' + item.nama_barang + '">' + item.nama_barang + '</option>');
+        });
+    });
 
+    $.get('/ruang', function (data) {
+        $.each(data.data, function (index, item) {
+            $('#ruang_kir').append('<option value="' + item.nama_ruang + '">' + item.nama_ruang + '</option>');
+        });
+    });
+
+    $.get('/barang.kir', function (data) {
+        $.each(data.data, function (index, item) {
+            $('#nama_aset').append('<option value="' + item.id + '">' + item.nama_barang + '</option>');
+        });
+    });
+
+    $.get('/bahan', function (data) {
+        $.each(data.data, function (index, item) {
+            $('#bahan_kir').append('<option value="' + item.id + '">' + item.nama + '</option>');
+        });
+    });
+
+}
+
+function selectOptAll()
+{
+    $.get('/lok', function (data) {
+        $.each(data.data, function (index, item) {
+            $('#lokasi_kir').append('<option value="' + item.id + '">' + item.lokasi + '</option>');
+        });
+    });
+
+    $.get('/departemen', function (data) {
+        $.each(data.data, function (index, item) {
+            $('#dep').append('<option value="' + item.id + '">' + item.kode_dep + '</option>');
+        });
+    });
+    $('body').on('change', '#dep', function (event) {
+        event.preventDefault();
+        var id = $(this).val();
+        $('#div').empty().append('<option value="">PILIH DIVSI</option>');
+        $.get('/div.dep/' + id , function (data) {
+            $.each(data.data, function (index, item) {
+                $('#div').prepend('<option value="' + item.id + '">' + item.nama_div + '</option>');
+          }
+          )})
+    });
+
+}
+
+function refKirInput()
+{
+    $.get('/kir.input', function(data) {
+        var i = 0;
+        var table = $("#tbl_kir_input").DataTable({
+            searching: false
+        });
+        table.clear().draw();
+
+
+        $.each(data.data, function(index, item) {
+            var editButton =
+            '<div class="btn-group">'+
+                '<a href="#"class="text-center badge bg-danger border border-secondary btn-sm" id="haps" data-id="' + item.idKir + '"><i class="fa-solid fa-trash"></i></a>'+
+            '</div>';
+            table.row.add([
+                 ++i,
+                item.lokasi,
+                item.nama_div,
+                item.gedung,
+                item.ruangan,
+                item.nama_barang,
+                editButton
+            ]).draw();
+        });
+    })
+}
+
+function kirTambah(lok,dep,div,ged,ruang)
+{
+var i =0;
+var table = $("#tbl_kir_input_tambah").DataTable({
+    searching: false
+});
+table.clear().draw();
+    $.get("/kir.detail/"+ lok +"/"+ dep +"/"+ div +"/"+ ged +"/"+ ruang, function(data){
+        $.each(data.data, function (index, items) {
+            var editButton = '<button type="button" id="edit" data-id="' + items.id + '" class="btn btn-outline-primary btn-sm"><i class="fas fa-edit"></i></button>';
+
+            table.row.add([
+            ++i,
+            items.nama_barang,
+            items.merk,
+            items.bahan,
+            items.jumlah,
+            items.satuan,
+            items.baik,
+            items.ringan,
+            items.berat,
+            editButton
+
+        ]).draw();
+
+        })
+    })
+}
+
+
+//PREVIOUS .VER
 function refbrg()
 {
     $.get('/barang', function(data) {
@@ -385,14 +514,14 @@ function pilih()
           }
           )})
     });
-    
+
     $.get('/v_kir', function (data) {
         $.each(data.data, function (index, item) {
             $('#voucher_kir').append('<option value="' + item.no_voucher + '">' + item.no_voucher + '</option>');
         });
     });
-    
-    
+
+
 
     $.get('/lok', function (data) {
         $.each(data.data, function (index, item) {
@@ -442,33 +571,7 @@ function pilih()
     });
 }
 
-function refKirInput()
-{
-    $.get('/kir.input', function(data) {
-        var i = 0;
-        var table = $("#tbl_kir_input").DataTable({
-            searching: false
-        });
-        table.clear().draw();
 
-
-        $.each(data.data, function(index, item) {
-            var editButton =
-            '<div class="btn-group">'+
-                '<a href="#"class="text-center badge bg-danger border border-secondary btn-sm" id="haps" data-id="' + item.idKir + '"><i class="fa-solid fa-trash"></i></a>'+
-            '</div>';
-            table.row.add([
-                 ++i,
-                item.lokasi,
-                item.nama_div,
-                item.gedung,
-                item.ruangan,
-                item.nama_barang,
-                editButton
-            ]).draw();
-        });
-    })
-}
 // function clearField()
 // {
 //     $('#nama_aset').val();

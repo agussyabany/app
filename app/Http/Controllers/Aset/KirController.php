@@ -31,7 +31,7 @@ class KirController extends Controller
           ]);
     }
 
-    
+
 
     public function kir_aktiva($idv)
     {
@@ -39,7 +39,7 @@ class KirController extends Controller
             ->join('aktivas', 'nilai_aktivas.id_aktiva', '=', 'aktivas.id')
             ->where('nilai_aktivas.no_voucher', $idv)
             ->get();
-    
+
         return response()->json([
             'data' => $kir_aktiva
         ]);
@@ -50,12 +50,12 @@ class KirController extends Controller
         $kir_tgl = NilaiAktiva::select('tgl_voucher','urai')
             ->where('id', $id)
             ->get();
-    
+
         return response()->json([
             'data' => $kir_tgl
         ]);
     }
-    
+
 
     public function del($id)
     {
@@ -72,7 +72,7 @@ class KirController extends Controller
                 ->get();
         return response()->json(['data' => $vKir]);
     }
-    
+
     public function v_kir()
     {
         $v_kir = NilaiAktiva::select('no_voucher')
@@ -154,7 +154,7 @@ class KirController extends Controller
             'lokasi' => 'required',
             'dep' => 'required',
             'div' => 'required',
-            'gedung' => 'required',
+            'gedung_kir' => 'required',
             // 'nilai_v'=>'required',
             'ruang_kir' => 'required',
             'nama_aset' => 'required',
@@ -166,7 +166,7 @@ class KirController extends Controller
             'ringan' => 'required|numeric',
             'berat' => 'required|numeric',
             'ket' => 'required',
-            'aktiva'=>'required'
+            //'aktiva'=>'required'
 
         ];
 
@@ -193,7 +193,7 @@ class KirController extends Controller
         $lokasi = $request->input('lokasi');
         $dep = $request->input('dep');
         $div = $request->input('div');
-        $gedung = $request->input('gedung');
+        $gedung = $request->input('gedung_kir');
         $ruang = $request->input('ruang_kir');
         //$nilai_v = $request->input('nilai_v');
         $nama_aset = $request->input('nama_aset');
@@ -252,6 +252,15 @@ class KirController extends Controller
         return response()->json([
             'data' => $kir
           ]);
+        // $user = Auth::user()->id;
+        // $kir = Kir::join('barangs','kirs.id_barang','=','barangs.id')
+        //                 ->where('input',0)
+        //                 ->where('id_user',$user)
+        //                 ->get();
+        // return response()->json([
+        //     'data' => $kir
+        //   ]);
+
     }
 
     public function clear()
@@ -282,8 +291,8 @@ class KirController extends Controller
                         $struktur = $divi['kode_div'];
                         $departemen = $dept['kode_dep'];
                         $sdm = $sdms['nama_sdm'];
-                    
-                        
+
+
                         $date = Carbon::now();
                         $tglIndo = $date->locale('id_ID')->format('d F Y');
                         $nama = Auth::user()->name;
