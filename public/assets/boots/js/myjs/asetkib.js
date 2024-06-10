@@ -679,7 +679,70 @@ $('#tabel_tambah').append('<table class="table table-striped table-border" id="t
 selectOptKir();
 kirTambah(lok,dep,div,ged,ruang);
 })
+//ARSIP
+$(document).on('click', '#data_arsip', function() {
+    $('#canvas_tree').empty();
+    var id = $(this).data('id');
+    var gd = id;
+    $('#kepala').html('DATA ARSIP <strong>GEDUNG ' + id + '<strong>');
+    
+    $.ajax({
+        type: "GET",
+        url: "/arsip.rak/" + gd,
+        success: function(response) {
+            $.each(response.data, function(index, fillItem) {
+                $('#canvas_tree').append(
+                    '<li><span><strong>FILLING ' + fillItem.fill + '</strong></span>' +
+                    '<ul id="fill' + fillItem.fill + '"></ul>' +
+                    '</li>'
+                );
+                var fill = fillItem.fill;
+                $.each(fillItem.raks, function(index, rakItem) {
+                    $('#fill' + fillItem.fill).append(
+                        
+                        '<li><a href="#" id="rak_detail" data-id="' + gd +','+ fill +','+ rakItem.rak +'" style="text-decoration:none; color:blue;"><strong>Rak ' + rakItem.rak + '</strong></a></li>'
+                    );
+                });
+            });
+        },
+        error: function(xhr) {
+            console.error("An error occurred:", xhr);
+        }
+    });
+});
+//Arsip Detail
+$(document).on('click', '#rak_detail', function() {
+    var id = $(this).data('id');
+    var delimiter = ",";
+    var id_key = id.split(delimiter);
+    var ged = id_key[0];
+    var fil = id_key[1];
+    var rak = id_key[2];
+    $('#td_gedung').html(ged);
+    $('#td_fil').html(fil);
+    $('#td_rak').html(rak);
 
+    var table = $("#tbl_detail_arsip").DataTable();
+    table.clear().draw();
+
+    $.get("/arsip.detail/"+ ged +"/"+ fil +"/"+ rak , function(data){
+        $.each(data.data, function (index, items) {
+            // var img = '<a href="#" id="detail_gedung_divisi"><img src="http://app.perumdamtirtakencana.id/assets/img/kir/'+items.img+'" height="100px" width="100px"></img></a>';
+            var editButton = '<button type="button" id="edit" data-id="' + items.id + '" class="btn btn-outline-primary btn-sm"><i class="fas fa-plus"></i></button>';
+    
+            table.row.add([
+            items.no_file,
+            items.nama_dok,
+            items.bulan,
+            items.kode_dok,
+            items.tahun,
+            editButton
+    
+        ]).draw();
+    
+            })
+        })
+})
 
 
 // $(document).ready(function() {

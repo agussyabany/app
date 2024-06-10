@@ -56,7 +56,7 @@
                         <a type="button" class="hoverable text-start btn" id="lokasi" style="width: 100%" href="/lokasis"><i class="fa-solid fa-location-dot"></i>&nbsp;Lokasi</a>
                     </li>
                     <li class="nav-item">
-                        <button type="button" class="hoverable text-start btn" id="dokumen" style="width: 100%"><i class="fa-regular fa-folder-open"></i>&nbsp;Dokumen</button>
+                        <a type="button" class="hoverable text-start btn" href="/arsip" id="dokumen"  style="width: 100%"><i class="fa-regular fa-folder-open"></i>&nbsp;Arsip</a>
                     </li>
                     <li class="nav-item">
                         <a type="button" class="hoverable text-start btn" id="bahan" style="width: 100%" href="/bahans"><i class="fa-solid fa-atom"></i>&nbsp;Bahan</a>
