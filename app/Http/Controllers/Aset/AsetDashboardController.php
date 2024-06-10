@@ -9,6 +9,7 @@ use App\Models\Aset\Barang;
 use App\Models\Aset\Departemen;
 use App\Models\Aset\Divisi;
 use App\Models\Aset\Gedung;
+use App\Models\Aset\Indeks;
 use App\Models\Aset\Kir;
 use App\Models\Aset\lokasi;
 use App\Models\Aset\Mesin;
@@ -263,6 +264,20 @@ class AsetDashboardController extends Controller
         $jabat = $user['jabat'];
         $divisi = $user['nama_div'];
         return view('admin.pages.aset.kib.nilai',compact(['jabat','divisi','nilai','no','on']));
+    }
+    public function arsip()
+    {
+        $on = 7;
+        $no = 1;
+        $idUSer = Auth::user()->id;
+        $user = User::join('divisis','users.divisi','=','divisis.id')
+                    ->join('jabatans','users.jabat','=','jabatans.id')
+                    ->where('users.id',$idUSer)
+                    ->first();
+        $arsip = Indeks::select('gedung')->distinct()->get();
+        $jabat = $user['jabat'];
+        $divisi = $user['nama_div'];
+        return view('admin.pages.aset.master.arsip',compact(['jabat','divisi','arsip','no','on']));
     }
 
     public function tanah()
