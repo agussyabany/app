@@ -41,7 +41,7 @@
                                                 <td>
                                                     <!-- Add action buttons/links here -->
                                                     <!-- Add action buttons/links here -->
-                                                    <button type="button" class="btn btn-outline-primary btn-sm" id="edit_lokasi" data-id="{{ $item->id }}"><i class="fas fa-edit"></i></button>
+                                                    <button type="button" class="btn btn-outline-primary btn-sm" id="edit_lokasi" data-id="{{ $item->idLok }}"><i class="fas fa-edit"></i></button>
                                                     <form action="" method="POST" style="display:inline-block;">
                                                         @csrf
                                                         @method('DELETE')
@@ -75,7 +75,7 @@
             <div class="modal-body" id="modal_bodyLG">
               <form action="/lok.save" id="form_lokasi" method="post" enctype="multipart/form-data">
                 @csrf
-                <input type="hidden" id="id" name="id">
+                <input type="text" id="id" name="id">
                 <input type="text" class="form-control" id="nama_lokasi" name="lokasi" placeholder="Nama Lokasi"><br>
                 <input type="text" class="form-control" id="alamat" name="alamat" placeholder="Alamat"><br>
                 <select class="select2 form-control" name="wil" id="wil" style="width:100%;">
