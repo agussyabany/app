@@ -62,4 +62,14 @@ class ArsipController extends Controller
             'data' => $detail
           ]);
     }
+
+    public function isi($id)
+    {
+
+        $isi = Arsip::where('id_indeks',$id)
+                        ->get();
+        return response()->json([
+            'data' => $isi
+          ]);
+    }
 }

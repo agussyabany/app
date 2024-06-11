@@ -20,7 +20,7 @@
                                         <tr>
                                             <th>NO</th>
                                             <th>NAMA GEDUNG</th>
-                                            
+
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -28,7 +28,7 @@
                                             <tr>
                                                 <td>{{ $no++ }}</td>
                                                 <td><a data-bs-toggle="offcanvas"  aria-controls="offcanvasExample" href="#data" style="text-decoration: none;" id="data_arsip" data-id="{{ $item->gedung}}"><strong>Gedung {{ $item->gedung }}</strong></a></td>
-                                                
+
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -64,14 +64,32 @@
         </div>
       </div>
       {{-- MODAL KIB --}}
-      <div class="modal"  id="lgModal">
+      <div class="modal"  id="modal_isi">
         <div class="modal-dialog  modal-xl">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="judul_modalLG">Modal title</h5>
+              <h5 class="modal-title" id="judul_modalLG">DETAIL ARSIP</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body" id="modal_bodyLG">
+                <table class="table table-striped" id="tbl_isi_arsip">
+                    <thead>
+                        <tr>
+                            <th>NO</th>
+                            <th>REGISTER</th>
+                            <th>KONDISI</th>
+                            <th>REKANAN</th>
+                            <th>JUDUL</th>
+                            <th>NILAI</th>
+                            <th>RETENSI</th>
+                            <th>KETERANGAN</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+
 
             </div>
             <div class="modal-footer">
@@ -124,11 +142,11 @@
                                             <th>KODE DOKUMEN</th>
                                             <th>TAHUN</th>
                                             <th>TAMBAH DOKUMEN</th>
-                                            
+
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        
+
                                     </tbody>
                                 </table>
 

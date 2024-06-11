@@ -685,7 +685,7 @@ $(document).on('click', '#data_arsip', function() {
     var id = $(this).data('id');
     var gd = id;
     $('#kepala').html('DATA ARSIP <strong>GEDUNG ' + id + '<strong>');
-    
+
     $.ajax({
         type: "GET",
         url: "/arsip.rak/" + gd,
@@ -699,8 +699,8 @@ $(document).on('click', '#data_arsip', function() {
                 var fill = fillItem.fill;
                 $.each(fillItem.raks, function(index, rakItem) {
                     $('#fill' + fillItem.fill).append(
-                        
-                        '<li><a href="#" id="rak_detail" data-id="' + gd +','+ fill +','+ rakItem.rak +'" style="text-decoration:none; color:blue;"><strong>Rak ' + rakItem.rak + '</strong></a></li>'
+
+                        '<li><a href="#" id="rak_detail" data-id="' + gd +','+ fill +','+ rakItem.rak +'" style="text-decoration:none;"><strong>Rak ' + rakItem.rak + '</strong></a></li>'
                     );
                 });
             });
@@ -727,23 +727,88 @@ $(document).on('click', '#rak_detail', function() {
 
     $.get("/arsip.detail/"+ ged +"/"+ fil +"/"+ rak , function(data){
         $.each(data.data, function (index, items) {
+            var bulans = items.bulan;
+            if (bulans == 1) {
+                var bulan = 'JANUARI';
+            }
+            if (bulans == 2) {
+                var bulan = 'FEBRUARI';
+            }
+            if (bulans == 3) {
+                var bulan = 'MARET';
+            }
+            if (bulans == 4) {
+                var bulan = 'APRIL';
+            }
+            if (bulans == 5) {
+                var bulan = 'MEI';
+            }
+            if (bulans == 6) {
+                var bulan = 'JUNI';
+            }
+            if (bulans == 7) {
+                var bulan = 'JULI';
+            }
+            if (bulans == 8) {
+                var bulan = 'AGUSTUS';
+            }
+            if (bulans == 9) {
+                var bulan = 'SEPTEMBER';
+            }
+            if (bulans == 10) {
+                var bulan = 'OKTOBER';
+            }
+            if (bulans == 11) {
+                var bulan = 'NOVEMBER';
+            }
+            if (bulans == 12) {
+                var bulan = 'DESEMBER';
+            }
             // var img = '<a href="#" id="detail_gedung_divisi"><img src="http://app.perumdamtirtakencana.id/assets/img/kir/'+items.img+'" height="100px" width="100px"></img></a>';
             var editButton = '<button type="button" id="edit" data-id="' + items.id + '" class="btn btn-outline-primary btn-sm"><i class="fas fa-plus"></i></button>';
-    
+            var baris = '<a href="#" style="text-decoration:none;" id="isi_arsip" data-id="'+ items.id +'"><strong>' + items.no_file + '</strong></a>';
+
             table.row.add([
-            items.no_file,
+            baris,
             items.nama_dok,
-            items.bulan,
+            bulan,
             items.kode_dok,
             items.tahun,
             editButton
-    
+
         ]).draw();
-    
+
             })
         })
 })
+$(document).on('click', '#isi_arsip', function() {
+    var id = $(this).data('id');
+    $('#modal_isi').modal('show');
+    //$('#judul_modalLG').html(id);
+    var no = 1;
+    var table = $("#tbl_isi_arsip").DataTable();
+    table.clear().draw();
 
+    $.get("/arsip.isi/"+ id , function(data){
+        $.each(data.data, function (index, items) {
+            table.row.add([
+            ++no,
+            items.reg,
+            items.kondisi,
+            items.rekanan,
+            items.judul,
+            items.nilai,
+            items.retensi,
+            items.ket
+            //editButton
+
+        ]).draw();
+
+            })
+        })
+
+
+})
 
 // $(document).ready(function() {
 
