@@ -197,6 +197,7 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::get('/arsip.fill/{id}',[ArsipController::class,'fill']);
     Route::get('/arsip.rak/{gd}',[ArsipController::class,'rak']);
     Route::get('/arsip.detail/{gd}/{fil}/{rak}',[ArsipController::class,'detail']);
+    Route::get('/arsip.isi/{id}',[ArsipController::class,'isi']);
 
 
 });
