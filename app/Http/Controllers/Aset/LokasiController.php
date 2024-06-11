@@ -43,8 +43,8 @@ class LokasiController extends Controller
             'lokasi' => 'required|string|max:255',
             'alamat' => 'required|string|max:255',
             'wil' => 'required|numeric',
-            'lat' => 'required|numeric',
-            'long' => 'required|numeric',
+            'lat' => 'required|string|max:255',
+            'long' => 'required|string|max:255',
             'img' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
@@ -90,8 +90,8 @@ class LokasiController extends Controller
             'lokasi' => 'required|string|max:255',
             'alamat' => 'required|string|max:255',
             'wil' => 'required|numeric',
-            'lat' => 'required|numeric',
-            'long' => 'required|numeric',
+            'lat' => 'required|string|max:255',
+            'long' => 'required|string|max:255',
             'id' => 'required|numeric'
         ]);
         $id = $request->input('id');
@@ -111,7 +111,7 @@ class LokasiController extends Controller
             'lat' => $lat,
             'long'=> $long
         ]);
-
+        //return $request;
         Alert::success('BERHASIL','DATA BERHASIL DIUPDATE');
         return redirect('/lokasis');
         //return response()->json(['message' => 'Data updated successfully']);

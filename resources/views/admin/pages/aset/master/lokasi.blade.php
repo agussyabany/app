@@ -73,9 +73,9 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body" id="modal_bodyLG">
-              <form action="/lok.save" id="form_lokasi" method="post" enctype="multipart/form-data">
+            <form action="/lok.save" id="form_lokasi" method="post" enctype="multipart/form-data">
                 @csrf
-                <input type="text" id="id" name="id">
+                <input type="hidden" id="id" name="id">
                 <input type="text" class="form-control" id="nama_lokasi" name="lokasi" placeholder="Nama Lokasi"><br>
                 <input type="text" class="form-control" id="alamat" name="alamat" placeholder="Alamat"><br>
                 <select class="select2 form-control" name="wil" id="wil" style="width:100%;">
@@ -94,7 +94,7 @@
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
               <button type="submit" class="tombol btn btn-primary" id="">SUBMIT</button>
-            </form>
+        </form>
             </div>
           </div>
         </div>
