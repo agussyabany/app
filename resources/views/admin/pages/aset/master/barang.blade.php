@@ -11,7 +11,7 @@
 
                 <div class="container card">
                     <div class="card-header">DATA BARANG <div class="position-absolute top-0 end-0">
-                        <button class="btn  btn-primary"  data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-file-circle-plus"></i></button>
+                        <button class="btn  btn-primary" id="add_br"  data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-file-circle-plus"></i></button>
                 </div>
                     </div>
                             <div class="card-body">
@@ -29,14 +29,14 @@
                                         @foreach($barang as $item)
                                             <tr>
                                                 <td>{{ $no++ }}</td>
-                                                <td>{{ $item->golongan }}</td>
+                                                <td>{{ $item->nama }}</td>
                                                 <td>{{ $item->nama_barang }}</td>
                                                 <td>{{ $item->kode_barang }}</td>
                                                 <td>
                                                     <!-- Add action buttons/links here -->
-                                                    <button type="button" id="edit" data-id="{{ $item->id }}" class="btn btn-outline-primary btn-sm"><i class="fas fa-edit"></i></button>
+                                                    <button type="button" id="edit" data-id="{{ $item->barId }}" class="btn btn-outline-primary btn-sm"><i class="fas fa-edit"></i></button>
 
-                                                      <a href="#" id="del_barang" data-id="{{ $item->id }}" class="btn btn-outline-danger btn-sm" data-confirm-delete="true"><i class="fas fa-trash"></i></a>
+                                                      <a href="#" id="del_barang" data-id="{{ $item->barId }}" class="btn btn-outline-danger btn-sm" data-confirm-delete="true"><i class="fas fa-trash"></i></a>
 
                                                 </td>
                                             </tr>
@@ -69,14 +69,16 @@
                             <form id="form_barang" action="/barang.save" method="post">
                               @csrf
                               <input type="hidden" val="" id="id" name="id">
-                              <select name="gol"  id="gol" class="select2 form-control" style="width:100%;">
+                              <input type="hidden" id="gol" name="gol">
+                              <select name=""  id="golOpt" class="select2 form-control" style="width:100%;">
                                 <option value="">-PILIH GOLONGAN-</option>
                                 <option value="1">TANAH</option>
                                 <option value="2">PERALATAN DAN MESIN</option>
                                 <option value="3">GEDUNG DAN BANGUNAN</option>
                                 <option value="4">JALAN,IRIGASI DAN JARINGAN</option>
                                 <option value="5">KONSTRUKSI DALAM PENGERJAAN</option>
-                                <option value="6">KIR</option>
+                                <option value="6">ASET TETAP LAINNYA</option>
+                                <option value="7">KIR</option>
                               </select><br><br>
                               <input type="text" class="form-control" id="nama" name="nama" placeholder="Nama Barang"><br>
                               <input type="text" class="form-control" id="kode" name="kode" placeholder="Kode Barang">

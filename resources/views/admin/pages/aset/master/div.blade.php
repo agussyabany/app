@@ -11,7 +11,7 @@
 
                 <div class="container card">
                     <div class="card-header">DATA DIVISI <div class="position-absolute top-0 end-0">
-                      <button class="btn  btn-primary"  data-bs-toggle="modal" data-bs-target="#modal_div"><i class="fa-solid fa-file-circle-plus"></i></button>
+                      <button class="btn  btn-primary" id="add_div"  data-bs-toggle="modal" data-bs-target="#modal_div"><i class="fa-solid fa-file-circle-plus"></i></button>
                 </div>
                     </div>
                             <div class="card-body">
@@ -65,7 +65,8 @@
               <form action="/div.save" id="form_div" method="post">
                 @csrf
                 <input type="hidden" id="id" name="id" value="">
-                <select name="dep"  id="dep_select" class="select2 form-control" style="width:100%;">
+                <input type="hidden" name="dep" id="depVal">
+                <select   id="dep_select" class="select2 form-control" style="width:100%;">
                   <option value="">-DEPARTEMEN-</option>
                   @foreach ($dep as $items)
                       <option value="{{ $items->id }}">{{ $items->kode_dep }}</option>

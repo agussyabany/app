@@ -11,7 +11,7 @@
 
                 <div class="container card">
                     <div class="card-header">DATA LOKASI <div class="position-absolute top-0 end-0">
-                      <button class="btn  btn-primary"  data-bs-toggle="modal" data-bs-target="#modal_lokasi"><i class="fa-solid fa-file-circle-plus"></i></button>
+                      <button class="btn  btn-primary" id="add_lok"  data-bs-toggle="modal" data-bs-target="#modal_lokasi"><i class="fa-solid fa-file-circle-plus"></i></button>
                 </div>
                     </div>
                             <div class="card-body">
@@ -76,8 +76,9 @@
                 <input type="hidden" id="id" name="id">
                 <input type="text" class="form-control" id="nama_lokasi" name="lokasi" placeholder="Nama Lokasi"><br>
                 <input type="text" class="form-control" id="alamat" name="alamat" placeholder="Alamat"><br>
-                <select class="select2 form-control" name="wil" id="wil" style="width:100%;">
-                    <option>- WILAYAH -</option>
+                <input type="hidden" id="wil" name="wil">
+                <select class="select2 form-control"  id="wilOpt" style="width:100%;">
+                    <option value="1">- WILAYAH -</option>
                     <option value="1">UNIT PELAYANAN WILAYAH I</option>
                     <option value="2">UNIT PELAYANAN WILAYAH II</option>
                     <option value="3">UNIT PELAYANAN WILAYAH III</option>

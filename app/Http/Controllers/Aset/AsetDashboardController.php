@@ -51,7 +51,11 @@ class AsetDashboardController extends Controller
                     ->join('jabatans','users.jabat','=','jabatans.id')
                     ->where('users.id',$idUSer)
                     ->first();
-        $barang = Barang::all();
+                    $barang = Barang::leftJoin('golongans', function($join) {
+                        $join->on(DB::raw('CAST(barangs.golongan AS bigint)'), '=', 'golongans.id');
+                    })
+                    ->select('barangs.id as barId', 'golongans.id as golID','nama_barang','kode_barang','golongan','golongans.nama as nama')
+                    ->get();
         $jabat = $user['jabat'];
         $divisi = $user['nama_div'];
         return view('admin.pages.aset.master.barang',compact(['jabat','divisi','barang','no','on']));

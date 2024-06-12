@@ -35,6 +35,9 @@
             <div class="container">
                 <ul class="nav flex-column" id="menuTabs">
                     <li class="nav-item">
+                        <a type="button"  class="hoverable text-center btn" style="width: 100%" data-tab-target="tab1" href="/aset"><STRONG>DASHBOARD</STRONG></a>
+                    </li>
+                    <li class="nav-item">
                         <span class="nav-link text-center disabled"><strong>DATA MASTER</strong></span>
                     </li>
                     <li class="nav-item pb-1">
@@ -55,9 +58,7 @@
                     <li class="nav-item">
                         <a type="button" class="hoverable text-start btn" id="lokasi" style="width: 100%" href="/lokasis"><i class="fa-solid fa-location-dot"></i>&nbsp;Lokasi</a>
                     </li>
-                    <li class="nav-item">
-                        <a type="button" class="hoverable text-start btn" href="/arsip" id="dokumen"  style="width: 100%"><i class="fa-regular fa-folder-open"></i>&nbsp;Arsip</a>
-                    </li>
+                    
                     <li class="nav-item">
                         <a type="button" class="hoverable text-start btn" id="bahan" style="width: 100%" href="/bahans"><i class="fa-solid fa-atom"></i>&nbsp;Bahan</a>
                     </li>
@@ -99,6 +100,14 @@
                       <li class="nav-item">
                           <a type="button"  class="hoverable text-start btn" id="nilai" style="width: 100%" href="/nilai"><i class="fa-solid fa-heart"></i>&nbsp;NILAI ASET</a>
                       </li>
+
+                      <li class="nav-item">
+                        <span class="nav-link text-center disabled"><strong>-----ARSIP-----</strong></span>
+                    </li>
+
+                    <li class="nav-item">
+                        <a type="button" class="hoverable text-start btn" href="/arsip" id="dokumen"  style="width: 100%"><i class="fa-regular fa-folder-open"></i>&nbsp;Arsip</a>
+                    </li>
 
                       <li class="nav-item">
                         <span class="nav-link text-center disabled"><strong>SETTING</strong></span>

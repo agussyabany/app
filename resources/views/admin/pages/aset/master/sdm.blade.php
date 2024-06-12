@@ -11,7 +11,7 @@
 
                 <div class="container card">
                     <div class="card-header">DATA SDM PENDUKUNG<div class="position-absolute top-0 end-0">
-                      <button class="btn  btn-primary"  data-bs-toggle="modal" data-bs-target="#modal_sdm"><i class="fa-solid fa-file-circle-plus"></i></button>
+                      <button class="btn  btn-primary" id="add_sdm"  data-bs-toggle="modal" data-bs-target="#modal_sdm"><i class="fa-solid fa-file-circle-plus"></i></button>
                 </div>
                     </div>
                             <div class="card-body">
@@ -71,12 +71,14 @@
                 <input type="hidden" id="id" name="id" value="">
                 <input type="text" class="form-control" id="nama" name="nama" placeholder="Nama SDM"><br>
                 <input type="text" class="form-control" id="nip" name="nip" placeholder="NIP"><br>
-                <select name="jabat" class="select2 form-control" id="jabat" style="width:100%;">
+                <input type="hidden" id="jabatVal" name="jabat">
+                <select  class="select2 form-control" id="jabatOpt" style="width:100%;">
                   <option value="1">MANAJER</option>
                   <option value="2">ASISTEN MANAJER</option>
                 <select>
                 <br><br>
-                <select name="div" class="select2 form-control" id="select_div" style="width:100%;">
+                <input type="hidden" name="div" id="divVal">
+                <select  class="select2 form-control" id="select_div" style="width:100%;">
                   @foreach ($div as $item)
                     <option value="{{ $item->id }}">{{ $item->nama_div }}</option>
                     @endforeach

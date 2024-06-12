@@ -10,6 +10,8 @@ $(document).on('click', '#edit', function() {
     var id = $(this).data('id');
     $('#exampleModal').modal('show');
     $('#judul_modal').html('EDIT BARANG');
+    $('#golOpt').attr('name','1');
+    $('#gol').attr('name','gol');
     $.ajax({
             type: "GET",
             url: "/barang.edit/"+ id,
@@ -18,12 +20,23 @@ $(document).on('click', '#edit', function() {
                 $('#nama').val(item.nama_barang);
                 $('#kode').val(item.kode_barang);
                 $('#id').val(item.barId);
-                $('#gol option[value="' + item.golongan + '"]').remove();
-                $('#gol').prepend('<option value="' + item.golongan + '" selected="selected">' + item.nama + '</option>');
+                $('#golOPt option[value="' + item.golongan + '"]').remove();
+                $('#golOpt').prepend('<option value="' + item.golongan + '" selected="selected">' + item.nama + '</option>');
+                $('#gol').val(item.golongan)
                 $('#form_barang').attr('action', '/barang.update');
             });
         }
     });
+
+    $('body').on('change', '#golOpt', function (event) {
+        event.preventDefault();
+        var id = $(this).val();
+        $('#gol').val(id);
+    });
+})
+$(document).on('click', '#add_br', function() {
+    $('#golOpt').attr('name','gol');
+    $('#gol').attr('name','1');
 })
 //HAPUS BARANG
 $(document).on('click', '#del_barang', function() {
@@ -96,6 +109,9 @@ $(document).on('click', '#edit_divisi', function() {
     var id = $(this).data('id');
     $('#modal_div').modal('show');
     $('#judul_modal').html('EDIT DIVISI');
+    $('#dep_select').attr('name','1');
+    $('#depVal').attr('name','dep');
+    
     $.ajax({
             type: "GET",
             url: "/div.edit/"+ id,
@@ -104,12 +120,22 @@ $(document).on('click', '#edit_divisi', function() {
                 $('#nama').val(item.nama_div);
                 $('#kode').val(item.kode_div);
                 $('#id').val(id);
-                $('#dep_select option[value="' + item.golongan + '"]').remove();
+                $('#dep_select option[value="' + item.id_dep + '"]').remove();
                 $('#dep_select').prepend('<option value="' + item.id_dep + '" selected="selected">' + item.kode_dep + '</option>');
+                $('#depVal').val(item.id_dep);
                 $('#form_div').attr('action', '/div.update');
             });
         }
     });
+    $('body').on('change', '#dep_select', function (event) {
+        event.preventDefault();
+        var id = $(this).val();
+        $('#depVal').val(id);
+    });
+})
+$(document).on('click', '#add_div', function() {
+    $('#dep_select').attr('name','dep');
+    $('#depVal').attr('name','1');
 })
 //HAPUS DIVISI
 $(document).on('click', '#del_div', function() {
@@ -153,7 +179,7 @@ $(document).on('click', '#edit_ruang', function() {
         }
     });
 })
-//HAPUS DIVISI
+//HAPUS RUANG
 $(document).on('click', '#del_ruang', function() {
     var id = $(this).data('id');
     var del = confirm('ANDA AKAN MENGHAPUS RUANG ?');
@@ -182,6 +208,10 @@ $(document).on('click', '#edit_sdm', function() {
     var id = $(this).data('id');
     $('#modal_sdm').modal('show');
     $('#judul_modal').html('EDIT SDM');
+    $('#jabatOpt').attr('name','1');
+    $('#jabatVal').attr('name','jabat');
+    $('#select_div').attr('name','1');
+    $('#divVal').attr('name','div');
     $.ajax({
             type: "GET",
             url: "/sdm.edit/"+ id,
@@ -189,16 +219,39 @@ $(document).on('click', '#edit_sdm', function() {
             $.each(data.data, function (index, item) {
                 $('#nama').val(item.nama_sdm);
                 $('#nip').val(item.nip);
-                $('#jabat option[value="' + item.jabat + '"]').remove();
-                $('#jabat').prepend('<option value="' + item.idJabat + '" selected="selected">' + item.jabat + '</option>');
-                $('#select_div option[value="' + item.jabat + '"]').remove();
+                $('#jabatOpt option[value="' + item.idJabat + '"]').remove();
+                $('#jabatOpt').prepend('<option value="' + item.idJabat + '" selected="selected">' + item.jabat + '</option>');
+                $('#jabatVal').val(item.idJabat);
+
+                $('#select_div option[value="' + item.idDiv + '"]').remove();
                 $('#select_div').prepend('<option value="' + item.idDiv + '" selected="selected">' + item.nama_div + '</option>');
+                $('#divVal').val(item.idDiv);
                 $('#id').val(id);
                 $('#form_sdm').attr('action', '/sdm.update');
             });
         }
     });
+    $('body').on('change', '#jabatOpt', function (event) {
+        event.preventDefault();
+        var id = $(this).val();
+        $('#jabatVal').val(id);
+    });
+    $('body').on('change', '#select_div', function (event) {
+        event.preventDefault();
+        var id = $(this).val();
+        $('#divVal').val(id);
+    });
 })
+
+$(document).on('click', '#add_sdm', function() {
+    $('#jabatOpt').attr('name','jabat');
+    $('#jabatVal').attr('name','1');
+
+    $('#select_div').attr('name','div');
+    $('#divVal').attr('name','1');
+})
+
+
 //HAPUS SDM
 $(document).on('click', '#del_sdm', function() {
     var id = $(this).data('id');
@@ -228,6 +281,8 @@ $(document).on('click', '#edit_lokasi', function() {
     var id = $(this).data('id');
     $('#modal_lokasi').modal('show');
     $('#judul_modal').html('EDIT LOKASI');
+    $('#wilOpt').attr('name','1');
+    $('#wil').attr('name','wil');
     $.ajax({
             type: "GET",
             url: "/lok.edit/"+ id,
@@ -236,8 +291,9 @@ $(document).on('click', '#edit_lokasi', function() {
                 $('#img').remove();
                 $('#nama_lokasi').val(item.lokasi);
                 $('#alamat').val(item.alamat);
-                $('#wil option[value="' + item.idWil + '"]').remove();
-                $('#wil').prepend('<option value="' + item.idWil + '" selected="selected">' + item.wilayah + '</option>');
+                $('#wilOpt option[value="' + item.idWil + '"]').remove();
+                $('#wilOpt').prepend('<option value="' + item.idWil + '" selected="selected">' + item.wilayah + '</option>');
+                $('#wil').val(item.idWil);
                 $('#lat').val(item.lat);
                 $('#long').val(item.long);
                 $('#id').val(id);
@@ -245,6 +301,17 @@ $(document).on('click', '#edit_lokasi', function() {
             });
         }
     });
+
+    
+    $('body').on('change', '#wilOpt', function (event) {
+        event.preventDefault();
+        var id = $(this).val();
+        $('#wil').val(id);
+    });
+})
+$(document).on('click', '#add_lok', function() {
+    $('#wilOpt').attr('name','wil');
+    $('#wil').attr('name','1');
 })
 //HAPUS LOKASI
 $(document).on('click', '#del_lok', function() {
@@ -262,7 +329,7 @@ $(document).on('click', '#del_lok', function() {
             },
             success: function (data) {
                 alert('Data berhasil Dihapus')
-                refDep();
+                location.reload();
             },
             error: function (xhr, textStatus, errorThrown) {
                 alert('Data gagal dihapus');
