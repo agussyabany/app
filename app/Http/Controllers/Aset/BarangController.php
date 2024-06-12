@@ -58,13 +58,7 @@ class BarangController extends Controller
     public function destroy ($id)
     {
         Barang::where('id', $id)->delete();
-
-        $title = 'Delete User!';
-        $text = "Are you sure you want to delete?";
-        confirmDelete($title, $text);
-
-        return redirect('/barangs');
-        //return response()->json(['message' => 'Data deleted successfully']);
+        return response()->json(['message' => 'Data deleted successfully']);
     }
 
     public function tanah()

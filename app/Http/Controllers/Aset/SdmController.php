@@ -49,7 +49,7 @@ class SdmController extends Controller
         $div = $request->input('div');
         Sdm::where('id',$id)
                 ->update([
-                    
+
                     'nama_sdm' => $nama,
                     'nip' => $nip,
                     'id_jabat' => $jabat,
@@ -67,5 +67,5 @@ class SdmController extends Controller
         return response()->json(['message' => 'Data deleted successfully']);
     }
 
-    
+
 }

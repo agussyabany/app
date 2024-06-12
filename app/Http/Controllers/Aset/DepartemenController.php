@@ -21,7 +21,7 @@ class DepartemenController extends Controller
             'kode_dep' => $kode_dep,
         ]);
 
-       
+
         Alert::success('BERHASIL','DATA BERHASIL DITAMBAH');
         return redirect('/depts');
         //return response()->json(['message' => 'Data inserted successfully']);
@@ -53,10 +53,6 @@ class DepartemenController extends Controller
     public function destroy ($id)
     {
         Departemen::where('id', $id)->delete();
-        $title = 'HAPUS DEPARTEMEN!';
-        $text = "Apakah Kamu Yakin?";
-        confirmDelete($title, $text);
-        return redirect('/depts');
-        //return response()->json(['message' => 'Data deleted successfully']);
+        return response()->json(['message' => 'Data deleted successfully']);
     }
 }

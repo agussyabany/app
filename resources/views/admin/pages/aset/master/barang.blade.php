@@ -35,11 +35,9 @@
                                                 <td>
                                                     <!-- Add action buttons/links here -->
                                                     <button type="button" id="edit" data-id="{{ $item->id }}" class="btn btn-outline-primary btn-sm"><i class="fas fa-edit"></i></button>
-                                                    <form action="{{ route('barang.destroy', $item->id) }}" method="POST" class="d-inline">
-                                                      @csrf
-                                                      @method('DELETE')
-                                                      <button type="submit" class="btn btn-outline-danger btn-sm" data-confirm-delete="true"><i class="fas fa-trash"></i></button>
-                                                  </form>
+
+                                                      <a href="#" id="del_barang" data-id="{{ $item->id }}" class="btn btn-outline-danger btn-sm" data-confirm-delete="true"><i class="fas fa-trash"></i></a>
+
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -58,7 +56,7 @@
 
 
                 {{-- MODAL MASTER --}}
-                
+
 
                     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                       <div class="modal-dialog">
@@ -70,7 +68,7 @@
                           <div class="modal-body" id="modal_bodyLG">
                             <form id="form_barang" action="/barang.save" method="post">
                               @csrf
-                              <input type="hidden" val="" id="id" name="id"> 
+                              <input type="hidden" val="" id="id" name="id">
                               <select name="gol"  id="gol" class="select2 form-control" style="width:100%;">
                                 <option value="">-PILIH GOLONGAN-</option>
                                 <option value="1">TANAH</option>
@@ -82,7 +80,7 @@
                               </select><br><br>
                               <input type="text" class="form-control" id="nama" name="nama" placeholder="Nama Barang"><br>
                               <input type="text" class="form-control" id="kode" name="kode" placeholder="Kode Barang">
-                            
+
                           </div>
                           <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

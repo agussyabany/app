@@ -42,11 +42,9 @@
                                                     <!-- Add action buttons/links here -->
                                                     <!-- Add action buttons/links here -->
                                                     <button type="button" class="btn btn-outline-primary btn-sm" id="edit_lokasi" data-id="{{ $item->idLok }}"><i class="fas fa-edit"></i></button>
-                                                    <form action="" method="POST" style="display:inline-block;">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn btn-outline-danger btn-sm"><i class="fas fa-trash"></i></button>
-                                                    </form>
+
+                                                        <a href="#" id="del_lok" data-id="{{ $item->idLok }}" class="btn btn-outline-danger btn-sm"><i class="fas fa-trash"></i></a>
+
                                                 </td>
                                             </tr>
                                         @endforeach

@@ -23,7 +23,7 @@
                                             <th>DIVSI</th>
                                             <th>DEPERATEMEN</th>
                                             <th>AKSI</th>
-                                            
+
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -34,9 +34,8 @@
                                                 <td>{{ $item->nama_div }}</td>
                                                 <td>{{ $item->kode_dep }}</td>
                                                 <td>
-                                                    <!-- Add action buttons/links here -->
                                                     <button type="button" class="btn btn-outline-primary btn-sm" id="edit_divisi" data-id="{{ $item->idDiv }}"><i class="fas fa-edit"></i></button>
-                                                    <a href="/div.hapus/{{ $item->idDiv }}" class="btn btn-outline-danger" data-confirm-delete="true"><i class="fas fa-trash"></i></a>
+                                                    <a href="#" id="del_div" data-id="{{ $item->idDiv }}" class="btn btn-outline-danger" data-confirm-delete="true"><i class="fas fa-trash"></i></a>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -74,7 +73,7 @@
                 </select><br><br>
                 <input type="text" class="form-control" id="nama" name="nama" placeholder="Nama Divisi"><br>
                 <input type="text" class="form-control" id="kode" name="kode" placeholder="Kode Divisi">
-              
+
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

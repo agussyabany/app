@@ -26,12 +26,14 @@ $(document).on('click', '#edit', function() {
     });
 })
 //HAPUS BARANG
-$(document).on('click', '#del_lok', function() {
+$(document).on('click', '#del_barang', function() {
     var id = $(this).data('id');
-    var del = confirm("Anda yakin menghapus data ini ?");
+    var del = confirm('ANDA AKAN MENGHAPUS BARANG ?');
     if (del) {
+
+        alert('HAPUS');
         $.ajax({
-            url: "/dep.hapus/" + id,
+            url: "/barang.hapus/" + id,
             type: "POST",
             dataType: 'json',
             beforeSend: function () {
@@ -39,7 +41,7 @@ $(document).on('click', '#del_lok', function() {
             },
             success: function (data) {
                 alert('Data berhasil Dihapus')
-                refDep();
+                location.reload();
             },
             error: function (xhr, textStatus, errorThrown) {
                 alert('Data gagal dihapus');
@@ -65,6 +67,30 @@ $(document).on('click', '#edit_departemen', function() {
         }
     });
 })
+//HAPUS DEPARTEMEN
+$(document).on('click', '#del_dep', function() {
+    var id = $(this).data('id');
+    var del = confirm('ANDA AKAN MENGHAPUS DEPARTEMEN ?');
+    if (del) {
+
+        alert('HAPUS');
+        $.ajax({
+            url: "/dep.hapus/" + id,
+            type: "POST",
+            dataType: 'json',
+            beforeSend: function () {
+
+            },
+            success: function (data) {
+                alert('Data berhasil Dihapus')
+                location.reload();
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                alert('Data gagal dihapus');
+            },
+        });
+     }
+    })
 //DIVISI
 $(document).on('click', '#edit_divisi', function() {
     var id = $(this).data('id');
@@ -85,6 +111,30 @@ $(document).on('click', '#edit_divisi', function() {
         }
     });
 })
+//HAPUS DIVISI
+$(document).on('click', '#del_div', function() {
+    var id = $(this).data('id');
+    var del = confirm('ANDA AKAN MENGHAPUS DIVISI ?');
+    if (del) {
+
+        alert('HAPUS');
+        $.ajax({
+            url: "/div.hapus/" + id,
+            type: "POST",
+            dataType: 'json',
+            beforeSend: function () {
+
+            },
+            success: function (data) {
+                alert('Data berhasil Dihapus')
+                location.reload();
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                alert('Data gagal dihapus');
+            },
+        });
+     }
+    })
 //RUANG
 $(document).on('click', '#edit_ruang', function() {
     var id = $(this).data('id');
@@ -103,6 +153,30 @@ $(document).on('click', '#edit_ruang', function() {
         }
     });
 })
+//HAPUS DIVISI
+$(document).on('click', '#del_ruang', function() {
+    var id = $(this).data('id');
+    var del = confirm('ANDA AKAN MENGHAPUS RUANG ?');
+    if (del) {
+
+        alert('HAPUS');
+        $.ajax({
+            url: "/ruang.hapus/" + id,
+            type: "POST",
+            dataType: 'json',
+            beforeSend: function () {
+
+            },
+            success: function (data) {
+                alert('Data berhasil Dihapus')
+                location.reload();
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                alert('Data gagal dihapus');
+            },
+        });
+     }
+    })
 //SDM
 $(document).on('click', '#edit_sdm', function() {
     var id = $(this).data('id');
@@ -125,6 +199,30 @@ $(document).on('click', '#edit_sdm', function() {
         }
     });
 })
+//HAPUS SDM
+$(document).on('click', '#del_sdm', function() {
+    var id = $(this).data('id');
+    var del = confirm('ANDA AKAN MENGHAPUS SDM ?');
+    if (del) {
+
+        alert('HAPUS');
+        $.ajax({
+            url: "/sdm.hapus/" + id,
+            type: "POST",
+            dataType: 'json',
+            beforeSend: function () {
+
+            },
+            success: function (data) {
+                alert('Data berhasil Dihapus')
+                location.reload();
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                alert('Data gagal dihapus');
+            },
+        });
+     }
+    })
 //LOKASI
 $(document).on('click', '#edit_lokasi', function() {
     var id = $(this).data('id');
@@ -148,6 +246,54 @@ $(document).on('click', '#edit_lokasi', function() {
         }
     });
 })
+//HAPUS LOKASI
+$(document).on('click', '#del_lok', function() {
+    var id = $(this).data('id');
+    var del = confirm('ANDA AKAN MENGHAPUS LOKASI ?');
+    if (del) {
+
+        alert('HAPUS');
+        $.ajax({
+            url: "/lok.hapus/" + id,
+            type: "POST",
+            dataType: 'json',
+            beforeSend: function () {
+
+            },
+            success: function (data) {
+                alert('Data berhasil Dihapus')
+                refDep();
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                alert('Data gagal dihapus');
+            },
+        });
+     }
+    })
+//HAPUS BAHAN
+$(document).on('click', '#del_bahan', function() {
+    var id = $(this).data('id');
+    var del = confirm('ANDA AKAN MENGHAPUS BAHAN ?');
+    if (del) {
+
+        alert('HAPUS');
+        $.ajax({
+            url: "/bahan.hapus/" + id,
+            type: "POST",
+            dataType: 'json',
+            beforeSend: function () {
+
+            },
+            success: function (data) {
+                alert('Data berhasil Dihapus')
+                location.reload();
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                alert('Data gagal dihapus');
+            },
+        });
+     }
+    })
 //BAHAN
 $(document).on('click', '#edit_bahan', function() {
     var id = $(this).data('id');

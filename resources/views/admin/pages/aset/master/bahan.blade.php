@@ -29,13 +29,8 @@
                                                 <td>{{ $no++ }}</td>
                                                 <td>{{ $item->nama }}</td>
                                                 <td>
-                                                    <!-- Add action buttons/links here -->
                                                     <button type="button" class="btn btn-outline-primary btn-sm" id="edit_bahan" data-id="{{ $item->id }}"><i class="fas fa-edit"></i></button>
-                                                    <form action="" method="POST" style="display:inline-block;">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn btn-outline-danger btn-sm"><i class="fas fa-trash"></i></button>
-                                                    </form>
+                                                    <a  href="#" id="del_bahan" data-id="{{ $item->id }}" class="btn btn-outline-danger btn-sm"><i class="fas fa-trash"></i></a>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -66,7 +61,7 @@
                 @csrf
                 <input type="hidden" id="id"  name="id" value="">
                 <input type="text" class="form-control" id="nama" name="nama" placeholder="Nama Bahan"><br>
-            
+
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
