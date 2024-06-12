@@ -43,7 +43,7 @@ $(document).ready(function() {
                     $.each(data.data, function (index, items) {
                         var thumbnail = $(
                             '<div class="pdf-thumbnail col ">' +
-                                '<embed width="150px" height="200px ; overflow: hidden;" name="plugin" src="http://127.0.0.1:8000/assets/img/lokasi/' + items.dok + '" type="application/pdf" border border-secondary rounded>' +
+                                '<embed width="150px" height="200px ; overflow: hidden;" name="plugin" src="http://app.perumdamtirtakencana.id/assets/img/lokasi/' + items.dok + '" type="application/pdf" border border-secondary rounded>' +
                                 '<p><a href="#" onclick="window.open(\'http://app.perumdamtirtakencana.id/assets/img/lokasi/' + items.dok + '\', \'_blank\'); return false;">' + items.dok + '</p>' +
                             '</div>'
                         );
@@ -79,6 +79,34 @@ $(document).ready(function() {
                 })
         })
 
+    })
+    //INPUT DATA TANAH
+    $(document).on('click', '#add', function() {
+        selectOptAll();
+        $.get('/barang.tanah', function (data) {
+            $.each(data.data, function (index, item) {
+                $('#nama').append('<option value="' + item.id + '">' + item.nama_barang + '</option>');
+            });
+        });
+
+        $.get('/vTanah', function (data) {
+            $.each(data.data, function (index, item) {
+                $('#voucher_tanah').append('<option value="' + item.no_voucher + '">' + item.no_voucher + '</option>');
+            });
+        });
+
+        $('body').on('change', '#voucher_tanah', function (event) {
+            event.preventDefault();
+            var idv = $(this).val();
+            $('#kode_aktiva').empty().append('<option value="">Select an aktiva</option>');
+            $.get('/kir_aktiva/' + idv , function (data) {
+                $.each(data.data, function (index, item) {
+                    $('#kode_aktiva').prepend('<option value="' + item.id + '">'+  item.kode +' | ' + item.aktiva + '</option>');
+                    $('#bulan_voc').val(item.tgl_voucher);
+                    $('#urai_voc').val(item.urai);
+              }
+              )})
+        });
     })
     //MESIN
     $(document).on('click', '#klik_nilai_mesin', function() {
@@ -1074,70 +1102,70 @@ $(document).on('click', '#isi_arsip', function() {
 //                     //Memberikan atribut id pada tombol submit modal
 //                  $('.tombol').attr('id', 'submit_a');
 
-//                  $(document).on('click', '#submit_a', function (event) {
-//                     event.preventDefault();
-//                     var fileInput = $('#dok')[0].files;
-//                     console.log(fileInput);
-//                         if (!fileInput || fileInput.length === 0) {
-//                             alert('Please select at least one file.');
-//                             return;
-//                         }
+                //  $(document).on('click', '#submit_a', function (event) {
+                //     event.preventDefault();
+                //     var fileInput = $('#dok')[0].files;
+                //     console.log(fileInput);
+                //         if (!fileInput || fileInput.length === 0) {
+                //             alert('Please select at least one file.');
+                //             return;
+                //         }
 
-//                         for (var i = 0; i < fileInput.length; i++) {
-//                             var currentFile = fileInput[i];
-//                             var reader = new FileReader();
-//                             reader.onload = function (e) {
-//                                 var arrayBuffer = e.target.result;
-//                                 // Send the data to the server
-//                                 sendDataToServer(arrayBuffer);
-//                             };
-//                              // Read the file as an ArrayBuffer
-//                             reader.readAsArrayBuffer(currentFile);
-//                         }
-//                         function sendDataToServer(arrayBuffer) {
-//                             // Additional form data
-//                             var additionalData =
-//                                 {
-//                                     lokasi: $('#lokasi_a').val(),
-//                                     kode: $('#kode').val(),
-//                                     lokasi: $('#lokasi_a').val(),
-//                                     kode: $('#kode').val(),
-//                                     tahun: $('#tahun').val(),
-//                                     nama: $('#nama').val(),
-//                                     guna: $('#guna').val(),
-//                                     no_tunjuk: $('#no_tunjuk').val(),
-//                                     tgl_tunjuk: $('#tgl_tunjuk').val(),
-//                                     luas_tunjuk: $('#luas_tunjuk').val(),
-//                                     sertifikat: $('#sertifikat').val(),
-//                                     tgl_sertifikat: $('#tgl_sertifikat').val(),
-//                                     luas_sertifikat: $('#luas_sertifikat').val(),
-//                                     no_gambar: $('#no_gambar').val(),
-//                                     tgl_gambar: $('#tgl_gambar').val(),
-//                                     luas_gambar: $('#luas_gambar').val(),
-//                                     hak: $('#hak').val(),
-//                                     asal: $('#asal').val(),
-//                                     pemilik: $('#pemilik').val(),
-//                                     nilai_a: $('#nilai_a').val(),
-//                                     nilai_now: $('#nilai_now').val(),
-//                                     ket: $('#ket').val(),
-//                                     dok: arrayBuffer,
-//                                 };
+                //         for (var i = 0; i < fileInput.length; i++) {
+                //             var currentFile = fileInput[i];
+                //             var reader = new FileReader();
+                //             reader.onload = function (e) {
+                //                 var arrayBuffer = e.target.result;
+                //                 // Send the data to the server
+                //                 sendDataToServer(arrayBuffer);
+                //             };
+                //              // Read the file as an ArrayBuffer
+                //             reader.readAsArrayBuffer(currentFile);
+                //         }
+                //         function sendDataToServer(arrayBuffer) {
+                //             // Additional form data
+                //             var additionalData =
+                //                 {
+                //                     lokasi: $('#lokasi_a').val(),
+                //                     kode: $('#kode').val(),
+                //                     lokasi: $('#lokasi_a').val(),
+                //                     kode: $('#kode').val(),
+                //                     tahun: $('#tahun').val(),
+                //                     nama: $('#nama').val(),
+                //                     guna: $('#guna').val(),
+                //                     no_tunjuk: $('#no_tunjuk').val(),
+                //                     tgl_tunjuk: $('#tgl_tunjuk').val(),
+                //                     luas_tunjuk: $('#luas_tunjuk').val(),
+                //                     sertifikat: $('#sertifikat').val(),
+                //                     tgl_sertifikat: $('#tgl_sertifikat').val(),
+                //                     luas_sertifikat: $('#luas_sertifikat').val(),
+                //                     no_gambar: $('#no_gambar').val(),
+                //                     tgl_gambar: $('#tgl_gambar').val(),
+                //                     luas_gambar: $('#luas_gambar').val(),
+                //                     hak: $('#hak').val(),
+                //                     asal: $('#asal').val(),
+                //                     pemilik: $('#pemilik').val(),
+                //                     nilai_a: $('#nilai_a').val(),
+                //                     nilai_now: $('#nilai_now').val(),
+                //                     ket: $('#ket').val(),
+                //                     dok: arrayBuffer,
+                //                 };
 
-//                             // Assuming you are using AJAX to send data to the server
-//                             $.ajax({
-//                                 url: '/tanah.save', // Replace with your actual server endpoint
-//                                 type: 'POST',
-//                                 data: additionalData,
-//                                 success: function (response) {
-//                                     console.log('Data sent successfully:', response);
-//                                 },
-//                                 error: function (error) {
-//                                     console.error('Error sending data:', error);
-//                                 }
-//                             });
-//                         }
+                //             // Assuming you are using AJAX to send data to the server
+                //             $.ajax({
+                //                 url: '/tanah.save', // Replace with your actual server endpoint
+                //                 type: 'POST',
+                //                 data: additionalData,
+                //                 success: function (response) {
+                //                     console.log('Data sent successfully:', response);
+                //                 },
+                //                 error: function (error) {
+                //                     console.error('Error sending data:', error);
+                //                 }
+                //             });
+                //         }
 
-//                 });
+                // });
 //                 //Modal DETAIL show
 //              $('#tbl_a').on('click', '.detail', function() {
 //                 var id = $(this).data('id');

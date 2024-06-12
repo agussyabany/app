@@ -16,7 +16,7 @@ $no = 0;
 
                 <div class="container card">
                     <div class="card-header">DATA TANAH <div class="position-absolute top-0 end-0">
-                      <button class="btn  btn-primary"  data-bs-toggle="modal" data-bs-target="#modal_tanah"><i class="fa-solid fa-file-circle-plus"></i></button>
+                      <button class="btn  btn-primary"  data-bs-toggle="modal" id="add" data-bs-target="#modal_tanah"><i class="fa-solid fa-file-circle-plus"></i></button>
                 </div>
                     </div>
                             <div class="card-body">
@@ -89,7 +89,8 @@ $no = 0;
             </div>
             <div class="modal-body" id="modal_bodyLG">
 
-              <form action="" id="form_a" enctype="multipart/form-data">
+              <form action="/tanah.save" id="form_a" method="POST" enctype="multipart/form-data">
+                @csrf
                 <div class="container">
                   <div class="row  border border-primary rounded">
                     <div class="container"><br>
@@ -106,14 +107,14 @@ $no = 0;
                                 <tr>
                                     <td>
                                         <div class="input-group input-group-sm mb-1">
-                                            <select class="select2 form-control" name="voucher_kir" id="voucher_kir" style="width:100%;">
+                                            <select class="select2 form-control" name="voucher_kir" id="voucher_tanah" style="width:100%;" required>
                                                 <option>- NO VOUCHER -</option>
                                             </select>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="input-group input-group-sm mb-1">
-                                            <select class="select2 form-control" name="kode_aktiva" id="kode_aktiva" style="width:100%;">
+                                            <select class="select2 form-control" name="kode_aktiva" id="kode_aktiva" style="width:100%;" required>
                                                 <option>- PILIH KODE AKTIVA -</option>
                                             </select>
                                         </div>
@@ -150,7 +151,7 @@ $no = 0;
                                         <tr>
                                             <td>
                                                 <div class="input-group input-group-sm mb-1">
-                                                    <select class="select2 form-control" name="lokasi" id="lokasi_a" style="width:100%;">
+                                                    <select class="select2 form-control" name="lokasi" id="lokasi_kir" style="width:100%;" required>
                                                         <option>- PILIH LOKASI -</option>
 
 
@@ -164,13 +165,13 @@ $no = 0;
                                             </td>
                                             <td>
                                                 <div class="input-group input-group-sm mb-1">
-                                                    <input type="number" name="tahun" id="tahun" value="2023" class="form-control">
+                                                    <input type="number" name="tahun" id="tahun" value="2023" class="form-control" required>
                                                 </div><br>
                                             </td>
                                             <td>
                                                 <div class="input-group input-group-sm mb-1">
 
-                                                    <select class="select2 form-control" style="width:100%;"  id="nama" name="nama" style="width:100%;">
+                                                    <select class="select2 form-control" style="width:100%;"  id="nama" name="nama" style="width:100%;" required>
                                                         <option> -NAMA BARANG- </option>
 
                                                     </select>
@@ -178,7 +179,7 @@ $no = 0;
                                             </td>
                                             <td>
                                                 <div class="input-group input-group-sm mb-1">
-                                                    <input type="text" nama="guna" id="guna" class="form-control">
+                                                    <input type="text" nama="guna" id="guna" class="form-control" required>
                                                 </div>
                                             </td>
                                     </tr>
@@ -197,17 +198,18 @@ $no = 0;
                             </legend>
                                 <div class="col">
                                     <div class="input-group input-group-sm mb-1">
-                                        <span class="input-group-text col-sm-3">No Surat</span><input nama="no_tunjuk" id="no_tunjuk" type="text" placeholder="Penunjukan" class="form-control">
+                                        <span class="input-group-text col-sm-3">No Surat</span>
+                                        <input name="no_tunjuk" id="no_tunjuk" type="text" placeholder="Penunjukan" class="form-control" required>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="input-group input-group-sm mb-1">
-                                        <span class="input-group-text col-sm-3">Tgl Surat</span><input type="date" placeholder="Penunjukan" nama="tgl_tunjuk" id="tgl_tunjuk" class="form-control">
+                                        <span class="input-group-text col-sm-3">Tgl Surat</span><input type="date" placeholder="Penunjukan" name="tgl_tunjuk" id="tgl_tunjuk" class="form-control" required>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="input-group input-group-sm mb-1">
-                                        <span class="input-group-text col-sm-3">Luas</span><input type="text" nama="luas_tunjuk" placeholder="Penunjukan" class="form-control">
+                                        <span class="input-group-text col-sm-3">Luas</span><input type="text" name="luas_tunjuk" placeholder="Penunjukan" class="form-control" required>
                                     </div>
                                 </div>
                          </fieldset><br>
@@ -218,17 +220,17 @@ $no = 0;
                             </legend>
                                 <div class="col">
                                     <div class="input-group input-group-sm mb-1">
-                                        <span class="input-group-text col-sm-3">No Surat</span><input type="text" nama="sertifikat" id="sertifikat" placeholder="SURAT SPPT/SPHAT/SPJBT" class="form-control">
+                                        <span class="input-group-text col-sm-3">No Surat</span><input type="text" name="sertifikat" id="sertifikat" placeholder="SURAT SPPT/SPHAT/SPJBT" class="form-control" required>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="input-group input-group-sm mb-1">
-                                        <span class="input-group-text col-sm-3">Tgl Surat</span><input type="date" name="tgl_sertifikat" id="tgl_sertifikat" placeholder="SURAT SPPT/SPHAT/SPJBT" class="form-control">
+                                        <span class="input-group-text col-sm-3">Tgl Surat</span><input type="date" name="tgl_sertifikat" id="tgl_sertifikat" placeholder="SURAT SPPT/SPHAT/SPJBT" class="form-control" required>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="input-group input-group-sm mb-1">
-                                        <span class="input-group-text col-sm-3">Luas</span><input type="text" name="luas_sertifikat" id="luas_sertifikat" placeholder="SURAT SPPT/SPHAT/SPJBT" class="form-control">
+                                        <span class="input-group-text col-sm-3">Luas</span><input type="text" name="luas_sertifikat" id="luas_sertifikat" placeholder="SURAT SPPT/SPHAT/SPJBT" class="form-control" required>
                                     </div>
                                 </div>
                          </fieldset><br>
@@ -239,17 +241,17 @@ $no = 0;
                             </legend>
                                 <div class="col">
                                     <div class="input-group input-group-sm mb-1">
-                                        <span class="input-group-text col-sm-3">No Surat</span><input type="text" name="no_gambar" id="no_gambar" placeholder="GAMBAR SITUASI" class="form-control">
+                                        <span class="input-group-text col-sm-3">No Surat</span><input type="text" name="no_gambar" id="no_gambar" placeholder="GAMBAR SITUASI" class="form-control" required>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="input-group input-group-sm mb-1">
-                                        <span class="input-group-text col-sm-3">Tgl Surat</span><input type="date" name="tgl_gambar" id="tgl_gambar" placeholder="GAMBAR SITUASI" class="form-control">
+                                        <span class="input-group-text col-sm-3">Tgl Surat</span><input type="date" name="tgl_gambar" id="tgl_gambar" placeholder="GAMBAR SITUASI" class="form-control" required>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="input-group input-group-sm  mb-1">
-                                        <span class="input-group-text col-sm-3">Luas</span><input type="text" name="luas_gambar" id="luas_gambar" placeholder="GAMBAR SITUASI" class="form-control">
+                                        <span class="input-group-text col-sm-3">Luas</span><input type="text" name="luas_gambar" id="luas_gambar" placeholder="GAMBAR SITUASI" class="form-control" required>
                                     </div>
                                 </div>
                          </fieldset><br>
@@ -260,7 +262,7 @@ $no = 0;
                                 <div class="col"><br>
                                     <div class="input-group input-group-sm mb-1">
 
-                                        <select name="hak" id="hak" class="select2 form-control" style="width:100%;">
+                                        <select name="hak" id="hak" class="select2 form-control" style="width:100%;" required>
                                             <option>-HAK-</option>
                                             <option>SHM</option>
                                             <option>Tanah Milik Perumdam</option>
@@ -274,41 +276,42 @@ $no = 0;
                                         </select>
                                     </div>
                                     <div class="input-group input-group-sm mb-1">
-                                        <span class="input-group-text col-sm-3">Pemilik Asal</span><input name="asal" id="asal" type="text" class="form-control">
+                                        <span class="input-group-text col-sm-3">Pemilik Asal</span><input name="asal" id="asal" type="text" class="form-control" required>
                                     </div>
                                     <div class="input-group input-group-sm mb-1">
-                                        <span class="input-group-text col-sm-3">Asal</span><input type="number" name="pemilik" id="pemilik" value="2023" class="form-control">
+                                        <span class="input-group-text col-sm-3">Asal</span><input type="number" name="pemilik" id="pemilik" value="2023" class="form-control" required>
                                     </div>
                                     <div class="input-group input-group-sm mb-1">
                                         <span class="input-group-text col-sm-3">Nilai perolehan</span>
-                                        <select class="select2 form-control" name="nilai_a" id="nilai_a" style="width:100%;">
+                                        <select class="select2 form-control" name="nilai_a" id="nilai_a" style="width:100%;" required>
                                             <option> -PILH NILAI AKTIVA- </option>
                                         </select>
                                     </div>
                                     <div class="input-group input-group-sm mb-1">
-                                        <span class="input-group-text col-sm-3">Nilai saat ini</span><input name="nilai_now" id="nilai_now" type="text" class="form-control">
+                                        <span class="input-group-text col-sm-3">Nilai saat ini</span><input name="nilai_now" id="nilai_now" type="text" class="form-control" required>
                                     </div>
                                 </div><br>
 
                                 <div class="col"><br>
 
                                     <div class="input-group input-group-sm mb-1">
-                                        <span class="input-group-text col-sm-3">Dokumen</span><input name="dok" id="dok" type="file" class="form-control" multiple>
+                                        <span class="input-group-text col-sm-3">Dokumen</span><input name="dok[]" id="dok" type="file" class="form-control" multiple required>
                                     </div>
                                     <div class="input-group input-group-sm mb-1">
-                                        <span class="input-group-text col-sm-3">Keterangan</span><textarea name="ket" id="ket" class="form-control"></textarea>
+                                        <span class="input-group-text col-sm-3">Keterangan</span><textarea name="ket" id="ket" class="form-control" required></textarea>
                                     </div>
                                 </div>
 
                         </div><br>
 
                  </div>
-            </form >
+
 
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="tombol btn btn-primary" id="">SUBMIT</button>
+              <button type="submit" id="simpan" class="tombol btn btn-primary" id="">SUBMIT</button>
+            </form >
             </div>
           </div>
         </div>

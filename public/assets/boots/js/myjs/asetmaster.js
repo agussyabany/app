@@ -25,8 +25,30 @@ $(document).on('click', '#edit', function() {
         }
     });
 })
+//HAPUS BARANG
+$(document).on('click', '#del_lok', function() {
+    var id = $(this).data('id');
+    var del = confirm("Anda yakin menghapus data ini ?");
+    if (del) {
+        $.ajax({
+            url: "/dep.hapus/" + id,
+            type: "POST",
+            dataType: 'json',
+            beforeSend: function () {
+
+            },
+            success: function (data) {
+                alert('Data berhasil Dihapus')
+                refDep();
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                alert('Data gagal dihapus');
+            },
+        });
+     }
+    })
 //DEPARTEMEN
-$(document).on('click', '#edit_departemen', function() {    
+$(document).on('click', '#edit_departemen', function() {
     var id = $(this).data('id');
     $('#modal_dep').modal('show');
     $('#judul_modal').html('EDIT DEPARTEMEN');
@@ -44,7 +66,7 @@ $(document).on('click', '#edit_departemen', function() {
     });
 })
 //DIVISI
-$(document).on('click', '#edit_divisi', function() {    
+$(document).on('click', '#edit_divisi', function() {
     var id = $(this).data('id');
     $('#modal_div').modal('show');
     $('#judul_modal').html('EDIT DIVISI');
@@ -64,7 +86,7 @@ $(document).on('click', '#edit_divisi', function() {
     });
 })
 //RUANG
-$(document).on('click', '#edit_ruang', function() {    
+$(document).on('click', '#edit_ruang', function() {
     var id = $(this).data('id');
     $('#modal_ruang').modal('show');
     $('#judul_modal').html('EDIT RUANG');
@@ -82,7 +104,7 @@ $(document).on('click', '#edit_ruang', function() {
     });
 })
 //SDM
-$(document).on('click', '#edit_sdm', function() {    
+$(document).on('click', '#edit_sdm', function() {
     var id = $(this).data('id');
     $('#modal_sdm').modal('show');
     $('#judul_modal').html('EDIT SDM');
@@ -104,7 +126,7 @@ $(document).on('click', '#edit_sdm', function() {
     });
 })
 //LOKASI
-$(document).on('click', '#edit_lokasi', function() {    
+$(document).on('click', '#edit_lokasi', function() {
     var id = $(this).data('id');
     $('#modal_lokasi').modal('show');
     $('#judul_modal').html('EDIT LOKASI');
@@ -127,7 +149,7 @@ $(document).on('click', '#edit_lokasi', function() {
     });
 })
 //BAHAN
-$(document).on('click', '#edit_bahan', function() {    
+$(document).on('click', '#edit_bahan', function() {
     var id = $(this).data('id');
     $('#modal_bahan').modal('show');
     $('#judul_modal').html('EDIT BAHAN');
@@ -503,30 +525,30 @@ $(document).on('click', '#edit_bahan', function() {
 //                 });
 //             });
 //             //Hapus Data
-//             $('#tbl_dep').on('click', '.delete-btn', function() {
-//                 var id = $(this).data('id');
-//                 var del = confirm("Anda yakin menghapus data ini ?");
-//                 if (del) {
-//                     $.ajax({
-//                         url: "/dep.hapus/" + id,
-//                         type: "POST",
-//                         dataType: 'json',
-//                         beforeSend: function () {
+            // $('#tbl_dep').on('click', '.delete-btn', function() {
+            //     var id = $(this).data('id');
+            //     var del = confirm("Anda yakin menghapus data ini ?");
+            //     if (del) {
+            //         $.ajax({
+            //             url: "/dep.hapus/" + id,
+            //             type: "POST",
+            //             dataType: 'json',
+            //             beforeSend: function () {
 
-//                         },
-//                         success: function (data) {
-//                             alert('Data berhasil Dihapus')
-//                             refDep();
-//                         },
-//                         error: function (xhr, textStatus, errorThrown) {
-//                             alert('Data gagal dihapus');
-//                         },
-//                     });
-//                  }
-//                 })
-//             });
+            //             },
+            //             success: function (data) {
+            //                 alert('Data berhasil Dihapus')
+            //                 refDep();
+            //             },
+            //             error: function (xhr, textStatus, errorThrown) {
+            //                 alert('Data gagal dihapus');
+            //             },
+            //         });
+            //      }
+            //     })
+        //     });
 
-//         });
+        // });
 
 //             //del
 //             $(document).on('click', '#dep_x', function() {
