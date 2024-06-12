@@ -31,11 +31,9 @@
                                                 <td>
                                                     <!-- Add action buttons/links here -->
                                                     <button type="button" class="btn btn-outline-primary btn-sm" id="edit_ruang" data-id="{{ $item->id }}"><i class="fas fa-edit"></i></button>
-                                                    <form action="" method="POST" style="display:inline-block;">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn btn-outline-danger btn-sm"><i class="fas fa-trash"></i></button>
-                                                    </form>
+
+                                                        <a href="#" id="del_ruang" data-id="{{  $item->id }}" class="btn btn-outline-danger btn-sm"><i class="fas fa-trash"></i></a>
+
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -68,7 +66,7 @@
                 <input type="hidden" id="id" name="id">
                 <input type="text" class="form-control" id="nama" name="nama" placeholder="Nama Ruangan"><br>
                 <input type="text" class="form-control" id="kode" name="kode" placeholder="Kode Ruangan">
-              
+
 
             </div>
             <div class="modal-footer">

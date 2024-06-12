@@ -33,7 +33,7 @@
                                                 <td>
                                                     <!-- Add action buttons/links here -->
                                                     <button type="button" data-id="{{ $item->id }}" id="edit_departemen" class="btn btn-outline-primary btn-sm"><i class="fas fa-edit"></i></button>
-                                                    <a href="/dep.hapus/{{ $item->id }}" class="btn btn-outline-danger" data-confirm-delete="true"><i class="fas fa-trash"></i></a>
+                                                    <a href="#" id="del_dep" data-id="{{ $item->id}}" class="btn btn-outline-danger" data-confirm-delete="true"><i class="fas fa-trash"></i></a>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -64,7 +64,7 @@
                           @csrf
                           <input type="hidden" id="id" value="" name="id">
                           <input type="text" class="form-control" id="nama" name="nama" placeholder="Nama Departemen"><br> <input type="text" class="form-control" id="kode" name="kode" placeholder="Kode Departemen">
-                        
+
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -75,7 +75,7 @@
                   </div>
                 </div>
 
-                
+
       {{-- MODAL KIB --}}
       <div class="modal"  id="lgModal">
         <div class="modal-dialog  modal-xl">

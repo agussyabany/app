@@ -37,11 +37,7 @@
                                                 <td>
                                                     <!-- Add action buttons/links here -->
                                                     <button type="button" class="btn btn-outline-primary btn-sm" id="edit_aktiva" data-id="{{ $item->id }}"><i class="fas fa-edit"></i></button>
-                                                    <form action="" method="POST" style="display:inline-block;">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn btn-outline-danger btn-sm"><i class="fas fa-trash"></i></button>
-                                                    </form>
+
                                                 </td>
                                             </tr>
                                         @endforeach

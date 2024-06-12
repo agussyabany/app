@@ -21,7 +21,7 @@ class Divisicontroller extends Controller
             'nama_div' => $nama_div,
             'kode_div' => $kode_div,
         ]);
-        
+
         Alert::success('BERHASIL','DATA BERHASIL DITAMBAH');
         return redirect('/divs');
         //return response()->json(['message' => 'Data inserted successfully']);
@@ -53,11 +53,6 @@ class Divisicontroller extends Controller
     public function destroy ($id)
     {
         Divisi::where('id', $id)->delete();
-
-        $title = 'HAPUS DIVISI!';
-        $text = "Apakah Kamu Yakin?";
-        confirmDelete($title, $text);
-        return redirect('/divs');
-        //return response()->json(['message' => 'Data deleted successfully']);
+        return response()->json(['message' => 'Data deleted successfully']);
     }
 }

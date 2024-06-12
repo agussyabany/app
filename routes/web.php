@@ -104,7 +104,7 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::post('/barang.save',[BarangController::class,'save']);
     Route::get('barang.edit/{id}',[BarangController::class,'edit']);
     Route::post('/barang.update',[BarangController::class,'update']);
-    //Route::get('barang.hapus/{id}',[BarangController::class,'destroy']);
+    Route::post('barang.hapus/{id}',[BarangController::class,'destroy']);
     Route::delete('barang.hapus/{id}', [BarangController::class, 'destroy'])->name('barang.destroy');
     Route::get('barang.tanah',[BarangController::class,'tanah']);
     Route::get('barang.mesin',[BarangController::class,'mesin']);
@@ -114,12 +114,12 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::post('/dep.save',[DepartemenController::class,'save']);
     Route::get('dep.edit/{id}',[DepartemenController::class,'edit']);
     Route::post('dep.update',[DepartemenController::class,'update']);
-    Route::get('dep.hapus/{id}',[DepartemenController::class,'destroy']);
+    Route::post('dep.hapus/{id}',[DepartemenController::class,'destroy']);
 
     Route::post('/div.save',[Divisicontroller::class,'save']);
     Route::get('div.edit/{id}',[Divisicontroller::class,'edit']);
     Route::post('div.update',[Divisicontroller::class,'update']);
-    Route::get('div.hapus/{id}',[Divisicontroller::class,'destroy']);
+    Route::post('div.hapus/{id}',[Divisicontroller::class,'destroy']);
 
     Route::post('/ruang.save',[RuangController::class,'save']);
     Route::get('ruang.edit/{id}',[RuangController::class,'edit']);
