@@ -153,6 +153,7 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::get('/tanah.print',[TanahController::class,'print']);
     Route::get('/tanah.nilai/{lok}',[TanahController::class,'nilaiSum']);
     Route::get('/nilaiTanah.detail/{id}',[TanahController::class,'nilaiTanah']);
+    Route::get('/vTanah',[TanahController::class,'vTanah']);
 
     Route::get('/mesin.dep/{id}',[MesinController::class,'dep']);
     Route::get('/mesin.div/{dep}/{lok}',[MesinController::class,'div']);

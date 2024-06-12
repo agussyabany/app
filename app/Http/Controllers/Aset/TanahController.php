@@ -4,18 +4,21 @@ namespace App\Http\Controllers\Aset;
 
 use App\Http\Controllers\Controller;
 use App\Models\Aset\NilaiAktiva;
+use App\Models\Aset\Pdf;
 use App\Models\Aset\Tanah;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class TanahController extends Controller
 {
     public function save(Request $request)
     {
+        $user = Auth::user()->id;
         $lokasi = $request->input('lokasi');
-        $kode = $request->input('kode');
+        $nilai = $request->input('kode_aktiva');
         $tahun = $request->input('tahun');
         $nama = $request->input('nama');
         $guna = $request->input('guna');
@@ -31,29 +34,55 @@ class TanahController extends Controller
         $hak = $request->input('hak');
         $asal = $request->input('asal');
         $pemilik = $request->input('pemilik');
-        $nilai_a = $request->input('nilai_a');
-        $nilai_now = $request->input('nilai_now');
         $ket = $request->input('ket');
-        $dok = $request->input('dok');
+        //$dok = $request->input('dok');
 
+        $tanah = new  Tanah();
+        $tanah->id_lokasi = $lokasi;
+        $tanah->id_barang = $nama;
+        $tanah->guna = $guna;
+        $tanah->tahun = $tahun;
+        $tanah->no_tunjuk = $no_tunjuk;
+        $tanah->tgl_tunjuk= $tgl_tunjuk;
+        $tanah->luas_tunjuk= $luas_tunjuk;
+        $tanah->sertifikat = $sertifikat;
+        $tanah->tgl_sertifikat = $tgl_sertifikat;
+        $tanah->luas_sertifikat = $luas_sertifikat;
+        $tanah->no_gambar = $no_gambar;
+        $tanah->tgl_gambar = $tgl_gambar;
+        $tanah->luas_gambar = $luas_gambar;
+        $tanah->hak = $hak;
+        $tanah->asal = $asal;
+        $tanah->pemilik = $pemilik;
+        $tanah->nilai = $nilai;
+        $tanah->ket = $ket;
+        $tanah->user = $user;
+        $tanah->save();
+    // Handle file uploads for dokumen
+    $dok = $request->file('dok'); // Expecting 'dok' to be an array of files
 
-        // $imageData = base64_decode($dok);
+    if ($request->hasFile('dok') && is_array($dok)) {
+        foreach ($dok as $file) {
+            if ($file->isValid()) {
+                $fileName = time() . '_' . uniqid() . '.pdf';
+                $folderPath = 'public/assets/img/tanah';
+                $filePath = $file->storeAs($folderPath, $fileName);
 
-
-        // $imageName = time() . '_' . uniqid() . '.pdf';
-        // file_put_contents(public_path('assets/img/lokasi/' . $imageName), $imageData);
-
-        
-        // $lokasi = new lokasi();
-        // $lokasi->lokasi = $nama_lokasi;
-        // $lokasi->alamat = $alamat;
-        // $lokasi->lat = $lat;
-        // $lokasi->long = $long;
-        // $lokasi->img = $imageName;
-        // $lokasi->save();
-
-
-        return response()->json(['message' => 'Data inserted successfully']);
+                // Create a new Dokumen entry
+                Pdf::create([
+                    'id_tanah' => $tanah->id,
+                    'dok' => $filePath,
+                    'gol'=>1
+                ]);
+            }
+        }
+        Alert::success('BERHASIL','DATA BERHASIL DITAMBAH');
+        return redirect('/tanah');
+        //return response()->json(['message' => 'Data inserted successfully']);
+        }
+        else {
+            return response()->json(['message' => 'No valid documents uploaded'], 400);
+        }
     }
 
     public function detail($id)
@@ -88,7 +117,7 @@ class TanahController extends Controller
         return view('admin.pages.aset.print.printTanah',compact(['tanah','i','total_luasTunjuk','total_luasSrtfkt','total_luasGambar','total_nilai','tglIndo','nama','nip']));
     }
 
-   
+
     public function nilaitanah($id)
     {
         $tanah = NilaiAktiva::join('aktivas','nilai_aktivas.id_aktiva','=','aktivas.id',)
@@ -107,5 +136,14 @@ class TanahController extends Controller
         return response()->json([
             'data' => $tanah
           ]);
+    }
+
+    public function vTanah()
+    {
+        $v_tanah = NilaiAktiva::select('no_voucher')
+                ->distinct()
+                ->where('cat', 1)
+                ->get();
+        return response()->json(['data' => $v_tanah]);
     }
 }
