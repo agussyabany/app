@@ -236,8 +236,8 @@ $(document).on('click', '#edit_lokasi', function() {
                 $('#img').remove();
                 $('#nama_lokasi').val(item.lokasi);
                 $('#alamat').val(item.alamat);
-                $('#wil option[value="' + item.wilayah + '"]').remove();
-                $('#wil').prepend('<option value="' + item.wilayah + '" selected="selected">' + item.wilayah + '</option>');
+                $('#wil option[value="' + item.idWil + '"]').remove();
+                $('#wil').prepend('<option value="' + item.idWil + '" selected="selected">' + item.wilayah + '</option>');
                 $('#lat').val(item.lat);
                 $('#long').val(item.long);
                 $('#id').val(id);

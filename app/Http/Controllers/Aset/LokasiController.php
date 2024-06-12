@@ -80,7 +80,7 @@ class LokasiController extends Controller
 
     public function edit($id)
     {
-        $lokasi = lokasi::select('lokasis.id as idLok','lokasi','alamat','aset_wilayah.wilayah as wilayah','lat','long','img')->join('aset_wilayah','lokasis.wilayah','=','aset_wilayah.id')->where('lokasis.id',$id)->get();
+        $lokasi = lokasi::select('lokasis.id as idLok','lokasi','alamat','aset_wilayah.wilayah as wilayah','lat','long','img','lokasis.wilayah as idWil')->join('aset_wilayah','lokasis.wilayah','=','aset_wilayah.id')->where('lokasis.id',$id)->get();
         return response()->json(['data' => $lokasi]);
     }
 
