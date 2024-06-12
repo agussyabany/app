@@ -86,14 +86,14 @@ class LokasiController extends Controller
 
     public function update(Request $request)
     {
-        $request->validate([
-            'lokasi' => 'required|string|max:255',
-            'alamat' => 'required|string|max:255',
-            'wil' => 'required|numeric',
-            'lat' => 'required|string|max:255',
-            'long' => 'required|string|max:255',
-            'id' => 'required|numeric'
-        ]);
+        // $request->validate([
+        //     'lokasi' => 'required|string|max:255',
+        //     'alamat' => 'required|string|max:255',
+        //     'wil' => 'required|numeric',
+        //     'lat' => 'required|string|max:255',
+        //     'long' => 'required|string|max:255',
+        //     'id' => 'required|numeric'
+        // ]);
         $id = $request->input('id');
         $nama_lokasi = $request->input('lokasi');
         $alamat = $request->input('alamat');
