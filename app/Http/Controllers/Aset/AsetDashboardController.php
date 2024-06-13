@@ -142,7 +142,10 @@ class AsetDashboardController extends Controller
                     ->join('jabatans','users.jabat','=','jabatans.id')
                     ->where('users.id',$idUSer)
                     ->first();
-        $lokasi = lokasi::select('lokasis.id as idLok','lokasi','alamat','aset_wilayah.wilayah as wilayah','lat','long','img')->join('aset_wilayah','lokasis.wilayah','=','aset_wilayah.id')->orederby('lokasi','ASC')->get();
+                    $lokasi = Lokasi::select('lokasis.id as idLok', 'lokasi', 'alamat', 'aset_wilayah.wilayah as wilayah', 'lat', 'long', 'img')
+                    ->join('aset_wilayah', 'lokasis.wilayah', '=', 'aset_wilayah.id')
+                    ->orderBy('lokasis.lokasi', 'ASC')
+                    ->get();
         $jabat = $user['jabat'];
         $divisi = $user['nama_div'];
         return view('admin.pages.aset.master.lokasi',compact(['jabat','divisi','lokasi','no','on']));
