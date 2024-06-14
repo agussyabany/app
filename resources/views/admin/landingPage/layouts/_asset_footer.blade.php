@@ -137,28 +137,28 @@
 
     /* ----------------------------- Initialize Map ----------------------------- */
     function initMap() {
-        map = L.map('map', {
-            center: {
-                lat: -0.4951403071438513,
-                lng: 117.14425132443439
-            },
-            zoom: 13
-        });
+    map = L.map('map', {
+        center: {
+            lat: -0.4951403071438513,
+            lng: 117.14425132443439
+        },
+        zoom: 13
+    });
 
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '© OpenStreetMap'
-        }).addTo(map);
-    }
-    initMap();
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap'
+    }).addTo(map);
+}
+initMap();
 
-    let markersCat1 = [];
-    let markersCat2 = [];
-    let markersCat3 = [];
-    let markersCat4 = [];
-    let markersCat5 = [];
+let markersCat1 = [];
+let markersCat2 = [];
+let markersCat3 = [];
+let markersCat4 = [];
+let markersCat5 = [];
 
-    $.get('/marker', function(data) {
-    data.forEach(function(markerData) {
+$.get('/marker', function(data) {
+    data.forEach(function(markerData, index) {
         let lat = parseFloat(markerData.lat);
         let long = parseFloat(markerData.long);
         console.log(markerData.cat);
@@ -166,48 +166,54 @@
         if (!isNaN(lat) && !isNaN(long)) {
             let iconUrl;
             if (markerData.cat === 2) {
-                iconUrl = 'http://app.perumdamtirtakencana.id/assets/img/marker/IPA2.png'; // Ganti dengan lokasi file PNG ikon kategori 1 Anda
-            }else if (markerData.cat === 4) {
-                iconUrl = 'http://app.perumdamtirtakencana.id/assets/img/marker/IPA1.png'; // Ganti dengan lokasi file PNG ikon kategori 2 Anda
-            }else if (markerData.cat === 3) {
-                iconUrl = 'http://app.perumdamtirtakencana.id/assets/img/marker/BOOST2.png'; // Ganti dengan lokasi file PNG ikon kategori 2 Anda
-            }else if (markerData.cat === 1 ) {
-                iconUrl = 'http://app.perumdamtirtakencana.id/assets/img/marker/kantor1.png'; // Ganti dengan lokasi file PNG ikon kategori 2 Anda
-            }else if (markerData.cat === 6 ) {
-                iconUrl = 'http://app.perumdamtirtakencana.id/assets/img/marker/TANAH.png'; // Ganti dengan lokasi file PNG ikon kategori 2 Anda
-            }
-            else {
-                iconUrl = 'http://app.perumdamtirtakencana.id/assets/img/marker/logo.png'; // Ganti dengan lokasi file PNG ikon default jika diperlukan
+                iconUrl = 'http://app.perumdamtirtakencana.id/assets/img/marker/IPA2.png';
+            } else if (markerData.cat === 4) {
+                iconUrl = 'http://app.perumdamtirtakencana.id/assets/img/marker/IPA1.png';
+            } else if (markerData.cat === 3) {
+                iconUrl = 'http://app.perumdamtirtakencana.id/assets/img/marker/BOOST2.png';
+            } else if (markerData.cat === 1) {
+                iconUrl = 'http://app.perumdamtirtakencana.id/assets/img/marker/kantor1.png';
+            } else if (markerData.cat === 6) {
+                iconUrl = 'http://app.perumdamtirtakencana.id/assets/img/marker/TANAH.png';
+            } else {
+                iconUrl = 'http://app.perumdamtirtakencana.id/assets/img/marker/logo.png';
             }
 
             let customIcon = L.icon({
                 iconUrl: iconUrl,
-                iconSize: [32, 32], // Sesuaikan dengan ukuran ikon Anda
-                iconAnchor: [16, 32], // Sesuaikan dengan titik anchor ikon Anda
-                popupAnchor: [0, -32] // Sesuaikan dengan posisi pop-up ikon Anda
+                iconSize: [32, 32],
+                iconAnchor: [16, 32],
+                popupAnchor: [0, -32]
             });
 
-            let popupContent = '<div class="container">' +
-                '<div><img src="http://app.perumdamtirtakencana.id/assets/img/lokasi/' + markerData.img + '" alt="" width="100px" height="100px">' +
-                '<div><h6>' + markerData.lokasi + '</h6></div>' +
-                '</div>';
+            let popupContent = `
+                <div class="container">
+                    <div>
+                        <img src="http://app.perumdamtirtakencana.id/assets/img/lokasi/${markerData.img}" alt="" width="100px" height="100px">
+                        <div><h6>${markerData.lokasi}</h6></div>
+                        <a href="#" id="marker-${index}" data-id="${markerData.id}" onclick="openCanvas(${index})">Open Canvas</a>
+                    </div>
+                </div>`;
 
-            let newMarker = L.marker([lat, long], { icon: customIcon }).addTo(map).bindPopup(popupContent);
+            let newMarker = L.marker([lat, long], { icon: customIcon })
+                .addTo(map)
+                .bindPopup(popupContent);
 
-            // Kategorisasi marker
+            newMarker.on('click', function() {
+                openCanvas(index, markerData.id);
+            });
+
             if (markerData.cat === 2) {
                 markersCat1.push(newMarker);
             } else if (markerData.cat === 4) {
                 markersCat2.push(newMarker);
             } else if (markerData.cat === 3) {
                 markersCat3.push(newMarker);
-            }else if (markerData.cat === 1) {
+            } else if (markerData.cat === 1) {
                 markersCat4.push(newMarker);
-            }else if (markerData.cat === 6) {
+            } else if (markerData.cat === 6) {
                 markersCat5.push(newMarker);
             }
-            // Tambahkan logika kategori lain jika diperlukan
-
         } else {
             console.error('Invalid latitude or longitude:', markerData.lat, markerData.long);
         }
@@ -217,7 +223,6 @@
         "OpenStreetMap": L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '© OpenStreetMap'
         })
-        // Tambahkan layer dasar lain jika diperlukan
     };
 
     let overlayMaps = {
@@ -226,13 +231,20 @@
         "INTAKE": L.layerGroup(markersCat3),
         "KANTOR": L.layerGroup(markersCat4),
         "TANAH": L.layerGroup(markersCat5)
-        // Tambahkan layer marker untuk kategori lain jika diperlukan
     };
 
     L.control.layers(baseMaps, overlayMaps).addTo(map);
-
-
 });
+
+function openCanvas(markerIndex, markerId) {
+    // console.log("Opening canvas for marker: " + markerIndex + " with id: " + markerId);
+    // let canvas = $('#data');
+    // canvas.show();
+    // $.get(`/getMarkerInfo?id=${markerId}`, function(data) {
+    //     canvas.find('#canvasTitle').text(data.title);
+    //     canvas.find('#canvasDescription').text(data.description);
+    // });
+}
 </script>
 <script>
     $(document).on('click', '#lok', function(){

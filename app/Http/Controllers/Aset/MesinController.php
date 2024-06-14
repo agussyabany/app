@@ -352,4 +352,13 @@ class MesinController extends Controller
             'data' => $mesin
           ]);
     }
+
+    public function vMesin()
+    {
+        $v_mesin = NilaiAktiva::select('no_voucher')
+                ->distinct()
+                ->where('cat', 2)
+                ->get();
+        return response()->json(['data' => $v_mesin]);
+    }
 }

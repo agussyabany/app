@@ -170,6 +170,7 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::get('/mesin.print/{lok}/{dep}/{div}',[MesinController::class,'print']);
     Route::get('/mesin.nilai/{lok}',[MesinController::class,'nilaiSum']);
     Route::get('/nilaiMesin.detail/{id}',[MesinController::class,'nilaimesin']);
+    Route::get('/vMesin',[MesinController::class,'vMesin']);
 
     Route::get('/gedung.dep/{id}',[GedungController::class,'dep']);
     Route::get('/gedung.div/{dep}/{lok}',[GedungController::class,'div']);
