@@ -10,6 +10,7 @@ use App\Models\Aset\Departemen;
 use App\Models\Aset\Divisi;
 use App\Models\Aset\Gedung;
 use App\Models\Aset\Indeks;
+use App\Models\Aset\KibD;
 use App\Models\Aset\Kir;
 use App\Models\Aset\lokasi;
 use App\Models\Aset\Mesin;
@@ -342,6 +343,24 @@ class AsetDashboardController extends Controller
         $jabat = $user['jabat'];
         $divisi = $user['nama_div'];
         return view('admin.pages.aset.kib.gedung',compact(['jabat','divisi','gedung','no','on']));
+    }
+
+    public function kibD()
+    {
+        $on = 13;
+        $no=1;
+        $idUSer = Auth::user()->id;
+        $user = User::join('divisis','users.divisi','=','divisis.id')
+                    ->join('jabatans','users.jabat','=','jabatans.id')
+                    ->where('users.id',$idUSer)
+                    ->first();
+        $kibD = KibD::select('id_lokasi','lokasi','alamat','lokasis.img as img_lok')
+                    ->distinct('id_lokasi')
+                    ->join('lokasis','kib_d_s.id_lokasi','=','lokasis.id')
+                    ->get();
+        $jabat = $user['jabat'];
+        $divisi = $user['nama_div'];
+        return view('admin.pages.aset.kib.kibD',compact(['jabat','divisi','kibD','no','on']));
     }
 
     public function kir()

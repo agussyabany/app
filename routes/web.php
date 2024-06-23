@@ -9,6 +9,7 @@ use App\Http\Controllers\Aset\BarangController;
 use App\Http\Controllers\Aset\DepartemenController;
 use App\Http\Controllers\Aset\Divisicontroller;
 use App\Http\Controllers\Aset\GedungController;
+use App\Http\Controllers\Aset\KibDController;
 use App\Http\Controllers\Aset\KirController;
 use App\Http\Controllers\Aset\LokasiController;
 use App\Http\Controllers\Aset\MesinController;
@@ -22,6 +23,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Diklat\Diklatcontroller;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Soc\Soccontroller;
+use App\Models\Aset\KibD;
 use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 use Symfony\Component\HttpKernel\Profiler\Profile;
@@ -98,6 +100,7 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::get('/tanah',[AsetDashboardController::class, 'tanah']);
     Route::get('/mesin',[AsetDashboardController::class, 'mesin']);
     Route::get('/gedung',[AsetDashboardController::class, 'gedung']);
+    Route::get('/kibd',[AsetDashboardController::class,'kibD']);
     Route::get('/kir',[AsetDashboardController::class, 'kir']);
 
 
@@ -176,6 +179,14 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::get('/gedung.print/{lok}/{dep}/{div}',[GedungController::class,'print']);
     Route::get('/gedung.nilai/{lok}',[GedungController::class,'nilaiSum']);
     Route::get('/nilaiGedung.detail/{id}',[GedungController::class,'nilaigedung']);
+
+    Route::get('/nilaiD/{id}',[KibDController::class,'nilaiD']);
+    Route::get('/d.dep/{id}',[KibDController::class,'dep']);
+    Route::get('/d.div/{dep}/{lok}',[KibDController::class,'div']);
+    Route::get('/d.show/{lok}/{dep}/{div}',[KibDController::class,'show']);
+    Route::get('/d.detail/{id}',[KibDController::class,'detail']);
+
+    
 
     Route::get('/kir.dep/{id}',[KirController::class,'dep']);
     Route::get('/kir.div/{dep}/{lok}',[KirController::class,'div']);

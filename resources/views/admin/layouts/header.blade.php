@@ -80,7 +80,7 @@
                           <a type="button"  class="hoverable text-start btn" id="gedung" style="width: 100%" href="/gedung"><i class="fa-solid fa-building"></i>&nbsp;GEDUNG DAN BANGUNAN</a>
                       </li>
                       <li class="nav-item">
-                          <a type="button"  class="hoverable text-start btn" id="jalan" style="width: 100%"><i class="fa-solid fa-road"></i>&nbsp;JALAN , IRIGASI DAN JARINGAN</a>
+                          <a type="button" href="/kibd"  class="hoverable text-start btn" id="jalan" style="width: 100%"><i class="fa-solid fa-road"></i>&nbsp;JALAN , IRIGASI DAN JARINGAN</a>
                       </li>
                       <li class="nav-item">
                           <a type="button"  class="hoverable text-start btn" id="tetap" style="width: 100%"><i class="fa-solid fa-marker"></i>&nbsp;ASET TETAP LAINNYA</a>
