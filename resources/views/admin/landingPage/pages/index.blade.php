@@ -347,6 +347,7 @@
 
 <section class="feature-section section">
     <div class="row">
+        {{-- <button class="btn btn-default border border-secondary btn-sm detail" data-id="" type="button" data-bs-toggle="offcanvas"  aria-controls="offcanvasExample" href="#data" id="data_kir">DETAIL</button> --}}
             <div class="section-heading">
                 <h2 class="section-title">DATA SEBARAN</h2>
                 <p class="section-content"></p>
@@ -373,5 +374,30 @@
             </div>
             </div>
         </div>
+
+        <div class="offcanvas offcanvas-start" style=" width: 90%;"  tabindex="-1" id="data" aria-labelledby="offcanvasBottomLabel">
+            <div class="offcanvas-header" id="kepala">
+
+            </div>
+            <div class="offcanvas-body large" id="canvas_body_tampil">
+                <div class="row">
+                    <div class="col-3 border border-primary rounded" id="canvas_tree">
+
+
+                    </div>
+                    <div class="col border border-primary rounded"><br>
+                        <div class="container">
+                            <div class="card">
+                                <div class="card-header" id="card-header"></div>
+                                <div class="card-body" id="card-body">
+
+
+                                </div>
+                            </div><br>
+                         </div>
+                    </div>
+                </div>
+            </div>
+          </div>
 
 @endsection

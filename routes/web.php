@@ -47,6 +47,7 @@ Route::get('/', function () {
 Route::get('/aset', function () {
     return redirect('/aset');
 });
+
 Route::get('/aset',[Webcontroller::class, 'index']);
 Route::get('/nilai.dashboard',[Webcontroller::class, 'nilai']);
 Route::get('/jumlah.dashboard',[Webcontroller::class, 'jumlah']);
@@ -72,8 +73,9 @@ Route::get('admin',function (){
 
 Route::middleware('auth','verified','role:aset')->group(function () {
     Route::get('/', function () {
-        return redirect('/aset.dashboard');
+        return redirect('/barangs');
     });
+
 
     Route::get('/aset.dashboard',[AsetDashboardController::class, 'index']);
     Route::get('/barangs',[AsetDashboardController::class, 'barangs']);
@@ -171,6 +173,7 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::get('/mesin.print/{lok}/{dep}/{div}',[MesinController::class,'print']);
     Route::get('/mesin.nilai/{lok}',[MesinController::class,'nilaiSum']);
     Route::get('/nilaiMesin.detail/{id}',[MesinController::class,'nilaimesin']);
+    Route::get('/vMesin',[MesinController::class,'vMesin']);
 
     Route::get('/gedung.dep/{id}',[GedungController::class,'dep']);
     Route::get('/gedung.div/{dep}/{lok}',[GedungController::class,'div']);

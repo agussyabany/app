@@ -15,7 +15,7 @@ $no = 0;
 
                 <div class="container card">
                     <div class="card-header">DATA PERALATAN DAN MESIN <div class="position-absolute top-0 end-0">
-                        <button class="btn  btn-primary" id="tambah_barang"><i class="fa-solid fa-file-circle-plus"></i></button>
+                        <button class="btn  btn-primary"  data-bs-toggle="modal" id="add_mesin" data-bs-target="#modal_mesin"><i class="fa-solid fa-file-circle-plus"></i></button>
                 </div>
                     </div>
                             <div class="card-body">
@@ -62,11 +62,259 @@ $no = 0;
                     </div>
                 </div>
 
+    {{-- MODAL TAMBAH --}}
+      <div class="modal"  id="modal_mesin">
+        <div class="modal-dialog  modal-xl">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="judul_modalLG">TAMBAH DATA MESIN</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="modal_bodyLG">
+                <form action="" id="form_a" enctype="multipart/form-data">
+                    <div class="container">
+                        <div class="row  border border-primary rounded">
+                            <div class="container"><br>
+                                <table class="table table-striped table-bordered rounded">
+                                    <thead>
+                                        <tr class="text-center">
+                                            <th>No Voucher</th>
+                                            <th>Kode Aktiva</th>
+                                            <th>Bulan</th>
+                                            <th>Uraian</th>
+                                          </tr>
+                                    </thead>
+                                <tbody>
+                                        <tr>
+                                            <td>
+                                                <div class="input-group input-group-sm mb-1">
+                                                    <select class="select2 form-control" name="voucher_kir" id="voucher_mesin" style="width:100%;" required>
+                                                        <option>- NO VOUCHER -</option>
+                                                    </select>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="input-group input-group-sm mb-1">
+                                                    <select class="select2 form-control" name="kode_aktiva" id="kode_aktiva" style="width:100%;" required>
+                                                        <option>- PILIH KODE AKTIVA -</option>
+                                                    </select>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="input-group input-group-sm mb-1">
+                                                    <input type="text" class="form-control" name="bulan_voc" id="bulan_voc" disabled>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="input-group input-group-sm mb-1">
+                                                    <input type="text" class="form-control" disabled value="text" id="urai_voc">
+                                                </div>
+                                            </td>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div><br>
+                            <div class="row  border border-primary rounded">
+                                <div class="container"><br>
+                                    <table class="table table-striped table-bordered rounded">
+                                        <thead>
+                                            <tr class="text-center">
+                                                <th>Lokasi</th>
+                                                <th>Departemen</th>
+                                                <th>Divisi</th>
+                                              </tr>
+                                        </thead>
+                                    <tbody>
+                                            <tr>
+                                                <td>
+                                                    <div class="input-group input-group-sm mb-1">
+                                                        <select class="select2 form-control" name="lokasi" id="lokasi_kir" style="width:100%;">
+                                                            <option>- PILIH LOKASI -</option>
+                                                        </select>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="input-group input-group-sm mb-1">
+                                                        <select class="select2 form-control" name="dep" id="dep" style="width:100%;">
+                                                            <option>- PILIH DEPARTEMEN -</option>
+                                                        </select>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="input-group input-group-sm mb-1">
+                                                        <select class="select2 form-control" name="div" id="div" style="width:100%;">
+                                                            <option>- PILIH DIVISI -</option>
+                                                        </select>
+                                                    </div>
+                                                </td>
+                                             </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div><br>
+                            <div class="row  border border-primary rounded">
+
+                                    <div class="col"><br>
+                                        <div class="input-group input-group-sm mb-1">
+                                            {{-- <span class="input-group-text col-sm-3">Hak</span> --}}
+                                            <select name="nama_aset" id="nama" class="select2 form-control" style="width:100%;">
+                                                <option>-NAMA ASET-</option>
+                                            </select>
+
+                                        </div>
+                                        <p style="color:red;" id="lokasi_error"></p>
+                                        <div class="input-group input-group-sm mb-1">
+                                            <span class="input-group-text col-sm-3">Kode Aset</span><input name="kode_aset" id="kode_aset" type="text" class="form-control">
+                                        </div>
+                                        <p style="color:red;" id="kode_aset_error"></p>
+
+                                        <div class="input-group input-group-sm mb-1">
+                                            <span class="input-group-text col-sm-3">Register</span><input type="text" name="reg" id="reg" value="" class="form-control">
+                                        </div>
+                                        <p style="color:red;" id="reg_error"></p>
+
+                                        <div class="input-group input-group-sm mb-1">
+
+                                            <select class="select2 form-control" name="jenis" id="jenis" style="width:100%;">
+                                                <option> -JENIS ASET- </option>
+                                                <option> Bergerak </option>
+                                                <option> Tidak Bergerak </option>
+                                            </select>
+                                        </div>
+                                        <div class="input-group input-group-sm mb-1">
+                                            <span class="input-group-text col-sm-3">Tahun</span><input name="tahun" id="tahun" type="number" class="form-control">
+                                        </div>
+                                        <p style="color:red;" id="tahun_error"></p>
+
+                                        <div class="input-group input-group-sm mb-1">
+                                            <span class="input-group-text col-sm-3">Batas</span><input name="batas" id="batas" type="text" class="form-control">
+                                        </div>
+                                        <p style="color:red;" id="batas_error"></p>
+
+                                        <div class="input-group input-group-sm mb-1">
+                                            <select class=" form-control" name="nilai_a" id="nilai_a">
+                                                <option> -NILAI PEROLEHAN- </option>
+                                            </select>
+                                        </div>
+                                        <div class="input-group input-group-sm mb-1">
+                                            <span class="input-group-text col-sm-3">Nilai Susut</span><input name="susut" id="susut" type="number" class="form-control">
+                                        </div>
 
 
+                                        <div class="input-group input-group-sm mb-1">
+                                            <select class="form-control" name="bahan" id="bahan_mesin">
+                                                <option> -BAHAN- </option>
+                                            </select>
+                                        </div>
+                                        <div class="input-group input-group-sm mb-1">
+                                            <span class="input-group-text col-sm-3">Guna</span><input name="guna" id="guna" type="text" class="form-control">
+                                        </div>
+                                        <p style="color:red;" id="guna_error"></p>
+                                    </div><br>
+
+                                    <div class="col"><br>
+                                        <div class="input-group input-group-sm mb-1">
+                                            <span class="input-group-text col-sm-3">Ukuran</span><input name="ukuran" id="ukuran" type="number" class="form-control">
+                                        </div>
+                                        <p style="color:red;" id="ukuran_error"></p>
+
+                                        <div class="input-group input-group-sm mb-1">
+                                            <span class="input-group-text col-sm-3">Merk/Type</span><input name="merk" id="merk" type="text" class="form-control">
+                                        </div>
+                                        <p style="color:red;" id="merk_error"></p>
+
+                                        <div class="input-group input-group-sm mb-1">
+                                            <span class="input-group-text col-sm-3">No Pabrik</span><input name="pabrik" id="pabrik" type="text" class="form-control">
+                                        </div>
+                                        <p style="color:red;" id="pabrik_error"></p>
+
+                                        <div class="input-group input-group-sm mb-1">
+                                            <span class="input-group-text col-sm-3">No Rangka</span><input name="rangka" id="rangka" type="text" class="form-control">
+                                        </div>
+                                        <p style="color:red;" id="rangka_error"></p>
+
+                                        <div class="input-group input-group-sm mb-1">
+                                            <span class="input-group-text col-sm-3">No Mesin</span><input name="mesin" id="mesin" type="text" class="form-control">
+                                        </div>
+                                        <p style="color:red;" id="mesin_error"></p>
+
+                                        <div class="input-group input-group-sm mb-1">
+                                            <span class="input-group-text col-sm-3">No Polisi</span><input name="nopol" id="nopol" type="text" class="form-control">
+                                        </div>
+                                        <p style="color:red;" id="nopol_error"></p>
+
+                                        <div class="input-group input-group-sm mb-1">
+                                            <span class="input-group-text col-sm-3">No BPKB</span><input name="bpkb" id="bpkb" type="text" class="form-control">
+                                        </div>
+                                        <p style="color:red;" id="bpkb_error"></p>
+
+                                        <div class="input-group input-group-sm mb-1">
+                                            <select class="select2 form-control" name="asal" id="asal" style="width:100%;">
+                                                <option> -ASAL- </option>
+                                                <option>Pembelian</option>
+                                                <option>Bantuan</option>
+                                                <option>Hibah</option>
+                                                <option>Penyertaan Modal</option>
+                                                <option>Serah Kelola</option>
+                                                <option>Ganti Rugi</option>
+                                                <option>Surat Penunjukan</option>
+                                                <option>SK Walikota</option>
+                                                <option>Sewa</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="input-group input-group-sm mb-1">
+                                            <span class="input-group-text col-sm-3">Dokumen</span><input name="dok" id="dok" type="file" class="form-control" multiple>
+                                        </div>
+                                        <div class="input-group input-group-sm mb-1">
+                                            <span class="input-group-text col-sm-3">Foto</span><input name="img" id="img" type="file" class="form-control" multiple>
+                                        </div>
+                                        <div class="input-group input-group-sm mb-1">
+                                            <span class="input-group-text col-sm-3">Keterangan</span><textarea name="ket" id="ket" class="form-control"></textarea>
+                                        </div>
+                                        <p style="color:red;" id="ket_error"></p>
+                                    </div>
+
+                            </div>
+
+                            <div class="row border border-primary rounded mt-1">
+                                <br><div class="float-end">
+                                    <button type="button" id="submit_b" class="btn btn-sm btn-primary float-end mt-1 mb-1">SUBMIT</button>
+                                </div>
+                            </div><br>
 
 
+                            <div class="row border border-primary rounded">
+                                <div class="container"><br>
+                                    <table  class="table table-bordered" id="tbl_mesin_input">
+                                        <thead>
+                                            <tr class="text-center">
+                                                <th>No</th>
+                                                <th>Lokasi</th>
+                                                <th>Divisi</th>
+                                                <th>Barang</th>
+                                                <th>Merk</th>
+                                              </tr>
+                                        </thead>
+                                         <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div><br>
 
+                        </div>
+                    </form >
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="tombol btn btn-primary" id="">SUBMIT</button>
+            </div>
+          </div>
+        </div>
+      </div>
 
 
       {{-- MODAL NILAI --}}

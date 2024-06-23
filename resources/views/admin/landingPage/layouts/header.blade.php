@@ -73,25 +73,44 @@
 							<!-- Collect the nav links, forms, and other content for toggling -->
 							<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 							  <ul class="nav navbar-nav">
-								<li class="dropdown active">
+                            @guest
+                            <li class="dropdown active">
+                                <a href="/aset" class="dropdown-toggle"><i class="fa fa-home" aria-hidden="true"></i><span>Home</span></a>
+                              </li>
+                              <li class="dropdown">
+                                <a href="/struktur"><i class="fa fa-cubes" aria-hidden="true"></i><span>Struktur</span></a>
+                              </li>
+                            @else
+                            <li class="dropdown active">
+                                <a href="/aset" class="dropdown-toggle"><i class="fa fa-home" aria-hidden="true"></i><span>Home</span></a>
+                              </li>
+                              <li class="dropdown">
+                                <a href="/struktur"><i class="fa fa-cubes" aria-hidden="true"></i><span>Struktur</span></a>
+                              </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-list-alt" aria-hidden="true"></i><span>KIB</span></a>
+                                <ul class="dropdown-menu">
+                                  <li><a href="/tanah">Tanah</a></li>
+                                  <li><a href="/gedung">Gedung Dan Bangunan</a></li>
+                                  <li><a href="/mesin">Mesin dan Peralatan</a></li>
+                                  <li><a href="#">Jalan, Irigasi Dan Jaringan</a></li>
+                                  <li><a href="#">Aset Tetap Lainnya</a></li>
+                                  <li><a href="#">Konstruksi</a></li>
+                                  <li><a href="/kir">KIR</a></li>
+                                </ul>
+                              </li>
+
+
+
+                            @endguest
+
+								{{-- <li class="dropdown active">
 								  <a href="/aset" class="dropdown-toggle"><i class="fa fa-home" aria-hidden="true"></i><span>Home</span></a>
-								  {{-- <ul class="dropdown-menu">
-									<li class="active"><a href="index.html">Homepage One</a></li>
-									<li><a href="index2.html">Homepage Two</a></li>
-									<li><a href="index3.html">Homepage Three</a></li>
-                                    <li><a href="one-page.html">One Page</a></li>
-                                    <li><a href="box-style.html">Box Layout</a></li>
-								  </ul> --}}
-								</li>
+                                </li>
 								<li class="dropdown">
 								  <a href="/struktur"><i class="fa fa-cubes" aria-hidden="true"></i><span>Struktur</span></a>
-								  {{-- <ul class="dropdown-menu">
-									<li><a href="portfolio_page_one.html">Portfolio One</a></li>
-									<li><a href="portfolio_page_two.html">Portfolio Two</a></li>
-									<li><a href="portfolio_page_three.html">Portfolio Three</a></li>
-								  </ul> --}}
-								</li>
-								{{-- <li class="dropdown">
+                                </li>
+								<li class="dropdown">
 								  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-list-alt" aria-hidden="true"></i><span>Pages</span></a>
 								  <ul class="dropdown-menu">
 									<li><a href="pricing_plan_page.html">Pricing Plan</a></li>
@@ -163,10 +182,14 @@
 								<ul class="cart-list">
 
 									<li class="cart-select-total">
-										<h3>Nama </h3>
-										<span>User</span>
-										<a href="/">Login</a>
-									</li>
+                                        <h3>Nama</h3>
+                                        <span>{{ Auth::user()->name ?? 'User' }}</span>
+                                        @guest
+                                            <a href="/">Login</a>
+                                        @else
+                                            <a href="/logout">LOGOUT</a>
+                                        @endguest
+                                    </li>
 								</ul>
 							</div>
 						</div>
