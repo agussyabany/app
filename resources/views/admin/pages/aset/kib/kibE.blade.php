@@ -35,7 +35,7 @@ $no = 0;
                                                 <td>{{ $no++ }}</td>
                                                 <td>{{ $item->lokasi }}</td>
                                                 <td>{{ $item->alamat }}</td>
-                                                <td ><STRONG><a id="klik_nilai_d" style="text-decoration: none;" href="#" data-id="{{ $item->id_lokasi }}" data-bs-toggle="modal" data-bs-target="#modal_d_nilai">{{number_format (NilaiAktiva::where('id_lokasi', $item->id_lokasi)->where('cat', 5)->sum('nilai'),0,',','.') }}</a></STRONG></td>
+                                                <td ><STRONG><a id="klik_nilai_e" style="text-decoration: none;" href="#" data-id="{{ $item->id_lokasi }}" data-bs-toggle="modal" data-bs-target="#modal_d_nilai">{{number_format (NilaiAktiva::where('id_lokasi', $item->id_lokasi)->where('cat', 5)->sum('nilai'),0,',','.') }}</a></STRONG></td>
 
 
 
@@ -264,11 +264,11 @@ $no = 0;
         <div class="modal-dialog  modal-xl">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="judul_modalLG">DETAIL NILAI D</h5>
+              <h5 class="modal-title" id="judul_modalLG">DETAIL NILAI E</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body" id="modal_bodyLG">
-              <table class="table table-striped table-border" id="tbl_detailNilai_d">
+              <table class="table table-striped table-border" id="tbl_detailNilai_e">
                 <thead>
                     <tr>
                         <th>NO</th>
@@ -317,7 +317,7 @@ $no = 0;
                                                 <th>Kode</th>
                                                 <th>Registrasi</th>
                                                 <th><i class="fa fa-cog"></i></th>
-                                                
+
                                             </tr>
                                         </thead>
                                         <tbody>

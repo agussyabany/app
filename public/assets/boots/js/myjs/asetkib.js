@@ -552,7 +552,7 @@ $(document).on('click', '#detail_gedung_divisi', function(){
                                         $('#ket_d').html(item.ket);
                                         //$('#gambar_d').attr('src','http://app.perumdamtirtakencana.id/assets/img/gedung/' + item.img);
                 });
-                
+
                     // $.get('/show/' + id, function (data) {
                     // $('#filed').empty();
                     // $.each(data.data, function (index, items) {
@@ -566,7 +566,34 @@ $(document).on('click', '#detail_gedung_divisi', function(){
                     // });
                    }
                 });
+            })
+//ASET TETAP LAINNYA
+            $(document).on('click', '#klik_nilai_e', function() {
+                var id = $(this).data('id');
+
+                var i = 0;
+                var table = $("#tbl_detailNilai_e").DataTable();
+                table.clear().draw();
+                    $.get("/nilaiE/"+ id , function(data) {
+                        $('#card-header').html('<strong>Divisi:'+ lokasi +' </strong>');
+                        $.each(data.data, function (index, items) {
+                        var nilaiAk = new Intl.NumberFormat('id-ID', {
+                            style: 'currency',
+                            currency: 'IDR',
+                            }).format(items.nilai);
+                            table.row.add([
+                            ++i,
+                            items.kode,
+                            items.aktiva,
+                            items.tgl_voucher,
+                            items.tahun,
+                            nilaiAk,
+                            items.urai,
+                            ]).draw();
+                        })
                 })
+
+            })
     //KIR
     $(document).on('click', '#klik_nilai_kir', function() {
         var id = $(this).data('id');

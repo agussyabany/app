@@ -10,6 +10,7 @@ use App\Http\Controllers\Aset\DepartemenController;
 use App\Http\Controllers\Aset\Divisicontroller;
 use App\Http\Controllers\Aset\GedungController;
 use App\Http\Controllers\Aset\KibDController;
+use App\Http\Controllers\Aset\KibEContrller;
 use App\Http\Controllers\Aset\KirController;
 use App\Http\Controllers\Aset\LokasiController;
 use App\Http\Controllers\Aset\MesinController;
@@ -190,7 +191,9 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::get('/d.show/{lok}/{dep}/{div}',[KibDController::class,'show']);
     Route::get('/d.detail/{id}',[KibDController::class,'detail']);
 
-    
+    Route::get('/nlaiE/{id}',[KibEContrller::class,'nilaiE']);
+
+
 
     Route::get('/kir.dep/{id}',[KirController::class,'dep']);
     Route::get('/kir.div/{dep}/{lok}',[KirController::class,'div']);
