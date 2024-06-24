@@ -83,7 +83,7 @@
                           <a type="button" href="/kibd"  class="hoverable text-start btn" id="jalan" style="width: 100%"><i class="fa-solid fa-road"></i>&nbsp;JALAN , IRIGASI DAN JARINGAN</a>
                       </li>
                       <li class="nav-item">
-                          <a type="button"  class="hoverable text-start btn" id="tetap" style="width: 100%"><i class="fa-solid fa-marker"></i>&nbsp;ASET TETAP LAINNYA</a>
+                          <a type="button" href="/kibe"  class="hoverable text-start btn" id="tetap" style="width: 100%"><i class="fa-solid fa-marker"></i>&nbsp;ASET TETAP LAINNYA</a>
                       </li>
                       <li class="nav-item">
                           <a type="button"  class="hoverable text-start btn" id="konstruksi" style="width: 100%"><i class="fa-solid fa-trowel-bricks"></i>&nbsp;KONSTRUKSI</a>
