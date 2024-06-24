@@ -126,7 +126,7 @@ class KirController extends Controller
 
     public function detail($lok,$dep,$div,$ged,$ruang)
     {
-        $ruang_detail = Kir::join('barangs','kirs.id_barang','=','barangs.id')
+        $ruang_detail = Kir::select('kirs.id as idKir','barangs.id as idBar','nama_barang','satuan','merk','bahan','jumlah','baik','ringan','berat','ket','img')->join('barangs','kirs.id_barang','=','barangs.id')
                             ->where('id_departemen',$dep)
                             ->where('id_lokasi',$lok)
                             ->where('id_div',$div)
@@ -320,4 +320,15 @@ class KirController extends Controller
             'data' => $gedung
           ]);
     }
+
+    public function edit($id)
+    {
+        $edit = Kir::select('kirs.id as idKir','barangs.id as idBar','nama_barang','satuan','merk','bahan','jumlah','baik','ringan','berat','ket','img')
+        ->join('barangs','kirs.id_barang','=','barangs.id')
+        ->where('kirs.id',$id)->get();
+        return response()->json([
+            'data' => $edit
+          ]);
+    }
+
 }

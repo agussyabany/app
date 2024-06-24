@@ -192,6 +192,10 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::get('/d.detail/{id}',[KibDController::class,'detail']);
 
     Route::get('/nlaiE/{id}',[KibEContrller::class,'nilaiE']);
+    Route::get('/e.dep/{id}',[KibEContrller::class,'dep']);
+    Route::get('/e.div/{dep}/{lok}',[KibEContrller::class,'div' ]);
+    Route::get('/e.show/{lok}/{dep}/{div}',[KibEContrller::class,'show']);
+    Route::get('/e.detail/{id}',[KibEContrller::class,'detail']);
 
 
 
@@ -212,6 +216,7 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::get('/v_kir',[KirController::class,'v_kir']);
     Route::get('/kir_aktiva/{idv}',[KirController::class,'kir_aktiva']);
     Route::get('/kir_tgl/{id}',[KirController::class,'kir_tgl']);
+    Route::get('/kir.edit/{id}',[KirController::class,'edit']);
 
     Route::get('/arsip.fill/{id}',[ArsipController::class,'fill']);
     Route::get('/arsip.rak/{gd}',[ArsipController::class,'rak']);

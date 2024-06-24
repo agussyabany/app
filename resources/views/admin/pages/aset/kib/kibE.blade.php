@@ -43,7 +43,7 @@ $no = 0;
                                                     <!-- Add action buttons/links here -->
                                                     <div class="btn-group">
 
-                                                        <button href="#data" id="detail_d" data-id="{{ $item->id_lokasi }}" class="btn btn-default border border-secondary btn-sm detail"  type="button"data-bs-toggle="offcanvas"  aria-controls="offcanvasExample">DETAIL</button>
+                                                        <button href="#data" id="detail_e" data-id="{{ $item->id_lokasi }}" class="btn btn-default border border-secondary btn-sm detail"  type="button"data-bs-toggle="offcanvas"  aria-controls="offcanvasExample">DETAIL</button>
 
 
                                                         <button type="button" class="btn btn-sm btn-default border border-secondary  dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"><span class="visually-hidden">Toggle Dropdown</span></button>
@@ -76,7 +76,7 @@ $no = 0;
         <div class="modal-dialog modal-xl">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="judul_modal">DETAIL JALAN,IRIGASI DAN JARINGAN</h5>
+              <h5 class="modal-title" id="judul_modal_detail">DETAIL ASET TETAP LAINNYA</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body" id="modal_body">
@@ -137,20 +137,20 @@ $no = 0;
                                             <td id="reg_d"> + item.reg+ </td>
                                         </tr>
                                         <tr>
-                                            <th>KONDISI BANGUNAN</th>
+                                            <th>KONDISI</th>
                                             <td id="kondisi_d"> + item.kondisi+ </td>
                                         </tr>
-                                        <tr>
+                                        {{-- <tr>
                                             <th>KONSTRUKSI</th>
                                             <td id="konstruksi_d"> + item.konstruksi+ </td>
-                                        </tr>
+                                        </tr> --}}
                                         <tr>
                                             <th>BAHAN</th>
                                             <td id="materi_d"> + item.materi+ </td>
                                         </tr>
                                         <tr>
-                                            <th>TGL SURAT</th>
-                                            <td id="tgl_imb_d"> + item.tgl_imb+ </td>
+                                            <th>TAHUN</th>
+                                            <td id="tahun_e"> + item.tgl_imb+ </td>
                                         </tr>
 
                                     </tbody>
@@ -163,25 +163,18 @@ $no = 0;
                                 <table class="table table-striped table-bordered">
                                     <tbody>
                                         <tr>
-                                            <th>LUAS</th>
-                                            <td id="luas_d"> + item.luas+ </td>
+                                            <th>JUMLAH</th>
+                                            <td id="jumlah_e"> + item.luas+ </td>
                                         </tr>
                                         <tr>
-                                            <th>SATATUS TANAH</th>
-                                            <td id="status_d"> + item.status+ </td>
+                                            <th>ASAL</th>
+                                            <td id="asal_e"> + item.status+ </td>
                                         </tr>
                                         <tr>
-                                            <th>LUAS LANTAI</th>
-                                            <td id="luastanah_d"> + item.luastanah+ </td>
+                                            <th>KET</th>
+                                            <td id="ket_d"> + item.luastanah+ </td>
                                         </tr>
-                                        <tr>
-                                            <th>NO KODE TANAH</th>
-                                            <td id="kode_tanah_d"> + item.kode_tanah+ </td>
-                                        </tr>
-                                        <tr>
-                                            <th>NO SURAT</th>
-                                            <td id="no_imb_d"> + item.no_imb+ </td>
-                                        </tr>
+                                        
                                     </tbody>
                                 </table>
                             </div>
@@ -189,59 +182,7 @@ $no = 0;
 
                     </div><br>
 
-                    <fieldset class="border border-secondary rounded-3 p-2 row">
-                        <legend class="float-none w-auto px-1 border border-secondary rounded">
-                        <div style="font-size: 15px;">-</div>
-                        </legend>
-                            <div class="col">
-                                <div class="input-group input-group-sm mb-1">
-                                    <table class="table table-striped table-bordered">
-                                        <tbody>
-                                            <tr>
-                                                <th>ASAL USUL</th>
-                                                <td id="asal_d"> + item.asal+ </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="input-group input-group-sm mb-1">
-                                    <table class="table table-striped table-bordered">
-                                        <tbody>
-                                            <tr>
-                                                <th>NILAI PEROLEHAN</th>
-                                                <td id="nilai_d"> + item.nilai+ </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            {{-- <div class="col">
-                                <div class="input-group input-group-sm mb-1">
-                                    <table class="table table-striped table-bordered">
-                                        <tbody>
-                                            <tr>
-                                                <th>NILAI PENYUSUTAN</th>
-                                                <td id="susut_d"> + item.susut+ </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div> --}}
-                            <div class="col">
-                                <div class="input-group input-group-sm mb-1">
-                                    <table class="table table-striped table-bordered">
-                                        <tbody>
-                                            <tr>
-                                                <th>KET</th>
-                                                <td id="ket_d"> + item.ket   + </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                     </fieldset><br>
+                    
 
                     <fieldset class="border border-secondary rounded-3 p-2 row" id="filed">
                             <legend class="float-none w-auto px-3 border border-secondary rounded">

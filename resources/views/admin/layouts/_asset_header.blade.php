@@ -31,6 +31,10 @@
     .kop{
       font-family: 'EB Garamond', serif;
     }
+
+    .highlighted-row {
+    background-color: red !important; /* Use !important only if necessary to override other styles */
+}
     
   </style>
 

@@ -298,7 +298,8 @@ $no = 0;
               <h5 class="modal-title" id="judul_modal">Modal title</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body" id="modal_body">
+            <div class="modal-body" id="modal_bodyKir">
+                <div id="edit_tabel" class="container"></div><br>
                 <table class="table table-striped table-border" id="tbl_kir_detail">
                     <thead>
                         <tr>

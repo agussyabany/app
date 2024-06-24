@@ -17,7 +17,7 @@ return new class extends Migration
             $table->integer('id_lokasi')->nullable(true);
             $table->integer('id_dep')->nullable(true);
             $table->integer('id_div')->nullable(true);
-            $table->char('kode')->nullable(true);
+            $table->char('kode')->nullable(true);   
             $table->char('reg')->nullable(true);
             $table->char('kondisi')->nullable(true);
             $table->integer('id_bahan')->nullable(true);
