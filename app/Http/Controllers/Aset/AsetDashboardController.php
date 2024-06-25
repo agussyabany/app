@@ -12,6 +12,7 @@ use App\Models\Aset\Gedung;
 use App\Models\Aset\Indeks;
 use App\Models\Aset\KibD;
 use App\Models\Aset\KibE;
+use App\Models\Aset\KibF;
 use App\Models\Aset\Kir;
 use App\Models\Aset\lokasi;
 use App\Models\Aset\Mesin;
@@ -383,6 +384,24 @@ class AsetDashboardController extends Controller
         $jabat = $user['jabat'];
         $divisi = $user['nama_div'];
         return view('admin.pages.aset.kib.kibE',compact(['jabat','divisi','kibE','no','on']));
+    }
+
+    public function kibF()
+    {
+        $on = 15;
+        $no=1;
+        $idUSer = Auth::user()->id;
+        $user = User::join('divisis','users.divisi','=','divisis.id')
+                    ->join('jabatans','users.jabat','=','jabatans.id')
+                    ->where('users.id',$idUSer)
+                    ->first();
+        $kibF = KibF::select('id_lokasi','lokasi','alamat','lokasis.img as img_lok','nilai')
+                    ->distinct('id_lokasi')
+                    ->join('lokasis','kib_f_s.id_lokasi','=','lokasis.id')
+                    ->get();
+        $jabat = $user['jabat'];
+        $divisi = $user['nama_div'];
+        return view('admin.pages.aset.kib.kibF',compact(['jabat','divisi','kibF','no','on']));
     }
 
     public function kir()

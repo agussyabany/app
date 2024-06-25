@@ -708,6 +708,78 @@ $(document).on('click', '#detail_gedung_divisi', function(){
                    }
                 });
             })
+
+        //Data F
+        $(document).on('click', '#detail_f', function() {
+            var id = $(this).data('id');
+            $('#canvas_tree').empty();
+            $('#card-header').empty();
+             $.ajax({
+                    type: "GET",
+                    url: "/f.dep/"+ id,
+                    success: function (data) {
+                    $.each(data.data, function (index, item) {
+                        $('#kepala').html('DATA KONSTRUKSI DALAM PENGERJAAN <strong>' + item.lokasi + '<strong>');
+                        $('#canvas_tree').append(
+                            '<li><span><strong>' + item.kode_dep +  '</strong></span>'+
+                                    '<ol id="f_div'+ item.id_dep +'"></ol>'+
+                                '</li>');
+                        var dep = item.id_dep;
+                        var lok = item.id_lokasi;
+                        $.get("/f.div/"+ dep + "/" + lok , function(data) {
+    
+                            $.each(data.data, function(index, item) {
+                                var div = item.id_div;
+    
+                                $("#f_div" + item.id_dep).append('<li><span><a data-id="' + dep + ',' + lok + ',' + div +
+                                ',' + item.nama_div +'" href="#" style="text-decoration: none;" id="tampil_f">'+ item.nama_div +'</a></span></li>')
+                            });
+                        })
+                    });
+                }
+            });
+        })
+
+        $(document).on('click', '#tampil_f', function() {
+            var id = $(this).data('id');
+            var delimiter = ",";
+            var id_key = id.split(delimiter);
+            var dep = id_key[0];
+            var lok = id_key[1];
+            var div = id_key[2];
+            var nama_div = id_key[3];
+            var i = 0;
+            var table = $("#tbl_c_data").DataTable();
+                table.clear().draw();
+                $.get("/f.show/"+ lok + "/" + dep + "/" + div , function(data) {
+                    $('#card-header').html('<strong>Divisi: '+ nama_div +'</strong><button class="btn btn-sm btn-primary float-end" id="print_b" data-id="' + lok + "," + dep + "," + div + '"><i class="fa-solid fa-print"></i></button>');
+    
+                    $.each(data.data, function (index, items) {
+                         var editButton =
+                                            '<div class="btn-group">'+
+                                                '<a class="btn btn-default border border-secondary btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#modal_d_detail" id="detail_d_divisi" data-id="'+ items.id_f +'"><i class="fa-solid fa-ellipsis-vertical"></i></a>'+
+    
+    
+                                                '<button type="button" class="btn btn-sm btn-default border border-secondary  dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"><span class="visually-hidden">Toggle Dropdown</span></button>'+
+                                                '<ul class="dropdown-menu">'+
+    
+                                                    '<li><a class="dropdown-item  edit" data-id=" '+ items.id_f +' " href="#"><i class="fa-solid fa-edit"></i>&nbsp;EDIT</a></li>'+
+                                                    '<li><a class="dropdown-item deleteB" data-id=" '+ items.id_f +' " href="#"><i class="fa-solid fa-trash"></i>&nbsp;DELETE</a></li>'+
+                                                    '<li><hr class="dropdown-divider"></li>'+
+    
+                                                '</ul>'+
+                                            '</div>';
+                                            var img = '<a href="#" data-bs-toggle="modal" data-bs-target="#modal_d_detail" id="detail_d_divisi" data-id="'+ items.id_gedung +'"><img src="http://app.perumdamtirtakencana.id/assets/img/gedung/'+items.img+'" height="100px" width="100px"></img></a>';
+                                            table.row.add([
+                                                ++i,
+                                                items.nama_barang,
+                                                items.tahun,
+                                                items.nilai,
+                                                editButton
+                                            ]).draw();
+                                        })
+                                    })
+                                })
     //KIR
     $(document).on('click', '#klik_nilai_kir', function() {
         var id = $(this).data('id');

@@ -11,6 +11,7 @@ use App\Http\Controllers\Aset\Divisicontroller;
 use App\Http\Controllers\Aset\GedungController;
 use App\Http\Controllers\Aset\KibDController;
 use App\Http\Controllers\Aset\KibEContrller;
+use App\Http\Controllers\Aset\KibFController;
 use App\Http\Controllers\Aset\KirController;
 use App\Http\Controllers\Aset\LokasiController;
 use App\Http\Controllers\Aset\MesinController;
@@ -100,12 +101,13 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::get('/arsip',[AsetDashboardController::class, 'arsip']);
 
 
-    Route::get('/tanah',[AsetDashboardController::class, 'tanah']);
-    Route::get('/mesin',[AsetDashboardController::class, 'mesin']);
-    Route::get('/gedung',[AsetDashboardController::class, 'gedung']);
+    Route::get('/tanah',[AsetDashboardController::class,'tanah']);
+    Route::get('/mesin',[AsetDashboardController::class,'mesin']);
+    Route::get('/gedung',[AsetDashboardController::class,'gedung']);
     Route::get('/kibd',[AsetDashboardController::class,'kibD']);
     Route::get('/kibe',[AsetDashboardController::class,'kibE']);
-    Route::get('/kir',[AsetDashboardController::class, 'kir']);
+    Route::get('/kibf',[AsetDashboardController::class,'kibF']);
+    Route::get('/kir',[AsetDashboardController::class,'kir']);
 
 
     Route::post('/barang.save',[BarangController::class,'save']);
@@ -196,6 +198,10 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::get('/e.div/{dep}/{lok}',[KibEContrller::class,'div' ]);
     Route::get('/e.show/{lok}/{dep}/{div}',[KibEContrller::class,'show']);
     Route::get('/e.detail/{id}',[KibEContrller::class,'detail']);
+
+    Route::get('/f.dep/{id}',[KibFController::class,'dep']);
+    Route::get('/f.div/{dep}/{lok}',[KibFController::class,'div']);
+    Route::get('/f.show/{lok}/{dep}/{div}',[KibFController::class,'show']);
 
 
 

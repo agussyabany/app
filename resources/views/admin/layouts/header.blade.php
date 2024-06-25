@@ -86,7 +86,7 @@
                           <a type="button" href="/kibe"  class="hoverable text-start btn" id="tetap" style="width: 100%"><i class="fa-solid fa-marker"></i>&nbsp;ASET TETAP LAINNYA</a>
                       </li>
                       <li class="nav-item">
-                          <a type="button"  class="hoverable text-start btn" id="konstruksi" style="width: 100%"><i class="fa-solid fa-trowel-bricks"></i>&nbsp;KONSTRUKSI</a>
+                          <a type="button" href="/kibf"  class="hoverable text-start btn" id="konstruksi" style="width: 100%"><i class="fa-solid fa-trowel-bricks"></i>&nbsp;KONSTRUKSI</a>
                       </li>
                       <li class="nav-item">
                           <a type="button"  class="hoverable text-start btn" id="kir" style="width: 100%" href="/kir"><i class="fa-solid fa-list"></i>&nbsp;K.I.R</a>
