@@ -15,9 +15,12 @@ class BarangController extends Controller
         $golongan = $request->input('gol');
         $nama_barang = $request->input('nama');
         $kode_barang = $request->input('kode');
+        $Maxid = Barang::max('id');
+        $id = $Maxid + 1;
 
         // Insert data into the 'barang' table
         Barang::insert([
+            'id'=> $id,
             'golongan' => $golongan,
             'nama_barang' => $nama_barang,
             'kode_barang' => $kode_barang,
