@@ -727,10 +727,10 @@ $(document).on('click', '#detail_gedung_divisi', function(){
                         var dep = item.id_dep;
                         var lok = item.id_lokasi;
                         $.get("/f.div/"+ dep + "/" + lok , function(data) {
-    
+
                             $.each(data.data, function(index, item) {
                                 var div = item.id_div;
-    
+
                                 $("#f_div" + item.id_dep).append('<li><span><a data-id="' + dep + ',' + lok + ',' + div +
                                 ',' + item.nama_div +'" href="#" style="text-decoration: none;" id="tampil_f">'+ item.nama_div +'</a></span></li>')
                             });
@@ -753,23 +753,23 @@ $(document).on('click', '#detail_gedung_divisi', function(){
                 table.clear().draw();
                 $.get("/f.show/"+ lok + "/" + dep + "/" + div , function(data) {
                     $('#card-header').html('<strong>Divisi: '+ nama_div +'</strong><button class="btn btn-sm btn-primary float-end" id="print_b" data-id="' + lok + "," + dep + "," + div + '"><i class="fa-solid fa-print"></i></button>');
-    
+
                     $.each(data.data, function (index, items) {
                          var editButton =
                                             '<div class="btn-group">'+
-                                                '<a class="btn btn-default border border-secondary btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#modal_d_detail" id="detail_d_divisi" data-id="'+ items.id_f +'"><i class="fa-solid fa-ellipsis-vertical"></i></a>'+
-    
-    
+                                                '<a class="btn btn-default border border-secondary btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#modal_f_detail" id="detail_f_divisi" data-id="'+ items.id_f +'"><i class="fa-solid fa-ellipsis-vertical"></i></a>'+
+
+
                                                 '<button type="button" class="btn btn-sm btn-default border border-secondary  dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"><span class="visually-hidden">Toggle Dropdown</span></button>'+
                                                 '<ul class="dropdown-menu">'+
-    
+
                                                     '<li><a class="dropdown-item  edit" data-id=" '+ items.id_f +' " href="#"><i class="fa-solid fa-edit"></i>&nbsp;EDIT</a></li>'+
                                                     '<li><a class="dropdown-item deleteB" data-id=" '+ items.id_f +' " href="#"><i class="fa-solid fa-trash"></i>&nbsp;DELETE</a></li>'+
                                                     '<li><hr class="dropdown-divider"></li>'+
-    
+
                                                 '</ul>'+
                                             '</div>';
-                                            var img = '<a href="#" data-bs-toggle="modal" data-bs-target="#modal_d_detail" id="detail_d_divisi" data-id="'+ items.id_gedung +'"><img src="http://app.perumdamtirtakencana.id/assets/img/gedung/'+items.img+'" height="100px" width="100px"></img></a>';
+                                            var img = '<a href="#" data-bs-toggle="modal" data-bs-target="#modal_d_detail" id="detail_f_divisi" data-id="'+ items.id_gedung +'"><img src="http://app.perumdamtirtakencana.id/assets/img/gedung/'+items.img+'" height="100px" width="100px"></img></a>';
                                             table.row.add([
                                                 ++i,
                                                 items.nama_barang,
@@ -780,6 +780,51 @@ $(document).on('click', '#detail_gedung_divisi', function(){
                                         })
                                     })
                                 })
+
+//MODAL DETAIL KIB D
+$(document).on('click', '#detail_f_divisi', function(){
+    var id = $(this).data('id');
+    //$('#exampleModal').modal('show');
+    $('#judul_modal_detail').html(id);
+    $.ajax({
+        type: "GET",
+        url: "/f.detail/"+ id,
+        success: function (data) {
+        $.each(data.data, function (index, item) {
+            $('#tahun_f').html(item.tahun);
+            $('#nama_barang_f').html(item.nama_barang);
+            $('#konstruksi_f').html(item.type);
+            $('#materi_f').html(item.materi);
+            $('#luas_f').html(item.luas);
+            $('#letak_f').html(item.letak);
+            $('#status_f').html(item.status_tanah);
+            $('#asal_f').html(item.asal);
+            $('#status_aset_f').html(item.status_aset);
+            $('#nilai_f').html(item.nilai);
+            $('#urai_f').html(item.urai);
+            $('#ket_f').html(item.ket);
+            // $('#no_imb_d').html(item.no_dok);
+            // $('#asal_d').html(item.asal);
+            // $('#nilai_d').html(item.harga);
+            //$('#susut_d').html(item.susut);
+            //$('#ket_d').html(item.ket);
+            //$('#gambar_d').attr('src','http://app.perumdamtirtakencana.id/assets/img/gedung/' + item.img);
+});
+
+// $.get('/show/' + id, function (data) {
+// $('#filed').empty();
+// $.each(data.data, function (index, items) {
+// var thumbnail = $(
+//             '<div class="pdf-thumbnail col ">' +
+//             '<embed width="150px" height="200px ; overflow: hidden;" name="plugin" src="http://app.perumdamtirtakencana.id/assets/img/gedung/' + items.dok + '" type="application/pdf" border border-secondary rounded>' +
+//                 '<p><a href="#" onclick="window.open(\'http://app.perumdamtirtakencana.id/assets/img/gedung/' + items.dok + '\', \'_blank\'); return false;">' + items.dok + '</p>' +
+//             '</div>');
+//             $('#filed').append(thumbnail);
+//     });
+// });
+}
+});
+})
     //KIR
     $(document).on('click', '#klik_nilai_kir', function() {
         var id = $(this).data('id');
@@ -952,13 +997,13 @@ $('#edit_tabel').append( '<fieldset class="border border-danger rounded-3 p-2 ro
                                 '<td class="text-center">' + id + '</td>'+
                                 '<td class="text-center">'+
                                     '<select class="select2" id="edit_barang" style="width:100%;">'+
-                                        
+
                                     '</select>'+
                                 '</td>'+
                                 '<td class="text-center"><input type="text" class="form-control" id="merk_edit"></td>'+
                                 '<td>'+
                                     '<select class="select2 form-control" id="edit_bahan" style="width:100%;" >'+
-                                        
+
                                     '</select>'+
                                 '</td>'+
                                 '<td class="text-center"><input type="text" class="form-control" style="width:35px;" id="jumlah_edit"></td>'+
@@ -997,8 +1042,8 @@ $('#edit_tabel').append( '<fieldset class="border border-danger rounded-3 p-2 ro
                         url: "/kir.edit/"+ id,
                         success: function (data) {
                         $.each(data.data, function (index, item) {
-                            
-                            
+
+
                             $('#edit_barang option[value="' + item.golongan + '"]').remove();
                             $('#edit_barang').prepend('<option value="' + item.idBar + '" selected="selected">' + item.nama_barang + '</option>');
                             $('#merk_edit').val(item.merk);
@@ -1014,7 +1059,7 @@ $('#edit_tabel').append( '<fieldset class="border border-danger rounded-3 p-2 ro
                         });
                     }
                 });
-                    
+
 })
 
 //Tambah Kir

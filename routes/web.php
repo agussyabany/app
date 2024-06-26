@@ -202,6 +202,7 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::get('/f.dep/{id}',[KibFController::class,'dep']);
     Route::get('/f.div/{dep}/{lok}',[KibFController::class,'div']);
     Route::get('/f.show/{lok}/{dep}/{div}',[KibFController::class,'show']);
+    Route::get('/f.detail/{id}',[KibFController::class,'detail']);
 
 
 

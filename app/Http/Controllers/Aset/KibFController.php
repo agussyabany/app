@@ -20,7 +20,7 @@ class KibFController extends Controller
             'data' => $kibF
           ]);
     }
-    
+
     public function div($dep,$lok)
     {
         $kibF = KibF::select('nama_div','id_div','kib_f_s.id_dep')
@@ -42,6 +42,16 @@ class KibFController extends Controller
                             ->where('kib_f_s.id_dep',$dep)
                             ->where('id_lokasi',$lok)
                             ->where('id_div',$div)
+                            ->get();
+        return response()->json([
+            'data' => $f_full
+          ]);
+    }
+
+    public function detail($id)
+    {
+        $f_full = KibF::where('kib_f_s.id',$id)
+                            ->join('barangs','kib_f_s.id_barang','barangs.id')
                             ->get();
         return response()->json([
             'data' => $f_full

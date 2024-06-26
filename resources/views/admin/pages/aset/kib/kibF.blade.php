@@ -73,11 +73,11 @@ $no = 0;
 
 
                 {{-- MODAL MASTER --}}
-    <div class="modal"  id="modal_d_detail">
+    <div class="modal"  id="modal_f_detail">
         <div class="modal-dialog modal-xl">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="judul_modal">DETAIL JALAN,IRIGASI DAN JARINGAN</h5>
+              <h5 class="modal-title" id="judul_modal">DETAIL KONSTRUKSI DALAM PENGERJAAN</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body" id="modal_body">
@@ -88,7 +88,7 @@ $no = 0;
                         <legend class="float-none w-auto px-1 border border-secondary rounded">
                         <div style="font-size: 15px;">-</div>
                         </legend>
-                            <div class="col">
+                            {{-- <div class="col">
                                 <div class="input-group input-group-sm mb-1">
                                     <table class="table table-striped table-bordered">
                                         <tbody>
@@ -99,14 +99,14 @@ $no = 0;
                                         </tbody>
                                     </table>
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="col">
                                 <div class="input-group input-group-sm mb-1">
                                     <table class="table table-striped table-bordered">
                                         <tbody>
                                             <tr>
                                                 <th>NAMA BARANG</th>
-                                                <td id="nama_barang_d"> + item.nama_barang + </td>
+                                                <td id="nama_barang_f"> + item.nama_barang + </td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -134,25 +134,28 @@ $no = 0;
                                 <table class="table table-striped table-bordered">
                                     <tbody>
                                         <tr>
-                                            <th>REGISTER</th>
-                                            <td id="reg_d"> + item.reg+ </td>
-                                        </tr>
-                                        <tr>
-                                            <th>KONDISI BANGUNAN</th>
-                                            <td id="kondisi_d"> + item.kondisi+ </td>
+                                            <th>TAHUN</th>
+                                            <td id="tahun_f"> + item.reg+ </td>
                                         </tr>
                                         <tr>
                                             <th>KONSTRUKSI</th>
-                                            <td id="konstruksi_d"> + item.konstruksi+ </td>
+                                            <td id="konstruksi_f"> + item.konstruksi+ </td>
                                         </tr>
+
                                         <tr>
                                             <th>BAHAN</th>
-                                            <td id="materi_d"> + item.materi+ </td>
+                                            <td id="materi_f"> + item.materi+ </td>
                                         </tr>
                                         <tr>
-                                            <th>TGL SURAT</th>
-                                            <td id="tgl_imb_d"> + item.tgl_imb+ </td>
+                                            <th>LUAS</th>
+                                            <td id="luas_f"> + item.tgl_imb+ </td>
                                         </tr>
+                                        {{-- <tr>
+                                            <th>KONDISI BANGUNAN</th>
+                                            <td id="kondisi_d"> + item.kondisi+ </td>
+                                        </tr> --}}
+
+
 
                                     </tbody>
                                 </table>
@@ -164,24 +167,24 @@ $no = 0;
                                 <table class="table table-striped table-bordered">
                                     <tbody>
                                         <tr>
-                                            <th>LUAS</th>
-                                            <td id="luas_d"> + item.luas+ </td>
+                                            <th>LETAK</th>
+                                            <td id="letak_f"> + item.luas+ </td>
                                         </tr>
                                         <tr>
                                             <th>SATATUS TANAH</th>
-                                            <td id="status_d"> + item.status+ </td>
+                                            <td id="status_f"> + item.status+ </td>
                                         </tr>
                                         <tr>
-                                            <th>LUAS LANTAI</th>
-                                            <td id="luastanah_d"> + item.luastanah+ </td>
+                                            <th>ASAL</th>
+                                            <td id="asal_f"> + item.luastanah+ </td>
                                         </tr>
                                         <tr>
-                                            <th>NO KODE TANAH</th>
-                                            <td id="kode_tanah_d"> + item.kode_tanah+ </td>
+                                            <th>STATUS ASET</th>
+                                            <td id="status_aset_f"> + item.kode_tanah+ </td>
                                         </tr>
                                         <tr>
-                                            <th>NO SURAT</th>
-                                            <td id="no_imb_d"> + item.no_imb+ </td>
+                                            <th>NILAI</th>
+                                            <td id="nilai_f"> + item.no_imb+ </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -199,14 +202,14 @@ $no = 0;
                                     <table class="table table-striped table-bordered">
                                         <tbody>
                                             <tr>
-                                                <th>ASAL USUL</th>
-                                                <td id="asal_d"> + item.asal+ </td>
+                                                <th>URAIAN</th>
+                                                <td id="urai_f"> + item.asal+ </td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
-                            <div class="col">
+                            {{-- <div class="col">
                                 <div class="input-group input-group-sm mb-1">
                                     <table class="table table-striped table-bordered">
                                         <tbody>
@@ -217,7 +220,7 @@ $no = 0;
                                         </tbody>
                                     </table>
                                 </div>
-                            </div>
+                            </div> --}}
                             {{-- <div class="col">
                                 <div class="input-group input-group-sm mb-1">
                                     <table class="table table-striped table-bordered">
@@ -236,7 +239,7 @@ $no = 0;
                                         <tbody>
                                             <tr>
                                                 <th>KET</th>
-                                                <td id="ket_d"> + item.ket   + </td>
+                                                <td id="ket_f"> + item.ket   + </td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -318,7 +321,7 @@ $no = 0;
                                                 <th>Tahun</th>
                                                 <th>Nilai</th>
                                                 <th><i class="fa fa-cog"></i></th>
-                                                
+
                                             </tr>
                                         </thead>
                                         <tbody>
