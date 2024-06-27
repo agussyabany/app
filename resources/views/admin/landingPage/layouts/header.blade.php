@@ -93,9 +93,9 @@
                                   <li><a href="/tanah">Tanah</a></li>
                                   <li><a href="/gedung">Gedung Dan Bangunan</a></li>
                                   <li><a href="/mesin">Mesin dan Peralatan</a></li>
-                                  <li><a href="#">Jalan, Irigasi Dan Jaringan</a></li>
-                                  <li><a href="#">Aset Tetap Lainnya</a></li>
-                                  <li><a href="#">Konstruksi</a></li>
+                                  <li><a href="/kibd">Jalan, Irigasi Dan Jaringan</a></li>
+                                  <li><a href="/kibe">Aset Tetap Lainnya</a></li>
+                                  <li><a href="/kibf">Konstruksi</a></li>
                                   <li><a href="/kir">KIR</a></li>
                                 </ul>
                               </li>
