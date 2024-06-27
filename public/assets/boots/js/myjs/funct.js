@@ -125,6 +125,34 @@ table.clear().draw();
         })
     })
 }
+function refKirUpdate()
+{
+    $('#judul_modal').html('<strong>Divisi:</strong> '+ nama_div +'<br><strong>Gedung:</strong> '+ ged +'<br><strong>Ruang: </strong>' + ruang +'<button class="btn btn-sm btn-primary float-end" id="print_kir" data-id="' + lok + "," + dep + "," + div + "," + ged + "," + ruang + '"><i class="fa-solid fa-print"></i></button>' );
+    var table = $("#tbl_kir_detail").DataTable();
+    table.clear().draw();
+    $.get("/kir.detail/"+ lok +"/"+ dep +"/"+ div +"/"+ ged +"/"+ ruang, function(data){
+        $.each(data.data, function (index, items) {
+                    var img = '<a href="#" id="detail_gedung_divisi"><img src="http://app.perumdamtirtakencana.id/assets/img/kir/'+items.img+'" height="100px" width="100px"></img></a>';
+                    var editButton = '<button type="button" id="edit_kir" data-id="' + items.idKir + '" class="btn btn-outline-primary btn-sm"><i class="fas fa-edit"></i></button>';
+
+                    table.row.add([
+                    ++i,
+                    items.nama_barang,
+                    items.merk,
+                    items.bahan,
+                    items.jumlah,
+                    items.satuan,
+                    items.baik,
+                    items.ringan,
+                    items.berat,
+                    img,
+                    editButton
+
+                ]).draw();
+
+            })
+        })
+}
 
 
 //PREVIOUS .VER

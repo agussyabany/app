@@ -84,7 +84,7 @@ class BarangController extends Controller
 
     public function kir()
     {
-        $kir = Barang::where('golongan',6)->get();
+        $kir = Barang::where('golongan',7)->get();
         return response()->json(['data' => $kir]);
     }
 }

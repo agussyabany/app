@@ -239,6 +239,37 @@ class KirController extends Controller
         return response()->json(['message' => 'Data inserted successfully']);
     }
 
+    public function update(Request $request)
+    {
+        $id = $request->input('id_kir');
+        $barang = $request->input('barang');
+        $merk = $request->input('merk');
+        $bahan = $request->input('bahan');
+        $jumlah = $request->input('jumlah');
+        $satuan = $request->input('satuan');
+        $baik = $request->input('baik');
+        $ringan = $request->input('ringan');
+        $berat = $request->input('berat');
+
+        $item = Kir::find($id);
+
+        if ($item) {
+            $item->id_barang = $barang;
+            $item->merk = $merk;
+            $item->bahan = $bahan;
+            $item->jumlah = $jumlah;
+            $item->satuan = $satuan;
+            $item->baik = $baik;
+            $item->ringan = $ringan;
+            $item->berat = $berat;
+            $item->save();
+
+            return response()->json(['message' => 'Item updated successfully'], 200);
+        } else {
+            return response()->json(['message' => 'Item not found'], 404);
+        }
+    }
+
     public function input()
     {
         $user = Auth::user()->id;

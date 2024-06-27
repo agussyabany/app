@@ -224,6 +224,7 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::get('/kir_aktiva/{idv}',[KirController::class,'kir_aktiva']);
     Route::get('/kir_tgl/{id}',[KirController::class,'kir_tgl']);
     Route::get('/kir.edit/{id}',[KirController::class,'edit']);
+    Route::post('/kir.update',[KirController::class,'update']);
 
     Route::get('/arsip.fill/{id}',[ArsipController::class,'fill']);
     Route::get('/arsip.rak/{gd}',[ArsipController::class,'rak']);

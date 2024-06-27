@@ -1,5 +1,10 @@
 //DATA TABLE UNTUK TABEL MASTER
-$('#tbl').DataTable();
+$('#tbl').DataTable({
+    dom: 'Bfrtip',
+    buttons: [
+      'excel'
+    ]
+  });
 //FUNGSI SELECT2 SELECT-OPTION
 $('.select2').select2({
     dropdownParent: $('#modal_bodyLG')
@@ -111,7 +116,7 @@ $(document).on('click', '#edit_divisi', function() {
     $('#judul_modal').html('EDIT DIVISI');
     $('#dep_select').attr('name','1');
     $('#depVal').attr('name','dep');
-    
+
     $.ajax({
             type: "GET",
             url: "/div.edit/"+ id,
@@ -302,7 +307,7 @@ $(document).on('click', '#edit_lokasi', function() {
         }
     });
 
-    
+
     $('body').on('change', '#wilOpt', function (event) {
         event.preventDefault();
         var id = $(this).val();

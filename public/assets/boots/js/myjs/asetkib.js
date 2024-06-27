@@ -803,9 +803,9 @@ $(document).on('click', '#detail_f_divisi', function(){
             $('#nilai_f').html(item.nilai);
             $('#urai_f').html(item.urai);
             $('#ket_f').html(item.ket);
-            // $('#no_imb_d').html(item.no_dok);
-            // $('#asal_d').html(item.asal);
-            // $('#nilai_d').html(item.harga);
+            //$('#no_imb_d').html(item.no_dok);
+            //$('#asal_d').html(item.asal);
+            //$('#nilai_d').html(item.harga);
             //$('#susut_d').html(item.susut);
             //$('#ket_d').html(item.ket);
             //$('#gambar_d').attr('src','http://app.perumdamtirtakencana.id/assets/img/gedung/' + item.img);
@@ -946,121 +946,203 @@ $('#judul_modal').html('<strong>Divisi:</strong> '+ nama_div +'<br><strong>Gedun
 
 $.get("/kir.detail/"+ lok +"/"+ dep +"/"+ div +"/"+ ged +"/"+ ruang, function(data){
     $.each(data.data, function (index, items) {
-        var img = '<a href="#" id="detail_gedung_divisi"><img src="http://app.perumdamtirtakencana.id/assets/img/kir/'+items.img+'" height="100px" width="100px"></img></a>';
-        var editButton = '<button type="button" id="edit_kir" data-id="' + items.idKir + '" class="btn btn-outline-primary btn-sm"><i class="fas fa-edit"></i></button>';
+                var img = '<a href="#" id="detail_gedung_divisi"><img src="http://app.perumdamtirtakencana.id/assets/img/kir/'+items.img+'" height="100px" width="100px"></img></a>';
+                var editButton = '<button type="button" id="edit_kir" data-id="' + items.idKir + '" class="btn btn-outline-primary btn-sm"><i class="fas fa-edit"></i></button>';
 
-        table.row.add([
-        ++i,
-        items.nama_barang,
-        items.merk,
-        items.bahan,
-        items.jumlah,
-        items.satuan,
-        items.baik,
-        items.ringan,
-        items.berat,
-        img,
-        editButton
+                table.row.add([
+                ++i,
+                items.nama_barang,
+                items.merk,
+                items.bahan,
+                items.jumlah,
+                items.satuan,
+                items.baik,
+                items.ringan,
+                items.berat,
+                img,
+                editButton
 
-    ]).draw();
+            ]).draw();
 
         })
     })
-})
-//EDIT KIR
-$(document).on('click', '#edit_kir', function() {
-    $('#edit_tabel').empty();
-    var id = $(this).data('id');
 
+    //EDIT KIR
+    $(document).on('click', '#edit_kir', function() {
+        $('#edit_tabel').empty();
+        var id = $(this).data('id');
 
-$('#edit_tabel').append( '<fieldset class="border border-danger rounded-3 p-2 row" id="filed">'+
-                               ' <legend class="float-none w-auto px-3 border border-danger rounded">'+
-                                    '<div style="font-size: 15px;"><strong>EDIT DATA TERPILIH</strong></div>'+
-                               ' </legend>'+
-                            '<table class="table table-striped table-responsive table-border" id="tbl_kir_edit">'+
-                            '<thead>'+
-                                '<tr>'+
-                                    '<th class="text-center">NO</th>'+
-                                    '<th class="text-center">Nama Aktiva</th>'+
-                                    '<th class="text-center">Merk/Type</th>'+
-                                    '<th class="text-center">Bahan</th>'+
-                                    '<th class="text-center">Jumlah</th>'+
-                                    '<th class="text-center">Satuan</th>'+
-                                    '<th class="text-center">Baik</th>'+
-                                    '<th>Rusak Ringan</th>'+
-                                    '<th class="text-center">Rusak Berat</th>'+
-                                    '<th></th>'+
-                                '</tr>'+
-                            '</thead>'+
-                        '<tbody>'+
-                            '<tr>'+
-                                '<td class="text-center">' + id + '</td>'+
-                                '<td class="text-center">'+
-                                    '<select class="select2" id="edit_barang" style="width:100%;">'+
+        function refreshTable() {
+            var table = $("#tbl_kir_detail").DataTable();
+            table.clear().draw();
 
-                                    '</select>'+
-                                '</td>'+
-                                '<td class="text-center"><input type="text" class="form-control" id="merk_edit"></td>'+
-                                '<td>'+
-                                    '<select class="select2 form-control" id="edit_bahan" style="width:100%;" >'+
+            $.get("/kir.detail/"+ lok +"/"+ dep +"/"+ div +"/"+ ged +"/"+ ruang, function(data){
+                $.each(data.data, function (index, items) {
+                    var img = '<a href="#" id="detail_gedung_divisi"><img src="http://app.perumdamtirtakencana.id/assets/img/kir/'+items.img+'" height="100px" width="100px"></img></a>';
+                    var editButton = '<a href="#" type="submit" id="edit_kir" data-id="' + items.idKir + '" class="btn btn-outline-primary btn-sm"><i class="fas fa-edit"></i></a>';
 
-                                    '</select>'+
-                                '</td>'+
-                                '<td class="text-center"><input type="text" class="form-control" style="width:35px;" id="jumlah_edit"></td>'+
-                                '<td class="text-center"><select class="select2" id="satuan_edit">'+
-                                        '<option>PCS</option>'+
-                                        '<option>UNIT</option>'+
-                                        '<option>SET</option>'+
-                                    '</select>'+
-                                '</td>'+
-                                '<td class="text-center"><input type="text" class="form-control" style="width:35px;" id="baik_edit"></td>'+
-                                '<td class="text-center"><input type="text" class="form-control" style="width:35px;" id="ringan_edit"></td>'+
-                                '<td class="text-center"><input type="text" class="form-control" style="width:35px;" id="berat_edit"></td>'+
-                                '<td class="text-center"><a href="#" class="btn btn-sm btn-outline-success"><i class="fas fa-save"></i></td>'+
-                            '</tr>'+
-                        '</tbody>'+
-                        '</fieldset><br></br>'
-                    )
-                    $('.select2').select2({
-                        dropdownParent: $('#modal_bodyKir')
-                    });
-
-                    $.get('/barang.kir', function (data) {
-                        $.each(data.data, function (index, item) {
-                            $('#edit_barang').append('<option value="' + item.id + '">' + item.nama_barang + '</option>');
-                        });
-                    });
-
-                    $.get('/bahan', function (data) {
-                        $.each(data.data, function (index, item) {
-                            $('#edit_bahan').append('<option value="' + item.id + '">' + item.nama + '</option>');
-                        });
-                    });
-
-                    $.ajax({
-                        type: "GET",
-                        url: "/kir.edit/"+ id,
-                        success: function (data) {
-                        $.each(data.data, function (index, item) {
-
-
-                            $('#edit_barang option[value="' + item.golongan + '"]').remove();
-                            $('#edit_barang').prepend('<option value="' + item.idBar + '" selected="selected">' + item.nama_barang + '</option>');
-                            $('#merk_edit').val(item.merk);
-                            $('#edit_bahan option[value="' + item.bahan + '"]').remove();
-                            $('#edit_bahan').prepend('<option value="' + item.bahan + '" selected="selected">' + item.bahan + '</option>');
-                            $('#jumlah_edit').val(item.jumlah);
-                            $('#satuan_edit option[value="' + item.satuan + '"]').remove();
-                            $('#satuan_edit').prepend('<option value="' + item.satuan + '" selected="selected">' + item.satuan + '</option>');
-                            $('#baik_edit').val(item.baik);
-                            $('#ringan_edit').val(item.ringan);
-                            $('#berat_edit').val(item.berat);
-                            //$('#form_barang').attr('action', '/barang.update');
-                        });
-                    }
+                    table.row.add([
+                        ++i,
+                        items.nama_barang,
+                        items.merk,
+                        items.bahan,
+                        items.jumlah,
+                        items.satuan,
+                        items.baik,
+                        items.ringan,
+                        items.berat,
+                        img,
+                        editButton
+                    ]).draw();
                 });
+            });
+        }
+
+
+    $('#edit_tabel').append( '<fieldset class="border border-danger rounded-3 p-2 row" id="filed">'+
+                                   ' <legend class="float-none w-auto px-3 border border-danger rounded">'+
+                                        '<div style="font-size: 15px;"><strong>EDIT DATA TERPILIH</strong></div>'+
+                                   ' </legend>'+
+                                '<table class="table table-striped table-responsive table-border" id="tbl_kir_edit">'+
+                                '<thead>'+
+                                    '<tr>'+
+                                        '<th class="text-center">NO</th>'+
+                                        '<th class="text-center">Nama Aktiva</th>'+
+                                        '<th class="text-center">Merk/Type</th>'+
+                                        '<th class="text-center">Bahan</th>'+
+                                        '<th class="text-center">Jumlah</th>'+
+                                        '<th class="text-center">Satuan</th>'+
+                                        '<th class="text-center">Baik</th>'+
+                                        '<th>Rusak Ringan</th>'+
+                                        '<th class="text-center">Rusak Berat</th>'+
+                                        '<th></th>'+
+                                    '</tr>'+
+                                '</thead>'+
+                            '<tbody>'+
+                                '<tr>'+
+                                    '<input type="hidden" id="id_kir" value=" '+ id +' ">'+
+                                    '<td class="text-center">' + id + '</td>'+
+                                    '<td class="text-center">'+
+                                        '<select class="select2" id="edit_barang" style="width:100%;">'+
+
+                                        '</select>'+
+                                    '</td>'+
+                                    '<td class="text-center"><input type="text" class="form-control" id="merk_edit"></td>'+
+                                    '<td>'+
+                                        '<select class="select2 form-control" id="edit_bahan" style="width:100%;" >'+
+
+                                        '</select>'+
+                                    '</td>'+
+                                    '<td class="text-center"><input type="text" class="form-control" style="width:35px;" id="jumlah_edit"></td>'+
+                                    '<td class="text-center"><select class="select2" id="satuan_edit">'+
+                                            '<option>PCS</option>'+
+                                            '<option>UNIT</option>'+
+                                            '<option>SET</option>'+
+                                        '</select>'+
+                                    '</td>'+
+                                    '<td class="text-center"><input type="text" class="form-control" style="width:35px;" id="baik_edit"></td>'+
+                                    '<td class="text-center"><input type="text" class="form-control" style="width:35px;" id="ringan_edit"></td>'+
+                                    '<td class="text-center"><input type="text" class="form-control" style="width:35px;" id="berat_edit"></td>'+
+                                    '<td class="text-center"><a href="#" id="submit_update" class="btn btn-sm btn-outline-success"><i class="fas fa-save"></i></td>'+
+                                '</tr>'+
+                            '</tbody>'+
+                            '</fieldset><br></br>'
+                        )
+                        $('.select2').select2({
+                            dropdownParent: $('#modal_bodyKir')
+                        });
+                        //selectOptKir();
+                        $.get('/barang.kir', function (data) {
+                            $.each(data.data, function (index, item) {
+                                $('#edit_barang').append('<option value="' + item.id + '">' + item.nama_barang + '</option>');
+                            });
+                        });
+
+                        $.get('/bahan', function (data) {
+                            $.each(data.data, function (index, item) {
+                                $('#edit_bahan').append('<option value="' + item.nama + '">' + item.nama + '</option>');
+                            });
+                        });
+
+                        $.ajax({
+                            type: "GET",
+                            url: "/kir.edit/"+ id,
+                            success: function (data) {
+                            $.each(data.data, function (index, item) {
+
+                                $('#id_kir').val()
+                                $('#edit_barang option[value="' + item.idBar + '"]').remove();
+                                $('#edit_barang').prepend('<option value="' + item.idBar + '" selected="selected">' + item.nama_barang + '</option>');
+                                $('#merk_edit').val(item.merk);
+
+                                $('#edit_bahan option[value="' + item.bahan + '"]').remove();
+                                $('#edit_bahan').prepend('<option value="' + item.bahan + '" selected="selected">' + item.bahan + '</option>');
+
+                                $('#jumlah_edit').val(item.jumlah);
+                                $('#satuan_edit option[value="' + item.satuan + '"]').remove();
+                                $('#satuan_edit').prepend('<option value="' + item.satuan + '" selected="selected">' + item.satuan + '</option>');
+                                $('#baik_edit').val(item.baik);
+                                $('#ringan_edit').val(item.ringan);
+                                $('#berat_edit').val(item.berat);
+                                //$('#form_barang').attr('action', '/barang.update');
+                            });
+                        }
+                    });
+
+                    //SUBMIT EDIT KIR
+    $(document).on('click','#submit_update',function() {
+        $.ajax({
+            data: {
+                id_kir:$('#id_kir').val(),
+                barang: $('#edit_barang').val(),
+                merk: $('#merk_edit').val(),
+                bahan:$('#edit_bahan').val(),
+                jumlah:$('#jumlah_edit').val(),
+                satuan:$('#satuan_edit').val(),
+                baik:$('#baik_edit').val(),
+                ringan:$('#ringan_edit').val(),
+                berat:$('#berat_edit').val(),
+            },
+            url: "/kir.update",
+            type: "POST",
+            dataType: 'json',
+            success: function (data) {
+                refreshTable();
+                $('#edit_tabel').empty();
+                alert('berhasil update');
+
+
+                // if (jenis == 1) {
+                //     refKirInput();
+                // } else {
+                //     kirTambah(lok,dep,div,ged,ruang);
+                // }
+            },
+            error: function(xhr) {
+                alert('gagal update')
+                // if (xhr.status === 400) {
+                //     // Validation error, handle it
+                //     var errors = xhr.responseJSON.errors;
+                //     $.each(errors, function(field, messages) {
+                //         // Display each error message for the specific field
+                //         $('#'+field+'_error').text(messages[0]); // Assume you have an element with an ID like 'reg_error'
+                //     });
+                // } else {
+                //     // Handle other errors
+                //     console.error('An error occurred:', xhr.responseText);
+                // }
+            }
+        });
+
+    })
+    })
+
 
 })
+
+
+
+
 
 //Tambah Kir
 
@@ -1125,11 +1207,6 @@ $(document).on('click', '#submit_kir', function (event) {
                     } else {
                         kirTambah(lok,dep,div,ged,ruang);
                     }
-
-
-
-
-
                 },
                 error: function(xhr) {
                     if (xhr.status === 400) {
@@ -1281,42 +1358,8 @@ $(document).on('click', '#rak_detail', function() {
     $.get("/arsip.detail/"+ ged +"/"+ fil +"/"+ rak , function(data){
         $.each(data.data, function (index, items) {
             var bulans = items.bulan;
-            if (bulans == 1) {
-                var bulan = 'JANUARI';
-            }
-            if (bulans == 2) {
-                var bulan = 'FEBRUARI';
-            }
-            if (bulans == 3) {
-                var bulan = 'MARET';
-            }
-            if (bulans == 4) {
-                var bulan = 'APRIL';
-            }
-            if (bulans == 5) {
-                var bulan = 'MEI';
-            }
-            if (bulans == 6) {
-                var bulan = 'JUNI';
-            }
-            if (bulans == 7) {
-                var bulan = 'JULI';
-            }
-            if (bulans == 8) {
-                var bulan = 'AGUSTUS';
-            }
-            if (bulans == 9) {
-                var bulan = 'SEPTEMBER';
-            }
-            if (bulans == 10) {
-                var bulan = 'OKTOBER';
-            }
-            if (bulans == 11) {
-                var bulan = 'NOVEMBER';
-            }
-            if (bulans == 12) {
-                var bulan = 'DESEMBER';
-            }
+            var bulanNames = ['JANUARI', 'FEBRUARI', 'MARET', 'APRIL', 'MEI', 'JUNI', 'JULI', 'AGUSTUS', 'SEPTEMBER', 'OKTOBER', 'NOVEMBER', 'DESEMBER'];
+            var bulan = bulanNames[bulans - 1];
             // var img = '<a href="#" id="detail_gedung_divisi"><img src="http://app.perumdamtirtakencana.id/assets/img/kir/'+items.img+'" height="100px" width="100px"></img></a>';
             var editButton = '<button type="button" id="edit" data-id="' + items.id + '" class="btn btn-outline-primary btn-sm"><i class="fas fa-plus"></i></button>';
             var baris = '<a href="#" style="text-decoration:none;" id="isi_arsip" data-id="'+ items.id +'"><strong>' + items.no_file + '</strong></a>';
