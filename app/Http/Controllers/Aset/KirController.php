@@ -321,8 +321,13 @@ class KirController extends Controller
                         $divisi = $divi['nama_div'];
                         $struktur = $divi['kode_div'];
                         $departemen = $dept['kode_dep'];
-                        $sdm = $sdms['nama_sdm'];
 
+
+                         if ($sdms == null) {
+                           $sdm="Penanggung Jawab";
+                         }else{
+                            $sdm = $sdms['nama_sdm'];
+                         }
 
                         $date = Carbon::now();
                         $tglIndo = $date->locale('id_ID')->format('d F Y');
@@ -354,7 +359,7 @@ class KirController extends Controller
 
     public function edit($id)
     {
-        $edit = Kir::select('kirs.id as idKir','barangs.id as idBar','nama_barang','satuan','merk','bahan','jumlah','baik','ringan','berat','ket','img')
+        $edit = Kir::select('kirs.id as idKir','barangs.id as idBar','nama_barang','satuan','merk','bahan','jumlah','baik','ringan','berat','ket','img','id_lokasi','id_departemen','id_div','ruangan','gedung')
         ->join('barangs','kirs.id_barang','=','barangs.id')
         ->where('kirs.id',$id)->get();
         return response()->json([

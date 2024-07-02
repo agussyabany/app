@@ -939,49 +939,17 @@ $(document).on('click', '#detail_f_divisi', function(){
         var ruang = id_key[4];
         var nama_div = id_key[5];
         var i = 0;
-
+$('#button_print').html('<button type="button" class="tombol btn btn-primary" id="print_kir" data-id="' + lok + "," + dep + "," + div + "," + ged + "," + ruang + '"><i class="fa fa-print"></i></button>')
 $('#judul_modal').html('<strong>Divisi:</strong> '+ nama_div +'<br><strong>Gedung:</strong> '+ ged +'<br><strong>Ruang: </strong>' + ruang +'<button class="btn btn-sm btn-primary float-end" id="print_kir" data-id="' + lok + "," + dep + "," + div + "," + ged + "," + ruang + '"><i class="fa-solid fa-print"></i></button>' );
     var table = $("#tbl_kir_detail").DataTable();
     table.clear().draw();
 
-$.get("/kir.detail/"+ lok +"/"+ dep +"/"+ div +"/"+ ged +"/"+ ruang, function(data){
-    $.each(data.data, function (index, items) {
-                var img = '<a href="#" id="detail_gedung_divisi"><img src="http://app.perumdamtirtakencana.id/assets/img/kir/'+items.img+'" height="100px" width="100px"></img></a>';
-                var editButton = '<button type="button" id="edit_kir" data-id="' + items.idKir + '" class="btn btn-outline-primary btn-sm"><i class="fas fa-edit"></i></button>';
+        $.get("/kir.detail/"+ lok +"/"+ dep +"/"+ div +"/"+ ged +"/"+ ruang, function(data){
+            $.each(data.data, function (index, items) {
+                        var img = '<a href="#" id="detail_gedung_divisi"><img src="http://app.perumdamtirtakencana.id/assets/img/kir/'+items.img+'" height="100px" width="100px"></img></a>';
+                        var editButton = '<button type="button" id="edit_kir" data-id="' + items.idKir + '" class="btn btn-outline-primary btn-sm"><i class="fas fa-edit"></i></button>';
 
-                table.row.add([
-                ++i,
-                items.nama_barang,
-                items.merk,
-                items.bahan,
-                items.jumlah,
-                items.satuan,
-                items.baik,
-                items.ringan,
-                items.berat,
-                img,
-                editButton
-
-            ]).draw();
-
-        })
-    })
-
-    //EDIT KIR
-    $(document).on('click', '#edit_kir', function() {
-        $('#edit_tabel').empty();
-        var id = $(this).data('id');
-
-        function refreshTable() {
-            var table = $("#tbl_kir_detail").DataTable();
-            table.clear().draw();
-
-            $.get("/kir.detail/"+ lok +"/"+ dep +"/"+ div +"/"+ ged +"/"+ ruang, function(data){
-                $.each(data.data, function (index, items) {
-                    var img = '<a href="#" id="detail_gedung_divisi"><img src="http://app.perumdamtirtakencana.id/assets/img/kir/'+items.img+'" height="100px" width="100px"></img></a>';
-                    var editButton = '<a href="#" type="submit" id="edit_kir" data-id="' + items.idKir + '" class="btn btn-outline-primary btn-sm"><i class="fas fa-edit"></i></a>';
-
-                    table.row.add([
+                        table.row.add([
                         ++i,
                         items.nama_barang,
                         items.merk,
@@ -993,13 +961,32 @@ $.get("/kir.detail/"+ lok +"/"+ dep +"/"+ div +"/"+ ged +"/"+ ruang, function(da
                         items.berat,
                         img,
                         editButton
+
                     ]).draw();
-                });
-            });
-        }
 
+                })
+            })
+        })
 
-    $('#edit_tabel').append( '<fieldset class="border border-danger rounded-3 p-2 row" id="filed">'+
+        $(document).on('click', '#print_kir', function() {
+            var id = $(this).data('id');
+            var delimiter = ",";
+            var id_key = id.split(delimiter);
+            var lok = id_key[0];
+            var dep = id_key[1];
+            var div = id_key[2];
+            var ged = id_key[3];
+            var ruang = id_key[4];
+            var url = "/kir.print/"+ lok +"/"+ dep +"/"+ div +"/"+ ged +"/"+ ruang;
+            var features = 'width=800,height=600';
+            window.open(url, '_blank', features);
+        })
+
+    //EDIT KIR
+    $(document).on('click', '#edit_kir', function() {
+        $('#edit_tabel').empty();
+        var id = $(this).data('id');
+        $('#edit_tabel').append( '<fieldset class="border border-danger rounded-3 p-2 row" id="filed">'+
                                    ' <legend class="float-none w-auto px-3 border border-danger rounded">'+
                                         '<div style="font-size: 15px;"><strong>EDIT DATA TERPILIH</strong></div>'+
                                    ' </legend>'+
@@ -1084,61 +1071,77 @@ $.get("/kir.detail/"+ lok +"/"+ dep +"/"+ div +"/"+ ged +"/"+ ruang, function(da
                                 $('#baik_edit').val(item.baik);
                                 $('#ringan_edit').val(item.ringan);
                                 $('#berat_edit').val(item.berat);
-                                //$('#form_barang').attr('action', '/barang.update');
                             });
                         }
                     });
 
+
+    })
+
                     //SUBMIT EDIT KIR
-    $(document).on('click','#submit_update',function() {
-        $.ajax({
-            data: {
-                id_kir:$('#id_kir').val(),
-                barang: $('#edit_barang').val(),
-                merk: $('#merk_edit').val(),
-                bahan:$('#edit_bahan').val(),
-                jumlah:$('#jumlah_edit').val(),
-                satuan:$('#satuan_edit').val(),
-                baik:$('#baik_edit').val(),
-                ringan:$('#ringan_edit').val(),
-                berat:$('#berat_edit').val(),
-            },
-            url: "/kir.update",
-            type: "POST",
-            dataType: 'json',
-            success: function (data) {
-                refreshTable();
-                $('#edit_tabel').empty();
-                alert('berhasil update');
+                    $(document).on('click','#submit_update',function() {
+                        $.ajax({
+                            data: {
+                                id_kir:$('#id_kir').val(),
+                                barang: $('#edit_barang').val(),
+                                merk: $('#merk_edit').val(),
+                                bahan:$('#edit_bahan').val(),
+                                jumlah:$('#jumlah_edit').val(),
+                                satuan:$('#satuan_edit').val(),
+                                baik:$('#baik_edit').val(),
+                                ringan:$('#ringan_edit').val(),
+                                berat:$('#berat_edit').val(),
+                            },
+                            url: "/kir.update",
+                            type: "POST",
+                            dataType: 'json',
+                            success: function (data) {
+
+                                var id = $('#id_kir').val()
+                                $.get("/kir.edit/"+ id, function (data) {
+                                    $.each(data.data, function (index, item) {
+
+                                        var lok = item.id_lokasi;
+                                        var dep = item.id_departemen;
+                                        var div = item.id_div;
+                                        var ged = item.gedung;
+                                        var ruang = item.ruangan;
 
 
-                // if (jenis == 1) {
-                //     refKirInput();
-                // } else {
-                //     kirTambah(lok,dep,div,ged,ruang);
-                // }
-            },
-            error: function(xhr) {
-                alert('gagal update')
-                // if (xhr.status === 400) {
-                //     // Validation error, handle it
-                //     var errors = xhr.responseJSON.errors;
-                //     $.each(errors, function(field, messages) {
-                //         // Display each error message for the specific field
-                //         $('#'+field+'_error').text(messages[0]); // Assume you have an element with an ID like 'reg_error'
-                //     });
-                // } else {
-                //     // Handle other errors
-                //     console.error('An error occurred:', xhr.responseText);
-                // }
-            }
-        });
+                                        var table = $("#tbl_kir_detail").DataTable();
+                                        table.clear().draw();
+                                        $.get("/kir.detail/"+ lok +"/"+ dep +"/"+ div +"/"+ ged +"/"+ ruang, function(data){
+                                            $.each(data.data, function (index, items) {
+                                                var img = '<a href="#" id="detail_gedung_divisi"><img src="http://app.perumdamtirtakencana.id/assets/img/kir/'+items.img+'" height="100px" width="100px"></img></a>';
+                                                var editButton = '<a href="#" type="submit" id="edit_kir" data-id="' + items.idKir + '" class="btn btn-outline-primary btn-sm"><i class="fas fa-edit"></i></a>';
 
-    })
-    })
+                                                table.row.add([
+                                                    ++i,
+                                                    items.nama_barang,
+                                                    items.merk,
+                                                    items.bahan,
+                                                    items.jumlah,
+                                                    items.satuan,
+                                                    items.baik,
+                                                    items.ringan,
+                                                    items.berat,
+                                                    img,
+                                                    editButton
+                                                ]).draw();
+                                            });
+                                        });
 
+                                    })
+                                    alert('berhasil update' + id);
+                                })
 
-})
+                            },
+                            error: function(xhr) {
+                                alert('gagal update')
+                            }
+                        });
+
+                    })
 
 
 
@@ -4377,21 +4380,21 @@ $(document).on('click', '#isi_arsip', function() {
                     // });
 
 //                 })
-//                 $(document).on('click', '#print_kir', function() {
-//                     var id = $(this).data('id');
-//                     var delimiter = ",";
-//                     var id_key = id.split(delimiter);
-//                     var lok = id_key[0];
-//                     var dep = id_key[1];
-//                     var div = id_key[2];
-//                     var ged = id_key[3];
-//                     var ruang = id_key[4];
-//                     var url = "/kir.print/"+ lok +"/"+ dep +"/"+ div +"/"+ ged +"/"+ ruang;
-//                     var features = 'width=800,height=600';
-//                     window.open(url, '_blank', features);
-//                 })
-//             });
-//      });
+                // $(document).on('click', '#print_kir', function() {
+                //     var id = $(this).data('id');
+                //     var delimiter = ",";
+                //     var id_key = id.split(delimiter);
+                //     var lok = id_key[0];
+                //     var dep = id_key[1];
+                //     var div = id_key[2];
+                //     var ged = id_key[3];
+                //     var ruang = id_key[4];
+                //     var url = "/kir.print/"+ lok +"/"+ dep +"/"+ div +"/"+ ged +"/"+ ruang;
+                //     var features = 'width=800,height=600';
+                //     window.open(url, '_blank', features);
+                // })
+            //});
+     //});
 //     $(document).on('click', '#kir_x', function() {
 //             $('#tab_kir').parent().remove(); // Hapus tab
 //             $('#kir_tab').remove(); // Hapus konten tab
