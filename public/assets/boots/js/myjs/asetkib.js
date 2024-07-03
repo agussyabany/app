@@ -941,8 +941,9 @@ $(document).on('click', '#detail_f_divisi', function(){
         var i = 0;
 $('#button_print').html('<button type="button" class="tombol btn btn-primary" id="print_kir" data-id="' + lok + "," + dep + "," + div + "," + ged + "," + ruang + '"><i class="fa fa-print"></i></button>')
 $('#judul_modal').html('<strong>Divisi:</strong> '+ nama_div +'<br><strong>Gedung:</strong> '+ ged +'<br><strong>Ruang: </strong>' + ruang +'<button class="btn btn-sm btn-primary float-end" id="print_kir" data-id="' + lok + "," + dep + "," + div + "," + ged + "," + ruang + '"><i class="fa-solid fa-print"></i></button>' );
-    var table = $("#tbl_kir_detail").DataTable();
-    table.clear().draw();
+
+        var table = $("#tbl_kir_detail").DataTable();
+        table.clear().draw();
 
         $.get("/kir.detail/"+ lok +"/"+ dep +"/"+ div +"/"+ ged +"/"+ ruang, function(data){
             $.each(data.data, function (index, items) {
@@ -1106,6 +1107,7 @@ $('#judul_modal').html('<strong>Divisi:</strong> '+ nama_div +'<br><strong>Gedun
                                         var div = item.id_div;
                                         var ged = item.gedung;
                                         var ruang = item.ruangan;
+                                        var i = 0;
 
 
                                         var table = $("#tbl_kir_detail").DataTable();
