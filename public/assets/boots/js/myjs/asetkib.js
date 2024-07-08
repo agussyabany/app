@@ -1084,8 +1084,8 @@ $('#judul_modal').html('<strong>Divisi:</strong> '+ nama_div +'<br><strong>Gedun
                         $.ajax({
                             data: {
                                 id_kir:$('#id_kir').val(),
-                                barang: $('#edit_barang').val(),
-                                merk: $('#merk_edit').val(),
+                                barang:$('#edit_barang').val(),
+                                merk:$('#merk_edit').val(),
                                 bahan:$('#edit_bahan').val(),
                                 jumlah:$('#jumlah_edit').val(),
                                 satuan:$('#satuan_edit').val(),
