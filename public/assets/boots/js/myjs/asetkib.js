@@ -948,7 +948,13 @@ $('#judul_modal').html('<strong>Divisi:</strong> '+ nama_div +'<br><strong>Gedun
         $.get("/kir.detail/"+ lok +"/"+ dep +"/"+ div +"/"+ ged +"/"+ ruang, function(data){
             $.each(data.data, function (index, items) {
                         var img = '<a href="#" id="detail_gedung_divisi"><img src="http://app.perumdamtirtakencana.id/assets/img/kir/'+items.img+'" height="100px" width="100px"></img></a>';
-                        var editButton = '<button type="button" id="edit_kir" data-id="' + items.idKir + '" class="btn btn-outline-primary btn-sm"><i class="fas fa-edit"></i></button>';
+                        // var editButton = '<button type="button" id="edit_kir" data-id="' + items.idKir + '" class="btn btn-outline-primary btn-sm"><i class="fas fa-edit"></i></button>';
+                        var editButton = '<button type="button" class="btn btn-sm btn-default border border-secondary  dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"><span class="visually-hidden">Toggle Dropdown</span></button>'+
+                        '<ul class="dropdown-menu">'+
+                            '<li><a class="dropdown-item edit" id="edit_kir" data-id="' + items.idKir + '" href="#"><i class="fa-solid fa-edit"></i>&nbsp;UPDATE</a></li>'+
+                            '<li><a class="dropdown-item delete" data-id="" href="#"><i class="fa fa-retweet"></i>&nbsp;MUTASI</a></li>'+
+                            '<li><hr class="dropdown-divider"></li>'+
+                        '</ul>';
 
                         table.row.add([
                         ++i,
