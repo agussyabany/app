@@ -1288,11 +1288,28 @@ $(document).on('click', '#kir_tambah_detail', function (event) {
         var nama_div = id_key[5];
         var i = 0;
 
-$('#judul_modal').html('<strong>Divisi:</strong> '+ nama_div +'<br><strong>Gedung:</strong> '+ ged +'<br><strong>Ruang: </strong>' + ruang +'<button class="btn btn-sm btn-primary float-end" id="print_kir" data-id="' + lok + "," + dep + "," + div + "," + ged + "," + ruang + '"><i class="fa-solid fa-print"></i></button>' );
-
-
 $('#head-off').empty();
-$('#head-off').append('<input type="hidden" value="'+ lok +'" id="lokasi_kir">'+
+$('#head-off').append('<div class="row  border border-primary rounded">'+
+                            '<div class="container"><br>'+
+                            ' <table class="table table-striped table-bordered rounded">'+
+                                    '<thead>'+
+                                        '<tr class="text-center">'+
+                                            '<th>DIVISI</th>'+
+                                            '<th>GEDUNG</th>'+
+                                            '<th>RUANGAN</th>'+
+                                        '</tr>'+
+                                    '</thead>'+
+                                '<tbody>'+
+                                        '<tr>'+
+                                            '<td class="text-center">'+ nama_div + '</td>'+
+                                            '<td class="text-center">'+ ged +'</div>'+
+                                            '<td class="text-center">'+ ruang +'</td>'+
+                                        '</tr>'+
+                                    '</tbody>'+
+                                '</table>'+
+                            '</div>'+
+                      '</div><br>'+
+                      '<input type="hidden" value="'+ lok +'" id="lokasi_kir">'+
                       '<input type="hidden" value="'+ dep +'" id="dep">'+
                       '<input type="hidden" value="'+ div +'" id="div">'+
                       '<input type="hidden" value="'+ ged +'" id="gedung_kir">'+
@@ -1351,7 +1368,7 @@ $(document).on('click', '#data_arsip', function() {
         }
     });
 });
-//Arsip Detail
+//ARSIP DETAIL
 $(document).on('click', '#rak_detail', function() {
     var id = $(this).data('id');
     var delimiter = ",";

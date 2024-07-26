@@ -1560,7 +1560,7 @@ AAYAhAEAACmHAAAAAA==
 
   </v:shape><![endif]--><![if !vml]><span style='mso-ignore:vglayout;
   position:absolute;z-index:1;margin-left:0px;margin-top:10px;width:142px;
-  height:171px'><img width=142 height=171
+  height:171px'><img width=150 height=150
   src="{{ asset('assets/img/kop.png') }}" v:shapes="Picture_x0020_1"></span><![endif]><span
   style='mso-ignore:vglayout2'>
   <table cellpadding=0 cellspacing=0>
@@ -1634,7 +1634,7 @@ AAYAhAEAACmHAAAAAA==
   <td height=20 class=xl1513466 style='height:15.0pt'></td>
   <td class=xl1513466></td>
   <td class=xl6313466>DIVISI</td>
-  <td class=xl6313466 colspan=2>: {{ $lokasi }}</td>
+  <td class=xl6313466 colspan=2>: {{ $divisi }}</td>
   <td class=xl1513466></td>
   <td class=xl1513466></td>
   <td class=xl6813466></td>
@@ -1647,7 +1647,7 @@ AAYAhAEAACmHAAAAAA==
   <td height=20 class=xl1513466 style='height:15.0pt'></td>
   <td class=xl1513466></td>
   <td class=xl6313466>LOKASI</td>
-  <td class=xl6313466 colspan=2>: KANTOR PUSAT</td>
+  <td class=xl6313466 colspan=2>: {{ $lokasi }}</td>
   <td class=xl1513466></td>
   <td class=xl1513466></td>
   <td class=xl6813466></td>
@@ -1670,7 +1670,7 @@ AAYAhAEAACmHAAAAAA==
  <tr height=20 style='height:15.0pt'>
   <td height=20 class=xl1513466 style='height:15.0pt'></td>
   <td class=xl1513466></td>
-  <td class=xl6313466>KODE DE<span style='display:none'>PT / DIV</span></td>
+  <td class=xl6313466>KODE<span style='display:none'>PT / DIV</span></td>
   <td class=xl6313466>: {{ $struktur }}</td>
   <td class=xl6313466></td>
   <td class=xl1513466></td>
@@ -1705,7 +1705,7 @@ AAYAhAEAACmHAAAAAA==
   <td rowspan=3 class=xl8813466 width=181 style='border-bottom:.5pt solid black;
   width:136pt'>MERK / TYPE</td>
   <td rowspan=3 class=xl8813466 width=64 style='border-bottom:.5pt solid black;
-  width:48pt'>BAHAN</td>F
+  width:48pt'>BAHAN</td>
   <td rowspan=3 class=xl8813466 width=64 style='border-bottom:.5pt solid black;
   width:48pt'>JUMLAH</td>
   <td rowspan=3 class=xl8813466 width=64 style='border-bottom:.5pt solid black;
@@ -1728,17 +1728,17 @@ AAYAhAEAACmHAAAAAA==
 
  @foreach ( $kir as $item )
  <tr height=20 style='height:15.0pt'>
-  <td height=20 class=xl7813466 style='height:15.0pt;border-top:none'>{{ ++$i }}</td>
-  <td class=xl7913466 style='border-top:none;border-left:none'>{{ $item->nama_barang }}</td>
+  <td height=20 class=xl7813466 style='height:15.0pt;'>{{ ++$i }}</td>
+  <td class=xl7913466 border-left:none'>{{ $item->nama_barang }}</td>
   <td colspan=2 class=xl8013466 style='border-left:none'>-</td>
-  <td class=xl8013466 style='border-top:none;border-left:none'>{{ $item->merk }}</td>
-  <td class=xl8113466 style='border-top:none;border-left:none'>{{ $item->bahan }}</td>
-  <td class=xl8113466 style='border-top:none;border-left:none'>{{ $item->jumlah }}</td>
-  <td class=xl8213466 style='border-top:none;border-left:none'>{{ $item->satuan }}</td>
-  <td class=xl8113466 style='border-top:none;border-left:none'>{{ $item->baik }}</td>
-  <td class=xl8213466 style='border-top:none;border-left:none'>{{ $item->ringan }}</td>
-  <td class=xl8213466 style='border-top:none;border-left:none'>{{ $item->berat }}</td>
-  <td class=xl8213466 style='border-top:none;border-left:none'>{{ $item->ket }}</td>
+  <td class=xl8013466 style='border-left:none'>{{ $item->merk }}</td>
+  <td class=xl8113466 style='border-left:none'>{{ $item->bahan }}</td>
+  <td class=xl8113466 style='border-left:none'>{{ $item->jumlah }}</td>
+  <td class=xl8213466 style='border-left:none'>{{ $item->satuan }}</td>
+  <td class=xl8113466 style='border-left:none'>{{ $item->baik }}</td>
+  <td class=xl8213466 style='border-left:none'>{{ $item->ringan }}</td>
+  <td class=xl8213466 style='border-left:none'>{{ $item->berat }}</td>
+  <td class=xl8213466 style='border-left:none'>{{ $item->ket }}</td>
  </tr>
  @endforeach
  <tr height=20 style='height:15.0pt'>
