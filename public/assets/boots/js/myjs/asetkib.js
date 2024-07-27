@@ -1287,7 +1287,7 @@ $(document).on('click', '#kir_tambah_detail', function (event) {
         var ruang = id_key[4];
         var nama_div = id_key[5];
         var i = 0;
-
+$('#judul_modal').empty();
 $('#head-off').empty();
 $('#head-off').append('<div class="row  border border-primary rounded">'+
                             '<div class="container"><br>'+
