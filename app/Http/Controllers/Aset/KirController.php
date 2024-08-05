@@ -162,6 +162,7 @@ class KirController extends Controller
             'merk' => 'required',
             'bahan' => 'required',
             'jumlah' => 'required|numeric',
+            'satuan' => 'required',
             'baik' => 'required|numeric',
             'ringan' => 'required|numeric',
             'berat' => 'required|numeric',
@@ -201,12 +202,13 @@ class KirController extends Controller
         $merk = $request->input('merk');
         $bahan = $request->input('bahan');
         $jumlah = $request->input('jumlah');
+        $satuan = $request->input('satuan');
         $baik = $request->input('baik');
         $ringan = $request->input('ringan');
         $berat = $request->input('berat');
         $ket = $request->input('ket');
         $img = $request->input('img');
-        $aktiva = $request->input('aktiva');
+        //$aktiva = $request->input('aktiva');
         $imageData = base64_decode($img);
 
 
@@ -226,6 +228,7 @@ class KirController extends Controller
         $kir->merk = $merk;
         $kir->bahan = $bahan;
         $kir->jumlah = $jumlah;
+        $kir->satuan = $satuan;
         $kir->baik = $baik;
         $kir->ringan = $ringan;
         $kir->berat = $berat;
@@ -233,7 +236,7 @@ class KirController extends Controller
         $kir->id_user = $user;
         $kir->created_at = $now;
         $kir->img = $imageName;
-        $kir->nilai_v= $aktiva;
+        //$kir->nilai_v= $aktiva;
         $kir->input = 0;
         $kir->save();
         return response()->json(['message' => 'Data inserted successfully']);

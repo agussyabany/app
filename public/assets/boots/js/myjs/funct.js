@@ -33,6 +33,8 @@ function selectOptKir()
         $.each(data.data, function (index, item) {
             $('#nama_aset').append('<option value="' + item.id + '">' + item.nama_barang + '</option>');
         });
+
+        
     });
 
     $.get('/bahan', function (data) {

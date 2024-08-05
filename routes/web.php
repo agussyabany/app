@@ -119,6 +119,7 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::get('barang.mesin',[BarangController::class,'mesin']);
     Route::get('barang.gedung',[BarangController::class,'gedung']);
     Route::get('barang.kir',[BarangController::class,'kir']);
+    Route::get('kode.kir/{id}',[BarangController::class,'kode_kir']);
 
     Route::post('/dep.save',[DepartemenController::class,'save']);
     Route::get('dep.edit/{id}',[DepartemenController::class,'edit']);

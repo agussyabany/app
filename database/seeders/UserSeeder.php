@@ -31,15 +31,15 @@ class UserSeeder extends Seeder
             //     'img'=>'robi.jpg',
             //     'password'=>bcrypt('robi2024')
             // ]
-            [
-                'name' => 'MUHAMMAD AGUS SYABANY',
-                'email'=>'agus@aset.smd',
-                'nip' =>'1982.2008.1.444',
-                'jabat'=>3,
-                'divisi'=>22,
-                'img'=>'agus.jpg',
-                'password'=>bcrypt('a')
-            ],
+            // [
+            //     'name' => 'MUHAMMAD AGUS SYABANY',
+            //     'email'=>'agus@aset.smd',
+            //     'nip' =>'1982.2008.1.444',
+            //     'jabat'=>3,
+            //     'divisi'=>22,
+            //     'img'=>'agus.jpg',
+            //     'password'=>bcrypt('a')
+            // ],
             // [
             //     'name' => 'DEA INRUM RISTYA',
             //     'email'=>'dea@aset.smd',
@@ -49,6 +49,15 @@ class UserSeeder extends Seeder
             //     'img'=>'dea.jpg',
             //     'password'=>bcrypt('dea2024')
             // ]
+            [
+                'name' => 'HELVIRA NUR HIDAYATi ',
+                'email'=>'ira@aset.smd',
+                'nip' =>'1993.2020.2.681',
+                'jabat'=>3,
+                'divisi'=>27,
+                'img'=>'ira.jpg',
+                'password'=>bcrypt('ira2024')
+            ]
         );
         $aset->assignRole('aset');
 
