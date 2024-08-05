@@ -155,8 +155,7 @@ $no = 0;
                                 </div>
                             </div><br>
                             <div class="row  border border-primary rounded">
-
-                                    <div class="col"><br>
+                                 <div class="col"><br>
                                         <div class="input-group input-group-sm mb-1">
                                             {{-- <span class="input-group-text col-sm-3">Hak</span> --}}
                                             <select name="nama_aset" id="nama" class="select2 form-control" style="width:100%;">
@@ -224,8 +223,9 @@ $no = 0;
                                             <span class="input-group-text col-sm-3">Merk/Type</span><input name="merk" id="merk" type="text" class="form-control">
                                         </div>
                                         <p style="color:red;" id="merk_error"></p>
-
-                                        <div class="input-group input-group-sm mb-1">
+                                        
+                                    <div id="kendaraan">
+                                        {{-- <div class="input-group input-group-sm mb-1">
                                             <span class="input-group-text col-sm-3">No Pabrik</span><input name="pabrik" id="pabrik" type="text" class="form-control">
                                         </div>
                                         <p style="color:red;" id="pabrik_error"></p>
@@ -248,7 +248,10 @@ $no = 0;
                                         <div class="input-group input-group-sm mb-1">
                                             <span class="input-group-text col-sm-3">No BPKB</span><input name="bpkb" id="bpkb" type="text" class="form-control">
                                         </div>
-                                        <p style="color:red;" id="bpkb_error"></p>
+                                        <p style="color:red;" id="bpkb_error"></p> --}}
+                                    </div>
+                                       
+                                        
 
                                         <div class="input-group input-group-sm mb-1">
                                             <select class="select2 form-control" name="asal" id="asal" style="width:100%;">

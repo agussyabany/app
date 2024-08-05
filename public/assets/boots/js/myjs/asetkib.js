@@ -162,7 +162,42 @@ $(document).ready(function() {
               }
               )})
         });
-    })
+
+        $('body').on('change','#kode_aktiva' , function (event) {
+            var kodeAktiva = $('#kode_aktiva').find('option:selected').text();
+            //alert("Teks yang dipilih adalah: " + kodeAktiva);
+
+            if (kodeAktiva == "31.08.10 | Kendaraan Penumpang") {
+
+                $('#kendaraan').append('<div class="input-group input-group-sm mb-1">'+
+                                            '<span class="input-group-text col-sm-3">No Pabrik</span><input name="pabrik" id="pabrik" type="text" class="form-control">'+
+                                       ' </div>'+
+                                        '<p style="color:red;" id="pabrik_error"></p>'+
+
+                                        '<div class="input-group input-group-sm mb-1">'+
+                                            '<span class="input-group-text col-sm-3">No Rangka</span><input name="rangka" id="rangka" type="text" class="form-control">'+
+                                        '</div>'+
+                                        '<p style="color:red;" id="rangka_error"></p>'+
+
+                                        '<div class="input-group input-group-sm mb-1">'+
+                                            '<span class="input-group-text col-sm-3">No Mesin</span><input name="mesin" id="mesin" type="text" class="form-control">'+
+                                        '</div>'+
+                                        '<p style="color:red;" id="mesin_error"></p>'+
+
+                                        '<div class="input-group input-group-sm mb-1">'+
+                                            '<span class="input-group-text col-sm-3">No Polisi</span><input name="nopol" id="nopol" type="text" class="form-control">'+
+                                        '</div>'+
+                                        '<p style="color:red;" id="nopol_error"></p>'+
+
+                                        '<div class="input-group input-group-sm mb-1">'+
+                                            '<span class="input-group-text col-sm-3">No BPKB</span><input name="bpkb" id="bpkb" type="text" class="form-control">'+
+                                        '</div>'+
+                                        '<p style="color:red;" id="bpkb_error"></p>')
+                                    }else{
+                                        $('#kendaraan').empty();
+                                    }
+                                })
+                            })
 //Data Mesin
     $(document).on('click', '#detail_mesin', function() {
         var id = $(this).data('id');

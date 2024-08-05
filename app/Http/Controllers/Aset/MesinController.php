@@ -97,6 +97,8 @@ class MesinController extends Controller
             'guna' => 'required',
             'ukuran' => 'required',
             'merk' => 'required',
+            
+            
             'pabrik' => 'required',
             'rangka' => 'required',
             'mesin' => 'required',
