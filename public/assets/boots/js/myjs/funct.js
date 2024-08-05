@@ -33,6 +33,8 @@ function selectOptKir()
         $.each(data.data, function (index, item) {
             $('#nama_aset').append('<option value="' + item.id + '">' + item.nama_barang + '</option>');
         });
+
+        
     });
 
     $.get('/bahan', function (data) {
@@ -42,6 +44,20 @@ function selectOptKir()
     });
 
 }
+function klir()
+{
+            $('#nama_aset').empty();
+            $('#kode_aset').empty();
+            $('#merk').empty();
+            $('#bahan_kir').empty();
+            $('jumlah').empty();
+            $('#satuan').empty();
+            $('#baik').empty();
+            $('#ringan').empty();
+            $('#berat').empty();
+            $('#ket').empty();
+}
+
 
 function selectOptAll()
 {

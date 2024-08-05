@@ -1730,7 +1730,7 @@ AAYAhAEAACmHAAAAAA==
  <tr height=20 style='height:15.0pt'>
   <td height=20 class=xl7813466 style='height:15.0pt;'>{{ ++$i }}</td>
   <td class=xl7913466 border-left:none'>{{ $item->nama_barang }}</td>
-  <td colspan=2 class=xl8013466 style='border-left:none'>-</td>
+  <td colspan=2 class=xl8013466 style='border-left:none'>{{ $item->kode_barang }}</td>
   <td class=xl8013466 style='border-left:none'>{{ $item->merk }}</td>
   <td class=xl8113466 style='border-left:none'>{{ $item->bahan }}</td>
   <td class=xl8113466 style='border-left:none'>{{ $item->jumlah }}</td>

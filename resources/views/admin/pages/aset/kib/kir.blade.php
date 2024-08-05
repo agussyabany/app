@@ -222,6 +222,16 @@ $no = 0;
                                                     <div class="input-group input-group-sm mb-1">
                                                         <span class="input-group-text col-sm-3">Jumlah</span><input name="jumlah" id="jumlah" type="number" class="form-control" >
                                                     </div>
+                                                    <div class="input-group input-group-sm mb-1">
+                                                        <select class="select2 form-control" name="satuan" id="satuan" style="width:100%;" >
+                                                            <option> - SATUAN - </option>
+                                                            <option>Unit</option>
+                                                            <option>Buah</option>\
+                                                            <option>Meter</option>
+                                                            <option>Set</option>
+                                                            <option>Lansam</option>
+                                                        </select>
+                                                    </div>
                                                     <span style="color:red;" id="jumlah_error"></span>
                                                 </div><br>
 

@@ -1200,7 +1200,17 @@ $(document).on('click', '#tambah_kir', function() {
     $('#jenis_input').val(1);
     selectOptKir();
     selectOptAll();
-    refKirInput()
+    refKirInput();``
+    $('body').on('change', '#nama_aset', function (event) {
+        event.preventDefault();
+        var id = $(this).val();
+        // $('#kode_aktiva').empty().append('<option value="">Select an aktiva</option>');
+        $.get('/kode.kir/' + id , function (data) {
+            $.each(data.data, function (index, item) {
+                $('#kode_aset').val(item.kode_barang);
+          }
+          )})
+    });
 
 })
 //MASUKAN KE KERANJANG KIR
@@ -1223,6 +1233,7 @@ $(document).on('click', '#submit_kir', function (event) {
             var base64Image = e.target.result.split(',')[1]; // Extract base64 data
 
             // Send the base64 encoded image data in the AJAX request
+            
             $.ajax({
                 data: {
                     lokasi: $('#lokasi_kir').val(),
@@ -1236,6 +1247,7 @@ $(document).on('click', '#submit_kir', function (event) {
                     merk:$('#merk').val(),
                     bahan:$('#bahan_kir').val(),
                     jumlah:$('#jumlah').val(),
+                    satuan:$('#satuan').val(),
                     baik:$('#baik').val(),
                     ringan:$('#ringan').val(),
                     berat:$('#berat').val(),
@@ -1243,6 +1255,7 @@ $(document).on('click', '#submit_kir', function (event) {
                     aktiva:$('#kode_aktiva').val(),
                     img: base64Image
                 },
+                
                 url: "/kir.save",
                 type: "POST",
                 dataType: 'json',
@@ -1253,6 +1266,7 @@ $(document).on('click', '#submit_kir', function (event) {
                     } else {
                         kirTambah(lok,dep,div,ged,ruang);
                     }
+                    klir();
                 },
                 error: function(xhr) {
                     if (xhr.status === 400) {
@@ -1369,7 +1383,20 @@ $('#tabel_tambah').append('<table class="table table-striped table-border" id="t
                             '<tbody>'+
                             '</tbody>'+
                             '</table>')
-selectOptKir();
+    selectOptKir();
+
+    $('body').on('change', '#nama_aset', function (event) {
+        event.preventDefault();
+        var id = $(this).val();
+        // $('#kode_aktiva').empty().append('<option value="">Select an aktiva</option>');
+        $.get('/kode.kir/' + id , function (data) {
+            $.each(data.data, function (index, item) {
+                $('#kode_aset').val(item.kode_barang);
+          }
+          )})
+    });
+    
+
 kirTambah(lok,dep,div,ged,ruang);
 })
 //ARSIP

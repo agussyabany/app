@@ -20,6 +20,7 @@ class Kir extends Model
         'merk',
         'bahan',
         'jumlah',
+        'satuan',
         'baik',
         'ringan',
         'berat',
