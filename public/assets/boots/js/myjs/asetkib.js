@@ -1165,7 +1165,7 @@ $(document).on('click', '#tambah_kir', function() {
     $('#jenis_input').val(1);
     selectOptKir();
     selectOptAll();
-    refKirInput();
+    refKirInput();``
     $('body').on('change', '#nama_aset', function (event) {
         event.preventDefault();
         var id = $(this).val();
@@ -1198,6 +1198,7 @@ $(document).on('click', '#submit_kir', function (event) {
             var base64Image = e.target.result.split(',')[1]; // Extract base64 data
 
             // Send the base64 encoded image data in the AJAX request
+            
             $.ajax({
                 data: {
                     lokasi: $('#lokasi_kir').val(),
@@ -1219,6 +1220,7 @@ $(document).on('click', '#submit_kir', function (event) {
                     aktiva:$('#kode_aktiva').val(),
                     img: base64Image
                 },
+                
                 url: "/kir.save",
                 type: "POST",
                 dataType: 'json',
@@ -1229,6 +1231,7 @@ $(document).on('click', '#submit_kir', function (event) {
                     } else {
                         kirTambah(lok,dep,div,ged,ruang);
                     }
+                    klir();
                 },
                 error: function(xhr) {
                     if (xhr.status === 400) {
