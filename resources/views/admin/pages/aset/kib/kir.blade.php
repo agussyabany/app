@@ -220,8 +220,26 @@ $no = 0;
                                                         </select>
                                                     </div>
                                                     <div class="input-group input-group-sm mb-1">
+                                                        <span class="input-group-text col-sm-3">Baik</span><input name="baik" id="baik" type="number" class="form-control" value=0 >
+                                                    </div>
+                                                    <span style="color:red;" id="baik_error"></span>
+                                                    <div class="input-group input-group-sm mb-1">
+                                                        <span class="input-group-text col-sm-3">Rusak Ringan</span><input name="merk" id="ringan" type="text" class="form-control" value=0 >
+                                                    </div>
+                                                    <span style="color:red;" id="merk_error"></span>
+                                                    
+                                                    
+                                                </div><br>
+
+                                                <div class="col"><br>
+                                                    <div class="input-group input-group-sm mb-1">
+                                                        <span class="input-group-text col-sm-3">Rusak Berat</span><input name="berat" id="berat" type="text" class="form-control" value=0>
+                                                    </div>
+                                                    <span style="color:red;" id="pabrik_error"></span>
+                                                    <div class="input-group input-group-sm mb-1">
                                                         <span class="input-group-text col-sm-3">Jumlah</span><input name="jumlah" id="jumlah" type="number" class="form-control" >
                                                     </div>
+                                                    <span style="color:red;" id="jumlah_error"></span>
                                                     <div class="input-group input-group-sm mb-1">
                                                         <select class="select2 form-control" name="satuan" id="satuan" style="width:100%;" >
                                                             <option> - SATUAN - </option>
@@ -232,25 +250,6 @@ $no = 0;
                                                             <option>Lansam</option>
                                                         </select>
                                                     </div>
-                                                    <span style="color:red;" id="jumlah_error"></span>
-                                                </div><br>
-
-                                                <div class="col"><br>
-                                                    <div class="input-group input-group-sm mb-1">
-                                                        <span class="input-group-text col-sm-3">Baik</span><input name="baik" id="baik" type="number" class="form-control" >
-                                                    </div>
-                                                    <span style="color:red;" id="baik_error"></span>
-
-                                                    <div class="input-group input-group-sm mb-1">
-                                                        <span class="input-group-text col-sm-3">Rusak Ringan</span><input name="merk" id="ringan" type="text" class="form-control" >
-                                                    </div>
-                                                    <span style="color:red;" id="merk_error"></span>
-
-                                                    <div class="input-group input-group-sm mb-1">
-                                                        <span class="input-group-text col-sm-3">Rusak Berat</span><input name="berat" id="berat" type="text" class="form-control" >
-                                                    </div>
-                                                    <span style="color:red;" id="pabrik_error"></span>
-
                                                     <div class="input-group input-group-sm mb-1">
                                                         <span class="input-group-text col-sm-3">Foto</span><input name="img" id="img" type="file" class="form-control" multiple>
                                                     </div>

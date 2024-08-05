@@ -46,12 +46,12 @@ function selectOptKir()
 }
 function klir()
 {
-            $('#nama_aset').empty();
+            //$('#nama_aset').empty();
             $('#kode_aset').empty();
             $('#merk').empty();
-            $('#bahan_kir').empty();
+            // $('#bahan_kir').empty();
             $('jumlah').empty();
-            $('#satuan').empty();
+            // $('#satuan').empty();
             $('#baik').empty();
             $('#ringan').empty();
             $('#berat').empty();

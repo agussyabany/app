@@ -1212,6 +1212,23 @@ $(document).on('click', '#tambah_kir', function() {
           )})
     });
 
+    function calculateTotal() {
+        var baik = parseInt($('#baik').val()) || 0;
+        var ringan = parseInt($('#ringan').val()) || 0;
+        var berat = parseInt($('#berat').val()) || 0;
+        var jumlah = baik + ringan + berat;
+        $('#jumlah').val(jumlah);
+    }
+
+    $('body').on('change', '#baik, #ringan, #berat', function () {
+        calculateTotal();
+    });
+
+    // Initial calculation to set the total correctly on page load
+    $(document).ready(function () {
+        calculateTotal();
+    });
+
 })
 //MASUKAN KE KERANJANG KIR
 $(document).on('click', '#submit_kir', function (event) {
