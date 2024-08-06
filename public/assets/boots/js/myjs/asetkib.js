@@ -1368,7 +1368,7 @@ $(document).on('click', '#kir_tambah_detail', function (event) {
         // Initial calculation to set the total correctly on page load
         $(document).ready(function () {
             calculateTotal();
-        });
+        }); 
 $('#judul_modal').empty();
 $('#head-off').empty();
 $('#head-off').append('<div class="row  border border-primary rounded">'+

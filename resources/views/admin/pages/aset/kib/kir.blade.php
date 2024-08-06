@@ -224,7 +224,7 @@ $no = 0;
                                                     </div>
                                                     <span style="color:red;" id="baik_error"></span>
                                                     <div class="input-group input-group-sm mb-1">
-                                                        <span class="input-group-text col-sm-3">Rusak Ringan</span><input name="merk" id="ringan" type="text" class="form-control" value=0 >
+                                                        <span class="input-group-text col-sm-3">Rusak Ringan</span><input name="merk" id="ringan" type="number" class="form-control" value=0 >
                                                     </div>
                                                     <span style="color:red;" id="merk_error"></span>
                                                     
@@ -233,7 +233,7 @@ $no = 0;
 
                                                 <div class="col"><br>
                                                     <div class="input-group input-group-sm mb-1">
-                                                        <span class="input-group-text col-sm-3">Rusak Berat</span><input name="berat" id="berat" type="text" class="form-control" value=0>
+                                                        <span class="input-group-text col-sm-3">Rusak Berat</span><input name="berat" id="berat" type="number" class="form-control" value=0>
                                                     </div>
                                                     <span style="color:red;" id="pabrik_error"></span>
                                                     <div class="input-group input-group-sm mb-1">
