@@ -316,7 +316,7 @@ class KirController extends Controller
                         ->where('ruangan',$ruang)
                         ->get();
                         $i = 0;
-                        $sdms = Sdm::select('nama_sdm')->where('id_div',$div)->first();
+                        $sdms = Sdm::select('nama_sdm','nip')->where('id_div',$div)->first();
                         $dept = Departemen::select('kode_dep')->where('id',$dep)->first();
                         $divi = Divisi::select('nama_div','kode_div')->where('id',$div)->first();
                         $loks = lokasi::select('lokasi')->where('id',$lok)->first();
@@ -328,15 +328,17 @@ class KirController extends Controller
 
                          if ($sdms == null) {
                            $sdm="Penanggung Jawab";
+                           $nips="0";
                          }else{
                             $sdm = $sdms['nama_sdm'];
+                            $nips = $sdms['nip'];
                          }
 
                         $date = Carbon::now();
                         $tglIndo = $date->locale('id_ID')->format('d F Y');
                         $nama = Auth::user()->name;
                         $nip = Auth::user()->nip;
-                        return view('admin.pages.aset.print.printKir',compact(['kir','i','lokasi','departemen','divisi','nama','tglIndo','struktur','ged','ruang','nip','sdm']));
+                        return view('admin.pages.aset.print.printKir',compact(['kir','i','lokasi','departemen','divisi','nama','tglIndo','struktur','ged','ruang','nip','sdm','nips']));
     }
 
     public function nilaiSum($loks)

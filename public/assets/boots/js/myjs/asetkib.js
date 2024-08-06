@@ -1200,7 +1200,7 @@ $(document).on('click', '#tambah_kir', function() {
     $('#jenis_input').val(1);
     selectOptKir();
     selectOptAll();
-    refKirInput();``
+    refKirInput();
     $('body').on('change', '#nama_aset', function (event) {
         event.preventDefault();
         var id = $(this).val();
@@ -1353,6 +1353,22 @@ $(document).on('click', '#kir_tambah_detail', function (event) {
         var ruang = id_key[4];
         var nama_div = id_key[5];
         var i = 0;
+        function calculateTotal() {
+            var baik = parseInt($('#baik').val()) || 0;
+            var ringan = parseInt($('#ringan').val()) || 0;
+            var berat = parseInt($('#berat').val()) || 0;
+            var jumlah = baik + ringan + berat;
+            $('#jumlah').val(jumlah);
+        }
+    
+        $('body').on('change', '#baik, #ringan, #berat', function () {
+            calculateTotal();
+        });
+    
+        // Initial calculation to set the total correctly on page load
+        $(document).ready(function () {
+            calculateTotal();
+        });
 $('#judul_modal').empty();
 $('#head-off').empty();
 $('#head-off').append('<div class="row  border border-primary rounded">'+
