@@ -39,7 +39,7 @@ function selectOptKir()
 
     $.get('/bahan', function (data) {
         $.each(data.data, function (index, item) {
-            $('#bahan_kir').append('<option value="' + item.id + '">' + item.nama + '</option>');
+            $('#bahan_kir').append('<option value="' + item.nama + '">' + item.nama + '</option>');
         });
     });
 

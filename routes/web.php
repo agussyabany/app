@@ -216,7 +216,7 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::post('/kir.save',[KirController::class,'save']);
     Route::get('/kir.input',[KirController::class,'input']);
     Route::post('/kir.clear',[KirController::class,'clear']);
-    Route::get('/kir.print/{lok}/{dep}/{div}/{ged}/{ruang}',[KirController::class,'print']);
+    Route::get('/kir.print/{lok}/{dep}/{div}/{ged}/{ruang}/{prnt}',[KirController::class,'print']);
     Route::get('/kir.nilai/{loks}',[KirController::class,'nilaiSum']);
     Route::get('/nilaiKir.detail/{id}',[KirController::class,'nilaikir']);
     Route::post('/kir.del/{id}',[KirController::class,'del']);

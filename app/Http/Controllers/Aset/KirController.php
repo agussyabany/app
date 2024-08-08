@@ -306,7 +306,7 @@ class KirController extends Controller
         return response()->json(['message' => 'Data updated successfully']);
     }
 
-    public function print($lok,$dep,$div,$ged,$ruang)
+    public function print($lok,$dep,$div,$ged,$ruang,$prnt)
     {
                         $kir = Kir::join('barangs','kirs.id_barang','=','barangs.id')
                         ->where('id_departemen',$dep)
@@ -338,7 +338,14 @@ class KirController extends Controller
                         $tglIndo = $date->locale('id_ID')->format('d F Y');
                         $nama = Auth::user()->name;
                         $nip = Auth::user()->nip;
-                        return view('admin.pages.aset.print.printKir',compact(['kir','i','lokasi','departemen','divisi','nama','tglIndo','struktur','ged','ruang','nip','sdm','nips']));
+
+                         if ($prnt == 'kir') {
+                            return view('admin.pages.aset.print.printKir',compact(['kir','i','lokasi','departemen','divisi','nama','tglIndo','struktur','ged','ruang','nip','sdm','nips']));
+                         }else{
+                            return view('admin.pages.aset.print.kirArsip',compact(['kir','i','lokasi','departemen','divisi','nama','tglIndo','struktur','ged','ruang','nip','sdm','nips']));
+                         }
+
+                       
     }
 
     public function nilaiSum($loks)

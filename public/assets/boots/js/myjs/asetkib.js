@@ -974,7 +974,8 @@ $(document).on('click', '#detail_f_divisi', function(){
         var ruang = id_key[4];
         var nama_div = id_key[5];
         var i = 0;
-$('#button_print').html('<button type="button" class="tombol btn btn-primary" id="print_kir" data-id="' + lok + "," + dep + "," + div + "," + ged + "," + ruang + '"><i class="fa fa-print"></i></button>')
+$('#button_print').html('<button type="button" class="tombol btn btn-primary" id="print_kir" data-id="' + lok + "," + dep + "," + div + "," + ged + "," + ruang + '"><i class="fa fa-print"></i></button> <button type="button" class="tombol btn btn-warning" id="print_kir_arsip" data-id="' + lok + "," + dep + "," + div + "," + ged + "," + ruang + '"><i class="fa fa-print"></i></button>')
+
 $('#judul_modal').html('<strong>Divisi:</strong> '+ nama_div +'<br><strong>Gedung:</strong> '+ ged +'<br><strong>Ruang: </strong>' + ruang +'<button class="btn btn-sm btn-primary float-end" id="print_kir" data-id="' + lok + "," + dep + "," + div + "," + ged + "," + ruang + '"><i class="fa-solid fa-print"></i></button>' );
 
         var table = $("#tbl_kir_detail").DataTable();
@@ -1019,7 +1020,23 @@ $('#judul_modal').html('<strong>Divisi:</strong> '+ nama_div +'<br><strong>Gedun
             var div = id_key[2];
             var ged = id_key[3];
             var ruang = id_key[4];
-            var url = "/kir.print/"+ lok +"/"+ dep +"/"+ div +"/"+ ged +"/"+ ruang;
+            var prnt = 'kir';
+            var url = "/kir.print/"+ lok +"/"+ dep +"/"+ div +"/"+ ged +"/"+ ruang + "/" + prnt;
+            var features = 'width=800,height=600';
+            window.open(url, '_blank', features);
+        })
+
+        $(document).on('click', '#print_kir_arsip', function() {
+            var id = $(this).data('id');
+            var delimiter = ",";
+            var id_key = id.split(delimiter);
+            var lok = id_key[0];
+            var dep = id_key[1];
+            var div = id_key[2];
+            var ged = id_key[3];
+            var ruang = id_key[4];
+            var prnt = 'arsip';
+            var url = "/kir.print/"+ lok +"/"+ dep +"/"+ div +"/"+ ged +"/"+ ruang + "/" + prnt;
             var features = 'width=800,height=600';
             window.open(url, '_blank', features);
         })
