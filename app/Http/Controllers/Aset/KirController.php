@@ -342,7 +342,7 @@ class KirController extends Controller
                          if ($prnt == 'kir') {
                             return view('admin.pages.aset.print.printKir',compact(['kir','i','lokasi','departemen','divisi','nama','tglIndo','struktur','ged','ruang','nip','sdm','nips']));
                          }else{
-                            return view('admin.pages.aset.print.kirArsip',compact(['kir','i','lokasi','departemen','divisi','nama','tglIndo','struktur','ged','ruang','nip','sdm','nips']));
+                            return view('admin.pages.aset.print.KirArsip',compact(['kir','i','lokasi','departemen','divisi','nama','tglIndo','struktur','ged','ruang','nip','sdm','nips']));
                          }
 
                        
