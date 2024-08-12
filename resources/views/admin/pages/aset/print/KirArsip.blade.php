@@ -1798,7 +1798,7 @@ aW1hZ2UxLnBuZ1BLBQYAAAAABgAGAIQBAAA8hwAAAAA=
   none'>{{$item->nama_barang}}</td>
   <td class=xl867652 style='border-left:none'>{{ $item->kode_barang }}</td>
   <td class=xl877652 style='border-left:none'>{{$item->merk}}</td>
-  <td class=xl867652 style='border-left:none'>{{$item->bahan}}</td>
+  <td class=xl867652 style='border-left:none'>{{$item->nama}}</td>
   <td class=xl867652 style='border-left:none'>{{$item->jumlah}}</td>
   <td class=xl867652 style='border-left:none'>{{$item->satuan}}</td>
   <td class=xl867652 style='border-left:none'>{{$item->baik}}</td>
@@ -1917,7 +1917,7 @@ aW1hZ2UxLnBuZ1BLBQYAAAAABgAGAIQBAAA8hwAAAAA=
   <td class=xl157652></td>
   <td class=xl157652></td>
   <td class=xl947652></td>
-  <td class=xl957652>Maskuriansyah</td>
+  <td class=xl957652>{{$sdm}}</td>
   <td class=xl157652></td>
  </tr>
  <tr height=20 style='height:15.0pt'>
@@ -1931,7 +1931,7 @@ aW1hZ2UxLnBuZ1BLBQYAAAAABgAGAIQBAAA8hwAAAAA=
   <td class=xl157652></td>
   <td class=xl157652></td>
   
-  <td class=xl967652>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NIPP : 1969.1990.1.187</td>
+  <td class=xl967652>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NIPP : {{$nips}}</td>
   <td class=xl157652></td>
  </tr>
  <![if supportMisalignedColumns]>
