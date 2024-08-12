@@ -1564,7 +1564,7 @@ aW1hZ2UxLnBuZ1BLBQYAAAAABgAGAIQBAAA8hwAAAAA=
   border-left:none'>{{$item->nama_barang}}</td>
   <td class=xl8129647 style='border-left:none'>{{$item->kode_barang}}</td>
   <td class=xl8229647 style='border-left:none'>{{$item->merk}}</td>
-  <td class=xl8129647 style='border-left:none'>{{$item->bahan}}</td>
+  <td class=xl8129647 style='border-left:none'>{{$item->nama}}</td>
   <td class=xl8129647 style='border-left:none'>{{$item->jumlah}}</td>
   <td class=xl8129647 style='border-left:none'>{{$item->nama_satuan}}</td>
   <td class=xl8129647 style='border-left:none'>{{$item->baik}}</td>

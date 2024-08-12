@@ -39,7 +39,7 @@ function selectOptKir()
 
     $.get('/bahan', function (data) {
         $.each(data.data, function (index, item) {
-            $('#bahan_kir').append('<option value="' + item.nama + '">' + item.nama + '</option>');
+            $('#bahan_kir').append('<option value="' + item.id + '">' + item.nama + '</option>');
         });
     });
 
@@ -128,7 +128,7 @@ table.clear().draw();
             ++i,
             items.nama_barang,
             items.merk,
-            items.bahan,
+            items.nama,
             items.jumlah,
             items.satuan,
             items.baik,

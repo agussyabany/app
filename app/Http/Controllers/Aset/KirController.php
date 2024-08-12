@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Aset;
 
 use App\Http\Controllers\Controller;
+use App\Models\Aset\Bahan;
 use App\Models\Aset\Departemen;
 use App\Models\Aset\Divisi;
 use App\Models\Aset\Kir;
@@ -126,7 +127,9 @@ class KirController extends Controller
 
     public function detail($lok,$dep,$div,$ged,$ruang)
     {
-        $ruang_detail = Kir::select('kirs.id as idKir','barangs.id as idBar','nama_barang','satuan','merk','bahan','jumlah','baik','ringan','berat','ket','img')->join('barangs','kirs.id_barang','=','barangs.id')
+        $ruang_detail = Kir::select('kirs.id as idKir','barangs.id as idBar','nama_barang','satuan','merk','bahan','jumlah','baik','ringan','berat','ket','img','nama')
+                            ->join('barangs','kirs.id_barang','=','barangs.id')
+                            ->join('bahans', Bahan::raw('CAST(kirs.bahan AS bigint)'), '=', 'bahans.id')//ini
                             ->where('id_departemen',$dep)
                             ->where('id_lokasi',$lok)
                             ->where('id_div',$div)
@@ -308,7 +311,8 @@ class KirController extends Controller
 
     public function print($lok,$dep,$div,$ged,$ruang,$prnt)
     {
-                        $kir = Kir::join('barangs','kirs.id_barang','=','barangs.id')
+                        $kir = Kir::join('bahans', Bahan::raw('CAST(kirs.bahan AS bigint)'), '=', 'bahans.id')
+                        ->join('barangs','kirs.id_barang','=','barangs.id')
                         ->where('id_departemen',$dep)
                         ->where('id_lokasi',$lok)
                         ->where('id_div',$div)

@@ -996,7 +996,7 @@ $('#judul_modal').html('<strong>Divisi:</strong> '+ nama_div +'<br><strong>Gedun
                         ++i,
                         items.nama_barang,
                         items.merk,
-                        items.bahan,
+                        items.nama,
                         items.jumlah,
                         items.satuan,
                         items.baik,
