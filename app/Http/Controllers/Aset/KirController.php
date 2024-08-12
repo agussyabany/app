@@ -336,6 +336,7 @@ class KirController extends Controller
 
                         $date = Carbon::now();
                         $tglIndo = $date->locale('id_ID')->format('d F Y');
+                        
                         $nama = Auth::user()->name;
                         $nip = Auth::user()->nip;
 
