@@ -912,7 +912,7 @@ $(document).on('click', '#detail_f_divisi', function(){
 
                             $.get("/kir.gedung/"+ lok + "/" + dep + "/" + div, function(data){
                                 $.each(data.data,function(index,items) {
-                                   $("#kir_ged" + item.id_div).append('<li><a href="#" id="kir_ruang" style="text-decoration: none;" data-id="' + dep + ',' + lok + ',' + div + ',' + items.gedung + ',' + item.nama_div + '"><span">Gedung '+ items.gedung +'</a></span>'+
+                                   $("#kir_ged" + item.id_div).append('<li><a href="#" id="kir_ruang" style="text-decoration: none;" data-id="' + dep + ',' + lok + ',' + div + ',' + items.gedung + ',' + item.nama_div + '"><span">'+ items.gedung +'</a></span>'+
 
                                     '</li>')
                                  })
