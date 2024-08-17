@@ -39,10 +39,15 @@ class RolePermissionSeeder extends Seeder
         // Permission::create(['name' =>'hapus-bppl']);
         // Permission::create(['name' =>'lihat-bppl']);
 
-        Permission::create(['name' =>'tambah-soc']);
-        Permission::create(['name' =>'edit-soc']);
-        Permission::create(['name' =>'hapus-soc']);
-        Permission::create(['name' =>'lihat-soc']);
+        // Permission::create(['name' =>'tambah-soc']);
+        // Permission::create(['name' =>'edit-soc']);
+        // Permission::create(['name' =>'hapus-soc']);
+        // Permission::create(['name' =>'lihat-soc']);
+
+        Permission::create(['name' =>'tambah-LiveLine']);
+        Permission::create(['name' =>'edit-LiveLine']);
+        Permission::create(['name' =>'hapus-LiveLine']);
+        Permission::create(['name' =>'lihat-LiveLine']);
 
 
         // Role::create(['name'=>'admin']);
@@ -50,7 +55,8 @@ class RolePermissionSeeder extends Seeder
         // Role::create(['name'=>'diklat']);
         // Role::create(['name'=>'api']);
         // Role::create(['name'=>'bppl']);
-         Role::create(['name'=>'soc']);
+        //Role::create(['name'=>'soc']);
+         Role::create(['name'=>'LiveLine']);
 
 
         // $roleAdmin = Role::findByName('admin');
@@ -83,10 +89,16 @@ class RolePermissionSeeder extends Seeder
         // $roleBppl->givePermissionTo('hapus-bppl');
         // $roleBppl->givePermissionTo('lihat-bppl');
 
-        $roleBppl= Role::findByName('soc');
-        $roleBppl->givePermissionTo('tambah-soc');
-        $roleBppl->givePermissionTo('edit-soc');
-        $roleBppl->givePermissionTo('hapus-soc');
-        $roleBppl->givePermissionTo('lihat-soc');
+        // $roleBppl= Role::findByName('soc');
+        // $roleBppl->givePermissionTo('tambah-soc');
+        // $roleBppl->givePermissionTo('edit-soc');
+        // $roleBppl->givePermissionTo('hapus-soc');
+        // $roleBppl->givePermissionTo('lihat-soc');
+
+        $roleLl= Role::findByName('LiveLine');
+        $roleLl->givePermissionTo('tambah-LiveLine');
+        $roleLl->givePermissionTo('edit-LiveLine');
+        $roleLl->givePermissionTo('hapus-LiveLine');
+        $roleLl->givePermissionTo('lihat-LiveLine');
     }
 }

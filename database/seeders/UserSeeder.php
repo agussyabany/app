@@ -21,7 +21,7 @@ class UserSeeder extends Seeder
         // ]);
         // $admin->assignRole('admin');
 
-        $aset = User::create(
+        //$aset = User::create(
             // [
             //     'name' => 'AAM ROBIDIN NOOR, S.E.',
             //     'email'=>'robi@aset.smd',
@@ -49,17 +49,17 @@ class UserSeeder extends Seeder
             //     'img'=>'dea.jpg',
             //     'password'=>bcrypt('dea2024')
             // ]
-            [
-                'name' => 'HELVIRA NUR HIDAYATi ',
-                'email'=>'ira@aset.smd',
-                'nip' =>'1993.2020.2.681',
-                'jabat'=>3,
-                'divisi'=>27,
-                'img'=>'ira.jpg',
-                'password'=>bcrypt('ira2024')
-            ]
-        );
-        $aset->assignRole('aset');
+            // [
+            //     'name' => 'HELVIRA NUR HIDAYATi ',
+            //     'email'=>'ira@aset.smd',
+            //     'nip' =>'1993.2020.2.681',
+            //     'jabat'=>3,
+            //     'divisi'=>27,
+            //     'img'=>'ira.jpg',
+            //     'password'=>bcrypt('ira2024')
+            // ]
+        // );
+        // $aset->assignRole('aset');
 
         // $diklat = User::create([
         //     'name' => 'Muhammad Agus Syabany',
@@ -92,5 +92,13 @@ class UserSeeder extends Seeder
 
         // ]);
         // $bppl->assignRole('bppl');
+
+        $liveLine = User::create([
+            'name' => 'agus',
+            'email'=>'agus@liveline.smd',
+            'password'=>bcrypt('a')
+
+        ]);
+        $liveLine->assignRole('LiveLine');
     }
 }

@@ -23,6 +23,7 @@ use App\Http\Controllers\Aset\TanahController;
 use App\Http\Controllers\Aset\Webcontroller;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Diklat\Diklatcontroller;
+use App\Http\Controllers\LiveLine\Llcontroller;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Soc\Soccontroller;
 use App\Models\Aset\KibD;
@@ -248,6 +249,13 @@ Route::middleware('auth','verified','role:soc')->group(function () {
         return redirect('/soc.dashboard');
     });
     Route::get('/soc.dashboard',[Soccontroller::class, 'index']);
+});
+
+Route::middleware('auth','verified','role:LiveLine')->group(function () {
+    Route::get('/', function () {
+        return redirect('/ll.dashboard');
+    });
+    Route::get('/ll.dashboard',[Llcontroller::class, 'index']);
 });
 
 require __DIR__.'/auth.php';
