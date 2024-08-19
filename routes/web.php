@@ -256,6 +256,8 @@ Route::middleware('auth','verified','role:LiveLine')->group(function () {
         return redirect('/ll.dashboard');
     });
     Route::get('/ll.dashboard',[Llcontroller::class, 'index']);
+    Route::get('/donut',[Llcontroller::class, 'donut']);
+    Route::get('/tabel',[Llcontroller::class, 'tabel']);
 });
 
 require __DIR__.'/auth.php';

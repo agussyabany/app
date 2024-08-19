@@ -51,38 +51,77 @@
         },
       ]
     }
-    //-------------
+    
+    $(document).ready(function() {
+      //-------------
     //- DONUT CHART -
     //-------------
     // Get context with jQuery - using jQuery's .get() method.
-    var donutChartCanvas = $('#donutChart').get(0).getContext('2d')
-    var donutData        = {
-      labels: [
-          'Chrome',
-          'IE',
-          'FireFox',
-          'Safari',
-          'Opera',
-          'Navigator',
-      ],
-      datasets: [
-        {
-          data: [700,500,400,600,300,100],
-          backgroundColor : ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de'],
+    $.ajax({
+    url: '/donut',
+    method: 'GET',
+    success: function(response) {
+        if (response.status === 'true') {
+            var donutChartCanvas = $('#donutChart').get(0).getContext('2d');
+            var donutData = {
+                labels: [
+                    'SOSIAL',
+                    'DASAR I',
+                    'DASAR II',
+                    'DASAR III',
+                    'DASAR IV',
+                    'PENUH I',
+                    'PENUH II',
+                    'PENUH III',
+                    'PENUH IV'
+                ],
+                datasets: [{
+                    data: response.data,
+                    backgroundColor: ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de', '#8e44ad', '#e74c3c', '#2ecc71']
+                }]
+            };
+            var donutOptions = {
+                maintainAspectRatio: false,
+                responsive: true
+            };
+            new Chart(donutChartCanvas, {
+                type: 'doughnut',
+                data: donutData,
+                options: donutOptions
+            });
         }
-      ]
     }
-    var donutOptions     = {
-      maintainAspectRatio : false,
-      responsive : true,
-    }
-    //Create pie or douhnut chart
-    // You can switch between pie and douhnut using the method below.
-    new Chart(donutChartCanvas, {
-      type: 'doughnut',
-      data: donutData,
-      options: donutOptions
-    })
+});
+
+//TABEL
+
+$.ajax({
+                url: '/donut',
+                method: 'GET',
+                success: function(response) {
+                    if (response.status === 'true') {
+                        let data = response.data;
+                        let tableBody = $('#data-table tbody');
+                        tableBody.empty(); // Kosongkan tabel sebelum menambahkan data baru
+
+                        // Daftar label yang diharapkan
+                        const labels = ['SOSIAL', 'DASAR 1', 'DASAR 2', 'DASAR 3', 'DASAR 4', 'PENUH 1', 'PENUH 2', 'PENUH 3', 'PENUH 4'];
+
+                        labels.forEach((label, index) => {
+                            let row = $('<tr>');
+                            row.append($('<td>').text(label));
+                            row.append($('<td>').text(data[index]));
+                            tableBody.append(row);
+                        });
+                    } else {
+                        alert('Data gagal diambil');
+                    }
+                },
+                error: function() {
+                    alert('Terjadi kesalahan saat mengambil data');
+                }
+            });
+});
 
 
     //-------------
