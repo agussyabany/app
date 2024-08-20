@@ -65,15 +65,15 @@
             var donutChartCanvas = $('#donutChart').get(0).getContext('2d');
             var donutData = {
                 labels: [
-                    'SOSIAL',
-                    'DASAR I',
-                    'DASAR II',
-                    'DASAR III',
-                    'DASAR IV',
-                    'PENUH I',
-                    'PENUH II',
-                    'PENUH III',
-                    'PENUH IV'
+                    'SS',
+                    'D1',
+                    'D2',
+                    'D3',
+                    'D4',
+                    'P1',
+                    'P2',
+                    'P3',
+                    'P4'
                 ],
                 datasets: [{
                     data: response.data,
@@ -82,7 +82,14 @@
             };
             var donutOptions = {
                 maintainAspectRatio: false,
-                responsive: true
+                responsive: true,
+                legend: {
+                    display: true,
+                    labels: {
+                        fontColor: 'white', // Ubah ini dengan warna yang Anda inginkan untuk label
+                        fontSize: 14 // Ubah ukuran font jika diperlukan
+                    }
+                }
             };
             new Chart(donutChartCanvas, {
                 type: 'doughnut',

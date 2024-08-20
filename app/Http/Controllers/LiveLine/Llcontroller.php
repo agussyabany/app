@@ -51,13 +51,15 @@ class Llcontroller extends Controller
             'harian' => count($data['harian']['pelunasan'] ?? [])
         ];
 
-        // Kirim data ke view
+        //Kirim data ke view
         return view('Liveline.pages.index', [
             'data' => $data,
             'totals' => $totals,
             'today' => $now,
             'startOfMonth' => $startOfMonth
         ]);
+
+        //return $data;
     }
 
     private function fetchData(Client $client, $url, $token, $tglawal, $tglakhir)
