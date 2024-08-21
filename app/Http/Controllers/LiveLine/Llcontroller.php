@@ -51,15 +51,15 @@ class Llcontroller extends Controller
             'harian' => count($data['harian']['pelunasan'] ?? [])
         ];
 
-        // Kirim data ke view
-        // return view('Liveline.pages.index', [
-        //     'data' => $data,
-        //     'totals' => $totals,
-        //     'today' => $now,
-        //     'startOfMonth' => $startOfMonth
-        // ]);
+        //Kirim data ke view
+        return view('Liveline.pages.index', [
+            'data' => $data,
+            'totals' => $totals,
+            'today' => $now,
+            'startOfMonth' => $startOfMonth
+        ]);
         
-        return $totals;
+        //return $totals;
     }
 
     private function fetchData(Client $client, $url, $token, $tglawal, $tglakhir)
@@ -122,54 +122,60 @@ class Llcontroller extends Controller
     ]);
 }
 
-public function tabel()
+public function bar()
 {
-    // Mengatur tanggal hari ini, awal bulan ini, dan awal tahun 2024
-    $today = now()->format('Y-m-d');
-    $startOfMonth = now()->startOfMonth()->format('Y-m-d');
-    $startOfYear = now()->year(2024)->startOfYear()->format('Y-m-d');
+    $client = new Client();
+    $url = env('API_PELANGGAN_URL');
+    $token = env('API_PELANGGAN_TOKEN');
 
-    // Mengambil data dari API dengan tanggal otomatis
-    $data = Cache::remember('data_perubahan_pelanggan', now()->addHours(1), function () use ($startOfYear, $today) {
-        return Http::get('http://36.91.188.154/webapi/Pelanggan/getDataPerubahanPelangganPilih', [
-            'token' => '5d659eef91487eb4d4c4181d51911api',
-            'tglawal' => $startOfYear,
-            'tglakhir' => $today,
-        ])->json();
-    });
+    // Tanggal 1 Januari 2024
+    $tglAwal = '2024-01-01';
+    // Tanggal saat ini
+    $tglAkhir = Carbon::now()->format('Y-m-d');
 
-    $pelunasan = $data['pelunasan'] ?? [];
+    // Mengambil data dari API
+    $response = $client->request('GET', $url, [
+        'query' => [
+            'token' => $token,
+            'tglawal' => $tglAwal,
+            'tglakhir' => $tglAkhir,
+        ]
+    ]);
 
-    // Mengelompokkan data berdasarkan golongan 'jlw'
-    $result = $this->groupByGolongan($pelunasan);
+    $data = json_decode($response->getBody()->getContents(), true);
 
-    return response()->json($result);
-}
+    $unitCounts = [
+        'UNIT I' => 0,
+        'UNIT II' => 0,
+        'UNIT III' => 0,
+        'UNIT IV' => 0
+    ];
 
-private function groupByGolongan($data)
-{
-    $result = [];
+    // Mengelompokkan dan menghitung berdasarkan unit
+    foreach ($data['pelunasan'] as $item) {
+        $unit = $item['unit'];
 
-    foreach ($data as $item) {
-        $golongan = $item['jlw'];
-
-        // Inisialisasi jika golongan belum ada
-        if (!isset($result[$golongan])) {
-            $result[$golongan] = [
-                'tahun' => 0,
-                'bulan' => 0,
-                'hari' => 0,
-            ];
+        switch ($unit) {
+            case '1':
+                $unitCounts['UNIT I']++;
+                break;
+            case '2':
+                $unitCounts['UNIT II']++;
+                break;
+            case '3':
+                $unitCounts['UNIT III']++;
+                break;
+            case '4':
+                $unitCounts['UNIT IV']++;
+                break;
         }
-
-        // Jumlahkan entri berdasarkan periode waktu
-        $result[$golongan]['tahun']++;
-        $result[$golongan]['bulan']++;
-        $result[$golongan]['hari']++;
     }
 
-    return $result;
+    return response()->json($unitCounts);
 }
+
+
+
 
 
 public function test(Request $request)

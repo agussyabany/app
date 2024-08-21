@@ -128,30 +128,79 @@ $.ajax({
                     alert('Terjadi kesalahan saat mengambil data');
                 }
             });
+
+            $.ajax({
+            url: '/bar',
+            method: 'GET',
+            success: function(data) {
+                var labels = ['UNIT I', 'UNIT II', 'UNIT III', 'UNIT IV'];
+                var counts = [];
+
+                $.each(labels, function(index, unit) {
+                    counts.push(data[unit]);
+                });
+
+                var barChartData = {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Jumlah Sambungan',
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.8)',  // Warna untuk UNIT I
+                            'rgba(54, 162, 235, 0.8)',  // Warna untuk UNIT II
+                            'rgba(255, 206, 86, 0.8)',  // Warna untuk UNIT III
+                            'rgba(75, 192, 192, 0.8)'   // Warna untuk UNIT IV
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)'
+                        ],
+                        borderWidth: 1,
+                        data: counts
+                    }]
+                };
+
+                var barChartOptions = {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            ticks: {
+                                color: '#ffffff' // Mengubah warna label x-axis menjadi putih
+                            }
+                        },
+                        y: {
+                            ticks: {
+                                color: '#ffffff' // Mengubah warna label y-axis menjadi putih
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: 'white' // Mengubah warna label legend menjadi putih
+                            }
+                        }
+                    },
+                    datasetFill: false
+                };
+
+                var barChartCanvas = $('#barChartUnit').get(0).getContext('2d');
+                new Chart(barChartCanvas, {
+                    type: 'bar',
+                    data: barChartData,
+                    options: barChartOptions
+                });
+            },
+            error: function() {
+                alert('Terjadi kesalahan saat mengambil data.');
+            }
+        });
 });
 
 
-    //-------------
-    //- BAR CHART -
-    //-------------
-    var barChartCanvas = $('#barChart').get(0).getContext('2d')
-    var barChartData = $.extend(true, {}, areaChartData)
-    var temp0 = areaChartData.datasets[0]
-    var temp1 = areaChartData.datasets[1]
-    barChartData.datasets[0] = temp1
-    barChartData.datasets[1] = temp0
-
-    var barChartOptions = {
-      responsive              : true,
-      maintainAspectRatio     : false,
-      datasetFill             : false
-    }
-
-    new Chart(barChartCanvas, {
-      type: 'bar',
-      data: barChartData,
-      options: barChartOptions
-    })
+   
 
     //---------------------
     //- STACKED BAR CHART -

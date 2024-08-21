@@ -71,19 +71,19 @@
             <div class="card">
               <div class="card-header">SL Berdasar Golongan Tahun 2024</div>
               <div class="card-body">
-                <canvas id="donutChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                <canvas id="donutChart" style="min-height: 350px; height: 350px; max-height: 350px; max-width: 100%;"></canvas>
               </div>
             </div>
           </div>
 
-          {{-- <div class="col">
+          <div class="col">
             <div class="card">
-              <div class="card-header">SL Berdasar Golongan Tahun 2024</div>
+              <div class="card-header">SL Perwilayah Tahun 2024</div>
               <div class="card-body">
-                <canvas id="donutChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                <canvas id="barChartUnit" style="min-height: 350px; height: 350px; max-height: 350px; max-width: 100%;"></canvas>
               </div>
             </div>
-          </div> --}}
+          </div>
           
         </div>
 
@@ -128,14 +128,14 @@
             </div>
 
           </div>
-          {{-- <div class="col">
+          <div class="col">
             <div class="card">
-              <div class="card-header">SL Perbulan Tahun 2024</div>
+              <div class="card-header">SL Per Tahun 2024</div>
               <div class="card-body">
                 <canvas id="barChart" style="min-height: 450px; height: 450px; max-height: 450px; max-width: 100%;"></canvas>
               </div>
             </div>
-          </div> --}}
+          </div>
         </div>
         
       </div>
