@@ -197,6 +197,31 @@ $.ajax({
                 alert('Terjadi kesalahan saat mengambil data.');
             }
         });
+
+        //TABEL
+
+        $.ajax({
+            url: '/bar',
+            type: 'GET',
+            success: function(data) {
+                var tableBody = $('#unitTable tbody');
+                tableBody.empty(); // Kosongkan tabel sebelum mengisi ulang
+
+                $.each(data, function(unit, count) {
+                    tableBody.append('<tr><td>' + unit + '</td><td>' + count + '</td></tr>');
+                });
+            },
+            error: function(xhr, status, error) {
+                console.error(error); // Log error jika ada
+            }
+        });
+
+        $('#keuangan').click(function(){
+            $('#pBody').html('12.890.234.123');
+        });
+
+
+        
 });
 
 

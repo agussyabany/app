@@ -69,7 +69,7 @@
         <div class="row">
           <div class="col">
             <div class="card">
-              <div class="card-header">SL Berdasar Golongan Tahun 2024</div>
+              <div class="card-header">BERDASAR GOLONGAN TAHUN 2024</div>
               <div class="card-body">
                 <canvas id="donutChart" style="min-height: 350px; height: 350px; max-height: 350px; max-width: 100%;"></canvas>
               </div>
@@ -78,7 +78,7 @@
 
           <div class="col">
             <div class="card">
-              <div class="card-header">SL Perwilayah Tahun 2024</div>
+              <div class="card-header">BERDASAR WILAYAH TAHUN 2024</div>
               <div class="card-body">
                 <canvas id="barChartUnit" style="min-height: 350px; height: 350px; max-height: 350px; max-width: 100%;"></canvas>
               </div>
@@ -92,7 +92,7 @@
           <div class="col">
             <div class="card">
               <div class="card-header border-transparent">
-                <h3 class="card-title">BERDASARKAN GOLONGAN TAHUN 2024</h3>
+                <h3 class="card-title text-center">JUMLAH BERDASARKAN GOLONGAN TAHUN 2024</h3>
     
                 <div class="card-tools">
                   <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -130,9 +130,19 @@
           </div>
           <div class="col">
             <div class="card">
-              <div class="card-header">SL Per Tahun 2024</div>
+              <div class="card-header">JUMLAH BERDASARKAN WILAYAH TAHUN 2024</div>
               <div class="card-body">
-                <canvas id="barChart" style="min-height: 450px; height: 450px; max-height: 450px; max-width: 100%;"></canvas>
+                <table class="table m-0" id="unitTable">
+                  <thead>
+                  <tr>
+                    <th>WILAYAH</th>
+                    <th>JUMLAH</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
@@ -149,7 +159,7 @@
 
               <div class="info-box-content">
                 <span class="info-box-text">WILAYAH</span>
-                <span class="info-box-number">13.000</span>
+                <span class="info-box-number">-</span>
               </div>
               <span class="info-box-icon bg-info elevation-1">I</span>
               <!-- /.info-box-content -->
@@ -163,7 +173,7 @@
 
               <div class="info-box-content">
                 <span class="info-box-text">WILAYAH</span>
-                <span class="info-box-number">50.000</span>
+                <span class="info-box-number">-</span>
               </div>
               <span class="info-box-icon bg-danger elevation-1">II</span>
               <!-- /.info-box-content -->
@@ -181,7 +191,7 @@
 
               <div class="info-box-content">
                 <span class="info-box-text">WILAYAH</span>
-                <span class="info-box-number">30.000</span>
+                <span class="info-box-number">-</span>
               </div>
               <span class="info-box-icon bg-success elevation-1">III</span>
               <!-- /.info-box-content -->
@@ -195,7 +205,7 @@
 
               <div class="info-box-content">
                 <span class="info-box-text">WILAYAH</span>
-                <span class="info-box-number">70.000</span>
+                <span class="info-box-number">-</span>
               </div>
               <span class="info-box-icon bg-warning elevation-1">IV</span>
               <!-- /.info-box-content -->
@@ -251,7 +261,7 @@
                 <div class="col-sm-4 col-8">
                   <div class="description-block border-right border-left">
                     <span class="description-text">AKTIV</span>
-                    <h3 class="text-success"><strong>35,210.43</strong></h3>
+                    <h3 class="text-success"><strong>-</strong></h3>
                     
                   </div>
                   <!-- /.description-block -->
@@ -260,7 +270,7 @@
                 <div class="col-sm-4 col-8">
                   <div class="description-block border-right">
                     <span class="description-text">TIDAK AKTIV</span>
-                    <h3 class="text-warning"><strong>10,390.90</strong></h3>
+                    <h3 class="text-warning"><strong>-</strong></h3>
                     
                   </div>
                   <!-- /.description-block -->
@@ -269,7 +279,7 @@
                 <div class="col-sm-4 col-8">
                   <div class="description-block border-right">
                     <span class="description-text">PUTUS SEGEL</span>
-                    <h3 class="text-danger"><strong>24,813.53</strong></h3>
+                    <h3 class="text-danger"><strong>-</strong></h3>
                     
                   </div>
                   <!-- /.description-block -->
@@ -287,5 +297,28 @@
   <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
+
+<div class="modal fade" id="modal-lg">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">PENDAPATAN</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h3 id="pBody"></h3>
+      </div>
+      <div class="modal-footer justify-content-between">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
 
 @endsection

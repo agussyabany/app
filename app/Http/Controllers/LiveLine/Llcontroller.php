@@ -174,39 +174,103 @@ public function bar()
     return response()->json($unitCounts);
 }
 
+// public function nilai()
+// {
+//     // Inisialisasi Guzzle Client
+//     $client = new Client();
+    
+//     // Mendapatkan URL dan Token API dari .env
+//     $url = env('API_PENDAPATAN');
+//     $token = env('API_PENDAPATAN_TOKEN');
+    
+//     // Melakukan request ke API
+//     $response = $client->request('GET', $url, [
+//         'headers' => [
+//             'Authorization' => 'Bearer ' . $token,
+//             'Accept'        => 'application/json',
+//         ]
+//     ]);
 
+//     // Mendecode response JSON
+//     $data = json_decode($response->getBody(), true);
+    
+//     // Memeriksa apakah status true dan data 'pelunasan' ada
+//     if ($data['status'] == "true" && isset($data['pelunasan'])) {
+//         // Menjumlahkan nilai rppiutang
+//         $totalRppiutang = array_sum(array_column($data['pelunasan'], 'rppiutang'));
+//     } else {
+//         // Jika data tidak valid, set totalRppiutang ke 0
+//         $totalRppiutang = 0;
+//     }
+    
+//     // Kembalikan atau tampilkan hasil (misalnya return ke view atau JSON response)
+//     return response()->json([
+//         'total_rppiutang' => $totalRppiutang
+//     ]);
+// }
 
+public function nilai()
+{
+    $client = new Client();
+    $url = env('API_PENDAPATAN');
+    $token = env('API_PENDAPATAN_TOKEN');
 
+    $response = $client->request('GET', $url, [
+        'headers' => [
+            'Authorization' => 'Bearer ' . $token,
+            'Accept'        => 'application/json',
+        ]
+    ]);
 
-public function test(Request $request)
-    {
-        $client = new Client();
-        
-        // Mengambil URL API dan token dari file .env
-        $url = env('API_PELANGGAN_URL');
-        $token = env('API_PELANGGAN_TOKEN');
+    $data = json_decode($response->getBody(), true);
 
-        // Mendapatkan tglawal dan tglakhir dari request atau menggunakan default
-        $tglawal = $request->input('tglawal', '2024-01-01'); // default tglawal
-        $tglakhir = $request->input('tglakhir', '2024-08-05'); // default tglakhir
+    // Debugging: Lihat isi dari $data
+    dd($data);
 
-        try {
-            // Membuat request ke API dengan query parameters
-            $response = $client->request('GET', $url, [
-                'query' => [
-                    'token' => $token,
-                    'tglawal' => $tglawal,
-                    'tglakhir' => $tglakhir
-                ]
-            ]);
-
-            $data = json_decode($response->getBody(), true);
-
-            return response()->json($data);
-        } catch (\Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 500);
-        }
+    if ($data['status'] == "true" && isset($data['pelunasan'])) {
+        $totalRppiutang = array_sum(array_column($data['pelunasan'], 'rppiutang'));
+    } else {
+        $totalRppiutang = 0;
     }
+
+    return response()->json([
+        'total_rppiutang' => $totalRppiutang
+    ]);
+}
+
+
+
+
+
+// public function test(Request $request)
+//     {
+//         $client = new Client();
+        
+//         // Mengambil URL API dan token dari file .env
+//         $url = env('API_PELANGGAN_URL');
+//         $token = env('API_PELANGGAN_TOKEN');
+
+//         // Mendapatkan tglawal dan tglakhir dari request atau menggunakan default
+//         $tglawal = $request->input('tglawal', '2024-01-01'); // default tglawal
+//         $tglakhir = $request->input('tglakhir', '2024-08-05'); // default tglakhir
+
+//         try {
+//             // Membuat request ke API dengan query parameters
+//             $response = $client->request('GET', $url, [
+//                 'query' => [
+//                     'token' => $token,
+//                     'tglawal' => $tglawal,
+//                     'tglakhir' => $tglakhir
+//                 ]
+//             ]);
+
+//             $data = json_decode($response->getBody(), true);
+
+//             return response()->json($data);
+//         } catch (\Exception $e) {
+//             return response()->json(['error' => $e->getMessage()], 500);
+//         }
+//     }
 
 
 }

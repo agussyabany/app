@@ -262,6 +262,7 @@ Route::middleware('auth','verified','role:LiveLine')->group(function () {
     Route::get('/donut',[Llcontroller::class, 'donut']);
     Route::get('/bar',[Llcontroller::class, 'bar']);
     Route::get('/test',[Llcontroller::class, 'test']);
+    Route::get('/nilai',[Llcontroller::class, 'nilai']);
 
 });
 

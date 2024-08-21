@@ -7,26 +7,12 @@
       <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
     </li>
     <li class="nav-item d-none d-sm-inline-block">
-      <a href="#" class="nav-link">PENAGIHAN</a>
-    </li>
-    <li class="nav-item d-none d-sm-inline-block">
-      <a href="#" class="nav-link">PELANGGAN</a>
-    </li>
-    <li class="nav-item d-none d-sm-inline-block">
       <a href="#" class="nav-link">SAMBUNGAN</a>
     </li>
     <li class="nav-item d-none d-sm-inline-block">
-      <a href="#" class="nav-link">PRODUKSI</a>
+      <a href="#" class="nav-link" data-toggle="modal" data-target="#modal-lg" id="keuangan">KEUANGAN</a>
     </li>
-    <li class="nav-item d-none d-sm-inline-block">
-      <a href="#" class="nav-link">KINERJA UNIT</a>
-    </li>
-    <li class="nav-item d-none d-sm-inline-block">
-      <a href="#" class="nav-link">KEUANGAN</a>
-    </li>
-    <li class="nav-item d-none d-sm-inline-block">
-      <a href="#" class="nav-link">MAP</a>
-    </li>
+    {{-- s --}}
   </ul>
 
   <!-- Right navbar links -->
