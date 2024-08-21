@@ -28,6 +28,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Soc\Soccontroller;
 use App\Models\Aset\KibD;
 use GuzzleHttp\Middleware;
+
 use Illuminate\Support\Facades\Route;
 use Symfony\Component\HttpKernel\Profiler\Profile;
 
@@ -42,6 +43,8 @@ use Symfony\Component\HttpKernel\Profiler\Profile;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+
 
 Route::get('/', function () {
     return redirect('login');
@@ -258,6 +261,8 @@ Route::middleware('auth','verified','role:LiveLine')->group(function () {
     Route::get('/ll.dashboard',[Llcontroller::class, 'index']);
     Route::get('/donut',[Llcontroller::class, 'donut']);
     Route::get('/tabel',[Llcontroller::class, 'tabel']);
+    Route::get('/test',[Llcontroller::class, 'test']);
+
 });
 
 require __DIR__.'/auth.php';

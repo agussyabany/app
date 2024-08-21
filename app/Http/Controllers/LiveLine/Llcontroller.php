@@ -51,15 +51,15 @@ class Llcontroller extends Controller
             'harian' => count($data['harian']['pelunasan'] ?? [])
         ];
 
-        //Kirim data ke view
-        return view('Liveline.pages.index', [
-            'data' => $data,
-            'totals' => $totals,
-            'today' => $now,
-            'startOfMonth' => $startOfMonth
-        ]);
-
-        //return $data;
+        // Kirim data ke view
+        // return view('Liveline.pages.index', [
+        //     'data' => $data,
+        //     'totals' => $totals,
+        //     'today' => $now,
+        //     'startOfMonth' => $startOfMonth
+        // ]);
+        
+        return $totals;
     }
 
     private function fetchData(Client $client, $url, $token, $tglawal, $tglakhir)
@@ -170,6 +170,37 @@ private function groupByGolongan($data)
 
     return $result;
 }
+
+
+public function test(Request $request)
+    {
+        $client = new Client();
+        
+        // Mengambil URL API dan token dari file .env
+        $url = env('API_PELANGGAN_URL');
+        $token = env('API_PELANGGAN_TOKEN');
+
+        // Mendapatkan tglawal dan tglakhir dari request atau menggunakan default
+        $tglawal = $request->input('tglawal', '2024-01-01'); // default tglawal
+        $tglakhir = $request->input('tglakhir', '2024-08-05'); // default tglakhir
+
+        try {
+            // Membuat request ke API dengan query parameters
+            $response = $client->request('GET', $url, [
+                'query' => [
+                    'token' => $token,
+                    'tglawal' => $tglawal,
+                    'tglakhir' => $tglakhir
+                ]
+            ]);
+
+            $data = json_decode($response->getBody(), true);
+
+            return response()->json($data);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
 
 
 }
