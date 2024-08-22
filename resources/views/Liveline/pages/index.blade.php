@@ -17,7 +17,7 @@
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             
-            <li class="breadcrumb-item active"><h3>PELANGGAN</h3></li>
+            <li class="breadcrumb-item active"><h1 id="digitalClock">PELANGGAN</h1></li>
           </ol>
         </div><!-- /.col -->
       </div><!-- /.row -->
@@ -143,6 +143,11 @@
                   
                   </tbody>
                 </table>
+              </div><br>
+            </div>
+            <div class="card">
+              <div class="card-body">
+                <img src="{{ asset('assets/img/pdam.png') }}" height="150px" width="550px">
               </div>
             </div>
           </div>
@@ -159,9 +164,9 @@
 
               <div class="info-box-content">
                 <span class="info-box-text">WILAYAH</span>
-                <span class="info-box-number">-</span>
+                <span id="unitI" class="info-box-number">-</span>
               </div>
-              <span class="info-box-icon bg-info elevation-1">I</span>
+              <span  class="info-box-icon bg-info elevation-1">I</span>
               <!-- /.info-box-content -->
             </div>
             <!-- /.info-box -->
@@ -173,7 +178,7 @@
 
               <div class="info-box-content">
                 <span class="info-box-text">WILAYAH</span>
-                <span class="info-box-number">-</span>
+                <span id="unitII" class="info-box-number">-</span>
               </div>
               <span class="info-box-icon bg-danger elevation-1">II</span>
               <!-- /.info-box-content -->
@@ -191,9 +196,9 @@
 
               <div class="info-box-content">
                 <span class="info-box-text">WILAYAH</span>
-                <span class="info-box-number">-</span>
+                <span id="unitIII" class="info-box-number">-</span>
               </div>
-              <span class="info-box-icon bg-success elevation-1">III</span>
+              <span  class="info-box-icon bg-success elevation-1">III</span>
               <!-- /.info-box-content -->
             </div>
             <!-- /.info-box -->
@@ -205,7 +210,7 @@
 
               <div class="info-box-content">
                 <span class="info-box-text">WILAYAH</span>
-                <span class="info-box-number">-</span>
+                <span id="unitIV" class="info-box-number">-</span>
               </div>
               <span class="info-box-icon bg-warning elevation-1">IV</span>
               <!-- /.info-box-content -->
@@ -221,7 +226,7 @@
             <div class="inner">
               <h3>TOTAL JUMLAH PELANGGAN</h3>
 
-              <h3>170.000<h3>
+              <h3>{{$totals['tahun']}}<h3>
             </div>
             <div class="icon">
               <i class="ion ion-person-add"></i>

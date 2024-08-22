@@ -217,8 +217,68 @@ $.ajax({
         });
 
         $('#keuangan').click(function(){
-            $('#pBody').html('12.890.234.123');
-        });
+            $.ajax({
+                url: '/nilai', // Ubah ini sesuai dengan route ke controller Anda
+                method: 'GET',
+                success: function(data) {
+                    // Format nilai total_rppiutang ke dalam format uang
+                    var formattedRppiutang = parseInt(data.total_rppiutang).toLocaleString('id-ID', {
+                        style: 'currency',
+                        currency: 'IDR',
+                        minimumFractionDigits: 0
+                    });
+
+                    // Tampilkan nilai yang sudah diformat
+                    $('#pBody').text(formattedRppiutang);
+                },
+                error: function(error) {
+                    console.log('Error:', error);
+                }
+            });
+    });
+
+    $.ajax({
+        url: '/bar', // Ubah ini sesuai dengan route ke controller Anda
+        method: 'GET',
+        success: function(data) {
+            // Mengupdate nilai di setiap info-box berdasarkan unit menggunakan id
+            $('#unitI').text(data['UNIT I'] + 100);
+            $('#unitII').text(data['UNIT II']);
+            $('#unitIII').text(data['UNIT III']);
+            $('#unitIV').text(data['UNIT IV']);
+        },
+        error: function(error) {
+            console.log('Error:', error);
+        }
+    });
+
+
+    function updateClock() {
+        // Mendapatkan waktu saat ini
+        var now = new Date();
+
+        // Mendapatkan jam, menit, dan detik
+        var hours = now.getHours();
+        var minutes = now.getMinutes();
+        var seconds = now.getSeconds();
+
+        // Menambahkan angka nol di depan angka satuan (0-9)
+        if (hours < 10) hours = '0' + hours;
+        if (minutes < 10) minutes = '0' + minutes;
+        if (seconds < 10) seconds = '0' + seconds;
+
+        // Format jam digital
+        var timeString = hours + ':' + minutes + ':' + seconds;
+
+        // Menampilkan jam di elemen dengan id "digitalClock"
+        $('#digitalClock').text(timeString);
+    }
+
+    // Memanggil fungsi updateClock setiap detik
+    setInterval(updateClock, 1000);
+
+    // Memanggil fungsi updateClock pertama kali untuk menampilkan jam saat halaman dimuat
+    updateClock();
 
 
         

@@ -133,17 +133,22 @@ public function bar()
     // Tanggal saat ini
     $tglAkhir = Carbon::now()->format('Y-m-d');
 
-    // Mengambil data dari API
-    $response = $client->request('GET', $url, [
-        'query' => [
-            'token' => $token,
-            'tglawal' => $tglAwal,
-            'tglakhir' => $tglAkhir,
-        ]
-    ]);
+    // Buat kunci cache unik berdasarkan tanggal awal dan akhir
+    $cacheKey = "pelanggan_data_{$tglAwal}_to_{$tglAkhir}";
 
-    $data = json_decode($response->getBody()->getContents(), true);
+    // Ambil data dari cache atau lakukan request API jika belum ada di cache
+    $data = Cache::remember($cacheKey, now()->addHours(1), function () use ($client, $url, $token, $tglAwal, $tglAkhir) {
+        $response = $client->request('GET', $url, [
+            'query' => [
+                'token' => $token,
+                'tglawal' => $tglAwal,
+                'tglakhir' => $tglAkhir,
+            ]
+        ]);
+        return json_decode($response->getBody()->getContents(), true);
+    });
 
+    // Inisialisasi unit counts
     $unitCounts = [
         'UNIT I' => 0,
         'UNIT II' => 0,
@@ -209,30 +214,37 @@ public function bar()
 //     ]);
 // }
 
-public function nilai()
+public function nilai(Request $request)
 {
-    $client = new Client();
+    // Mendapatkan URL dan Token API dari .env
     $url = env('API_PENDAPATAN');
     $token = env('API_PENDAPATAN_TOKEN');
 
-    $response = $client->request('GET', $url, [
-        'headers' => [
-            'Authorization' => 'Bearer ' . $token,
-            'Accept'        => 'application/json',
-        ]
-    ]);
+    // Kunci cache unik untuk menyimpan hasil API
+    $cacheKey = 'pendapatan_' . md5($url . $token);
 
-    $data = json_decode($response->getBody(), true);
+    // Mengambil data dari cache atau melakukan request API jika belum ada di cache
+    $data = Cache::remember($cacheKey, now()->addHours(1), function () use ($url, $token) {
+        $client = new Client();
+        $response = $client->request('GET', $url, [
+            'query' => [
+                'token' => $token,
+            ]
+        ]);
 
-    // Debugging: Lihat isi dari $data
-    dd($data);
+        return json_decode($response->getBody(), true);
+    });
 
+    // Memeriksa apakah status true dan data 'pelunasan' ada
     if ($data['status'] == "true" && isset($data['pelunasan'])) {
+        // Menjumlahkan nilai rppiutang
         $totalRppiutang = array_sum(array_column($data['pelunasan'], 'rppiutang'));
     } else {
+        // Jika data tidak valid, set totalRppiutang ke 0
         $totalRppiutang = 0;
     }
 
+    // Kembalikan atau tampilkan hasil sebagai JSON response
     return response()->json([
         'total_rppiutang' => $totalRppiutang
     ]);
