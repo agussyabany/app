@@ -18,7 +18,7 @@
 <script src="{{ asset('assets/LiveLine/plugins/chart.js/Chart.min.js') }}"></script>
 
 <!-- AdminLTE for demo purposes -->
-<script src="{{ asset('assets/LiveLine/dist/js/demo.js')}}"></script>
+{{-- <script src="{{ asset('assets/LiveLine/dist/js/demo.js')}}"></script> --}}
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{ asset('asssts/LiveLine/dist/js/pages/dashboard2.js')}}"></script>
 <script>
@@ -129,74 +129,76 @@ $.ajax({
                 }
             });
 
+            //BAR
             $.ajax({
-            url: '/bar',
-            method: 'GET',
-            success: function(data) {
-                var labels = ['UNIT I', 'UNIT II', 'UNIT III', 'UNIT IV'];
-                var counts = [];
+              url: '/bar',
+              method: 'GET',
+              success: function(data) {
+                  var labels = ['UNIT I', 'UNIT II', 'UNIT III', 'UNIT IV'];
+                  var counts = [];
 
-                $.each(labels, function(index, unit) {
-                    counts.push(data[unit]);
-                });
+                  $.each(labels, function(index, unit) {
+                      counts.push(data[unit]);
+                  });
 
-                var barChartData = {
-                    labels: labels,
-                    datasets: [{
-                        label: 'Jumlah Sambungan',
-                        backgroundColor: [
-                            'rgba(255, 99, 132, 0.8)',  // Warna untuk UNIT I
-                            'rgba(54, 162, 235, 0.8)',  // Warna untuk UNIT II
-                            'rgba(255, 206, 86, 0.8)',  // Warna untuk UNIT III
-                            'rgba(75, 192, 192, 0.8)'   // Warna untuk UNIT IV
-                        ],
-                        borderColor: [
-                            'rgba(255, 99, 132, 1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(75, 192, 192, 1)'
-                        ],
-                        borderWidth: 1,
-                        data: counts
-                    }]
-                };
+                  var barChartData = {
+                      labels: labels,
+                      datasets: [{
+                          label: 'Jumlah Sambungan',
+                          backgroundColor: [
+                              'rgba(255, 99, 132, 0.8)',  // Warna untuk UNIT I
+                              'rgba(54, 162, 235, 0.8)',  // Warna untuk UNIT II
+                              'rgba(255, 206, 86, 0.8)',  // Warna untuk UNIT III
+                              'rgba(75, 192, 192, 0.8)'   // Warna untuk UNIT IV
+                          ],
+                          borderColor: [
+                              'rgba(255, 99, 132, 1)',
+                              'rgba(54, 162, 235, 1)',
+                              'rgba(255, 206, 86, 1)',
+                              'rgba(75, 192, 192, 1)'
+                          ],
+                          borderWidth: 1,
+                          data: counts
+                      }]
+                  };
 
-                var barChartOptions = {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        x: {
-                            ticks: {
-                                color: '#ffffff' // Mengubah warna label x-axis menjadi putih
-                            }
-                        },
-                        y: {
-                            ticks: {
-                                color: '#ffffff' // Mengubah warna label y-axis menjadi putih
-                            }
-                        }
-                    },
-                    plugins: {
-                        legend: {
-                            labels: {
-                                color: 'white' // Mengubah warna label legend menjadi putih
-                            }
-                        }
-                    },
-                    datasetFill: false
-                };
+                  var barChartOptions = {
+                  responsive: true,
+                  maintainAspectRatio: false,
+                  scales: {
+                      x: {
+                          ticks: {
+                              color: '#ffffff' // Mengubah warna label x-axis menjadi putih
+                          }
+                      },
+                      y: {
+                          min: 0, // Memastikan y-axis mulai dari 0
+                          ticks: {
+                              color: '#ffffff' // Mengubah warna label y-axis menjadi putih
+                          }
+                      }
+                  },
+                  plugins: {
+                      legend: {
+                          labels: {
+                              color: 'white' // Mengubah warna label legend menjadi putih
+                          }
+                      }
+                  },
+                  datasetFill: false
+              };;
 
-                var barChartCanvas = $('#barChartUnit').get(0).getContext('2d');
-                new Chart(barChartCanvas, {
-                    type: 'bar',
-                    data: barChartData,
-                    options: barChartOptions
-                });
-            },
-            error: function() {
-                alert('Terjadi kesalahan saat mengambil data.');
-            }
-        });
+                  var barChartCanvas = $('#barChartUnit').get(0).getContext('2d');
+                  new Chart(barChartCanvas, {
+                      type: 'bar',
+                      data: barChartData,
+                      options: barChartOptions
+                  });
+              },
+              error: function() {
+                  alert('Terjadi kesalahan saat mengambil data.');
+              }
+          });
 
         //TABEL
 
@@ -237,15 +239,20 @@ $.ajax({
             });
     });
 
+
+    function formatNumber(num) {
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+}
+
     $.ajax({
         url: '/bar', // Ubah ini sesuai dengan route ke controller Anda
         method: 'GET',
         success: function(data) {
             // Mengupdate nilai di setiap info-box berdasarkan unit menggunakan id
-            $('#unitI').text(data['UNIT I'] + 100);
-            $('#unitII').text(data['UNIT II']);
-            $('#unitIII').text(data['UNIT III']);
-            $('#unitIV').text(data['UNIT IV']);
+            $('#unitI').text(formatNumber(data['UNIT I'] + 38226)); // Format menjadi dengan pemisah ribuan
+            $('#unitII').text(formatNumber(data['UNIT II'] + 51513));      // Format menjadi dengan pemisah ribuan
+            $('#unitIII').text(formatNumber(data['UNIT III'] + 55297));    // Format menjadi dengan pemisah ribuan
+            $('#unitIV').text(formatNumber(data['UNIT IV'] + 32267));      // Format menjadi dengan pemisah ribuan
         },
         error: function(error) {
             console.log('Error:', error);
@@ -279,6 +286,15 @@ $.ajax({
 
     // Memanggil fungsi updateClock pertama kali untuk menampilkan jam saat halaman dimuat
     updateClock();
+
+
+    // Fungsi untuk menyegarkan halaman
+    function refreshPage() {
+        location.reload(); // Menyegarkan halaman
+    }
+
+    // Setel interval untuk menyegarkan halaman setiap 5 menit (300000 milidetik)
+    setTimeout(refreshPage, 300000);
 
 
         

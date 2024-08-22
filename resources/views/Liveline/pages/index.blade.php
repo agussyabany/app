@@ -37,7 +37,7 @@
             <div class="col-sm-4 col-8">
               <div class="description-block border-right border-left">
                
-                <h3 class="text-success"><strong>{{$totals['tahun']}}</strong></h3>
+                <h3 class="text-success"><strong>{{ number_format($totals['tahun'], 0) }}</strong></h3>
                 <span class="description-text">TAHUN 2024</span>
               </div>
               <!-- /.description-block -->
@@ -46,7 +46,7 @@
             <div class="col-sm-4 col-8">
               <div class="description-block border-right">
                
-                <h3 class="text-warning"><strong>{{$totals['bulan']}}</strong></h3>
+                <h3 class="text-warning"><strong>{{ number_format($totals['bulan'], 0) }}</strong></h3>
                 <span class="description-text">AGUSTUS 2024</span>
               </div>
               <!-- /.description-block -->
@@ -55,7 +55,7 @@
             <div class="col-sm-4 col-8">
               <div class="description-block border-right">
                 
-                <h3 class="text-primary"><strong>{{$totals['harian']}}</strong></h3>
+                <h3 class="text-primary"><strong>{{ number_format($totals['harian'], 0) }}</strong></h3>
                 <span class="description-text">HARI INI {{$today}}</span>
               </div>
               <!-- /.description-block -->
@@ -147,7 +147,7 @@
             </div>
             <div class="card">
               <div class="card-body">
-                <img src="{{ asset('assets/img/pdam.png') }}" height="150px" width="550px">
+                <img src="{{ asset('assets/img/pdam.png') }}" height="150px" width="600px">
               </div>
             </div>
           </div>
@@ -164,7 +164,7 @@
 
               <div class="info-box-content">
                 <span class="info-box-text">WILAYAH</span>
-                <span id="unitI" class="info-box-number">-</span>
+                <h4 id="unitI" class="info-box-number">-</h4>
               </div>
               <span  class="info-box-icon bg-info elevation-1">I</span>
               <!-- /.info-box-content -->
@@ -178,7 +178,7 @@
 
               <div class="info-box-content">
                 <span class="info-box-text">WILAYAH</span>
-                <span id="unitII" class="info-box-number">-</span>
+                <h4 id="unitII" class="info-box-number">-</h4>
               </div>
               <span class="info-box-icon bg-danger elevation-1">II</span>
               <!-- /.info-box-content -->
@@ -196,7 +196,7 @@
 
               <div class="info-box-content">
                 <span class="info-box-text">WILAYAH</span>
-                <span id="unitIII" class="info-box-number">-</span>
+                <h4 id="unitIII" class="info-box-number">-</h4>
               </div>
               <span  class="info-box-icon bg-success elevation-1">III</span>
               <!-- /.info-box-content -->
@@ -210,7 +210,7 @@
 
               <div class="info-box-content">
                 <span class="info-box-text">WILAYAH</span>
-                <span id="unitIV" class="info-box-number">-</span>
+                <h4 id="unitIV" class="info-box-number">-</h4>
               </div>
               <span class="info-box-icon bg-warning elevation-1">IV</span>
               <!-- /.info-box-content -->
@@ -226,7 +226,7 @@
             <div class="inner">
               <h3>TOTAL JUMLAH PELANGGAN</h3>
 
-              <h3>{{$totals['tahun']}}<h3>
+              <h3>{{ number_format($totals['tahun'] + 177303, 0) }}<h3>
             </div>
             <div class="icon">
               <i class="ion ion-person-add"></i>
