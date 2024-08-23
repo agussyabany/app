@@ -179,40 +179,7 @@ public function bar()
     return response()->json($unitCounts);
 }
 
-// public function nilai()
-// {
-//     // Inisialisasi Guzzle Client
-//     $client = new Client();
-    
-//     // Mendapatkan URL dan Token API dari .env
-//     $url = env('API_PENDAPATAN');
-//     $token = env('API_PENDAPATAN_TOKEN');
-    
-//     // Melakukan request ke API
-//     $response = $client->request('GET', $url, [
-//         'headers' => [
-//             'Authorization' => 'Bearer ' . $token,
-//             'Accept'        => 'application/json',
-//         ]
-//     ]);
 
-//     // Mendecode response JSON
-//     $data = json_decode($response->getBody(), true);
-    
-//     // Memeriksa apakah status true dan data 'pelunasan' ada
-//     if ($data['status'] == "true" && isset($data['pelunasan'])) {
-//         // Menjumlahkan nilai rppiutang
-//         $totalRppiutang = array_sum(array_column($data['pelunasan'], 'rppiutang'));
-//     } else {
-//         // Jika data tidak valid, set totalRppiutang ke 0
-//         $totalRppiutang = 0;
-//     }
-    
-//     // Kembalikan atau tampilkan hasil (misalnya return ke view atau JSON response)
-//     return response()->json([
-//         'total_rppiutang' => $totalRppiutang
-//     ]);
-// }
 
 public function nilai(Request $request)
 {
@@ -249,6 +216,67 @@ public function nilai(Request $request)
         'total_rppiutang' => $totalRppiutang
     ]);
 }
+
+public function donutTwo()
+{
+    $client = new Client();
+    $url = env('API_PELANGGAN_URL');
+    $token = env('API_PELANGGAN_TOKEN');
+
+    // Tanggal 1 Januari 2024
+    $tglAwal = '2024-01-01';
+    // Tanggal saat ini
+    $tglAkhir = Carbon::now()->format('Y-m-d');
+
+    // Buat kunci cache unik berdasarkan tanggal awal dan akhir
+    $cacheKey = "pelanggan_data_{$tglAwal}_to_{$tglAkhir}";
+
+    // Ambil data dari cache atau lakukan request API jika belum ada di cache
+    $data = Cache::remember($cacheKey, now()->addHours(1), function () use ($client, $url, $token, $tglAwal, $tglAkhir) {
+        $response = $client->request('GET', $url, [
+            'query' => [
+                'token' => $token,
+                'tglawal' => $tglAwal,
+                'tglakhir' => $tglAkhir,
+            ]
+        ]);
+        return json_decode($response->getBody()->getContents(), true);
+    });
+
+    // Inisialisasi unit counts
+    $unitCounts = [
+        'UNIT I' => 0,
+        'UNIT II' => 0,
+        'UNIT III' => 0,
+        'UNIT IV' => 0
+    ];
+
+    // Mengelompokkan dan menghitung berdasarkan unit
+    foreach ($data['pelunasan'] as $item) {
+        $unit = $item['unit'];
+
+        switch ($unit) {
+            case '1':
+                $unitCounts['UNIT I']++;
+                break;
+            case '2':
+                $unitCounts['UNIT II']++;
+                break;
+            case '3':
+                $unitCounts['UNIT III']++;
+                break;
+            case '4':
+                $unitCounts['UNIT IV']++;
+                break;
+        }
+    }
+
+    return response()->json([
+        'status' => true,
+        'data' => array_values($unitCounts)
+    ]);
+}
+
 
 
 

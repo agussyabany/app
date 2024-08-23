@@ -8,7 +8,7 @@
             @include('Liveline.layouts._asset_header')
             <meta name="theme-color" content="#712cf9">
         </head>
-        <body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+        <body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed sidebar-collapse">
             @include('Liveline.layouts.header')
             @yield('content')
             @stack('scripts')

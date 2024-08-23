@@ -100,6 +100,51 @@
     }
 });
 
+$.ajax({
+    url: '/donut.duo',
+    method: 'GET',
+    success: function(response) {
+        if (response.status === true) {
+            var donutChartCanvas = $('#MyDonutChart').get(0).getContext('2d');
+            //console.log($('#MyDonutChart').get(0)); 
+            var donutData = {
+                labels: [
+                    'UNIT I',
+                    'UNIT II',
+                    'UNIT III',
+                    'UNIT IV'
+                ],
+                datasets: [{
+                    data: response.data,
+                    backgroundColor: ['#f56954', '#00a65a', '#f39c12', '#00c0ef']
+                }]
+            };
+           
+            var donutOptions = {
+                maintainAspectRatio: false,
+                responsive: true,
+                legend: {
+                    display: true,
+                    labels: {
+                        fontColor: 'white', // Ubah ini dengan warna yang Anda inginkan untuk label
+                        fontSize: 14 // Ubah ukuran font jika diperlukan
+                    }
+                }
+            };
+            new Chart(donutChartCanvas, {
+                type: 'doughnut',
+                data: donutData,
+                options: donutOptions
+            });
+        } else {
+            console.log('Data tidak tersedia atau error dalam pengambilan data.');
+        }
+    },
+    error: function(xhr, status, error) {
+        console.log('Error: ' + error);
+    }
+});
+
 //TABEL
 
 $.ajax({
@@ -144,20 +189,20 @@ $.ajax({
                   var barChartData = {
                       labels: labels,
                       datasets: [{
-                          label: 'Jumlah Sambungan',
+                          label: '-',
                           backgroundColor: [
-                              'rgba(255, 99, 132, 0.8)',  // Warna untuk UNIT I
-                              'rgba(54, 162, 235, 0.8)',  // Warna untuk UNIT II
-                              'rgba(255, 206, 86, 0.8)',  // Warna untuk UNIT III
-                              'rgba(75, 192, 192, 0.8)'   // Warna untuk UNIT IV
-                          ],
+                                '#17a2b8',  // Warna untuk UNIT I (rgba(255, 99, 132, 0.8))
+                                '#dc3545',  // Warna untuk UNIT II (rgba(54, 162, 235, 0.8))
+                                '#28a745',  // Warna untuk UNIT III (rgba(255, 206, 86, 0.8))
+                                '#ffc107'   // Warna untuk UNIT IV (rgba(75, 192, 192, 0.8))
+                            ],
                           borderColor: [
-                              'rgba(255, 99, 132, 1)',
-                              'rgba(54, 162, 235, 1)',
-                              'rgba(255, 206, 86, 1)',
-                              'rgba(75, 192, 192, 1)'
+                              'rgba(255, 255, 255, 1)',
+                              'rgba(255, 255, 255, 1)',
+                              'rgba(255, 255, 255, 1)',
+                              'rgba(255, 255, 255, 1)'
                           ],
-                          borderWidth: 1,
+                          borderWidth: 2,
                           data: counts
                       }]
                   };
@@ -237,7 +282,7 @@ $.ajax({
                     console.log('Error:', error);
                 }
             });
-    });
+        });
 
 
     function formatNumber(num) {
@@ -250,9 +295,9 @@ $.ajax({
         success: function(data) {
             // Mengupdate nilai di setiap info-box berdasarkan unit menggunakan id
             $('#unitI').text(formatNumber(data['UNIT I'] + 38226)); // Format menjadi dengan pemisah ribuan
-            $('#unitII').text(formatNumber(data['UNIT II'] + 51513));      // Format menjadi dengan pemisah ribuan
-            $('#unitIII').text(formatNumber(data['UNIT III'] + 55297));    // Format menjadi dengan pemisah ribuan
-            $('#unitIV').text(formatNumber(data['UNIT IV'] + 32267));      // Format menjadi dengan pemisah ribuan
+            $('#unitII').text(formatNumber(data['UNIT II'] + 51513));// Format menjadi dengan pemisah ribuan
+            $('#unitIII').text(formatNumber(data['UNIT III'] + 55297));// Format menjadi dengan pemisah ribuan
+            $('#unitIV').text(formatNumber(data['UNIT IV'] + 32267));// Format menjadi dengan pemisah ribuan
         },
         error: function(error) {
             console.log('Error:', error);
@@ -295,6 +340,61 @@ $.ajax({
 
     // Setel interval untuk menyegarkan halaman setiap 5 menit (300000 milidetik)
     setTimeout(refreshPage, 300000);
+
+    $.ajax({
+    url: '/donut.duo',
+    method: 'GET',
+    success: function(response) {
+        if (response.status === true) {
+            var donutChartCanvas = $('#MyDonutChart').get(0).getContext('2d');
+            //console.log($('#MyDonutChart').get(0)); 
+            var donutData = {
+                labels: [
+                    'UNIT I',
+                    'UNIT II',
+                    'UNIT III',
+                    'UNIT IV'
+                ],
+                datasets: [{
+                    data: response.data,
+                    backgroundColor: ['#f56954', '#00a65a', '#f39c12', '#00c0ef']
+                }]
+            };
+           
+            var donutOptions = {
+                maintainAspectRatio: false,
+                responsive: true,
+                legend: {
+                    display: true,
+                    labels: {
+                        fontColor: 'white', // Ubah ini dengan warna yang Anda inginkan untuk label
+                        fontSize: 14 // Ubah ukuran font jika diperlukan
+                    }
+                }
+            };
+            new Chart(donutChartCanvas, {
+                type: 'doughnut',
+                data: donutData,
+                options: donutOptions
+            });
+        } else {
+            console.log('Data tidak tersedia atau error dalam pengambilan data.');
+        }
+    },
+    error: function(xhr, status, error) {
+        console.log('Error: ' + error);
+    }
+});
+
+    // Fungsi untuk memformat angka dengan pemisah ribuan
+    function formatNumber(number) {
+        return number.toLocaleString();
+    }
+
+    
+
+    
+
 
 
         

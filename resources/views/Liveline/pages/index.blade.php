@@ -30,7 +30,7 @@
     <div class="container-fluid">
       <!-- Info boxes -->
       <div class="row"> 
-      <div class="col text-center border border-primary"><br>
+      <div class="col text-center border border-primary rounded"><br>
         <h5>SAMBUNGAN LANGGANAN BARU</h5>
         <div class="card-footer">
           <div class="row">
@@ -220,38 +220,17 @@
           <!-- /.col -->
         </div>
 
-        <div class="">
-          <!-- small box -->
-          <div class="small-box bg-secondary">
-            <div class="inner">
-              <h3>TOTAL JUMLAH PELANGGAN</h3>
-
-              <h3>{{ number_format($totals['tahun'] + 177303, 0) }}<h3>
-            </div>
-            <div class="icon">
-              <i class="ion ion-person-add"></i>
-            </div>
-            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
+        
 
         <!-- STACKED BAR CHART -->
-        <div class="card card-success">
+        <div class="card">
           <div class="card-header">
-            <h3 class="card-title">PENAMBAHAN PELANGGAN PERTAHUN</h3>
-
-            <div class="card-tools">
-              <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                <i class="fas fa-minus"></i>
-              </button>
-              <button type="button" class="btn btn-tool" data-card-widget="remove">
-                <i class="fas fa-times"></i>
-              </button>
-            </div>
+            
           </div>
+
           <div class="card-body">
             <div class="chart">
-              <canvas id="stackedBarChart" style="min-height: 400px; height: 400px; max-height: 400px; max-width: 100%;"></canvas>
+              <canvas id="myDonutChart" style="min-height: 550px; height:  550px; max-height:  550px; max-width: 100%;"></canvas>
             </div>
           </div>
           <!-- /.card-body -->
@@ -294,6 +273,21 @@
               </div>
               <!-- /.row -->
             </div>
+      </div>
+    </div><br><br>
+
+    <div class="">
+      <!-- small box -->
+      <div class="small-box bg-secondary">
+        <div class="inner">
+          <h3>TOTAL JUMLAH PELANGGAN</h3>
+
+          <h3>{{ number_format($totals['tahun'] + 177303, 0) }}<h3>
+        </div>
+        <div class="icon">
+          <i class="ion ion-person-add"></i>
+        </div>
+        <a href="#" class="small-box-footer"></a>
       </div>
     </div>
       <!-- /.row -->
