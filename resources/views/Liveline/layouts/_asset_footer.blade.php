@@ -24,39 +24,9 @@
 <script>
   $(function(){
 
-    var areaChartData = {
-      labels  : ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-      datasets: [
-        {
-          label               : 'Digital Goods',
-          backgroundColor     : 'rgba(60,141,188,0.9)',
-          borderColor         : 'rgba(60,141,188,0.8)',
-          pointRadius          : false,
-          pointColor          : '#3b8bba',
-          pointStrokeColor    : 'rgba(60,141,188,1)',
-          pointHighlightFill  : '#fff',
-          pointHighlightStroke: 'rgba(60,141,188,1)',
-          data                : [28, 48, 40, 19, 86, 27, 90]
-        },
-        {
-          label               : 'Electronics',
-          backgroundColor     : 'rgba(210, 214, 222, 1)',
-          borderColor         : 'rgba(210, 214, 222, 1)',
-          pointRadius         : false,
-          pointColor          : 'rgba(210, 214, 222, 1)',
-          pointStrokeColor    : '#c1c7d1',
-          pointHighlightFill  : '#fff',
-          pointHighlightStroke: 'rgba(220,220,220,1)',
-          data                : [65, 59, 80, 81, 56, 55, 40]
-        },
-      ]
-    }
     
     $(document).ready(function() {
-      //-------------
-    //- DONUT CHART -
-    //-------------
-    // Get context with jQuery - using jQuery's .get() method.
+    //DONUT SL BERDASAR GOLONGAN TANUN 2024
     $.ajax({
     url: '/donut',
     method: 'GET',
@@ -99,14 +69,13 @@
         }
     }
 });
-
+//DONUT JUMLAH PELANGGAN BERDASARKAN WILAYAH TAHUN 2024
 $.ajax({
     url: '/donut.duo',
     method: 'GET',
     success: function(response) {
         if (response.status === true) {
-            var donutChartCanvas = $('#MyDonutChart').get(0).getContext('2d');
-            //console.log($('#MyDonutChart').get(0)); 
+            var donutChartCanvas = $('#DonutPlgn').get(0).getContext('2d');
             var donutData = {
                 labels: [
                     'UNIT I',
@@ -116,7 +85,7 @@ $.ajax({
                 ],
                 datasets: [{
                     data: response.data,
-                    backgroundColor: ['#f56954', '#00a65a', '#f39c12', '#00c0ef']
+                    backgroundColor: ['#17a2b8', '#dc3545', '#28a745', '#ffc107']
                 }]
             };
            
@@ -145,7 +114,7 @@ $.ajax({
     }
 });
 
-//TABEL
+//TABEL SL BERASDASARKAN GOLONGAN
 
 $.ajax({
                 url: '/donut',
@@ -174,78 +143,61 @@ $.ajax({
                 }
             });
 
-            //BAR
-            $.ajax({
-              url: '/bar',
-              method: 'GET',
-              success: function(data) {
-                  var labels = ['UNIT I', 'UNIT II', 'UNIT III', 'UNIT IV'];
-                  var counts = [];
+            //PIECHART SL BERDASAR WILAYAH
+                $.ajax({
+        url: '/bar',
+        method: 'GET',
+        success: function(data) {
+            var labels = ['UNIT I', 'UNIT II', 'UNIT III', 'UNIT IV'];
+            var counts = [];
 
-                  $.each(labels, function(index, unit) {
-                      counts.push(data[unit]);
-                  });
+            $.each(labels, function(index, unit) {
+                counts.push(data[unit]);
+            });
 
-                  var barChartData = {
-                      labels: labels,
-                      datasets: [{
-                          label: '-',
-                          backgroundColor: [
-                                '#17a2b8',  // Warna untuk UNIT I (rgba(255, 99, 132, 0.8))
-                                '#dc3545',  // Warna untuk UNIT II (rgba(54, 162, 235, 0.8))
-                                '#28a745',  // Warna untuk UNIT III (rgba(255, 206, 86, 0.8))
-                                '#ffc107'   // Warna untuk UNIT IV (rgba(75, 192, 192, 0.8))
-                            ],
-                          borderColor: [
-                              'rgba(255, 255, 255, 1)',
-                              'rgba(255, 255, 255, 1)',
-                              'rgba(255, 255, 255, 1)',
-                              'rgba(255, 255, 255, 1)'
-                          ],
-                          borderWidth: 2,
-                          data: counts
-                      }]
-                  };
+            var pieChartData = {
+                labels: labels,
+                datasets: [{
+                    label: '-',
+                    backgroundColor: [
+                        '#17a2b8',  // Warna untuk UNIT I
+                        '#dc3545',  // Warna untuk UNIT II
+                        '#28a745',  // Warna untuk UNIT III
+                        '#ffc107'   // Warna untuk UNIT IV
+                    ],
+                    borderColor: 'rgba(255, 255, 255, 1)',
+                    borderWidth: 2,
+                    data: counts
+                }]
+            };
 
-                  var barChartOptions = {
-                  responsive: true,
-                  maintainAspectRatio: false,
-                  scales: {
-                      x: {
-                          ticks: {
-                              color: '#ffffff' // Mengubah warna label x-axis menjadi putih
-                          }
-                      },
-                      y: {
-                          min: 0, // Memastikan y-axis mulai dari 0
-                          ticks: {
-                              color: '#ffffff' // Mengubah warna label y-axis menjadi putih
-                          }
-                      }
-                  },
-                  plugins: {
-                      legend: {
-                          labels: {
-                              color: 'white' // Mengubah warna label legend menjadi putih
-                          }
-                      }
-                  },
-                  datasetFill: false
-              };;
+            var pieChartOptions = {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: 'white' // Mengubah warna label legend menjadi putih
+                        }
+                    }
+                }
+            };
 
-                  var barChartCanvas = $('#barChartUnit').get(0).getContext('2d');
-                  new Chart(barChartCanvas, {
-                      type: 'bar',
-                      data: barChartData,
-                      options: barChartOptions
-                  });
-              },
-              error: function() {
-                  alert('Terjadi kesalahan saat mengambil data.');
-              }
-          });
+            var pieChartCanvas = $('#barChartUnit').get(0).getContext('2d');
+            new Chart(pieChartCanvas, {
+                type: 'pie',
+                data: pieChartData,
+                options: pieChartOptions
+            });
+        },
+        error: function() {
+            alert('Terjadi kesalahan saat mengambil data.');
+        }
+    });
 
-        //TABEL
+//END OF BAR
+
+        //TABEL SL BERDASARKAN WILAYAH
 
         $.ajax({
             url: '/bar',
@@ -262,7 +214,7 @@ $.ajax({
                 console.error(error); // Log error jika ada
             }
         });
-
+//KLIK NAVBAR KEUANGAN
         $('#keuangan').click(function(){
             $.ajax({
                 url: '/nilai', // Ubah ini sesuai dengan route ke controller Anda

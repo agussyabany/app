@@ -17,7 +17,7 @@
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             
-            <li class="breadcrumb-item active"><h1 id="digitalClock">PELANGGAN</h1></li>
+            <li class="breadcrumb-item active">{{$tglIndo}}<h1 id="digitalClock">PELANGGAN</h1></li>
           </ol>
         </div><!-- /.col -->
       </div><!-- /.row -->
@@ -92,16 +92,7 @@
           <div class="col">
             <div class="card">
               <div class="card-header border-transparent">
-                <h3 class="card-title text-center">JUMLAH BERDASARKAN GOLONGAN TAHUN 2024</h3>
-    
-                <div class="card-tools">
-                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                    <i class="fas fa-minus"></i>
-                  </button>
-                  <button type="button" class="btn btn-tool" data-card-widget="remove">
-                    <i class="fas fa-times"></i>
-                  </button>
-                </div>
+                <p class=" text-center">JUMLAH BERDASARKAN GOLONGAN TAHUN 2024</p>
               </div>
               <!-- /.card-header -->
               <div class="card-body p-0">
@@ -230,7 +221,7 @@
 
           <div class="card-body">
             <div class="chart">
-              <canvas id="myDonutChart" style="min-height: 550px; height:  550px; max-height:  550px; max-width: 100%;"></canvas>
+              <canvas id="DonutPlgn" style="min-height: 550px; height:  550px; max-height:  550px; max-width: 100%;"></canvas>
             </div>
           </div>
           <!-- /.card-body -->
@@ -301,7 +292,7 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">PENDAPATAN</h4>
+        <h4 class="modal-title">PENDAPATAN {{ $minSatu}}</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>

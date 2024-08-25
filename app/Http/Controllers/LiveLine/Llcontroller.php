@@ -19,6 +19,8 @@ class Llcontroller extends Controller
 
         // Mendapatkan tanggal saat ini
         $now = Carbon::now()->format('Y-m-d');
+        $minSatu = Carbon::now()->subDay(1)->locale('id')->isoFormat('dddd, D MMMM Y');
+        $tglIndo = Carbon::now()->locale('id')->isoFormat('dddd, D MMMM Y');
 
         // Mendefinisikan tanggal otomatis
         $startOfYear = Carbon::now()->startOfYear()->format('Y-m-d'); // Awal tahun ini
@@ -56,7 +58,9 @@ class Llcontroller extends Controller
             'data' => $data,
             'totals' => $totals,
             'today' => $now,
-            'startOfMonth' => $startOfMonth
+            'startOfMonth' => $startOfMonth,
+            'minSatu' => $minSatu,
+            'tglIndo' => $tglIndo
         ]);
         
         //return $totals;
