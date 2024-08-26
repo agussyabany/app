@@ -94,9 +94,9 @@ class UserSeeder extends Seeder
         // $bppl->assignRole('bppl');
 
         $liveLine = User::create([
-            'name' => 'agus',
-            'email'=>'agus@liveline.smd',
-            'password'=>bcrypt('a')
+            'name' => 'Service & Opertion Center',
+            'email'=>'soc@liveline.smd',
+            'password'=>bcrypt('soc2024')
 
         ]);
         $liveLine->assignRole('LiveLine');
