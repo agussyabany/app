@@ -1,12 +1,52 @@
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script>
+<!-- REQUIRED SCRIPTS -->
+<!-- jQuery -->
+<script src="{{ asset('assets/LiveLine/plugins/jquery/jquery.min.js') }}"></script>
+<!-- Bootstrap -->
+<script src="{{ asset('assets/LiveLine/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+<!-- overlayScrollbars -->
+<script src="{{ asset('assets/Liveline/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
+<!-- AdminLTE App -->
+<script src="{{ asset('assets/Liveline/dist/js/adminlte.js') }}"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.12.313/pdf.min.js"></script>
-{{-- <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script> --}}
-<script src="{{ asset('assets/boots/js/myjs/asetmaster.js')}}"></script>
-<script src="{{ asset('assets/boots/js/myjs/asetkib.js') }}"></script>
-<script src="{{ asset('assets/boots/js/myjs/funct.js') }}"></script>
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<!-- PAGE PLUGINS -->
+<!-- jQuery Mapael -->
+<script src="{{ asset('assets/LiveLine/plugins/jquery-mousewheel/jquery.mousewheel.js')}}"></script>
+<script src="{{ asset('assets/LiveLine/plugins/raphael/raphael.min.js')}}"></script>
+<script src="{{ asset('assets/LiveLine/plugins/jquery-mapael/jquery.mapael.min.js') }}"></script>
+<script src="{{ asset('assets/LiveLine/plugins/jquery-mapael/maps/usa_states.min.js') }}"></script>
+<!-- ChartJS -->
+<script src="{{ asset('assets/LiveLine/plugins/chart.js/Chart.min.js') }}"></script>
 
+<!-- AdminLTE for demo purposes -->
+{{-- <script src="{{ asset('assets/LiveLine/dist/js/demo.js')}}"></script> --}}
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script src="{{ asset('asssts/LiveLine/dist/js/pages/dashboard2.js')}}"></script>
+
+<script>    
+    $(document).ready(function() {
+   var on =JSON.parse("{{json_encode($on)}}");
+   console.log(on)
+   if (on ===1 )
+    {
+        $("#pegawai").addClass('nav-link active');
+        $("#master").addClass("menu-open");
+    }
+   if (on ===2 ) 
+   {
+    $("#pemateri").addClass('nav-link active');
+    $("#master").addClass("menu-open");
+}
+   if (on ===3 ) 
+   {
+    $("#divisidiklat").addClass('nav-link active');
+    $("#master").addClass("menu-open");
+}
+   if (on ===4 ) 
+   {
+    $("#datadiklat").addClass('nav-link active');
+    $("#pelatihan").addClass("menu-open");
+}
+});
+
+
+</script>

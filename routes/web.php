@@ -22,12 +22,18 @@ use App\Http\Controllers\Aset\SdmController;
 use App\Http\Controllers\Aset\TanahController;
 use App\Http\Controllers\Aset\Webcontroller;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Diklat\DataDiklatController;
 use App\Http\Controllers\Diklat\Diklatcontroller;
+use App\Http\Controllers\Diklat\DivisiDiklatController;
+use App\Http\Controllers\Diklat\PegawaiController;
+use App\Http\Controllers\Diklat\PemateriController;
 use App\Http\Controllers\LiveLine\Llcontroller;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Soc\Soccontroller;
 use App\Models\Aset\KibD;
 use GuzzleHttp\Middleware;
+use Symfony\Component\HttpKernel\DataCollector\DataCollector;
+
 
 use Illuminate\Support\Facades\Route;
 use Symfony\Component\HttpKernel\Profiler\Profile;
@@ -244,7 +250,10 @@ Route::middleware('auth','verified','role:diklat')->group(function () {
         return redirect('/diklat.dashboard');
     });
     Route::get('/diklat.dashboard',[Diklatcontroller::class, 'index']);
-
+    Route::get('/pegawai',[PegawaiController::class, 'pegawai']);
+    Route::get('/pemateri',[PemateriController::class, 'pemateri']);
+    Route::get('/divisidiklat',[DivisiDiklatController::class, 'divisidiklat']);
+    Route::get('/datadiklat',[DataDiklatController::class, 'datadiklat']);
 });
 
 Route::middleware('auth','verified','role:soc')->group(function () {
@@ -266,5 +275,20 @@ Route::middleware('auth','verified','role:LiveLine')->group(function () {
     Route::get('/donut.duo',[Llcontroller::class,'donutTwo']);
 
 });
+
+// //diklat 
+// Route::middleware('auth','verified','role:diklat')->group(function () {
+//     Route::get('/', function () {
+//         return '<h1>diklat</h1>';
+//     });
+    // Route::get('/ll.dashboard',[Llcontroller::class, 'index']);
+    // Route::get('/donut',[Llcontroller::class, 'donut']);
+    // Route::get('/bar',[Llcontroller::class, 'bar']);
+    // Route::get('/test',[Llcontroller::class, 'test']);
+    // Route::get('/nilai',[Llcontroller::class, 'nilai']);
+    // Route::get('/donut.duo',[Llcontroller::class,'donutTwo']);
+
+// });
+
 
 require __DIR__.'/auth.php';

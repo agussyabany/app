@@ -61,13 +61,13 @@ class UserSeeder extends Seeder
         // );
         // $aset->assignRole('aset');
 
-        // $diklat = User::create([
-        //     'name' => 'Muhammad Agus Syabany',
-        //     'email'=>'agus@diklat.smd',
-        //     'password'=>bcrypt('a')
+        $diklat = User::create([
+            'name' => 'adialamsyah',
+            'email'=>'adialamsyah0041@gmail.com',
+            'password'=>bcrypt('a')
 
-        // ]);
-        // $diklat->assignRole('diklat');
+        ]);
+        $diklat->assignRole('diklat');
 
         // $soc = User::create([
         //     'name' => 'Muhammad Agus Syabany',
@@ -93,12 +93,12 @@ class UserSeeder extends Seeder
         // ]);
         // $bppl->assignRole('bppl');
 
-        $liveLine = User::create([
-            'name' => 'Service & Opertion Center',
-            'email'=>'soc@liveline.smd',
-            'password'=>bcrypt('soc2024')
+        // $liveLine = User::create([
+        //     'name' => 'Service & Opertion Center',
+        //     'email'=>'soc@liveline.smd',
+        //     'password'=>bcrypt('soc2024')
 
-        ]);
-        $liveLine->assignRole('LiveLine');
+        // ]);
+        // $liveLine->assignRole('LiveLine');
     }
 }

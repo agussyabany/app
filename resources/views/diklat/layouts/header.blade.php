@@ -1,116 +1,197 @@
 
+<!-- Navbar -->
+<nav class="main-header navbar navbar-expand navbar-dark">
+  <!-- Left navbar links -->
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+    </li>
+    <li class="nav-item d-none d-sm-inline-block">
+      <a href="#" class="nav-link">SAMBUNGAN </a>
+    </li>
+    <li class="nav-item d-none d-sm-inline-block">
+      <a href="#" class="nav-link" data-toggle="modal" data-target="#modal-lg" id="keuangan">KEUANGAN</a>
+    </li>
+    {{-- s --}}
+  </ul>
 
-
-<div class="">
-
-  <div class="row">
-    <header class="bg-primary text-white kop" style="background-image: url('{{asset('assets/img/head.jpg')}}');background-size: cover; background-repeat: no-repeat; width:100%;">
-        <div class="row">
-        <div class="col-2  collapse-horizontal in"   id="collapseWidthExample">
-            <div class="text-center float-start">
-
-                <a href=""><img src="{{asset('assets/img/perumdam.png')}}" width="35px" width="35px" alt="" class="rounded-circle mt-1 mb-1 ms-1 "></a>
-                SISTEM INFORMASI ASET
+  <!-- Right navbar links -->
+  <ul class="navbar-nav ml-auto">
+    <!-- Navbar Search -->
+    <li class="nav-item">
+      <a class="nav-link" data-widget="navbar-search" href="#" role="button">
+        <i class="fas fa-search"></i>
+      </a>
+      <div class="navbar-search-block">
+        <form class="form-inline">
+          <div class="input-group input-group-sm">
+            <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+            <div class="input-group-append">
+              <button class="btn btn-navbar" type="submit">
+                <i class="fas fa-search"></i>
+              </button>
+              <button class="btn btn-navbar" type="button" data-widget="navbar-search">
+                <i class="fas fa-times"></i>
+              </button>
             </div>
-        </div>
-        <div class="col">
-            <div class="float-start">
-                <button class="btn mt-1" type="button" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample">
-                    <i class="fa-solid fa-list"></i>
-                </button>
-            </div>
-            <div class="text-center float-end">
-                {{Auth::user()->name}}
-                <a href="#" type="button" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="<div class='container text-center border rounded'>
-                    <p>{{Auth::user()->name}}<br>{{ $jabat }} Divisi {{ $divisi }}<br>{{Auth::user()->nip}}<br><a href='{{route('logout')}}' class='btn btn-danger btn-sm'>LOGOUT</a></p>
-            </div>" data-bs-html="true" data-bs-title="USER ACCOUNT"><img src="http://app.perumdamtirtakencana.id/assets/img/user/{{ Auth::user()->img }}" width="40px" width="40px" alt="" class="rounded-circle mt-1 me-1 border border-default" ></a>
-            </div>
-
-        </div>
-        </div>
-    </header>
-
-    <nav class="col-2 nav" id="collapseWidthExample">
-        <div class=" collapse-horizontal in"  id="collapseWidthExample"   style="background-image: url('{{asset('assets/img/side3.jpg')}}');background-size: cover; background-repeat: no-repeat;font-family: 'Bahnschrift-SemiLight', sans-serif; width:100%; height:100%">
-            <div class="container">
-                <ul class="nav flex-column" id="menuTabs">
-                    <li class="nav-item">
-                        <span class="nav-link text-center disabled"><strong>DATA MASTER</strong></span>
-                    </li>
-                    <li class="nav-item pb-1">
-                        <a type="button" id="barang" class="hoverable" style="width: 100%" data-tab-target="tab1" href="#"><i class="fa-solid fa-boxes-stacked"></i>&nbsp;Barang</a>
-                    </li>
-                    <li class="nav-item">
-                        <button type="button" class="hoverable" id="departemen" style="width: 100%" data-tab-target="tab2" href="#"><i class="fa-solid fa-user-tie"></i>&nbsp;Departemen</button>
-                    </li>
-                    <li class="nav-item">
-                        <button type="button" class="hoverable" id="divisi" style="width: 100%"><i class="fa-solid fa-users"></i>&nbsp;Divisi</button>
-                    </li>
-                    <li class="nav-item">
-                        <button type="button" class="hoverable" id="ruang" style="width: 100%"><i class="fa-solid fa-door-open"></i>&nbsp;Ruangan</button>
-                    </li>
-                    <li class="nav-item">
-                        <button type="button" class="hoverable" id="sdm" style="width: 100%"><i class="fa-solid fa-people-arrows"></i>&nbsp;SDM Pendukung</button>
-                    </li>
-                    <li class="nav-item">
-                        <button type="button" class="hoverable" id="lokasi" style="width: 100%"><i class="fa-solid fa-location-dot"></i>&nbsp;Lokasi</button>
-                    </li>
-                    <li class="nav-item">
-                        <button type="button" class="hoverable" id="dokumen" style="width: 100%"><i class="fa-regular fa-folder-open"></i>&nbsp;Dokumen</button>
-                    </li>
-                    <li class="nav-item">
-                        <button type="button" class="hoverable" id="bahan" style="width: 100%"><i class="fa-solid fa-atom"></i>&nbsp;Bahan</button>
-                    </li>
-                    <li class="nav-item">
-                      <button type="button" class="hoverable" id="aktiva" style="width: 100%"><i class="fa-solid fa-barcode"></i>&nbsp;Kode Aktiva</button>
-                  </li>
-
-
-                      <li class="nav-item">
-                          <span class="nav-link text-center disabled"><strong>K . I . B</strong></span>
-                      </li>
-                      <li class="nav-item">
-                          <a type="button" href="#"  class="hoverable" id="a" style="width: 100%"><i class="fa-regular fa-map"></i>&nbsp;TANAH</a>
-                      </li>
-                      <li class="nav-item">
-                          <a type="button"  class="hoverable" id="b" style="width: 100%"><i class="fa-solid fa-gears"></i>&nbsp;PERALATAN DAN MESIN</a>
-                      </li>
-                      <li class="nav-item">
-                          <a type="button"  class="hoverable" id="c" style="width: 100%"><i class="fa-solid fa-building"></i>&nbsp;GEDUNG DAN BANGUNAN</a>
-                      </li>
-                      <li class="nav-item">
-                          <a type="button"  class="hoverable" id="d" style="width: 100%"><i class="fa-solid fa-road"></i>&nbsp;JALAN , IRIGASI DAN JARINGAN</a>
-                      </li>
-                      <li class="nav-item">
-                          <a type="button"  class="hoverable" id="e" style="width: 100%"><i class="fa-solid fa-marker"></i>&nbsp;ASET TETAP LAINNYA</a>
-                      </li>
-                      <li class="nav-item">
-                          <a type="button"  class="hoverable" id="f" style="width: 100%"><i class="fa-solid fa-trowel-bricks"></i>&nbsp;KONSTRUKSI</a>
-                      </li>
-                      <li class="nav-item">
-                          <a type="button"  class="hoverable" id="kir" style="width: 100%"><i class="fa-solid fa-list"></i>&nbsp;K.I.R</a>
-                      </li>
-
-
-                      <li class="nav-item">
-                          <span class="nav-link text-center disabled"><strong>NILAI ASET</strong></span>
-                      </li>
-
-                      <li class="nav-item">
-                          <a type="button"  class="hoverable" id="nilai" style="width: 100%"><i class="fa-solid fa-heart"></i>&nbsp;NILAI ASET</a>
-                      </li>
-
-                      
-                    </ul>
-                </div>
-
+          </div>
+        </form>
       </div>
-  </nav>
+    </li>
 
+    
+    <li class="nav-item">
+      <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+        <i class="fas fa-expand-arrows-alt"></i>
+      </a>
+    </li>
+  </ul>
+</nav>
+<!-- /.navbar -->
+<!-- Main Sidebar Container -->
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+  <!-- Brand Logo -->
+  <a href="index3.html" class="brand-link">
+    <img src="{{ asset('assets/LiveLine/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+    <span class="brand-text font-weight-light">-</span>
+  </a>
 
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <!-- Sidebar user panel (optional) -->
+    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+      <div class="image">
+        <img src="{{ asset('assets/LiveLine/dist/img/logo.png') }}" class="img-circle elevation-2" alt="User Image">
+      </div>
+      <div class="info">
+        <a href="#" class="d-block">PERUMDAM TIRTA KENCANA</a>
+      </div>
+    </div>
 
+    <!-- SidebarSearch Form -->
+    <div class="form-inline">
+      <div class="input-group" data-widget="sidebar-search">
+        <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+        <div class="input-group-append">
+          <button class="btn btn-sidebar">
+            <i class="fas fa-search fa-fw"></i>
+          </button>
+        </div>
+      </div>
+    </div>
 
+    <!-- Sidebar Menu -->
+          <nav class="mt-2">
+      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        <!-- Add icons to the links using the .nav-icon class
+             with font-awesome or any other icon font library -->
+        <li class="nav-item " id="master"> 
+          <a href="#" class="nav-link active">
+            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <p>
+              MASTER DATA
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item ">
+              <a href="#" class="nav-link ">
+                <i class="far fa-circle nav-icon"></i>
+                <p>PENGGUNA</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/pegawai" id="pegawai" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>PEGAWAI</p>
+              </a>
+            </li>
+          
+            <li class="nav-item">
+              <a href="/pemateri" id="pemateri" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>PEMATERI</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/divisidiklat" id="divisidiklat" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>DIVISI DIKLAT</p>
+              </a>
 
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item " id="pelatihan">
+          <a href="#" class="nav-link active">
+            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <p>
+              PELATIHAN
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="/datadiklat" id="datadiklat" class="nav-link ">  
+                <i class="far fa-circle nav-icon"></i>
+                <p>DATA DIKLAT</p>
+              </a>
+            </li>
+            </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>-</p>
+              </a>
 
+            
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link active">
+            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <p>
+              WEB CMS
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="#" class="nav-link ">  
+                <i class="far fa-circle nav-icon"></i>
+               
+              </a>
+            </li>
 
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link active">
+            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <p>
+              PENGATURAN
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="#" class="nav-link ">  
+                <i class="far fa-circle nav-icon"></i>
+               
+              </a>
+            </li>
+
+            
+
+        
+      </ul>
+    </nav>
+    
+    <!-- /.sidebar-menu -->
+  </div>
+  <!-- /.sidebar -->
+</aside>
 
