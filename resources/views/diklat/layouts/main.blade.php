@@ -8,17 +8,17 @@
             <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
             <meta name="generator" content="Hugo 0.118.2">
             <title>Aset PDAM</title>
-            @include('admin.layouts._asset_header')
+            @include('diklat.layouts._asset_header')
             <meta name="theme-color" content="#712cf9">
         </head>
         <body>
-            @include('admin.layouts.header')
+            @include('diklat.layouts.header')
             @yield('content')
             @stack('scripts')
-            @include('admin.layouts.footer')
+            @include('diklat.layouts.footer')
         </body>
 </html>
-            @include('admin.layouts._asset_footer')
+            @include('diklat.layouts._asset_footer')
 
         {{-- //@include('sweetalert::alert') --}}
 
