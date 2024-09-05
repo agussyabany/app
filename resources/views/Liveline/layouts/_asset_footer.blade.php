@@ -4,9 +4,9 @@
 <!-- Bootstrap -->
 <script src="{{ asset('assets/LiveLine/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <!-- overlayScrollbars -->
-<script src="{{ asset('assets/Liveline/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
+<script src="{{ asset('assets/LiveLine/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
 <!-- AdminLTE App -->
-<script src="{{ asset('assets/Liveline/dist/js/adminlte.js') }}"></script>
+<script src="{{ asset('assets/LiveLine/dist/js/adminlte.js') }}"></script>
 
 <!-- PAGE PLUGINS -->
 <!-- jQuery Mapael -->
@@ -20,7 +20,7 @@
 <!-- AdminLTE for demo purposes -->
 {{-- <script src="{{ asset('assets/LiveLine/dist/js/demo.js')}}"></script> --}}
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="{{ asset('asssts/LiveLine/dist/js/pages/dashboard2.js')}}"></script>
+<script src="{{ asset('assets/LiveLine/dist/js/pages/dashboard2.js')}}"></script>
 <script>
   $(function(){
 
@@ -135,11 +135,11 @@ $.ajax({
                             tableBody.append(row);
                         });
                     } else {
-                        alert('Data gagal diambil');
+                        console.log('Data Gagal Diambil')
                     }
                 },
                 error: function() {
-                    alert('Terjadi kesalahan saat mengambil data');
+                    console.log('Terjadi kesalahan saat mengambil data');
                 }
             });
 
@@ -191,7 +191,7 @@ $.ajax({
             });
         },
         error: function() {
-            alert('Terjadi kesalahan saat mengambil data.');
+            console.log('Terjadi kesalahan saat mengambil data.');
         }
     });
 
