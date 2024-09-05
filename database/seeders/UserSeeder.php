@@ -98,13 +98,13 @@ class UserSeeder extends Seeder
         );
         $aset->assignRole('aset');
 
-        // $diklat = User::create([
-        //     'name' => 'Muhammad Agus Syabany',
-        //     'email'=>'agus@diklat.smd',
-        //     'password'=>bcrypt('a')
+        $diklat = User::create([
+            'name' => 'adialamsyah',
+            'email'=>'adialamsyah0041@gmail.com',
+            'password'=>bcrypt('a')
 
-        // ]);
-        // $diklat->assignRole('diklat');
+        ]);
+        $diklat->assignRole('diklat');
 
         // $soc = User::create([
         //     'name' => 'Muhammad Agus Syabany',

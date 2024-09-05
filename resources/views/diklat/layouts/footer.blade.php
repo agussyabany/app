@@ -1,8 +1,9 @@
-<footer style="background-color: darkgray" class="footer mt-auto py-3 ">
-    <div class="container">
-      <span class="text-body-secondary">Perumdam Tirta Kencana Samarinda</span>
-    </div>
-  </footer>
-
+ <!-- Main Footer -->
+ <footer class="main-footer">
+  <strong>Copyright &copy; 2024 <a href="https://adminlte.io">S.O.C</a>.</strong>
+  All rights reserved.
+  <div class="float-right d-none d-sm-inline-block">
+    <b>Version</b> 3.2.0
   </div>
+</footer>
 </div>
