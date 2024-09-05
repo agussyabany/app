@@ -21,7 +21,7 @@ class UserSeeder extends Seeder
         // ]);
         // $admin->assignRole('admin');
 
-        //$aset = User::create(
+        $aset = User::create(
             // [
             //     'name' => 'AAM ROBIDIN NOOR, S.E.',
             //     'email'=>'robi@aset.smd',
@@ -58,8 +58,45 @@ class UserSeeder extends Seeder
             //     'img'=>'ira.jpg',
             //     'password'=>bcrypt('ira2024')
             // ]
-        // );
-        // $aset->assignRole('aset');
+
+            [
+                'name' => 'HILAL',
+                'email' => 'hilal@aset.smd',
+                'nip' => '1986.2008.1.461',
+                'jabat' => '3',
+                'divisi' => 27,
+                'img' => '-',
+                'password' => bcrypt('hilal2024')
+            ],
+            [
+                'name' => 'HJ DAHLIANA',
+                'email' => 'dahlia@aset.smd',
+                'nip' => '1972.1996.2.258',
+                'jabat' => '3',
+                'divisi' => 27,
+                'img' => '-',
+                'password' => bcrypt('dahlia2024')
+            ],
+            [
+                'name' => 'MUHAMMAD RIDHO AZZINDANI AZHAR',
+                'email' => 'rido@aset.smd',
+                'nip' => '-',
+                'jabat' => '3',
+                'divisi' => 27,
+                'img' => '-',
+                'password' => bcrypt('rido2024')
+            ],
+            [
+                'name' => 'ANDI ERWIN',
+                'email' => 'erwin@aset.smd',
+                'nip' => '-',
+                'jabat' => '3',
+                'divisi' => 27,
+                'img' => '-',
+                'password' => bcrypt('erwin2024')
+            ]
+        );
+        $aset->assignRole('aset');
 
         // $diklat = User::create([
         //     'name' => 'Muhammad Agus Syabany',
@@ -93,12 +130,12 @@ class UserSeeder extends Seeder
         // ]);
         // $bppl->assignRole('bppl');
 
-        $liveLine = User::create([
-            'name' => 'Service & Opertion Center',
-            'email'=>'soc@liveline.smd',
-            'password'=>bcrypt('soc2024')
+        // $liveLine = User::create([
+        //     'name' => 'Service & Opertion Center',
+        //     'email'=>'soc@liveline.smd',
+        //     'password'=>bcrypt('soc2024')
 
-        ]);
-        $liveLine->assignRole('LiveLine');
+        // ]);
+        // $liveLine->assignRole('LiveLine');
     }
 }
