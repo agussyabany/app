@@ -21,7 +21,7 @@ class UserSeeder extends Seeder
         // ]);
         // $admin->assignRole('admin');
 
-        $aset = User::create(
+        //$aset = User::create(
             // [
             //     'name' => 'AAM ROBIDIN NOOR, S.E.',
             //     'email'=>'robi@aset.smd',
@@ -59,51 +59,56 @@ class UserSeeder extends Seeder
             //     'password'=>bcrypt('ira2024')
             // ]
 
-            [
-                'name' => 'HILAL',
-                'email' => 'hilal@aset.smd',
-                'nip' => '1986.2008.1.461',
-                'jabat' => '3',
-                'divisi' => 27,
-                'img' => '-',
-                'password' => bcrypt('hilal2024')
-            ],
-            [
-                'name' => 'HJ DAHLIANA',
-                'email' => 'dahlia@aset.smd',
-                'nip' => '1972.1996.2.258',
-                'jabat' => '3',
-                'divisi' => 27,
-                'img' => '-',
-                'password' => bcrypt('dahlia2024')
-            ],
-            [
-                'name' => 'MUHAMMAD RIDHO AZZINDANI AZHAR',
-                'email' => 'rido@aset.smd',
+            // [
+            //     'name' => 'HILAL',
+            //     'email' => 'hilal@aset.smd',
+            //     'nip' => '1986.2008.1.461',
+            //     'jabat' => '3',
+            //     'divisi' => 27,
+            //     'img' => '-',
+            //     'password' => bcrypt('hilal2024')
+            // ],
+            // [
+            //     'name' => 'HJ DAHLIANA',
+            //     'email' => 'dahlia@aset.smd',
+            //     'nip' => '1972.1996.2.258',
+            //     'jabat' => '3',
+            //     'divisi' => 27,
+            //     'img' => '-',
+            //     'password' => bcrypt('dahlia2024')
+            // ],
+            // [
+            //     'name' => 'MUHAMMAD RIDHO AZZINDANI AZHAR',
+            //     'email' => 'rido@aset.smd',
+            //     'nip' => '-',
+            //     'jabat' => '3',
+            //     'divisi' => 27,
+            //     'img' => '-',
+            //     'password' => bcrypt('rido2024')
+            // ],
+            // [
+            //     'name' => 'ANDI ERWIN',
+            //     'email' => 'erwin@aset.smd',
+            //     'nip' => '-',
+            //     'jabat' => '3',
+            //     'divisi' => 27,
+            //     'img' => '-',
+            //     'password' => bcrypt('erwin2024')
+            // ]
+        //);
+        //$aset->assignRole('aset');
+
+        $diklat = User::create(
+             [
+                'name' => 'MUHAMMAD AGUS SYABANY',
+                'email' => 'agus@diklat.smd',
                 'nip' => '-',
                 'jabat' => '3',
-                'divisi' => 27,
+                'divisi' => 0,
                 'img' => '-',
-                'password' => bcrypt('rido2024')
-            ],
-            [
-                'name' => 'ANDI ERWIN',
-                'email' => 'erwin@aset.smd',
-                'nip' => '-',
-                'jabat' => '3',
-                'divisi' => 27,
-                'img' => '-',
-                'password' => bcrypt('erwin2024')
+                'password' => bcrypt('a')
             ]
         );
-        $aset->assignRole('aset');
-
-        $diklat = User::create([
-            'name' => 'adialamsyah',
-            'email'=>'adialamsyah0041@gmail.com',
-            'password'=>bcrypt('a')
-
-        ]);
         $diklat->assignRole('diklat');
 
         // $soc = User::create([
