@@ -249,22 +249,6 @@ Route::middleware('auth','verified','role:diklat')->group(function () {
     Route::get('/', function () {
         return redirect('/diklat.dashboard');
     });
-<<<<<<< HEAD
-    Route::get('/diklat.dashboard',[Diklatcontroller::class, 'index']);
-    Route::get('/pegawai',[PegawaiController::class, 'pegawai'])->name('pegawai.index');
-    Route::get('/pemateri',[PemateriController::class, 'pemateri']);
-    Route::get('/divisidiklat',[DivisiDiklatController::class, 'divisidiklat']);
-    Route::get('/datadiklat',[DataDiklatController::class, 'datadiklat']);
-    Route::post('/pegawai/save', [PegawaiController::class, 'save'])->name('pegawai.save');
-    Route::post('/pegawai/store', [PegawaiController::class, 'store'])->name('pegawai.store');
-    Route::get('pegawai/{id}/edit', [PegawaiController::class, 'edit'])->name('pegawai.edit');
-    Route::post('/pegawai/{id}/update', [PegawaiController::class, 'update'])->name('pegawai.update');
-    Route::delete('pegawai/{id}', [PegawaiController::class, 'destroy'])->name('pegawai.destroy');
-
-
-
-
-=======
     Route::get('/diklat.dashboard', [DiklatController::class, 'index'])->name('divisi.index');
     Route::post('/divisi', [DivisiController::class, 'store'])->name('divisi.store');
     Route::get('/divisi', [DivisiController::class, 'index']);
@@ -272,16 +256,20 @@ Route::middleware('auth','verified','role:diklat')->group(function () {
     Route::resource('pemateri', PemateriController::class);
     Route::get('/pemateri',[PemateriController::class, 'index'])->name('pemateri.index');
     Route::post('/pemateri.save',[PemateriController::class, 'save']);
-    Route::get('/pemateri/{id}/edit', 'PemateriController@edit')->name('pemateri.edit');
-    Route::patch('/pemateri/{id}', 'PemateriController@update')->name('pemateri.update');
+    Route::get('/pemateri/{id}/edit',[PemateriController::class, 'edit']) ->name('pemateri.edit');
+    Route::patch('/pemateri/{id}', [PemateriController::class, 'update'])->name('pemateri.update');
     Route::delete('/pemateri/{id}', [PemateriController::class, 'destroy'])->name('pemateri.destroy');
    Route::post('bagian.save',[DivisiDiklatController::class, 'save']);
    Route::delete('/bagian/{id}', [DivisiDiklatController::class, 'destroy'])->name('bagian.destroy');
 Route::put('/bagian/{id}', [DivisiDiklatController::class, 'update'])->name('bagian.update');
+Route::post('/pegawai/save', [PegawaiController::class, 'save'])->name('pegawai.save');
+Route::post('/pegawai/store', [PegawaiController::class, 'store'])->name('pegawai.store');
+Route::get('pegawai/{id}/edit', [PegawaiController::class, 'edit'])->name('pegawai.edit');
+Route::post('/pegawai/{id}/update', [PegawaiController::class, 'update'])->name('pegawai.update');
+Route::delete('pegawai/{id}', [PegawaiController::class, 'destroy'])->name('pegawai.destroy');
 
 
    Route::get('divisidiklat',[DivisiDiklatController::class, 'index']);
->>>>>>> 687e8359e353a48f9554105fd17b64f2bc1eb285
 });
 
 Route::middleware('auth','verified','role:soc')->group(function () {
