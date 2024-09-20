@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Aset;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -8,12 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Divisi extends Model
 {
     use HasFactory;
-    protected $divsi = [
 
-        'id',
-        'id_dep',
-        'kode_div',
-        'nama_div'
-
-    ];
+    protected $fillable = ['divisi']; // Izinkan mass assignment untuk kolom 'divisi'
 }

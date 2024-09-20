@@ -44,6 +44,10 @@ class AuthenticatedSessionController extends Controller
                 return redirect()->to('/soc.dashboard');
             }
 
+            if (Auth::user()->hasRole('LiveLine')) {
+                return redirect()->to('/ll.dashboard');
+            }
+
             return redirect()->intended(RouteServiceProvider::HOME);
         } catch (\Illuminate\Auth\AuthenticationException $e) {
             // Authentication failed
