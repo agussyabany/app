@@ -10,6 +10,8 @@ class Diklatcontroller extends Controller
     public function index()
 
     {
-         return view('diklat.pages.dashboard');
+        $on=0;
+         return view('diklat.pages.index',compact(['on']));
+         
     }
 }
