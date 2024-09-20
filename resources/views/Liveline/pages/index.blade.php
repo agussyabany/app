@@ -235,7 +235,7 @@
               <div class="row">
                 <div class="col-sm-4 col-8">
                   <div class="description-block border-right border-left">
-                    <span class="description-text">AKTIV</span>
+                    <span class="description-text">AKTIF</span>
                     <h3 class="text-success"><strong>-</strong></h3>
                     
                   </div>
@@ -244,7 +244,7 @@
                 <!-- /.col -->
                 <div class="col-sm-4 col-8">
                   <div class="description-block border-right">
-                    <span class="description-text">TIDAK AKTIV</span>
+                    <span class="description-text">TIDAK AKTIF</span>
                     <h3 class="text-warning"><strong>-</strong></h3>
                     
                   </div>

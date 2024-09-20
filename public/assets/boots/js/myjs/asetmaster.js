@@ -224,6 +224,7 @@ $(document).on('click', '#edit_sdm', function() {
             $.each(data.data, function (index, item) {
                 $('#nama').val(item.nama_sdm);
                 $('#nip').val(item.nip);
+                
                 $('#jabatOpt option[value="' + item.idJabat + '"]').remove();
                 $('#jabatOpt').prepend('<option value="' + item.idJabat + '" selected="selected">' + item.jabat + '</option>');
                 $('#jabatVal').val(item.idJabat);
@@ -231,6 +232,7 @@ $(document).on('click', '#edit_sdm', function() {
                 $('#select_div option[value="' + item.idDiv + '"]').remove();
                 $('#select_div').prepend('<option value="' + item.idDiv + '" selected="selected">' + item.nama_div + '</option>');
                 $('#divVal').val(item.idDiv);
+
                 $('#id').val(id);
                 $('#form_sdm').attr('action', '/sdm.update');
             });
