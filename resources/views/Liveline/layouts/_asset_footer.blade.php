@@ -135,11 +135,11 @@ $.ajax({
                             tableBody.append(row);
                         });
                     } else {
-                        alert('Data gagal diambil');
+                        console.log('Data Gagal Diambil')
                     }
                 },
                 error: function() {
-                    alert('Terjadi kesalahan saat mengambil data');
+                    console.log('Terjadi kesalahan saat mengambil data');
                 }
             });
 
@@ -191,7 +191,7 @@ $.ajax({
             });
         },
         error: function() {
-            alert('Terjadi kesalahan saat mengambil data.');
+            console.log('Terjadi kesalahan saat mengambil data.');
         }
     });
 

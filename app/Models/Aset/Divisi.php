@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Divisi extends Model
 {
     use HasFactory;
-    protected $fillable = [
+    protected $divsi = [
 
         'id',
         'id_dep',

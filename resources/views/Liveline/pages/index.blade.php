@@ -17,7 +17,7 @@
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             
-            <li class="breadcrumb-item active">{{$tglIndo}}<h1 id="digitalClock">PELANGGAN</h1></li>
+            <li class="breadcrumb-item active"><h1>{{$tglIndo}}</h1><h1 id="digitalClock">PELANGGAN</h1></li>
           </ol>
         </div><!-- /.col -->
       </div><!-- /.row -->
@@ -31,7 +31,7 @@
       <!-- Info boxes -->
       <div class="row"> 
       <div class="col text-center border border-primary rounded"><br>
-        <h5>SAMBUNGAN LANGGANAN BARU</h5>
+        <h3>SAMBUNGAN LANGGANAN BARU</h3>
         <div class="card-footer">
           <div class="row">
             <div class="col-sm-4 col-8">
@@ -47,7 +47,7 @@
               <div class="description-block border-right">
                
                 <h3 class="text-warning"><strong>{{ number_format($totals['bulan'], 0) }}</strong></h3>
-                <span class="description-text">AGUSTUS 2024</span>
+                <span class="description-text">SEPTEMBER 2024</span>
               </div>
               <!-- /.description-block -->
             </div>
@@ -69,7 +69,7 @@
         <div class="row">
           <div class="col">
             <div class="card">
-              <div class="card-header">BERDASAR GOLONGAN TAHUN 2024</div>
+              <div class="card-header"><h3>BERDASAR GOLONGAN TAHUN 2024</h3></div>
               <div class="card-body">
                 <canvas id="donutChart" style="min-height: 350px; height: 350px; max-height: 350px; max-width: 100%;"></canvas>
               </div>
@@ -78,7 +78,7 @@
 
           <div class="col">
             <div class="card">
-              <div class="card-header">BERDASAR WILAYAH TAHUN 2024</div>
+              <div class="card-header"><h3>BERDASAR WILAYAH TAHUN 2024</h3></div>
               <div class="card-body">
                 <canvas id="barChartUnit" style="min-height: 350px; height: 350px; max-height: 350px; max-width: 100%;"></canvas>
               </div>
@@ -92,7 +92,7 @@
           <div class="col">
             <div class="card">
               <div class="card-header border-transparent">
-                <p class=" text-center">JUMLAH BERDASARKAN GOLONGAN TAHUN 2024</p>
+                <p class=" text-center"><h3>JUMLAH BERDASARKAN GOLONGAN TAHUN 2024</h3></p>
               </div>
               <!-- /.card-header -->
               <div class="card-body p-0">
@@ -121,7 +121,7 @@
           </div>
           <div class="col">
             <div class="card">
-              <div class="card-header">JUMLAH BERDASARKAN WILAYAH TAHUN 2024</div>
+              <div class="card-header"><h3>JUMLAH BERDASARKAN WILAYAH TAHUN 2024</h3></div>
               <div class="card-body">
                 <table class="table m-0" id="unitTable">
                   <thead>
@@ -147,7 +147,7 @@
       </div>
       
       <div class="col text-center border border-primary"><br>
-        <h5>JUMLAH PELANGGAN</h5>
+        <h3>JUMLAH PELANGGAN</h3>
         <div class="row">
           <div class="col-12 col-sm-6 col-md-3">
             <div class="info-box">
@@ -230,12 +230,12 @@
 
         <div class="row"> 
           <div class="col text-center"><br>
-            <h5>SATATUS PELANGGAN</h5>
+            <h3>STATUS PELANGGAN</h3>
             <div class="card-footer">
               <div class="row">
                 <div class="col-sm-4 col-8">
                   <div class="description-block border-right border-left">
-                    <span class="description-text">AKTIV</span>
+                    <span class="description-text">AKTIF</span>
                     <h3 class="text-success"><strong>-</strong></h3>
                     
                   </div>
@@ -244,7 +244,7 @@
                 <!-- /.col -->
                 <div class="col-sm-4 col-8">
                   <div class="description-block border-right">
-                    <span class="description-text">TIDAK AKTIV</span>
+                    <span class="description-text">TIDAK AKTIF</span>
                     <h3 class="text-warning"><strong>-</strong></h3>
                     
                   </div>
