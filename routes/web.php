@@ -250,10 +250,19 @@ Route::middleware('auth','verified','role:diklat')->group(function () {
         return redirect('/diklat.dashboard');
     });
     Route::get('/diklat.dashboard',[Diklatcontroller::class, 'index']);
-    Route::get('/pegawai',[PegawaiController::class, 'pegawai']);
+    Route::get('/pegawai',[PegawaiController::class, 'pegawai'])->name('pegawai.index');
     Route::get('/pemateri',[PemateriController::class, 'pemateri']);
     Route::get('/divisidiklat',[DivisiDiklatController::class, 'divisidiklat']);
     Route::get('/datadiklat',[DataDiklatController::class, 'datadiklat']);
+    Route::post('/pegawai/save', [PegawaiController::class, 'save'])->name('pegawai.save');
+    Route::post('/pegawai/store', [PegawaiController::class, 'store'])->name('pegawai.store');
+    Route::get('pegawai/{id}/edit', [PegawaiController::class, 'edit'])->name('pegawai.edit');
+    Route::post('/pegawai/{id}/update', [PegawaiController::class, 'update'])->name('pegawai.update');
+    Route::delete('pegawai/{id}', [PegawaiController::class, 'destroy'])->name('pegawai.destroy');
+
+
+
+
 });
 
 Route::middleware('auth','verified','role:soc')->group(function () {
