@@ -25,6 +25,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Diklat\DataDiklatController;
 use App\Http\Controllers\Diklat\Diklatcontroller;
 use App\Http\Controllers\Diklat\DivisiDiklatController;
+use App\Http\Controllers\Diklat\Mobile\Mobilecontroller;
 use App\Http\Controllers\Diklat\PegawaiController;
 use App\Http\Controllers\Diklat\PemateriController;
 use App\Http\Controllers\LiveLine\Llcontroller;
@@ -82,7 +83,7 @@ Route::get('admin',function (){
 })->middleware('auth','verified','role:admin');
 
 
-
+//SISTEM INFORMASI ASET
 Route::middleware('auth','verified','role:aset')->group(function () {
     Route::get('/', function () {
         return redirect('/barangs');
@@ -136,7 +137,7 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::post('dep.update',[DepartemenController::class,'update']);
     Route::post('dep.hapus/{id}',[DepartemenController::class,'destroy']);
 
-    Route::post('/div.save',[Devisicontroller::class,'save']);
+    Route::post('/div.save',[Divisicontroller::class,'save']);
     Route::get('div.edit/{id}',[Divisicontroller::class,'edit']);
     Route::post('div.update',[Divisicontroller::class,'update']);
     Route::post('div.hapus/{id}',[Divisicontroller::class,'destroy']);
@@ -244,7 +245,11 @@ Route::middleware('auth','verified','role:aset')->group(function () {
 
 
 });
+// END OF SISTEM INFORMASI ASET
 
+
+
+// SINSTEM INFORAMSI DIKLAT
 Route::middleware('auth','verified','role:diklat')->group(function () {
     Route::get('/', function () {
         return redirect('/diklat.dashboard');
@@ -259,21 +264,30 @@ Route::middleware('auth','verified','role:diklat')->group(function () {
     Route::get('/pemateri/{id}/edit', 'PemateriController@edit')->name('pemateri.edit');
     Route::patch('/pemateri/{id}', 'PemateriController@update')->name('pemateri.update');
     Route::delete('/pemateri/{id}', [PemateriController::class, 'destroy'])->name('pemateri.destroy');
-   Route::post('bagian.save',[DivisiDiklatController::class, 'save']);
-   Route::delete('/bagian/{id}', [DivisiDiklatController::class, 'destroy'])->name('bagian.destroy');
-Route::put('/bagian/{id}', [DivisiDiklatController::class, 'update'])->name('bagian.update');
-
-
-   Route::get('divisidiklat',[DivisiDiklatController::class, 'index']);
+    Route::post('bagian.save',[DivisiDiklatController::class, 'save']);
+    Route::delete('/bagian/{id}', [DivisiDiklatController::class, 'destroy'])->name('bagian.destroy');
+    Route::put('/bagian/{id}', [DivisiDiklatController::class, 'update'])->name('bagian.update');
+    Route::get('divisidiklat',[DivisiDiklatController::class, 'index']);
 });
+Route::get('/lpk', function () {
+    return redirect('/home');
+});
+Route::get('/home',[Mobilecontroller::class, 'index']);
 
+// END OF SISTEM INFORMASI DIKLAT
+
+
+// SISTEM INFORAMSI SOC
 Route::middleware('auth','verified','role:soc')->group(function () {
     Route::get('/', function () {
         return redirect('/soc.dashboard');
     });
     Route::get('/soc.dashboard',[Soccontroller::class, 'index']);
 });
+//END OF SISTEM INFORMASI SOC
 
+
+//LIVE LINE DASHBOARD
 Route::middleware('auth','verified','role:LiveLine')->group(function () {
     Route::get('/', function () {
         return redirect('/ll.dashboard');
@@ -286,20 +300,8 @@ Route::middleware('auth','verified','role:LiveLine')->group(function () {
     Route::get('/donut.duo',[Llcontroller::class,'donutTwo']);
 
 });
+// END OF LIVE LINE DASHBOARD
 
-// //diklat 
-// Route::middleware('auth','verified','role:diklat')->group(function () {
-//     Route::get('/', function () {
-//         return '<h1>diklat</h1>';
-//     });
-    // Route::get('/ll.dashboard',[Llcontroller::class, 'index']);
-    // Route::get('/donut',[Llcontroller::class, 'donut']);
-    // Route::get('/bar',[Llcontroller::class, 'bar']);
-    // Route::get('/test',[Llcontroller::class, 'test']);
-    // Route::get('/nilai',[Llcontroller::class, 'nilai']);
-    // Route::get('/donut.duo',[Llcontroller::class,'donutTwo']);
-
-// });
 
 
 require __DIR__.'/auth.php';
