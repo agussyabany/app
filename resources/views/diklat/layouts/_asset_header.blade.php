@@ -9,4 +9,9 @@
   <!-- datat ablecss -->
   <link rel="stylesheet" href="https://cdn.datatables.net/2.1.5/css/dataTables.dataTables.css" />
 
+<!-- Select2 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="{{asset('assets/LiveLine/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css')}}">
 
+<!-- DataTables CSS Yang Baru-->
+<link rel="stylesheet" href="https://cdn.datatables.net/2.1.5/css/dataTables.dataTables.css" />
