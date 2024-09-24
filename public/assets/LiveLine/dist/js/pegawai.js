@@ -15,35 +15,29 @@ $(document).on('click', '#tambahDataPegawai', function() {
 
 
 //EDIT DATA PEGAWAI
-$(document).on('click', '.edit_pegawai', function() {
-    var id = $(this).data('id');
-    
-    // Set judul modal
-    $('#judulModalPegawai').html('Edit Data Pegawai');
+$(document).ready(function() {
+    // Event ketika tombol edit di-click
+    $(document).on('click', '.edit_pegawai', function() {
+        var id = $(this).data('id'); // Ambil ID dari tombol edit
 
-    // Ambil data pegawai melalui AJAX
-    $.ajax({
-        type: "GET",
-        url: "/pegawai/" + id + "/edit",
-        success: function(response) {
-            var item = response.data;
-
-            // Isi nilai input
-            $('#nama_pegawai').val(item.id);
-            $('#namaPegawai').val(item.nama_pegawai);
-            $('#nipPegawai').val(item.nip);
-            $('#jabatanPegawai').val(item.jabatan).trigger('change');
-            $('#bagianPegawai').val(item.bagian).trigger('change');
-
-            // Set action form untuk update data
-            $('#formPegawai').attr('action', '/pegawai/' + id + '/update');
-
-            // Tampilkan modal
-            $('#modalPegawai').modal('show');
-        },
-        error: function(xhr) {
-            alert('Terjadi kesalahan saat memuat data.');
-        }
+        // AJAX untuk mengambil data pegawai berdasarkan ID
+        $.ajax({
+            url: '/pegawai/' + id + '/edit', // Pastikan rute edit sesuai
+            type: 'GET',
+            success: function(data) {
+                // Isi form modal dengan data pegawai
+                $('#idPegawai').val(data.id);
+                $('#namaPegawai').val(data.nama_pegawai);
+                $('#nipPegawai').val(data.nip);
+                $('#jabatanPegawai').val(data.jabatan);
+                $('#bagianPegawai').val(data.bagian);
+                $('#modalPegawai').modal('show'); // Tampilkan modal
+            },
+            error: function(xhr) {
+                // Jika terjadi kesalahan
+                alert('Terjadi kesalahan saat memuat data.');
+            }
+        });
     });
 });
 

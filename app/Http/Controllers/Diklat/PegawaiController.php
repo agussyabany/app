@@ -23,19 +23,19 @@ class PegawaiController extends Controller
     }
 
     public function edit($id)
-{
-    $pegawai = Pegawai::find($id);
+    {
+        // Ambil data pegawai berdasarkan ID
+        $pegawai = Pegawai::find($id);
     
-    if ($pegawai) {
-        return response()->json([
-            'data' => $pegawai
-        ]);
-    } else {
-        return response()->json([
-            'error' => 'Data tidak ditemukan.'
-        ], 404);
+        // Pastikan data ditemukan
+        if ($pegawai) {
+            return response()->json($pegawai);
+        } else {
+            return response()->json(['error' => 'Pegawai tidak ditemukan'], 404);
+        }
     }
-}
+    
+
 public function store(Request $request)
 {
     $request->validate([

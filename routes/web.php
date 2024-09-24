@@ -262,7 +262,7 @@ Route::middleware('auth','verified','role:diklat')->group(function () {
     Route::get('/pegawai',[PegawaiController::class, 'pegawai'])->name('pegawai.index');
     Route::post('/pegawai/save', [PegawaiController::class, 'save'])->name('pegawai.save');
     Route::post('/pegawai/store', [PegawaiController::class, 'store'])->name('pegawai.store');
-    Route::get('pegawai/{id}/edit', [PegawaiController::class, 'edit'])->name('pegawai.edit');
+    Route::get('/pegawai/{id}/edit', [PegawaiController::class, 'edit'])->name('pegawai.edit');
     Route::post('/pegawai/{id}/update', [PegawaiController::class, 'update'])->name('pegawai.update');
     Route::delete('pegawai/{id}', [PegawaiController::class, 'destroy'])->name('pegawai.destroy');
     Route::get('/diklat.dashboard', [DiklatController::class, 'index'])->name('divisi.index');

@@ -91,8 +91,8 @@
                                 <label for="inputNamaBagian">Nama Bagian</label>
                                 <input type="text" class="form-control" id="inputNamaBagian" name="bagian" value="">
                             </div>
-                            <button type="submit" class="btn btn-outline-light float-right">Save</button>
-                            <button type="button" class="btn btn-outline-light float-right" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-success float-right">Save</button>
+                            <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
                         </form>
                     </div>
                 </div>
@@ -118,8 +118,8 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-outline-light">Save</button>
+                        <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success float-right">Save</button>
                         </div>
                         </form>
                     </div>
