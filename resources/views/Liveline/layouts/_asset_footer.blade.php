@@ -21,11 +21,25 @@
 {{-- <script src="{{ asset('assets/LiveLine/dist/js/demo.js')}}"></script> --}}
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{ asset('assets/LiveLine/dist/js/pages/dashboard2.js')}}"></script>
+<script src="{{ asset('assets/LiveLine/dist/js/rapat.js')}}"></script>
+<script>
+     $(document).ready(function() {
+        $('#tbl').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+            'excel'
+            ]
+        });
+
+     })
+</script>
 <script>
   $(function(){
 
     
     $(document).ready(function() {
+
+       
     //DONUT SL BERDASAR GOLONGAN TANUN 2024
     $.ajax({
     url: '/donut',

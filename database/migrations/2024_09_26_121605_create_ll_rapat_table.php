@@ -11,10 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('soc_device', function (Blueprint $table) {
+        Schema::create('ll_rapat', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_device');
-            $table->string('nama');
+            $table->text('agenda')->nullable();
+            $table->char('peserta')->nullable();
+            $table->dateTime('tgl')->nullable();
+            $table->char('tempat');
             $table->timestamps();
         });
     }
@@ -24,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('device');
+        Schema::dropIfExists('ll_rapat');
     }
 };

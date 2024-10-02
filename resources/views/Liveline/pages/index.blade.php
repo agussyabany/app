@@ -47,7 +47,7 @@
               <div class="description-block border-right">
                
                 <h3 class="text-warning"><strong>{{ number_format($totals['bulan'], 0) }}</strong></h3>
-                <span class="description-text">SEPTEMBER 2024</span>
+                <span class="description-text">OKTOBER 2024</span>
               </div>
               <!-- /.description-block -->
             </div>
@@ -236,7 +236,8 @@
                 <div class="col-sm-4 col-8">
                   <div class="description-block border-right border-left">
                     <span class="description-text">AKTIF</span>
-                    <h3 class="text-success"><strong>-</strong></h3>
+                    <h3 class="text-success"><strong>{{ number_format($totals['tahun'] + 177303 - (4150 + 1394), 0) }}</strong></h3>
+                    <!-- JUMLAH SAMBUNGAN AKHIR TAHUN + JUMLAH PELANGGAN  -->
                     
                   </div>
                   <!-- /.description-block -->
@@ -245,7 +246,7 @@
                 <div class="col-sm-4 col-8">
                   <div class="description-block border-right">
                     <span class="description-text">TIDAK AKTIF</span>
-                    <h3 class="text-warning"><strong>-</strong></h3>
+                    <h3 class="text-warning"><strong>4.150</strong></h3>
                     
                   </div>
                   <!-- /.description-block -->
@@ -253,8 +254,8 @@
                 <!-- /.col -->
                 <div class="col-sm-4 col-8">
                   <div class="description-block border-right">
-                    <span class="description-text">PUTUS SEGEL</span>
-                    <h3 class="text-danger"><strong>-</strong></h3>
+                    <span class="description-text">PUTUS SEMENTARA</span>
+                    <h3 class="text-danger"><strong>1.394</strong></h3>
                     
                   </div>
                   <!-- /.description-block -->

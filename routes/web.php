@@ -28,6 +28,7 @@ use App\Http\Controllers\Diklat\DivisiDiklatController;
 use App\Http\Controllers\Diklat\PegawaiController;
 use App\Http\Controllers\Diklat\PemateriController;
 use App\Http\Controllers\LiveLine\Llcontroller;
+use App\Http\Controllers\LiveLine\RapatController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Soc\Soccontroller;
 use App\Models\Aset\KibD;
@@ -273,6 +274,10 @@ Route::middleware('auth','verified','role:LiveLine')->group(function () {
     Route::get('/test',[Llcontroller::class, 'test']);
     Route::get('/nilai',[Llcontroller::class, 'nilai']);
     Route::get('/donut.duo',[Llcontroller::class,'donutTwo']);
+
+    //UMUM
+    Route::get('/rapat',[RapatController::class, 'index']);
+    Route::post('/rapat.save',[RapatController::class,'save']);
 
 });
 

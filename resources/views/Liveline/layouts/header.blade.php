@@ -124,12 +124,25 @@
                 <p>KEPATUHAN</p>
               </a>
             </li>
+            
+          </ul>
+        </li>
+        <li class="nav-item menu-close">
+          <a href="#" class="nav-link active">
+            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <p>
+              UMUM
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="#" class="nav-link">
+              <a href="/rapat" class="nav-link active">
                 <i class="far fa-circle nav-icon"></i>
-                <p>UMUM DAN KESEKRETARIATAN</p>
+                <p>HUMAS</p>
               </a>
             </li>
+            
           </ul>
         </li>
         
