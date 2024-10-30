@@ -14,7 +14,7 @@ class RapatController extends Controller
     {
         $no = 1;
         $tglIndo = Carbon::now()->locale('id')->isoFormat('dddd, D MMMM Y');
-        $rapat = Rapat::orderBy('tgl', 'ASC')->get();
+        $rapat = Rapat::orderBy('tgl', 'DESC')->get();
         return view('Liveline.pages.rapat',compact(['tglIndo','rapat','no']));
 
     }

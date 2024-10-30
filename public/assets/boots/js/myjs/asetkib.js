@@ -132,7 +132,7 @@ $(document).ready(function() {
                     items.urai,
                     ]).draw();
                 })
-        })
+            })
 
     })
     //INPUT DATA TANAH
@@ -959,6 +959,7 @@ $(document).on('click', '#detail_f_divisi', function(){
             })
         })
     })
+    
 //KIR DETAIL
     $(document).on('click', '#kir_detail', function() {
         $('#edit_tabel').empty();
@@ -983,8 +984,7 @@ $('#judul_modal').html('<strong>Divisi:</strong> '+ nama_div +'<br><strong>Gedun
 
         $.get("/kir.detail/"+ lok +"/"+ dep +"/"+ div +"/"+ ged +"/"+ ruang, function(data){
             $.each(data.data, function (index, items) {
-                        var img = '<a href="#" id="detail_gedung_divisi"><img src="http://app.perumdamtirtakencana.id/assets/img/kir/'+items.img+'" height="100px" width="100px"></img></a>';
-                        // var editButton = '<button type="button" id="edit_kir" data-id="' + items.idKir + '" class="btn btn-outline-primary btn-sm"><i class="fas fa-edit"></i></button>';
+                        var img = '<a href="#" id="img" data-id="' + items.idKir + '"><img src="http://app.perumdamtirtakencana.id/assets/img/kir/'+items.img+'" height="100px" width="100px"></img></a>';
                         var editButton = '<button type="button" class="btn btn-sm btn-default border border-secondary  dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"><span class="visually-hidden">Toggle Dropdown</span></button>'+
                         '<ul class="dropdown-menu">'+
                             '<li><a class="dropdown-item edit" id="edit_kir" data-id="' + items.idKir + '" href="#"><i class="fa-solid fa-edit"></i>&nbsp;UPDATE</a></li>'+
@@ -1040,7 +1040,117 @@ $('#judul_modal').html('<strong>Divisi:</strong> '+ nama_div +'<br><strong>Gedun
             var features = 'width=800,height=600';
             window.open(url, '_blank', features);
         })
+    //EDIT GAMBAR KIR
+    $(document).on('click','#img', function(){
+        $('#edit_tabel').empty();
+        var id = $(this).data('id');
+        $.ajax({
+            type: "GET",
+            url: "/kir.edit/"+ id,
+            success: function (data) {
+            $.each(data.data, function (index, item) {
+                $('#edit_tabel').append( '<fieldset class="border border-warning rounded-3 p-2 row" id="filed">'+
+                ' <legend class="float-none w-auto px-3 border border-danger rounded">'+
+                     '<div style="font-size: 15px;"><strong>EDIT GAMBAR</strong></div>'+
+                ' </legend>'+
+                '<div class="row">'+
 
+                 '<div class="col rounded">'+
+                    '<img  src="http://app.perumdamtirtakencana.id/assets/img/kir/'+item.img+'" height="250px" width="250px"></img>'+
+                 '</div>'+
+
+                   '<div class="col">'+
+                     '<input type="file" id="imgInput" class="form-control"><br>'+
+                     '<a href=# class="btn btn-outline-primary" data-id="'+ id +'" id="updateImg"><i class="fa fa-save" ></i></a>'+
+                   '</div>'+
+                   '<div class="col">'+
+                     '<img id="preview" src="" height="250px" width="250px"></img>'+
+                  '</div>'+
+
+                 '</div>'+
+              '</fieldset><br></br>')
+
+              $('#imgInput').change(function(e) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#preview').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(this.files[0]);
+            });
+                
+            });
+        }
+    });
+})
+
+// Update image on clicking the save button
+$(document).on('click', '#updateImg', function(e) {
+    e.preventDefault();
+    var id = $(this).data('id'); // Get the ID of the item being updated
+    var formData = new FormData();
+    var fileInput = $('#imgInput')[0].files[0]; // Get the file from the input
+
+    // Check if a file is selected
+    if (!fileInput) {
+        alert("Please select an image to upload.");
+        return;
+    }
+
+    formData.append('img', fileInput); // Append the image to formData
+    formData.append('_method', 'POST'); // Laravel usually expects a PUT or PATCH request for updates
+
+    $.ajax({
+        url: '/kir.imgUpd/' + id, // Replace with your update route
+        type: 'POST', // Laravel accepts POST with _method as PUT
+        data: formData,
+        processData: false, // Important to prevent jQuery from processing the data
+        contentType: false, // Important to prevent jQuery from setting content type header
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') // Ensure CSRF token is sent
+        },
+        success: function(response) {
+            alert("Image updated successfully!");
+            $.get("/kir.edit/"+ id, function (data) {
+                $.each(data.data, function (index, item) {
+
+                    var lok = item.id_lokasi;
+                    var dep = item.id_departemen;
+                    var div = item.id_div;
+                    var ged = item.gedung;
+                    var ruang = item.ruangan;
+                    var i = 0;
+                    
+                    var table = $("#tbl_kir_detail").DataTable();
+                    table.clear().draw();
+                    $.get("/kir.detail/"+ lok +"/"+ dep +"/"+ div +"/"+ ged +"/"+ ruang, function(data){
+                        $.each(data.data, function (index, items) {
+                            var img = '<a href="#" id="img" data-id="' + items.idKir + '"><img src="http://app.perumdamtirtakencana.id/assets/img/kir/'+items.img+'" height="100px" width="100px"></img></a>';
+                            var editButton = '<a href="#" type="submit" id="edit_kir" data-id="' + items.idKir + '" class="btn btn-outline-primary btn-sm"><i class="fas fa-edit"></i></a>';
+
+                            table.row.add([
+                                ++i,
+                                items.nama_barang,
+                                items.merk,
+                                items.bahan,
+                                items.jumlah,
+                                items.satuan,
+                                items.baik,
+                                items.ringan,
+                                items.berat,
+                                img,
+                                editButton
+                            ]).draw();
+                        });
+                    });
+
+                })
+            })
+        },
+        error: function(xhr, status, error) {
+            alert("Error updating image: " + error);
+        }
+    });
+});
     //EDIT KIR
     $(document).on('click', '#edit_kir', function() {
         $('#edit_tabel').empty();
@@ -1062,6 +1172,7 @@ $('#judul_modal').html('<strong>Divisi:</strong> '+ nama_div +'<br><strong>Gedun
                                         '<th>Rusak Ringan</th>'+
                                         '<th class="text-center">Rusak Berat</th>'+
                                         '<th></th>'+
+                                        
                                     '</tr>'+
                                 '</thead>'+
                             '<tbody>'+
@@ -1089,7 +1200,8 @@ $('#judul_modal').html('<strong>Divisi:</strong> '+ nama_div +'<br><strong>Gedun
                                     '<td class="text-center"><input type="text" class="form-control" style="width:35px;" id="baik_edit"></td>'+
                                     '<td class="text-center"><input type="text" class="form-control" style="width:35px;" id="ringan_edit"></td>'+
                                     '<td class="text-center"><input type="text" class="form-control" style="width:35px;" id="berat_edit"></td>'+
-                                    '<td class="text-center"><a href="#" id="submit_update" class="btn btn-sm btn-outline-success"><i class="fas fa-save"></i></td>'+
+                                    '<td class="text-center"><a href="#" id="submit_update" class="btn btn-sm btn-outline-success"><i class="fa fa-save"></i></td>'+
+                                    '<td class="text-center"><a href="#" id="close" class="btn btn-sm btn-outline-secondary">X</a></td>'+
                                 '</tr>'+
                             '</tbody>'+
                             '</fieldset><br></br>'
@@ -1133,10 +1245,11 @@ $('#judul_modal').html('<strong>Divisi:</strong> '+ nama_div +'<br><strong>Gedun
                             });
                         }
                     });
+                })
+                $(document).on('click','#close',function() {
+                    $('#edit_tabel').empty();
 
-
-    })
-
+                })
                     //SUBMIT EDIT KIR
                     $(document).on('click','#submit_update',function() {
                         $.ajax({

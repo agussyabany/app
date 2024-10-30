@@ -27,6 +27,7 @@ use App\Http\Controllers\Diklat\Diklatcontroller;
 use App\Http\Controllers\Diklat\DivisiDiklatController;
 use App\Http\Controllers\Diklat\PegawaiController;
 use App\Http\Controllers\Diklat\PemateriController;
+use App\Http\Controllers\LiveLine\KinerjaController;
 use App\Http\Controllers\LiveLine\Llcontroller;
 use App\Http\Controllers\LiveLine\RapatController;
 use App\Http\Controllers\ProfileController;
@@ -237,6 +238,7 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::get('/kir_tgl/{id}',[KirController::class,'kir_tgl']);
     Route::get('/kir.edit/{id}',[KirController::class,'edit']);
     Route::post('/kir.update',[KirController::class,'update']);
+    Route::post('/kir.imgUpd/{id}', [KirController::class, 'Imgupdate']);
 
     Route::get('/arsip.fill/{id}',[ArsipController::class,'fill']);
     Route::get('/arsip.rak/{gd}',[ArsipController::class,'rak']);
@@ -280,20 +282,13 @@ Route::middleware('auth','verified','role:LiveLine')->group(function () {
     Route::post('/rapat.save',[RapatController::class,'save']);
 
 });
+Route::get('/perumdam',[KinerjaController::class, 'kinerja']);
+Route::get('/keuangan',[KinerjaController::class, 'keuangan']);
+Route::get('/operasional',[KinerjaController::class, 'operasional']);
+Route::get('/pelayanan',[KinerjaController::class, 'pelayanan']);
+Route::get('/sdmkin',[KinerjaController::class, 'sdm']);
+Route::get('/utama',[KinerjaController::class, 'utama']);
 
-// //diklat 
-// Route::middleware('auth','verified','role:diklat')->group(function () {
-//     Route::get('/', function () {
-//         return '<h1>diklat</h1>';
-//     });
-    // Route::get('/ll.dashboard',[Llcontroller::class, 'index']);
-    // Route::get('/donut',[Llcontroller::class, 'donut']);
-    // Route::get('/bar',[Llcontroller::class, 'bar']);
-    // Route::get('/test',[Llcontroller::class, 'test']);
-    // Route::get('/nilai',[Llcontroller::class, 'nilai']);
-    // Route::get('/donut.duo',[Llcontroller::class,'donutTwo']);
-
-// });
 
 
 require __DIR__.'/auth.php';

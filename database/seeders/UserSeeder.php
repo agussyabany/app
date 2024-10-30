@@ -21,7 +21,7 @@ class UserSeeder extends Seeder
         // ]);
         // $admin->assignRole('admin');
 
-        //$aset = User::create(
+        $aset = User::create(
             // [
             //     'name' => 'AAM ROBIDIN NOOR, S.E.',
             //     'email'=>'robi@aset.smd',
@@ -95,21 +95,30 @@ class UserSeeder extends Seeder
             //     'img' => '-',
             //     'password' => bcrypt('erwin2024')
             // ]
-        //);
-        //$aset->assignRole('aset');
-
-        $diklat = User::create(
-             [
-                'name' => 'MUHAMMAD AGUS SYABANY',
-                'email' => 'agus@diklat.smd',
-                'nip' => '-',
+            [
+                'name' => 'ARYO ARIADI',
+                'email' => 'aryo@aset.smd',
+                'nip' => '1994.2020.1.660',
                 'jabat' => '3',
-                'divisi' => 0,
+                'divisi' => 27,
                 'img' => '-',
-                'password' => bcrypt('a')
+                'password' => bcrypt('aryo2024')
             ]
         );
-        $diklat->assignRole('diklat');
+        $aset->assignRole('aset');
+
+        // $diklat = User::create(
+        //      [
+        //         'name' => 'MUHAMMAD AGUS SYABANY',
+        //         'email' => 'agus@diklat.smd',
+        //         'nip' => '-',
+        //         'jabat' => '3',
+        //         'divisi' => 0,
+        //         'img' => '-',
+        //         'password' => bcrypt('a')
+        //     ]
+        // );
+        // $diklat->assignRole('diklat');
 
         // $soc = User::create([
         //     'name' => 'Muhammad Agus Syabany',

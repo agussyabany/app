@@ -6,5 +6,25 @@
   <link rel="stylesheet" href="{{asset('assets/LiveLine/plugins/overlayScrollbars/css/OverlayScrollbars.min.css')}}">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{('assets/LiveLine/dist/css/adminlte.min.css')}}">
+  <style>
+    .calculation-table {
+      width: 100%;
+      text-align: center;
+      font-size: 18px;
+    }
+    .calculation-table td {
+      padding: 10px;
+    }
+    .calculation-table .line-cell {
+      border-bottom: 3px solid black;
+      position: relative;
+    }
+    .calculation-table .line-cell span {
+      position: absolute;
+      right: 0;
+      top: -20px;
+      font-weight: bold;
+    }
+  </style>
 
 

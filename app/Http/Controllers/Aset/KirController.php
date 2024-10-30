@@ -338,8 +338,8 @@ class KirController extends Controller
                             $nips = $sdms['nip'];
                          }
 
-                        $date = Carbon::now();
-                        $tglIndo = $date->locale('id_ID')->format('d F Y');
+                        //$date = Carbon::now();
+                        $tglIndo = Carbon::now()->locale('id')->isoFormat('D MMMM Y');
                         
                         $nama = Auth::user()->name;
                         $nip = Auth::user()->nip;
@@ -376,12 +376,40 @@ class KirController extends Controller
 
     public function edit($id)
     {
-        $edit = Kir::select('kirs.id as idKir','barangs.id as idBar','nama_barang','satuan','merk','bahan','jumlah','baik','ringan','berat','ket','img','id_lokasi','id_departemen','id_div','ruangan','gedung')
+        $edit = Kir::select('kirs.id as idKir','barangs.id as idBar','nama_barang','satuan','merk','bahan','jumlah','baik','ringan','berat','ket','img','id_lokasi','id_departemen','id_div','ruangan','gedung','img')
         ->join('barangs','kirs.id_barang','=','barangs.id')
         ->where('kirs.id',$id)->get();
         return response()->json([
             'data' => $edit
           ]);
+    }
+
+   
+    public function  Imgupdate(Request $request, $id)
+    {
+        $kir = Kir::find($id);
+
+        if (!$kir) {
+            return response()->json(['error' => 'Data not found'], 404);
+        }
+
+        // Validasi gambar
+        $request->validate([
+            'img' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Gambar max 2MB
+        ]);
+
+        // Jika ada file gambar yang diupload
+        if ($request->hasFile('img')) {
+            $file = $request->file('img');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('assets/img/kir'), $filename);
+
+            // Simpan nama file ke database
+            $kir->img = $filename;
+            $kir->save();
+        }
+
+        return response()->json(['success' => 'Image updated successfully!']);
     }
 
 }

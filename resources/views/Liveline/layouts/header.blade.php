@@ -6,13 +6,6 @@
     <li class="nav-item">
       <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
     </li>
-    <li class="nav-item d-none d-sm-inline-block">
-      <a href="#" class="nav-link">SAMBUNGAN</a>
-    </li>
-    <li class="nav-item d-none d-sm-inline-block">
-      <a href="#" class="nav-link" data-toggle="modal" data-target="#modal-lg" id="keuangan">KEUANGAN</a>
-    </li>
-    {{-- s --}}
   </ul>
 
   <!-- Right navbar links -->
@@ -85,11 +78,73 @@
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <!-- Add icons to the links using the .nav-icon class
              with font-awesome or any other icon font library -->
-        <li class="nav-item menu-open">
+        <li class="nav-item menu-close">
+          <a href="/perumdam" class="nav-link active">
+            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <p>
+              KINERJA
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+          <li class="nav-item">
+              <a href="/perumdam" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>HOME</p>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a href="/keuangan" class="nav-link active">
+                <i class="far fa-circle nav-icon"></i>
+                <p>KEUANGAN</p>
+              </a>
+            </li>
+            
+          </ul>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="/pelayanan" class="nav-link ">
+                <i class="far fa-circle nav-icon"></i>
+                <p>PELAYANAN</p>
+              </a>
+            </li>
+            
+          </ul>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="/operasional" class="nav-link ">
+                <i class="far fa-circle nav-icon"></i>
+                <p>OPERASIONAL</p>
+              </a>
+            </li>
+            
+          </ul>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="/sdmkin" class="nav-link ">
+                <i class="far fa-circle nav-icon"></i>
+                <p>SDM</p>
+              </a>
+            </li>
+            
+          </ul>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="/rapat" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>ADMINISTRASI</p>
+              </a>
+            </li>
+            
+          </ul>
+        </li>
+
+        <li class="nav-item">
           <a href="#" class="nav-link active">
             <i class="nav-icon fas fa-tachometer-alt"></i>
             <p>
-              Dashboard
+              DEPARTEMEN
               <i class="right fas fa-angle-left"></i>
             </p>
           </a>
@@ -98,6 +153,12 @@
               <a href="#" class="nav-link active">
                 <i class="far fa-circle nav-icon"></i>
                 <p>HUBUNGAN PELANGGAN</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link" data-toggle="modal" data-target="#modal-lg" id="keuangan">
+                <i class="far fa-circle nav-icon"></i>
+                <p>KEUANGAN</p>
               </a>
             </li>
             <li class="nav-item">
@@ -127,24 +188,7 @@
             
           </ul>
         </li>
-        <li class="nav-item menu-close">
-          <a href="#" class="nav-link active">
-            <i class="nav-icon fas fa-tachometer-alt"></i>
-            <p>
-              UMUM
-              <i class="right fas fa-angle-left"></i>
-            </p>
-          </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a href="/rapat" class="nav-link active">
-                <i class="far fa-circle nav-icon"></i>
-                <p>HUMAS</p>
-              </a>
-            </li>
-            
-          </ul>
-        </li>
+        
         
       </ul>
     </nav>
