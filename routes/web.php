@@ -27,6 +27,11 @@ use App\Http\Controllers\Diklat\Diklatcontroller;
 use App\Http\Controllers\Diklat\DivisiDiklatController;
 use App\Http\Controllers\Diklat\PegawaiController;
 use App\Http\Controllers\Diklat\PemateriController;
+use App\Http\Controllers\LiveLine\AdminKinerja\AdmAdminstrasiController;
+use App\Http\Controllers\LiveLine\AdminKinerja\AdmKeuController;
+use App\Http\Controllers\LiveLine\AdminKinerja\AdmOprsController;
+use App\Http\Controllers\LiveLine\AdminKinerja\AdmPelController;
+use App\Http\Controllers\LiveLine\AdminKinerja\AdmSdmController;
 use App\Http\Controllers\LiveLine\KinerjaController;
 use App\Http\Controllers\LiveLine\Llcontroller;
 use App\Http\Controllers\LiveLine\RapatController;
@@ -79,9 +84,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('admin',function (){
-    return '<h1>Hello Admin<h1>';
-})->middleware('auth','verified','role:admin');
+
 
 
 
@@ -280,14 +283,63 @@ Route::middleware('auth','verified','role:LiveLine')->group(function () {
     //UMUM
     Route::get('/rapat',[RapatController::class, 'index']);
     Route::post('/rapat.save',[RapatController::class,'save']);
-
 });
+
+
 Route::get('/perumdam',[KinerjaController::class, 'kinerja']);
 Route::get('/keuangan',[KinerjaController::class, 'keuangan']);
 Route::get('/operasional',[KinerjaController::class, 'operasional']);
 Route::get('/pelayanan',[KinerjaController::class, 'pelayanan']);
 Route::get('/sdmkin',[KinerjaController::class, 'sdm']);
 Route::get('/utama',[KinerjaController::class, 'utama']);
+
+Route::get('/nrw',[AdmOprsController::class, 'nrw']);
+Route::get('/chartNrw',[AdmOprsController::class, 'chartNrw']);
+Route::get('/cakupan',[AdmPelController::class, 'cakupan']);
+Route::get('/laba',[AdmKeuController::class, 'laba']);
+
+
+
+
+Route::middleware('auth','verified','permission:edit-LiveLine')->group(function () {
+    Route::get('/', function () {
+        return redirect('/utama');
+    });
+
+    Route::get('/aKeuangan',[AdmKeuController::class, 'data']);
+    Route::post('/keuSave',[AdmKeuController::class, 'save']);
+    Route::get('/dataKeuBy/{id}',[AdmKeuController::class, 'dataKeuBy']);
+    Route::post('/keuEdit',[AdmKeuController::class, 'edit']);
+    Route::post('/delKeu/{id}',[AdmKeuController::class, 'del']);
+
+    Route::get('/aOperasional',[AdmOprsController::class, 'data']);
+    Route::post('/opSave',[AdmOprsController::class, 'save']);
+    Route::get('/dataOpBy/{id}',[AdmOprsController::class, 'dataOpBy']);
+    Route::post('/opEdit',[AdmOprsController::class, 'edit']);
+    Route::post('/delOps/{id}',[AdmOprsController::class, 'del']);
+
+    Route::get('/aPelayanan',[AdmPelController::class, 'data']);
+    Route::post('/pelSave',[AdmPelController::class, 'save']);
+    Route::get('/dataPelBy/{id}',[AdmPelController::class, 'dataOpBy']);
+    Route::post('/pelEdit',[AdmPelController::class, 'edit']);
+    Route::post('/delPel/{id}',[AdmPelController::class, 'del']);
+
+    Route::get('/aSdm',[AdmSdmController::class, 'data']);
+    Route::post('/sdmSave',[AdmSdmController::class, 'save']);
+    Route::get('/dataSdmBy/{id}',[AdmSdmController::class, 'dataSdmBy']);
+    Route::post('/sdmEdit',[AdmSdmController::class, 'edit']);
+    Route::post('/delSdm/{id}',[AdmSdmController::class, 'del']);
+
+    Route::get('/aAdm',[AdmAdminstrasiController::class, 'data']);
+
+
+});
+
+// Route::get('admin',function (){
+//     return '<h1>Hello Admin<h1>';
+// })->middleware('auth','verified','role:admin');
+
+
 
 
 

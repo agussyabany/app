@@ -215,13 +215,25 @@
                           </tr>
                           <tr>
                             <td>4.</td>
-                            <td  style="text-align: left;"><a href="#" id="kalibrasi"><h5>PENGGANTIAN/KALIBRASI METER AIR</h5></a></td>
+                            <td  style="text-align: left;"><a href="#" id="kualitas"><h5>KUALITAS AIR PELANGGAN</h5></a></td>
                             <td>
                               <div class="progress progress-xs progress-striped active">
                                 <div class="progress-bar bg-success" style="width: 5.2%"></div>
                               </div>
                             </td>
-                            <td><span class="badge bg-success"><h5>5,2%</h5></span></td>
+                            <td><span class="badge bg-success"><h5>9,82%</h5></span></td>
+                            <td><h5>1</h5></td>
+                            <td><h5>5</h5></td>
+                          </tr>
+                          <tr>
+                            <td>5.</td>
+                            <td  style="text-align: left;"><a href="#" id="pertumbuhan"><h5>PERTUMBUHAN PELANGGAN</h5></a></td>
+                            <td>
+                              <div class="progress progress-xs progress-striped active">
+                                <div class="progress-bar bg-success" style="width: 5.2%"></div>
+                              </div>
+                            </td>
+                            <td><span class="badge bg-success"><h5>5,93%</h5></span></td>
                             <td><h5>2</h5></td>
                             <td><h5>5</h5></td>
                           </tr>
@@ -242,7 +254,7 @@
                     <div class="row">
                       <div class="col">
                         <!-- MAP -->
-                          <div class="info-box  bg-warning">
+                          <a href="#" id="rasioProd"><div class="info-box  bg-warning">
                             <span class="info-box-icon"><i class="fa fa-cogs"></i></span>
               
                             <div class="info-box-content">
@@ -252,12 +264,12 @@
 
                             <div class="info-box-text  mr-3 ml-2 mt-3"><h3 class="text-center">5/5</h3></div>
                             <!-- /.info-box-content -->
-                          </div>
+                          </div></a>  
                         </div>
                        
                         <div class="col">
                               <!-- /.info-box -->
-                          <div class="info-box  bg-danger">
+                          <a href="#" id="nrw"><div class="info-box  bg-danger">
                             <span class="info-box-icon"><i class="fa fa-tint"></i></span>
               
                             <div class="info-box-content">
@@ -266,7 +278,7 @@
                             </div>
                             <!-- /.info-box-content -->
                             <div class="info-box-text  mr-3 ml-2 mt-3"><h3 class="text-center">2/5</h3></div>
-                        </div>
+                        </div></a>
                       </div>
 
                       
@@ -275,7 +287,7 @@
                     <div class="row">
                       <div class="col">
                         <!-- /.info-box -->
-                      <div class="info-box bg-success">
+                      <a href="#" id="jam"><div class="info-box bg-success">
                         <span class="info-box-icon"><i class="fas fa-clock"></i></span>
           
                         <div class="info-box-content">
@@ -284,12 +296,12 @@
                         </div>
                         <!-- /.info-box-content -->
                         <div class="info-box-text  mr-3 ml-2 mt-3"><h3 class="text-center">5/5</h3></div>
-                      </div>
+                      </div></a>
                     </div>
 
                     <div class="col">
                       <!-- /.info-box -->
-                    <div class="info-box  bg-info">
+                    <a href="#" id="tekanan"><div class="info-box  bg-info">
                       <span class="info-box-icon"><i class="fas fa-tachometer-alt"></i></span>
         
                       <div class="info-box-content">
@@ -298,7 +310,7 @@
                       </div>
                       <!-- /.info-box-content -->
                       <div class="info-box-text  mr-3 ml-2 mt-3"><h3 class="text-center">5/5</h3></div>
-                    </div>
+                    </div></a>
                     <!-- /.info-box -->
 
                 </div>
@@ -312,35 +324,21 @@
 
                             <div class="col">
                               <!-- /.info-box -->
-                            <div class="info-box  bg-primary">
+                            <a href="#" id="kalibrasi"><div class="info-box  bg-primary">
                               <span class="info-box-icon"><i class="fa fa-shower"></i></span>
                 
                               <div class="info-box-content">
-                                <span class=""><h4>Kualitas Air Pelanggan</h4></span>
+                                <span class=""><h4>Penggantian Dan Kalibrasi Meter</h4></span>
                                 <span class=""><h4>3,76</h4></span>
                               </div>
                               <!-- /.info-box-content -->
                               <div class="info-box-text  mr-3 ml-2 mt-3"><h3 class="text-center">1/5</h3></div>
-                            </div>
+                            </div></a>
                             <!-- /.info-box -->
 
                         </div>
 
-                            <div class="col">
-                              <!-- /.info-box -->
-                            <div class="info-box  bg-secondary">
-                              <span class="info-box-icon"><i class="fa fa-chart-bar"></i></span>
-                
-                              <div class="info-box-content">
-                                <span class=""><h4>Penambahan Kapasitas Produksi</h4></span>
-                                <span class=""><h4>200</h4></span>
-                              </div>
-                              <!-- /.info-box-content -->
-                              <div class="info-box-text  mr-3 ml-2 mt-3"><h3 class="text-center">-/5</h3></div>
-                            </div>
-                            <!-- /.info-box -->
-
-                        </div>
+                            
                      </div>
 
                      <div class="row">
@@ -429,7 +427,7 @@
 
           <div class="col">
             <div class="card">
-              <div class="card-header"><h6 class="text-center">RASIO PEGAWAI TERHADAP PELANGGAN</h6></div>
+              <a href="#" id="rasioPegawai"><div class="card-header"><h6 class="text-center">RASIO PEGAWAI TERHADAP PELANGGAN</h6></div></a>
               <div class="card-body">
                 <div class="row">
                   <div class="col">
@@ -466,7 +464,7 @@
 
           <div class="col">
             <div class="card">
-              <div class="card-header"><h6 class="text-center">RASIO DIKLAT PEGAWAI</h6></div>
+              <a href="#" id="rasioDiklat"><div class="card-header"><h6 class="text-center">RASIO DIKLAT PEGAWAI</h6></div></a>
               <div class="card-body">
                 <div class="row">
                   <div class="col">
@@ -503,7 +501,7 @@
 
           <div class="col">
             <div class="card">
-              <div class="card-header"><h6 class="text-center">RASIO BIAYA DIKLAT</h6></div>
+              <a href="#" id="rasioBiaya"><div class="card-header"><h6 class="text-center">RASIO BIAYA DIKLAT</h6></div></a>
               <div class="card-body">
                 <div class="row">
                   <div class="col">
@@ -522,8 +520,8 @@
                       <tbody>
                         <tr>
                           <td><h4>2,90 %</h4></td>
-                          <td><h4>5</h4></td>
                           <td><h4>2</h4></td>
+                          <td><h4>5</h4></td>
                         </tr>
                         
                       </tbody>
@@ -544,7 +542,7 @@
 
   </div>
 
-  <div class="modal fade" id="modal-lg" aria-hidden="true" style="display: none;">
+  <!-- <div class="modal fade" id="modal-lg" aria-hidden="true" style="display: none;">
   <div class="modal-dialog modal-xl modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
@@ -611,5 +609,5 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 @endsection

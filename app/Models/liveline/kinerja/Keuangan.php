@@ -19,7 +19,8 @@ class Keuangan extends Model
         'JmlPnrmRekAir',
         'jmlRekAir',
         'TotalAktiva',
-        'TotalHutang'
+        'TotalHutang',
+        'bulanTahun'
 
     ];
 }

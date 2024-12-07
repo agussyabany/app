@@ -30,7 +30,7 @@ class AuthenticatedSessionController extends Controller
             $request->session()->regenerate();
 
             if (Auth::user()->hasRole('admin')) {
-                return redirect('admin');
+                return redirect('/utama');
             }
 
             if (Auth::user()->hasRole('aset')) {

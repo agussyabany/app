@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Pelayanan extends Model
 {
     use HasFactory;
+    protected $table = 'kin_pelayanans';
     protected $fillable = [
         'JmlPnddkTrlyni',
         'jmlPndkWil',
@@ -18,6 +19,7 @@ class Pelayanan extends Model
         'UjiKualitas',
         'titikUji',
         'JmlAirTrjualDom',
-        'JmlPlgnDom'
+        'JmlPlgnDom',
+        'bulanTahun'
     ];
 }

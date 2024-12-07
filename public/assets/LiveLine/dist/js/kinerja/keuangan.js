@@ -4,16 +4,41 @@ $(document).ready(function() {
   $(document).on('click', '#roe', function() {
     $('#modal-lg').modal('show');
     $('#judul').empty();
+    $('#chartKinerja').empty();
     $('#judul').html('RETURN ON EQUITY');
     kosong();
     $('#persen').html('X 100%');
     $('#a').html('Laba Setelah Pajak');
-    $('#a_nilai').html('73.897.071.387');
+    //$('#a_nilai').html('73.897.071.387');
     $('#b').html('Jumlah Ekuitas');
-    $('#b_nilai').html('577.162.239.562');
-    $('#hasil').html('12,8 %');
+    //$('#b_nilai').html('577.162.239.562');
+    //$('#hasil').html('12,8 %');
     $('#nilai').html('5');
     $('#target').html('5')
+
+    $.ajax({
+      url: '/laba',
+      type: 'GET',
+      dataType: 'json',
+      success: function(response) {
+          console.log('Data berhasil diterima:', response);
+          let labaStlPjkFormatted = response.labaStlPjk.toLocaleString('id-ID');
+          let jmlEkuitasFormatted = response.jmlEkuitas.toLocaleString('id-ID');
+          $('#a_nilai').html(labaStlPjkFormatted);
+          $('#b_nilai').html(jmlEkuitasFormatted);
+
+          var labaStlPjk = response.labaStlPjk;
+          var jmlEkuitas = response.jmlEkuitas;
+          var persenTase = (labaStlPjk / jmlEkuitas) * 100;
+          var persenTaseFormatted = persenTase.toFixed(2);
+           $('#hasil').html(persenTaseFormatted +'%');
+      },
+      error: function(xhr, status, error) {
+          console.error('Error:', error);
+      }
+  })
+  var dataGrafik =[1.51,1.32,1.09,1.79,1.19,2.24,1.36,2.21,1.17];
+  grafik(dataGrafik);
   })
   //Ratio Operational BUTTON
   $(document).on('click', '#rop', function() {
@@ -78,67 +103,52 @@ $(document).ready(function() {
     $('#target').html('5')
   })
 
+  //Edit data keuangan
+  $(document).on('click', '#edit_keuangan', function() {
+    var id = $(this).data('id');
+    $('#modal-keuangan').modal('show');
+    $('#judul_keuangan').empty();
+    $('#judul_keuangan').html('EDIT DATA ASPEK KEUNGAN');
+    $('#form-keuangan').attr('action', '/keuEdit');
+    $.ajax({
+      type: "GET",
+      url: "/dataKeuBy/"+ id,
+      success: function (data) {
+      $.each(data.data, function (index, item) {
+          $('#idKeu').val(id);
+          $('#labaStlPjk').val(item.labaStlPjk);
+          $('#jmlEkuitas').val(item.jmlEkuitas);
+          $('#biayaOps').val(item.biayaOps);
+          $('#PndptnOps').val(item.PndptnOps);
+          $('#kaStrkas').val(item.kaStrkas);
+          $('#HutangLancar').val(item.HutangLancar);
+          $('#JmlPnrmRekAir').val(item.JmlPnrmRekAir);
+          $('#jmlRekAir').val(item.jmlRekAir);
+          $('#TotalAktiva').val(item.TotalAktiva);
+          $('#TotalHutang').val(item.TotalHutang);
+    
+           // Mengatur nilai input bulan dengan format YYYY-MM
+        $('#date').val(item.bulanTahun.replace(/(\w+) (\d{4})/, function(_, bulan, tahun) {
+          var bulanIndex = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+          return `${tahun}-${('0' + (bulanIndex.indexOf(bulan) + 1)).slice(-2)}`;
+      }));
 
-            /* Chart.js Charts */
-  // Sales chart
-  var salesChartCanvas = document.getElementById('revenue-chart-canvas').getContext('2d')
-  // $('#revenue-chart').get(0).getContext('2d');
-
-  var salesChartData = {
-    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-    datasets: [
-      {
-        label: 'Digital Goods',
-        backgroundColor: 'rgba(60,141,188,0.9)',
-        borderColor: 'rgba(60,141,188,0.8)',
-        pointRadius: false,
-        pointColor: '#3b8bba',
-        pointStrokeColor: 'rgba(60,141,188,1)',
-        pointHighlightFill: '#fff',
-        pointHighlightStroke: 'rgba(60,141,188,1)',
-        data: [28, 48, 40, 19, 86, 27, 90]
-      },
-      {
-        label: 'Electronics',
-        backgroundColor: 'rgba(210, 214, 222, 1)',
-        borderColor: 'rgba(210, 214, 222, 1)',
-        pointRadius: false,
-        pointColor: 'rgba(210, 214, 222, 1)',
-        pointStrokeColor: '#c1c7d1',
-        pointHighlightFill: '#fff',
-        pointHighlightStroke: 'rgba(220,220,220,1)',
-        data: [65, 59, 80, 81, 56, 55, 40]
-      }
-    ]
+    });
   }
+  });
+   
+})
 
-  var salesChartOptions = {
-    maintainAspectRatio: false,
-    responsive: true,
-    legend: {
-      display: false
-    },
-    scales: {
-      xAxes: [{
-        gridLines: {
-          display: false
-        }
-      }],
-      yAxes: [{
-        gridLines: {
-          display: false
-        }
-      }]
-    }
-  }
 
-  // This will get the first returned node in the jQuery collection.
-  // eslint-disable-next-line no-unused-vars
-  var salesChart = new Chart(salesChartCanvas, { // lgtm[js/unused-local-variable]
-    type: 'line',
-    data: salesChartData,
-    options: salesChartOptions
-  })
+  
+ //Tambah data keuangan
+ $(document).on('click', '#tambah_keuangan', function() {
+  $('#judul_keuangan').empty();
+  $('#judul_keuangan').html('TAMBAH DATA ASPEK KEUANGAN');
+  $('#form-keuangan').attr('action', '/keuSave');
+ })
+
+          
 
   
 

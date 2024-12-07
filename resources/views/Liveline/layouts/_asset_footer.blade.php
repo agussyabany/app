@@ -9,7 +9,7 @@
       </div>
       <div class="modal-body" id="body">
         <div class="card">
-                  <div class="card-body box-profile">
+            <div class="card-body box-profile">
 
                   <div class="row">
                     <div class="col">
@@ -45,22 +45,19 @@
                           
                         </tbody>
                       </table>
+                      
                     </div>
                   </div><br>
 
-                  <div class="row">
-                    <canvas id="revenue-chart-canvas" height="450" style="height: 300px; display: block; width: 580px;" width="870" class="chartjs-render-monitor"></canvas>
-                  </div>
-              
-                 </div>
-              </div>
+                  <canvas id="chartKinerja" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 443px;" width="443" height="250" class="chartjs-render-monitor"></canvas>
+                </div>
             </div>
-      <div class="modal-footer justify-content-between">
-        <button type="button" class="btn btn-default"data-dismiss="modal">CLOSE</button>
-      </div>
+        </div>
     </div>
-  </div>
+ </div>
 </div>
+</div>
+
 
 <!-- REQUIRED SCRIPTS -->
 <!-- jQuery -->
@@ -81,11 +78,12 @@
 <!-- ChartJS -->
 <script src="{{ asset('assets/LiveLine/plugins/chart.js/Chart.min.js') }}"></script>
 <script src="{{ asset('assets/LiveLine/plugins/jquery-knob/jquery.knob.min.js')}}"></script>
+<script src="https://cdn.datatables.net/2.1.8/js/dataTables.min.js"></script>
 
 <!-- AdminLTE for demo purposes -->
 {{-- <script src="{{ asset('assets/LiveLine/dist/js/demo.js')}}"></script> --}}
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="{{ asset('assets/LiveLine/dist/js/pages/dashboard2.js')}}"></script>
+<!-- <script src="{{ asset('assets/LiveLine/dist/js/pages/dashboard2.js')}}"></script> -->
 <script src="{{ asset('assets/LiveLine/dist/js/rapat.js')}}"></script>
 <script src="{{ asset('assets/LiveLine/dist/js/kinerja/fungsi.js')}}"></script>
 <script src="{{ asset('assets/LiveLine/dist/js/kinerja/kinerja.js')}}"></script>
@@ -94,6 +92,46 @@
 <script src="{{ asset('assets/LiveLine/dist/js/kinerja/operasional.js')}}"></script>
 <script src="{{ asset('assets/LiveLine/dist/js/kinerja/pelayanan.js')}}"></script>
 <script src="{{ asset('assets/LiveLine/dist/js/kinerja/sdm.js')}}"></script>
+<script>
+    $(document).ready(function() {
+
+        $(document).on('click', '#laba', function() {
+            $('#modal-laba').modal('show');
+            $('#judulLaba').empty();
+            $('#judulLaba').html('LABA');
+            kosong();
+            $('#persen').html('/');
+            $('#a').html('Biaya Operasi');
+            $('#a_nilai').html('354.746.734.631');
+            $('#b').html('Pendapatan Operasi');
+            $('#b_nilai').html('467.368.442.487');
+            $('#hasil').html('0,76');
+            $('#nilai').html('3');
+            $('#target').html('5')
+        })
+       
+            if (on === 1) {$('#1').addClass('nav-link active hoverable'); $('#nav_kinerja').addClass('nav-item menu-open');}
+            if (on === 2) {$('#2').addClass('nav-link active hoverable');}
+            if (on === 3) {$('#3').addClass('nav-link active hoverable');}
+            if (on === 4) {$('#4').addClass('nav-link active hoverable');}
+            if (on === 5) {$('#5').addClass('nav-link active hoverable');}
+            if (on === 6) {$('#6').addClass('nav-link active hoverable');}
+
+            if (on === 7) {$('#7').addClass('nav-link active hoverable');}
+            if (on === 8) {$('#8').addClass('nav-link active hoverable');}
+            if (on === 9) {$('#9').addClass('nav-link active hoverable');}
+            if (on === 10) {$('#10').addClass('nav-link active hoverable');}
+            if (on === 11) {$('#11').addClass('nav-link active hoverable');}
+            if (on === 12) {$('#12').addClass('nav-link active hoverable');}
+
+            if (on === 13) {$('#13').addClass('nav-link active hoverable');$('#nav_adminKinerja').addClass('nav-item menu-open');}
+            if (on === 14) {$('#14').addClass('nav-link active hoverable');}
+            if (on === 15) {$('#15').addClass('nav-link active hoverable');}
+            if (on === 16) {$('#16').addClass('nav-link active hoverable');}
+            if (on === 17) {$('#17').addClass('nav-link active hoverable');}
+            if (on === 18) {$('#18').addClass('nav-link active hoverable');}
+        });
+</script>
 <script>
      $(document).ready(function() {
         $('#tbl').DataTable({
@@ -372,12 +410,9 @@ $.ajax({
 
 
     // Fungsi untuk menyegarkan halaman
-    function refreshPage() {
-        location.reload(); // Menyegarkan halaman
-    }
+    
 
-    // Setel interval untuk menyegarkan halaman setiap 5 menit (300000 milidetik)
-    setTimeout(refreshPage, 300000);
+   
 
     $.ajax({
     url: '/donut.duo',
@@ -428,43 +463,14 @@ $.ajax({
     function formatNumber(number) {
         return number.toLocaleString();
     }
-
-    
-
-    
-
-
-
-        
 });
 
 
-   
 
-    //---------------------
-    //- STACKED BAR CHART -
-    //---------------------
-    var stackedBarChartCanvas = $('#stackedBarChart').get(0).getContext('2d')
-    var stackedBarChartData = $.extend(true, {}, barChartData)
+//$('#modal-lg').on('shown.bs.modal', function () {
+  
+  
 
-    var stackedBarChartOptions = {
-      responsive              : true,
-      maintainAspectRatio     : false,
-      scales: {
-        xAxes: [{
-          stacked: true,
-        }],
-        yAxes: [{
-          stacked: true
-        }]
-      }
-    }
-
-    new Chart(stackedBarChartCanvas, {
-      type: 'bar',
-      data: stackedBarChartData,
-      options: stackedBarChartOptions
-    })
-
-  })
+//})
+})
 </script>

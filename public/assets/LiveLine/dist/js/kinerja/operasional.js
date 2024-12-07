@@ -19,16 +19,41 @@ $(document).ready(function() {
   $(document).on('click', '#nrw', function() {
     $('#modal-lg').modal('show');
     $('#judul').empty();
+    $('#chartKinerja').empty();
     $('#judul').html('KEHILANGAN AIR');
     kosong();
     $('#persen').html('X 100 %');
     $('#a').html('Air Disistribusikan - Air Terjual');
-    $('#a_nilai').html('35.385.634');
     $('#b').html('Jumlah Air Didistribusikan');
-    $('#b_nilai').html('89.495.486');
-    $('#hasil').html('39,54%');
+   
     $('#nilai').html('2');
     $('#target').html('5')
+    $.ajax({
+          url: '/nrw',
+          type: 'GET',
+          dataType: 'json',
+          success: function(data) {
+              console.log('Data berhasil diterima:', data);
+              let terDistribusiFormatted = (data.terDistribusi - data.airterjual).toLocaleString('id-ID');
+              let airterjualFormatted = data.airterjual.toLocaleString('id-ID');
+              $('#a_nilai').html(terDistribusiFormatted);
+              $('#b_nilai').html(airterjualFormatted);
+
+              var TerDisrirbusi = data.terDistribusi;
+              var AirTerjual = data.airterjual;
+              var persenTase = ((TerDisrirbusi - AirTerjual) / TerDisrirbusi) * 100;
+              var persenTaseFormatted = persenTase.toFixed(2);
+              $('#hasil').html(persenTaseFormatted +'%');
+          },
+          error: function(xhr, status, error) {
+              console.error('Error:', error);
+          }
+      })
+      //Chart
+      var dataGrafik = [39.98,39.90,39.95,39.50,38.87,38.39,37.97,37.42,37.29];
+      grafik(dataGrafik);
+
+     
   })
 
   //Jam Operasi Layanan
@@ -78,6 +103,49 @@ $(document).ready(function() {
     $('#nilai').html('2');
     $('#target').html('5')
   })
+
+   //Edit data Operasional
+   $(document).on('click', '#edit_operasional', function() {
+    var id = $(this).data('id');
+    $('#modal-operasional').modal('show');
+    $('#judul_operasional').empty();
+    $('#judul_operasional').html('EDIT DATA ASPEK OPERASIONAL');
+    $('#form-operasional').attr('action', '/opEdit');
+    $.ajax({
+      type: "GET",
+      url: "/dataOpBy/"+ id,
+      success: function (data) {
+      $.each(data.data, function (index, item) {
+          $('#idOps').val(id);
+          $('#VolProdRil').val(item.VolProdRil);
+          $('#KpstsTrpsng').val(item.KpstsTrpsng)
+          $('#KalkulasiJumAir').val(item.KalkulasiJumAir)
+          $('#JmlAirDist').val(item.JmlAirDist);
+          $('#JmlWktPly').val(item.JmlWktPly);
+          $('#Plgnlayan').val(item.Plgnlayan);
+          $('#PlgnAktiv').val(item.PlgnAktiv);
+          $('#MtrAirGnti').val(item.MtrAirGnti);
+
+         
+    
+           // Mengatur nilai input bulan dengan format YYYY-MM
+        $('#date').val(item.bulanTahun.replace(/(\w+) (\d{4})/, function(_, bulan, tahun) {
+          var bulanIndex = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+          return `${tahun}-${('0' + (bulanIndex.indexOf(bulan) + 1)).slice(-2)}`;
+      }));
+
+    });
+  }
+  });
+   
+})
+
+ //Tambah data Operasional
+ $(document).on('click', '#tambah_operasional', function() {
+  $('#judul_operasional').empty();
+  $('#judul_operasional').html('TAMBAH DATA ASPEK OPERASIONAL');
+  $('#form-operasional').attr('action', '/opSave');
+ })
 
 
 })

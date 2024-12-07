@@ -13,6 +13,7 @@ class KinSdm extends Model
         'JmlPlgn1000',
         'JmlPegDiklat',
         'RealByDiklat',
-        'RealByPeg'
+        'RealByPeg',
+        'bulanTahun'
     ];
 }

@@ -47,7 +47,7 @@
               <div class="description-block border-right">
                
                 <h3 class="text-warning"><strong>{{ number_format($totals['bulan'], 0) }}</strong></h3>
-                <span class="description-text">OKTOBER 2024</span>
+                <span class="description-text">NOVEMBER 2024</span>
               </div>
               <!-- /.description-block -->
             </div>
@@ -236,7 +236,7 @@
                 <div class="col-sm-4 col-8">
                   <div class="description-block border-right border-left">
                     <span class="description-text">AKTIF</span>
-                    <h3 class="text-success"><strong>{{ number_format($totals['tahun'] + 177303 - (4150 + 1394), 0) }}</strong></h3>
+                    <h3 class="text-success"><strong>{{ number_format($totals['tahun'] + 177303 - (4145 + 1417), 0) }}</strong></h3>
                     <!-- JUMLAH SAMBUNGAN AKHIR TAHUN + JUMLAH PELANGGAN  -->
                     
                   </div>
@@ -246,7 +246,7 @@
                 <div class="col-sm-4 col-8">
                   <div class="description-block border-right">
                     <span class="description-text">TIDAK AKTIF</span>
-                    <h3 class="text-warning"><strong>4.150</strong></h3>
+                    <h3 class="text-warning"><strong>4.145</strong></h3>
                     
                   </div>
                   <!-- /.description-block -->
@@ -255,7 +255,7 @@
                 <div class="col-sm-4 col-8">
                   <div class="description-block border-right">
                     <span class="description-text">PUTUS SEMENTARA</span>
-                    <h3 class="text-danger"><strong>1.394</strong></h3>
+                    <h3 class="text-danger"><strong>1.417</strong></h3>
                     
                   </div>
                   <!-- /.description-block -->
@@ -311,5 +311,14 @@
   <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
+
+<script>
+  function refreshPage() {
+        location.reload(); // Menyegarkan halaman
+    }
+
+     // Setel interval untuk menyegarkan halaman setiap 5 menit (300000 milidetik)
+     setTimeout(refreshPage, 300000);
+</script>
 
 @endsection

@@ -84,6 +84,7 @@
         <a href="#" id="solv">
         <div class="info-box  bg-success">
               <span class="info-box-icon"><i class="fas fa-handshake"></i></span>
+            
 
               <div class="info-box-content">
                 <span class=""><h5>Solvabilitas</h5></span>
@@ -94,6 +95,8 @@
               </div>
               <div class="info-box-text  mr-3 ml-2 mt-3"><h3 class="text-center"> 5 / 5</h3></div>
           </div>
+
+          
         </a>
       </div>
       

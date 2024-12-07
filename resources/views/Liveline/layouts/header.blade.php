@@ -78,8 +78,8 @@
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <!-- Add icons to the links using the .nav-icon class
              with font-awesome or any other icon font library -->
-        <li class="nav-item menu-close">
-          <a href="/perumdam" class="nav-link active">
+        <li class="nav-item" id="nav_kinerja">
+          <a href="/perumdam"  class="nav-link active">
             <i class="nav-icon fas fa-tachometer-alt"></i>
             <p>
               KINERJA
@@ -88,14 +88,14 @@
           </a>
           <ul class="nav nav-treeview">
           <li class="nav-item">
-              <a href="/perumdam" class="nav-link">
+              <a href="/perumdam" class="nav-link" id="1">
                 <i class="far fa-circle nav-icon"></i>
                 <p>HOME</p>
               </a>
             </li>
 
             <li class="nav-item">
-              <a href="/keuangan" class="nav-link active">
+              <a href="/keuangan" class="nav-link" id="2">
                 <i class="far fa-circle nav-icon"></i>
                 <p>KEUANGAN</p>
               </a>
@@ -104,7 +104,7 @@
           </ul>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="/pelayanan" class="nav-link ">
+              <a href="/pelayanan" class="nav-link" id="3">
                 <i class="far fa-circle nav-icon"></i>
                 <p>PELAYANAN</p>
               </a>
@@ -113,7 +113,7 @@
           </ul>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="/operasional" class="nav-link ">
+              <a href="/operasional" class="nav-link " id="4">
                 <i class="far fa-circle nav-icon"></i>
                 <p>OPERASIONAL</p>
               </a>
@@ -122,7 +122,7 @@
           </ul>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="/sdmkin" class="nav-link ">
+              <a href="/sdmkin" class="nav-link " id="5">
                 <i class="far fa-circle nav-icon"></i>
                 <p>SDM</p>
               </a>
@@ -131,7 +131,7 @@
           </ul>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="/rapat" class="nav-link">
+              <a href="/rapat" class="nav-link" id="6">
                 <i class="far fa-circle nav-icon"></i>
                 <p>ADMINISTRASI</p>
               </a>
@@ -141,7 +141,7 @@
         </li>
 
         <li class="nav-item">
-          <a href="#" class="nav-link active">
+          <a href="#" class="nav-link active" >
             <i class="nav-icon fas fa-tachometer-alt"></i>
             <p>
               DEPARTEMEN
@@ -150,37 +150,37 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="#" class="nav-link active">
+              <a href="#" class="nav-link active" id="7">
                 <i class="far fa-circle nav-icon"></i>
                 <p>HUBUNGAN PELANGGAN</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="#" class="nav-link" data-toggle="modal" data-target="#modal-lg" id="keuangan">
+              <a href="#" class="nav-link" id="8">
                 <i class="far fa-circle nav-icon"></i>
                 <p>KEUANGAN</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="#" class="nav-link">
+              <a href="#" class="nav-link" id="9">
                 <i class="far fa-circle nav-icon"></i>
                 <p>SUMBER DAYA MANUSIA</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="#" class="nav-link">
+              <a href="#" class="nav-link" id="10">
                 <i class="far fa-circle nav-icon"></i>
                 <p>PRODUKSI</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="#" class="nav-link">
+              <a href="#" class="nav-link" id="11">
                 <i class="far fa-circle nav-icon"></i>
                 <p>DISTRIBUSI</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="#" class="nav-link">
+              <a href="#" class="nav-link" id="12">
                 <i class="far fa-circle nav-icon"></i>
                 <p>KEPATUHAN</p>
               </a>
@@ -188,6 +188,69 @@
             
           </ul>
         </li>
+
+<!-- ADMIN PANEL -->
+@if(auth()->check() && auth()->user()->can('edit-LiveLine'))
+      <li class="nav-item" id="nav_adminKinerja">
+          <a href="/perumdam" class="nav-link active">
+            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <p>
+              ADMIN KINERJA
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+          
+
+            <li class="nav-item">
+              <a href="/aKeuangan" class="nav-link" id="13">
+                <i class="far fa-circle nav-icon"></i>
+                <p>KEUANGAN</p>
+              </a>
+            </li>
+            
+          </ul>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="/aPelayanan" class="nav-link " id="14">
+                <i class="far fa-circle nav-icon"></i>
+                <p>PELAYANAN</p>
+              </a>
+            </li>
+            
+          </ul>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="/aOperasional" class="nav-link " id="15">
+                <i class="far fa-circle nav-icon"></i>
+                <p>OPERASIONAL</p>
+              </a>
+            </li>
+            
+          </ul>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="/aSdm" class="nav-link " id="16">
+                <i class="far fa-circle nav-icon"></i>
+                <p>SDM</p>
+              </a>
+            </li>
+            
+          </ul>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="/aAdm" class="nav-link" id="17">
+                <i class="far fa-circle nav-icon"></i>
+                <p>ADMINISTRASI</p>
+              </a>
+            </li>
+            
+          </ul>
+        </li>
+        @endif
+
+        
+
         
         
       </ul>

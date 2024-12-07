@@ -8,15 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class Operasional extends Model
 {
     use HasFactory;
+    protected $table = 'kin_operasionals';
 
     protected $fillable = [
         'VolProdRil',
         'KpstsTrpsng',
-        'KalkulasiJumAir',
+        'terDistirbusi',
         'JmlAirDist',
         'JmlWktPly',
         'Plgnlayan',
         'PlgnAktiv',
-        'MtrAirGnti'
+        'MtrAirGnti',
+        'bulanTahun'
     ];
 }

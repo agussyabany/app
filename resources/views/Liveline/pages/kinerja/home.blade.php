@@ -15,30 +15,30 @@
         <div class="card">
           <div class="card-header">
             <h6 class="text-center">
-              PERUMDAM TIRTA KENCANA KOTA SAMARINDA
+              PERUMDAM TIRTA KENCANA KOTA SAMARINDA TAHUN 2024
             </h6>
 
           </div>
           <!-- /.card-header -->
           <div class="card-body">
             <div class="row">
-              <div class="col">
-                <input type="text" class="knob" value="30" data-width="90" data-height="90" data-fgColor="#3c8dbc">
+              <a href="#" id="nrw" style="text-decoration: none;"><div class="col" >
+                <input type="text" class="knob" value="{{$nrw}}" data-width="90" data-readonly="true" data-height="90" data-fgColor="#f56954"  disabled>
 
-                <div class="knob-label text-center">NRW</div>
-              </div>
+                <div class="knob-label text-center">NRW (%)</div>
+              </div></a>
               <!-- ./col -->
-              <div class="col">
-                <input type="text" class="knob" value="70" data-width="90" data-height="90" data-fgColor="#f56954">
-                  <div class="knob-label text-center">CAKUPAN</div>
-              </div>
+              <a href="#" id="cakup"><div class="col">
+                <input type="text" class="knob" value="{{ $cakupan }}" data-width="90" data-readonly="true" data-height="90" data-fgColor="#00a65a" disabled>
+                  <div class="knob-label text-center">CAKUPAN (%)</div>
+              </div></a>
               <!-- ./col -->
-              <div class="col">
-                <input type="text" class="knob" value="-80" data-min="-150" data-max="150" data-width="90"
-                       data-height="90" data-fgColor="#00a65a">
+              <a href="#" id="laba"><div class="col">
+                <input type="text" class="knob" value="{{ $laba }}" data-width="90" data-readonly="true" data-height="90" data-width="90"
+                       data-height="90" data-fgColor="#00a65a" disabled>
 
-                <div class="knob-label text-center">LABA</div>
-              </div>
+                <div class="knob-label text-center">LABA (Miliar)</div>
+              </div></a>
             </div>
           </div>
         </div>
@@ -118,5 +118,53 @@
   
   <br>
   </div>
+</div>
+
+<div class="modal fade" id="modal-laba" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="text-center" id="judulLaba">Large Modal</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body" id="body">
+        <div class="card">
+            <div class="card-body box-profile">
+
+                  <div class="row">
+                    <div class="col">
+                      <h3 class="text-center">{{ $nilaiLabaModal }}</h3>
+
+                    </div>
+                    
+                      <table class="table table-striped text-center">
+                        <thead>
+                          <tr>
+                            
+                            <th>BULAN</th>
+                            <th>NILAI</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                        @foreach( $bulanan as $item)
+                          <tr>
+                            <td id="">{{ \Carbon\Carbon::parse($item->bulanTahun)->format('F Y') }}</td>
+                            <td id="">{{number_format($item->labaStlPjk, 0, '.', '.') }}</td>
+                          </tr>
+                        @endforeach  
+                        </tbody>
+                      </table>
+                      
+                    
+                  </div><br>
+
+                  <canvas id="" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 443px;" width="443" height="250" class="chartjs-render-monitor"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+ </div>
 </div>
 @endsection
