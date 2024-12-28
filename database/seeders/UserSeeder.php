@@ -107,18 +107,18 @@ class UserSeeder extends Seeder
         //);
         //$aset->assignRole('aset');
 
-        // $diklat = User::create(
-        //      [
-        //         'name' => 'MUHAMMAD AGUS SYABANY',
-        //         'email' => 'agus@diklat.smd',
-        //         'nip' => '-',
-        //         'jabat' => '3',
-        //         'divisi' => 0,
-        //         'img' => '-',
-        //         'password' => bcrypt('a')
-        //     ]
-        // );
-        // $diklat->assignRole('diklat');
+        $diklat = User::create(
+             [
+                'name' => 'MUHAMMAD AGUS SYABANY',
+                'email' => 'agus@diklat.smd',
+                'nip' => '-',
+                'jabat' => '3',
+                'divisi' => 0,
+                'img' => '-',
+                'password' => bcrypt('a')
+            ]
+        );
+        $diklat->assignRole('diklat');
 
         // $soc = User::create([
         //     'name' => 'Muhammad Agus Syabany',
@@ -144,21 +144,12 @@ class UserSeeder extends Seeder
         // ]);
         // $bppl->assignRole('bppl');
 
-        // $liveLine = User::create([
-        //     'name' => 'Service & Opertion Center',
-        //     'email'=>'soc@liveline.smd',
-        //     'password'=>bcrypt('soc2024')
+        $liveLine = User::create([
+            'name' => 'Service & Opertion Center',
+            'email'=>'soc@liveline.smd',
+            'password'=>bcrypt('soc2024')
 
         // ]);
         // $liveLine->assignRole('LiveLine');
-
-        $admin = User::create([
-            'name' => 'MUHAMMAD LIZARDI ELANDA',
-            'email'=>'aldi@spi.smd',
-            'nip'=>'1997.2022.1.784',
-            'password'=>bcrypt('2024aldi')
-
-        ]);
-        $admin->assignRole('admin');
     }
 }

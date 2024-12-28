@@ -34,10 +34,9 @@
               </div></a>
               <!-- ./col -->
               <a href="#" id="laba"><div class="col">
-                <input type="text" class="knob" value="{{ $laba }}" data-width="90" data-readonly="true" data-height="90" data-width="90"
-                       data-height="90" data-fgColor="#00a65a" disabled>
+                <input type="text" class="knob" value="{{$laba}}" data-width="90" data-readonly="true" data-height="90" data-width="90" data-height="90" data-fgColor="#00a65a" disabled>
 
-                <div class="knob-label text-center">LABA (Miliar)</div>
+                <div class="knob-label text-center">LABA {{ $laba }} (Miliar) </div>
               </div></a>
             </div>
           </div>

@@ -32,7 +32,7 @@ class KinerjaController extends Controller
             $HitungCakupan = ($JmlPnddkTrlyni->JmlPnddkTrlyni / $jmlPndkWil->jmlPndkWil) * 100;
             $cakupan = round($HitungCakupan, 2); // Bulatkan hasil
         } else {
-            $cakupan = null; // Jika data tidak ditemukan
+            $cakupan = null; 
         }
 
         $nilaiLaba = keuangan::sum('labaStlPjk');
@@ -40,7 +40,7 @@ class KinerjaController extends Controller
         $nilaiLabaModal = number_format($nilaiLaba, 0, '.', '.');
         $bulanan = keuangan::select('labaStlPjk','bulanTahun')->get();
 
-        return view('Liveline.pages.kinerja.home',compact(['on','nrw','cakupan','laba','nilaiLabaModal','bulanan']));
+        return view('Liveline.pages.kinerja.home',compact(['on','nrw','cakupan','laba','nilaiLabaModal','bulanan','JmlPnddkTrlyni']));
     }
 
     public function keuangan ()
