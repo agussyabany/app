@@ -15,6 +15,7 @@ $(document).ready(function() {
                 url: "/tanah.detail/"+ id,
                 success: function (data) {
                 $.each(data.data, function (index, item) {
+                    console.log('ini');
                     $('#alamat_D').html(item.alamat);
                     $('#nama_barang_D').html(item.nama_barang);
                     $('#guna_D').html(item.guna);

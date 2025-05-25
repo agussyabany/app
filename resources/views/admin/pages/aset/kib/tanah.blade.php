@@ -330,15 +330,15 @@ $no = 0;
                                 <tbody>
                                     <tr>
                                         <th>Letak</th>
-                                        <td id="alamat_D"> item.alamat+ </td>
+                                        <td id="alamat_D"> </td>
                                     </tr>
                                     <tr>
                                         <th>Nama Barang</th>
-                                        <td id="nama_barang_D"> item.nama_barang+ </td>
+                                        <td id="nama_barang_D"> </td>
                                     </tr>
                                     <tr>
                                         <th>Penggunaan</th>
-                                        <td id="guna_D"> item.guna+ </td>
+                                        <td id="guna_D">  </td>
                                     </tr>
                                 </tbody>
                             </table>

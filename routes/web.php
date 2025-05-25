@@ -251,46 +251,7 @@ Route::middleware('auth','verified','role:aset')->group(function () {
 
 
 });
-// END OF SISTEM INFORMASI ASET
 
-
-
-// SINSTEM INFORAMSI DIKLAT
-// Route::middleware('auth','verified','role:diklat')->group(function () {
-//     Route::get('/', function () {
-//         return redirect('/diklat.dashboard');
-//     });
-   
-   
-
-
-
-//     Route::get('/pegawai',[PegawaiController::class, 'pegawai'])->name('pegawai.index');
-//     Route::post('/pegawai/save', [PegawaiController::class, 'save'])->name('pegawai.save');
-//     Route::post('/pegawai/store', [PegawaiController::class, 'store'])->name('pegawai.store');
-//     Route::get('/pegawai/{id}/edit', [PegawaiController::class, 'edit'])->name('pegawai.edit');
-//     Route::post('/pegawai/{id}/update', [PegawaiController::class, 'update'])->name('pegawai.update');
-//     Route::delete('pegawai/{id}', [PegawaiController::class, 'destroy'])->name('pegawai.destroy');
-//     Route::get('/diklat.dashboard', [DiklatController::class, 'index'])->name('divisi.index');
-//     Route::post('/divisi', [DivisiController::class, 'store'])->name('divisi.store');
-//     Route::get('/divisi', [DivisiController::class, 'index']);
-//     Route::resource('pemateri', PemateriController::class);
-//     Route::get('/pemateri',[PemateriController::class, 'index'])->name('pemateri.index');
-//     Route::post('/pemateri.save',[PemateriController::class, 'save']);
-//     Route::get('/pemateri/{id}/edit',[PemateriController::class, 'edit']) ->name('pemateri.edit');
-//     Route::patch('/pemateri/{id}', [PemateriController::class, 'update'])->name('pemateri.update');
-//     Route::delete('/pemateri/{id}', [PemateriController::class, 'destroy'])->name('pemateri.destroy');
-//     Route::post('bagian.save',[DivisiDiklatController::class, 'save']);
-//     Route::delete('/bagian/{id}', [DivisiDiklatController::class, 'destroy'])->name('bagian.destroy');
-//     Route::put('/bagian/{id}', [DivisiDiklatController::class, 'update'])->name('bagian.update');
-//     Route::get('divisidiklat',[DivisiDiklatController::class, 'index']);
-// });
-// Route::get('/lpk', function () {
-//     return redirect('/home');
-// });
-// Route::get('/home',[Mobilecontroller::class, 'index']);
-
-// END OF SISTEM INFORMASI DIKLAT
 
 
 // SISTEM INFORAMSI SOC
