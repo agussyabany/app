@@ -260,6 +260,7 @@ class AsetDashboardController extends Controller
 
     public function nilai()
     {
+        
         $on = 17;
         $no = 1;
         $idUSer = Auth::user()->id;
