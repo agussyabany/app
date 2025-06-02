@@ -1660,6 +1660,25 @@ $(document).on('click', '#isi_arsip', function() {
 
 })
 
+//DATA TABEL NILAI
+$('#tbl_sside').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: "nilai/data",
+        columns: [
+            
+            { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
+            { data: 'no_voucher', name: 'no_voucher' },
+            { data: 'tgl_voucher', name: 'tgl_voucher' },
+            { data: 'aktiva', name: 'aktiva' },
+            { data: 'tahun', name: 'tahun' },
+            { data: 'nilai', name: 'nilai' },
+            { data: 'urai', name: 'urai' },
+            { data: 'kib', name: 'kib' },
+            { data: 'aksi', name: 'aksi', orderable: false, searchable: false }
+        ]
+    });
+
 // $(document).ready(function() {
 
 //     //TANAH

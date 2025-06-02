@@ -113,7 +113,8 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::get('/lok',[AsetDashboardController::class, 'lokasi']);
     Route::get('/bahan',[AsetDashboardController::class, 'bahan']);
     Route::get('/aktiva',[AsetDashboardController::class, 'aktiva']);
-    Route::get('/nilai',[AsetDashboardController::class, 'nilai']);
+    Route::get('/nilai',[AsetDashboardController::class, 'nilaiView']);
+    Route::get('/nilai/data', [AsetDashboardController::class, 'nilaiData']);
     Route::get('/arsip',[AsetDashboardController::class, 'arsip']);
 
 

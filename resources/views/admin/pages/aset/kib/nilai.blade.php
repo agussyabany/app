@@ -15,7 +15,7 @@
                 </div>
                     </div>
                             <div class="card-body">
-                                <table class="table table-striped" id="tbl">
+                                {{-- <table class="table table-striped" id="tbl">
                                     <thead>
                                         <tr>
                                             <th>NO</th>
@@ -57,7 +57,23 @@
                                             </tr>
                                         @endforeach
                                     </tbody>
-                                </table>
+                                </table> --}}
+
+                                <table class="table table-striped" id="tbl_sside">
+                                  <thead>
+                                      <tr>
+                                          <th>NO</th>
+                                          <th>NO VOUCHER</th>
+                                          <th>TGL VOUCHER</th>
+                                          <th>AKTIVA</th>
+                                          <th>TAHUN</th>
+                                          <th>NILAI</th>
+                                          <th>URAI</th>
+                                          <th>GOLONGAN</th>
+                                          <th>AKSI</th>
+                                      </tr>
+                                  </thead>
+                              </table>
                             </div>
                         </div>
                     </div>

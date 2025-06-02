@@ -24,6 +24,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Yajra\DataTables\Facades\DataTables;
 
 class AsetDashboardController extends Controller
 {
@@ -258,24 +259,64 @@ class AsetDashboardController extends Controller
           ]);
     }
 
-    public function nilai()
-    {
-        
-        $on = 17;
-        $no = 1;
-        $idUSer = Auth::user()->id;
-        $user = User::join('divisis','users.divisi','=','divisis.id')
-                    ->join('jabatans','users.jabat','=','jabatans.id')
-                    ->where('users.id',$idUSer)
-                    ->first();
-        $nilai = NilaiAktiva::select('nilai_aktivas.id as id_nilai','aktivas.id as as id_aktiva','no_voucher','tgl_voucher','aktiva','tahun','nilai','urai','kib','kode')
-                                ->join('lokasis','nilai_aktivas.id_lokasi','lokasis.id')
-                                ->join('aktivas','nilai_aktivas.id_aktiva','aktivas.id')
-                                ->orderBy('nilai_aktivas.id','DESC')->get();
-        $jabat = $user['jabat'];
-        $divisi = $user['nama_div'];
-        return view('admin.pages.aset.kib.nilai',compact(['jabat','divisi','nilai','no','on']));
-    }
+    public function nilaiView()
+{
+    $on = 17;
+    $no = 1;
+    $idUSer = Auth::user()->id;
+    $user = User::join('divisis','users.divisi','=','divisis.id')
+                ->join('jabatans','users.jabat','=','jabatans.id')
+                ->where('users.id',$idUSer)
+                ->first();
+
+    $jabat = $user['jabat'];
+    $divisi = $user['nama_div'];
+    return view('admin.pages.aset.kib.nilai', compact('jabat', 'divisi', 'on', 'no'));
+}
+
+public function nilaiData()
+{
+    $data = NilaiAktiva::select(
+                'nilai_aktivas.id as id_nilai',
+                'aktivas.id as id_aktiva',
+                'no_voucher',
+                'tgl_voucher',
+                'aktiva',
+                'tahun',
+                'nilai',
+                'urai',
+                'kib',
+                'kode'
+            )
+            ->join('lokasis','nilai_aktivas.id_lokasi','lokasis.id')
+            ->join('aktivas','nilai_aktivas.id_aktiva','aktivas.id')
+            ->orderBy('nilai_aktivas.id','DESC');
+
+    return DataTables::of($data)
+        ->addIndexColumn()
+        ->addColumn('aksi', function($row){
+            return '
+                <div class="btn-group">
+                    <button class="btn btn-default border border-secondary btn-sm detail" data-id="'.$row->id_nilai.'" type="button">DETAIL</button>
+                    <button type="button" class="btn btn-sm btn-default border border-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"><span class="visually-hidden">Toggle Dropdown</span></button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item edit" data-id="'.$row->id_nilai.'" href="#"><i class="fa-solid fa-edit"></i>&nbsp;EDIT</a></li>
+                        <li><a class="dropdown-item delete" data-id="'.$row->id_nilai.'" href="#"><i class="fa-solid fa-trash"></i>&nbsp;DELETE</a></li>
+                        <li><a class="dropdown-item nilai" data-id="'.$row->id_nilai.'" href="#"><i class="fa-solid fa-trash"></i>&nbsp;NILAI</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                    </ul>
+                </div>';
+        })
+        ->rawColumns(['aksi'])
+        ->make(true);
+
+    
+
+
+
+}
+
+
     public function arsip()
     {
         $on = 7;
