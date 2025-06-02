@@ -11,7 +11,7 @@
 
                 <div class="container card">
                     <div class="card-header">DATA NILAI <div class="position-absolute top-0 end-0">
-                        <button class="btn  btn-primary" id="tambah_barang"><i class="fa-solid fa-file-circle-plus"></i></button>
+                        <button class="btn  btn-primary" id="tambah_barang" data-bs-toggle="modal" data-bs-target="#tambahNilai"><i class="fa-solid fa-file-circle-plus"></i></button>
                 </div>
                     </div>
                             <div class="card-body">
@@ -87,19 +87,90 @@
 
 
                 {{-- MODAL MASTER --}}
-    <div class="modal"  id="myModal">
-        <div class="modal-dialog modal-dialog-centered">
+    <div class="modal"  id="tambahNilai">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="judul_modal">Modal title</h5>
+              <h5 class="modal-title" id="judul_modal">Tambah Nilai</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body" id="modal_body">
+              <form action="nilai.save" id="form_div" method="post">
+                @csrf
+                <div class="row">
+                  <div class="col">
+                    <input type="text" class="form-control" name="no_voucher" placeholder="Nomer Voucher" required>
+                  </div>
+                  <div class="col">
+                    <input type="date" class="form-control"  name="tgl_voucher" required>
+                  </div>
+                  <div class="col">
+                    <select   class="select2 form-control" style="width:100%;" name="id_aktiva" required>
+                      <option value="">-AKTIVA-</option>
+                      @foreach ($aktiva as $item )
+                       <option value="{{$item->id}}">{{$item->kode}}|{{$item->aktiva}}</option>
+                        
+                      @endforeach
+                    </select>
+                  </div>
+                </div><br>
+                <div class="row">
+                  <div class="col">
+                    <select    class="select2 form-control" style="width:100%;" name="id_lokasi" required>
+                      <option value="">-LOKASI-</option>
+                      @foreach ($lok as $item )
+                        <option value="{{$item->id}}">{{$item->lokasi}}</option>
+                        
+                      @endforeach
+                    </select>
+                  </div>
+                  <div class="col">
+                     <select   class="select2 form-control" style="width:100%;" name="dep" required>
+                      <option value="">-DEPARTEMEN-</option>
+                     @foreach ($dep as $item)
+                       <option value="{{$item->id}}">{{$item->kode_dep}}</option>
+                     @endforeach
+                    </select>
+                  </div>
+                  <div class="col">
+                    <select class="select2 form-control" style="width:100%;" name="div" required>
+                      <option value="">-DIVISI-</option>
+                      @foreach ($div as $item )
+                        <option value="{{$item->id}}">{{$item->nama_div}}</option>
+                        
+                      @endforeach
+                    </select>
+                  </div>
+                </div><br>
+                <div class="row">
+                  <div class="col">
+                    <select class="select2 form-control" style="width:100%;" name="cat" required>
+                      <option value="">-GOLONGAN-</option>
+                     @foreach ($golongan as $item)
+                       <option value="{{$item->id}}">{{$item->nama}}</option>
+                     @endforeach
+                    </select>
+                  </div>
+                  <div class="col">
+                    <select class="select2 form-control" style="width:100%;" name="tahun" required>
+                      <option value="">-TAHUN-</option>
+                     @foreach ($tahunRange as $tahun)
+                       <option value="{{$tahun}}">{{$tahun}}</option>
+                     @endforeach
+                    </select>
+                  </div>
+                  <div class="col">
+                    <input type="number" class="form-control" name="nilai" id="" placeholder="Nilai" required>
+                  </div>
+                </div><br>
+                <textarea name="urai" id="" cols="30" rows="10" class="form-control bordered border-info" placeholder="URAIAN" required></textarea>
 
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="tombol btn btn-primary" id="">SUBMIT</button>
+              <button type="submit" class="tombol btn btn-primary" id="">SUBMIT</button>
+            </form>
+
             </div>
           </div>
         </div>

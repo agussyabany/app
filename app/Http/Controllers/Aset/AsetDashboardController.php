@@ -9,6 +9,7 @@ use App\Models\Aset\Barang;
 use App\Models\Aset\Departemen;
 use App\Models\Aset\Divisi;
 use App\Models\Aset\Gedung;
+use App\Models\Aset\Golongan;
 use App\Models\Aset\Indeks;
 use App\Models\Aset\KibD;
 use App\Models\Aset\KibE;
@@ -271,7 +272,17 @@ class AsetDashboardController extends Controller
 
     $jabat = $user['jabat'];
     $divisi = $user['nama_div'];
-    return view('admin.pages.aset.kib.nilai', compact('jabat', 'divisi', 'on', 'no'));
+    $tahunSekarang = date('Y');
+    $tahunAwal = $tahunSekarang - 30;
+    $tahunAkhir = $tahunSekarang + 10;
+    $tahunRange = range($tahunAkhir, $tahunAwal);
+
+    $aktiva = Aktiva::get();
+    $dep = Departemen::get();
+    $div  =Divisi::get();
+    $lok = lokasi::get();
+    $golongan = Golongan::get();
+    return view('admin.pages.aset.kib.nilai', compact('jabat', 'divisi', 'on', 'no','tahunRange','aktiva','dep','div','lok','golongan'));
 }
 
 public function nilaiData()
