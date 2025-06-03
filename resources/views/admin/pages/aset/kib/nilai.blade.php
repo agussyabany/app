@@ -98,14 +98,16 @@
               <form action="nilai.save" id="form_div" method="post">
                 @csrf
                 <div class="row">
+
                   <div class="col">
-                    <input type="text" class="form-control" name="no_voucher" placeholder="Nomer Voucher" required>
+                    <input type="text" class="form-control" name="no_voucher" id="no_voucher" placeholder="Nomer Voucher" required>
+                  </div>
+
+                  <div class="col">
+                    <input type="date" class="form-control"  name="tgl_voucher" id="tgl_voucher" required>
                   </div>
                   <div class="col">
-                    <input type="date" class="form-control"  name="tgl_voucher" required>
-                  </div>
-                  <div class="col">
-                    <select   class="select2 form-control" style="width:100%;" name="id_aktiva" required>
+                    <select   class="select2 form-control" style="width:100%;" name="id_aktiva" id="id_aktiva" required>
                       <option value="">-AKTIVA-</option>
                       @foreach ($aktiva as $item )
                        <option value="{{$item->id}}">{{$item->kode}}|{{$item->aktiva}}</option>
@@ -114,9 +116,10 @@
                     </select>
                   </div>
                 </div><br>
+                
                 <div class="row">
                   <div class="col">
-                    <select    class="select2 form-control" style="width:100%;" name="id_lokasi" required>
+                    <select    class="select2 form-control" style="width:100%;" name="id_lokasi" id="id_lokasi" required>
                       <option value="">-LOKASI-</option>
                       @foreach ($lok as $item )
                         <option value="{{$item->id}}">{{$item->lokasi}}</option>
@@ -125,7 +128,7 @@
                     </select>
                   </div>
                   <div class="col">
-                     <select   class="select2 form-control" style="width:100%;" name="dep" required>
+                     <select   class="select2 form-control" style="width:100%;" name="dep" id="dep" required>
                       <option value="">-DEPARTEMEN-</option>
                      @foreach ($dep as $item)
                        <option value="{{$item->id}}">{{$item->kode_dep}}</option>
@@ -133,7 +136,7 @@
                     </select>
                   </div>
                   <div class="col">
-                    <select class="select2 form-control" style="width:100%;" name="div" required>
+                    <select class="select2 form-control" style="width:100%;" name="div" id="div" required>
                       <option value="">-DIVISI-</option>
                       @foreach ($div as $item )
                         <option value="{{$item->id}}">{{$item->nama_div}}</option>
@@ -144,26 +147,29 @@
                 </div><br>
                 <div class="row">
                   <div class="col">
-                    <select class="select2 form-control" style="width:100%;" name="cat" required>
+                    <select class="select2 form-control" style="width:100%;" name="cat" id="cat" required>
                       <option value="">-GOLONGAN-</option>
                      @foreach ($golongan as $item)
                        <option value="{{$item->id}}">{{$item->nama}}</option>
                      @endforeach
                     </select>
                   </div>
+
                   <div class="col">
-                    <select class="select2 form-control" style="width:100%;" name="tahun" required>
+                    <select class="select2 form-control" style="width:100%;" name="tahun" id="tahun" required>
                       <option value="">-TAHUN-</option>
                      @foreach ($tahunRange as $tahun)
                        <option value="{{$tahun}}">{{$tahun}}</option>
                      @endforeach
                     </select>
                   </div>
+
                   <div class="col">
-                    <input type="number" class="form-control" name="nilai" id="" placeholder="Nilai" required>
+                    <input type="text" class="form-control" name="nilai" id="nominal">
                   </div>
+
                 </div><br>
-                <textarea name="urai" id="" cols="30" rows="10" class="form-control bordered border-info" placeholder="URAIAN" required></textarea>
+                <textarea name="urai" id="urai" cols="30" rows="10" class="form-control bordered border-info" placeholder="URAIAN" required></textarea>
 
             </div>
             <div class="modal-footer">
@@ -175,6 +181,8 @@
           </div>
         </div>
       </div>
+
+
       {{-- MODAL KIB --}}
       <div class="modal"  id="lgModal">
         <div class="modal-dialog  modal-xl">

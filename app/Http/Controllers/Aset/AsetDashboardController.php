@@ -307,25 +307,18 @@ public function nilaiData()
         ->addIndexColumn()
         ->addColumn('aksi', function($row){
             return '
-                <div class="btn-group">
-                    <button class="btn btn-default border border-secondary btn-sm detail" data-id="'.$row->id_nilai.'" type="button">DETAIL</button>
-                    <button type="button" class="btn btn-sm btn-default border border-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"><span class="visually-hidden">Toggle Dropdown</span></button>
+                <div class="btn-group ">
+                    <button class="btn btn-default border border-primary btn-sm detail" data-id="'.$row->id_nilai.'" type="button"></button>
+                    <button type="button" class="btn btn-sm btn-default border border-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"><span class="visually-hidden">Toggle Dropdown</span></button>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item edit" data-id="'.$row->id_nilai.'" href="#"><i class="fa-solid fa-edit"></i>&nbsp;EDIT</a></li>
+                        <li><a class="dropdown-item editNilai" data-id="'.$row->id_nilai.'" href="#"><i class="fa-solid fa-edit"></i>&nbsp;EDIT</a></li>
                         <li><a class="dropdown-item delete" data-id="'.$row->id_nilai.'" href="#"><i class="fa-solid fa-trash"></i>&nbsp;DELETE</a></li>
-                        <li><a class="dropdown-item nilai" data-id="'.$row->id_nilai.'" href="#"><i class="fa-solid fa-trash"></i>&nbsp;NILAI</a></li>
-                        <li><hr class="dropdown-divider"></li>
                     </ul>
                 </div>';
         })
         ->rawColumns(['aksi'])
         ->make(true);
-
-    
-
-
-
-}
+    }
 
 
     public function arsip()

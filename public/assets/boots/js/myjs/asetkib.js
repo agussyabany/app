@@ -887,7 +887,7 @@ $(document).on('click', '#detail_f_divisi', function(){
                 })
              })
             })
-        })
+        
         $(document).on('click', '#data_kir', function() {
             $('#canvas_tree').empty();
             var id = $(this).data('id');
@@ -1659,7 +1659,7 @@ $(document).on('click', '#isi_arsip', function() {
 
 
 })
-
+//------NILAI-----//
 //DATA TABEL NILAI
 $('#tbl_sside').DataTable({
         processing: true,
@@ -1679,10 +1679,25 @@ $('#tbl_sside').DataTable({
         ]
     });
 
- document.getElementById('inputTahun').addEventListener('change', function () {
-  const fullValue = this.value; // format: "YYYY-MM"
-  const tahun = fullValue.split('-')[0];
-  console.log('Tahun:', tahun);
-});
+//EDIT NILAI
+    $(document).on('click', '.editNilai', function() {
+        var id = $(this).data('id');
+        $('#tambahNilai').modal('show');
+        $('#judul_modal').html('Edit Nilai');
+        $.ajax({
+                type: "GET",
+                url: "/nilai.edit/"+ id,
+                success: function (data) {
+                $.each(data.data, function (index, item) {
+                    
+                    $('#no_voucher').val(item.no_voucher);
+                    $('#id_lokasi').val(item.id_lokasi).trigger('change');
+                    $('#nominal').val(item.nilai);
+                    $('#urai').val(item.urai);
 
-
+                    
+                });
+            }
+        });
+    });
+})
