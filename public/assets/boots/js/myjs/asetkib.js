@@ -1681,17 +1681,27 @@ $('#tbl_sside').DataTable({
 
 //EDIT NILAI
     $(document).on('click', '.editNilai', function() {
+
+
         var id = $(this).data('id');
         $('#tambahNilai').modal('show');
         $('#judul_modal').html('Edit Nilai');
+        $('#form_nilai').attr('action', 'nilai.update');
         $.ajax({
                 type: "GET",
                 url: "/nilai.edit/"+ id,
                 success: function (data) {
                 $.each(data.data, function (index, item) {
-                    
+                    console.log(item.lokasi);
+                    $('#id_nilai').val(item.id);
                     $('#no_voucher').val(item.no_voucher);
                     $('#id_lokasi').val(item.id_lokasi).trigger('change');
+                    $('#id_aktiva').val(item.id_aktiva).trigger('change');
+                    $('#dep').val(item.dep).trigger('change');
+                    $('#div').val(item.div).trigger('change');
+                    $('#cat').val(item.cat).trigger('change');
+                    $('#tahun').val(item.tahun).trigger('change');
+                    $('#tgl_voucher').val(item.tgl_voucher);
                     $('#nominal').val(item.nilai);
                     $('#urai').val(item.urai);
 
@@ -1700,4 +1710,17 @@ $('#tbl_sside').DataTable({
             }
         });
     });
+    //Tambah Nilai
+    $(document).on('click', '#tambah_nilai', function() {
+
+        $('#form_nilai')[0].reset(); // Reset input biasa (text, textarea, date)
+        $('#form_nilai').attr('action', 'nilai.save'); // Ganti action ke nilai.save
+        $('#judul_modal').html('Tambah Nilai'); // Ganti judul modal
+
+        // Reset select2
+        $('#id_lokasi, #id_aktiva, #dep, #div, #cat, #tahun').val('').trigger('change');
+
+        $('#tambahNilai').modal('show');
+
+    })
 })

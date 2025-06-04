@@ -49,38 +49,48 @@ class NilaiController extends Controller
 
     public function edit($id)
     {
-        $aktiva = NilaiAktiva::select('nilai_aktivas.id as idn','aktivas.id as idA','no_voucher','tgl_voucher','kode','aktiva','nilai','urai','tahun')
-                            ->join('aktivas','nilai_aktivas.id_aktiva','=','aktivas.id')
-                            ->where('nilai_aktivas.id',$id)
+        $aktiva = NilaiAktiva::select('id','no_voucher','tgl_voucher','id_aktiva','nilai','urai','tahun','id_lokasi','dep','div','cat')
+                            ->where('id',$id)
                             ->get();
         return response()->json(['data' => $aktiva]);
     }
 
     public function update (Request $request)
     {
-        $id = $request->input('id');
-        $no = $request->input('no');
-        $tgl = $request->input('tgl');
-        $tahun = $request->input('tahun');
-        $kode = $request->input('kode_aktiva');
+        $id = $request->input('id_nilai');
+        $no_voucher = $request->input('no_voucher');
+        $tgl_voucher = $request->input('tgl_voucher');
+        $id_aktiva = $request->input('id_aktiva');
         $nilai = $request->input('nilai');
         $urai = $request->input('urai');
+        $tahun = $request->input('tahun');
+        $id_lokasi = $request->input('id_lokasi');
+        $dep = $request->input('dep');
+        $div = $request->input('div');
+        $cat = $request->input('cat');
         NilaiAktiva::where('id',$id)
                 ->update([
-                    'no_voucher' => $no,
-                    'tgl_voucher' => $tgl,
+                    'no_voucher' => $no_voucher,
+                    'tgl_voucher' => $tgl_voucher,
                     'tahun' => $tahun,
-                    'id_aktiva' => $kode,
+                    'id_aktiva' => $id_aktiva,
                     'nilai'=>$nilai,
                     'urai'=>$urai,
+                    'tahun'=>$tahun,
+                    'id_lokasi'=>$id_lokasi,
+                    'dep'=>$dep,
+                    'div'=>$div,
+                    'cat'=>$cat
                 ]);
 
-                return response()->json(['data' => 'update Data Sukses']);
+        Alert::success('BERHASIL','DATA BERHASIL DIUPDATE');
+        return redirect('/nilai');
 
     }
     public function destroy ($id)
     {
         NilaiAktiva::where('id', $id)->delete();
-        return response()->json(['message' => 'Data deleted successfully']);
+        Alert::success('BERHASIL','DATA BERHASIL DIHAPUS');
+        return redirect('/nilai');
     }
 }

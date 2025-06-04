@@ -11,7 +11,7 @@
 
                 <div class="container card">
                     <div class="card-header">DATA NILAI <div class="position-absolute top-0 end-0">
-                        <button class="btn  btn-primary" id="tambah_barang" data-bs-toggle="modal" data-bs-target="#tambahNilai"><i class="fa-solid fa-file-circle-plus"></i></button>
+                        <button class="btn  btn-primary" id="tambah_nilai" data-bs-toggle="modal" data-bs-target="#tambahNilai"><i class="fa-solid fa-file-circle-plus"></i></button>
                 </div>
                     </div>
                             <div class="card-body">
@@ -95,10 +95,10 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body" id="modal_body">
-              <form action="nilai.save" id="form_div" method="post">
+              <form action="nilai.save" id="form_nilai" method="post">
                 @csrf
                 <div class="row">
-
+                  <input type="hidden" id="id_nilai" name="id_nilai">
                   <div class="col">
                     <input type="text" class="form-control" name="no_voucher" id="no_voucher" placeholder="Nomer Voucher" required>
                   </div>
@@ -116,7 +116,7 @@
                     </select>
                   </div>
                 </div><br>
-                
+
                 <div class="row">
                   <div class="col">
                     <select    class="select2 form-control" style="width:100%;" name="id_lokasi" id="id_lokasi" required>
