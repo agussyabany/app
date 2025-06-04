@@ -9,6 +9,7 @@ use App\Models\Aset\Barang;
 use App\Models\Aset\Departemen;
 use App\Models\Aset\Divisi;
 use App\Models\Aset\Gedung;
+use App\Models\Aset\Golongan;
 use App\Models\Aset\Indeks;
 use App\Models\Aset\KibD;
 use App\Models\Aset\KibE;
@@ -271,7 +272,17 @@ class AsetDashboardController extends Controller
 
     $jabat = $user['jabat'];
     $divisi = $user['nama_div'];
-    return view('admin.pages.aset.kib.nilai', compact('jabat', 'divisi', 'on', 'no'));
+    $tahunSekarang = date('Y');
+    $tahunAwal = $tahunSekarang - 30;
+    $tahunAkhir = $tahunSekarang + 10;
+    $tahunRange = range($tahunAkhir, $tahunAwal);
+
+    $aktiva = Aktiva::get();
+    $dep = Departemen::get();
+    $div  =Divisi::get();
+    $lok = lokasi::get();
+    $golongan = Golongan::get();
+    return view('admin.pages.aset.kib.nilai', compact('jabat', 'divisi', 'on', 'no','tahunRange','aktiva','dep','div','lok','golongan'));
 }
 
 public function nilaiData()
@@ -295,26 +306,31 @@ public function nilaiData()
     return DataTables::of($data)
         ->addIndexColumn()
         ->addColumn('aksi', function($row){
-            return '
-                <div class="btn-group">
-                    <button class="btn btn-default border border-secondary btn-sm detail" data-id="'.$row->id_nilai.'" type="button">DETAIL</button>
-                    <button type="button" class="btn btn-sm btn-default border border-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"><span class="visually-hidden">Toggle Dropdown</span></button>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item edit" data-id="'.$row->id_nilai.'" href="#"><i class="fa-solid fa-edit"></i>&nbsp;EDIT</a></li>
-                        <li><a class="dropdown-item delete" data-id="'.$row->id_nilai.'" href="#"><i class="fa-solid fa-trash"></i>&nbsp;DELETE</a></li>
-                        <li><a class="dropdown-item nilai" data-id="'.$row->id_nilai.'" href="#"><i class="fa-solid fa-trash"></i>&nbsp;NILAI</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                    </ul>
-                </div>';
+            return '<div class="btn-group">
+                        <button class="btn btn-default border border-primary btn-sm detail" data-id="'.$row->id_nilai.'" type="button"></button>
+                        <button type="button" class="btn btn-sm btn-default border border-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="visually-hidden">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a class="dropdown-item editNilai" data-id="'.$row->id_nilai.'" href="#">
+                                    <i class="fa-solid fa-edit"></i>&nbsp;EDIT
+                                </a>
+                            </li>
+                            <li>
+                                <form action="'.url('nilai.hapus/' . $row->id_nilai).'" method="POST" onsubmit="return confirm(\'Yakin ingin menghapus data ini?\')" style="display:inline;">
+                                    '.csrf_field().method_field('POST   ').'
+                                    <button type="submit" class="dropdown-item">
+                                        <i class="fa-solid fa-trash"></i>&nbsp;DELETE
+                                    </button>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>';
         })
         ->rawColumns(['aksi'])
         ->make(true);
-
-    
-
-
-
-}
+    }
 
 
     public function arsip()
