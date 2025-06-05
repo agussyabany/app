@@ -6,8 +6,16 @@ $('#tbl').DataTable({
     ]
   });
 //FUNGSI SELECT2 SELECT-OPTION
-$('.select2').select2({
-    dropdownParent: $('#modal_bodyLG')
+$('#modal_bodyLG').on('shown.bs.modal', function () {
+    $(this).find('.select2').select2({
+        dropdownParent: $('#modal_bodyLG')
+    });
+});
+
+$('#tambahNilai').on('shown.bs.modal', function () {
+    $(this).find('.select2').select2({
+        dropdownParent: $('#tambahNilai')
+    });
 });
 
 //BARANG

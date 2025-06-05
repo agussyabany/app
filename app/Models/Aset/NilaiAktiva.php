@@ -16,8 +16,10 @@ class NilaiAktiva extends Model
         'urai',
         'user',
         'tahun',
-        'created_at',
-        'updated_at'
+        'id_lokasi',
+        'dep',
+        'div',
+        'cat'
 
     ];
 }
