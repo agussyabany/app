@@ -64,14 +64,15 @@ class TanahController extends Controller
     if ($request->hasFile('dok') && is_array($dok)) {
         foreach ($dok as $file) {
             if ($file->isValid()) {
+                
+                $destinationPath = public_path('assets/img/lokasi');
                 $fileName = time() . '_' . uniqid() . '.pdf';
-                $folderPath = 'public/assets/img/tanah';
-                $filePath = $file->storeAs($folderPath, $fileName);
+                $file->move($destinationPath, $fileName);
 
                 // Create a new Dokumen entry
                 Pdf::create([
                     'id_tanah' => $tanah->id,
-                    'dok' => $filePath,
+                    'dok' => $fileName,
                     'gol'=>1
                 ]);
             }
