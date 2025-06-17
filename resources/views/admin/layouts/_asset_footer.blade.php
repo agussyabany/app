@@ -10,9 +10,9 @@
 </script>   
 
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-<script src="{{ asset('assets/boots/js/myjs/asetkib.js') }}"></script>
-<script src="{{ asset('assets/boots/js/myjs/funct.js') }}"></script>
-<script src="{{ asset('assets/boots/js/myjs/asetmaster.js')}}"></script>
+<script src="{{ asset('assets/myjs/asetkib.js') }}"></script>
+<script src="{{ asset('assets/myjs/funct.js') }}"></script>
+<script src="{{ asset('assets/myjs/asetmaster.js')}}"></script>
 <script>
     $(document).ready(function() {
         var on =  JSON.parse("{{ json_encode($on) }}");
