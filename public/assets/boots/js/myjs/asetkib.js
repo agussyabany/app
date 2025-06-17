@@ -4,6 +4,7 @@ $(document).ready(function() {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
+    
 
     //TANAH
     $(document).on('click', '#detail_tanah', function() {
@@ -41,16 +42,21 @@ $(document).ready(function() {
 
                 $.get('/show/' + id, function (data) {
                     $('#filed').empty();
+                    var fileUrl = BASE_URL; // misalnya: http://127.0.0.1:8000
+
                     $.each(data.data, function (index, items) {
+                        var fullPath = fileUrl + '/assets/img/lokasi/' + items.dok;
+
                         var thumbnail = $(
-                            '<div class="pdf-thumbnail col ">' +
-                                '<embed width="150px" height="200px ; overflow: hidden;" name="plugin" src="https://app.perumdamtirtakencana.id/assets/img/lokasi/' + items.dok + '" type="application/pdf" border border-secondary rounded>' +
-                                '<p><a href="#" onclick="window.open(\'https://app.perumdamtirtakencana.id/assets/img/lokasi/' + items.dok + '\', \'_blank\'); return false;">' + items.dok + '</p>' +
+                            '<div class="pdf-thumbnail col">' +
+                                '<embed width="150px" height="200px" src="' + fullPath + '" type="application/pdf">' +
+                                '<p><a href="#" onclick="window.open(\'' + fullPath + '\', \'_blank\'); return false;">' + items.dok + '</a></p>' +
                             '</div>'
                         );
-                    $('#filed').append(thumbnail);
+
+                        $('#filed').append(thumbnail);
                     });
-                });
+});
             }
         });
     })
