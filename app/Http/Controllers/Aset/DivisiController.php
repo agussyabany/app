@@ -7,7 +7,7 @@ use App\Models\Aset\Divisi;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
-class Divisicontroller extends Controller
+class DivisiController extends Controller
 {
     public function save(Request $request)
     {

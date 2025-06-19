@@ -118,6 +118,27 @@ $(document).on('click', '#del_dep', function() {
      }
     })
 //DIVISI
+
+$('#dep_select').on('change', function () {
+            var depId = $(this).val();
+
+            if (depId) {
+                $.ajax({
+                    url: '/depSel/' + depId,
+                    type: 'GET',
+                    success: function (response) {
+                        $('#kode').val(response.kode_dep);
+                    },
+                    error: function () {
+                        $('#kode').val('');
+                        alert('Departemen tidak ditemukan.');
+                    }
+                });
+            } else {
+                $('#kode').val('');
+            }
+        });
+
 $(document).on('click', '#edit_divisi', function() {
     var id = $(this).data('id');
     $('#modal_div').modal('show');
