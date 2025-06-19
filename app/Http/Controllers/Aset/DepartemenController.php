@@ -55,4 +55,18 @@ class DepartemenController extends Controller
         Departemen::where('id', $id)->delete();
         return response()->json(['message' => 'Data deleted successfully']);
     }
+
+
+    //Suplai ke Select Option
+
+            public function depSel($id)
+        {
+            $dep = Departemen::select('nama_dep')->find($id); // sesuaikan model jika perlu
+
+            if ($dep) {
+                return response()->json(['kode_dep' => $dep->nama_dep]);
+            }
+
+            return response()->json(['kode_dep' => null], 404);
+        }
 }
