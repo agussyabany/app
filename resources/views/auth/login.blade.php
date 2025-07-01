@@ -85,7 +85,7 @@
             <form method="post" action="{{ route('login') }}">
                 @csrf
                 <img class="mb-4" src="{{asset('assets/img/pdam.png')}}" alt="" width="300" height="57">
-                <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+                <h1 class="h3 mb-3 fw-normal">Please sign </h1>
 
                 <div class="form-floating">
                     @if ($errors->any())
@@ -99,7 +99,7 @@
                      @endif
                      
                 <input class="form-control" placeholder="name@example.com" id="email" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" >
-                <label for="floatingInput">Email address</label>
+                <label for="floatingInput">Email</label>
                 </div>
                 <div class="form-floating">
                 <input id="password"type="password" name="password" required autocomplete="current-password"  type="password" class="form-control" placeholder="Password">
