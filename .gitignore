@@ -20,5 +20,7 @@ yarn-error.log
 .htaccess
 server.php
 /public/assets/img/
+/public/assets/boots/
+/public/assets/LiveLine/
 /public/htaccess
 

@@ -7,7 +7,7 @@ use App\Http\Controllers\Aset\AsetDashboardController;
 use App\Http\Controllers\Aset\BahanController;
 use App\Http\Controllers\Aset\BarangController;
 use App\Http\Controllers\Aset\DepartemenController;
-use App\Http\Controllers\Aset\Divisicontroller;
+use App\Http\Controllers\Aset\DivisiController;
 use App\Http\Controllers\Aset\GedungController;
 use App\Http\Controllers\Aset\KibDController;
 use App\Http\Controllers\Aset\KibEContrller;
@@ -142,11 +142,12 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::get('dep.edit/{id}',[DepartemenController::class,'edit']);
     Route::post('dep.update',[DepartemenController::class,'update']);
     Route::post('dep.hapus/{id}',[DepartemenController::class,'destroy']);
+    Route:: get('depSel/{id}',[DepartemenController::class,'depSel']);
 
-    Route::post('/div.save',[Divisicontroller::class,'save']);
-    Route::get('div.edit/{id}',[Divisicontroller::class,'edit']);
-    Route::post('div.update',[Divisicontroller::class,'update']);
-    Route::post('div.hapus/{id}',[Divisicontroller::class,'destroy']);
+    Route::post('/div.save',[DivisiController::class,'save']);
+    Route::get('div.edit/{id}',[DivisiController::class,'edit']);
+    Route::post('div.update',[DivisiController::class,'update']);
+    Route::post('div.hapus/{id}',[DivisiController::class,'destroy']);
 
     Route::post('/ruang.save',[RuangController::class,'save']);
     Route::get('ruang.edit/{id}',[RuangController::class,'edit']);
