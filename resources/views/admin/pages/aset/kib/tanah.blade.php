@@ -48,7 +48,7 @@ $no = 0;
 
                                                         <button type="button" class="btn btn-sm btn-default border border-secondary  dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"><span class="visually-hidden">Toggle Dropdown</span></button>
                                                         <ul class="dropdown-menu">
-                                                            <li><a class="dropdown-item  edit" data-id="" href="#"><i class="fa-solid fa-edit"></i>&nbsp;EDIT</a></li>
+                                                            <li><a class="dropdown-item  updateA" data-id="" href="#"><i class="fa-solid fa-edit"></i>&nbsp;EDIT</a></li>
                                                             <li><a class="dropdown-item delete" data-id="" href="#"><i class="fa-solid fa-trash"></i>&nbsp;DELETE</a></li>
                                                             <li><a class="dropdown-item nilai" data-id="" href="#"><i class="fa-solid fa-trash"></i>&nbsp;NILAI</a></li>
                                                             <li><hr class="dropdown-divider"></li>
@@ -63,15 +63,7 @@ $no = 0;
                         </div>
                     </div>
                 </div>
-
-
-
-
-
-
-
-
-
+                
       {{-- MODAL KIB --}}
       <div class="modal"  id="modal_tanah">
         <div class="modal-dialog  modal-xl">
@@ -354,13 +346,10 @@ $no = 0;
                                         <td id="asal_D"> item.asal+ </td>
                                     </tr>
                                     <tr>
-                                        <th>Tahun Pengadan</th>
+                                        <th>Tahun Pengadaan</th>
                                         <td id="tahun_D"> item.tahun+ </td>
                                     </tr>
-                                    <tr>
-                                        <th>-</th>
-                                        <td id="guna_Dt"> item.guna+ </td>
-                                    </tr>
+                                    
                                 </tbody>
                             </table>
                         </div>
@@ -485,10 +474,7 @@ $no = 0;
                                         <th>Hak</th>
                                         <td id="hak_D"> item.hak+ </td>
                                     </tr>
-                                    <tr>
-                                        <th>Asal Usul</th>
-                                        <td id="asal_D"> item.asal+ </td>
-                                    </tr>
+                                    
                                     <tr>
                                         <th>Pemilik Asal</th>
                                         <td id="pemilik_D"> item.pemilik+ </td>
@@ -506,10 +492,7 @@ $no = 0;
                                         <th>Nilai</th>
                                         <td><a data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"><h5 id="sumNilai"></h5></a></td>
                                     </tr>
-                                    <tr>
-                                        <th></th>
-                                        <td></td>
-                                    </tr>
+                                    
                                     <tr>
                                         <th>Keterangan</th>
                                         <td id="ket_D"> item.ket+ </td>

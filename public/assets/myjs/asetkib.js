@@ -10,13 +10,13 @@ $(document).ready(function() {
     $(document).on('click', '#detail_tanah', function() {
         var id = $(this).data('id');
         //$('#exampleModal').modal('show');
-        $('#judul_modalLG_detail').html("DETAIL TANAH");
+       
         $.ajax({
                 type: "GET",
                 url: "/tanah.detail/"+ id,
                 success: function (data) {
                 $.each(data.data, function (index, item) {
-                    console.log('ini');
+                    $('#judul_modalLG_detail').html(item.lokasi);
                     $('#alamat_D').html(item.alamat);
                     $('#nama_barang_D').html(item.nama_barang);
                     $('#guna_D').html(item.guna);
@@ -115,6 +115,54 @@ $(document).ready(function() {
               )})
         });
     })
+    //Edit tanah
+    $(document).on('click', '.updateA', function() {
+        var id = $(this).data('id');
+        $('#modal_tanah').modal('show');
+        $('#judul_modalLG').html('UPDATE DATA TANAH');
+
+        $.get("/tanah.detail/"+ id , function(data) {
+            $.each(data.data, function (index, items) {
+
+
+                    selectOptAll();
+                    $.get('/barang.tanah', function (data) {
+                        $.each(data.data, function (index, item) {
+                            $('#nama').append('<option value="' + item.id + '">' + item.nama_barang + '</option>');
+                        });
+                    });
+
+                    $('#voucher_tanah').empty()
+                    $('#voucher_tanah').append('<option value="' + barang.id + '" selected>' + barang.nama_barang + '</option>')
+
+                    $.get('/vTanah', function (data) {
+                        $.each(data.data, function (index, item) {
+                            $('#voucher_tanah').append('<option value="' + item.no_voucher + '">' + item.no_voucher + '</option>');
+                        });
+                    });
+
+                    $('body').on('change', '#voucher_tanah', function (event) {
+                        event.preventDefault();
+                        var idv = $(this).val();
+                        $('#kode_aktiva').empty().append('<option value="">Select an aktiva</option>');
+                        $.get('/kir_aktiva/' + idv , function (data) {
+                            $.each(data.data, function (index, item) {
+                                $('#kode_aktiva').prepend('<option value="' + item.id + '">'+  item.kode +' | ' + item.aktiva + '</option>');
+                                $('#bulan_voc').val(item.tgl_voucher);
+                                $('#urai_voc').val(item.urai);
+                        }
+                        )})
+                    });
+
+
+
+            })
+        })
+
+        
+    })
+
+
     //MESIN
     $(document).on('click', '#klik_nilai_mesin', function() {
         var id = $(this).data('id');
