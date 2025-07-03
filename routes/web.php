@@ -177,6 +177,9 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::get('/show/{id}',[PdfController::class,'show']);
 
     Route::post('/tanah.save',[TanahController::class,'save']);
+    Route::post('/tanah.update/{id}',[TanahController::class,'update']);
+    Route::post('/del.tanah/{id}',[TanahController::class,'destroy']);
+
     Route::get('/tanah.detail/{id}',[TanahController::class,'detail']);
     Route::get('/tanah.print',[TanahController::class,'print']);
     Route::get('/tanah.nilai/{lok}',[TanahController::class,'nilaiSum']);

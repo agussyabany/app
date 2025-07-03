@@ -89,13 +89,12 @@ $(document).ready(function() {
     })
     //INPUT DATA TANAH
     $(document).on('click', '#add', function() {
-        selectOptAll();
-        $.get('/barang.tanah', function (data) {
-            $.each(data.data, function (index, item) {
-                $('#nama').append('<option value="' + item.id + '">' + item.nama_barang + '</option>');
-            });
-        });
+        $('#judul_modalLG').html('TAMBAH DATA TANAH');
+        $('#form_a')[0].reset();
+        $('#form_a').attr('action', '/tanah.save');
 
+
+        selectOptAll();
         $.get('/vTanah', function (data) {
             $.each(data.data, function (index, item) {
                 $('#voucher_tanah').append('<option value="' + item.no_voucher + '">' + item.no_voucher + '</option>');
@@ -119,47 +118,45 @@ $(document).ready(function() {
     $(document).on('click', '.updateA', function() {
         var id = $(this).data('id');
         $('#modal_tanah').modal('show');
-        $('#judul_modalLG').html('UPDATE DATA TANAH');
+        $('#form_a').attr('action', '/tanah.update/' + id);
+        $.ajax({
+                type: "GET",
+                url: "/tanah.detail/"+id,
+                success: function (data) {
+                $.each(data.data, function (index, item) {
 
-        $.get("/tanah.detail/"+ id , function(data) {
-            $.each(data.data, function (index, items) {
+                $('#judul_modalLG').html('UPDATE DATA TANAH ' + item.lokasi);
+                  
+                  $('#lokasi_kir').empty;
+                  $('#lokasi_kir').append('<option value="' + item.id_lokasi + '" selected>' + item.lokasi + '</option>');
 
+                  $('#nama').empty();
+                  $('#nama').append('<option value="' + item.id_barang + '" selected>' + item.nama_barang + '</option>');
+                  selectOptAll();
 
-                    selectOptAll();
-                    $.get('/barang.tanah', function (data) {
-                        $.each(data.data, function (index, item) {
-                            $('#nama').append('<option value="' + item.id + '">' + item.nama_barang + '</option>');
-                        });
-                    });
+                  $('#tahun').val(item.tahun);
+                  $('#guna').val(item.guna);
+                  $('#no_tunjuk').val(item.no_tunjuk);
+                  $('#tgl_tunjuk').val(item.tgl_tunjuk);//
+                  $('#luas_tunjuk').val(item.luas_tunjuk);
+                  $('#sertifikat').val(item.sertifikat);
+                  $('#tgl_sertifikat').val(item.tgl_sertifikat);//
+                  $('#luas_sertifikat').val(item.luas_sertifikat);
+                  $('#no_gambar').val(item.no_gambar);
+                  $('#tgl_gambar').val(item.tgl_gambar);//
+                  $('#luas_gambar').val(item.luas_gambar);
 
-                    $('#voucher_tanah').empty()
-                    $('#voucher_tanah').append('<option value="' + barang.id + '" selected>' + barang.nama_barang + '</option>')
+                  $('#hak').append('<option value="' + item.hak + '" selected>' + item.hak + '</option>');
 
-                    $.get('/vTanah', function (data) {
-                        $.each(data.data, function (index, item) {
-                            $('#voucher_tanah').append('<option value="' + item.no_voucher + '">' + item.no_voucher + '</option>');
-                        });
-                    });
+                  $('#asal').append('<option value="' + item.asal + '" selected>' + item.asal + '</option>');
+                  
+                  $('#pemilik').val(item.pemilik);
+                  $('#ket').val(item.ket);
 
-                    $('body').on('change', '#voucher_tanah', function (event) {
-                        event.preventDefault();
-                        var idv = $(this).val();
-                        $('#kode_aktiva').empty().append('<option value="">Select an aktiva</option>');
-                        $.get('/kir_aktiva/' + idv , function (data) {
-                            $.each(data.data, function (index, item) {
-                                $('#kode_aktiva').prepend('<option value="' + item.id + '">'+  item.kode +' | ' + item.aktiva + '</option>');
-                                $('#bulan_voc').val(item.tgl_voucher);
-                                $('#urai_voc').val(item.urai);
-                        }
-                        )})
-                    });
-
-
-
-            })
-        })
-
-        
+                  $('#dok').attr('disabled', true);
+                });
+            }
+        });
     })
 
 
