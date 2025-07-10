@@ -33,7 +33,12 @@ class Mesin extends Model
         'input',
         'bahan',
         'asal',
-        'id'
+        'id',
+        'jenis',
+        'id_voucher2',
+        'fungsi',
+        'kodisi',
+        'dok'
 
     ];
 

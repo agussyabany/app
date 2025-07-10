@@ -149,7 +149,7 @@ $(document).ready(function() {
                   $('#hak').append('<option value="' + item.hak + '" selected>' + item.hak + '</option>');
 
                   $('#asal').append('<option value="' + item.asal + '" selected>' + item.asal + '</option>');
-                  
+
                   $('#pemilik').val(item.pemilik);
                   $('#ket').val(item.ket);
 
@@ -187,12 +187,18 @@ $(document).ready(function() {
             })
 
     })
-    //INPUT DATA TANAH
+    //INPUT DATA MESIN
     $(document).on('click', '#add_mesin', function() {
         selectOptAll();
         $.get('/barang.mesin', function (data) {
             $.each(data.data, function (index, item) {
                 $('#nama').append('<option value="' + item.id + '">' + item.nama_barang + '</option>');
+            });
+        });
+
+        $.get('/bahan', function (data) {// bahan
+            $.each(data.data, function (index, item) {
+                $('#bahan_mesin').append('<option value="' + item.nama + '">' + item.nama + '</option>');
             });
         });
 
@@ -211,16 +217,18 @@ $(document).ready(function() {
                     $('#kode_aktiva').prepend('<option value="' + item.id + '">'+  item.kode +' | ' + item.aktiva + '</option>');
                     $('#bulan_voc').val(item.tgl_voucher);
                     $('#urai_voc').val(item.urai);
+                    $('#nilaiB').val(item.nilai);
+                    $('#id_voucher2').val(item.id);
               }
               )})
         });
 
         $('body').on('change','#kode_aktiva' , function (event) {
             var kodeAktiva = $('#kode_aktiva').find('option:selected').text();
-            //alert("Teks yang dipilih adalah: " + kodeAktiva);
+            
 
             if (kodeAktiva == "31.08.10 | Kendaraan Penumpang") {
-
+                $('#jenisB').val(2);
                 $('#kendaraan').append('<div class="input-group input-group-sm mb-1">'+
                                             '<span class="input-group-text col-sm-3">No Pabrik</span><input name="pabrik" id="pabrik" type="text" class="form-control">'+
                                        ' </div>'+
@@ -247,9 +255,85 @@ $(document).ready(function() {
                                         '<p style="color:red;" id="bpkb_error"></p>')
                                     }else{
                                         $('#kendaraan').empty();
+                                        $('#jenisB').val(1);
                                     }
                                 })
                             })
+
+//Save Mesin
+$('#submit_b').click(function (e) {
+        e.preventDefault();
+
+        let formData = new FormData($('#form_b')[0]);
+
+        // Tambahkan flag draft
+        formData.append('is_final', 0);
+
+        $.ajax({
+            url: 'mesin.save',
+            type: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function (res) {
+                if (res.success) {
+                    $('#form_b')[0].reset();
+                    fetchKeranjang(); // refresh keranjang
+                } else {
+                    alert('Gagal menambahkan ke keranjang');
+                }
+            },
+            error: function (xhr) {
+                alert('Error server saat menambahkan ke keranjang');
+            }
+        });
+    });
+    // Load data keranjang
+    function fetchKeranjang() {
+    $.ajax({
+        url: 'mesin.input',
+        method: 'GET',
+        success: function (res) {
+            let rows = '';
+            $.each(res.data, function (i, item) {
+                rows += `
+                    <tr>
+                        <td>${i + 1}</td>
+                        <td>${item.nama_barang}</td>
+                        <td>${item.kode}</td>
+                        <td>${item.merk}</td>
+                        <td>${item.guna}</td>
+                        <td class="text-center">
+                            <button class="btn btn-sm  btn-outline-danger btn-hapus" data-id="${item.idb}">
+                               <i class="fas fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>`;
+            });
+            $('#tbl_mesin_input tbody').html(rows);
+        }
+    });
+}fetchKeranjang(); // load saat pertama kali modal dibuka
+//Hapus keranjang
+$(document).on('click', '.btn-hapus', function () {
+    const id = $(this).data('id');
+    if (confirm('Yakin ingin menghapus item ini dari keranjang?')) {
+        $.ajax({
+            url:'mesin.hapus/'+id,
+            method: 'POST',
+            success: function (res) {
+                if (res.success) {
+                    fetchKeranjang();
+                } else {
+                    alert('Gagal menghapus item');
+                }
+            }
+        });
+    }
+});
+
+
+
 //Data Mesin
     $(document).on('click', '#detail_mesin', function() {
         var id = $(this).data('id');

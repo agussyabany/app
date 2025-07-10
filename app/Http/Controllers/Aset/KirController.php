@@ -36,7 +36,7 @@ class KirController extends Controller
 
     public function kir_aktiva($idv)
     {
-        $kir_aktiva = NilaiAktiva::select('aktivas.aktiva','aktivas.kode','nilai_aktivas.id','nilai_aktivas.tgl_voucher','nilai_aktivas.urai')
+        $kir_aktiva = NilaiAktiva::select('aktivas.aktiva','aktivas.kode','nilai_aktivas.id','nilai_aktivas.tgl_voucher','nilai_aktivas.urai','nilai_aktivas.nilai')
             ->join('aktivas', 'nilai_aktivas.id_aktiva', '=', 'aktivas.id')
             ->where('nilai_aktivas.no_voucher', $idv)
             ->get();
