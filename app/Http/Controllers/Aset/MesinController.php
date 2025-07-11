@@ -151,7 +151,7 @@ class MesinController extends Controller
     public function hapus($id)
     {
         Mesin::where('id', $id)->delete();
-        return response()->json(['message' => 'Data deleted successfully']);
+        return response()->json(['success' => true,'message' => 'Data deleted successfully']);
     }
 
     public function update(Request $request)

@@ -277,7 +277,7 @@ $('#submit_b').click(function (e) {
             processData: false,
             success: function (res) {
                 if (res.success) {
-                    $('#form_b')[0].reset();
+                    $('#form_b').find('input, textarea').val('');
                     fetchKeranjang(); // refresh keranjang
                 } else {
                     alert('Gagal menambahkan ke keranjang');
@@ -304,7 +304,7 @@ $('#submit_b').click(function (e) {
                         <td>${item.merk}</td>
                         <td>${item.guna}</td>
                         <td class="text-center">
-                            <button class="btn btn-sm  btn-outline-danger btn-hapus" data-id="${item.idb}">
+                            <button type="button" class="btn btn-sm  btn-outline-danger btn-hapus" data-id="${item.idb}">
                                <i class="fas fa-trash"></i>
                             </button>
                         </td>
