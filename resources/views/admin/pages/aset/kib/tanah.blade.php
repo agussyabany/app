@@ -48,9 +48,18 @@ $no = 0;
 
                                                         <button type="button" class="btn btn-sm btn-default border border-secondary  dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"><span class="visually-hidden">Toggle Dropdown</span></button>
                                                         <ul class="dropdown-menu">
-                                                            <li><a class="dropdown-item  updateA" data-id="" href="#"><i class="fa-solid fa-edit"></i>&nbsp;EDIT</a></li>
-                                                            <li><a class="dropdown-item delete" data-id="" href="#"><i class="fa-solid fa-trash"></i>&nbsp;DELETE</a></li>
-                                                            <li><a class="dropdown-item nilai" data-id="" href="#"><i class="fa-solid fa-trash"></i>&nbsp;NILAI</a></li>
+                                                            <li><a class="dropdown-item  updateA" data-id="{{ $item->id_tanah}}" href="#"><i class="fa-solid fa-edit"></i>&nbsp;EDIT</a></li>
+                                                            <li>
+                                                            <form action="/del.tanah/{{ $item->id_tanah }}" method="POST" style="display:inline;">
+                                                                @csrf
+                                                                
+                                                                <a class="dropdown-item" href="#" onclick="event.preventDefault(); 
+                                                                    if (confirm('Apakah  yakin ingin menghapus data  {{ $item->lokasi }} ?')) {  
+                                                                        this.closest('form').submit(); 
+                                                                    }"><i class="fa-solid fa-trash"></i>&nbsp;HAPUS</a>
+                                                            </form>
+                                                            </li>
+                                                            
                                                             <li><hr class="dropdown-divider"></li>
                                                         </ul>
                                                     </div>
@@ -77,7 +86,7 @@ $no = 0;
               <form action="/tanah.save" id="form_a" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="container">
-                  <div class="row  border border-primary rounded">
+                  {{-- <div class="row  border border-primary rounded">
                     <div class="container"><br>
                         <table class="table table-striped table-bordered rounded">
                             <thead>
@@ -119,7 +128,7 @@ $no = 0;
                             </tbody>
                         </table>
                     </div>
-                </div><br>
+                </div><br> --}}
                         <div class="row  border border-primary rounded">
                             <div class="container"><br>
                                 <table class="table table-striped table-bordered rounded">
@@ -164,7 +173,7 @@ $no = 0;
                                             </td>
                                             <td>
                                                 <div class="input-group input-group-sm mb-1">
-                                                    <input type="text" nama="guna" id="guna" class="form-control" required>
+                                                    <input type="text" name="guna" id="guna" class="form-control" required>
                                                 </div>
                                             </td>
                                     </tr>
@@ -194,7 +203,7 @@ $no = 0;
                                 </div>
                                 <div class="col">
                                     <div class="input-group input-group-sm mb-1">
-                                        <span class="input-group-text col-sm-3">Luas</span><input type="text" name="luas_tunjuk" placeholder="Penunjukan" class="form-control" required>
+                                        <span class="input-group-text col-sm-3">Luas</span><input id="luas_tunjuk" type="text" name="luas_tunjuk" placeholder="Penunjukan" class="form-control" required>
                                     </div>
                                 </div>
                          </fieldset><br>
@@ -246,7 +255,23 @@ $no = 0;
 
                                 <div class="col"><br>
                                     <div class="input-group input-group-sm mb-1">
+                                        <select class="select2 form-control" name="asal" id="asal" style="width:100%;" fdprocessedid="t9y0c">
+                                                <option> -ASAL- </option>
+                                                <option>Pembelian</option>
+                                                <option>Bantuan</option>
+                                                <option>Hibah</option>
+                                                <option>Penyertaan Modal</option>
+                                                <option>Serah Kelola</option>
+                                                <option>Ganti Rugi</option>
+                                                <option>Surat Penunjukan</option>
+                                                <option>SK Walikota</option>
+                                                <option>Sewa</option>
+                                    </select>
 
+                                    </div>
+                                    
+                                    <div class="input-group input-group-sm mb-1">
+                                        
                                         <select name="hak" id="hak" class="select2 form-control" style="width:100%;" required>
                                             <option>-HAK-</option>
                                             <option>SHM</option>
@@ -261,20 +286,11 @@ $no = 0;
                                         </select>
                                     </div>
                                     <div class="input-group input-group-sm mb-1">
-                                        <span class="input-group-text col-sm-3">Pemilik Asal</span><input name="asal" id="asal" type="text" class="form-control" required>
+                                        <span class="input-group-text col-sm-3">Pemilik Asal</span><input name="pemilik" id="pemilik" type="text" class="form-control" required>
                                     </div>
-                                    <div class="input-group input-group-sm mb-1">
-                                        <span class="input-group-text col-sm-3">Asal</span><input type="number" name="pemilik" id="pemilik" value="2023" class="form-control" required>
-                                    </div>
-                                    <div class="input-group input-group-sm mb-1">
-                                        <span class="input-group-text col-sm-3">Nilai perolehan</span>
-                                        <select class="select2 form-control" name="nilai_a" id="nilai_a" style="width:100%;" required>
-                                            <option> -PILH NILAI AKTIVA- </option>
-                                        </select>
-                                    </div>
-                                    <div class="input-group input-group-sm mb-1">
-                                        <span class="input-group-text col-sm-3">Nilai saat ini</span><input name="nilai_now" id="nilai_now" type="text" class="form-control" required>
-                                    </div>
+                                    
+                                    
+                                    
                                 </div><br>
 
                                 <div class="col"><br>

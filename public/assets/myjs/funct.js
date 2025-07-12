@@ -72,6 +72,12 @@ function selectOptAll()
             $('#dep').append('<option value="' + item.id + '">' + item.kode_dep + '</option>');
         });
     });
+
+    // $.get('/barang.tanah', function (data) {
+    //         $.each(data.data, function (index, item) {
+    //             $('#nama').append('<option value="' + item.id + '">' + item.nama_barang + '</option>');
+    //         });
+    //     });
     $('body').on('change', '#dep', function (event) {
         event.preventDefault();
         var id = $(this).val();

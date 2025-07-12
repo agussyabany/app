@@ -86,9 +86,53 @@ class TanahController extends Controller
         }
     }
 
+    public function update(Request $request, $id)
+{
+    $user = Auth::user()->id;
+
+    $tanah = Tanah::findOrFail($id); // cari berdasarkan ID
+
+    $tanah->id_lokasi       = $request->input('lokasi');
+    $tanah->id_barang       = $request->input('nama');
+    $tanah->guna            = $request->input('guna');
+    $tanah->tahun           = $request->input('tahun');
+    $tanah->no_tunjuk       = $request->input('no_tunjuk');
+    $tanah->tgl_tunjuk      = $request->input('tgl_tunjuk');
+    $tanah->luas_tunjuk     = $request->input('luas_tunjuk');
+    $tanah->sertifikat      = $request->input('sertifikat');
+    $tanah->tgl_sertifikat  = $request->input('tgl_sertifikat');
+    $tanah->luas_sertifikat = $request->input('luas_sertifikat');
+    $tanah->no_gambar       = $request->input('no_gambar');
+    $tanah->tgl_gambar      = $request->input('tgl_gambar');
+    $tanah->luas_gambar     = $request->input('luas_gambar');
+    $tanah->hak             = $request->input('hak');
+    $tanah->asal            = $request->input('asal');
+    $tanah->pemilik         = $request->input('pemilik');
+    //$tanah->nilai           = $request->input('kode_aktiva');
+    $tanah->ket             = $request->input('ket');
+    $tanah->user            = $user;
+
+    $tanah->save();
+
+    Alert::success('BERHASIL', 'DATA BERHASIL DIPERBARUI');
+    return redirect('/tanah');
+}
+
+public function destroy($id)
+{
+    // Cari data tanah berdasarkan ID
+    $tanah = Tanah::findOrFail($id);
+
+    // Hapus data tanah, tapi biarkan dokumennya tetap
+    $tanah->delete();
+
+    Alert::success('BERHASIL', 'DATA TANAH BERHASIL DIHAPUS (DOKUMEN TETAP ADA)');
+    return redirect('/tanah');
+}
+
     public function detail($id)
     {
-        $tanah = Tanah::select('tanahs.id as id_tanah','id_lokasi','lokasi','nama_barang','guna','alamat','no_tunjuk','tgl_tunjuk','img','asal','tahun','no_tunjuk','tgl_tunjuk','luas_tunjuk','sertifikat','tgl_sertifikat','luas_sertifikat','no_gambar','tgl_gambar','luas_gambar','hak','asal','pemilik','nilai','nilai_now','ket','kode_barang')
+        $tanah = Tanah::select('tanahs.id as id_tanah','id_lokasi','lokasi','barangs.id as id_barang','nama_barang','guna','alamat','no_tunjuk','tgl_tunjuk','img','asal','tahun','no_tunjuk','tgl_tunjuk','luas_tunjuk','sertifikat','tgl_sertifikat','luas_sertifikat','no_gambar','tgl_gambar','luas_gambar','hak','asal','pemilik','nilai','nilai_now','ket','kode_barang')
                         ->join('lokasis','tanahs.id_lokasi','=','lokasis.id')
                         ->join('barangs','tanahs.id_barang','=','barangs.id')
                         ->where('tanahs.id',$id)
@@ -148,3 +192,4 @@ class TanahController extends Controller
         return response()->json(['data' => $v_tanah]);
     }
 }
+
