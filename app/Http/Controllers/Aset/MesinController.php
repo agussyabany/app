@@ -67,7 +67,7 @@ class MesinController extends Controller
 
     public function edit($id)
     {
-        $mesin_full = Mesin::select('barangs.id as idBar','nama_barang','kode_dep','nama_div','lokasi','id_lokasi','id_departemen','id_div','kode','reg','tahun','harga','susut','bahan','asal','ukuran','merk','pabrik','rangka','mesin','polisi','bpkb','ket','mesins.id as id_mesin','guna')
+        $mesin_full = Mesin::select('barangs.id as idBar','nama_barang','kode_dep','nama_div','lokasi','id_lokasi','id_departemen','id_div','kode','reg','tahun','harga','susut','bahan','asal','ukuran','merk','pabrik','rangka','mesin','polisi','bpkb','ket','mesins.id as id_mesin','guna','fungsi','jenis','id_voucher2','kodisi')
                             ->where('mesins.id',$id)
                             ->join('barangs','mesins.id_barang','barangs.id')
                             ->join('divisis','mesins.id_div','divisis.id')
@@ -143,9 +143,12 @@ class MesinController extends Controller
 
     public function clear()
     {
-        Mesin::where('input',0)
-        ->update(['input' => 1]);
-        return response()->json(['message' => 'Data updated successfully']);
+        try {
+            Mesin::where('input', 0)->update(['input' => 1]);
+            return response()->json(['success' => true]);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false]);
+        }
     }
 
     public function hapus($id)
@@ -156,114 +159,118 @@ class MesinController extends Controller
 
     public function update(Request $request)
     {
-        $rules = [
-            'lokasi' => 'required',
-            'dep' => 'required',
-            'div' => 'required',
-            'jenis' => 'required',
-            'id_voucher2' => 'required',
-            'nama_aset' => 'required',
-            'kode_aset' => 'required',
-            'reg' => 'required',
-            'merk' => 'required',
-            'ukuran' => 'required',
-            'fungsi' => 'required',
-            'guna' => 'required',
-            'bahan' => 'required',
-            'tahun' => 'required|numeric',
-            'kondisi_b'=> 'required',
-            'asal' => 'required',
-            'nilai' => 'required',
+        // $rules = [
+        //     'lokasi' => 'required',
+        //     'dep' => 'required',
+        //     'div' => 'required',
+        //     'jenis' => 'required',
+        //     'id_voucher2' => 'required',
+        //     'nama_aset' => 'required',
+        //     'kode_aset' => 'required',
+        //     'reg' => 'required',
+        //     'merk' => 'required',
+        //     'ukuran' => 'required',
+        //     'fungsi' => 'required',
+        //     'guna' => 'required',
+        //     'bahan' => 'required',
+        //     'tahun' => 'required|numeric',
+        //     'kondisi_b'=> 'required',
+        //     'asal' => 'required',
+        //     'nilai' => 'required',
             
-            // 'pabrik' => 'required',
-            // 'rangka' => 'required',
-            // 'mesin' => 'required',
-            // 'nopol' => 'required',
-            // 'bpkb' => 'required',
+        //     // 'pabrik' => 'required',
+        //     // 'rangka' => 'required',
+        //     // 'mesin' => 'required',
+        //     // 'nopol' => 'required',
+        //     // 'bpkb' => 'required',
             
-            'ket' => 'required',
-        ];
+        //     'ket' => 'required',
+        // ];
 
-        // Custom error messages
-        $messages = [
-            'required' => 'The :attribute field is required.',
-            'numeric' => 'The :attribute must be a number.',
-            'image' => 'The :attribute must be an image.',
-            'mimes' => 'The :attribute must be a file of type: jpeg, png, jpg, gif.',
-            'max' => 'The :attribute may not be greater than :max kilobytes.',
-        ];
+        // // Custom error messages
+        // $messages = [
+        //     'required' => 'The :attribute field is required.',
+        //     'numeric' => 'The :attribute must be a number.',
+        //     'image' => 'The :attribute must be an image.',
+        //     'mimes' => 'The :attribute must be a file of type: jpeg, png, jpg, gif.',
+        //     'max' => 'The :attribute may not be greater than :max kilobytes.',
+        // ];
 
-        // Validate the request
-        $validator = Validator::make($request->all(), $rules, $messages);
+        // // Validate the request
+        // $validator = Validator::make($request->all(), $rules, $messages);
 
-        // If validation fails, return the errors
-        if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()], 400);
-        }
+        // // If validation fails, return the errors
+        // if ($validator->fails()) {
+        //     return response()->json(['errors' => $validator->errors()], 400);
+        // }
 
-        $user = Auth::user()->id;
-        $id = $request->input('id');
-        $lokasi = $request->input('lokasi');
-        $dep = $request->input('dep');
-        $div = $request->input('div');
-        $jenis = $request->input('jenis');//
-        $id_voucher2 = $request->input('id_voucher2');//
-        $nama_aset = $request->input('nama_aset');
-        $kode_aset = $request->input('kode_aset');
-        $reg = $request->input('reg');
-        $merk = $request->input('merk');
-        $ukuran = $request->input('ukuran');
-        $fungsi = $request->input('fungsi');//
-        $guna = $request->input('guna');
-        $bahan = $request->input('bahan');
-        $tahun = $request->input('tahun');
-        $kondisi = $request->input('kondisi');//
-        $asal = $request->input('asal');
-        $nilai = $request->input('nilai');
+        // $user = Auth::user()->id;
+        // $id = $request->input('id');
+        // $lokasi = $request->input('lokasi');
+        // $dep = $request->input('dep');
+        // $div = $request->input('div');
+        // $jenis = $request->input('jenis');//
+        // $id_voucher2 = $request->input('id_voucher2');//
+        // $nama_aset = $request->input('nama_aset');
+        // $kode_aset = $request->input('kode_aset');
+        // $reg = $request->input('reg');
+        // $merk = $request->input('merk');
+        // $ukuran = $request->input('ukuran');
+        // $fungsi = $request->input('fungsi');//
+        // $guna = $request->input('guna');
+        // $bahan = $request->input('bahan');
+        // $tahun = $request->input('tahun');
+        // $kondisi = $request->input('kondisi');//
+        // $asal = $request->input('asal');
+        // $nilai = $request->input('nilai');
         
-        $pabrik = $request->input('pabrik');
-        $rangka = $request->input('rangka');
-        $mesin = $request->input('mesin');
-        $nopol = $request->input('nopol');
-        $bpkb = $request->input('bpkb');
+        // $pabrik = $request->input('pabrik');
+        // $rangka = $request->input('rangka');
+        // $mesin = $request->input('mesin');
+        // $nopol = $request->input('nopol');
+        // $bpkb = $request->input('bpkb');
         
-        $ket = $request->input('ket');
+        // $ket = $request->input('ket');
        
 
-        Mesin::where('id',$id)
-        ->update(
-            [
-                'id_lokasi' => $lokasi,
-                'id_departemen' => $dep,
-                'id_div' => $div,
-                'id_barang' => $nama_aset,
-                'kode' => $kode_aset,
-                'reg' => $reg,
-                'merk' => $merk,
-                'ukuran' => $ukuran,
-                'fungsi' => $fungsi,
-                'guna' => $guna,
-                'bahan' => $bahan,
-                'tahun' => $tahun,
-                'kodisi' => $kondisi,
-                'asal' => $asal,
-                'harga' => $nilai,
+        // Mesin::where('id',$id)
+        // ->update(
+        //     [
+        //         'id_lokasi' => $lokasi,
+        //         'id_departemen' => $dep,
+        //         'id_div' => $div,
+        //         'id_barang' => $nama_aset,
+        //         'kode' => $kode_aset,
+        //         'reg' => $reg,
+        //         'merk' => $merk,
+        //         'ukuran' => $ukuran,
+        //         'fungsi' => $fungsi,
+        //         'guna' => $guna,
+        //         'bahan' => $bahan,
+        //         'tahun' => $tahun,
+        //         'kodisi' => $kondisi,
+        //         'asal' => $asal,
+        //         'harga' => $nilai,
                 
                
                 
-                'pabrik' => $pabrik,
-                'rangka' => $rangka,
-                'mesin' => $mesin,
-                'polisi' => $nopol,
-                'bpkb' => $bpkb,
-                'ket' => $ket,
+        //         'pabrik' => $pabrik,
+        //         'rangka' => $rangka,
+        //         'mesin' => $mesin,
+        //         'polisi' => $nopol,
+        //         'bpkb' => $bpkb,
+        //         'ket' => $ket,
                 
-                'id_user' => $user,
+        //         'id_user' => $user,
                 
                 
-            ]);
-        return response()->json(['message' => 'Data updated successfully']);
+        //     ]);
+        // return response()->json(['message' => 'Data updated successfully']);
+        return $request;
     }
+
+
+
     public function print($lok,$dep,$div)
     {
         $mesin = Mesin::select('nama_barang','merk','guna','tahun','mesins.id as id_mesin','nama_div','img','pabrik','rangka','polisi','bpkb','asal','kode','reg','harga')

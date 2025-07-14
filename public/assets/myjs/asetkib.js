@@ -4,7 +4,7 @@ $(document).ready(function() {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-    
+    var fileUrl = BASE_URL;
 
     //TANAH
     $(document).on('click', '#detail_tanah', function() {
@@ -42,7 +42,7 @@ $(document).ready(function() {
 
                 $.get('/show/' + id, function (data) {
                     $('#filed').empty();
-                    var fileUrl = BASE_URL; // misalnya: http://127.0.0.1:8000
+                     // misalnya: http://127.0.0.1:8000
 
                     $.each(data.data, function (index, items) {
                         var fullPath = fileUrl + '/assets/img/lokasi/' + items.dok;
@@ -56,7 +56,7 @@ $(document).ready(function() {
 
                         $('#filed').append(thumbnail);
                     });
-});
+                });
             }
         });
     })
@@ -189,6 +189,9 @@ $(document).ready(function() {
     })
     //INPUT DATA MESIN
     $(document).on('click', '#add_mesin', function() {
+        $('#submitEdit_b').attr('id','checkoutBtn');
+        $('#vMesin').show();
+        $('#keranjang').show();
         selectOptAll();
         $.get('/barang.mesin', function (data) {
             $.each(data.data, function (index, item) {
@@ -331,6 +334,23 @@ $(document).on('click', '.btn-hapus', function () {
         });
     }
 });
+//CHECKOUT MESIN
+$('#checkoutBtn').click(function () {
+        if (confirm("Yakin ingin menyimpan semua data secara permanen?")) {
+            $.ajax({
+                url: '/mesin.clear',
+                type: 'POST',
+                success: function (res) {
+                    if (res.success) {
+                        alert('Data berhasil difinalisasi!');
+                        fetchKeranjang();
+                    } else {
+                        alert('Gagal checkout');
+                    }
+                }
+            });
+        }
+    });
 
 
 
@@ -366,6 +386,7 @@ $(document).on('click', '.btn-hapus', function () {
             }
         });
     })
+    var fullPath = fileUrl + '/assets/img/mesin/gbr/';
     $(document).on('click', '#tampil_mesin', function() {
         var id = $(this).data('id');
         var delimiter = ",";
@@ -381,19 +402,20 @@ $(document).on('click', '.btn-hapus', function () {
                 $('#card-header').html('<strong>Divisi: '+ nama_div +'</strong><button class="btn btn-sm btn-primary float-end" id="print_b" data-id="' + lok + "," + dep + "," + div + '"><i class="fa-solid fa-print"></i></button>');
 
                 $.each(data.data, function (index, items) {
+                     
                      var editButton =
                                         '<div class="btn-group">'+
                                             '<button class="btn btn-default border border-secondary btn-sm" type="button"><i class="fa-solid fa-ellipsis-vertical"></i></button>'+
                                             '<button type="button" class="btn btn-sm btn-default border border-secondary  dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"><span class="visually-hidden">Toggle Dropdown</span></button>'+
                                             '<ul class="dropdown-menu">'+
 
-                                                '<li><a class="dropdown-item  edit" data-id=" '+ items.id_mesin +' " href="#"><i class="fa-solid fa-edit"></i>&nbsp;EDIT</a></li>'+
+                                                '<li><a class="dropdown-item  editB" data-id=" '+ items.id_mesin +' " href="#"><i class="fa-solid fa-edit"></i>&nbsp;EDIT</a></li>'+
                                                 '<li><a class="dropdown-item deleteB" data-id=" '+ items.id_mesin +' " href="#"><i class="fa-solid fa-trash"></i>&nbsp;DELETE</a></li>'+
                                                 '<li><hr class="dropdown-divider"></li>'+
 
                                             '</ul>'+
                                         '</div>';
-                                        var img = '<a href="#" data-bs-toggle="modal" data-bs-target="#modal_mesin_detail" id="detail_mesin_divisi" data-id="'+ items.id_mesin +'"><img src="http://app.perumdamtirtakencana.id/assets/img/mesin/'+items.img+'" height="100px" width="100px"></img></a>';
+                                        var img = '<a href="#" data-bs-toggle="modal" data-bs-target="#modal_mesin_detail" id="detail_mesin_divisi" data-id="'+ items.id_mesin +'"><img src="' + fullPath + items.img +'" height="100px" width="100px"></img></a>';
                                         table.row.add([
                                             ++i,
                                             items.nama_barang,
@@ -408,7 +430,6 @@ $(document).on('click', '.btn-hapus', function () {
                             })
 $(document).on('click', '#detail_mesin_divisi', function(){
     var id = $(this).data('id');
-        //$('#exampleModal').modal('show');
         $('#judul_modal_detail').html();
         $.ajax({
                 type: "GET",
@@ -432,7 +453,7 @@ $(document).on('click', '#detail_mesin_divisi', function(){
                     $('#polisi_D').html(item.polisi);
                     $('#susut_D').html(item.susut);
                     $('#ket_D').html(item.ket);
-                    $('#gambar_D').attr('src', 'http://app.perumdamtirtakencana.id/assets/img/mesin/' + item.img);
+                    $('#gambar_D').attr('src', fullPath + item.img );
 
                 });
 
@@ -452,8 +473,88 @@ $(document).on('click', '#detail_mesin_divisi', function(){
                 });
             }
         });
+    })
 
-})
+//EDIT MESIN
+$(document).on('click', '.editB', function () {
+    let modal = new bootstrap.Modal(document.getElementById('modal_mesin'));
+    modal.show();
+    $('#checkoutBtn').attr('id', 'submitEdit_b');
+    
+    $('#vMesin').hide();
+    $('#keranjang').hide();
+    var id = $(this).data('id');
+        $.ajax({
+                type: "GET",
+                url: "/mesin.edit/"+ id,
+                success: function (data) {
+                $.each(data.data, function (index, item) {
+                    $('#judul_modalB').html('EDIT MESIN ' + item.lokasi + ' ' + 'Departemen : ' + item.kode_dep + 'Divisi : ' + item.nama_div);
+                    $('#id_b').val(id);
+                    
+                    $('#lokasi_kir').empty;
+                    $('#lokasi_kir').append('<option value="' + item.id_lokasi + '" selected>' + item.lokasi + '</option>');
+
+                    $('#dep').empty;
+                    $('#dep').append('<option value="' + item.id_departemen + '" selected>' + item.kode_dep + '</option>');
+
+                    $('#div').empty;
+                    $('#div').append('<option value="' + item.id_div + '" selected>' + item.nama_div + '</option>');
+
+                    selectOptAll();
+
+                    $('#nama').empty;
+                    $('#nama').append('<option value="' + item.idBar + '" selected>' + item.nama_barang + '</option>');
+                    $.get('/barang.mesin', function (data) {
+                            $.each(data.data, function (index, item) {
+                                $('#nama').append('<option value="' + item.id + '">' + item.nama_barang + '</option>');
+                            });
+                        });
+                        
+                    $('#jenisB').val(item.jenis);
+                    $('#id_voucher2').val(item.id_voucher2);
+                    $('#nama').val(item.nama_barang);
+                    $('#kode_aset').val(item.kode);
+                    $('#reg').val(item.reg);
+                    $('#merk').val(item.merk);
+                    $('#ukuran').val(item.ukuran);
+                    $('#fungsi').val(item.fungsi);
+                    $('#guna').val(item.guna);
+                    $('#bahan_mesin').append('<option value="' + item.bahan + '" selected>' + item.bahan + '</option>');
+                    $('#tahun').val(item.tahun);
+                    $('#kondisi_b').append('<option value="' + item.kodisi + '" selected>' + item.kodisi + '</option>');
+                    $('#asal').append('<option value="' + item.asal + '" selected>' + item.asal + '</option>');
+                    $('#nilaiB').val(item.harga);
+                    $('#ket').val(item.ket);
+                });
+            }
+        });
+    });
+
+    $(document).on('click', '#submitEdit_b', function () {
+         e.preventDefault();
+         let formData = new FormData($('#form_b')[0]);
+
+        $.ajax({
+            url: 'mesin.update',
+            type: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function (res) {
+                if (res.success) {
+                    alert('Gagal menambahkan ke keranjang');
+                } else {
+                    alert('Gagal menambahkan ke keranjang');
+                }
+            },
+            error: function (xhr) {
+                alert('Error server saat menambahkan ke keranjang');
+            }
+        });
+
+
+    })
 
     //GEDUNG
     $(document).on('click', '#klik_nilai_gedung', function() {

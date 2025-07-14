@@ -67,13 +67,14 @@ $no = 0;
         <div class="modal-dialog  modal-xl">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="judul_modalLG">TAMBAH DATA MESIN</h5>
+              <h5 class="modal-title" id="judul_modalB">TAMBAH DATA MESIN</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body" id="modal_bodyLG">
                 <form action="" id="form_b" enctype="multipart/form-data">
+                    <input type="text" id="id_b" name="id" value="">
                     <div class="container">
-                        <div class="row  border border-primary rounded">
+                        <div class="row  border border-primary rounded" id="vMesin">
                             <div class="container"><br>
                                 <table class="table table-striped table-bordered rounded">
                                     <thead>
@@ -162,7 +163,6 @@ $no = 0;
                                         <div class="input-group input-group-sm mb-1">
                                             {{-- <span class="input-group-text col-sm-3">Hak</span> --}}
                                             <select name="nama_aset" id="nama" class="select2 form-control" style="width:100%;">
-                                                <option>-Nama Barang-</option>
                                             </select>
 
                                         </div>
@@ -283,31 +283,34 @@ $no = 0;
                                     </div>
 
                             </div>
+                            <div id="keranjang">
+                                <div class="row border border-primary rounded mt-1">
+                                    <br>
+                                    <div class="float-end">
+                                        <button  type="button" id="submit_b" class="btn btn-sm btn-primary float-end mt-1 mb-1">SUBMIT</button>
+                                    </div>
+                                </div><br>
 
-                            <div class="row border border-primary rounded mt-1">
-                                <br><div class="float-end">
-                                    <button  type="button" id="submit_b" class="btn btn-sm btn-primary float-end mt-1 mb-1">SUBMIT</button>
-                                </div>
-                            </div><br>
 
-
-                            <div class="row border border-primary rounded">
-                                <div class="container"><br>
-                                    <table  class="table table-bordered" id="tbl_mesin_input">
-                                        <thead>
-                                            <tr class="text-center">
-                                                <th>No</th>
-                                                <th>Barang</th>
-                                                <th>Kode</th>
-                                                <th>Merk</th>
-                                                <th>Penggunaan</th>
-                                              </tr>
-                                        </thead>
-                                         <tbody>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div><br>
+                                <div class="row border border-primary rounded">
+                                    <div class="container"><br>
+                                        <table  class="table table-bordered" id="tbl_mesin_input">
+                                            <thead>
+                                                <tr class="text-center">
+                                                    <th>No</th>
+                                                    <th>Barang</th>
+                                                    <th>Kode</th>
+                                                    <th>Merk</th>
+                                                    <th>Penggunaan</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div><br>
+                            </div>
+                            
 
                         </div>
                     </form >
