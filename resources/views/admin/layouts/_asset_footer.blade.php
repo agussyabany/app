@@ -35,3 +35,13 @@
             if (on === 17) {$('#nilai').addClass('text-start btn btn-primary hoverable');}
         });
 </script>
+<script>
+    $(document).ready(function () {
+        $('.select2').each(function () {
+            $(this).select2({
+                dropdownParent: $(this).closest('.modal'), // otomatis cari modal terdekat
+                width: 'resolve'
+            });
+        });
+    });
+</script>

@@ -192,6 +192,8 @@ $(document).ready(function() {
         $('#submitEdit_b').attr('id','checkoutBtn');
         $('#vMesin').show();
         $('#keranjang').show();
+        $('#create').show();
+        $('#update').hide();
         selectOptAll();
         $.get('/barang.mesin', function (data) {
             $.each(data.data, function (index, item) {
@@ -199,7 +201,17 @@ $(document).ready(function() {
             });
         });
 
-        $.get('/bahan', function (data) {// bahan
+        $('body').on('change','#nama' , function (event) {
+            event.preventDefault();
+            var id = $(this).val();
+            $.get('/mesin.barang/'+id, function (data) {
+            $.each(data.data, function (index, item) {
+                $('#kode_aset').val(item.kode_barang);
+            });
+        });
+    })
+
+        $.get('/bahan', function (data) {
             $.each(data.data, function (index, item) {
                 $('#bahan_mesin').append('<option value="' + item.nama + '">' + item.nama + '</option>');
             });
@@ -211,26 +223,41 @@ $(document).ready(function() {
             });
         });
 
-        $('body').on('change', '#voucher_mesin', function (event) {
-            event.preventDefault();
-            var idv = $(this).val();
-            $('#kode_aktiva').empty().append('<option value="">Select an aktiva</option>');
-            $.get('/kir_aktiva/' + idv , function (data) {
+        $('#kode_aktiva').empty().append('<option value="">Select an aktiva</option>');
+            $.get('/mesin.aktiva/' , function (data) {
                 $.each(data.data, function (index, item) {
                     $('#kode_aktiva').prepend('<option value="' + item.id + '">'+  item.kode +' | ' + item.aktiva + '</option>');
-                    $('#bulan_voc').val(item.tgl_voucher);
-                    $('#urai_voc').val(item.urai);
-                    $('#nilaiB').val(item.nilai);
-                    $('#id_voucher2').val(item.id);
               }
               )})
-        });
+
+        
+
+        // $('body').on('change', '#voucher_mesin', function (event) {
+        //     event.preventDefault();
+        //     var idv = $(this).val();
+        //     $('#kode_aktiva').empty().append('<option value="">Select an aktiva</option>');
+        //     $.get('/kir_aktiva/' + idv , function (data) {
+        //         $.each(data.data, function (index, item) {
+        //             $('#kode_aktiva').prepend('<option value="' + item.id + '">'+  item.kode +' | ' + item.aktiva + '</option>');
+        //             $('#bulan_voc').val(item.tgl_voucher);
+        //             $('#urai_voc').val(item.urai);
+        //             $('#nilaiB').val(item.nilai);
+        //             $('#id_voucher2').val(item.id);
+        //       }
+        //       )})
+        // });
 
         $('body').on('change','#kode_aktiva' , function (event) {
             var kodeAktiva = $('#kode_aktiva').find('option:selected').text();
+            let kendaraanAktiva = [
+                                    "31.08.10 | Kendaraan Penumpang",
+                                    "31.08.20 | Kendaraan Angkut Barang",
+                                    "31.08.30 | Kendaraan Tangki Air",
+                                    "31.08.40 | Kendaraan Roda Dua"
+                                 ];
             
-
-            if (kodeAktiva == "31.08.10 | Kendaraan Penumpang") {
+            $('#kendaraan').empty();
+            if (kendaraanAktiva.includes(kodeAktiva)) {
                 $('#jenisB').val(2);
                 $('#kendaraan').append('<div class="input-group input-group-sm mb-1">'+
                                             '<span class="input-group-text col-sm-3">No Pabrik</span><input name="pabrik" id="pabrik" type="text" class="form-control">'+
@@ -410,7 +437,7 @@ $('#checkoutBtn').click(function () {
                                             '<ul class="dropdown-menu">'+
 
                                                 '<li><a class="dropdown-item  editB" data-id=" '+ items.id_mesin +' " href="#"><i class="fa-solid fa-edit"></i>&nbsp;EDIT</a></li>'+
-                                                '<li><a class="dropdown-item deleteB" data-id=" '+ items.id_mesin +' " href="#"><i class="fa-solid fa-trash"></i>&nbsp;DELETE</a></li>'+
+                                                '<li><a class="dropdown-item btn-hapus" data-id=" '+ items.id_mesin +' " href="#"><i class="fa-solid fa-trash"></i>&nbsp;DELETE</a></li>'+
                                                 '<li><hr class="dropdown-divider"></li>'+
 
                                             '</ul>'+
@@ -483,6 +510,8 @@ $(document).on('click', '.editB', function () {
     
     $('#vMesin').hide();
     $('#keranjang').hide();
+    $('#create').hide();
+    $('#update').show();
     var id = $(this).data('id');
         $.ajax({
                 type: "GET",
@@ -531,8 +560,8 @@ $(document).on('click', '.editB', function () {
         });
     });
 
-    $(document).on('click', '#submitEdit_b', function () {
-         e.preventDefault();
+    $(document).on('click', '#edit_2', function () {
+       
          let formData = new FormData($('#form_b')[0]);
 
         $.ajax({
@@ -543,9 +572,9 @@ $(document).on('click', '.editB', function () {
             processData: false,
             success: function (res) {
                 if (res.success) {
-                    alert('Gagal menambahkan ke keranjang');
+                    alert('Data Berhasil di Update');
                 } else {
-                    alert('Gagal menambahkan ke keranjang');
+                    alert('Gagal update');
                 }
             },
             error: function (xhr) {

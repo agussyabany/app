@@ -44,13 +44,7 @@ $no = 0;
 
                                                       <button id="detail_mesin" data-id="{{ $item->id_lokasi }}" class="btn btn-default border border-secondary btn-sm detail tree" data-bs-toggle="offcanvas" role="button" aria-controls="offcanvasExample" href="#data"  type="button">DETAIL</button>
 
-                                                        <button type="button" class="btn btn-sm btn-default border border-secondary  dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"><span class="visually-hidden">Toggle Dropdown</span></button>
-                                                        <ul class="dropdown-menu">
-                                                            <li><a class="dropdown-item  edit" data-id="" href="#"><i class="fa-solid fa-edit"></i>&nbsp;EDIT</a></li>
-                                                            <li><a class="dropdown-item delete" data-id="" href="#"><i class="fa-solid fa-trash"></i>&nbsp;DELETE</a></li>
-                                                            <li><a class="dropdown-item nilai" data-id="" href="#"><i class="fa-solid fa-trash"></i>&nbsp;NILAI</a></li>
-                                                            <li><hr class="dropdown-divider"></li>
-                                                        </ul>
+                                                        
                                                     </div>
                                                 </td>
                                             </tr>
@@ -72,7 +66,7 @@ $no = 0;
             </div>
             <div class="modal-body" id="modal_bodyLG">
                 <form action="" id="form_b" enctype="multipart/form-data">
-                    <input type="text" id="id_b" name="id" value="">
+                    <input type="hidden" id="id_b" name="id" value="">
                     <div class="container">
                         <div class="row  border border-primary rounded" id="vMesin">
                             <div class="container"><br>
@@ -89,7 +83,7 @@ $no = 0;
                                         <tr>
                                             <td>
                                                 <div class="input-group input-group-sm mb-1">
-                                                    <select class="select2 form-control" name="voucher_mesin" id="voucher_mesin" style="width:100%;" required>
+                                                    <select class="select2 form-control" name="voucher_mesin" id="voucher_mesin" style="width:100%;" required disabled>
                                                         <option>- NO VOUCHER -</option>
                                                     </select>
                                                 </div>
@@ -158,8 +152,8 @@ $no = 0;
                             <div class="row  border border-primary rounded">
                                  <div class="col"><br>
 
-                                    <input type="text" value="1" name="jenis" id="jenisB">
-                                    <input type="text" value="" id="id_voucher2" name="id_voucher2">
+                                    <input type="hidden" value="1" name="jenis" id="jenisB">
+                                    <input type="hidden" value="" id="id_voucher2" name="id_voucher2">
                                         <div class="input-group input-group-sm mb-1">
                                             {{-- <span class="input-group-text col-sm-3">Hak</span> --}}
                                             <select name="nama_aset" id="nama" class="select2 form-control" style="width:100%;">
@@ -181,7 +175,7 @@ $no = 0;
                                         </div>
                                         <p style="color:red;" id="merk_error"></p>
                                         <div class="input-group input-group-sm mb-1">
-                                            <span class="input-group-text col-sm-3">Ukuran</span><input name="ukuran" id="ukuran" type="number" class="form-control">
+                                            <span class="input-group-text col-sm-3">Ukuran</span><input name="ukuran" id="ukuran" type="text" class="form-control">
                                         </div>
                                         <p style="color:red;" id="ukuran_error"></p>
 
@@ -288,6 +282,7 @@ $no = 0;
                                     <br>
                                     <div class="float-end">
                                         <button  type="button" id="submit_b" class="btn btn-sm btn-primary float-end mt-1 mb-1">SUBMIT</button>
+                                       
                                     </div>
                                 </div><br>
 
@@ -318,8 +313,9 @@ $no = 0;
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="tombol btn btn-primary" id="checkoutBtn">SUBMIT</button>
-            </div>
+              <div id="create"><button type="button" class="tombol btn btn-primary" id="checkoutBtn">SUBMIT</button></div>
+              <div id="update"> <button  type="button" id="edit_2" class="btn btn-sm btn-primary float-end mt-1 mb-1">SUBMIT</button></div>
+             </div>
           </div>
         </div>
       </div>

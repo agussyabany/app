@@ -200,6 +200,8 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::get('/mesin.nilai/{lok}',[MesinController::class,'nilaiSum']);
     Route::get('/nilaiMesin.detail/{id}',[MesinController::class,'nilaimesin']);
     Route::get('/vMesin',[MesinController::class,'vMesin']);
+    Route::get('/mesin.aktiva',[MesinController::class,'aktiva']);
+    Route::get('/mesin.barang/{id}',[MesinController::class,'barang']);
 
     Route::get('/gedung.dep/{id}',[GedungController::class,'dep']);
     Route::get('/gedung.div/{dep}/{lok}',[GedungController::class,'div']);
