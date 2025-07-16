@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Aset;
 
 use App\Http\Controllers\Controller;
+use App\Models\Aset\Aktiva;
+use App\Models\Aset\Barang;
 use App\Models\Aset\Departemen;
 use App\Models\Aset\Divisi;
 use App\Models\Aset\Gedung;
@@ -43,6 +45,7 @@ class GedungController extends Controller
 
     public function show($lok,$dep,$div)
     {
+        $gedung_full = Gedung::all();
         $gedung_full = Gedung::select('nama_barang','guna','gedungs.id as id_gedung','nama_div','img')
                             ->join('barangs','gedungs.id_barang','barangs.id')
                             ->join('divisis','gedungs.id_div','divisis.id')
@@ -105,6 +108,80 @@ class GedungController extends Controller
                 ->get();
         return response()->json([
             'data' => $gedung
+          ]);
+    }
+
+    public function save(Request $request)
+     {
+        
+        try {
+            $user = Auth::user()->id;
+            $gedung = new Gedung();
+            $gedung->id_user = $user;
+
+            $gedung->id_lokasi = $request->id_lokasi;
+            $gedung->id_departemen = $request->id_departemen;
+            $gedung->id_div = $request->id_div;
+            $gedung->id_barang = $request->id_barang;
+            $gedung->kode = $request->kode;
+            $gedung->reg = $request->reg;
+            $gedung->kondisi = $request->kondisi;
+            $gedung->konstruksi = $request->konstruksi;
+            $gedung->materi = $request->materi;
+            $gedung->luastanah = $request->luastanah;
+            $gedung->tgl_imb = $request->tgl_imb;
+            $gedung->no_imb = $request->no_imb;
+            $gedung->luas = $request->luas;
+            $gedung->status = $request->status;
+            $gedung->kode_tanah = $request->kode_tanah;
+            $gedung->asal = $request->asal;
+            $gedung->nilai = $request->nilai;
+            $gedung->ket = $request->ket;
+            $gedung->input = $request->is_final ?? 0;
+
+            if ($request->hasFile('dok')) {
+                $file = $request->file('dok');
+                $filename = time() . '_' . $file->getClientOriginalName();
+                $file->move(public_path('assets/img/gedung/dok'), $filename);
+                $gedung->dok = $filename;
+            }
+
+            if ($request->hasFile('img')) {
+                $img = $request->file('img');
+                $imgname = time() . '_' . $img->getClientOriginalName();
+                $img->move(public_path('assets/img/gedung/img'), $imgname);
+                $gedung->img = $imgname;
+            }
+
+            $gedung->save();
+
+            return response()->json(['success' => true]);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'error' => $e->getMessage()]);
+        }
+     }
+
+    public function aktiva ()
+    {
+        $aktiva = Aktiva::where('kib','KIB C - GEDUNG DAN BANGUNAN')->get();
+        return response()->json(['data' => $aktiva]);
+
+    }
+
+    public function barang ($id)
+    {
+        $barang = Barang::where('id',$id)->get();
+        return response()->json(['data' => $barang]);
+    }
+
+    public function input()
+    {
+        $data = Gedung::select('gedungs.id as idb','nama_barang','kode_barang','luas','konstruksi')
+                        ->join('barangs','gedungs.id_barang','barangs.id')
+                        ->where('input',0)
+                        ->get();
+        return response()->json([
+            'data' => $data
           ]);
     }
 }

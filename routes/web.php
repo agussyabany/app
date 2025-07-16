@@ -210,6 +210,10 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::get('/gedung.print/{lok}/{dep}/{div}',[GedungController::class,'print']);
     Route::get('/gedung.nilai/{lok}',[GedungController::class,'nilaiSum']);
     Route::get('/nilaiGedung.detail/{id}',[GedungController::class,'nilaigedung']);
+    Route::post('/gedung.save',[GedungController::class,'save']);
+    Route::get('/gedung.aktiva',[GedungController::class,'aktiva']);
+    Route::get('/gedung.barang/{id}',[GedungController::class,'barang']);
+    Route::get('/gedung.input',[GedungController::class,'input']);
 
     Route::get('/nilaiD/{id}',[KibDController::class,'nilaiD']);
     Route::get('/d.dep/{id}',[KibDController::class,'dep']);

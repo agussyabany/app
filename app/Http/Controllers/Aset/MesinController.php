@@ -137,8 +137,8 @@ class MesinController extends Controller
 
     public function input()
     {
-        $data = Mesin::select('mesins.id as idb','nama_barang','merk','guna','kode')
-                        ->join('barangs','mesins.id_barang','barangs.id')
+        $data = Mesin::select('mesins.id as idb','nama_barang','kode_barang','luas')
+                        ->join('barangs','gedungs.id_barang','barangs.id')
                         ->where('input',0)
                         ->get();
         return response()->json([

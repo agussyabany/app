@@ -399,8 +399,8 @@ $no = 0;
                                     <table class="table table-striped table-bordered">
                                         <tbody>
                                             <tr>
-                                                <th>PENGGUNAAN</th>
-                                                <td id="guna_D"> + item.guna+ </td>
+                                                <th>REGISTER</th>
+                                                <td id="reg_D"></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -410,30 +410,38 @@ $no = 0;
 
 
 
-                         <div class="row">
+                    <div class="row">
                         <div class="col">
                             <div class="container border border-primary rounded"><br>
                                 <table class="table table-striped table-bordered">
                                     <tbody>
                                         <tr>
                                             <th>MERK / TYPE</th>
-                                            <td id="merk_D"> + item.merk+ </td>
+                                            <td id="merk_D"></td>
                                         </tr>
                                         <tr>
                                             <th>UKURAN / CC</th>
-                                            <td id="ukuran_D"> + item.ukuran+ </td>
+                                            <td id="ukuran_D"></td>
                                         </tr>
                                         <tr>
                                             <th>BAHAN</th>
-                                            <td id="bahan_D"> + item.bahan+ </td>
+                                            <td id="bahan_D"></td>
                                         </tr>
                                         <tr>
                                             <th>TAHUN</th>
-                                            <td id="tahun_D"> + item.tahun+ </td>
+                                            <td id="tahun_D"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>PENGGUNAAN</th>
+                                            <td id="guna_D"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>FUNGSI</th>
+                                            <td id="fungsi_D"></td>
                                         </tr>
                                         <tr>
                                             <th>KONDISI</th>
-                                            <td id="kondisi_D"> </td>
+                                            <td id="kondisi_D"></td>
                                         </tr>
 
                                     </tbody>
@@ -441,34 +449,39 @@ $no = 0;
                             </div>
                         </div>
 
-                        <div class="col">
+                          <div class="col" id="kendaraan_b">
                             <div class="container border border-primary rounded"><br>
                                 <table class="table table-striped table-bordered">
                                     <tbody>
                                         <tr>
                                             <th>BPKB</th>
-                                            <td id="bpkb_D"> + item.bpkb+ </td>
+                                            <td id="bpkb_D"></td>
                                         </tr>
                                         <tr>
                                             <th>PABRIK</th>
-                                            <td id="pabrik_D"> + item.pabrik+ </td>
+                                            <td id="pabrik_D"></td>
                                         </tr>
                                         <tr>
                                             <th>RANGKA</th>
-                                            <td id="rangka_D"> + item.rangka+ </td>
+                                            <td id="rangka_D"></td>
                                         </tr>
                                         <tr>
                                             <th>MESIN</th>
-                                            <td id="mesin_D"> + item.mesin+ </td>
+                                            <td id="mesin_D"></td>
                                         </tr>
                                         <tr>
                                             <th>POLISI</th>
-                                            <td id="polisi_D"> + item.polisi+ </td>
+                                            <td id="polisi_D"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>STATUS KENDARAAN</th>
+                                            <td id="status_D"></td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
+
 
                     </div><br>
 
@@ -482,7 +495,7 @@ $no = 0;
                                         <tbody>
                                             <tr>
                                                 <th>ASAL USUL</th>
-                                                <td id="asal_D"> + item.asal+ </td>
+                                                <td id="asal_D"></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -494,24 +507,13 @@ $no = 0;
                                         <tbody>
                                             <tr>
                                                 <th>NILAI PEROLEHAN</th>
-                                                <td id=""> + formattedCurrency + </td>
+                                                <td id="nilai_d"></td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
-                            <div class="col">
-                                <div class="input-group input-group-sm mb-1">
-                                    <table class="table table-striped table-bordered">
-                                        <tbody>
-                                            <tr>
-                                                <th>NILAI PENYUSUTAN</th>
-                                                <td id="susut_D"> + item.susut+ </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
+                            
                             <div class="col">
                                 <div class="input-group input-group-sm mb-1">
                                     <table class="table table-striped table-bordered">
