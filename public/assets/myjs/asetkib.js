@@ -979,6 +979,8 @@ $(document).on('click', '.editC', function () {
 
     })
     //Data D
+    var fullPathImgC = fileUrl + '/assets/img/jalan/img/';
+    var fullPathDocC = fileUrl + '/assets/img/jalan/dok/';
     $(document).on('click', '#detail_d', function() {
         var id = $(this).data('id');
         $('#canvas_tree').empty();
@@ -1032,7 +1034,7 @@ $(document).on('click', '.editC', function () {
                                             '<button type="button" class="btn btn-sm btn-default border border-secondary  dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"><span class="visually-hidden">Toggle Dropdown</span></button>'+
                                             '<ul class="dropdown-menu">'+
 
-                                                '<li><a class="dropdown-item  edit" data-id=" '+ items.id_d +' " href="#"><i class="fa-solid fa-edit"></i>&nbsp;EDIT</a></li>'+
+                                                '<li><a class="dropdown-item  editD" data-id=" '+ items.id_d +' " href="#"><i class="fa-solid fa-edit"></i>&nbsp;EDIT</a></li>'+
                                                 '<li><a class="dropdown-item deleteB" data-id=" '+ items.id_d +' " href="#"><i class="fa-solid fa-trash"></i>&nbsp;DELETE</a></li>'+
                                                 '<li><hr class="dropdown-divider"></li>'+
 
@@ -1093,6 +1095,213 @@ $(document).on('click', '.editC', function () {
                    }
                 });
             })
+//Input Jalan Irigasi Dan Jaringan
+$(document).on('click', '#add_d', function() {
+    $('#vMesin').show();
+    $('#keranjangD').show();
+    $('#createD').show();
+    $('#updateD').hide();
+    // $('#kode_aktiva_d').empty().append('<option value="">Select an aktiva</option>');
+    //         $.get('/gedung.aktiva/' , function (data) {
+    //             $.each(data.data, function (index, item) {
+    //                 $('#kode_aktiva_c').prepend('<option value="' + item.id + '">'+  item.kode +' | ' + item.aktiva + '</option>');
+    //           }
+    //           )})
+    selectOptAll();
+
+        $.get('/barang.d', function (data) {
+            $.each(data.data, function (index, item) {
+                $('#id_barang').append('<option value="' + item.id + '">' + item.nama_barang + '</option>');
+            });
+        });
+
+        $('body').on('change','#id_barang' , function (event) {
+            event.preventDefault();
+            var id = $(this).val();
+            $.get('/gedung.barang/'+id, function (data) {
+            $.each(data.data, function (index, item) {
+                $('#kode').val(item.kode_barang);
+            });
+        });
+    })
+})
+//Save Jalan Irigasi Dan Jaringan
+$('#submit_d').click(function (e) {
+        e.preventDefault();
+        let formData = new FormData($('#form_d')[0]);
+        // Tambahkan flag draft
+        formData.append('is_final', 0);
+
+        $.ajax({
+            url: 'jalan.save',
+            type: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function (res) {
+                if (res.success) {
+                    $('#form_d')
+                    .find('input, textarea')
+                    //.not('#') // sesuaikan
+                    .val('');
+                    fetchKeranjangD(); // refresh keranjang
+                } else {
+                    alert('Gagal menambahkan ke keranjang');
+                }
+            },
+            error: function (xhr) {
+                alert('Error server saat menambahkan ke keranjang');
+            }
+        });
+    });
+ // Load data keranjang JALAN
+    function fetchKeranjangD() {
+    $.ajax({
+        url: 'jalan.input',
+        method: 'GET',
+        success: function (res) {
+            let rows = '';
+            $.each(res.data, function (i, item) {
+                rows += `
+                    <tr>
+                        <td>${i + 1}</td>
+                        <td>${item.nama_barang}</td>
+                        <td>${item.kode_barang}</td>
+                        <td>${item.luas}</td>
+                        <td>${item.struktur}</td>
+                        <td class="text-center">
+                            <button type="button" class="btn btn-sm  btn-outline-danger btn-hapusD" data-id="${item.idb}">
+                               <i class="fas fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>`;
+            });
+            $('#tbl_d_input tbody').html(rows);
+        }
+    });
+}fetchKeranjangD(); // load saat pertama kali modal dibuka
+//Del Keranjang JALAN
+$(document).on('click', '.btn-hapusD', function () {
+    const id = $(this).data('id');
+    if (confirm('Yakin ingin menghapus item ini?')) {
+        $.ajax({
+            url:'jalan.hapus/'+id,
+            method: 'POST',
+            success: function (res) {
+                if (res.success) {
+                    fetchKeranjangD();
+                } else {
+                    alert('Gagal menghapus item');
+                }
+            }
+        });
+    }
+});
+//CHECKOUT GEDUNG
+$('#checkoutBtnD').click(function () {
+        if (confirm("Yakin ingin menyimpan semua data secara permanen?")) {
+            $.ajax({
+                url: '/jalan.clear',
+                type: 'POST',
+                success: function (res) {
+                    if (res.success) {
+                        alert('Data berhasil difinalisasi!');
+                        fetchKeranjangD();
+                    } else {
+                        alert('Gagal checkout');
+                    }
+                }
+            });
+        }
+    });
+//Edit Jalan
+$(document).on('click', '.editD', function () {
+    let modal = new bootstrap.Modal(document.getElementById('modal_D'));
+    modal.show();
+    var id = $(this).data('id');
+    $('#vMesin').hide();
+    $('#keranjangD').hide();
+    $('#createD').hide();
+    $('#updateD').show();
+   
+        $.ajax({
+                type: "GET",
+                url: "/jalan.edit/"+ id,
+                success: function (data) {
+                $.each(data.data, function (index, item) {
+                    $('#judul_modalD_crud').html('EDIT JALAN ' + item.lokasi + ' ' + 'Departemen : ' + item.kode_dep + 'Divisi : ' + item.nama_div);
+                    $('#id_d').val(id);
+                    
+                    $('#lokasi_kir').empty;
+                    $('#lokasi_kir').append('<option value="' + item.id_lokasi + '" selected>' + item.lokasi + '</option>');
+
+                    $('#dep').empty;
+                    $('#dep').append('<option value="' + item.idDep + '" selected>' + item.kode_dep + '</option>');
+
+                    $('#div').empty;
+                    $('#div').append('<option value="' + item.id_div + '" selected>' + item.nama_div + '</option>');
+
+                    selectOptAll();
+
+                    $('#id_barang').empty;
+                    $('#id_barang').append('<option value="' + item.idBar + '" selected>' + item.nama_barang + '</option>');
+                    $.get('/barang.d', function (data) {
+                            $.each(data.data, function (index, item) {
+                                $('#id_barang').append('<option value="' + item.id + '">' + item.nama_barang + '</option>');
+                            });
+                        });
+                        
+                    $('#kode').val(item.kode);
+                    $('#reg').val(item.reg);
+
+                    $('#kondisi_d_edit').append('<option value="' + item.kondisi + '" selected>' + item.kondisi + '</option>');
+
+                    $('#konstruksi_d_edit').append('<option value="' + item.struktur + '" selected>' + item.struktur + '</option>');
+
+                    $('#materi_d_edit').append('<option value="' + item.materi + '" selected>' + item.materi + '</option>');
+
+                    $('#luas_lantai').val(item.luas_lantai);
+                    let tgl = item.tgl_dok.trim(); // hapus spasi ekstra
+                    $('#tgl_dok_edit').val(tgl);
+                    console.log(item.tgl_dok);
+                    $('#no_dok').val(item.no_dok);
+                    $('#luas').val(item.luas);
+
+                    $('#asal_d_edit').append('<option value="' + item.asal + '" selected>' + item.asal + '</option>');
+
+                    $('#nilaiD').val(item.nilai);
+
+                    $('#status_d_edit').append('<option value="' + item.status + '" selected>' + item.status + '</option>');
+
+                    $('#kode_tanahD').val(item.kode_tanah);
+                    $('#ket').val(item.ket);
+                });
+            }
+        });
+    });
+   //Execute Update jalan
+    $(document).on('click', '#edit_4', function () {
+       
+         let formData = new FormData($('#form_d')[0]);
+
+        $.ajax({
+            url: 'jalan.update',
+            type: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function (res) {
+                if (res.success) {
+                    alert('Data Berhasil di Update');
+                } else {
+                    alert('Gagal update');
+                }
+            },
+            error: function (xhr) {
+                alert('Error server saat menambahkan ke keranjang');
+            }
+        });
+    })
 //ASET TETAP LAINNYA
             $(document).on('click', '#klik_nilai_e', function() {
                 var id = $(this).data('id');

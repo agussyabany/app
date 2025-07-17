@@ -136,6 +136,7 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::get('barang.tanah',[BarangController::class,'tanah']);
     Route::get('barang.mesin',[BarangController::class,'mesin']);
     Route::get('barang.gedung',[BarangController::class,'gedung']);
+    Route::get('barang.d',[BarangController::class,'d']);
     Route::get('barang.kir',[BarangController::class,'kir']);
     Route::get('kode.kir/{id}',[BarangController::class,'kode_kir']);
 
@@ -226,6 +227,12 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::get('/d.div/{dep}/{lok}',[KibDController::class,'div']);
     Route::get('/d.show/{lok}/{dep}/{div}',[KibDController::class,'show']);
     Route::get('/d.detail/{id}',[KibDController::class,'detail']);
+    Route::post('/jalan.save',[KibDController::class,'save']);
+    Route::get('/jalan.input',[KibDController::class,'input']);
+    Route::post('/jalan.hapus/{id}',[KibDController::class,'hapus']);
+    Route::post('/jalan.clear',[KibDController::class,'clear']);
+    Route::get('/jalan.edit/{id}',[KibDController::class,'edit']);
+    Route::post('/jalan.update',[KibDController::class,'update']);
 
     Route::get('/nlaiE/{id}',[KibEContrller::class,'nilaiE']);
     Route::get('/e.dep/{id}',[KibEContrller::class,'dep']);
