@@ -643,7 +643,8 @@ $(document).on('click', '.editB', function () {
             }
         });
     })
-
+    var fullPathImgC = fileUrl + '/assets/img/gedung/img/';
+    var fullPathDocC = fileUrl + '/assets/img/gedung/dok/';
     $(document).on('click', '#tampil_gedung', function() {
         var id = $(this).data('id');
         var delimiter = ",";
@@ -665,13 +666,13 @@ $(document).on('click', '.editB', function () {
                                             '<button type="button" class="btn btn-sm btn-default border border-secondary  dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"><span class="visually-hidden">Toggle Dropdown</span></button>'+
                                             '<ul class="dropdown-menu">'+
 
-                                                '<li><a class="dropdown-item  edit" data-id=" '+ items.id_gedung +' " href="#"><i class="fa-solid fa-edit"></i>&nbsp;EDIT</a></li>'+
-                                                '<li><a class="dropdown-item deleteB" data-id=" '+ items.id_gedung +' " href="#"><i class="fa-solid fa-trash"></i>&nbsp;DELETE</a></li>'+
+                                                '<li><a class="dropdown-item  editC" data-id=" '+ items.id_gedung +' " href="#"><i class="fa-solid fa-edit"></i>&nbsp;EDIT</a></li>'+
+                                                '<li><a class="dropdown-item btn-hapusC" data-id=" '+ items.id_gedung +' " href="#"><i class="fa-solid fa-trash"></i>&nbsp;DELETE</a></li>'+
                                                 '<li><hr class="dropdown-divider"></li>'+
 
                                             '</ul>'+
                                         '</div>';
-                                        var img = '<a href="#" data-bs-toggle="modal" data-bs-target="#modal_gedung_detail" id="detail_gedung_divisi" data-id="'+ items.id_gedung +'"><img src="http://app.perumdamtirtakencana.id/assets/img/gedung/'+items.img+'" height="100px" width="100px"></img></a>';
+                                        var img = '<a href="#" data-bs-toggle="modal" data-bs-target="#modal_gedung_detail" id="detail_gedung_divisi" data-id="'+ items.id_gedung +'"><img src="' + fullPathImgC + items.img +'" height="100px" width="100px"></img></a>';
                                         table.row.add([
                                             ++i,
                                             items.nama_barang,
@@ -709,27 +710,27 @@ $(document).on('click', '#detail_gedung_divisi', function(){
                         $('#nilai_d').html(item.nilai);
                         $('#susut_d').html(item.susut);
                         $('#ket_d').html(item.ket);
-                        $('#gambar_d').attr('src','http://app.perumdamtirtakencana.id/assets/img/gedung/' + item.img);
-});
-
-    $.get('/show/' + id, function (data) {
-    $('#filed').empty();
-    $.each(data.data, function (index, items) {
-    var thumbnail = $(
-                '<div class="pdf-thumbnail col ">' +
-                '<embed width="150px" height="200px ; overflow: hidden;" name="plugin" src="http://app.perumdamtirtakencana.id/assets/img/gedung/' + items.dok + '" type="application/pdf" border border-secondary rounded>' +
-                    '<p><a href="#" onclick="window.open(\'http://app.perumdamtirtakencana.id/assets/img/gedung/' + items.dok + '\', \'_blank\'); return false;">' + items.dok + '</p>' +
-                '</div>');
-                $('#filed').append(thumbnail);
-        });
-    });
-   }
+                        $('#gambar_d').attr('src',fullPathImgC + item.img);
+                        $('#filedC').empty();
+    
+                        var thumbnail = $(
+                                    '<div class="pdf-thumbnail col ">' +
+                                    '<embed width="150px" height="200px ; overflow: hidden;" name="plugin" src="' + fullPathDocC + item.dok + '" type="application/pdf" border border-secondary rounded>' +
+                                        '<p><a href="#" onclick="window.open(\'' + fullPathDocC + item.dok + '\', \'_blank\'); return false;">' + item.dok + '</p>' +
+                                    '</div>');
+                                    $('#filedC').append(thumbnail);
+                    });
+                }
 });
 })
 
 
 //Input Gedung
 $(document).on('click', '#add_gedung', function() {
+    $('#vMesin').show();
+    $('#keranjangC').show();
+    $('#createC').show();
+    $('#updateC').hide();
     $('#kode_aktiva_c').empty().append('<option value="">Select an aktiva</option>');
             $.get('/gedung.aktiva/' , function (data) {
                 $.each(data.data, function (index, item) {
@@ -815,7 +816,7 @@ $('#submit_c').click(function (e) {
                         <td>${item.luas}</td>
                         <td>${item.konstruksi}</td>
                         <td class="text-center">
-                            <button type="button" class="btn btn-sm  btn-outline-danger btn-hapus" data-id="${item.idb}">
+                            <button type="button" class="btn btn-sm  btn-outline-danger btn-hapusC" data-id="${item.idb}">
                                <i class="fas fa-trash"></i>
                             </button>
                         </td>
@@ -825,6 +826,128 @@ $('#submit_c').click(function (e) {
         }
     });
 }fetchKeranjangC(); // load saat pertama kali modal dibuka
+//Hapus keranjang Gedung
+$(document).on('click', '.btn-hapusC', function () {
+    const id = $(this).data('id');
+    if (confirm('Yakin ingin menghapus item ini?')) {
+        $.ajax({
+            url:'gedung.hapus/'+id,
+            method: 'POST',
+            success: function (res) {
+                if (res.success) {
+                    fetchKeranjangC();
+                } else {
+                    alert('Gagal menghapus item');
+                }
+            }
+        });
+    }
+});
+//CHECKOUT GEDUNG
+$('#checkoutBtnC').click(function () {
+        if (confirm("Yakin ingin menyimpan semua data secara permanen?")) {
+            $.ajax({
+                url: '/gedung.clear',
+                type: 'POST',
+                success: function (res) {
+                    if (res.success) {
+                        alert('Data berhasil difinalisasi!');
+                        fetchKeranjangC();
+                    } else {
+                        alert('Gagal checkout');
+                    }
+                }
+            });
+        }
+    });
+//EDIT GEDUNG
+$(document).on('click', '.editC', function () {
+    let modal = new bootstrap.Modal(document.getElementById('modal_gedung'));
+    modal.show();
+    var id = $(this).data('id');
+    $('#vMesin').hide();
+    $('#keranjangC').hide();
+    $('#createC').hide();
+    $('#updateC').show();
+   
+        $.ajax({
+                type: "GET",
+                url: "/gedung.edit/"+ id,
+                success: function (data) {
+                $.each(data.data, function (index, item) {
+                    $('#judul_modalC').html('EDIT GEDUNG ' + item.lokasi + ' ' + 'Departemen : ' + item.kode_dep + 'Divisi : ' + item.nama_div);
+                    $('#id_c').val(id);
+                    
+                    $('#lokasi_kir').empty;
+                    $('#lokasi_kir').append('<option value="' + item.id_lokasi + '" selected>' + item.lokasi + '</option>');
+
+                    $('#dep').empty;
+                    $('#dep').append('<option value="' + item.id_departemen + '" selected>' + item.kode_dep + '</option>');
+
+                    $('#div').empty;
+                    $('#div').append('<option value="' + item.id_div + '" selected>' + item.nama_div + '</option>');
+
+                    selectOptAll();
+
+                    $('#id_barang').empty;
+                    $('#id_barang').append('<option value="' + item.idBar + '" selected>' + item.nama_barang + '</option>');
+                    $.get('/barang.gedung    ', function (data) {
+                            $.each(data.data, function (index, item) {
+                                $('#nama').append('<option value="' + item.id + '">' + item.nama_barang + '</option>');
+                            });
+                        });
+                        
+                    $('#kode').val(item.kode);
+                    $('#reg').val(item.reg);
+
+                    $('#kondisi_c').append('<option value="' + item.kondisi + '" selected>' + item.kondisi + '</option>');
+
+                    $('#konstruksi_c').append('<option value="' + item.konstruksi + '" selected>' + item.konstruksi + '</option>');
+
+                    $('#materi').append('<option value="' + item.materi + '" selected>' + item.materi + '</option>');
+
+                    $('#luastanah').val(item.luastanah);
+                    $('#tgl_imb').val(item.tgl_imb);
+                    $('#no_imb').val(item.no_imb);
+                    $('#luas').val(item.luas);
+
+                    $('#asal_c').append('<option value="' + item.asal + '" selected>' + item.asal + '</option>');
+
+                    $('#nilaiC').val(item.nilai);
+
+                    $('#status_c').append('<option value="' + item.status + '" selected>' + item.status + '</option>');
+
+                    $('#kode_tanahC').val(item.kode_tanah);
+                    $('#ket').val(item.ket);
+                });
+            }
+        });
+    });
+    //Execute Upate
+    $(document).on('click', '#edit_3', function () {
+       
+         let formData = new FormData($('#form_c')[0]);
+
+        $.ajax({
+            url: 'gedung.update',
+            type: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function (res) {
+                if (res.success) {
+                    alert('Data Berhasil di Update');
+                } else {
+                    alert('Gagal update');
+                }
+            },
+            error: function (xhr) {
+                alert('Error server saat menambahkan ke keranjang');
+            }
+        });
+
+
+    })
 
 
 

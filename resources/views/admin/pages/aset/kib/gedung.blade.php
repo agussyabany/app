@@ -68,12 +68,12 @@ $no = 0;
         <div class="modal-dialog  modal-xl">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="judul_modalB">TAMBAH DATA GEDUNG</h5>
+              <h5 class="modal-title" id="judul_modalC">TAMBAH DATA GEDUNG</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body" id="modal_bodyLG">
                 <form action="" id="form_c" enctype="multipart/form-data">
-                    <input type="hidden" id="id_b" name="id" value="">
+                    <input type="hidden" id="id_c" name="id" value="">
                     <div class="container">
                         <div class="row  border border-primary rounded" id="vMesin">
                             <div class="container"><br>
@@ -187,7 +187,7 @@ $no = 0;
                                         </div>
                                         <p style="color:red;" id="kondisi_error"></p>
                                         <div class="input-group input-group-sm mb-1">
-                                            <select class=" form-control" name="konstruksi" id="konstruksi">
+                                            <select class=" form-control" name="konstruksi" id="konstruksi_c">
                                                 <option> -KONSTRUKSI- </option>
                                                 <option value="BERTINGKAT"> BERTINGKAT </option>
                                                 <option value="TIDAK BERTINGKAT"> TIDAK BERTINGKAT </option>
@@ -250,7 +250,7 @@ $no = 0;
                                         </div>
 
                                         <div class="input-group input-group-sm mb-1">
-                                            <span class="input-group-text col-sm-3">Harga Rp</span><input name="nilai" id="nilaiB" type="number" class="form-control">
+                                            <span class="input-group-text col-sm-3">Harga Rp</span><input name="nilai" id="nilaiC" type="number" class="form-control">
                                         </div>
                                         
                                         <div class="input-group input-group-sm mb-1">
@@ -266,7 +266,7 @@ $no = 0;
                                     </div>
 
                             </div>
-                            <div id="keranjang">
+                            <div id="keranjangC">
                                 <div class="row border border-primary rounded mt-1">
                                     <br>
                                     <div class="float-end">
@@ -302,8 +302,8 @@ $no = 0;
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <div id="create"><button type="button" class="tombol btn btn-primary" id="checkoutBtn">SUBMIT</button></div>
-              <div id="update"> <button  type="button" id="edit_2" class="btn btn-sm btn-primary float-end mt-1 mb-1">SUBMIT</button></div>
+              <div id="createC"><button type="button" class="tombol btn btn-primary" id="checkoutBtnC">SUBMIT</button></div>
+              <div id="updateC"> <button  type="button" id="edit_3" class="btn btn-sm btn-primary float-end mt-1 mb-1">SUBMIT</button></div>
              </div>
           </div>
         </div>
@@ -462,18 +462,7 @@ $no = 0;
                                     </table>
                                 </div>
                             </div>
-                            <div class="col">
-                                <div class="input-group input-group-sm mb-1">
-                                    <table class="table table-striped table-bordered">
-                                        <tbody>
-                                            <tr>
-                                                <th>NILAI PENYUSUTAN</th>
-                                                <td id="susut_d"> + item.susut+ </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
+                            
                             <div class="col">
                                 <div class="input-group input-group-sm mb-1">
                                     <table class="table table-striped table-bordered">
@@ -488,7 +477,7 @@ $no = 0;
                             </div>
                      </fieldset><br>
 
-                    <fieldset class="border border-secondary rounded-3 p-2 row" id="filed">
+                    <fieldset class="border border-secondary rounded-3 p-2 row" id="filedC">
                             <legend class="float-none w-auto px-3 border border-secondary rounded">
                                 <div style="font-size: 15px;"><strong>DOKUMEN</strong></div>
                             </legend>
