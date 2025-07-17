@@ -15,4 +15,12 @@ class PdfController extends Controller
             'data' => $pdf
           ]);
     }
+
+    // public function mesin($id)
+    // {
+    //     $pdf = Pdf::where('id_tanah',$id)->get();
+    //     return response()->json([
+    //         'data' => $pdf
+    //       ]);
+    // }
 }

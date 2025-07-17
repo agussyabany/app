@@ -38,6 +38,7 @@ use App\Http\Controllers\LiveLine\Llcontroller;
 use App\Http\Controllers\LiveLine\RapatController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Soc\Soccontroller;
+use App\Models\Aset\Gedung;
 use App\Models\Aset\KibD;
 use GuzzleHttp\Middleware;
 use Symfony\Component\HttpKernel\DataCollector\DataCollector;
@@ -200,6 +201,9 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::get('/mesin.nilai/{lok}',[MesinController::class,'nilaiSum']);
     Route::get('/nilaiMesin.detail/{id}',[MesinController::class,'nilaimesin']);
     Route::get('/vMesin',[MesinController::class,'vMesin']);
+    Route::get('/mesin.aktiva',[MesinController::class,'aktiva']);
+    Route::get('/mesin.barang/{id}',[MesinController::class,'barang']);
+    
 
     Route::get('/gedung.dep/{id}',[GedungController::class,'dep']);
     Route::get('/gedung.div/{dep}/{lok}',[GedungController::class,'div']);
@@ -208,6 +212,14 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::get('/gedung.print/{lok}/{dep}/{div}',[GedungController::class,'print']);
     Route::get('/gedung.nilai/{lok}',[GedungController::class,'nilaiSum']);
     Route::get('/nilaiGedung.detail/{id}',[GedungController::class,'nilaigedung']);
+    Route::post('/gedung.save',[GedungController::class,'save']);
+    Route::get('/gedung.aktiva',[GedungController::class,'aktiva']);
+    Route::get('/gedung.barang/{id}',[GedungController::class,'barang']);
+    Route::get('/gedung.input',[GedungController::class,'input']);
+    Route::post('/gedung.hapus/{id}',[GedungController::class,'hapus']);
+    Route::post('/gedung.clear',[GedungController::class,'clear']);
+    Route::get('/gedung.edit/{id}',[GedungController::class,'edit']);
+    Route::post('/gedung.update',[GedungController::class,'update']);
 
     Route::get('/nilaiD/{id}',[KibDController::class,'nilaiD']);
     Route::get('/d.dep/{id}',[KibDController::class,'dep']);

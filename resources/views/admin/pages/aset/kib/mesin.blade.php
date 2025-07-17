@@ -44,13 +44,7 @@ $no = 0;
 
                                                       <button id="detail_mesin" data-id="{{ $item->id_lokasi }}" class="btn btn-default border border-secondary btn-sm detail tree" data-bs-toggle="offcanvas" role="button" aria-controls="offcanvasExample" href="#data"  type="button">DETAIL</button>
 
-                                                        <button type="button" class="btn btn-sm btn-default border border-secondary  dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"><span class="visually-hidden">Toggle Dropdown</span></button>
-                                                        <ul class="dropdown-menu">
-                                                            <li><a class="dropdown-item  edit" data-id="" href="#"><i class="fa-solid fa-edit"></i>&nbsp;EDIT</a></li>
-                                                            <li><a class="dropdown-item delete" data-id="" href="#"><i class="fa-solid fa-trash"></i>&nbsp;DELETE</a></li>
-                                                            <li><a class="dropdown-item nilai" data-id="" href="#"><i class="fa-solid fa-trash"></i>&nbsp;NILAI</a></li>
-                                                            <li><hr class="dropdown-divider"></li>
-                                                        </ul>
+                                                        
                                                     </div>
                                                 </td>
                                             </tr>
@@ -67,13 +61,14 @@ $no = 0;
         <div class="modal-dialog  modal-xl">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="judul_modalLG">TAMBAH DATA MESIN</h5>
+              <h5 class="modal-title" id="judul_modalB">TAMBAH DATA MESIN</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body" id="modal_bodyLG">
                 <form action="" id="form_b" enctype="multipart/form-data">
+                    <input type="hidden" id="id_b" name="id" value="">
                     <div class="container">
-                        <div class="row  border border-primary rounded">
+                        <div class="row  border border-primary rounded" id="vMesin">
                             <div class="container"><br>
                                 <table class="table table-striped table-bordered rounded">
                                     <thead>
@@ -88,7 +83,7 @@ $no = 0;
                                         <tr>
                                             <td>
                                                 <div class="input-group input-group-sm mb-1">
-                                                    <select class="select2 form-control" name="voucher_mesin" id="voucher_mesin" style="width:100%;" required>
+                                                    <select class="select2 form-control" name="voucher_mesin" id="voucher_mesin" style="width:100%;" required disabled>
                                                         <option>- NO VOUCHER -</option>
                                                     </select>
                                                 </div>
@@ -157,12 +152,11 @@ $no = 0;
                             <div class="row  border border-primary rounded">
                                  <div class="col"><br>
 
-                                    <input type="text" value="1" name="jenis" id="jenisB">
-                                    <input type="text" value="" id="id_voucher2" name="id_voucher2">
+                                    <input type="hidden" value="1" name="jenis" id="jenisB">
+                                    <input type="hidden" value="" id="id_voucher2" name="id_voucher2">
                                         <div class="input-group input-group-sm mb-1">
                                             {{-- <span class="input-group-text col-sm-3">Hak</span> --}}
                                             <select name="nama_aset" id="nama" class="select2 form-control" style="width:100%;">
-                                                <option>-Nama Barang-</option>
                                             </select>
 
                                         </div>
@@ -181,7 +175,7 @@ $no = 0;
                                         </div>
                                         <p style="color:red;" id="merk_error"></p>
                                         <div class="input-group input-group-sm mb-1">
-                                            <span class="input-group-text col-sm-3">Ukuran</span><input name="ukuran" id="ukuran" type="number" class="form-control">
+                                            <span class="input-group-text col-sm-3">Ukuran</span><input name="ukuran" id="ukuran" type="text" class="form-control">
                                         </div>
                                         <p style="color:red;" id="ukuran_error"></p>
 
@@ -283,31 +277,35 @@ $no = 0;
                                     </div>
 
                             </div>
+                            <div id="keranjang">
+                                <div class="row border border-primary rounded mt-1">
+                                    <br>
+                                    <div class="float-end">
+                                        <button  type="button" id="submit_b" class="btn btn-sm btn-primary float-end mt-1 mb-1">SUBMIT</button>
+                                       
+                                    </div>
+                                </div><br>
 
-                            <div class="row border border-primary rounded mt-1">
-                                <br><div class="float-end">
-                                    <button  type="button" id="submit_b" class="btn btn-sm btn-primary float-end mt-1 mb-1">SUBMIT</button>
-                                </div>
-                            </div><br>
 
-
-                            <div class="row border border-primary rounded">
-                                <div class="container"><br>
-                                    <table  class="table table-bordered" id="tbl_mesin_input">
-                                        <thead>
-                                            <tr class="text-center">
-                                                <th>No</th>
-                                                <th>Barang</th>
-                                                <th>Kode</th>
-                                                <th>Merk</th>
-                                                <th>Penggunaan</th>
-                                              </tr>
-                                        </thead>
-                                         <tbody>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div><br>
+                                <div class="row border border-primary rounded">
+                                    <div class="container"><br>
+                                        <table  class="table table-bordered" id="tbl_mesin_input">
+                                            <thead>
+                                                <tr class="text-center">
+                                                    <th>No</th>
+                                                    <th>Barang</th>
+                                                    <th>Kode</th>
+                                                    <th>Merk</th>
+                                                    <th>Penggunaan</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div><br>
+                            </div>
+                            
 
                         </div>
                     </form >
@@ -315,8 +313,9 @@ $no = 0;
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="tombol btn btn-primary" id="checkoutBtn">SUBMIT</button>
-            </div>
+              <div id="create"><button type="button" class="tombol btn btn-primary" id="checkoutBtn">SUBMIT</button></div>
+              <div id="update"> <button  type="button" id="edit_2" class="btn btn-sm btn-primary float-end mt-1 mb-1">SUBMIT</button></div>
+             </div>
           </div>
         </div>
       </div>
@@ -400,8 +399,8 @@ $no = 0;
                                     <table class="table table-striped table-bordered">
                                         <tbody>
                                             <tr>
-                                                <th>PENGGUNAAN</th>
-                                                <td id="guna_D"> + item.guna+ </td>
+                                                <th>REGISTER</th>
+                                                <td id="reg_D"></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -411,30 +410,38 @@ $no = 0;
 
 
 
-                         <div class="row">
+                    <div class="row">
                         <div class="col">
                             <div class="container border border-primary rounded"><br>
                                 <table class="table table-striped table-bordered">
                                     <tbody>
                                         <tr>
                                             <th>MERK / TYPE</th>
-                                            <td id="merk_D"> + item.merk+ </td>
+                                            <td id="merk_D"></td>
                                         </tr>
                                         <tr>
                                             <th>UKURAN / CC</th>
-                                            <td id="ukuran_D"> + item.ukuran+ </td>
+                                            <td id="ukuran_D"></td>
                                         </tr>
                                         <tr>
                                             <th>BAHAN</th>
-                                            <td id="bahan_D"> + item.bahan+ </td>
+                                            <td id="bahan_D"></td>
                                         </tr>
                                         <tr>
                                             <th>TAHUN</th>
-                                            <td id="tahun_D"> + item.tahun+ </td>
+                                            <td id="tahun_D"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>PENGGUNAAN</th>
+                                            <td id="guna_D"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>FUNGSI</th>
+                                            <td id="fungsi_D"></td>
                                         </tr>
                                         <tr>
                                             <th>KONDISI</th>
-                                            <td id="kondisi_D"> </td>
+                                            <td id="kondisi_D"></td>
                                         </tr>
 
                                     </tbody>
@@ -442,34 +449,39 @@ $no = 0;
                             </div>
                         </div>
 
-                        <div class="col">
+                          <div class="col" id="kendaraan_b">
                             <div class="container border border-primary rounded"><br>
                                 <table class="table table-striped table-bordered">
                                     <tbody>
                                         <tr>
                                             <th>BPKB</th>
-                                            <td id="bpkb_D"> + item.bpkb+ </td>
+                                            <td id="bpkb_D"></td>
                                         </tr>
                                         <tr>
                                             <th>PABRIK</th>
-                                            <td id="pabrik_D"> + item.pabrik+ </td>
+                                            <td id="pabrik_D"></td>
                                         </tr>
                                         <tr>
                                             <th>RANGKA</th>
-                                            <td id="rangka_D"> + item.rangka+ </td>
+                                            <td id="rangka_D"></td>
                                         </tr>
                                         <tr>
                                             <th>MESIN</th>
-                                            <td id="mesin_D"> + item.mesin+ </td>
+                                            <td id="mesin_D"></td>
                                         </tr>
                                         <tr>
                                             <th>POLISI</th>
-                                            <td id="polisi_D"> + item.polisi+ </td>
+                                            <td id="polisi_D"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>STATUS KENDARAAN</th>
+                                            <td id="status_D"></td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
+
 
                     </div><br>
 
@@ -483,7 +495,7 @@ $no = 0;
                                         <tbody>
                                             <tr>
                                                 <th>ASAL USUL</th>
-                                                <td id="asal_D"> + item.asal+ </td>
+                                                <td id="asal_D"></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -495,24 +507,13 @@ $no = 0;
                                         <tbody>
                                             <tr>
                                                 <th>NILAI PEROLEHAN</th>
-                                                <td id=""> + formattedCurrency + </td>
+                                                <td id="nilai_d"></td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
-                            <div class="col">
-                                <div class="input-group input-group-sm mb-1">
-                                    <table class="table table-striped table-bordered">
-                                        <tbody>
-                                            <tr>
-                                                <th>NILAI PENYUSUTAN</th>
-                                                <td id="susut_D"> + item.susut+ </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
+                            
                             <div class="col">
                                 <div class="input-group input-group-sm mb-1">
                                     <table class="table table-striped table-bordered">

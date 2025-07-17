@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Aset;
 
 use App\Http\Controllers\Controller;
+use App\Models\Aset\Aktiva;
+use App\Models\Aset\Barang;
 use App\Models\Aset\Departemen;
 use App\Models\Aset\Divisi;
 use App\Models\Aset\Mesin;
@@ -67,7 +69,7 @@ class MesinController extends Controller
 
     public function edit($id)
     {
-        $mesin_full = Mesin::select('barangs.id as idBar','nama_barang','kode_dep','nama_div','lokasi','id_lokasi','id_departemen','id_div','kode','reg','tahun','harga','susut','bahan','asal','ukuran','merk','pabrik','rangka','mesin','polisi','bpkb','ket','mesins.id as id_mesin','guna')
+        $mesin_full = Mesin::select('barangs.id as idBar','nama_barang','kode_dep','nama_div','lokasi','id_lokasi','id_departemen','id_div','kode','reg','tahun','harga','susut','bahan','asal','ukuran','merk','pabrik','rangka','mesin','polisi','bpkb','ket','mesins.id as id_mesin','guna','fungsi','jenis','id_voucher2','kodisi')
                             ->where('mesins.id',$id)
                             ->join('barangs','mesins.id_barang','barangs.id')
                             ->join('divisis','mesins.id_div','divisis.id')
@@ -103,6 +105,11 @@ class MesinController extends Controller
             $mesin->kodisi = $request->kondisi_b;
             $mesin->asal = $request->asal;
             $mesin->harga = $request->nilai;
+            $mesin->pabrik = $request->pabrik;
+            $mesin->rangka= $request->rangka;
+            $mesin->mesin = $request->mesin;
+            $mesin->polisi = $request->nopol;
+            $mesin->bpkb = $request->bpkb;
             $mesin->ket = $request->ket;
             $mesin->input = $request->is_final ?? 0;
 
@@ -130,7 +137,7 @@ class MesinController extends Controller
 
     public function input()
     {
-        $data = Mesin::select('mesins.id as idb','nama_barang','merk','guna','kode')
+        $data = Mesin::select('mesins.id as idb','nama_barang','kode_barang','luas')
                         ->join('barangs','mesins.id_barang','barangs.id')
                         ->where('input',0)
                         ->get();
@@ -143,9 +150,12 @@ class MesinController extends Controller
 
     public function clear()
     {
-        Mesin::where('input',0)
-        ->update(['input' => 1]);
-        return response()->json(['message' => 'Data updated successfully']);
+        try {
+            Mesin::where('input', 0)->update(['input' => 1]);
+            return response()->json(['success' => true]);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false]);
+        }
     }
 
     public function hapus($id)
@@ -160,8 +170,8 @@ class MesinController extends Controller
             'lokasi' => 'required',
             'dep' => 'required',
             'div' => 'required',
-            'jenis' => 'required',
-            'id_voucher2' => 'required',
+            //'jenis' => 'required',
+            //'id_voucher2' => 'required',
             'nama_aset' => 'required',
             'kode_aset' => 'required',
             'reg' => 'required',
@@ -206,18 +216,18 @@ class MesinController extends Controller
         $lokasi = $request->input('lokasi');
         $dep = $request->input('dep');
         $div = $request->input('div');
-        $jenis = $request->input('jenis');//
-        $id_voucher2 = $request->input('id_voucher2');//
+        // $jenis = $request->input('jenis');
+        // $id_voucher2 = $request->input('id_voucher2');
         $nama_aset = $request->input('nama_aset');
         $kode_aset = $request->input('kode_aset');
         $reg = $request->input('reg');
         $merk = $request->input('merk');
         $ukuran = $request->input('ukuran');
-        $fungsi = $request->input('fungsi');//
+        $fungsi = $request->input('fungsi');
         $guna = $request->input('guna');
         $bahan = $request->input('bahan');
         $tahun = $request->input('tahun');
-        $kondisi = $request->input('kondisi');//
+        $kondisi = $request->input('kondisi_b');
         $asal = $request->input('asal');
         $nilai = $request->input('nilai');
         
@@ -262,8 +272,11 @@ class MesinController extends Controller
                 
                 
             ]);
-        return response()->json(['message' => 'Data updated successfully']);
+        return response()->json(['success' => true,'message' => 'Data updated successfully']);
     }
+
+
+
     public function print($lok,$dep,$div)
     {
         $mesin = Mesin::select('nama_barang','merk','guna','tahun','mesins.id as id_mesin','nama_div','img','pabrik','rangka','polisi','bpkb','asal','kode','reg','harga')
@@ -313,5 +326,18 @@ class MesinController extends Controller
                 ->where('cat', 2)
                 ->get();
         return response()->json(['data' => $v_mesin]);
+    }
+
+    public function aktiva ()
+    {
+        $aktiva = Aktiva::where('kib','KIB B - PERALATAN DAN MESIN')->get();
+        return response()->json(['data' => $aktiva]);
+
+    }
+
+    public function barang ($id)
+    {
+        $barang = Barang::where('id',$id)->get();
+        return response()->json(['data' => $barang]);
     }
 }
