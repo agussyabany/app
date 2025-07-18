@@ -99,4 +99,10 @@ class BarangController extends Controller
         $d = Barang::where('golongan',4)->get();
         return response()->json(['data' => $d]);
     }
+
+    public function e()
+    {
+        $e = Barang::where('golongan',6)->get();
+        return response()->json(['data' => $e]);
+    }
 }

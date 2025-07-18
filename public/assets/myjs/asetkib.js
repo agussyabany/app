@@ -945,8 +945,6 @@ $(document).on('click', '.editC', function () {
                 alert('Error server saat menambahkan ke keranjang');
             }
         });
-
-
     })
 
 
@@ -1443,6 +1441,73 @@ $(document).on('click', '.editD', function () {
                    }
                 });
             })
+//Input Aset tetap lainya
+$(document).on('click', '#add_e', function() {
+    $('#vMesin').show();
+    $('#keranjangE').show();
+    $('#createE').show();
+    $('#updateE').hide();
+    // $('#kode_aktiva_d').empty().append('<option value="">Select an aktiva</option>');
+    //         $.get('/gedung.aktiva/' , function (data) {
+    //             $.each(data.data, function (index, item) {
+    //                 $('#kode_aktiva_c').prepend('<option value="' + item.id + '">'+  item.kode +' | ' + item.aktiva + '</option>');
+    //           }
+    //           )})
+    selectOptAll();
+
+        $.get('/barang.e', function (data) {
+            $.each(data.data, function (index, item) {
+                $('#id_barang').append('<option value="' + item.id + '">' + item.nama_barang + '</option>');
+            });
+        });
+
+        $('body').on('change','#id_barang' , function (event) {
+            event.preventDefault();
+            var id = $(this).val();
+            $.get('/aset.barang/'+id, function (data) {
+            $.each(data.data, function (index, item) {
+                $('#kode').val(item.kode_barang);
+            });
+        });
+    })
+
+    $.get('/bahan', function (data) {
+            $.each(data.data, function (index, item) {
+                $('#bahan_e_edit').append('<option value="' + item.nama + '">' + item.nama + '</option>');
+            });
+        });
+})
+//Save Gedung
+$('#submit_e').click(function (e) {
+        e.preventDefault();
+
+        let formData = new FormData($('#form_e')[0]);
+
+        // Tambahkan flag draft
+        formData.append('is_final', 0);
+
+        $.ajax({
+            url: 'jalan.save',
+            type: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function (res) {
+                if (res.success) {
+                    $('#form_c')
+                    .find('input, textarea')
+                    //.not('#') // sesuaikan
+                    .val('');
+                    fetchKeranjangE(); // refresh keranjang
+                } else {
+                    alert('Gagal menambahkan ke keranjang');
+                }
+            },
+            error: function (xhr) {
+                alert('Error server saat menambahkan ke keranjang');
+            }
+        });
+    });
 
         //Data F
         $(document).on('click', '#detail_f', function() {

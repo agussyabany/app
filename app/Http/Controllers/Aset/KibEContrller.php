@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Aset;
 
 use App\Http\Controllers\Controller;
+use App\Models\Aset\Barang;
 use App\Models\Aset\KibE;
 use App\Models\Aset\NilaiAktiva;
 use Illuminate\Http\Request;
@@ -69,5 +70,11 @@ class KibEContrller extends Controller
         return response()->json([
             'data' => $e_full
           ]);
+    }
+
+    public function barang ($id)
+    {
+        $barang = Barang::where('id',$id)->get();
+        return response()->json(['data' => $barang]);
     }
 }
