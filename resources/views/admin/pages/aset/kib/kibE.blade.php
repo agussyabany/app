@@ -72,7 +72,7 @@ $no = 0;
 
 
                 {{-- MODAL MASTER --}}
-    <div class="modal"  id="modal_d_detail">
+    <div class="modal"  id="modal_e_detail">
         <div class="modal-dialog modal-xl">
           <div class="modal-content">
             <div class="modal-header">
@@ -81,7 +81,7 @@ $no = 0;
             </div>
             <div class="modal-body" id="modal_body">
                 <div class="container">
-                    {{-- <img id="gambar_d" src="" height="500px" width="550px" class="rounded mx-auto d-block" alt="..."><br> --}}
+                    <img id="gambar_e" src="" height="500px" width="550px" class="rounded mx-auto d-block" alt="..."><br>
 
                     <fieldset class="border border-secondary rounded-3 p-2 row">
                         <legend class="float-none w-auto px-1 border border-secondary rounded">
@@ -93,7 +93,7 @@ $no = 0;
                                         <tbody>
                                             <tr>
                                                 <th>KODE</th>
-                                                <td id="kode_d"> + item.kode+ </td>
+                                                <td id="kode_e"> + item.kode+ </td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -105,7 +105,7 @@ $no = 0;
                                         <tbody>
                                             <tr>
                                                 <th>NAMA BARANG</th>
-                                                <td id="nama_barang_d"> + item.nama_barang + </td>
+                                                <td id="nama_barang_e"> + item.nama_barang + </td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -134,11 +134,11 @@ $no = 0;
                                     <tbody>
                                         <tr>
                                             <th>REGISTER</th>
-                                            <td id="reg_d"> + item.reg+ </td>
+                                            <td id="reg_e"> + item.reg+ </td>
                                         </tr>
                                         <tr>
                                             <th>KONDISI</th>
-                                            <td id="kondisi_d"> + item.kondisi+ </td>
+                                            <td id="kondisi_e"> + item.kondisi+ </td>
                                         </tr>
                                         {{-- <tr>
                                             <th>KONSTRUKSI</th>
@@ -146,7 +146,7 @@ $no = 0;
                                         </tr> --}}
                                         <tr>
                                             <th>BAHAN</th>
-                                            <td id="materi_d"> + item.materi+ </td>
+                                            <td id="materi_e"> + item.materi+ </td>
                                         </tr>
                                         <tr>
                                             <th>TAHUN</th>
@@ -172,7 +172,7 @@ $no = 0;
                                         </tr>
                                         <tr>
                                             <th>KET</th>
-                                            <td id="ket_d"> + item.luastanah+ </td>
+                                            <td id="ket_e"> + item.luastanah+ </td>
                                         </tr>
                                         
                                     </tbody>
@@ -250,13 +250,14 @@ $no = 0;
                             <div class="card">
                                 <div class="card-header" id="card-header"></div>
                                 <div class="card-body" id="card-body">
-                                    <table class="table table-striped table-border" id="tbl_c_data">
+                                    <table class="table table-striped table-border" id="tbl_e_data">
                                         <thead>
                                             <tr>
                                                 <th>NO</th>
                                                 <th>Nama Aset</th>
                                                 <th>Kode</th>
                                                 <th>Registrasi</th>
+                                                <th></th>
                                                 <th><i class="fa fa-cog"></i></th>
 
                                             </tr>
@@ -426,7 +427,7 @@ $no = 0;
                                         
                                         
                                         <div class="input-group input-group-sm mb-1">
-                                            <select class="select2 form-control" name="asal" id="asal_d_edit" style="width:100%;">
+                                            <select class="select2 form-control" name="asal" id="asal_e_edit" style="width:100%;">
                                                 <option> -ASAL- </option>
                                                 <option>Pembelian</option>
                                                 <option>Bantuan</option>
@@ -453,7 +454,7 @@ $no = 0;
                                     </div>
 
                             </div>
-                            <div id="keranjangD">
+                            <div id="keranjangE">
                                 <div class="row border border-primary rounded mt-1">
                                     <br>
                                     <div class="float-end">
@@ -465,14 +466,13 @@ $no = 0;
 
                                 <div class="row border border-primary rounded">
                                     <div class="container"><br>
-                                        <table  class="table table-bordered" id="tbl_d_input">
+                                        <table  class="table table-bordered" id="tbl_e_input">
                                             <thead>
                                                 <tr class="text-center">
                                                     <th>No</th>
-                                                    <th>Gedung</th>
+                                                    <th>Nama Aset</th>
                                                     <th>Kode</th>
-                                                    <th>Luas</th>
-                                                    <th>Konstruksi</th>
+                                                    <th>Jumlah</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -489,8 +489,8 @@ $no = 0;
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <div id="createD"><button type="button" class="tombol btn btn-primary" id="checkoutBtnD">SUBMIT</button></div>
-              <div id="updateD"> <button  type="button" id="edit_4" class="btn btn-sm btn-primary float-end mt-1 mb-1">SUBMIT</button></div>
+              <div id="createE"><button type="button" class="tombol btn btn-primary" id="checkoutBtnD">SUBMIT</button></div>
+              <div id="updateE"> <button  type="button" id="edit_5" class="btn btn-sm btn-primary float-end mt-1 mb-1">SUBMIT</button></div>
              </div>
           </div>
         </div>

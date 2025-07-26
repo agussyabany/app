@@ -12,12 +12,17 @@ $no = 0;
 @section('content')
 
     <div class="col container">
-        <br>
+        <br>        
+                    
 
-                <div class="container card">
-                    <div class="card-header">DATA TANAH <div class="position-absolute top-0 end-0">
-                      <button class="btn  btn-primary"  data-bs-toggle="modal" id="add" data-bs-target="#modal_tanah"><i class="fa-solid fa-file-circle-plus"></i></button>
-                </div>
+
+                 
+                <div class="container card"><br>
+                    <div class="float-end">
+                         <button class="btn  btn-outline-success"  data-bs-toggle="modal" id="add" data-bs-target="#modal_tanah">CETAK</button>
+                        <button class="btn  btn-outline-primary"  data-bs-toggle="modal" id="add" data-bs-target="#modal_tanah">TAMBAH</button>
+                    </div><br><br>
+                    <div class="card-header">DATA TANAH <div class="position-absolute top-0 end-0"></div>
                     </div>
                             <div class="card-body">
                                 <table class="table table-striped" id="tbl">

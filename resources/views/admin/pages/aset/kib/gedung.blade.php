@@ -156,6 +156,7 @@ $no = 0;
                                     </table>
                                 </div>
                             </div><br>
+                            {{-- main componenet --}}
                             <div class="row  border border-primary rounded">
                                  <div class="col"><br>
 

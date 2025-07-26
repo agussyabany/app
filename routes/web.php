@@ -138,6 +138,7 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::get('barang.gedung',[BarangController::class,'gedung']);
     Route::get('barang.d',[BarangController::class,'d']);
     Route::get('barang.e',[BarangController::class,'e']);
+     Route::get('barang.f',[BarangController::class,'f']);
     Route::get('barang.kir',[BarangController::class,'kir']);
     Route::get('kode.kir/{id}',[BarangController::class,'kode_kir']);
 
@@ -240,7 +241,12 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::get('/e.div/{dep}/{lok}',[KibEContrller::class,'div' ]);
     Route::get('/e.show/{lok}/{dep}/{div}',[KibEContrller::class,'show']);
     Route::get('/e.detail/{id}',[KibEContrller::class,'detail']);
-     Route::get('/aset.barang/{id}',[KibEContrller::class,'barang']);
+    Route::get('/aset.barang/{id}',[KibEContrller::class,'barang']);
+    Route::post('/aset.save',[KibEContrller::class,'save']);
+    Route::get('/aset.input',[KibEContrller::class,'input']);
+    Route::post('/aset.hapus/{id}',[KibEContrller::class,'hapus']);
+    Route::get('/aset.edit/{id}',[KibEContrller::class,'edit']);
+    Route::post('/aset.update',[KibEContrller::class,'update']);
 
     Route::get('/f.dep/{id}',[KibFController::class,'dep']);
     Route::get('/f.div/{dep}/{lok}',[KibFController::class,'div']);
