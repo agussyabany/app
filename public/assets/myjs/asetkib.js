@@ -419,17 +419,17 @@ $('#checkoutBtn').click(function () {
                      
                      var editButton =
                                         '<div class="btn-group">'+
-                                            '<button class="btn btn-default border border-secondary btn-sm" type="button"><i class="fa-solid fa-ellipsis-vertical"></i></button>'+
+                                            '<button class="btn btn-default border border-secondary btn-sm text-success" type="button" data-bs-toggle="modal" data-bs-target="#modal_mesin_detail" id="detail_mesin_divisi" data-id="'+ items.id_mesin +'"><i class="fas fa-eye"></i></button>'+
                                             '<button type="button" class="btn btn-sm btn-default border border-secondary  dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"><span class="visually-hidden">Toggle Dropdown</span></button>'+
                                             '<ul class="dropdown-menu">'+
 
-                                                '<li><a class="dropdown-item  editB" data-id=" '+ items.id_mesin +' " href="#"><i class="fa-solid fa-edit"></i>&nbsp;EDIT</a></li>'+
-                                                '<li><a class="dropdown-item btn-hapus" data-id=" '+ items.id_mesin +' " href="#"><i class="fa-solid fa-trash"></i>&nbsp;DELETE</a></li>'+
+                                                '<li><a class="dropdown-item  editB text-primary" data-id=" '+ items.id_mesin +' " href="#"><i class="fa-solid fa-edit"></i>&nbsp;EDIT</a></li>'+
+                                                '<li><a class="dropdown-item btn-hapus text-danger" data-id=" '+ items.id_mesin +' " href="#"><i class="fa-solid fa-trash"></i>&nbsp;DELETE</a></li>'+
                                                 '<li><hr class="dropdown-divider"></li>'+
 
                                             '</ul>'+
                                         '</div>';
-                                        var img = '<a href="#" data-bs-toggle="modal" data-bs-target="#modal_mesin_detail" id="detail_mesin_divisi" data-id="'+ items.id_mesin +'"><img src="' + fullPath + items.img +'" height="100px" width="100px"></img></a>';
+                                        var img = '<a href="#" ><img src="' + fullPath + items.img +'" height="100px" width="100px"></img></a>';
                                         table.row.add([
                                             ++i,
                                             items.nama_barang,
@@ -662,17 +662,17 @@ $(document).on('click', '.editB', function () {
                 $.each(data.data, function (index, items) {
                      var editButton =
                                         '<div class="btn-group">'+
-                                            '<button class="btn btn-default border border-secondary btn-sm" type="button"><i class="fa-solid fa-ellipsis-vertical"></i></button>'+
+                                            '<button class="btn btn-default border border-secondary btn-sm text-success" data-bs-toggle="modal" data-bs-target="#modal_gedung_detail" id="detail_gedung_divisi" data-id="'+ items.id_gedung +'" type="button"><i class="fa fa-eye"></i></button>'+
                                             '<button type="button" class="btn btn-sm btn-default border border-secondary  dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"><span class="visually-hidden">Toggle Dropdown</span></button>'+
                                             '<ul class="dropdown-menu">'+
 
-                                                '<li><a class="dropdown-item  editC" data-id=" '+ items.id_gedung +' " href="#"><i class="fa-solid fa-edit"></i>&nbsp;EDIT</a></li>'+
-                                                '<li><a class="dropdown-item btn-hapusC" data-id=" '+ items.id_gedung +' " href="#"><i class="fa-solid fa-trash"></i>&nbsp;DELETE</a></li>'+
+                                                '<li><a class="dropdown-item  editC text-primary" data-id=" '+ items.id_gedung +' " href="#"><i class="fa-solid fa-edit"></i>&nbsp;EDIT</a></li>'+
+                                                '<li><a class="dropdown-item btn-hapusC text-danger" data-id=" '+ items.id_gedung +' " href="#"><i class="fa-solid fa-trash"></i>&nbsp;DELETE</a></li>'+
                                                 '<li><hr class="dropdown-divider"></li>'+
 
                                             '</ul>'+
                                         '</div>';
-                                        var img = '<a href="#" data-bs-toggle="modal" data-bs-target="#modal_gedung_detail" id="detail_gedung_divisi" data-id="'+ items.id_gedung +'"><img src="' + fullPathImgC + items.img +'" height="100px" width="100px"></img></a>';
+                                        var img = '<a href="#" ><img src="' + fullPathImgC + items.img +'" height="100px" width="100px"></img></a>';
                                         table.row.add([
                                             ++i,
                                             items.nama_barang,
@@ -1026,14 +1026,14 @@ $(document).on('click', '.editC', function () {
                 $.each(data.data, function (index, items) {
                      var editButton =
                                         '<div class="btn-group">'+
-                                            '<a class="btn btn-default border border-secondary btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#modal_d_detail" id="detail_d_divisi" data-id="'+ items.id_d +'"><i class="fa-solid fa-ellipsis-vertical"></i></a>'+
+                                            '<a class="btn btn-default border border-secondary btn-sm text-success" type="button" data-bs-toggle="modal" data-bs-target="#modal_d_detail" id="detail_d_divisi" data-id="'+ items.id_d +'"><i class="fa fa-eye"></i></a>'+
 
 
                                             '<button type="button" class="btn btn-sm btn-default border border-secondary  dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"><span class="visually-hidden">Toggle Dropdown</span></button>'+
                                             '<ul class="dropdown-menu">'+
 
-                                                '<li><a class="dropdown-item  editD" data-id=" '+ items.id_d +' " href="#"><i class="fa-solid fa-edit"></i>&nbsp;EDIT</a></li>'+
-                                                '<li><a class="dropdown-item deleteB" data-id=" '+ items.id_d +' " href="#"><i class="fa-solid fa-trash"></i>&nbsp;DELETE</a></li>'+
+                                                '<li><a class="dropdown-item  editD text-primary" data-id=" '+ items.id_d +' " href="#"><i class="fa-solid fa-edit"></i>&nbsp;EDIT</a></li>'+
+                                                '<li><a class="dropdown-item deleteB text-danger" data-id=" '+ items.id_d +' " href="#"><i class="fa-solid fa-trash"></i>&nbsp;DELETE</a></li>'+
                                                 '<li><hr class="dropdown-divider"></li>'+
 
                                             '</ul>'+
@@ -1378,19 +1378,19 @@ $(document).on('click', '.editD', function () {
                 $.each(data.data, function (index, items) {
                      var editButton =
                                         '<div class="btn-group">'+
-                                            '<a class="btn btn-default border border-secondary btn-sm" type="button"  data-id="'+ items.id_e +'"><i class="fa-solid fa-ellipsis-vertical"></i></a>'+
+                                            '<a class="btn btn-default border border-secondary btn-sm text-success" type="button"  data-bs-toggle="modal" data-bs-target="#modal_e_detail" id="detail_e_divisi" data-id="'+ items.id_e +','+items.nama_div +'"><i class="fa fa-eye"></i></a>'+
 
 
                                             '<button type="button" class="btn btn-sm btn-default border border-secondary  dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"><span class="visually-hidden">Toggle Dropdown</span></button>'+
                                             '<ul class="dropdown-menu">'+
 
-                                                '<li><a class="dropdown-item  editE" data-id=" '+ items.id_e +' " href="#"><i class="fa-solid fa-edit"></i>&nbsp;EDIT</a></li>'+
-                                                '<li><a class="dropdown-item btn-hapusE" data-id=" '+ items.id_e +' " href="#"><i class="fa-solid fa-trash"></i>&nbsp;DELETE</a></li>'+
+                                                '<li><a class="dropdown-item  editE text-primary" data-id=" '+ items.id_e +' " href="#"><i class="fa-solid fa-edit"></i>&nbsp;EDIT</a></li>'+
+                                                '<li><a class="dropdown-item btn-hapusE text-danger" data-id=" '+ items.id_e +' " href="#"><i class="fa-solid fa-trash"></i>&nbsp;DELETE</a></li>'+
                                                 '<li><hr class="dropdown-divider"></li>'+
 
                                             '</ul>'+
                                         '</div>';
-                                        var img = '<a href="#" data-bs-toggle="modal" data-bs-target="#modal_e_detail" id="detail_e_divisi" data-id="'+ items.id_e +','+items.nama_div +'"><img src="'+ fullPathImgE + items.img+'" height="100px" width="100px"></img></a>';
+                                        var img = '<a href="#" ><img src="'+ fullPathImgE + items.img+'" height="100px" width="100px"></img></a>';
                                         table.row.add([
                                             ++i,
                                             items.nama_barang,
