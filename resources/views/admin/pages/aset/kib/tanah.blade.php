@@ -45,20 +45,20 @@ $no = 0;
                                                 <td>{{ $item->alamat }}</td>
                                                 <td>{{ $item->guna }}</td>
                                                 <td ><STRONG><a id="klik_nilai" style="text-decoration: none;" href="#" data-id="{{ $item->idLok }}" data-bs-toggle="modal" data-bs-target="#modal_tanah_nilai">{{number_format (NilaiAktiva::where('id_lokasi', $item->idLok)->where('cat', 1)->sum('nilai'),0,',','.') }}</a></STRONG></td>
-                                                <td><img height="80px" width="80px" src="http://app.perumdamtirtakencana.id/assets/img/lokasi/{{$item->img }}" alt=""></td>
+                                                <td><img height="80px" width="80px" src="" alt=""></td>
                                                 <td>
                                                     <!-- Add action buttons/links here -->
                                                     <div class="btn-group">
-                                                        <button id="detail_tanah" data-id="{{ $item->id_tanah }}" class="btn btn-default border border-secondary btn-sm detail" data-bs-toggle="modal" data-bs-target="#modal_tanah_detail"  type="button">DETAIL</button>
+                                                        <button id="detail_tanah" data-id="{{ $item->id_tanah }}" class="btn btn-default border border-secondary btn-sm detail text-success" data-bs-toggle="modal" data-bs-target="#modal_tanah_detail"  type="button"><i class="fas fa-eye"></i></button>
 
                                                         <button type="button" class="btn btn-sm btn-default border border-secondary  dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"><span class="visually-hidden">Toggle Dropdown</span></button>
                                                         <ul class="dropdown-menu">
-                                                            <li><a class="dropdown-item  updateA" data-id="{{ $item->id_tanah}}" href="#"><i class="fa-solid fa-edit"></i>&nbsp;EDIT</a></li>
+                                                            <li><a class="dropdown-item  updateA text-primary" data-id="{{ $item->id_tanah}}" href="#"><i class="fa-solid fa-edit"></i>&nbsp;EDIT</a></li>
                                                             <li>
                                                             <form action="/del.tanah/{{ $item->id_tanah }}" method="POST" style="display:inline;">
                                                                 @csrf
                                                                 
-                                                                <a class="dropdown-item" href="#" onclick="event.preventDefault(); 
+                                                                <a class="dropdown-item text-danger" href="#" onclick="event.preventDefault(); 
                                                                     if (confirm('Apakah  yakin ingin menghapus data  {{ $item->lokasi }} ?')) {  
                                                                         this.closest('form').submit(); 
                                                                     }"><i class="fa-solid fa-trash"></i>&nbsp;HAPUS</a>

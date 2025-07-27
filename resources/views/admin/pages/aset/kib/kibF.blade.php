@@ -15,7 +15,7 @@ $no = 0;
 
                 <div class="container card">
                     <div class="card-header">DATA KONSTRUKSI DALAM PENGERJAAN<div class="position-absolute top-0 end-0">
-                        <button class="btn  btn-primary" data-bs-toggle="modal" id="add_f" data-bs-target="#modal_F"><i class="fa-solid fa-file-circle-plus"></i></button>
+                        <button class="btn  btn-primary" data-bs-toggle="modal" id="add_f" data-bs-target="#modal_F">TAMBAH</i></button>
                 </div>
                     </div>
                             <div class="card-body">
@@ -45,15 +45,6 @@ $no = 0;
                                                     <div class="btn-group">
 
                                                         <button href="#data" id="detail_f" data-id="{{ $item->id_lokasi }}" class="btn btn-default border border-secondary btn-sm detail"  type="button"data-bs-toggle="offcanvas"  aria-controls="offcanvasExample">DETAIL</button>
-
-
-                                                        <button type="button" class="btn btn-sm btn-default border border-secondary  dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"><span class="visually-hidden">Toggle Dropdown</span></button>
-                                                        <ul class="dropdown-menu">
-                                                            <li><a class="dropdown-item  edit" data-id="" href="#"><i class="fa-solid fa-edit"></i>&nbsp;EDIT</a></li>
-                                                            <li><a class="dropdown-item delete" data-id="" href="#"><i class="fa-solid fa-trash"></i>&nbsp;DELETE</a></li>
-                                                            <li><a class="dropdown-item nilai" data-id="" href="#"><i class="fa-solid fa-trash"></i>&nbsp;NILAI</a></li>
-                                                            <li><hr class="dropdown-divider"></li>
-                                                        </ul>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -82,7 +73,7 @@ $no = 0;
             </div>
             <div class="modal-body" id="modal_body">
                 <div class="container">
-                    {{-- <img id="gambar_d" src="" height="500px" width="550px" class="rounded mx-auto d-block" alt="..."><br> --}}
+                    <img id="gambar_f" src="" height="500px" width="550px" class="rounded mx-auto d-block" alt="..."><br>
 
                     <fieldset class="border border-secondary rounded-3 p-2 row">
                         <legend class="float-none w-auto px-1 border border-secondary rounded">
@@ -247,7 +238,7 @@ $no = 0;
                             </div>
                      </fieldset><br>
 
-                    <fieldset class="border border-secondary rounded-3 p-2 row" id="filed">
+                    <fieldset class="border border-secondary rounded-3 p-2 row" id="filedF">
                             <legend class="float-none w-auto px-3 border border-secondary rounded">
                                 <div style="font-size: 15px;"><strong>DOKUMEN</strong></div>
                             </legend>
@@ -449,7 +440,7 @@ $no = 0;
                                         <p style="color:red;" id="reg_error"></p>
                                         
                                         <div class="input-group input-group-sm mb-1">
-                                            <select class=" form-control" name="struktur" id="struktur_f">
+                                            <select class=" form-control" name="struktur" id="struktur_f_edit">
                                                 <option> -KONSTRUKSI- </option>
                                                 <option value="BERTINGKAT"> BERTINGKAT </option>
                                                 <option value="TIDAK BERTINGKAT"> TIDAK BERTINGKAT </option>
@@ -457,7 +448,7 @@ $no = 0;
                                         </div>
                                         <p style="color:red;" id="kondisi_error"></p>
                                         <div class="input-group input-group-sm mb-1">
-                                            <select class=" form-control" name="materi" id="materi_f">
+                                            <select class=" form-control" name="materi" id="materi_f_edit">
                                                 <option> -MATERIAL- </option>
                                                 <option value="BETON"> BETON </option>
                                                 <option value="TIDAK BETON"> TIDAK BETON </option>
@@ -465,17 +456,17 @@ $no = 0;
                                         </div>
                                         <p style="color:red;" id="kondisi_error"></p>
                                         <div class="input-group input-group-sm mb-1">
-                                            <span class="input-group-text col-sm-3">Luas</span><input name="luas" id="luas_f" type="text" class="form-control">
+                                            <span class="input-group-text col-sm-3">Luas</span><input name="luas" id="luas_f_edit" type="text" class="form-control">
                                         </div>
                                         <p style="color:red;" id="ukuran_error"></p>
 
                                         <div class="input-group input-group-sm mb-1">
-                                            <span class="input-group-text col-sm-3">Tahun</span><input name="tahun" id="tahun_f" type="number" class="form-control">
+                                            <span class="input-group-text col-sm-3">Tahun</span><input name="tahun" id="tahun_f_edit" type="text" class="form-control">
                                         </div>
                                         <p style="color:red;" id="ukuran_error"></p>
 
                                         <div class="input-group input-group-sm mb-1">
-                                            <span class="input-group-text col-sm-3">Type</span><input name="type" id="type" type="text" class="form-control">
+                                            <span class="input-group-text col-sm-3">Type</span><input name="type" id="type_f_edit" type="text" class="form-control">
                                         </div>
                                         <p style="color:red;" id="guna_error"></p>
                                         
@@ -483,18 +474,18 @@ $no = 0;
                                        </div><br>
 
                                     <div class="col"><br>
-                                        <div class="input-group input-group-sm mb-1">
+                                        {{-- <div class="input-group input-group-sm mb-1">
                                             <span class="input-group-text col-sm-3">Luas</span><input name="luas" id="luas" type="text" class="form-control">
-                                        </div>
+                                        </div> --}}
                                         <p style="color:red;" id="luas_error"></p>
                                         <div class="input-group input-group-sm mb-1">
-                                            <select class="form-control" name="status_tanah" id="status_tanah_f">
+                                            <select class="form-control" name="status_tanah" id="status_tanah_f_edit">
                                                 <option> -Status Tanah- </option>
                                                 <option value="Pemprov"> Pemprov </option>
                                             </select>
                                         </div>
                                         <div class="input-group input-group-sm mb-1">
-                                            <select class="form-control" name="status_aset" id="status_aset_f">
+                                            <select class="form-control" name="status_aset" id="status_aset_f_edit">
                                                 <option> -Status Aset- </option>
                                                 <option value="Pemprov"> Hak Milik </option>
                                                 <option value="Pemprov"> Hak Kelola </option>
@@ -502,7 +493,7 @@ $no = 0;
                                         </div>
                                         
                                         <div class="input-group input-group-sm mb-1">
-                                            <select class="select2 form-control" name="asal" id="asal_f" style="width:100%;">
+                                            <select class="select2 form-control" name="asal" id="asal_f_edit" style="width:100%;">
                                                 <option> -ASAL- </option>
                                                 <option>Pembelian</option>
                                                 <option>Bantuan</option>
@@ -527,7 +518,7 @@ $no = 0;
                                             <span class="input-group-text col-sm-3">Foto</span><input name="img" id="img" type="file" class="form-control" multiple>
                                         </div>
                                         <div class="input-group input-group-sm mb-1">
-                                            <span class="input-group-text /mesin.savecol-sm-3">Uraian</span><textarea name="urai" id="urai_f" class="form-control"></textarea>
+                                            <span class="input-group-text /mesin.savecol-sm-3">Uraian</span><textarea name="urai" id="urai_edit" class="form-control"></textarea>
                                         </div>
                                         <div class="input-group input-group-sm mb-1">
                                             <span class="input-group-text /mesin.savecol-sm-3">Keterangan</span><textarea name="ket" id="ket" class="form-control"></textarea>
@@ -536,7 +527,7 @@ $no = 0;
                                     </div>
 
                             </div>
-                            <div id="keranjangE">
+                            <div id="keranjangF">
                                 <div class="row border border-primary rounded mt-1">
                                     <br>
                                     <div class="float-end">
@@ -548,13 +539,13 @@ $no = 0;
 
                                 <div class="row border border-primary rounded">
                                     <div class="container"><br>
-                                        <table  class="table table-bordered" id="tbl_e_input">
+                                        <table  class="table table-bordered" id="tbl_f_input">
                                             <thead>
                                                 <tr class="text-center">
                                                     <th>No</th>
                                                     <th>Nama Aset</th>
-                                                    <th>Kode</th>
-                                                    <th>Jumlah</th>
+                                                    <th>Type</th>
+                                                    <th>Struktur</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -571,7 +562,7 @@ $no = 0;
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <div id="createF"><button type="button" class="tombol btn btn-primary" id="checkoutBtnD">SUBMIT</button></div>
+              <div id="createF"><button type="button" class="tombol btn btn-primary" id="checkoutBtnF">SUBMIT</button></div>
               <div id="updateF"> <button  type="button" id="edit_6" class="btn btn-sm btn-primary float-end mt-1 mb-1">SUBMIT</button></div>
              </div>
           </div>

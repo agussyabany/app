@@ -220,4 +220,14 @@ public function input()
       
         
     }
+
+    public function clear()
+    {
+        try {
+            KibE::where('input', 0)->update(['input' => 1]);
+            return response()->json(['success' => true]);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false]);
+        }
+    }
 }

@@ -489,7 +489,7 @@ $no = 0;
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <div id="createE"><button type="button" class="tombol btn btn-primary" id="checkoutBtnD">SUBMIT</button></div>
+              <div id="createE"><button type="button" class="tombol btn btn-primary" id="checkoutBtnE">SUBMIT</button></div>
               <div id="updateE"> <button  type="button" id="edit_5" class="btn btn-sm btn-primary float-end mt-1 mb-1">SUBMIT</button></div>
              </div>
           </div>

@@ -245,13 +245,22 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::post('/aset.save',[KibEContrller::class,'save']);
     Route::get('/aset.input',[KibEContrller::class,'input']);
     Route::post('/aset.hapus/{id}',[KibEContrller::class,'hapus']);
+    Route::post('/aset.clear',[KibEContrller::class,'clear']);
     Route::get('/aset.edit/{id}',[KibEContrller::class,'edit']);
     Route::post('/aset.update',[KibEContrller::class,'update']);
+    
 
     Route::get('/f.dep/{id}',[KibFController::class,'dep']);
     Route::get('/f.div/{dep}/{lok}',[KibFController::class,'div']);
     Route::get('/f.show/{lok}/{dep}/{div}',[KibFController::class,'show']);
     Route::get('/f.detail/{id}',[KibFController::class,'detail']);
+    Route::post('/konstruksi.save',[KibFController::class,'save']);
+    Route::get('/konstruksi.input',[KibFController::class,'input']);
+    Route::post('/konstruksi.hapus/{id}',[KibFController::class,'hapus']);
+    Route::post('/konstruksi.clear',[KibFController::class,'clear']);
+    Route::get('/konstruksi.edit/{id}',[KibFController::class,'edit']);
+    Route::post('/konstruksi.update',[KibFController::class,'update']);
+    
 
 
 

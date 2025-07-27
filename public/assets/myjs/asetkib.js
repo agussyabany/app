@@ -1195,7 +1195,7 @@ $(document).on('click', '.btn-hapusD', function () {
         });
     }
 });
-//CHECKOUT GEDUNG
+//CHECKOUT JALAN
 $('#checkoutBtnD').click(function () {
         if (confirm("Yakin ingin menyimpan semua data secara permanen?")) {
             $.ajax({
@@ -1557,6 +1557,23 @@ $(document).on('click', '.btn-hapusE', function () {
         });
     }
 });
+//CHECKOUT JALAN
+$('#checkoutBtnE').click(function () {
+        if (confirm("Yakin ingin menyimpan semua data secara permanen?")) {
+            $.ajax({
+                url: '/aset.clear',
+                type: 'POST',
+                success: function (res) {
+                    if (res.success) {
+                        alert('Data berhasil difinalisasi!');
+                        fetchKeranjangE();
+                    } else {
+                        alert('Gagal checkout');
+                    }
+                }
+            });
+        }
+    });
 //Edit Aset Tetap Lainnya
 $(document).on('click', '.editE', function () {
     let modal = new bootstrap.Modal(document.getElementById('modal_E'));
@@ -1666,7 +1683,8 @@ $(document).on('click', '.editE', function () {
                 }
             });
         })
-
+        var fullPathImgF = fileUrl + '/assets/img/konstruksi/img/';
+        var fullPathDocF = fileUrl + '/assets/img/konstruksi/dok/';
         $(document).on('click', '#tampil_f', function() {
             var id = $(this).data('id');
             var delimiter = ",";
@@ -1684,14 +1702,14 @@ $(document).on('click', '.editE', function () {
                     $.each(data.data, function (index, items) {
                          var editButton =
                                             '<div class="btn-group">'+
-                                                '<a class="btn btn-default border border-secondary btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#modal_f_detail" id="detail_f_divisi" data-id="'+ items.id_f +'"><i class="fa-solid fa-ellipsis-vertical"></i></a>'+
+                                                '<a class="btn btn-default border border-secondary btn-sm text-success" type="button" data-bs-toggle="modal" data-bs-target="#modal_f_detail" id="detail_f_divisi" data-id="'+ items.id_f +'"><i class="fas fa-eye"></i></a>'+
 
 
                                                 '<button type="button" class="btn btn-sm btn-default border border-secondary  dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"><span class="visually-hidden">Toggle Dropdown</span></button>'+
                                                 '<ul class="dropdown-menu">'+
 
-                                                    '<li><a class="dropdown-item  edit" data-id=" '+ items.id_f +' " href="#"><i class="fa-solid fa-edit"></i>&nbsp;EDIT</a></li>'+
-                                                    '<li><a class="dropdown-item deleteB" data-id=" '+ items.id_f +' " href="#"><i class="fa-solid fa-trash"></i>&nbsp;DELETE</a></li>'+
+                                                    '<li><a class="dropdown-item  editF text-primary" data-id=" '+ items.id_f +' " href="#"><i class="fa-solid fa-edit"></i>&nbsp;EDIT</a></li>'+
+                                                    '<li><a class="dropdown-item btn-hapusF text-danger" data-id=" '+items.id_f+' " href="#"><i class="fa-solid fa-trash"></i>&nbsp;DELETE</a></li>'+
                                                     '<li><hr class="dropdown-divider"></li>'+
 
                                                 '</ul>'+
@@ -1709,9 +1727,9 @@ $(document).on('click', '.editE', function () {
                                 })
 
 //MODAL DETAIL KIB F
+
 $(document).on('click', '#detail_f_divisi', function(){
     var id = $(this).data('id');
-    //$('#exampleModal').modal('show');
     $('#judul_modal_detail').html(id);
     $.ajax({
         type: "GET",
@@ -1730,25 +1748,17 @@ $(document).on('click', '#detail_f_divisi', function(){
             $('#nilai_f').html(item.nilai);
             $('#urai_f').html(item.urai);
             $('#ket_f').html(item.ket);
-            //$('#no_imb_d').html(item.no_dok);
-            //$('#asal_d').html(item.asal);
-            //$('#nilai_d').html(item.harga);
-            //$('#susut_d').html(item.susut);
-            //$('#ket_d').html(item.ket);
-            //$('#gambar_d').attr('src','http://app.perumdamtirtakencana.id/assets/img/gedung/' + item.img);
+            $('#gambar_f').attr('src',fullPathImgF + item.img);
+             $('#filedF').empty();
+            var thumbnail = $('<div class="pdf-thumbnail col ">' +
+                                    '<embed width="150px" height="200px ; overflow: hidden;" name="plugin" src="' + fullPathDocF + item.dok + '" type="application/pdf" border border-secondary rounded>' +
+                                        '<p><a href="#" onclick="window.open(\'' + fullPathDocF + item.dok + '\', \'_blank\'); return false;">' + item.dok + '</p>' +
+                                    '</div>');
+            $('#filedF').append(thumbnail);
+            
 });
 
-// $.get('/show/' + id, function (data) {
-// $('#filed').empty();
-// $.each(data.data, function (index, items) {
-// var thumbnail = $(
-//             '<div class="pdf-thumbnail col ">' +
-//             '<embed width="150px" height="200px ; overflow: hidden;" name="plugin" src="http://app.perumdamtirtakencana.id/assets/img/gedung/' + items.dok + '" type="application/pdf" border border-secondary rounded>' +
-//                 '<p><a href="#" onclick="window.open(\'http://app.perumdamtirtakencana.id/assets/img/gedung/' + items.dok + '\', \'_blank\'); return false;">' + items.dok + '</p>' +
-//             '</div>');
-//             $('#filed').append(thumbnail);
-//     });
-// });
+
 }
 });
 })
@@ -1767,6 +1777,187 @@ $(document).on('click', '#add_f', function() {
             });
         });
 })
+//Save Konstruksi
+$('#submit_f').click(function (e) {
+        e.preventDefault();
+
+        let formData = new FormData($('#form_f')[0]);
+
+        // Tambahkan flag draft
+        formData.append('is_final', 0);
+
+        $.ajax({
+            url: 'konstruksi.save',
+            type: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function (res) {
+                if (res.success) {
+                    $('#form_f')
+                    .find('input, textarea')
+                    //.not('#') // sesuaikan
+                    .val('');
+                    fetchKeranjangF(); // refresh keranjang
+                } else {
+                    alert('Gagal menambahkan ke keranjang');
+                }
+            },
+            error: function (xhr) {
+                alert('Error server saat menambahkan ke keranjang');
+            }
+        });
+    });
+
+// Load data keranjang KOnstruksi
+    function fetchKeranjangF() {
+    $.ajax({
+        url: 'konstruksi.input',
+        method: 'GET',
+        success: function (res) {
+            let rows = '';
+            $.each(res.data, function (i, item) {
+                rows += `
+                    <tr>
+                        <td>${i + 1}</td>
+                        <td>${item.nama_barang}</td>
+                        <td>${item.type}</td>
+                        <td>${item.struktur}</td>
+                        <td class="text-center">
+                            <button type="button" class="btn btn-sm  btn-outline-danger btn-hapusF" data-id="${item.idf}">
+                               <i class="fas fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>`;
+            });
+            $('#tbl_f_input tbody').html(rows);
+        }
+    });
+}fetchKeranjangF(); // load saat pertama kali modal dibuka
+//Del Keranjang Konstruksi
+$(document).on('click', '.btn-hapusF', function () {
+    const id = $(this).data('id');
+    if (confirm('Yakin ingin menghapus item ini?')) {
+        $.ajax({
+            url:'konstruksi.hapus/'+id,
+            method: 'POST',
+            success: function (res) {
+                if (res.success) {
+                    $('#tampil_f').trigger('click');
+                    fetchKeranjangF();
+                } else {
+                    alert('Gagal menghapus item');
+                }
+            }
+        });
+    }
+});
+//CHECKOUT KONSTRUKSI
+$('#checkoutBtnF').click(function () {
+        if (confirm("Yakin ingin menyimpan semua data secara permanen?")) {
+            $.ajax({
+                url: '/konstruksi.clear',
+                type: 'POST',
+                success: function (res) {
+                    if (res.success) {
+                        alert('Data berhasil difinalisasi!');
+                        fetchKeranjangF();
+                    } else {
+                        alert('Gagal checkout');
+                    }
+                }
+            });
+        }
+    });
+//EDIT KONSTRUKSI
+$(document).on('click', '.editF', function () {
+    let modal = new bootstrap.Modal(document.getElementById('modal_F'));
+    modal.show();
+    $('#judul_modalF_crud').html('EDIT KONSTRUKSI DALAM PENGERJAAN');
+    var id = $(this).data('id');
+    $('#vMesin').hide();
+    $('#keranjangF').hide();
+    $('#createF').hide();
+    $('#updateF').show();
+   
+        $.ajax({
+                type: "GET",
+                url: "/konstruksi.edit/"+ id,
+                success: function (data) {
+                $.each(data.data, function (index, item) {
+                    $('#id_f').val(id);
+                    
+                    $('#lokasi_kir').empty;
+                    $('#lokasi_kir').append('<option value="' + item.id_lokasi + '" selected>' + item.lokasi + '</option>');
+
+                    $('#dep').empty;
+                    $('#dep').append('<option value="'+ item.idDep +'" selected>' + item.kode_dep + '</option>');
+
+                    $('#div').empty;
+                    $('#div').append('<option value="' + item.id_div + '" selected>' + item.nama_div + '</option>');
+
+                    selectOptAll();
+
+                    $('#id_barang').empty;
+                    $('#id_barang').append('<option value="' + item.idBar + '" selected>' + item.nama_barang + '</option>');
+                    $.get('/barang.f', function (data) {
+                            $.each(data.data, function (index, item) {
+                                $('#id_barang').append('<option value="' + item.id + '">' + item.nama_barang + '</option>');
+                            });
+                        });
+                        
+                    $('#kode').val(item.kode);
+                    $('#reg').val(item.reg);
+
+
+                    $('#struktur_f_edit').append('<option value="' + item.struktur + '" selected>' + item.struktur + '</option>');
+
+                    $('#materi_f_edit').append('<option value="' + item.materi + '" selected>' + item.materi + '</option>');
+
+                    
+                    $('#luas_f_edit').val(item.luas);
+                    $('#tahun_f_edit').val(item.tahun);
+                    $('#type_f_edit').val(item.type);
+
+                    $('#asal_f_edit').append('<option value="' + item.asal + '" selected>' + item.asal + '</option>');
+
+                    $('#nilaiC').val(item.nilai);
+
+                    $('#status_tanah_f_edit').append('<option value="' + item.status_tanah + '" selected>' + item.status_tanah + '</option>');
+
+                    $('#status_aset_f_edit').append('<option value="' + item.status_aset + '" selected>' + item.status_aset + '</option>');
+                     $('#urai_edit').val(item.nilai);
+                    $('#nilaiF').val(item.nilai);
+                    $('#ket').val(item.ket);
+                });
+            }
+        });
+    });
+
+//Execute Update Konstruksi Dalam Pengerjaan
+    $(document).on('click', '#edit_6', function () {
+     let formData = new FormData($('#form_f')[0]);
+         $.ajax({
+            url: 'konstruksi.update',
+            type: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function (res) {
+                if (res.success) {
+                    alert('Data Berhasil diUpdate');
+                } else {
+                    alert('Gagal update');
+                }
+            },
+            error: function (xhr) {
+                alert('Error server saat menambahkan ke keranjang');
+            }
+        });
+    })
+
+
+
     //KIR
     $(document).on('click', '#klik_nilai_kir', function() {
         var id = $(this).data('id');
