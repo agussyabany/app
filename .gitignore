@@ -19,7 +19,7 @@ yarn-error.log
 /.vscode
 .htaccess
 server.php
-#/public/assets/img/
+/public/assets/img/
 /public/assets/boots/
 /public/assets/LiveLine/
 /public/htaccess

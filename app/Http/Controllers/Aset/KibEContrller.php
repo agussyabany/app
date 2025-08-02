@@ -4,8 +4,12 @@ namespace App\Http\Controllers\Aset;
 
 use App\Http\Controllers\Controller;
 use App\Models\Aset\Barang;
+use App\Models\Aset\Departemen;
+use App\Models\Aset\Divisi;
 use App\Models\Aset\KibE;
+use App\Models\Aset\lokasi;
 use App\Models\Aset\NilaiAktiva;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -229,5 +233,29 @@ public function input()
         } catch (\Exception $e) {
             return response()->json(['success' => false]);
         }
+    }
+
+    public function print($lok,$dep,$div)
+    {
+        $aset = KibE::join('barangs','kib_e_s.id_barang','barangs.id')
+                        ->join('divisis','kib_e_s.id_div','divisis.id')
+                        ->join('bahans','kib_e_s.id_bahan','bahans.id')
+                        ->where('kib_e_s.id_dep',$dep)
+                        ->where('id_lokasi',$lok)
+                        ->where('id_div',$div)
+                        ->get();
+                        $i = 0;
+                        $dept = Departemen::select('kode_dep')->where('id',$dep)->first();
+                        $divi = Divisi::select('nama_div','kode_div')->where('id',$div)->first();
+                        $loks = lokasi::select('lokasi')->where('id',$lok)->first();
+                        $lokasi = $loks['lokasi'];
+                        $divisi = $divi['nama_div'];
+                        $struktur = $divi['kode_div'];
+                        $departemen = $dept['kode_dep'];
+                        $date = Carbon::now();
+                        $tglIndo = $date->locale('id_ID')->format('d F Y');
+                        $nama = Auth::user()->name;
+                        $nip = Auth::user()->nip;
+                        return view('admin.pages.aset.print.printAset',compact(['aset','i','lokasi','departemen','divisi','nama','tglIndo','struktur','nip']));
     }
 }

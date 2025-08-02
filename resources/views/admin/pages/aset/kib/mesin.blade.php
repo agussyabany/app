@@ -12,12 +12,15 @@ $no = 0;
 
     <div class="col container" id="barang_tab" role="tabpanel" aria-labelledby="tab_div">
         <br>
+        
 
-                <div class="container card">
-                    <div class="card-header">DATA PERALATAN DAN MESIN <div class="position-absolute top-0 end-0">
-                        <button class="btn  btn-primary"  data-bs-toggle="modal" id="add_mesin" data-bs-target="#modal_mesin"><i class="fa-solid fa-file-circle-plus"></i></button>
-                </div>
+                <div class="container">
+                    <div class="float-end">
+                        <button class="btn btn-sm btn-outline-primary "  data-bs-toggle="modal" id="add_mesin" data-bs-target="#modal_mesin">TAMBAH</button>
                     </div>
+                    <br><br>
+                    <div class="card">
+                        <div class="card-header">DATA PERALATAN DAN MESIN</div>
                             <div class="card-body">
                                 <table class="table table-striped" id="tbl">
                                     <thead>
@@ -52,6 +55,9 @@ $no = 0;
                                     </tbody>
                                 </table>
                             </div>
+
+                    </div>
+                    
                         </div>
                     </div>
                 </div>
