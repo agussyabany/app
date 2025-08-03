@@ -19,7 +19,7 @@ $no = 0;
                  
                 <div class="container card"><br>
                     <div class="float-end">
-                         <button class="btn  btn-outline-success"  data-bs-toggle="modal" id="add" data-bs-target="#modal_tanah">CETAK</button>
+                         <button class="btn  btn-outline-success"   onclick="window.open('/tanah.print', '_blank')"><i class="fa fa-print"></i>&nbsp;CETAK</button>
                         <button class="btn  btn-outline-primary"  data-bs-toggle="modal" id="add" data-bs-target="#modal_tanah">TAMBAH</button>
                     </div><br><br>
                     <div class="card-header">DATA TANAH <div class="position-absolute top-0 end-0"></div>

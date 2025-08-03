@@ -235,6 +235,7 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::post('/jalan.clear',[KibDController::class,'clear']);
     Route::get('/jalan.edit/{id}',[KibDController::class,'edit']);
     Route::post('/jalan.update',[KibDController::class,'update']);
+    Route::get('/jalan.print/{lok}/{dep}/{div}',[KibDController::class,'print']);
 
     Route::get('/nlaiE/{id}',[KibEContrller::class,'nilaiE']);
     Route::get('/e.dep/{id}',[KibEContrller::class,'dep']);
@@ -248,6 +249,7 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::post('/aset.clear',[KibEContrller::class,'clear']);
     Route::get('/aset.edit/{id}',[KibEContrller::class,'edit']);
     Route::post('/aset.update',[KibEContrller::class,'update']);
+    Route::get('/aset.print/{lok}/{dep}/{div}',[KibEContrller::class,'print']);
     
 
     Route::get('/f.dep/{id}',[KibFController::class,'dep']);
@@ -260,6 +262,7 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::post('/konstruksi.clear',[KibFController::class,'clear']);
     Route::get('/konstruksi.edit/{id}',[KibFController::class,'edit']);
     Route::post('/konstruksi.update',[KibFController::class,'update']);
+    Route::get('/konstruksi.print/{lok}/{dep}/{div}',[KibFController::class,'print']);
     
 
 

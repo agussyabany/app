@@ -85,7 +85,6 @@ $(document).ready(function() {
                     ]).draw();
                 })
         })
-
     })
     //INPUT DATA TANAH
     $(document).on('click', '#add', function() {
@@ -93,7 +92,11 @@ $(document).ready(function() {
         $('#form_a')[0].reset();
         $('#form_a').attr('action', '/tanah.save');
 
-
+        $.get('/barang.tanah', function (data) {
+            $.each(data.data, function (index, item) {
+                $('#nama').append('<option value="' + item.id + '">' + item.nama_barang + '</option>');
+            });
+        });
         selectOptAll();
         $.get('/vTanah', function (data) {
             $.each(data.data, function (index, item) {
@@ -442,6 +445,20 @@ $('#checkoutBtn').click(function () {
                                     })
                                 })
                             })
+                            //Print Mesin
+                            $(document).on('click', '#print_b', function() {
+                            // Ambil data-id
+                            var data = $(this).data('id').split(",");
+                            var lok = data[0];
+                            var dep = data[1];
+                            var div = data[2];
+
+                            // Buat URL print
+                            var url = '/mesin.print/' + lok + '/' + dep + '/' + div;
+
+                            // Buka di tab baru
+                            window.open(url, '_blank');
+                        });
 $(document).on('click', '#detail_mesin_divisi', function(){
     var id = $(this).data('id');
         $('#judul_modal_detail').html();
@@ -657,7 +674,7 @@ $(document).on('click', '.editB', function () {
         var table = $("#tbl_c_data").DataTable();
             table.clear().draw();
             $.get("/gedung.show/"+ lok + "/" + dep + "/" + div , function(data) {
-                $('#card-header').html('<strong>Divisi: '+ nama_div +'</strong><button class="btn btn-sm btn-primary float-end" id="print_b" data-id="' + lok + "," + dep + "," + div + '"><i class="fa-solid fa-print"></i></button>');
+                $('#card-header').html('<strong>Divisi: '+ nama_div +'</strong><button class="btn btn-sm btn-primary float-end" id="print_c" data-id="' + lok + "," + dep + "," + div + '"><i class="fa-solid fa-print"></i></button>');
 
                 $.each(data.data, function (index, items) {
                      var editButton =
@@ -683,6 +700,20 @@ $(document).on('click', '.editB', function () {
                                     })
                                 })
                             })
+                            //Print Mesin
+                            $(document).on('click', '#print_c', function() {
+                            // Ambil data-id
+                            var data = $(this).data('id').split(",");
+                            var lok = data[0];
+                            var dep = data[1];
+                            var div = data[2];
+
+                            // Buat URL print
+                            var url = '/gedung.print/' + lok + '/' + dep + '/' + div;
+
+                            // Buka di tab baru
+                            window.open(url, '_blank');
+                        });
 
 $(document).on('click', '#detail_gedung_divisi', function(){
                 var id = $(this).data('id');
@@ -1021,7 +1052,7 @@ $(document).on('click', '.editC', function () {
         var table = $("#tbl_c_data").DataTable();
             table.clear().draw();
             $.get("/d.show/"+ lok + "/" + dep + "/" + div , function(data) {
-                $('#card-header').html('<strong>Divisi: '+ nama_div +'</strong><button class="btn btn-sm btn-primary float-end" id="print_b" data-id="' + lok + "," + dep + "," + div + '"><i class="fa-solid fa-print"></i></button>');
+                $('#card-header').html('<strong>Divisi: '+ nama_div +'</strong><button class="btn btn-sm btn-primary float-end" id="print_d" data-id="' + lok + "," + dep + "," + div + '"><i class="fa-solid fa-print"></i></button>');
 
                 $.each(data.data, function (index, items) {
                      var editButton =
@@ -1049,6 +1080,21 @@ $(document).on('click', '.editC', function () {
                                     })
                                 })
                             })
+
+                            //Print Jalan
+                            $(document).on('click', '#print_d', function() {
+                            // Ambil data-id
+                            var data = $(this).data('id').split(",");
+                            var lok = data[0];
+                            var dep = data[1];
+                            var div = data[2];
+
+                            // Buat URL print
+                            var url = '/jalan.print/' + lok + '/' + dep + '/' + div;
+
+                            // Buka di tab baru
+                            window.open(url, '_blank');
+                        });
                             //MODAL DETAIL KIB D
                             $(document).on('click', '#detail_d_divisi', function(){
                                 var id = $(this).data('id');
@@ -1373,7 +1419,7 @@ $(document).on('click', '.editD', function () {
         var table = $("#tbl_e_data").DataTable();
             table.clear().draw();
             $.get("/e.show/"+ lok + "/" + dep + "/" + div , function(data) {
-                $('#card-header').html('<strong>Divisi: '+ nama_div +'</strong><button class="btn btn-sm btn-primary float-end" id="print_b" data-id="' + lok + "," + dep + "," + div + '"><i class="fa-solid fa-print"></i></button>');
+                $('#card-header').html('<strong>Divisi: '+ nama_div +'</strong><button class="btn btn-sm btn-primary float-end" id="print_e" data-id="' + lok + "," + dep + "," + div + '"><i class="fa-solid fa-print"></i></button>');
 
                 $.each(data.data, function (index, items) {
                      var editButton =
@@ -1402,6 +1448,20 @@ $(document).on('click', '.editD', function () {
                                     })
                                 })
                             })
+                            //Print Aset
+                            $(document).on('click', '#print_e', function() {
+                            // Ambil data-id
+                            var data = $(this).data('id').split(",");
+                            var lok = data[0];
+                            var dep = data[1];
+                            var div = data[2];
+
+                            // Buat URL print
+                            var url = '/aset.print/' + lok + '/' + dep + '/' + div;
+
+                            // Buka di tab baru
+                            window.open(url, '_blank');
+                        });
                             $(document).on('click', '#detail_e_divisi', function(){
                                var dataId = $(this).data('id');
                                 var delimiter = ",";
@@ -1697,7 +1757,7 @@ $(document).on('click', '.editE', function () {
             var table = $("#tbl_c_data").DataTable();
                 table.clear().draw();
                 $.get("/f.show/"+ lok + "/" + dep + "/" + div , function(data) {
-                    $('#card-header').html('<strong>Divisi: '+ nama_div +'</strong><button class="btn btn-sm btn-primary float-end" id="print_b" data-id="' + lok + "," + dep + "," + div + '"><i class="fa-solid fa-print"></i></button>');
+                    $('#card-header').html('<strong>Divisi: '+ nama_div +'</strong><button class="btn btn-sm btn-primary float-end" id="print_f" data-id="' + lok + "," + dep + "," + div + '"><i class="fa-solid fa-print"></i></button>');
 
                     $.each(data.data, function (index, items) {
                          var editButton =
@@ -1725,6 +1785,21 @@ $(document).on('click', '.editE', function () {
                                         })
                                     })
                                 })
+
+                            //Print Mesin
+                            $(document).on('click', '#print_f', function() {
+                            // Ambil data-id
+                            var data = $(this).data('id').split(",");
+                            var lok = data[0];
+                            var dep = data[1];
+                            var div = data[2];
+
+                            // Buat URL print
+                            var url = '/konstruksi.print/' + lok + '/' + dep + '/' + div;
+
+                            // Buka di tab baru
+                            window.open(url, '_blank');
+                        });
 
 //MODAL DETAIL KIB F
 
