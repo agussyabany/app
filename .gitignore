@@ -19,13 +19,8 @@ yarn-error.log
 /.vscode
 .htaccess
 server.php
-
-# Abaikan semua folder assets
 /public/assets/img/
+/public/assets/boots/
 /public/assets/LiveLine/
 /public/htaccess
 
-# Khusus izinkan folder boots
-/public/assets/boots/
-!public/assets/boots
-!public/assets/boots/**

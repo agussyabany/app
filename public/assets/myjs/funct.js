@@ -72,6 +72,8 @@ function selectOptAll()
             $('#dep').append('<option value="' + item.id + '">' + item.kode_dep + '</option>');
         });
     });
+
+    
     $('body').on('change', '#dep', function (event) {
         event.preventDefault();
         var id = $(this).val();

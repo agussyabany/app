@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Aset;
 
 use App\Http\Controllers\Controller;
+use App\Models\Aset\Aktiva;
+use App\Models\Aset\Barang;
 use App\Models\Aset\Departemen;
 use App\Models\Aset\Divisi;
 use App\Models\Aset\Mesin;
@@ -67,7 +69,7 @@ class MesinController extends Controller
 
     public function edit($id)
     {
-        $mesin_full = Mesin::select('barangs.id as idBar','nama_barang','kode_dep','nama_div','lokasi','id_lokasi','id_departemen','id_div','kode','reg','tahun','harga','susut','bahan','asal','ukuran','merk','pabrik','rangka','mesin','polisi','bpkb','ket','mesins.id as id_mesin','guna')
+        $mesin_full = Mesin::select('barangs.id as idBar','nama_barang','kode_dep','nama_div','lokasi','id_lokasi','id_departemen','id_div','kode','reg','tahun','harga','susut','bahan','asal','ukuran','merk','pabrik','rangka','mesin','polisi','bpkb','ket','mesins.id as id_mesin','guna','fungsi','jenis','id_voucher2','kodisi')
                             ->where('mesins.id',$id)
                             ->join('barangs','mesins.id_barang','barangs.id')
                             ->join('divisis','mesins.id_div','divisis.id')
@@ -80,141 +82,86 @@ class MesinController extends Controller
     }
 
     public function save(Request $request)
-    {
-        $rules = [
-            'lokasi' => 'required',
-            'dep' => 'required',
-            'div' => 'required',
-            'nama_aset' => 'required',
-            'kode_aset' => 'required',
-            'reg' => 'required',
-            'jenis' => 'required',
-            'tahun' => 'required|numeric',
-            'batas' => 'required|numeric',
+     {
+        
+        try {
+            $user = Auth::user()->id;
+            $mesin = new Mesin();
+            $mesin->id_user = $user;
+            $mesin->id_lokasi = $request->lokasi;
+            $mesin->id_departemen = $request->dep;
+            $mesin->id_div = $request->div;
+            $mesin->jenis = $request->jenis;
+            $mesin->id_voucher2 = $request->id_voucher2;
+            $mesin->id_barang = $request->nama_aset;
+            $mesin->kode = $request->kode_aset;
+            $mesin->reg = $request->reg;
+            $mesin->merk = $request->merk;
+            $mesin->ukuran = $request->ukuran;
+            $mesin->fungsi = $request->fungsi;
+            $mesin->guna = $request->guna;
+            $mesin->bahan = $request->bahan;
+            $mesin->tahun = $request->tahun;
+            $mesin->kodisi = $request->kondisi_b;
+            $mesin->asal = $request->asal;
+            $mesin->harga = $request->nilai;
+            $mesin->pabrik = $request->pabrik;
+            $mesin->rangka= $request->rangka;
+            $mesin->mesin = $request->mesin;
+            $mesin->polisi = $request->nopol;
+            $mesin->bpkb = $request->bpkb;
+            $mesin->ket = $request->ket;
+            $mesin->input = $request->is_final ?? 0;
 
-            'susut' => 'required|numeric',
-            'bahan' => 'required',
-            'guna' => 'required',
-            'ukuran' => 'required',
-            'merk' => 'required',
-            
-            
-            'pabrik' => 'required',
-            'rangka' => 'required',
-            'mesin' => 'required',
-            'nopol' => 'required',
-            'bpkb' => 'required',
-            'asal' => 'required',
-            'ket' => 'required',
+            if ($request->hasFile('dok')) {
+                $file = $request->file('dok');
+                $filename = time() . '_' . $file->getClientOriginalName();
+                $file->move(public_path('assets/img/mesin/dok'), $filename);
+                $mesin->dok = $filename;
+            }
 
-        ];
+            if ($request->hasFile('img')) {
+                $img = $request->file('img');
+                $imgname = time() . '_' . $img->getClientOriginalName();
+                $img->move(public_path('assets/img/mesin/gbr'), $imgname);
+                $mesin->img = $imgname;
+            }
 
-        // Custom error messages
-        $messages = [
-            'required' => 'The :attribute field is required.',
-            'numeric' => 'The :attribute must be a number.',
-            'image' => 'The :attribute must be an image.',
-            'mimes' => 'The :attribute must be a file of type: jpeg, png, jpg, gif.',
-            'max' => 'The :attribute may not be greater than :max kilobytes.',
-        ];
+            $mesin->save();
 
-        // Validate the request
-        $validator = Validator::make($request->all(), $rules, $messages);
-
-        // If validation fails, return the errors
-        if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()], 400);
+            return response()->json(['success' => true]);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'error' => $e->getMessage()]);
         }
-        $maxId = Mesin::maxId();
-        $id = $maxId + 1;
-        $now = Carbon::now();
-        $user = Auth::user()->id;
-        $lokasi = $request->input('lokasi');
-        $dep = $request->input('dep');
-        $div = $request->input('div');
-        $nama_aset = $request->input('nama_aset');
-        $kode_aset = $request->input('kode_aset');
-        $reg = $request->input('reg');
-        $jenis = $request->input('jenis');
-        $tahun = $request->input('tahun');
-        $batas = $request->input('batas');
-        $nilai = $request->input('nilai');
-        $susut = $request->input('susut');
-        $bahan = $request->input('bahan');
-        $guna = $request->input('guna');
-        $ukuran = $request->input('ukuran');
-        $merk = $request->input('merk');
-        $pabrik = $request->input('pabrik');
-        $rangka = $request->input('rangka');
-        $mesin = $request->input('mesin');
-        $nopol = $request->input('nopol');
-        $bpkb = $request->input('bpkb');
-        $asal = $request->input('asal');
-        $ket = $request->input('ket');
-        $batas = $request->input('batas');
-        $img = $request->input('img');
-
-        $imageData = base64_decode($img);
-
-
-        $imageName = time() . '_' . uniqid() . '.jpg';
-        file_put_contents(public_path('assets/img/mesin/' . $imageName), $imageData);
-
-        // Save other form data to the database
-        $kib_b = new Mesin();
-        $kib_b->id = $id;
-        $kib_b->id_barang = $nama_aset;
-        $kib_b->id_departemen = $dep;
-        $kib_b->id_div = $div;
-        $kib_b->id_lokasi = $lokasi;
-        $kib_b->kode = $kode_aset;
-        $kib_b->reg = $reg;
-        $kib_b->tahun = $tahun;
-        $kib_b->harga = $nilai;
-        $kib_b->susut = $susut;
-        $kib_b->ukuran = $ukuran;
-        $kib_b->merk = $merk;
-        $kib_b->pabrik = $pabrik;
-        $kib_b->rangka = $rangka;
-        $kib_b->mesin = $mesin;
-        $kib_b->polisi = $nopol;
-        $kib_b->bpkb = $bpkb;
-        $kib_b->ket = $ket;
-        $kib_b->guna = $guna;
-        $kib_b->id_user = $user;
-        $kib_b->created_at = $now;
-        $kib_b->img = $imageName;
-        $kib_b->input = 0;
-        $kib_b->bahan = $bahan;
-        $kib_b->asal = $asal;
-        $kib_b->save();
-        return response()->json(['message' => 'Data inserted successfully']);
-    }
+     }
 
     public function input()
     {
-        $mesin = Mesin::select('lokasi','nama_div','nama_barang','merk')
+        $data = Mesin::select('mesins.id as idb','nama_barang','kode_barang','luas')
                         ->join('barangs','mesins.id_barang','barangs.id')
-                        ->join('divisis','mesins.id_div','divisis.id')
-                        ->join('lokasis','mesins.id_lokasi','=','lokasis.id')
                         ->where('input',0)
                         ->get();
         return response()->json([
-            'data' => $mesin
+            'data' => $data
           ]);
+
+   
     }
 
     public function clear()
     {
-        Mesin::where('input',0)
-        ->update(['input' => 1]);
-        return response()->json(['message' => 'Data updated successfully']);
+        try {
+            Mesin::where('input', 0)->update(['input' => 1]);
+            return response()->json(['success' => true]);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false]);
+        }
     }
 
     public function hapus($id)
     {
         Mesin::where('id', $id)->delete();
-        return response()->json(['message' => 'Data deleted successfully']);
+        return response()->json(['success' => true,'message' => 'Data deleted successfully']);
     }
 
     public function update(Request $request)
@@ -223,23 +170,27 @@ class MesinController extends Controller
             'lokasi' => 'required',
             'dep' => 'required',
             'div' => 'required',
+            //'jenis' => 'required',
+            //'id_voucher2' => 'required',
             'nama_aset' => 'required',
             'kode_aset' => 'required',
             'reg' => 'required',
-            'jenis' => 'required',
-            'tahun' => 'required|numeric',
-            'batas' => 'required|numeric',
-            'susut' => 'required|numeric',
-            'bahan' => 'required',
-            'guna' => 'required',
-            'ukuran' => 'required',
             'merk' => 'required',
-            'pabrik' => 'required',
-            'rangka' => 'required',
-            'mesin' => 'required',
-            'nopol' => 'required',
-            'bpkb' => 'required',
+            'ukuran' => 'required',
+            'fungsi' => 'required',
+            'guna' => 'required',
+            'bahan' => 'required',
+            'tahun' => 'required|numeric',
+            'kondisi_b'=> 'required',
             'asal' => 'required',
+            'nilai' => 'required',
+            
+            // 'pabrik' => 'required',
+            // 'rangka' => 'required',
+            // 'mesin' => 'required',
+            // 'nopol' => 'required',
+            // 'bpkb' => 'required',
+            
             'ket' => 'required',
         ];
 
@@ -265,54 +216,67 @@ class MesinController extends Controller
         $lokasi = $request->input('lokasi');
         $dep = $request->input('dep');
         $div = $request->input('div');
+        // $jenis = $request->input('jenis');
+        // $id_voucher2 = $request->input('id_voucher2');
         $nama_aset = $request->input('nama_aset');
         $kode_aset = $request->input('kode_aset');
         $reg = $request->input('reg');
-        $jenis = $request->input('jenis');
-        $tahun = $request->input('tahun');
-        $batas = $request->input('batas');
-        $nilai = $request->input('nilai');
-        $susut = $request->input('susut');
-        $bahan = $request->input('bahan');
-        $guna = $request->input('guna');
-        $ukuran = $request->input('ukuran');
         $merk = $request->input('merk');
+        $ukuran = $request->input('ukuran');
+        $fungsi = $request->input('fungsi');
+        $guna = $request->input('guna');
+        $bahan = $request->input('bahan');
+        $tahun = $request->input('tahun');
+        $kondisi = $request->input('kondisi_b');
+        $asal = $request->input('asal');
+        $nilai = $request->input('nilai');
+        
         $pabrik = $request->input('pabrik');
         $rangka = $request->input('rangka');
         $mesin = $request->input('mesin');
         $nopol = $request->input('nopol');
         $bpkb = $request->input('bpkb');
-        $asal = $request->input('asal');
+        
         $ket = $request->input('ket');
-        $batas = $request->input('batas');
+       
 
         Mesin::where('id',$id)
         ->update(
             [
-                'id_barang' => $nama_aset,
+                'id_lokasi' => $lokasi,
                 'id_departemen' => $dep,
                 'id_div' => $div,
-                'id_lokasi' => $lokasi,
+                'id_barang' => $nama_aset,
                 'kode' => $kode_aset,
                 'reg' => $reg,
-                'tahun' => $tahun,
-                'harga' => $nilai,
-                'susut' => $susut,
-                'ukuran' => $ukuran,
                 'merk' => $merk,
+                'ukuran' => $ukuran,
+                'fungsi' => $fungsi,
+                'guna' => $guna,
+                'bahan' => $bahan,
+                'tahun' => $tahun,
+                'kodisi' => $kondisi,
+                'asal' => $asal,
+                'harga' => $nilai,
+                
+               
+                
                 'pabrik' => $pabrik,
                 'rangka' => $rangka,
                 'mesin' => $mesin,
                 'polisi' => $nopol,
                 'bpkb' => $bpkb,
                 'ket' => $ket,
-                'guna' => $guna,
+                
                 'id_user' => $user,
-                'bahan' => $bahan,
-                'asal' => $asal,
+                
+                
             ]);
-        return response()->json(['message' => 'Data updated successfully']);
+        return response()->json(['success' => true,'message' => 'Data updated successfully']);
     }
+
+
+
     public function print($lok,$dep,$div)
     {
         $mesin = Mesin::select('nama_barang','merk','guna','tahun','mesins.id as id_mesin','nama_div','img','pabrik','rangka','polisi','bpkb','asal','kode','reg','harga')
@@ -362,5 +326,18 @@ class MesinController extends Controller
                 ->where('cat', 2)
                 ->get();
         return response()->json(['data' => $v_mesin]);
+    }
+
+    public function aktiva ()
+    {
+        $aktiva = Aktiva::where('kib','KIB B - PERALATAN DAN MESIN')->get();
+        return response()->json(['data' => $aktiva]);
+
+    }
+
+    public function barang ($id)
+    {
+        $barang = Barang::where('id',$id)->get();
+        return response()->json(['data' => $barang]);
     }
 }

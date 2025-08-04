@@ -72,7 +72,7 @@ class BarangController extends Controller
 
     public function mesin()
     {
-        $mesin = Barang::where('golongan',6)->get();
+        $mesin = Barang::where('golongan',2)->get();
         return response()->json(['data' => $mesin]);
     }
 
@@ -92,5 +92,22 @@ class BarangController extends Controller
     {
         $kir = Barang::where('id',$id)->get();
         return response()->json(['data' => $kir]);
+    }
+
+    public function d()
+    {
+        $d = Barang::where('golongan',4)->get();
+        return response()->json(['data' => $d]);
+    }
+
+    public function e()
+    {
+        $e = Barang::where('golongan',6)->get();
+        return response()->json(['data' => $e]);
+    }
+    public function f()
+    {
+        $f = Barang::where('golongan',2)->get();
+        return response()->json(['data' => $f]);
     }
 }

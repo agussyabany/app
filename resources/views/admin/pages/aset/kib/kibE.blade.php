@@ -15,7 +15,7 @@ $no = 0;
 
                 <div class="container card">
                     <div class="card-header">DATA ASET TETAP LAINYA<div class="position-absolute top-0 end-0">
-                        <button class="btn  btn-primary" id="tambah_barang"><i class="fa-solid fa-file-circle-plus"></i></button>
+                        <button class="btn  btn-primary" data-bs-toggle="modal" id="add_e" data-bs-target="#modal_E"><i class="fa-solid fa-file-circle-plus"></i></button>
                 </div>
                     </div>
                             <div class="card-body">
@@ -46,13 +46,7 @@ $no = 0;
                                                         <button href="#data" id="detail_e" data-id="{{ $item->id_lokasi }}" class="btn btn-default border border-secondary btn-sm detail"  type="button"data-bs-toggle="offcanvas"  aria-controls="offcanvasExample">DETAIL</button>
 
 
-                                                        <button type="button" class="btn btn-sm btn-default border border-secondary  dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"><span class="visually-hidden">Toggle Dropdown</span></button>
-                                                        <ul class="dropdown-menu">
-                                                            <li><a class="dropdown-item  edit" data-id="" href="#"><i class="fa-solid fa-edit"></i>&nbsp;EDIT</a></li>
-                                                            <li><a class="dropdown-item delete" data-id="" href="#"><i class="fa-solid fa-trash"></i>&nbsp;DELETE</a></li>
-                                                            <li><a class="dropdown-item nilai" data-id="" href="#"><i class="fa-solid fa-trash"></i>&nbsp;NILAI</a></li>
-                                                            <li><hr class="dropdown-divider"></li>
-                                                        </ul>
+                                                        
                                                     </div>
                                                 </td>
                                             </tr>
@@ -72,7 +66,7 @@ $no = 0;
 
 
                 {{-- MODAL MASTER --}}
-    <div class="modal"  id="modal_d_detail">
+    <div class="modal"  id="modal_e_detail">
         <div class="modal-dialog modal-xl">
           <div class="modal-content">
             <div class="modal-header">
@@ -81,7 +75,7 @@ $no = 0;
             </div>
             <div class="modal-body" id="modal_body">
                 <div class="container">
-                    {{-- <img id="gambar_d" src="" height="500px" width="550px" class="rounded mx-auto d-block" alt="..."><br> --}}
+                    <img id="gambar_e" src="" height="500px" width="550px" class="rounded mx-auto d-block" alt="..."><br>
 
                     <fieldset class="border border-secondary rounded-3 p-2 row">
                         <legend class="float-none w-auto px-1 border border-secondary rounded">
@@ -93,7 +87,7 @@ $no = 0;
                                         <tbody>
                                             <tr>
                                                 <th>KODE</th>
-                                                <td id="kode_d"> + item.kode+ </td>
+                                                <td id="kode_e"> + item.kode+ </td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -105,7 +99,7 @@ $no = 0;
                                         <tbody>
                                             <tr>
                                                 <th>NAMA BARANG</th>
-                                                <td id="nama_barang_d"> + item.nama_barang + </td>
+                                                <td id="nama_barang_e"> + item.nama_barang + </td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -134,11 +128,11 @@ $no = 0;
                                     <tbody>
                                         <tr>
                                             <th>REGISTER</th>
-                                            <td id="reg_d"> + item.reg+ </td>
+                                            <td id="reg_e"> + item.reg+ </td>
                                         </tr>
                                         <tr>
                                             <th>KONDISI</th>
-                                            <td id="kondisi_d"> + item.kondisi+ </td>
+                                            <td id="kondisi_e"> + item.kondisi+ </td>
                                         </tr>
                                         {{-- <tr>
                                             <th>KONSTRUKSI</th>
@@ -146,7 +140,7 @@ $no = 0;
                                         </tr> --}}
                                         <tr>
                                             <th>BAHAN</th>
-                                            <td id="materi_d"> + item.materi+ </td>
+                                            <td id="materi_e"> + item.materi+ </td>
                                         </tr>
                                         <tr>
                                             <th>TAHUN</th>
@@ -172,7 +166,7 @@ $no = 0;
                                         </tr>
                                         <tr>
                                             <th>KET</th>
-                                            <td id="ket_d"> + item.luastanah+ </td>
+                                            <td id="ket_e"> + item.luastanah+ </td>
                                         </tr>
                                         
                                     </tbody>
@@ -250,13 +244,14 @@ $no = 0;
                             <div class="card">
                                 <div class="card-header" id="card-header"></div>
                                 <div class="card-body" id="card-body">
-                                    <table class="table table-striped table-border" id="tbl_c_data">
+                                    <table class="table table-striped table-border" id="tbl_e_data">
                                         <thead>
                                             <tr>
                                                 <th>NO</th>
                                                 <th>Nama Aset</th>
                                                 <th>Kode</th>
                                                 <th>Registrasi</th>
+                                                <th></th>
                                                 <th><i class="fa fa-cog"></i></th>
 
                                             </tr>
@@ -274,5 +269,225 @@ $no = 0;
                 </div>
             </div>
           </div>
+{{-- Tambah Data Aset Tetap Lainya --}}
+    <div class="modal"  id="modal_E">
+        <div class="modal-dialog  modal-xl">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="judul_modalE_crud">TAMBAH DATA ASET TETAP LAINNYA</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="modal_bodyLG">
+                <form action="" id="form_e" enctype="multipart/form-data">
+                    <input type="hidden" id="id_e" name="id" value="">
+                    <div class="container">
+                        {{-- <div class="row  border border-primary rounded" id="vMesin">
+                            <div class="container"><br>
+                                <table class="table table-striped table-bordered rounded">
+                                    <thead>
+                                        <tr class="text-center">
+                                            <th>No Voucher</th>
+                                            <th>Kode Aktiva</th>
+                                            <th>Bulan</th>
+                                            <th>Uraian</th>
+                                          </tr>
+                                    </thead>
+                                <tbody>
+                                        <tr>
+                                            <td>
+                                                <div class="input-group input-group-sm mb-1">
+                                                    <select class="select2 form-control" name="voucher_mesin" id="voucher_mesin" style="width:100%;" required disabled>
+                                                        <option>- NO VOUCHER -</option>
+                                                    </select>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="input-group input-group-sm mb-1">
+                                                    <select class="select2 form-control" name="kode_aktiva" id="kode_aktiva_c" style="width:100%;" required>
+                                                        <option>- PILIH KODE AKTIVA -</option>
+                                                    </select>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="input-group input-group-sm mb-1">
+                                                    <input type="text" class="form-control" name="bulan_voc" id="bulan_voc" disabled>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="input-group input-group-sm mb-1">
+                                                    <input type="text" class="form-control" disabled value="text" id="urai_voc">
+                                                </div>
+                                            </td>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div><br> --}}
+                            <div class="row  border border-primary rounded">
+                                <div class="container"><br>
+                                    <table class="table table-striped table-bordered rounded">
+                                        <thead>
+                                            <tr class="text-center">
+                                                <th>Lokasi</th>
+                                                <th>Departemen</th>
+                                                <th>Divisi</th>
+                                              </tr>
+                                        </thead>
+                                    <tbody>
+                                            <tr>
+                                                <td>
+                                                    <div class="input-group input-group-sm mb-1">
+                                                        <select class="select2 form-control" name="id_lokasi" id="lokasi_kir" style="width:100%;">
+                                                            <option>- PILIH LOKASI -</option>
+                                                        </select>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="input-group input-group-sm mb-1">
+                                                        <select class="select2 form-control" name="id_departemen" id="dep" style="width:100%;">
+                                                            <option>- PILIH DEPARTEMEN -</option>
+                                                        </select>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="input-group input-group-sm mb-1">
+                                                        <select class="select2 form-control" name="id_div" id="div" style="width:100%;">
+                                                            <option>- PILIH DIVISI -</option>
+                                                        </select>
+                                                    </div>
+                                                </td>
+                                             </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div><br>
+                            <div class="row  border border-primary rounded">
+                                 <div class="col"><br>
+
+                                    <input type="hidden" value="1" name="jenis" id="jenisB">
+                                    <input type="hidden" value="" id="id_voucher2" name="id_voucher2">
+                                        <div class="input-group input-group-sm mb-1">
+                                            {{-- <span class="input-group-text col-sm-3">Hak</span> --}}
+                                            <select name="id_barang" id="id_barang" class="select2 form-control" style="width:100%;">
+                                            </select>
+
+                                        </div>
+                                        <p style="color:red;" id="lokasi_error"></p>
+                                        <div class="input-group input-group-sm mb-1">
+                                            <span class="input-group-text col-sm-3">Kode Barang</span><input name="kode" id="kode" type="text" class="form-control">
+                                        </div>
+                                        <p style="color:red;" id="kode_aset_error"></p>
+
+                                        <div class="input-group input-group-sm mb-1">
+                                            <span class="input-group-text col-sm-3">Register</span><input type="text" name="reg" id="reg" value="" class="form-control">
+                                        </div>
+                                        <p style="color:red;" id="reg_error"></p>
+                                        <div class="input-group input-group-sm mb-1">
+                                            <select class=" form-control" name="kondisi" id="kondisi_e_edit">
+                                                <option> -KONDISI- </option>
+                                                <option value="BAIK"> BAIK </option>
+                                                <option value="RUSAK RINGAN"> RUSAK RINGAN </option>
+                                                <option value="RUSAK BERAT"> RUSAK BERAT </option>
+                                            </select>
+                                        </div>
+                                        <p style="color:red;" id="kondisi_error"></p>
+                                        <div class="input-group input-group-sm mb-1">
+                                            <select class=" form-control" name="id_bahan" id="bahan_e_edit">
+                                                <option> -BAHAN- </option>
+                                               
+                                            </select>
+                                        </div>
+                                        <p style="color:red;" id="kondisi_error"></p>
+                                        
+                                        <p style="color:red;" id="kondisi_error"></p>
+                                        
+                                        
+
+                                       </div><br>
+
+                                    <div class="col"><br>
+                                      <div class="input-group input-group-sm mb-1">
+                                            <span class="input-group-text col-sm-3">Tahun Pengadaan</span><input name="tahun" id="tahun" type="text" class="form-control">
+                                        </div>
+                                        <p style="color:red;" id="ukuran_error"></p>
+
+                                        
+
+                                        <div class="input-group input-group-sm mb-1">
+                                            <span class="input-group-text col-sm-3">Jumlah</span><input name="jumlah" id="jumlah" type="text" class="form-control">
+                                        </div>
+                                        <p style="color:red;" id="guna_error"></p>  
+                                        
+                                        
+                                        <div class="input-group input-group-sm mb-1">
+                                            <select class="select2 form-control" name="asal" id="asal_e_edit" style="width:100%;">
+                                                <option> -ASAL- </option>
+                                                <option>Pembelian</option>
+                                                <option>Bantuan</option>
+                                                <option>Hibah</option>
+                                                <option>Penyertaan Modal</option>
+                                                <option>Serah Kelola</option>
+                                                <option>Ganti Rugi</option>
+                                                <option>Surat Penunjukan</option>
+                                                <option>SK Walikota</option>
+                                                <option>Sewa</option>
+                                            </select>
+                                        </div>
+
+                                        
+                                        
+                                        
+                                        <div class="input-group input-group-sm mb-1">
+                                            <span class="input-group-text col-sm-3">Foto</span><input name="img" id="img" type="file" class="form-control" multiple>
+                                        </div>
+                                        <div class="input-group input-group-sm mb-1">
+                                            <span class="input-group-text col-sm-3">Keterangan</span><textarea name="ket" id="ket" class="form-control"></textarea>
+                                        </div>
+                                        <p style="color:red;" id="ket_error"></p>
+                                    </div>
+
+                            </div>
+                            <div id="keranjangE">
+                                <div class="row border border-primary rounded mt-1">
+                                    <br>
+                                    <div class="float-end">
+                                        <button  type="button" id="submit_e" class="btn btn-sm btn-primary float-end mt-1 mb-1">SUBMIT</button>
+                                       
+                                    </div>
+                                </div><br>
+
+
+                                <div class="row border border-primary rounded">
+                                    <div class="container"><br>
+                                        <table  class="table table-bordered" id="tbl_e_input">
+                                            <thead>
+                                                <tr class="text-center">
+                                                    <th>No</th>
+                                                    <th>Nama Aset</th>
+                                                    <th>Kode</th>
+                                                    <th>Jumlah</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div><br>
+                            </div>
+                            
+
+                        </div>
+                    </form >
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <div id="createE"><button type="button" class="tombol btn btn-primary" id="checkoutBtnE">SUBMIT</button></div>
+              <div id="updateE"> <button  type="button" id="edit_5" class="btn btn-sm btn-primary float-end mt-1 mb-1">SUBMIT</button></div>
+             </div>
+          </div>
+        </div>
+      </div>
 
 @endsection

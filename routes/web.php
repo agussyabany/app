@@ -38,6 +38,7 @@ use App\Http\Controllers\LiveLine\Llcontroller;
 use App\Http\Controllers\LiveLine\RapatController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Soc\Soccontroller;
+use App\Models\Aset\Gedung;
 use App\Models\Aset\KibD;
 use GuzzleHttp\Middleware;
 use Symfony\Component\HttpKernel\DataCollector\DataCollector;
@@ -135,6 +136,9 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::get('barang.tanah',[BarangController::class,'tanah']);
     Route::get('barang.mesin',[BarangController::class,'mesin']);
     Route::get('barang.gedung',[BarangController::class,'gedung']);
+    Route::get('barang.d',[BarangController::class,'d']);
+    Route::get('barang.e',[BarangController::class,'e']);
+     Route::get('barang.f',[BarangController::class,'f']);
     Route::get('barang.kir',[BarangController::class,'kir']);
     Route::get('kode.kir/{id}',[BarangController::class,'kode_kir']);
 
@@ -177,6 +181,9 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::get('/show/{id}',[PdfController::class,'show']);
 
     Route::post('/tanah.save',[TanahController::class,'save']);
+    Route::post('/tanah.update/{id}',[TanahController::class,'update']);
+    Route::post('/del.tanah/{id}',[TanahController::class,'destroy']);
+
     Route::get('/tanah.detail/{id}',[TanahController::class,'detail']);
     Route::get('/tanah.print',[TanahController::class,'print']);
     Route::get('/tanah.nilai/{lok}',[TanahController::class,'nilaiSum']);
@@ -197,6 +204,9 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::get('/mesin.nilai/{lok}',[MesinController::class,'nilaiSum']);
     Route::get('/nilaiMesin.detail/{id}',[MesinController::class,'nilaimesin']);
     Route::get('/vMesin',[MesinController::class,'vMesin']);
+    Route::get('/mesin.aktiva',[MesinController::class,'aktiva']);
+    Route::get('/mesin.barang/{id}',[MesinController::class,'barang']);
+    
 
     Route::get('/gedung.dep/{id}',[GedungController::class,'dep']);
     Route::get('/gedung.div/{dep}/{lok}',[GedungController::class,'div']);
@@ -205,23 +215,55 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::get('/gedung.print/{lok}/{dep}/{div}',[GedungController::class,'print']);
     Route::get('/gedung.nilai/{lok}',[GedungController::class,'nilaiSum']);
     Route::get('/nilaiGedung.detail/{id}',[GedungController::class,'nilaigedung']);
+    Route::post('/gedung.save',[GedungController::class,'save']);
+    Route::get('/gedung.aktiva',[GedungController::class,'aktiva']);
+    Route::get('/gedung.barang/{id}',[GedungController::class,'barang']);
+    Route::get('/gedung.input',[GedungController::class,'input']);
+    Route::post('/gedung.hapus/{id}',[GedungController::class,'hapus']);
+    Route::post('/gedung.clear',[GedungController::class,'clear']);
+    Route::get('/gedung.edit/{id}',[GedungController::class,'edit']);
+    Route::post('/gedung.update',[GedungController::class,'update']);
 
     Route::get('/nilaiD/{id}',[KibDController::class,'nilaiD']);
     Route::get('/d.dep/{id}',[KibDController::class,'dep']);
     Route::get('/d.div/{dep}/{lok}',[KibDController::class,'div']);
     Route::get('/d.show/{lok}/{dep}/{div}',[KibDController::class,'show']);
     Route::get('/d.detail/{id}',[KibDController::class,'detail']);
+    Route::post('/jalan.save',[KibDController::class,'save']);
+    Route::get('/jalan.input',[KibDController::class,'input']);
+    Route::post('/jalan.hapus/{id}',[KibDController::class,'hapus']);
+    Route::post('/jalan.clear',[KibDController::class,'clear']);
+    Route::get('/jalan.edit/{id}',[KibDController::class,'edit']);
+    Route::post('/jalan.update',[KibDController::class,'update']);
+    Route::get('/jalan.print/{lok}/{dep}/{div}',[KibDController::class,'print']);
 
     Route::get('/nlaiE/{id}',[KibEContrller::class,'nilaiE']);
     Route::get('/e.dep/{id}',[KibEContrller::class,'dep']);
     Route::get('/e.div/{dep}/{lok}',[KibEContrller::class,'div' ]);
     Route::get('/e.show/{lok}/{dep}/{div}',[KibEContrller::class,'show']);
     Route::get('/e.detail/{id}',[KibEContrller::class,'detail']);
+    Route::get('/aset.barang/{id}',[KibEContrller::class,'barang']);
+    Route::post('/aset.save',[KibEContrller::class,'save']);
+    Route::get('/aset.input',[KibEContrller::class,'input']);
+    Route::post('/aset.hapus/{id}',[KibEContrller::class,'hapus']);
+    Route::post('/aset.clear',[KibEContrller::class,'clear']);
+    Route::get('/aset.edit/{id}',[KibEContrller::class,'edit']);
+    Route::post('/aset.update',[KibEContrller::class,'update']);
+    Route::get('/aset.print/{lok}/{dep}/{div}',[KibEContrller::class,'print']);
+    
 
     Route::get('/f.dep/{id}',[KibFController::class,'dep']);
     Route::get('/f.div/{dep}/{lok}',[KibFController::class,'div']);
     Route::get('/f.show/{lok}/{dep}/{div}',[KibFController::class,'show']);
     Route::get('/f.detail/{id}',[KibFController::class,'detail']);
+    Route::post('/konstruksi.save',[KibFController::class,'save']);
+    Route::get('/konstruksi.input',[KibFController::class,'input']);
+    Route::post('/konstruksi.hapus/{id}',[KibFController::class,'hapus']);
+    Route::post('/konstruksi.clear',[KibFController::class,'clear']);
+    Route::get('/konstruksi.edit/{id}',[KibFController::class,'edit']);
+    Route::post('/konstruksi.update',[KibFController::class,'update']);
+    Route::get('/konstruksi.print/{lok}/{dep}/{div}',[KibFController::class,'print']);
+    
 
 
 

@@ -12,12 +12,17 @@ $no = 0;
 @section('content')
 
     <div class="col container">
-        <br>
+        <br>        
+                    
 
-                <div class="container card">
-                    <div class="card-header">DATA TANAH <div class="position-absolute top-0 end-0">
-                      <button class="btn  btn-primary"  data-bs-toggle="modal" id="add" data-bs-target="#modal_tanah"><i class="fa-solid fa-file-circle-plus"></i></button>
-                </div>
+
+                 
+                <div class="container card"><br>
+                    <div class="float-end">
+                         <button class="btn  btn-outline-success"   onclick="window.open('/tanah.print', '_blank')"><i class="fa fa-print"></i>&nbsp;CETAK</button>
+                        <button class="btn  btn-outline-primary"  data-bs-toggle="modal" id="add" data-bs-target="#modal_tanah">TAMBAH</button>
+                    </div><br><br>
+                    <div class="card-header">DATA TANAH <div class="position-absolute top-0 end-0"></div>
                     </div>
                             <div class="card-body">
                                 <table class="table table-striped" id="tbl">
@@ -40,17 +45,26 @@ $no = 0;
                                                 <td>{{ $item->alamat }}</td>
                                                 <td>{{ $item->guna }}</td>
                                                 <td ><STRONG><a id="klik_nilai" style="text-decoration: none;" href="#" data-id="{{ $item->idLok }}" data-bs-toggle="modal" data-bs-target="#modal_tanah_nilai">{{number_format (NilaiAktiva::where('id_lokasi', $item->idLok)->where('cat', 1)->sum('nilai'),0,',','.') }}</a></STRONG></td>
-                                                <td><img height="80px" width="80px" src="http://app.perumdamtirtakencana.id/assets/img/lokasi/{{$item->img }}" alt=""></td>
+                                                <td><img height="80px" width="80px" src="" alt=""></td>
                                                 <td>
                                                     <!-- Add action buttons/links here -->
                                                     <div class="btn-group">
-                                                        <button id="detail_tanah" data-id="{{ $item->id_tanah }}" class="btn btn-default border border-secondary btn-sm detail" data-bs-toggle="modal" data-bs-target="#modal_tanah_detail"  type="button">DETAIL</button>
+                                                        <button id="detail_tanah" data-id="{{ $item->id_tanah }}" class="btn btn-default border border-secondary btn-sm detail text-success" data-bs-toggle="modal" data-bs-target="#modal_tanah_detail"  type="button"><i class="fas fa-eye"></i></button>
 
                                                         <button type="button" class="btn btn-sm btn-default border border-secondary  dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"><span class="visually-hidden">Toggle Dropdown</span></button>
                                                         <ul class="dropdown-menu">
-                                                            <li><a class="dropdown-item  edit" data-id="" href="#"><i class="fa-solid fa-edit"></i>&nbsp;EDIT</a></li>
-                                                            <li><a class="dropdown-item delete" data-id="" href="#"><i class="fa-solid fa-trash"></i>&nbsp;DELETE</a></li>
-                                                            <li><a class="dropdown-item nilai" data-id="" href="#"><i class="fa-solid fa-trash"></i>&nbsp;NILAI</a></li>
+                                                            <li><a class="dropdown-item  updateA text-primary" data-id="{{ $item->id_tanah}}" href="#"><i class="fa-solid fa-edit"></i>&nbsp;EDIT</a></li>
+                                                            <li>
+                                                            <form action="/del.tanah/{{ $item->id_tanah }}" method="POST" style="display:inline;">
+                                                                @csrf
+                                                                
+                                                                <a class="dropdown-item text-danger" href="#" onclick="event.preventDefault(); 
+                                                                    if (confirm('Apakah  yakin ingin menghapus data  {{ $item->lokasi }} ?')) {  
+                                                                        this.closest('form').submit(); 
+                                                                    }"><i class="fa-solid fa-trash"></i>&nbsp;HAPUS</a>
+                                                            </form>
+                                                            </li>
+                                                            
                                                             <li><hr class="dropdown-divider"></li>
                                                         </ul>
                                                     </div>
@@ -63,15 +77,7 @@ $no = 0;
                         </div>
                     </div>
                 </div>
-
-
-
-
-
-
-
-
-
+                
       {{-- MODAL KIB --}}
       <div class="modal"  id="modal_tanah">
         <div class="modal-dialog  modal-xl">
@@ -85,7 +91,7 @@ $no = 0;
               <form action="/tanah.save" id="form_a" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="container">
-                  <div class="row  border border-primary rounded">
+                  {{-- <div class="row  border border-primary rounded">
                     <div class="container"><br>
                         <table class="table table-striped table-bordered rounded">
                             <thead>
@@ -127,7 +133,7 @@ $no = 0;
                             </tbody>
                         </table>
                     </div>
-                </div><br>
+                </div><br> --}}
                         <div class="row  border border-primary rounded">
                             <div class="container"><br>
                                 <table class="table table-striped table-bordered rounded">
@@ -172,7 +178,7 @@ $no = 0;
                                             </td>
                                             <td>
                                                 <div class="input-group input-group-sm mb-1">
-                                                    <input type="text" nama="guna" id="guna" class="form-control" required>
+                                                    <input type="text" name="guna" id="guna" class="form-control" required>
                                                 </div>
                                             </td>
                                     </tr>
@@ -202,7 +208,7 @@ $no = 0;
                                 </div>
                                 <div class="col">
                                     <div class="input-group input-group-sm mb-1">
-                                        <span class="input-group-text col-sm-3">Luas</span><input type="text" name="luas_tunjuk" placeholder="Penunjukan" class="form-control" required>
+                                        <span class="input-group-text col-sm-3">Luas</span><input id="luas_tunjuk" type="text" name="luas_tunjuk" placeholder="Penunjukan" class="form-control" required>
                                     </div>
                                 </div>
                          </fieldset><br>
@@ -254,7 +260,23 @@ $no = 0;
 
                                 <div class="col"><br>
                                     <div class="input-group input-group-sm mb-1">
+                                        <select class="select2 form-control" name="asal" id="asal" style="width:100%;" fdprocessedid="t9y0c">
+                                                <option> -ASAL- </option>
+                                                <option>Pembelian</option>
+                                                <option>Bantuan</option>
+                                                <option>Hibah</option>
+                                                <option>Penyertaan Modal</option>
+                                                <option>Serah Kelola</option>
+                                                <option>Ganti Rugi</option>
+                                                <option>Surat Penunjukan</option>
+                                                <option>SK Walikota</option>
+                                                <option>Sewa</option>
+                                    </select>
 
+                                    </div>
+                                    
+                                    <div class="input-group input-group-sm mb-1">
+                                        
                                         <select name="hak" id="hak" class="select2 form-control" style="width:100%;" required>
                                             <option>-HAK-</option>
                                             <option>SHM</option>
@@ -269,20 +291,11 @@ $no = 0;
                                         </select>
                                     </div>
                                     <div class="input-group input-group-sm mb-1">
-                                        <span class="input-group-text col-sm-3">Pemilik Asal</span><input name="asal" id="asal" type="text" class="form-control" required>
+                                        <span class="input-group-text col-sm-3">Pemilik Asal</span><input name="pemilik" id="pemilik" type="text" class="form-control" required>
                                     </div>
-                                    <div class="input-group input-group-sm mb-1">
-                                        <span class="input-group-text col-sm-3">Asal</span><input type="number" name="pemilik" id="pemilik" value="2023" class="form-control" required>
-                                    </div>
-                                    <div class="input-group input-group-sm mb-1">
-                                        <span class="input-group-text col-sm-3">Nilai perolehan</span>
-                                        <select class="select2 form-control" name="nilai_a" id="nilai_a" style="width:100%;" required>
-                                            <option> -PILH NILAI AKTIVA- </option>
-                                        </select>
-                                    </div>
-                                    <div class="input-group input-group-sm mb-1">
-                                        <span class="input-group-text col-sm-3">Nilai saat ini</span><input name="nilai_now" id="nilai_now" type="text" class="form-control" required>
-                                    </div>
+                                    
+                                    
+                                    
                                 </div><br>
 
                                 <div class="col"><br>
@@ -354,13 +367,10 @@ $no = 0;
                                         <td id="asal_D"> item.asal+ </td>
                                     </tr>
                                     <tr>
-                                        <th>Tahun Pengadan</th>
+                                        <th>Tahun Pengadaan</th>
                                         <td id="tahun_D"> item.tahun+ </td>
                                     </tr>
-                                    <tr>
-                                        <th>-</th>
-                                        <td id="guna_Dt"> item.guna+ </td>
-                                    </tr>
+                                    
                                 </tbody>
                             </table>
                         </div>
@@ -485,10 +495,7 @@ $no = 0;
                                         <th>Hak</th>
                                         <td id="hak_D"> item.hak+ </td>
                                     </tr>
-                                    <tr>
-                                        <th>Asal Usul</th>
-                                        <td id="asal_D"> item.asal+ </td>
-                                    </tr>
+                                    
                                     <tr>
                                         <th>Pemilik Asal</th>
                                         <td id="pemilik_D"> item.pemilik+ </td>
@@ -506,10 +513,7 @@ $no = 0;
                                         <th>Nilai</th>
                                         <td><a data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"><h5 id="sumNilai"></h5></a></td>
                                     </tr>
-                                    <tr>
-                                        <th></th>
-                                        <td></td>
-                                    </tr>
+                                    
                                     <tr>
                                         <th>Keterangan</th>
                                         <td id="ket_D"> item.ket+ </td>
