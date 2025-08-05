@@ -33,7 +33,6 @@ $no = 0;
                                             <th>ALAMAT</th>
                                             <th>PENGGUNAAN</th>
                                             <th>NILAI</th>
-                                            <th>GAMBAR</th>
                                             <th>AKSI</th>
                                         </tr>
                                     </thead>
@@ -45,7 +44,7 @@ $no = 0;
                                                 <td>{{ $item->alamat }}</td>
                                                 <td>{{ $item->guna }}</td>
                                                 <td ><STRONG><a id="klik_nilai" style="text-decoration: none;" href="#" data-id="{{ $item->idLok }}" data-bs-toggle="modal" data-bs-target="#modal_tanah_nilai">{{number_format (NilaiAktiva::where('id_lokasi', $item->idLok)->where('cat', 1)->sum('nilai'),0,',','.') }}</a></STRONG></td>
-                                                <td><img height="80px" width="80px" src="" alt=""></td>
+                                                
                                                 <td>
                                                     <!-- Add action buttons/links here -->
                                                     <div class="btn-group">

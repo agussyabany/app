@@ -379,10 +379,12 @@ public function nilaiData()
         $user = User::join('divisis','users.divisi','=','divisis.id')
                     ->join('jabatans','users.jabat','=','jabatans.id')
                     ->where('users.id',$idUSer)
+                   
                     ->first();
         $mesin = Mesin::select('id_lokasi','lokasi','alamat','lokasis.img as img_lok')
                     ->distinct('id_lokasi')
                     ->join('lokasis','mesins.id_lokasi','=','lokasis.id')
+                     ->where('input',1)
                     ->get();
 
         $jabat = $user['jabat'];
