@@ -183,7 +183,6 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::post('/tanah.save',[TanahController::class,'save']);
     Route::post('/tanah.update/{id}',[TanahController::class,'update']);
     Route::post('/del.tanah/{id}',[TanahController::class,'destroy']);
-
     Route::get('/tanah.detail/{id}',[TanahController::class,'detail']);
     Route::get('/tanah.print',[TanahController::class,'print']);
     Route::get('/tanah.nilai/{lok}',[TanahController::class,'nilaiSum']);
@@ -236,6 +235,7 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::get('/jalan.edit/{id}',[KibDController::class,'edit']);
     Route::post('/jalan.update',[KibDController::class,'update']);
     Route::get('/jalan.print/{lok}/{dep}/{div}',[KibDController::class,'print']);
+    Route::get('/nilaiJalan.detail/{id}',[KibDController::class,'nilaijalan']);
 
     Route::get('/nlaiE/{id}',[KibEContrller::class,'nilaiE']);
     Route::get('/e.dep/{id}',[KibEContrller::class,'dep']);

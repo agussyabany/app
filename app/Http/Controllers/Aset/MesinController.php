@@ -137,7 +137,7 @@ class MesinController extends Controller
 
     public function input()
     {
-        $data = Mesin::select('mesins.id as idb','nama_barang','kode_barang','luas')
+        $data = Mesin::select('mesins.id as idb','nama_barang','kode_barang','merk','guna','kode')
                         ->join('barangs','mesins.id_barang','barangs.id')
                         ->where('input',0)
                         ->get();
@@ -312,7 +312,7 @@ class MesinController extends Controller
     {
         $mesin = NilaiAktiva::join('aktivas','nilai_aktivas.id_aktiva','=','aktivas.id',)
                 ->where('id_lokasi', $id)
-                ->where('cat',2)
+                ->where('kib','KIB B - PERALATAN DAN MESIN')
                 ->get();
         return response()->json([
             'data' => $mesin

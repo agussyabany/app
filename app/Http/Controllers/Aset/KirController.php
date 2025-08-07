@@ -367,7 +367,7 @@ class KirController extends Controller
     {
         $gedung = NilaiAktiva::join('aktivas','nilai_aktivas.id_aktiva','=','aktivas.id',)
                 ->where('id_lokasi', $id)
-                ->where('cat',7)
+                ->where('kib', 'KIR (KARTU INVENTARIS RUANGAN)')
                 ->get();
         return response()->json([
             'data' => $gedung

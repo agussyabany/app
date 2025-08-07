@@ -35,7 +35,7 @@ $no = 0;
                                                 <td>{{ $no++ }}</td>
                                                 <td>{{ $item->lokasi }}</td>
                                                 <td>{{ $item->alamat }}</td>
-                                                <td ><STRONG><a id="klik_nilai_kir" style="text-decoration: none;" href="#" data-id="{{ $item->id_lokasi }}" data-bs-toggle="modal" data-bs-target="#modal_kir_nilai">{{number_format (NilaiAktiva::where('id_lokasi', $item->id_lokasi)->where('cat', 7)->sum('nilai'),0,',','.') }}</a></STRONG></td>
+                                                <td ><STRONG><a id="klik_nilai_kir" style="text-decoration: none;" href="#" data-id="{{ $item->id_lokasi }}" data-bs-toggle="modal" data-bs-target="#modal_kir_nilai">{{number_format (NilaiAktiva::join('aktivas', 'nilai_aktivas.id_aktiva', '=', 'aktivas.id')->where('id_lokasi', $item->id_lokasi)->where('kib', 'KIR (KARTU INVENTARIS RUANGAN)')->sum('nilai'),0,',','.') }}</a></STRONG></td>
 
 
 

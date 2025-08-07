@@ -43,6 +43,32 @@
   .dropdown:hover .dropdown-content {
     display: block;
   }
+
+/* EDIT IMAGE */
+   .gambar-wrapper {
+        position: relative;
+    }
+
+    .edit-icon {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        display: none;
+        background-color: rgba(255, 255, 255, 0.8);
+        padding: 8px;
+        border-radius: 50%;
+        cursor: pointer;
+        z-index: 10;
+    }
+
+    .gambar-wrapper:hover .edit-icon {
+        display: block;
+    }
+
+    .edit-icon i {
+        font-size: 18px;
+        color: #333;
+    }
    </style>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">

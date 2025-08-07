@@ -19,7 +19,7 @@ class KibDController extends Controller
     {
         $kibD = NilaiAktiva::join('aktivas','nilai_aktivas.id_aktiva','=','aktivas.id',)
                 ->where('id_lokasi', $id)
-                ->where('cat',4)
+                ->where('kib', 'KIB D - JALAN, IRIGASI DAN JARINGAN')
                 ->get();
         return response()->json([
             'data' => $kibD
@@ -277,5 +277,15 @@ class KibDController extends Controller
                         $nama = Auth::user()->name;
                         $nip = Auth::user()->nip;
                         return view('admin.pages.aset.print.printJalan',compact(['jalan','i','lokasi','departemen','divisi','nama','tglIndo','struktur','nip']));
+    }
+    public function nilaijalan($id)
+    {
+        $gedung = NilaiAktiva::join('aktivas','nilai_aktivas.id_aktiva','=','aktivas.id',)
+                ->where('id_lokasi', $id)
+                ->where('kib', 'KIB D - JALAN, IRIGASI DAN JARINGAN')
+                ->get();
+        return response()->json([
+            'data' => $gedung
+          ]);
     }
 }
