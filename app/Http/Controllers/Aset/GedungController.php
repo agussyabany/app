@@ -105,7 +105,7 @@ class GedungController extends Controller
     {
         $gedung = NilaiAktiva::join('aktivas','nilai_aktivas.id_aktiva','=','aktivas.id',)
                 ->where('id_lokasi', $id)
-                ->where('cat',3)
+                ->where('kib', 'KIB C - GEDUNG DAN BANGUNAN')
                 ->get();
         return response()->json([
             'data' => $gedung

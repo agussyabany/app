@@ -21,6 +21,7 @@ use App\Models\Aset\NilaiAktiva;
 use App\Models\Aset\Ruangan;
 use App\Models\Aset\Sdm;
 use App\Models\Aset\Tanah;
+use App\Models\Soc\Nilai;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -285,52 +286,53 @@ class AsetDashboardController extends Controller
     return view('admin.pages.aset.kib.nilai', compact('jabat', 'divisi', 'on', 'no','tahunRange','aktiva','dep','div','lok','golongan'));
 }
 
-public function nilaiData()
-{
-    $data = NilaiAktiva::select(
-                'nilai_aktivas.id as id_nilai',
-                'aktivas.id as id_aktiva',
-                'no_voucher',
-                'tgl_voucher',
-                'aktiva',
-                'tahun',
-                'nilai',
-                'urai',
-                'kib',
-                'kode'
-            )
-            ->join('lokasis','nilai_aktivas.id_lokasi','lokasis.id')
-            ->join('aktivas','nilai_aktivas.id_aktiva','aktivas.id')
-            ->orderBy('nilai_aktivas.id','DESC');
+    public function nilaiData()
+    {
+        $sumNilai = NilaiAktiva::sum('nilai');
+        $data = NilaiAktiva::select(
+                    'nilai_aktivas.id as idNilai',
+                    'no_voucher',
+                    'tgl_voucher',
+                    'aktiva',
+                    'tahun',
+                    'nilai',
+                    'urai',
+                    'kib',
+                    'kode'
+                )
+                // ->join('lokasis','nilai_aktivas.id_lokasi','lokasis.id')
+                ->join('aktivas','nilai_aktivas.id_aktiva','aktivas.id')
+                ->orderBy('idNilai','DESC');
+            
 
-    return DataTables::of($data)
-        ->addIndexColumn()
-        ->addColumn('aksi', function($row){
-            return '<div class="btn-group">
-                        <button class="btn btn-default border border-primary btn-sm detail" data-id="'.$row->id_nilai.'" type="button"></button>
-                        <button type="button" class="btn btn-sm btn-default border border-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-                            <span class="visually-hidden">Toggle Dropdown</span>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a class="dropdown-item editNilai" data-id="'.$row->id_nilai.'" href="#">
-                                    <i class="fa-solid fa-edit"></i>&nbsp;EDIT
-                                </a>
-                            </li>
-                            <li>
-                                <form action="'.url('nilai.hapus/' . $row->id_nilai).'" method="POST" onsubmit="return confirm(\'Yakin ingin menghapus data ini?\')" style="display:inline;">
-                                    '.csrf_field().method_field('POST   ').'
-                                    <button type="submit" class="dropdown-item">
-                                        <i class="fa-solid fa-trash"></i>&nbsp;DELETE
-                                    </button>
-                                </form>
-                            </li>
-                        </ul>
-                    </div>';
-        })
-        ->rawColumns(['aksi'])
-        ->make(true);
-    }
+        return DataTables::of($data)
+            ->addIndexColumn()
+            ->addColumn('aksi', function($row){
+                return '<div class="btn-group">
+                            <button class="btn btn-default border border-primary btn-sm detail" data-id="'.$row->idNilai.'" type="button"></button>
+                            <button type="button" class="btn btn-sm btn-default border border-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                                <span class="visually-hidden">Toggle Dropdown</span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a class="dropdown-item editNilai" data-id="'.$row->idNilai.'" href="#">
+                                        <i class="fa-solid fa-edit"></i>&nbsp;EDIT
+                                    </a>
+                                </li>
+                                <li>
+                                    <form action="'.url('nilai.hapus/' . $row->idNilai).'" method="POST" onsubmit="return confirm(\'Yakin ingin menghapus data ini?\')" style="display:inline;">
+                                        '.csrf_field().method_field('POST   ').'
+                                        <button type="submit" class="dropdown-item">
+                                            <i class="fa-solid fa-trash"></i>&nbsp;DELETE
+                                        </button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>';
+            })
+            ->rawColumns(['aksi'])
+            ->make(true);
+        }
 
 
     public function arsip()

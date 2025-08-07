@@ -5,6 +5,12 @@ $(document).ready(function() {
             }
         });
     var fileUrl = BASE_URL;
+    
+
+    $(document).on('click', '.edit-icon', function (e) {
+        e.preventDefault();
+        alert('Edit Gambar');
+   });
 
     //TANAH
     $(document).on('click', '#detail_tanah', function() {
@@ -161,6 +167,8 @@ $(document).ready(function() {
             }
         });
     })
+
+    
 
 
     //MESIN
@@ -551,11 +559,11 @@ $(document).on('click', '.editB', function () {
 
                     selectOptAll();
 
-                    $('#nama').empty;
-                    $('#nama').append('<option value="' + item.idBar + '" selected>' + item.nama_barang + '</option>');
+                    $('#nama_edit_b').empty;
+                    $('#nama_edit_b').append('<option value="' + item.idBar + '" selected>' + item.nama_barang + '</option>');
                     $.get('/barang.mesin', function (data) {
                             $.each(data.data, function (index, item) {
-                                $('#nama').append('<option value="' + item.id + '">' + item.nama_barang + '</option>');
+                                $('#nama_edit_b').append('<option value="' + item.id + '">' + item.nama_barang + '</option>');
                             });
                         });
                         
@@ -569,7 +577,7 @@ $(document).on('click', '.editB', function () {
                     $('#fungsi').val(item.fungsi);
                     $('#guna').val(item.guna);
                     $('#bahan_mesin').append('<option value="' + item.bahan + '" selected>' + item.bahan + '</option>');
-                    $('#tahun').val(item.tahun);
+                    $('#tahun_b_edit').val(item.tahun);
                     $('#kondisi_b').append('<option value="' + item.kodisi + '" selected>' + item.kodisi + '</option>');
                     $('#asal').append('<option value="' + item.asal + '" selected>' + item.asal + '</option>');
                     $('#nilaiB').val(item.harga);
@@ -921,11 +929,11 @@ $(document).on('click', '.editC', function () {
 
                     selectOptAll();
 
-                    $('#id_barang').empty;
-                    $('#id_barang').append('<option value="' + item.idBar + '" selected>' + item.nama_barang + '</option>');
+                    $('#barang_d_edit').empty;
+                    $('#barang_d_edit').append('<option value="' + item.idBar + '" selected>' + item.nama_barang + '</option>');
                     $.get('/barang.gedung    ', function (data) {
                             $.each(data.data, function (index, item) {
-                                $('#nama').append('<option value="' + item.id + '">' + item.nama_barang + '</option>');
+                                $('#barang_d_edit').append('<option value="' + item.id + '">' + item.nama_barang + '</option>');
                             });
                         });
                         
@@ -1009,8 +1017,8 @@ $(document).on('click', '.editC', function () {
 
     })
     //Data D
-    var fullPathImgC = fileUrl + '/assets/img/jalan/img/';
-    var fullPathDocC = fileUrl + '/assets/img/jalan/dok/';
+    var fullPathImgD = fileUrl + '/assets/img/jalan/img/';
+    var fullPathDocD = fileUrl + '/assets/img/jalan/dok/';
     $(document).on('click', '#detail_d', function() {
         var id = $(this).data('id');
         $('#canvas_tree').empty();

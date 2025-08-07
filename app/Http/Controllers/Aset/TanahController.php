@@ -167,7 +167,7 @@ public function destroy($id)
     {
         $tanah = NilaiAktiva::join('aktivas','nilai_aktivas.id_aktiva','=','aktivas.id',)
                 ->where('id_lokasi', $id)
-                ->where('cat',1)
+                ->where('kib','TANAH')
                 ->get();
         return response()->json([
             'data' => $tanah

@@ -43,7 +43,7 @@ $no = 0;
                                                 <td>{{ $item->lokasi }}</td>
                                                 <td>{{ $item->alamat }}</td>
                                                 <td>{{ $item->guna }}</td>
-                                                <td ><STRONG><a id="klik_nilai" style="text-decoration: none;" href="#" data-id="{{ $item->idLok }}" data-bs-toggle="modal" data-bs-target="#modal_tanah_nilai">{{number_format (NilaiAktiva::where('id_lokasi', $item->idLok)->where('cat', 1)->sum('nilai'),0,',','.') }}</a></STRONG></td>
+                                                <td ><STRONG><a id="klik_nilai" style="text-decoration: none;" href="#" data-id="{{ $item->idLok }}" data-bs-toggle="modal" data-bs-target="#modal_tanah_nilai">{{number_format (NilaiAktiva::join('aktivas', 'nilai_aktivas.id_aktiva', '=', 'aktivas.id')->where('id_lokasi', $item->idLok)->where('kib', 'TANAH')->sum('nilai'),0,',','.') }}</a></STRONG></td>
                                                 
                                                 <td>
                                                     <!-- Add action buttons/links here -->
@@ -333,7 +333,18 @@ $no = 0;
             </div>
             <div class="modal-body" id="modal_bodyLG">
               <div class="container">
-                <img id="gambar_D" src="#" height="500px" width="500px" class="rounded mx-auto d-block" alt="..."><br>
+                <div class="text-center my-3">
+                    <div class="gambar-wrapper position-relative d-inline-block" style="max-width: 100%; height: auto;">
+                        <img id="gambar_D"
+                            src=""
+                            alt="Foto Lokasi"
+                            class="img-fluid rounded shadow"
+                            style="max-height: 500px; object-fit: contain;">
+                        <div class="edit-icon">
+                            <i class="fas fa-edit"></i>
+                        </div>
+                    </div>
+                </div><br>
 
                 <div class="row">
                     <div class="col">

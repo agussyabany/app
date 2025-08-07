@@ -35,7 +35,7 @@ $no = 0;
                                                 <td>{{ $no++ }}</td>
                                                 <td>{{ $item->lokasi }}</td>
                                                 <td>{{ $item->alamat }}</td>
-                                                <td ><STRONG><a id="klik_nilai_gedung" style="text-decoration: none;" href="#" data-id="{{ $item->id_lokasi }}" data-bs-toggle="modal" data-bs-target="#modal_gedung_nilai">{{number_format (NilaiAktiva::where('id_lokasi', $item->id_lokasi)->where('cat', 3)->sum('nilai'),0,',','.') }}</a></STRONG></td>
+                                                <td ><STRONG><a id="klik_nilai_gedung" style="text-decoration: none;" href="#" data-id="{{ $item->id_lokasi }}" data-bs-toggle="modal" data-bs-target="#modal_gedung_nilai">{{number_format (NilaiAktiva::join('aktivas', 'nilai_aktivas.id_aktiva', '=', 'aktivas.id')->where('id_lokasi', $item->id_lokasi)->where('kib', 'KIB C - GEDUNG DAN BANGUNAN')->sum('nilai'),0,',','.') }}</a></STRONG></td>
 
 
 
@@ -164,7 +164,7 @@ $no = 0;
                                     <input type="hidden" value="" id="id_voucher2" name="id_voucher2">
                                         <div class="input-group input-group-sm mb-1">
                                             {{-- <span class="input-group-text col-sm-3">Hak</span> --}}
-                                            <select name="id_barang" id="id_barang" class="select2 form-control" style="width:100%;">
+                                            <select name="id_barang" id="barang_d_edit" class="select2 form-control" style="width:100%;">
                                             </select>
 
                                         </div>

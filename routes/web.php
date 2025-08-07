@@ -235,6 +235,7 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::get('/jalan.edit/{id}',[KibDController::class,'edit']);
     Route::post('/jalan.update',[KibDController::class,'update']);
     Route::get('/jalan.print/{lok}/{dep}/{div}',[KibDController::class,'print']);
+    Route::get('/nilaiJalan.detail/{id}',[KibDController::class,'nilaijalan']);
 
     Route::get('/nlaiE/{id}',[KibEContrller::class,'nilaiE']);
     Route::get('/e.dep/{id}',[KibEContrller::class,'dep']);

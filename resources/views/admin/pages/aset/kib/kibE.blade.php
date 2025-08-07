@@ -25,7 +25,7 @@ $no = 0;
                                             <th>NO</th>
                                             <th>LOKASI</th>
                                             <th>ALAMAT</th>
-                                            <th>NILAI</th>
+                                            
                                             <th>AKSI</th>
                                         </tr>
                                     </thead>
@@ -35,7 +35,7 @@ $no = 0;
                                                 <td>{{ $no++ }}</td>
                                                 <td>{{ $item->lokasi }}</td>
                                                 <td>{{ $item->alamat }}</td>
-                                                <td ><STRONG><a id="klik_nilai_e" style="text-decoration: none;" href="#" data-id="{{ $item->id_lokasi }}" data-bs-toggle="modal" data-bs-target="#modal_d_nilai">{{number_format (NilaiAktiva::where('id_lokasi', $item->id_lokasi)->where('cat', 5)->sum('nilai'),0,',','.') }}</a></STRONG></td>
+                                                
 
 
 

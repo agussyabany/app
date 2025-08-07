@@ -312,7 +312,7 @@ class MesinController extends Controller
     {
         $mesin = NilaiAktiva::join('aktivas','nilai_aktivas.id_aktiva','=','aktivas.id',)
                 ->where('id_lokasi', $id)
-                ->where('cat',2)
+                ->where('kib','KIB B - PERALATAN DAN MESIN')
                 ->get();
         return response()->json([
             'data' => $mesin
