@@ -6,17 +6,17 @@ $(document).ready(function() {
         });
     var fileUrl = BASE_URL;
     
-
-    $(document).on('click', '.edit-icon', function (e) {
+   //Update Foto tanah
+   $(document).on('click', '#edit-img-a', function (e) {
         e.preventDefault();
         alert('Edit Gambar');
    });
 
+  
+
     //TANAH
     $(document).on('click', '#detail_tanah', function() {
         var id = $(this).data('id');
-        //$('#exampleModal').modal('show');
-       
         $.ajax({
                 type: "GET",
                 url: "/tanah.detail/"+ id,
@@ -470,7 +470,8 @@ $('#checkoutBtn').click(function () {
                         });
 $(document).on('click', '#detail_mesin_divisi', function(){
     var id = $(this).data('id');
-        $('#judul_modal_detail').html();
+    $('#testBid').val(id);
+    $('#judul_modal_detail').html();
         
         $.ajax({
                 type: "GET",
@@ -505,8 +506,8 @@ $(document).on('click', '#detail_mesin_divisi', function(){
                     $('#status_D').html(item.asal);
                     $('#nilai_d').html(item.harga.toLocaleString('id-ID'));
                     $('#ket_D').html(item.ket);
-                    $('#gambar_D').attr('src', fullPath + item.img );
-
+                    $('#gambar_B').attr('src', fullPath + item.img );
+                   
                     $('#filed').empty();
                     $.each(data.data, function (index, items) {
                          var thumbnail = $(
@@ -515,19 +516,95 @@ $(document).on('click', '#detail_mesin_divisi', function(){
                                 '<p><a href="#" onclick="window.open(\'' + fullPathD + items.dok + '\', \'_blank\'); return false;">' + items.dok + '</a></p>' +
                             '</div>'
                         );
-
                     // Append the thumbnail to the fieldset
                     $('#filed').append(thumbnail);
                     });
 
                 });
-                       
-                
-                    
-                
-            }
+             }
         });
+  
+
+})
+
+ //Upadate Foto Mesin
+   $(document).on('click', '#edit-img-b', function (e) {
+    e.preventDefault();
+    var id = $('#testBid').val();
+    console.log(id);
+   
+    
+     $('#col-edit').append(`
+                <div class="col" id="upadate-form-b">
+                    <div class="d-flex align-items-center gap-2">
+                        <input type="file" name="editGambar" class="form-control" id="editGambarInputB">
+                        <a class="btn btn-sm btn-outline-danger" type="button" id="undo-update-b">X</a>
+                    </div>
+                    <div class="mt-2">
+                        <img id="previewEditGambarB" src="" alt="Preview" style="max-width:300px; display:none; border:1px solid #ccc; border-radius:5px;"><br><br><a class="btn btn-sm btn-outline-success" type="button" id="submit-update-img-b" data-id="">UPDATE</a>
+                    </div>
+                </div>
+            `);
+        // Preview Image
+        $(document).on('change', '#editGambarInputB', function (e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function (ev) {
+                        $('#previewEditGambarB').attr('src', ev.target.result).show();
+                    }
+                    reader.readAsDataURL(file);
+                } else {
+                    $('#previewEditGambar').hide();
+                }
+            });
+
+    // Submit update
+        $(document).on('click', '#submit-update-img-b', function (e) {
+            e.preventDefault();
+           
+            let fileInput = $('#editGambarInputB')[0].files[0];
+
+            if (!fileInput) {
+                alert('Pilih gambar terlebih dahulu!');
+                return;
+            }
+
+            let formData = new FormData();
+            formData.append('editGambar', fileInput);
+            formData.append('_token', $('meta[name="csrf-token"]').attr('content'));
+
+            $.ajax({
+                url: '/mesin.updateFoto/' + id,
+                type: 'POST',
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function (res) {
+                    // update foto lama tanpa reload
+                    $('#gambar_B').attr('src', res.newImagePath);
+                    // hapus form input
+                    $('#upadte-form-b').remove();
+                },
+                error: function (xhr) {
+                    alert('Gagal update foto');
+                }
+            });
+        });
+    //Cancel Img Update  
+    $(document).on('click', '#tutup-modal-b', function (e) {
+        $('#upadate-form-b').remove();
     })
+    
+    //Cancel Update foto Mesin
+    $(document).on('click', '#undo-update-b', function (e) {
+        e.preventDefault();
+        $('#upadate-form-b').remove();
+         $('#testBid').empty()
+    });
+
+  });
+
 
 //EDIT MESIN
 $(document).on('click', '.editB', function () {
@@ -566,7 +643,7 @@ $(document).on('click', '.editB', function () {
                                 $('#nama_edit_b').append('<option value="' + item.id + '">' + item.nama_barang + '</option>');
                             });
                         });
-                        
+                    
                     $('#jenisB').val(item.jenis);
                     $('#id_voucher2').val(item.id_voucher2);
                     $('#nama').val(item.nama_barang);

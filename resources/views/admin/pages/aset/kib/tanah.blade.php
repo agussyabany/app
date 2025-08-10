@@ -335,12 +335,13 @@ $no = 0;
               <div class="container">
                 <div class="text-center my-3">
                     <div class="gambar-wrapper position-relative d-inline-block" style="max-width: 100%; height: auto;">
+                        
                         <img id="gambar_D"
                             src=""
                             alt="Foto Lokasi"
                             class="img-fluid rounded shadow"
                             style="max-height: 500px; object-fit: contain;">
-                        <div class="edit-icon">
+                        <div class="edit-icon" id="edit-img-a">
                             <i class="fas fa-edit"></i>
                         </div>
                     </div>

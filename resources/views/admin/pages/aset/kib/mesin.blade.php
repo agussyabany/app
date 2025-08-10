@@ -366,11 +366,36 @@ $no = 0;
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="judul_modal_detail">DETAIL  PERALATAN DAN MESIN</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              
+              
+              <button type="button" class="btn-close" data-bs-dismiss="modal" id="tutup-modal-b" aria-label="Close"></button>
             </div>
             <div class="modal-body" id="modal_bodyLG">
                 <div class="container">
-                    <img id="gambar_D" src="" height="500px" width="550px" class="rounded mx-auto d-block" alt="..."><br>
+                    <div class="text-center my-3">
+                        <div class="row" id="col-edit">
+                            <div class="btn">
+                                 <input type="hidden" id="testBid">
+                            </div>
+                           
+                            <div class="col">
+                                <div class="gambar-wrapper position-relative d-inline-block" style="max-width: 100%; height: auto;">
+                                    <img id="gambar_B"
+                                        src=""
+                                        alt="Foto Lokasi"
+                                        class="img-fluid rounded shadow"
+                                        style="max-height: 500px; object-fit: contain;">
+                                    <div class="edit-icon" id="edit-img-b">
+                                        <i class="fas fa-edit"></i>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                        
+                    
+                </div><br>
 
                     <fieldset class="border border-secondary rounded-3 p-2 row">
                         <legend class="float-none w-auto px-1 border border-secondary rounded">

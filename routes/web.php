@@ -205,6 +205,7 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::get('/vMesin',[MesinController::class,'vMesin']);
     Route::get('/mesin.aktiva',[MesinController::class,'aktiva']);
     Route::get('/mesin.barang/{id}',[MesinController::class,'barang']);
+    Route::get('/mesin.updateFoto/{id}',[MesinController::class,'foto']);
     
 
     Route::get('/gedung.dep/{id}',[GedungController::class,'dep']);
