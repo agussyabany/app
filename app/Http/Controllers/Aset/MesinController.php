@@ -347,27 +347,28 @@ class MesinController extends Controller
         'editGambar' => 'required|image|mimes:jpeg,png,jpg|max:2048'
     ]);
 
-    $mesin = Mesin::findOrFail($id);
+        $mesin = Mesin::findOrFail($id);
 
-    // Hapus file lama jika ada
-    // $oldFile = public_path('assets/img/mesin/gbr' . $lokasi->img);
-    // if (file_exists($oldFile) && is_file($oldFile)) {
+     // Hapus file lama jika ada
+      // $oldFile = public_path('assets/img/mesin/gbr' . $lokasi->img);
+     // if (file_exists($oldFile) && is_file($oldFile)) {
     //     unlink($oldFile);
     // }
 
-    // Simpan file baru
-    $file = $request->file('editGambar');
-    $filename = time() . '.' . $file->getClientOriginalExtension();
-    $file->move(public_path('assets/img//mesin/gbr'), $filename);
+        //Simpan file baru
+        $file = $request->file('editGambar');
+        $filename = time() . '.' . $file->getClientOriginalExtension();
+        $file->move(public_path('assets/img//mesin/gbr'), $filename);
 
-    // Update DB
-    $mesin->img = $filename;
-    $mesin->save();
+        //Update DB
+        $mesin->img = $filename;
+        $mesin->save();
 
-    return response()->json([
-        'success' => true,
-        'newImageUrl' => asset('assets/img/lokasi/' . $filename)
-    ]);
+        return response()->json([
+            'success' => true
+        ]);
+
+        //return [$request->all(),$id];
 }
 
 }

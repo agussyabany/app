@@ -375,7 +375,7 @@ $no = 0;
                     <div class="text-center my-3">
                         <div class="row" id="col-edit">
                             <div class="btn">
-                                 <input type="hidden" id="testBid">
+                                 <input type="text" id="testBid">
                             </div>
                            
                             <div class="col">
@@ -596,7 +596,7 @@ $no = 0;
                         <div class="container">
                             <div class="card">
                                 <div class="card-header" id="card-header"></div>
-                                <div class="card-body" id="card-body">
+                                <div class="card-body" id="card-body-b">
                                     <table class="table table-striped table-border" id="tbl_b_data">
                                         <thead>
                                             <tr>

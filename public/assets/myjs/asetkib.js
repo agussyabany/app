@@ -469,6 +469,7 @@ $('#checkoutBtn').click(function () {
                             window.open(url, '_blank');
                         });
 $(document).on('click', '#detail_mesin_divisi', function(){
+    $('#testBid').empty();
     var id = $(this).data('id');
     $('#testBid').val(id);
     $('#judul_modal_detail').html();
@@ -530,12 +531,13 @@ $(document).on('click', '#detail_mesin_divisi', function(){
  //Upadate Foto Mesin
    $(document).on('click', '#edit-img-b', function (e) {
     e.preventDefault();
+    $('#testBid').empty();
     var id = $('#testBid').val();
     console.log(id);
    
     
      $('#col-edit').append(`
-                <div class="col" id="upadate-form-b">
+                <div class="col" id="update-form-b">
                     <div class="d-flex align-items-center gap-2">
                         <input type="file" name="editGambar" class="form-control" id="editGambarInputB">
                         <a class="btn btn-sm btn-outline-danger" type="button" id="undo-update-b">X</a>
@@ -560,8 +562,13 @@ $(document).on('click', '#detail_mesin_divisi', function(){
             });
 
     // Submit update
+    var xhrRequest;
         $(document).on('click', '#submit-update-img-b', function (e) {
             e.preventDefault();
+            // Abort the previous request if it's still pending
+                if (xhrRequest) {
+                    xhrRequest.abort();
+                }
            
             let fileInput = $('#editGambarInputB')[0].files[0];
 
@@ -580,11 +587,9 @@ $(document).on('click', '#detail_mesin_divisi', function(){
                 data: formData,
                 contentType: false,
                 processData: false,
+                cache: false,  // Menonaktifkan cache
                 success: function (res) {
-                    // update foto lama tanpa reload
-                    $('#gambar_B').attr('src', res.newImagePath);
-                    // hapus form input
-                    $('#upadte-form-b').remove();
+                     //window.location.reload();
                 },
                 error: function (xhr) {
                     alert('Gagal update foto');
@@ -593,13 +598,13 @@ $(document).on('click', '#detail_mesin_divisi', function(){
         });
     //Cancel Img Update  
     $(document).on('click', '#tutup-modal-b', function (e) {
-        $('#upadate-form-b').remove();
+        $('#update-form-b').remove();
     })
     
     //Cancel Update foto Mesin
     $(document).on('click', '#undo-update-b', function (e) {
         e.preventDefault();
-        $('#upadate-form-b').remove();
+        $('#update-form-b').remove();
          $('#testBid').empty()
     });
 
