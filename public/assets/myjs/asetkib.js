@@ -589,7 +589,7 @@ $(document).on('click', '#detail_mesin_divisi', function(){
                 processData: false,
                 cache: false,  // Menonaktifkan cache
                 success: function (res) {
-                     //window.location.reload();
+                     window.location.reload();
                 },
                 error: function (xhr) {
                     alert('Gagal update foto');
