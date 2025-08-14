@@ -12,12 +12,17 @@ $no = 0;
 
     <div class="col container" id="barang_tab" role="tabpanel" aria-labelledby="tab_div">
         <br>
-
-                <div class="container card">
-                    <div class="card-header">DATA GEDUNG<div class="position-absolute top-0 end-0">
-                        <button class="btn  btn-primary"  data-bs-toggle="modal" id="add_gedung" data-bs-target="#modal_gedung"><i class="fa-solid fa-file-circle-plus"></i></button>
-                </div>
+                    
+                    <div class="container">
+                        <div class="float-end">
+                        <button class="btn btn-outline-primary"  data-bs-toggle="modal" id="add_gedung" data-bs-target="#modal_gedung">Tambah</button>
                     </div>
+                        <div class="card">
+                   
+                    <div class="card-header d-flex justify-content-between">
+                            <span>DATA GEDUNG DAN BANGUNAN</span>
+                            <span class="text-end">Total Nilai Gedung :<strong>{{ number_format($totalGedung, 0, ".", ".") }}</strong></span>
+                        </div>
                             <div class="card-body">
                                 <table class="table table-striped" id="tbl">
                                     <thead>
@@ -61,6 +66,9 @@ $no = 0;
                                 </table>
                             </div>
                         </div>
+                        
+                    </div>
+                
                     </div>
                 </div>
 

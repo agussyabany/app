@@ -4,7 +4,7 @@ $(document).ready(function() {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-    var fileUrl = BASE_URL;
+    var fileUrl = "https://app.perumdamtirtakencana.id";
     
    //Update Foto tanah
    $(document).on('click', '#edit-img-a', function (e) {
@@ -2939,7 +2939,13 @@ $('#tbl_sside').DataTable({
             { data: 'urai', name: 'urai' },
             { data: 'kib', name: 'kib' },
             { data: 'aksi', name: 'aksi', orderable: false, searchable: false }
-        ]
+        ],
+         initComplete: function(settings, json) {
+        // Ambil sumNilai dari response
+            $('#totalNilai').text(
+            parseInt(json.sumNilai).toLocaleString('id-ID')
+        );
+    }
     });
 
 //EDIT NILAI

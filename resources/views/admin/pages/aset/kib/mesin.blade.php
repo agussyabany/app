@@ -20,7 +20,10 @@ $no = 0;
                     </div>
                     <br><br>
                     <div class="card">
-                        <div class="card-header">DATA PERALATAN DAN MESIN</div>
+                       <div class="card-header d-flex justify-content-between">
+                            <span>DATA PERALATAN DAN MESIN</span>
+                            <span class="text-end">Total Nilai Mesin :<strong>{{ number_format($totalMesin, 0, ".", ".") }}</strong></span>
+                        </div>
                             <div class="card-body">
                                 <table class="table table-striped" id="tbl">
                                     <thead>
@@ -375,7 +378,7 @@ $no = 0;
                     <div class="text-center my-3">
                         <div class="row" id="col-edit">
                             <div class="btn">
-                                 <input type="text" id="testBid">
+                                 <input type="hidden" id="testBid">
                             </div>
                            
                             <div class="col">

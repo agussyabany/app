@@ -22,8 +22,10 @@ $no = 0;
                          <button class="btn  btn-outline-success"   onclick="window.open('/tanah.print', '_blank')"><i class="fa fa-print"></i>&nbsp;CETAK</button>
                         <button class="btn  btn-outline-primary"  data-bs-toggle="modal" id="add" data-bs-target="#modal_tanah">TAMBAH</button>
                     </div><br><br>
-                    <div class="card-header">DATA TANAH <div class="position-absolute top-0 end-0"></div>
-                    </div>
+                        <div class="card-header d-flex justify-content-between">
+                            <span>DATA TANAH</span>
+                            <span class="text-end">Total Nilai Tanah :<strong>{{ number_format($totalTanah, 0, ".", ".") }}</strong></span>
+                        </div>
                             <div class="card-body">
                                 <table class="table table-striped" id="tbl">
                                     <thead>

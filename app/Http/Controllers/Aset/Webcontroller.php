@@ -29,76 +29,76 @@ class Webcontroller extends Controller
         $initMarker = lokasi::select('lat','long')->get();
 
         $a = NilaiAktiva::whereIn('id_aktiva',[1,2])
-                         ->whereBetween('tgl_voucher', ['1980-01-01', '2023-05-31'])
+                         ->whereBetween('tgl_voucher', ['1980-01-01', '2025-05-31'])
                         ->sum('nilai');
         $aJuni = NilaiAktiva::whereIn('id_aktiva',[1,2])
-                        ->whereBetween('tgl_voucher', ['2023-06-01', '2023-06-30'])
+                        ->whereBetween('tgl_voucher', ['2025-04-01', '2025-04-30'])
                         ->sum('nilai');
 
 
         $b = NilaiAktiva::whereIn('id_aktiva',[6,34,35,36])
-                        ->whereBetween('tgl_voucher', ['1980-01-01', '2023-05-31'])
+                        ->whereBetween('tgl_voucher', ['1980-01-01', '2025-05-31'])
                         ->sum('nilai');
         $bJuni = NilaiAktiva::whereIn('id_aktiva',[6,34,35,36])
-                        ->whereBetween('tgl_voucher', ['2023-06-01', '2023-06-30'])
+                        ->whereBetween('tgl_voucher', ['2025-04-01', '2025-04-30'])
                         ->sum('nilai');
 
         $c = NilaiAktiva::whereIn('id_aktiva',[26,27,28,29,30,31,32])
-                        ->whereBetween('tgl_voucher', ['1980-01-01', '2023-05-31'])
+                        ->whereBetween('tgl_voucher', ['1980-01-01', '2025-05-31'])
                         ->sum('nilai');
         $cJuni = NilaiAktiva::whereIn('id_aktiva',[26,27,28,29,30,31,32])
-                        ->whereBetween('tgl_voucher', ['2023-06-01', '2023-06-30'])
+                        ->whereBetween('tgl_voucher', ['2025-04-01', '2025-04-30'])
                         ->sum('nilai');
 
         $d = NilaiAktiva::whereIn('id_aktiva',[3,4,5,33])
-                        ->whereBetween('tgl_voucher', ['1980-01-01', '2023-05-31'])
+                        ->whereBetween('tgl_voucher', ['1980-01-01', '2025-05-31'])
                         ->sum('nilai');
         $dJuni = NilaiAktiva::whereIn('id_aktiva',[3,4,5,33])
-                        ->whereBetween('tgl_voucher', ['2023-06-01', '2023-06-30'])
+                        ->whereBetween('tgl_voucher', ['2025-04-01', '2025-04-30'])
                         ->sum('nilai');
 
         $e = NilaiAktiva::whereIn('id_aktiva',[18,19,20,21,22,23,24,25])
-                        ->whereBetween('tgl_voucher', ['1980-01-01', '2023-05-31'])
+                        ->whereBetween('tgl_voucher', ['1980-01-01', '2025-05-31'])
                         ->sum('nilai');
         $eJuni = NilaiAktiva::whereIn('id_aktiva',[18,19,20,21,22,23,24,25])
-                        ->whereBetween('tgl_voucher', ['2023-06-01', '2023-06-30'])
+                        ->whereBetween('tgl_voucher', ['2025-04-01', '2025-04-30'])
                         ->sum('nilai');
 
 
         $f = NilaiAktiva::whereIn('id_aktiva',[37,38,39,40,41,42,43,44,45,46])
-                        ->whereBetween('tgl_voucher', ['1980-01-01', '2023-05-31'])
+                        ->whereBetween('tgl_voucher', ['1980-01-01', '2025-05-31'])
                         ->sum('nilai');
         $fJuni = NilaiAktiva::whereIn('id_aktiva',[37,38,39,40,41,42,43,44,45,46])
-                        ->whereBetween('tgl_voucher', ['2023-06-01', '2023-06-30'])
+                        ->whereBetween('tgl_voucher', ['2025-04-01', '2025-04-30'])
                         ->sum('nilai');
 
 
         $g = NilaiAktiva::whereIn('id_aktiva',[7,8,9,10,11,12])
-                        ->whereBetween('tgl_voucher', ['1980-01-01', '2023-05-31'])
+                        ->whereBetween('tgl_voucher', ['1980-01-01', '2025-05-31'])
                         ->sum('nilai');
         $gJuni = NilaiAktiva::whereIn('id_aktiva',[7,8,9,10,11,12])
-                        ->whereBetween('tgl_voucher', ['2023-06-01', '2023-06-30'])
+                        ->whereBetween('tgl_voucher', ['2025-04-01', '2025-04-30'])
                         ->sum('nilai');
 
 
         $h = NilaiAktiva::whereIn('id_aktiva',[48,49,50,51])
-                        ->whereBetween('tgl_voucher', ['1980-01-01', '2023-05-31'])
+                        ->whereBetween('tgl_voucher', ['1980-01-01', '2025-05-31'])
                         ->sum('nilai');
         $hJuni = NilaiAktiva::whereIn('id_aktiva',[48,49,50,51])
-                        ->whereBetween('tgl_voucher', ['2023-06-01', '2023-06-30'])
+                        ->whereBetween('tgl_voucher', ['2025-04-01', '2025-04-30'])
                         ->sum('nilai');
 
         $i = NilaiAktiva::whereIn('id_aktiva',[13,14,15,16,17])
-                        ->whereBetween('tgl_voucher', ['1980-01-01', '2023-05-31'])
+                        ->whereBetween('tgl_voucher', ['1980-01-01', '2025-05-31'])
                         ->sum('nilai');
         $iJuni = NilaiAktiva::whereIn('id_aktiva',[13,14,15,16,17])
-                        ->whereBetween('tgl_voucher', ['2023-06-01', '2023-06-30'])
+                        ->whereBetween('tgl_voucher', ['2025-04-01', '2025-04-30'])
                         ->sum('nilai');
 
-        $total2023 = $a+$b+$c+$d+$e+$f+$g+$h+$i;
-        $juni2023 = $aJuni+$bJuni+$cJuni+$dJuni+$eJuni+$fJuni+$gJuni+$hJuni+$iJuni;
+        $total2025 = $a+$b+$c+$d+$e+$f+$g+$h+$i;
+        $juni2025 = $aJuni+$bJuni+$cJuni+$dJuni+$eJuni+$fJuni+$gJuni+$hJuni+$iJuni;
 
-        return view('admin.landingPage.pages.index',compact(['tanah','mesin','gedung','kir','initMarker','total','a','aJuni','b','bJuni','c','cJuni','d','dJuni','e','eJuni','f','fJuni','g','gJuni','h','hJuni','i','iJuni','total2023','juni2023']));
+        return view('admin.landingPage.pages.index',compact(['tanah','mesin','gedung','kir','initMarker','total','a','aJuni','b','bJuni','c','cJuni','d','dJuni','e','eJuni','f','fJuni','g','gJuni','h','hJuni','i','iJuni','total2025','juni2025']));
     }
 
     public function nilai()
@@ -112,7 +112,7 @@ class Webcontroller extends Controller
         $sum205210 = NilaiAktiva::whereBetween('tgl_voucher', ['2004-01-01','2008-12-31'])->sum('nilai');
         $sum210215 = NilaiAktiva::whereBetween('tgl_voucher', ['2009-01-01','2014-12-31'])->sum('nilai');
         $sum215220 = NilaiAktiva::whereBetween('tgl_voucher', ['2015-01-01','2019-12-31'])->sum('nilai');
-        $sum220223 = NilaiAktiva::whereBetween('tgl_voucher', ['2020-01-01','2023-12-31'])->sum('nilai');
+        $sum220223 = NilaiAktiva::whereBetween('tgl_voucher', ['2020-01-01','2025-12-31'])->sum('nilai');
 
         $dek2 =  $sum8085 + $sum8590;
         $dek3 = $dek2 + $sum9095;

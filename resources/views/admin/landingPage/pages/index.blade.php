@@ -198,7 +198,7 @@
                     <th class="text-center" rowspan="2">Nama Barang</th>
                     <th class="text-center">s/d</th>
                     <th class="text-center">Tambahan</th>
-                    <th class="text-center">Harga Perolehan s/d Juni 2023</th>
+                    <th class="text-center">Harga Perolehan s/d Juni 2025</th>
 
                 </tr>
                 </thead>
@@ -206,8 +206,8 @@
                     <tr>
                         <th></th>
                         <th></th>
-                        <th class="text-center">31/05/23</th>
-                        <th class="text-center">30/06/23</th>
+                        <th class="text-center">31/05/25</th>
+                        <th class="text-center">30/06/25</th>
                         <th class="text-center"></th>
                     </tr>
 
@@ -279,9 +279,9 @@
 
                     <tr class="table-active">
                         <th colspan="2" class="text-center">TOTAL</th>
-                        <th>{{ number_format($total2023, 2, ".", ".") }}</th>
-                        <th>{{ number_format($juni2023, 2, ".", ".") }}</th>
-                        <th>{{ number_format($total2023 + $juni2023, 2, ".", ".") }}</th>
+                        <th>{{ number_format($total2025, 2, ".", ".") }}</th>
+                        <th>{{ number_format($juni2025, 2, ".", ".") }}</th>
+                        <th>{{ number_format($total2025 + $juni2025, 2, ".", ".") }}</th>
                     </tr>
                  </tbody>
             </table>

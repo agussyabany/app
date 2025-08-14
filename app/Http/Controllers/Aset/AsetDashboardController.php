@@ -331,6 +331,9 @@ class AsetDashboardController extends Controller
                         </div>';
             })
             ->rawColumns(['aksi'])
+            ->with([
+            'sumNilai' => $sumNilai
+            ])
             ->make(true);
         }
 
@@ -370,7 +373,9 @@ class AsetDashboardController extends Controller
                         ->get();
         $jabat = $user['jabat'];
         $divisi = $user['nama_div'];
-        return view('admin.pages.aset.kib.tanah',compact(['jabat','divisi','tanah','no','on']));
+
+        $totalTanah = NilaiAktiva::join('aktivas', 'nilai_aktivas.id_aktiva', '=', 'aktivas.id')->where('kib', 'TANAH')->sum('nilai');
+        return view('admin.pages.aset.kib.tanah',compact(['jabat','divisi','tanah','no','on','totalTanah']));
     }
 
     public function mesin()
@@ -391,7 +396,8 @@ class AsetDashboardController extends Controller
 
         $jabat = $user['jabat'];
         $divisi = $user['nama_div'];
-        return view('admin.pages.aset.kib.mesin',compact(['jabat','divisi','mesin','no','on']));
+        $totalMesin = NilaiAktiva::join('aktivas', 'nilai_aktivas.id_aktiva', '=', 'aktivas.id')->where('kib','KIB B - PERALATAN DAN MESIN')->sum('nilai');
+        return view('admin.pages.aset.kib.mesin',compact(['jabat','divisi','mesin','no','on','totalMesin']));
     }
 
     public function gedung()
@@ -409,7 +415,8 @@ class AsetDashboardController extends Controller
                     ->get();
         $jabat = $user['jabat'];
         $divisi = $user['nama_div'];
-        return view('admin.pages.aset.kib.gedung',compact(['jabat','divisi','gedung','no','on']));
+        $totalGedung = NilaiAktiva::join('aktivas', 'nilai_aktivas.id_aktiva', '=', 'aktivas.id')->where('kib', 'KIB C - GEDUNG DAN BANGUNAN')->sum('nilai');
+        return view('admin.pages.aset.kib.gedung',compact(['jabat','divisi','gedung','no','on','totalGedung']));
     }
 
     public function kibD()
