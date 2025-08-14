@@ -28,7 +28,7 @@ class KibDController extends Controller
 
     public function dep($id)
     {
-        $kibD = KibD::select('kode_dep','id_dep','nama_dep','id_lokasi','lokasi')
+        $kibD = KibD::select('kib_d_s.id as idD','kode_dep','id_dep','nama_dep','id_lokasi','lokasi')
                         ->join('departemens','kib_d_s.id_dep','=','departemens.id')
                         ->join('lokasis','kib_d_s.id_lokasi','=','lokasis.id')
                         ->where('id_lokasi',$id)
@@ -288,4 +288,26 @@ class KibDController extends Controller
             'data' => $gedung
           ]);
     }
+
+    public function foto(Request $request, $id)
+        {
+            $request->validate([
+                'editGambar' => 'required|image|mimes:jpeg,png,jpg|max:2048'
+            ]);
+
+                $jalan = KibD::findOrFail($id);
+
+                //Simpan file baru
+                $file = $request->file('editGambar');
+                $filename = time() . '.' . $file->getClientOriginalExtension();
+                $file->move(public_path('assets/img/jalan/img'), $filename);
+
+                //Update DB
+                $jalan->img = $filename;
+                $jalan->save();
+
+                return response()->json([
+                    'success' => true
+                ]);
+            }
 }

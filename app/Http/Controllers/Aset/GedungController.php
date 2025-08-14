@@ -306,4 +306,26 @@ class GedungController extends Controller
         return response()->json(['success' => true,'message' => 'Data updated successfully']);
         
     }
+
+            public function foto(Request $request, $id)
+        {
+            $request->validate([
+                'editGambar' => 'required|image|mimes:jpeg,png,jpg|max:2048'
+            ]);
+
+                $gedung = Gedung::findOrFail($id);
+
+                //Simpan file baru
+                $file = $request->file('editGambar');
+                $filename = time() . '.' . $file->getClientOriginalExtension();
+                $file->move(public_path('assets/img/gedung/img'), $filename);
+
+                //Update DB
+                $gedung->img = $filename;
+                $gedung->save();
+
+                return response()->json([
+                    'success' => true
+                ]);
+            }
 }

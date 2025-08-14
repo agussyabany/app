@@ -335,7 +335,29 @@ $no = 0;
             </div>
             <div class="modal-body" id="modal_body">
                 <div class="container">
-                    <img id="gambar_d" src="" height="500px" width="550px" class="rounded mx-auto d-block" alt="..."><br>
+                    <div class="text-center my-3">
+                        <div class="row" id="col-edit-c">
+                            <div class="btn">
+                                 <input type="hidden" id="testCid">
+                            </div>
+                           
+                            <div class="col">
+                                <div class="gambar-wrapper position-relative d-inline-block" style="max-width: 100%; height: auto;">
+                                    <img id="gambar_C"
+                                        src=""
+                                        alt="Foto Lokasi"
+                                        class="img-fluid rounded shadow"
+                                        style="max-height: 500px; object-fit: contain;">
+                                    <div class="edit-icon" id="edit-img-c">
+                                        <i class="fas fa-edit"></i>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                   
 
                     <fieldset class="border border-secondary rounded-3 p-2 row">
                         <legend class="float-none w-auto px-1 border border-secondary rounded">

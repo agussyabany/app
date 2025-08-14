@@ -4,7 +4,7 @@ $(document).ready(function() {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-    var fileUrl = "https://app.perumdamtirtakencana.id";
+    var fileUrl = BASE_URL;
     
    //Update Foto tanah
    $(document).on('click', '#edit-img-a', function (e) {
@@ -528,87 +528,87 @@ $(document).on('click', '#detail_mesin_divisi', function(){
 
 })
 
- //Upadate Foto Mesin
-   $(document).on('click', '#edit-img-b', function (e) {
-    e.preventDefault();
-    $('#testBid').empty();
-    var id = $('#testBid').val();
-    console.log(id);
-   
-    
-     $('#col-edit').append(`
-                <div class="col" id="update-form-b">
-                    <div class="d-flex align-items-center gap-2">
-                        <input type="file" name="editGambar" class="form-control" id="editGambarInputB">
-                        <a class="btn btn-sm btn-outline-danger" type="button" id="undo-update-b">X</a>
-                    </div>
-                    <div class="mt-2">
-                        <img id="previewEditGambarB" src="" alt="Preview" style="max-width:300px; display:none; border:1px solid #ccc; border-radius:5px;"><br><br><a class="btn btn-sm btn-outline-success" type="button" id="submit-update-img-b" data-id="">UPDATE</a>
-                    </div>
-                </div>
-            `);
-        // Preview Image
-        $(document).on('change', '#editGambarInputB', function (e) {
-                const file = e.target.files[0];
-                if (file) {
-                    const reader = new FileReader();
-                    reader.onload = function (ev) {
-                        $('#previewEditGambarB').attr('src', ev.target.result).show();
-                    }
-                    reader.readAsDataURL(file);
-                } else {
-                    $('#previewEditGambar').hide();
-                }
-            });
-
-    // Submit update
-    var xhrRequest;
-        $(document).on('click', '#submit-update-img-b', function (e) {
-            e.preventDefault();
-            // Abort the previous request if it's still pending
-                if (xhrRequest) {
-                    xhrRequest.abort();
-                }
-           
-            let fileInput = $('#editGambarInputB')[0].files[0];
-
-            if (!fileInput) {
-                alert('Pilih gambar terlebih dahulu!');
-                return;
-            }
-
-            let formData = new FormData();
-            formData.append('editGambar', fileInput);
-            formData.append('_token', $('meta[name="csrf-token"]').attr('content'));
-
-            $.ajax({
-                url: '/mesin.updateFoto/' + id,
-                type: 'POST',
-                data: formData,
-                contentType: false,
-                processData: false,
-                cache: false,  // Menonaktifkan cache
-                success: function (res) {
-                     window.location.reload();
-                },
-                error: function (xhr) {
-                    alert('Gagal update foto');
-                }
-            });
-        });
-    //Cancel Img Update  
-    $(document).on('click', '#tutup-modal-b', function (e) {
-        $('#update-form-b').remove();
-    })
-    
-    //Cancel Update foto Mesin
-    $(document).on('click', '#undo-update-b', function (e) {
+    //Upadate Foto Mesin
+    $(document).on('click', '#edit-img-b', function (e) {
         e.preventDefault();
-        $('#update-form-b').remove();
-         $('#testBid').empty()
-    });
+        $('#testBid').empty();
+        var id = $('#testBid').val();
+        console.log(id);
+    
+        
+        $('#col-edit').append(`
+                    <div class="col" id="update-form-b">
+                        <div class="d-flex align-items-center gap-2">
+                            <input type="file" name="editGambar" class="form-control" id="editGambarInputB">
+                            <a class="btn btn-sm btn-outline-danger" type="button" id="undo-update-b">X</a>
+                        </div>
+                        <div class="mt-2">
+                            <img id="previewEditGambarB" src="" alt="Preview" style="max-width:300px; display:none; border:1px solid #ccc; border-radius:5px;"><br><br><a class="btn btn-sm btn-outline-success" type="button" id="submit-update-img-b" data-id="">UPDATE</a>
+                        </div>
+                    </div>
+                `);
+            // Preview Image
+            $(document).on('change', '#editGambarInputB', function (e) {
+                    const file = e.target.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = function (ev) {
+                            $('#previewEditGambarB').attr('src', ev.target.result).show();
+                        }
+                        reader.readAsDataURL(file);
+                    } else {
+                        $('#previewEditGambar').hide();
+                    }
+                });
 
-  });
+        // Submit update
+        var xhrRequest;
+            $(document).on('click', '#submit-update-img-b', function (e) {
+                e.preventDefault();
+                // Abort the previous request if it's still pending
+                    if (xhrRequest) {
+                        xhrRequest.abort();
+                    }
+            
+                let fileInput = $('#editGambarInputB')[0].files[0];
+
+                if (!fileInput) {
+                    alert('Pilih gambar terlebih dahulu!');
+                    return;
+                }
+
+                let formData = new FormData();
+                formData.append('editGambar', fileInput);
+                formData.append('_token', $('meta[name="csrf-token"]').attr('content'));
+
+                $.ajax({
+                    url: '/mesin.updateFoto/' + id,
+                    type: 'POST',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    cache: false,  // Menonaktifkan cache
+                    success: function (res) {
+                        window.location.reload();
+                    },
+                    error: function (xhr) {
+                        alert('Gagal update foto');
+                    }
+                });
+            });
+        //Cancel Img Update  
+        $(document).on('click', '#tutup-modal-b', function (e) {
+            $('#update-form-b').remove();
+        })
+        
+        //Cancel Update foto Mesin
+        $(document).on('click', '#undo-update-b', function (e) {
+            e.preventDefault();
+            $('#update-form-b').remove();
+            $('#testBid').empty()
+        });
+
+    });
 
 
 //EDIT MESIN
@@ -807,8 +807,9 @@ $(document).on('click', '.editB', function () {
                         });
 
 $(document).on('click', '#detail_gedung_divisi', function(){
+                $('#testCid').empty();
                 var id = $(this).data('id');
-                //$('#exampleModal').modal('show');
+                $('#testCid').val(id);
                 $('#judul_modal_detail').html();
                 $.ajax({
                     type: "GET",
@@ -832,7 +833,7 @@ $(document).on('click', '#detail_gedung_divisi', function(){
                         $('#nilai_d').html(item.nilai);
                         $('#susut_d').html(item.susut);
                         $('#ket_d').html(item.ket);
-                        $('#gambar_d').attr('src',fullPathImgC + item.img);
+                        $('#gambar_C').attr('src',fullPathImgC + item.img);
                         $('#filedC').empty();
     
                         var thumbnail = $(
@@ -845,6 +846,88 @@ $(document).on('click', '#detail_gedung_divisi', function(){
                 }
 });
 })
+
+ //Upadate Foto Gedung
+    $(document).on('click', '#edit-img-c', function (e) {
+        e.preventDefault();
+        $('#testCid').empty();
+        var id = $('#testCid').val();
+        console.log(id);
+    
+        
+        $('#col-edit-c').append(`
+                    <div class="col" id="update-form-c">
+                        <div class="d-flex align-items-center gap-2">
+                            <input type="file" name="editGambar" class="form-control" id="editGambarInputC">
+                            <a class="btn btn-sm btn-outline-danger" type="button" id="undo-update-c">X</a>
+                        </div>
+                        <div class="mt-2">
+                            <img id="previewEditGambarC" src="" alt="Preview" style="max-width:300px; display:none; border:1px solid #ccc; border-radius:5px;"><br><br><a class="btn btn-sm btn-outline-success" type="button" id="submit-update-img-c" data-id="">UPDATE</a>
+                        </div>
+                    </div>
+                `);
+            // Preview Image
+            $(document).on('change', '#editGambarInputC', function (e) {
+                    const file = e.target.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = function (ev) {
+                            $('#previewEditGambarC').attr('src', ev.target.result).show();
+                        }
+                        reader.readAsDataURL(file);
+                    } else {
+                        $('#previewEditGambar').hide();
+                    }
+                });
+
+        // Submit update
+        var xhrRequest;
+            $(document).on('click', '#submit-update-img-c', function (e) {
+                e.preventDefault();
+                // Abort the previous request if it's still pending
+                    if (xhrRequest) {
+                        xhrRequest.abort();
+                    }
+            
+                let fileInput = $('#editGambarInputC')[0].files[0];
+
+                if (!fileInput) {
+                    alert('Pilih gambar terlebih dahulu!');
+                    return;
+                }
+
+                let formData = new FormData();
+                formData.append('editGambar', fileInput);
+                formData.append('_token', $('meta[name="csrf-token"]').attr('content'));
+
+                $.ajax({
+                    url: '/gedung.updateFoto/' + id,
+                    type: 'POST',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    cache: false,  // Menonaktifkan cache
+                    success: function (res) {
+                        window.location.reload();
+                    },
+                    error: function (xhr) {
+                        alert('Gagal update foto');
+                    }
+                });
+            });
+        //Cancel Img Update  
+        $(document).on('click', '#tutup-modal-c', function (e) {
+            $('#update-form-c').remove();
+        })
+        
+        //Cancel Update foto Mesin
+        $(document).on('click', '#undo-update-c', function (e) {
+            e.preventDefault();
+            $('#update-form-c').remove();
+            $('#testCid').empty()
+        });
+
+    });
 
 
 //Input Gedung
@@ -1117,13 +1200,14 @@ $(document).on('click', '.editC', function () {
                             '</li>');
                     var dep = item.id_dep;
                     var lok = item.id_lokasi;
+                    var idD = item.idD
                     $.get("/d.div/"+ dep + "/" + lok , function(data) {
 
                         $.each(data.data, function(index, item) {
                             var div = item.id_div;
 
                             $("#d_div" + item.id_dep).append('<li><span><a data-id="' + dep + ',' + lok + ',' + div +
-                            ',' + item.nama_div +'" href="#" style="text-decoration: none;" id="tampil_d">'+ item.nama_div +'</a></span></li>')
+                            ',' + item.nama_div +',' + idD +'" href="#" style="text-decoration: none;" id="tampil_d">'+ item.nama_div +'</a></span></li>')
                         });
                     })
                 });
@@ -1139,6 +1223,9 @@ $(document).on('click', '.editC', function () {
         var lok = id_key[1];
         var div = id_key[2];
         var nama_div = id_key[3];
+        var idD = id_key[4];
+        $('#testDid').empty();
+        $('#testDid').val(idD);
         var i = 0;
         var table = $("#tbl_c_data").DataTable();
             table.clear().draw();
@@ -1213,7 +1300,7 @@ $(document).on('click', '.editC', function () {
                                         $('#nilai_d').html(item.harga);
                                         //$('#susut_d').html(item.susut);
                                         $('#ket_d').html(item.ket);
-                                        //$('#gambar_d').attr('src','http://app.perumdamtirtakencana.id/assets/img/gedung/' + item.img);
+                                        $('#gambar_d').attr('src', fullPathImgD + item.img);
                 });
 
                     // $.get('/show/' + id, function (data) {
@@ -1230,6 +1317,88 @@ $(document).on('click', '.editC', function () {
                    }
                 });
             })
+
+//Upadate Foto Gedung
+    $(document).on('click', '#edit-img-d', function (e) {
+        e.preventDefault();
+        $('#testDid').empty();
+        var id = $('#testDid').val();
+        console.log(id);
+    
+        
+        $('#col-edit-d').append(`
+                    <div class="col" id="update-form-d">
+                        <div class="d-flex align-items-center gap-2">
+                            <input type="file" name="editGambar" class="form-control" id="editGambarInputD">
+                            <a class="btn btn-sm btn-outline-danger" type="button" id="undo-update-d">X</a>
+                        </div>
+                        <div class="mt-2">
+                            <img id="previewEditGambarD" src="" alt="Preview" style="max-width:300px; display:none; border:1px solid #ccc; border-radius:5px;"><br><br><a class="btn btn-sm btn-outline-success" type="button" id="submit-update-img-d" data-id="">UPDATE</a>
+                        </div>
+                    </div>
+                `);
+            // Preview Image
+            $(document).on('change', '#editGambarInputD', function (e) {
+                    const file = e.target.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = function (ev) {
+                            $('#previewEditGambarD').attr('src', ev.target.result).show();
+                        }
+                        reader.readAsDataURL(file);
+                    } else {
+                        $('#previewEditGambar').hide();
+                    }
+                });
+
+        // Submit update
+        var xhrRequest;
+            $(document).on('click', '#submit-update-img-d', function (e) {
+                e.preventDefault();
+                // Abort the previous request if it's still pending
+                    if (xhrRequest) {
+                        xhrRequest.abort();
+                    }
+            
+                let fileInput = $('#editGambarInputD')[0].files[0];
+
+                if (!fileInput) {
+                    alert('Pilih gambar terlebih dahulu!');
+                    return;
+                }
+
+                let formData = new FormData();
+                formData.append('editGambar', fileInput);
+                formData.append('_token', $('meta[name="csrf-token"]').attr('content'));
+
+                $.ajax({
+                    url: '/jalan.updateFoto/' + id,
+                    type: 'POST',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    cache: false,  // Menonaktifkan cache
+                    success: function (res) {
+                        //window.location.reload();
+                    },
+                    error: function (xhr) {
+                        alert('Gagal update foto');
+                    }
+                });
+            });
+        //Cancel Img Update  
+        $(document).on('click', '#tutup-modal-d', function (e) {
+            $('#update-form-d').remove();
+        })
+        
+        //Cancel Update foto Mesin
+        $(document).on('click', '#undo-update-d', function (e) {
+            e.preventDefault();
+            $('#update-form-d').remove();
+            $('#testDid').empty()
+        });
+
+    });
 //Input Jalan Irigasi Dan Jaringan
 $(document).on('click', '#add_d', function() {
     $('#vMesin').show();
@@ -1559,6 +1728,8 @@ $(document).on('click', '.editD', function () {
                                 var id_key = dataId.split(delimiter);
                                 var id = id_key[0];
                                 var nama_div = id_key[1];
+                                $('#testEid').empty();
+                                $('#testEid').val(id);
                                
                                 $.ajax({
                                     type: "GET",
@@ -1597,6 +1768,88 @@ $(document).on('click', '.editD', function () {
                    }
                 });
             })
+
+//Upadate Foto Aset Tetap
+    $(document).on('click', '#edit-img-e', function (e) {
+        e.preventDefault();
+        $('#testEid').empty();
+        var id = $('#testEid').val();
+        console.log(id);
+    
+        
+        $('#col-edit-e').append(`
+                    <div class="col" id="update-form-e">
+                        <div class="d-flex align-items-center gap-2">
+                            <input type="file" name="editGambar" class="form-control" id="editGambarInputE">
+                            <a class="btn btn-sm btn-outline-danger" type="button" id="undo-update-e">X</a>
+                        </div>
+                        <div class="mt-2">
+                            <img id="previewEditGambarE" src="" alt="Preview" style="max-width:300px; display:none; border:1px solid #ccc; border-radius:5px;"><br><br><a class="btn btn-sm btn-outline-success" type="button" id="submit-update-img-e" data-id="">UPDATE</a>
+                        </div>
+                    </div>
+                `);
+            // Preview Image
+            $(document).on('change', '#editGambarInputE', function (e) {
+                    const file = e.target.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = function (ev) {
+                            $('#previewEditGambarE').attr('src', ev.target.result).show();
+                        }
+                        reader.readAsDataURL(file);
+                    } else {
+                        $('#previewEditGambar').hide();
+                    }
+                });
+
+        // Submit update
+        var xhrRequest;
+            $(document).on('click', '#submit-update-img-e', function (e) {
+                e.preventDefault();
+                // Abort the previous request if it's still pending
+                    if (xhrRequest) {
+                        xhrRequest.abort();
+                    }
+            
+                let fileInput = $('#editGambarInputE')[0].files[0];
+
+                if (!fileInput) {
+                    alert('Pilih gambar terlebih dahulu!');
+                    return;
+                }
+
+                let formData = new FormData();
+                formData.append('editGambar', fileInput);
+                formData.append('_token', $('meta[name="csrf-token"]').attr('content'));
+
+                $.ajax({
+                    url: '/aset.updateFoto/' + id,
+                    type: 'POST',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    cache: false,  // Menonaktifkan cache
+                    success: function (res) {
+                        window.location.reload();
+                    },
+                    error: function (xhr) {
+                        alert('Gagal update foto');
+                    }
+                });
+            });
+        //Cancel Img Update  
+        $(document).on('click', '#tutup-modal-e', function (e) {
+            $('#update-form-e').remove();
+        })
+        
+        //Cancel Update foto Mesin
+        $(document).on('click', '#undo-update-e', function (e) {
+            e.preventDefault();
+            $('#update-form-e').remove();
+            $('#testEid').empty()
+        });
+
+    });
 //Input Aset tetap lainya
 $(document).on('click', '#add_e', function() {
     $('#vMesin').show();

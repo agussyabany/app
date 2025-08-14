@@ -223,6 +223,7 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::post('/gedung.clear',[GedungController::class,'clear']);
     Route::get('/gedung.edit/{id}',[GedungController::class,'edit']);
     Route::post('/gedung.update',[GedungController::class,'update']);
+    Route::post('/gedung.updateFoto/{id}',[GedungController::class,'foto']);
 
     Route::get('/nilaiD/{id}',[KibDController::class,'nilaiD']);
     Route::get('/d.dep/{id}',[KibDController::class,'dep']);
@@ -237,6 +238,7 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::post('/jalan.update',[KibDController::class,'update']);
     Route::get('/jalan.print/{lok}/{dep}/{div}',[KibDController::class,'print']);
     Route::get('/nilaiJalan.detail/{id}',[KibDController::class,'nilaijalan']);
+    Route::post('/jalan.updateFoto/{id}',[KibDController::class,'foto']);
 
     Route::get('/nlaiE/{id}',[KibEContrller::class,'nilaiE']);
     Route::get('/e.dep/{id}',[KibEContrller::class,'dep']);
@@ -251,6 +253,7 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::get('/aset.edit/{id}',[KibEContrller::class,'edit']);
     Route::post('/aset.update',[KibEContrller::class,'update']);
     Route::get('/aset.print/{lok}/{dep}/{div}',[KibEContrller::class,'print']);
+    Route::post('/aset.updateFoto/{id}',[KibEContrller::class,'foto']);
     
 
     Route::get('/f.dep/{id}',[KibFController::class,'dep']);

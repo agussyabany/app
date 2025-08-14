@@ -258,4 +258,26 @@ public function input()
                         $nip = Auth::user()->nip;
                         return view('admin.pages.aset.print.printAset',compact(['aset','i','lokasi','departemen','divisi','nama','tglIndo','struktur','nip']));
     }
+
+    public function foto(Request $request, $id)
+        {
+            $request->validate([
+                'editGambar' => 'required|image|mimes:jpeg,png,jpg|max:2048'
+            ]);
+
+                $aset = KibE::findOrFail($id);
+
+                //Simpan file baru
+                $file = $request->file('editGambar');
+                $filename = time() . '.' . $file->getClientOriginalExtension();
+                $file->move(public_path('assets/img/aset_tetap/img'), $filename);
+
+                //Update DB
+                $aset->img = $filename;
+                $aset->save();
+
+                return response()->json([
+                    'success' => true
+                ]);
+            }
 }
