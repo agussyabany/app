@@ -54,12 +54,13 @@ class KibDController extends Controller
 
     public function show($lok,$dep,$div)
     {
-        $d_full = KibD::select('nama_barang','kode','kib_d_s.id as id_d','nama_div','reg')
+        $d_full = KibD::select('nama_barang','kode','kib_d_s.id as id_d','nama_div','reg','img')
                             ->join('barangs','kib_d_s.id_barang','barangs.id')
                             ->join('divisis','kib_d_s.id_div','divisis.id')
                             ->where('kib_d_s.id_dep',$dep)
                             ->where('id_lokasi',$lok)
                             ->where('id_div',$div)
+                            ->orderby('kib_d_s.id', 'ASC')
                             ->get();
         return response()->json([
             'data' => $d_full

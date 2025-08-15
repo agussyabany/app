@@ -336,6 +336,7 @@ $no = 0;
                                                 <th>Nama Aset</th>
                                                 <th>Kode</th>
                                                 <th>Registrasi</th>
+                                                <th>-</th>
                                                 <th><i class="fa fa-cog"></i></th>
                                                 
                                             </tr>

@@ -1181,7 +1181,7 @@ $(document).on('click', '.editC', function () {
         })
 
     })
-    //Data D
+    //Data D Jalan
     var fullPathImgD = fileUrl + '/assets/img/jalan/img/';
     var fullPathDocD = fileUrl + '/assets/img/jalan/dok/';
     $(document).on('click', '#detail_d', function() {
@@ -1207,7 +1207,7 @@ $(document).on('click', '.editC', function () {
                             var div = item.id_div;
 
                             $("#d_div" + item.id_dep).append('<li><span><a data-id="' + dep + ',' + lok + ',' + div +
-                            ',' + item.nama_div +',' + idD +'" href="#" style="text-decoration: none;" id="tampil_d">'+ item.nama_div +'</a></span></li>')
+                            ',' + item.nama_div +'" href="#" style="text-decoration: none;" id="tampil_d">'+ item.nama_div +'</a></span></li>')
                         });
                     })
                 });
@@ -1223,9 +1223,9 @@ $(document).on('click', '.editC', function () {
         var lok = id_key[1];
         var div = id_key[2];
         var nama_div = id_key[3];
-        var idD = id_key[4];
-        $('#testDid').empty();
-        $('#testDid').val(idD);
+        
+       
+       
         var i = 0;
         var table = $("#tbl_c_data").DataTable();
             table.clear().draw();
@@ -1247,12 +1247,13 @@ $(document).on('click', '.editC', function () {
 
                                             '</ul>'+
                                         '</div>';
-                                        var img = '<a href="#" data-bs-toggle="modal" data-bs-target="#modal_d_detail" id="detail_d_divisi" data-id="'+ items.id_gedung +'"><img src="https://app.perumdamtirtakencana.id/assets/img/gedung/'+items.img+'" height="100px" width="100px"></img></a>';
+                                        var img = '<a href="#" data-bs-toggle="modal" data-bs-target="#modal_d_detail" id="detail_d_divisi" data-id="'+ items.id_gedung +'"><img src="'+ fullPathImgD + items.img+'" height="100px" width="100px"></img></a>';
                                         table.row.add([
                                             ++i,
                                             items.nama_barang,
                                             items.kode,
                                             items.reg,
+                                            img,
                                             editButton
                                         ]).draw();
                                     })
@@ -1276,7 +1277,7 @@ $(document).on('click', '.editC', function () {
                             //MODAL DETAIL KIB D
                             $(document).on('click', '#detail_d_divisi', function(){
                                 var id = $(this).data('id');
-                                //$('#exampleModal').modal('show');
+                                $('#testDid').val(id);
                                 $('#judul_modal_detail').html(id);
                                 $.ajax({
                                     type: "GET",
@@ -1324,8 +1325,6 @@ $(document).on('click', '.editC', function () {
         $('#testDid').empty();
         var id = $('#testDid').val();
         console.log(id);
-    
-        
         $('#col-edit-d').append(`
                     <div class="col" id="update-form-d">
                         <div class="d-flex align-items-center gap-2">
@@ -1379,7 +1378,7 @@ $(document).on('click', '.editC', function () {
                     processData: false,
                     cache: false,  // Menonaktifkan cache
                     success: function (res) {
-                        //window.location.reload();
+                        window.location.reload();
                     },
                     error: function (xhr) {
                         alert('Gagal update foto');

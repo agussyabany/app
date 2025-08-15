@@ -61,6 +61,7 @@ class KibEContrller extends Controller
                             ->where('kib_e_s.id_dep',$dep)
                             ->where('id_lokasi',$lok)
                             ->where('id_div',$div)
+                            ->orderBy('kib_e_s.id','ASC')
                             ->get();
         return response()->json([
             'data' => $e_full
