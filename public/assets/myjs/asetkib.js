@@ -4,9 +4,9 @@ $(document).ready(function() {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-    var fileUrl = BASE_URL;
+    var fileUrl = "https://app.perumdamtirtakencana.id";
     
-   //Update Foto tanah
+  //Update Foto tanah
    $(document).on('click', '#edit-img-a', function (e) {
         e.preventDefault();
         alert('Edit Gambar');
