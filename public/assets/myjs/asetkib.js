@@ -43,6 +43,7 @@ $(document).ready(function() {
                     $('#pemilik_D').html(item.pemilik);
                     $('#ket_D').html(item.ket);
                     $('#gambar_D').attr('src', 'https://app.perumdamtirtakencana.id/assets/img/lokasi/' + item.img);
+                    $('#kode_D').html(item.kode_barang);
 
                 });
 

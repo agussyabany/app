@@ -363,8 +363,8 @@ $no = 0;
                                         <td id="nama_barang_D"> </td>
                                     </tr>
                                     <tr>
-                                        <th>Penggunaan</th>
-                                        <td id="guna_D">  </td>
+                                        <th>Kode Barang</th>
+                                        <td id="kode_D">  </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -382,6 +382,10 @@ $no = 0;
                                     <tr>
                                         <th>Tahun Pengadaan</th>
                                         <td id="tahun_D"> item.tahun+ </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Penggunaan</th>
+                                        <td id="guna_D">  </td>
                                     </tr>
                                     
                                 </tbody>
