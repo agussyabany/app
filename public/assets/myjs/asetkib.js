@@ -43,6 +43,7 @@ $(document).ready(function() {
                     $('#pemilik_D').html(item.pemilik);
                     $('#ket_D').html(item.ket);
                     $('#gambar_D').attr('src', 'https://app.perumdamtirtakencana.id/assets/img/lokasi/' + item.img);
+                    
                     $('#kode_D').html(item.kode_barang);
 
                 });
@@ -141,8 +142,11 @@ $(document).ready(function() {
                   $('#lokasi_kir').append('<option value="' + item.id_lokasi + '" selected>' + item.lokasi + '</option>');
 
                   $('#nama').empty();
-                  $('#nama').append('<option value="' + item.id_barang + '" selected>' + item.nama_barang + '</option>');
-                  selectOptAll();
+                 $.get('/barang.tanah', function (data) {
+                    $.each(data.data, function (index, item) {
+                        $('#nama').append('<option value="' + item.id + '">' + item.nama_barang + '</option>');
+                    });
+                });
 
                   $('#tahun').val(item.tahun);
                   $('#guna').val(item.guna);

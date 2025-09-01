@@ -528,7 +528,7 @@ $no = 0;
                                 <tbody>
                                     <tr>
                                         <th>Nilai</th>
-                                        <td><a data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"><h5 id="sumNilai"></h5></a></td>
+                                        <td id="nilai_D"></td>
                                     </tr>
                                     
                                     <tr>
