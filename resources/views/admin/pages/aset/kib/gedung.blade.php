@@ -238,7 +238,8 @@ $no = 0;
                                             <select class="form-control" name="status" id="status_c">
                                                 <option> -Status Tanah- </option>
                                                 <option value="Pemprov"> Pemprov </option>
-                                            </select>
+						<option value="Perumdam">Perumdam</option>	
+                                           </select>
                                         </div>
                                         <div class="input-group input-group-sm mb-1">
                                             <span class="input-group-text col-sm-3">Kode Tanah</span><input name="kode_tanah" id="kode_tanahC" type="text" class="form-control">
@@ -246,6 +247,7 @@ $no = 0;
                                         <div class="input-group input-group-sm mb-1">
                                             <select class="select2 form-control" name="asal" id="asal_c" style="width:100%;">
                                                 <option> -ASAL- </option>
+                                                <option>Perumdam</option>
                                                 <option>Pembelian</option>
                                                 <option>Bantuan</option>
                                                 <option>Hibah</option>

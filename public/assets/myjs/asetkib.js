@@ -214,7 +214,7 @@ $(document).ready(function() {
         selectOptAll();
         $.get('/barang.mesin', function (data) {
             $.each(data.data, function (index, item) {
-                $('#nama').append('<option value="' + item.id + '">' + item.nama_barang + '</option>');
+                $('#nama_edit_b').append('<option value="' + item.id + '">' + item.nama_barang + '</option>');
             });
         });
 
@@ -951,7 +951,7 @@ $(document).on('click', '#add_gedung', function() {
 
         $.get('/barang.gedung', function (data) {
             $.each(data.data, function (index, item) {
-                $('#id_barang').append('<option value="' + item.id + '">' + item.nama_barang + '</option>');
+                $('#barang_d_edit').append('<option value="' + item.id + '">' + item.nama_barang + '</option>');
             });
         });
 

@@ -183,7 +183,7 @@ class MesinController extends Controller
             'tahun' => 'required|numeric',
             'kondisi_b'=> 'required',
             'asal' => 'required',
-            'nilai' => 'required',
+            //'nilai' => 'required',
             
             // 'pabrik' => 'required',
             // 'rangka' => 'required',

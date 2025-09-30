@@ -233,7 +233,7 @@ class GedungController extends Controller
             'luas' => 'required|numeric',
             'kode_tanah'=> 'required',
             'asal' => 'required',
-            'nilai' => 'required',
+            //'nilai' => 'required',
             'ket' => 'required',
         ];
 

@@ -109,14 +109,14 @@ class UserSeeder extends Seeder
 
         $diklat = User::create(
              [
-                'name' => 'MUHAMMAD AGUS SYABANY',
-                'email' => 'agus@diklat.smd',
+                'name' => 'KIKI',
+                'email' => 'kiki@diklat.smd',
                 'nip' => '-',
                 'jabat' => '3',
                 'divisi' => 0,
                 'img' => '-',
-                'password' => bcrypt('a')
-            ]
+                'password' => bcrypt('654321')
+            ],
         );
         $diklat->assignRole('diklat');
 
