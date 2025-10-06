@@ -37,7 +37,7 @@ $no = 0;
                                     <tbody>
                                         @foreach($gedung as $item)
                                             <tr>
-                                                <td>{{ $no++ }}</td>
+                                                <td>{{ ++$no }}</td>
                                                 <td>{{ $item->lokasi }}</td>
                                                 <td>{{ $item->alamat }}</td>
                                                 <td ><STRONG><a id="klik_nilai_gedung" style="text-decoration: none;" href="#" data-id="{{ $item->id_lokasi }}" data-bs-toggle="modal" data-bs-target="#modal_gedung_nilai">{{number_format (NilaiAktiva::join('aktivas', 'nilai_aktivas.id_aktiva', '=', 'aktivas.id')->where('id_lokasi', $item->id_lokasi)->where('kib', 'KIB C - GEDUNG DAN BANGUNAN')->sum('nilai'),0,',','.') }}</a></STRONG></td>

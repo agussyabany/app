@@ -32,7 +32,7 @@ $no = 0;
                                     <tbody>
                                         @foreach($kibE as $item)
                                             <tr>
-                                                <td>{{ $no++ }}</td>
+                                                <td>{{ ++$no }}</td>
                                                 <td>{{ $item->lokasi }}</td>
                                                 <td>{{ $item->alamat }}</td>
                                                 
