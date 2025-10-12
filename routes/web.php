@@ -138,7 +138,7 @@ Route::middleware('auth','verified','role:aset')->group(function () {
     Route::get('barang.gedung',[BarangController::class,'gedung']);
     Route::get('barang.d',[BarangController::class,'d']);
     Route::get('barang.e',[BarangController::class,'e']);
-     Route::get('barang.f',[BarangController::class,'f']);
+    Route::get('barang.f',[BarangController::class,'f']);
     Route::get('barang.kir',[BarangController::class,'kir']);
     Route::get('kode.kir/{id}',[BarangController::class,'kode_kir']);
 

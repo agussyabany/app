@@ -188,7 +188,7 @@ $no = 0;
                                         </div>
                                         <p style="color:red;" id="ukuran_error"></p>
 
-                                        <div class="input-group input-group-sm mb-1">
+                                        <div class="input-group input-group-sm mb-1" id="fungsiKendaraan">
                                             <span class="input-group-text col-sm-3">Fungsi</span><input name="fungsi" id="fungsi" type="text" class="form-control">
                                         </div>
                                         <p style="color:red;" id="ukuran_error"></p>
@@ -454,7 +454,7 @@ $no = 0;
                                             <td id="merk_D"></td>
                                         </tr>
                                         <tr>
-                                            <th>UKURAN / CC</th>
+                                            <th id="ukuran_cc">UKURAN / CC</th>
                                             <td id="ukuran_D"></td>
                                         </tr>
                                         <tr>
@@ -535,7 +535,7 @@ $no = 0;
                                     </table>
                                 </div>
                             </div>
-                            <div class="col">
+                            {{-- <div class="col">
                                 <div class="input-group input-group-sm mb-1">
                                     <table class="table table-striped table-bordered">
                                         <tbody>
@@ -546,7 +546,7 @@ $no = 0;
                                         </tbody>
                                     </table>
                                 </div>
-                            </div>
+                            </div> --}}
                             
                             <div class="col">
                                 <div class="input-group input-group-sm mb-1">
@@ -606,8 +606,8 @@ $no = 0;
                                                 <th>NO</th>
                                                 <th>Nama Aset</th>
                                                 <th>Merk</th>
-                                                <th>Penggunaan</th>
-                                                <th>Tahun</th>
+                                                <th>Fungsi</th>
+                                                <th>Kondisi</th>
                                                 <th>Foto/Detail</th>
                                                 <th>Aksi</th>
                                             </tr>

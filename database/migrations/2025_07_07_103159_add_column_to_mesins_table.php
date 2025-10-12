@@ -15,7 +15,7 @@ return new class extends Migration
             $table->integer('jenis')->nullable(true);
             $table->bigInteger('id_voucher2')->nullable(true);
             $table->string('fungsi')->nullable(true);
-            $table->string('kodisi')->nullable(true);
+            $table->string('kondisi')->nullable(true);
         });
     }
 

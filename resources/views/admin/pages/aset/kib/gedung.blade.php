@@ -178,7 +178,7 @@ $no = 0;
                                         </div>
                                         <p style="color:red;" id="lokasi_error"></p>
                                         <div class="input-group input-group-sm mb-1">
-                                            <span class="input-group-text col-sm-3">Kode Inventaris</span><input name="kode" id="kode" type="text" class="form-control">
+                                            <span class="input-group-text col-sm-3">Kode Inventaris</span><input name="kode" id="kode_gedung" type="text" class="form-control">
                                         </div>
                                         <p style="color:red;" id="kode_aset_error"></p>
 
@@ -483,7 +483,7 @@ $no = 0;
                                     </table>
                                 </div>
                             </div>
-                            <div class="col">
+                            {{-- <div class="col">
                                 <div class="input-group input-group-sm mb-1">
                                     <table class="table table-striped table-bordered">
                                         <tbody>
@@ -494,7 +494,7 @@ $no = 0;
                                         </tbody>
                                     </table>
                                 </div>
-                            </div>
+                            </div> --}}
                             
                             <div class="col">
                                 <div class="input-group input-group-sm mb-1">

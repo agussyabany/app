@@ -45,7 +45,7 @@ class MesinController extends Controller
 
     public function show($lok,$dep,$div)
     {
-        $mesin_full = Mesin::select('nama_barang','merk','guna','tahun','mesins.id as id_mesin','nama_div','img')
+        $mesin_full = Mesin::select('nama_barang','merk','guna','tahun','mesins.id as id_mesin','nama_div','img','fungsi','kondisi')
                             ->join('barangs','mesins.id_barang','barangs.id')
                             ->join('divisis','mesins.id_div','divisis.id')
                             ->where('id_departemen',$dep)
@@ -69,7 +69,7 @@ class MesinController extends Controller
 
     public function edit($id)
     {
-        $mesin_full = Mesin::select('barangs.id as idBar','nama_barang','kode_dep','nama_div','lokasi','id_lokasi','id_departemen','id_div','kode','reg','tahun','harga','susut','bahan','asal','ukuran','merk','pabrik','rangka','mesin','polisi','bpkb','ket','mesins.id as id_mesin','guna','fungsi','jenis','id_voucher2','kodisi')
+        $mesin_full = Mesin::select('barangs.id as idBar','nama_barang','kode_dep','nama_div','lokasi','id_lokasi','id_departemen','id_div','kode','reg','tahun','harga','susut','bahan','asal','ukuran','merk','pabrik','rangka','mesin','polisi','bpkb','ket','mesins.id as id_mesin','guna','fungsi','jenis','id_voucher2','kondisi')
                             ->where('mesins.id',$id)
                             ->join('barangs','mesins.id_barang','barangs.id')
                             ->join('divisis','mesins.id_div','divisis.id')
@@ -137,9 +137,11 @@ class MesinController extends Controller
 
     public function input()
     {
+        $user = Auth()->id();
         $data = Mesin::select('mesins.id as idb','nama_barang','kode_barang','merk','guna','kode')
                         ->join('barangs','mesins.id_barang','barangs.id')
                         ->where('input',0)
+                        ->where('id_user',$user)
                         ->get();
         return response()->json([
             'data' => $data

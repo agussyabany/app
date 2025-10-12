@@ -30,13 +30,31 @@ $(document).ready(function() {
                     $('#tahun_D').html(item.tahun);
                     $('#guna_D').html(item.guna);
                     $('#no_tunjuk_D').html(item.no_tunjuk);
-                    $('#tgl_tunjuk_D').html(item.tgl_tunjuk);
+
+                    if (item.tgl_tunjuk == '1000-01-01') {
+                        var tglTnjk = '-'
+                    }else{
+                        var tglTnjk = item.tgl_tunjuk;
+                    }
+                    $('#tgl_tunjuk_D').html(tglTnjk);
+
+
                     $('#luas_tunjuk_D').html(item.luas_tunjuk);
                     $('#sertifikat_D').html(item.sertifikat);
-                    $('#tgl_sertifikat_D').html(item.tgl_sertifikat);
+                    if (item.tgl_sertifikat == '1000-01-01') {
+                        var tglSertfkt = '-'
+                    }else{
+                        var tglSertfkt = item.sertifikat;
+                    }
+                    $('#tgl_sertifikat_D').html(tglSertfkt);
                     $('#luas_sertifikat_D').html(item.luas_sertifikat);
                     $('#no_gambar_D').html(item.no_gambar);
-                    $('#tgl_gambar_D').html(item.tgl_gambar);
+                    if (item.tgl_gambar == '1000-01-01') {
+                        var tglGmbr = '-'
+                    }else{
+                        var tglGmbr = item.tgl_tunjuk;
+                    }
+                    $('#tgl_gambar_D').html(tglGmbr);
                     $('#luas_gambar_D').html(item.luas_gambar);
                     $('#hak_D').html(item.hak);
                     $('#asal_D').html(item.asal);
@@ -124,6 +142,8 @@ $(document).ready(function() {
               }
               )})
         });
+
+        
     })
     //Edit tanah
     $(document).on('click', '.updateA', function() {
@@ -218,7 +238,7 @@ $(document).ready(function() {
             });
         });
 
-        $('body').on('change','#nama' , function (event) {
+        $('body').on('change','#nama_edit_b' , function (event) {
             event.preventDefault();
             var id = $(this).val();
             $.get('/mesin.barang/'+id, function (data) {
@@ -259,6 +279,7 @@ $(document).ready(function() {
             $('#kendaraan').empty();
             if (kendaraanAktiva.includes(kodeAktiva)) {
                 $('#jenisB').val(2);
+                $('#fungsiKendaraan').hide();
                 $('#kendaraan').append('<div class="input-group input-group-sm mb-1">'+
                                             '<span class="input-group-text col-sm-3">No Pabrik</span><input name="pabrik" id="pabrik" type="text" class="form-control">'+
                                        ' </div>'+
@@ -286,6 +307,7 @@ $(document).ready(function() {
                                     }else{
                                         $('#kendaraan').empty();
                                         $('#jenisB').val(1);
+                                        $('#fungsiKendaraan').show();
                                     }
                                 })
                             })
@@ -410,11 +432,13 @@ $('#checkoutBtn').click(function () {
 
                             $("#mesin_div" + item.id_departemen).append('<li><span><a data-id="' + dep + ',' + lok + ',' + div +
                             ',' + item.nama_div +'" href="#" style="text-decoration: none;" id="tampil_mesin">'+ item.nama_div +'</a></span></li>')
+                            $('#tampil_mesin').trigger('click');
                         });
                     })
                 });
             }
         });
+        
     })
     var fullPath = fileUrl + '/assets/img/mesin/gbr/';
     var fullPathD = fileUrl + '/assets/img/mesin/dok/';
@@ -451,8 +475,8 @@ $('#checkoutBtn').click(function () {
                                             ++i,
                                             items.nama_barang,
                                             items.merk,
-                                            items.guna,
-                                            items.tahun,
+                                            items.fungsi,
+                                            items.kondisi,
                                             img,
                                             editButton
                                         ]).draw();
@@ -487,8 +511,10 @@ $(document).on('click', '#detail_mesin_divisi', function(){
                     var jenis = item.jenis;
                     if (jenis == 1) {
                         $('#kendaraan_b').hide();
+                        $('#ukuran_cc').html('Ukuran');
                     } else {
                         $('#kendaraan_b').show();
+                        $('#ukuran_cc').html('CC');
                     } 
 
                     $('#kode_D').html(item.kode);
@@ -750,6 +776,7 @@ $(document).on('click', '.editB', function () {
 
                             $("#gedung_div" + item.id_departemen).append('<li><span><a data-id="' + dep + ',' + lok + ',' + div +
                             ',' + item.nama_div +'" href="#" style="text-decoration: none;" id="tampil_gedung">'+ item.nama_div +'</a></span></li>')
+                            $('#tampil_gedung').trigger('click');
                         });
                     })
                 });
@@ -955,12 +982,12 @@ $(document).on('click', '#add_gedung', function() {
             });
         });
 
-        $('body').on('change','#id_barang' , function (event) {
+        $('body').on('change','#barang_d_edit' , function (event) {
             event.preventDefault();
             var id = $(this).val();
             $.get('/gedung.barang/'+id, function (data) {
             $.each(data.data, function (index, item) {
-                $('#kode').val(item.kode_barang);
+                $('#kode_gedung').val(item.kode_barang);
             });
         });
     })
@@ -1213,6 +1240,7 @@ $(document).on('click', '.editC', function () {
 
                             $("#d_div" + item.id_dep).append('<li><span><a data-id="' + dep + ',' + lok + ',' + div +
                             ',' + item.nama_div +'" href="#" style="text-decoration: none;" id="tampil_d">'+ item.nama_div +'</a></span></li>')
+                            $('#tampil_d').trigger('click');
                         });
                     })
                 });
@@ -1661,6 +1689,7 @@ $(document).on('click', '.editD', function () {
 
                             $("#e_div" + item.id_dep).append('<li><span><a data-id="' + dep + ',' + lok + ',' + div +
                             ',' + item.nama_div +'" href="#" style="text-decoration: none;" id="tampil_e">'+ item.nama_div +'</a></span></li>')
+                            $('#tampil_e').trigger('click');
                         });
                     })
                 });
@@ -1965,7 +1994,7 @@ $(document).on('click', '.btn-hapusE', function () {
         });
     }
 });
-//CHECKOUT JALAN
+//CHECKOUT ASet
 $('#checkoutBtnE').click(function () {
         if (confirm("Yakin ingin menyimpan semua data secara permanen?")) {
             $.ajax({
@@ -2085,6 +2114,7 @@ $(document).on('click', '.editE', function () {
 
                                 $("#f_div" + item.id_dep).append('<li><span><a data-id="' + dep + ',' + lok + ',' + div +
                                 ',' + item.nama_div +'" href="#" style="text-decoration: none;" id="tampil_f">'+ item.nama_div +'</a></span></li>')
+                                $('#tampil_f').trigger('click');
                             });
                         })
                     });
@@ -2436,6 +2466,7 @@ $(document).on('click', '.editF', function () {
                                    $("#kir_ged" + item.id_div).append('<li><a href="#" id="kir_ruang" style="text-decoration: none;" data-id="' + dep + ',' + lok + ',' + div + ',' + items.gedung + ',' + item.nama_div + '"><span">'+ items.gedung +'</a></span>'+
 
                                     '</li>')
+                                    $('#kir_ruang').trigger('click');
                                  })
                             })
                         });

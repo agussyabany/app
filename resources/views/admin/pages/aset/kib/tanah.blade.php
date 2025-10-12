@@ -526,10 +526,10 @@ $no = 0;
                         <div class="container border border-primary rounded"><br>
                             <table class="table table-striped table-bordered">
                                 <tbody>
-                                    <tr>
+                                    {{-- <tr>
                                         <th>Nilai</th>
                                         <td id="nilai_D"></td>
-                                    </tr>
+                                    </tr> --}}
                                     
                                     <tr>
                                         <th>Keterangan</th>

@@ -177,9 +177,11 @@ class GedungController extends Controller
 
     public function input()
     {
+        $user = Auth()->id();
         $data = Gedung::select('gedungs.id as idb','nama_barang','kode_barang','luas','konstruksi')
                         ->join('barangs','gedungs.id_barang','barangs.id')
                         ->where('input',0)
+                        ->where('id_user',$user)
                         ->get();
         return response()->json([
             'data' => $data

@@ -129,9 +129,11 @@ class KibDController extends Controller
 
      public function input()
     {
+        $user = Auth()->id();
         $data = KibD::select('kib_d_s.id as idb','nama_barang','kode_barang','luas','struktur')
                         ->join('barangs','kib_d_s.id_barang','barangs.id')
                         ->where('input',0)
+                        ->where('id_user',$user)
                         ->get();
         return response()->json([
             'data' => $data

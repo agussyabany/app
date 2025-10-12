@@ -123,9 +123,11 @@ class KibEContrller extends Controller
      }
 public function input()
     {
+        $user = Auth()->id();
         $data = KibE::select('kib_e_s.id as ide','nama_barang','kode_barang','jumlah','kode')
                         ->join('barangs','kib_e_s.id_barang','barangs.id')
                         ->where('input',0)
+                        ->where('id_user',$user)
                         ->get();
         return response()->json([
             'data' => $data
