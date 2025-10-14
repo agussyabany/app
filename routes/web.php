@@ -120,6 +120,7 @@ Route::middleware('auth','verified','role:aset')->group(function () {
 
 
     Route::get('/tanah',[AsetDashboardController::class,'tanah']);
+    Route::get('/tanah/{id}',[AsetDashboardController::class,'idTanah']);
     Route::get('/mesin',[AsetDashboardController::class,'mesin']);
     Route::get('/gedung',[AsetDashboardController::class,'gedung']);
     Route::get('/kibd',[AsetDashboardController::class,'kibD']);

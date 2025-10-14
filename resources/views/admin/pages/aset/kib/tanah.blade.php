@@ -50,7 +50,8 @@ $no = 0;
                                                 <td>
                                                     <!-- Add action buttons/links here -->
                                                     <div class="btn-group">
-                                                        <button id="detail_tanah" data-id="{{ $item->id_tanah }}" class="btn btn-default border border-secondary btn-sm detail text-success" data-bs-toggle="modal" data-bs-target="#modal_tanah_detail"  type="button"><i class="fas fa-eye"></i></button>
+                                                        {{-- <button id="detail_tanah" data-id="{{ $item->id_tanah }}" class="btn btn-default border border-secondary btn-sm detail text-success" data-bs-toggle="modal" data-bs-target="#modal_tanah_detail"  type="button"><i class="fas fa-eye"></i></button> --}}
+                                                        <button id="detail_tanah" data-id="{{ $item->idLok }}" class="btn btn-default border border-secondary btn-sm detail tree" data-bs-toggle="offcanvas" role="button" aria-controls="offcanvasExample" href="#data"  type="button"><i class="fas fa-eye"></i></button>
 
                                                         <button type="button" class="btn btn-sm btn-default border border-secondary  dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"><span class="visually-hidden">Toggle Dropdown</span></button>
                                                         <ul class="dropdown-menu">
@@ -334,7 +335,289 @@ $no = 0;
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body" id="modal_bodyLG">
-              <div class="container">
+              {{-- <div class="container">
+                <div class="text-center my-3">
+                    <div class="gambar-wrapper position-relative d-inline-block" style="max-width: 100%; height: auto;">
+                        
+                        <img id="gambar_D"
+                            src=""
+                            alt="Foto Lokasi"
+                            class="img-fluid rounded shadow"
+                            style="max-height: 500px; object-fit: contain;">
+                        <div class="edit-icon" id="edit-img-a">
+                            <i class="fas fa-edit"></i>
+                        </div>
+                    </div>
+                </div><br>
+
+                <div class="row">
+                    <div class="col">
+                        <div class="container border border-primary rounded"><br>
+                            <table class="table table-striped table-bordered">
+                                <tbody>
+                                    <tr>
+                                        <th>Letak</th>
+                                        <td id="alamat_D"> </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Nama Barang</th>
+                                        <td id="nama_barang_D"> </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Kode Barang</th>
+                                        <td id="kode_D">  </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="container border border-primary rounded"><br>
+                            <table class="table table-striped table-bordered">
+                                <tbody>
+                                    <tr>
+                                        <th>Asal Usul</th>
+                                        <td id="asal_D"> item.asal+ </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Tahun Pengadaan</th>
+                                        <td id="tahun_D"> item.tahun+ </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Penggunaan</th>
+                                        <td id="guna_D">  </td>
+                                    </tr>
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div><br>
+
+                <fieldset class="border border-secondary rounded-3 p-2 row">
+                        <legend class="float-none w-auto px-3 border border-secondary rounded">
+                            <div style="font-size: 15px;"><strong>PENUNJUKAN</strong></div>
+                        </legend>
+                            <div class="col">
+                            <table class="table table-striped table-bordered">
+                                <tbody>
+                                    <tr>
+                                        <th>Nomor Surat</th>
+                                        <td id="no_tunjuk_D"> item.no_tunjuk+ </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            </div>
+                            <div class="col">
+                                <table class="table table-striped table-bordered">
+                                    <tbody>
+                                        <tr>
+                                            <th>Tanggal</th>
+                                            <td id="tgl_tunjuk_D"> item.tgl_tunjuk+ </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col">
+                                <table class="table table-striped table-bordered">
+                                    <tbody>
+                                        <tr>
+                                            <th>Luas</th>
+                                            <td id="luas_tunjuk_D"> item.luas_tunjuk+ </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                     ' </fieldset><br>
+
+                     <fieldset class="border border-secondary rounded-3 p-2 row">
+                        <legend class="float-none w-auto px-3 border border-secondary rounded">
+                            <div style="font-size: 15px;"><strong>SPPT/SPHAT/SPJBT</strong></div>
+                        </legend>
+                            <div class="col">
+                            <table class="table table-striped table-bordered">
+                                <tbody>
+                                    <tr>
+                                        <th>Nomor Surat</th>
+                                        <td id="sertifikat_D"> item.sertifikat+ </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            </div>
+                            <div class="col">
+                                <table class="table table-striped table-bordered">
+                                    <tbody>
+                                        <tr>
+                                            <th>Tanggal</th>
+                                            <td id="tgl_sertifikat_D"> item.tgl_sertifikat+ </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col">
+                                <table class="table table-striped table-bordered">
+                                    <tbody>
+                                        <tr>
+                                            <th>Luas</th>
+                                            <td id="luas_sertifikat_D"> item.luas_sertifikat+ </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                     ' </fieldset><br>
+
+                     <fieldset class="border border-secondary rounded-3 p-2 row">
+                        <legend class="float-none w-auto px-3 border border-secondary rounded">
+                            <div style="font-size: 15px;"><strong>GAMBAR SITUASI</strong></div>
+                        </legend>
+                            <div class="col">
+                            <table class="table table-striped table-bordered">
+                                <tbody>
+                                    <tr>
+                                        <th>Nomor Surat</th>
+                                        <td id="no_gambar_D"> item.no_gambar+ </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            </div>
+                            <div class="col">
+                                <table class="table table-striped table-bordered">
+                                    <tbody>
+                                        <tr>
+                                            <th>Tanggal</th>
+                                            <td id="tgl_gambar_D"> item.tgl_gambar+ </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col">
+                                <table class="table table-striped table-bordered">
+                                    <tbody>
+                                        <tr>
+                                            <th>Luas</th>
+                                            <td id="luas_gambar_D"> item.luas_gambar+ </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                     ' </fieldset><br>
+
+                     <div class="row">
+                    <div class="col">
+                        <div class="container border border-primary rounded"><br>
+                            <table class="table table-striped table-bordered">
+                                <tbody>
+                                    <tr>
+                                        <th>Hak</th>
+                                        <td id="hak_D"> item.hak+ </td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <th>Pemilik Asal</th>
+                                        <td id="pemilik_D"> item.pemilik+ </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="container border border-primary rounded"><br>
+                            <table class="table table-striped table-bordered">
+                                <tbody>
+                                    {{-- <tr>
+                                        <th>Nilai</th>
+                                        <td id="nilai_D"></td>
+                                    </tr> --}}
+                                    
+                                    <tr>
+                                        <th>Keterangan</th>
+                                        <td id="ket_D"> item.ket+ </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div><br>
+
+                <fieldset class="border border-secondary rounded-3 p-2 row" id="filed">
+                        <legend class="float-none w-auto px-3 border border-secondary rounded">
+                            <div style="font-size: 15px;"><strong>DOKUMEN</strong></div>
+                        </legend>
+
+                     </fieldset><br>
+                </div> --}}
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="tombol btn btn-primary" id="">SUBMIT</button>
+            </div>
+          </div>
+        </div>
+      </div>
+{{-- MODAL NILAI --}}
+<div class="modal"  id="modal_tanah_nilai">
+    <div class="modal-dialog  modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="judul_modalLG_detail">DETAIL NILAI</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" id="modal_bodyLG">
+
+            <table class="table table-striped table-border" id="tbl_detailNilai">
+                <thead>
+                    <tr>
+                        <th>NO</th>
+                        <th>Kode Perkiraan</th>
+                        <th>Nama Aktiva</th>
+                        <th>Tanggal</th>
+                        <th>Tahun</th>
+                        <th>Nilai</th>
+                        <th>Uraian</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+        </table>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="tombol btn btn-primary" id="">SUBMIT</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+        {{-- OFFCANVAS TREE --}}
+
+
+        <div class="offcanvas offcanvas-end" style=" width: 90%;"  tabindex="-1" id="data" aria-labelledby="offcanvasBottomLabel">
+            <div class="offcanvas-header" id="kepala">
+
+            </div>
+            <div class="offcanvas-body large" id="canvas_body_tampil">
+                <div class="row">
+                    <div class="col-3 border border-primary rounded" id="canvas_tree">
+                        
+
+                    </div>
+                    <div class="col border border-primary rounded"><br>
+                        <div class="container">
+                            <div class="card">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <span id="card-header">Rencana Reservoir</span>
+
+                                    <button class="btn btn-sm btn-outline btn-primary updateA" id=updateA>
+                                    <i class="fa fa-pencil"></i>
+                                    </button>
+                                </div>
+                                <div class="card-body" id="card-body">
+                                    <div class="container">
                 <div class="text-center my-3">
                     <div class="gambar-wrapper position-relative d-inline-block" style="max-width: 100%; height: auto;">
                         
@@ -549,69 +832,6 @@ $no = 0;
 
                      </fieldset><br>
                 </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="tombol btn btn-primary" id="">SUBMIT</button>
-            </div>
-          </div>
-        </div>
-      </div>
-{{-- MODAL NILAI --}}
-<div class="modal"  id="modal_tanah_nilai">
-    <div class="modal-dialog  modal-xl">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="judul_modalLG_detail">DETAIL NILAI</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body" id="modal_bodyLG">
-
-            <table class="table table-striped table-border" id="tbl_detailNilai">
-                <thead>
-                    <tr>
-                        <th>NO</th>
-                        <th>Kode Perkiraan</th>
-                        <th>Nama Aktiva</th>
-                        <th>Tanggal</th>
-                        <th>Tahun</th>
-                        <th>Nilai</th>
-                        <th>Uraian</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-        </table>
-
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="tombol btn btn-primary" id="">SUBMIT</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-        {{-- OFFCANVAS TREE --}}
-
-
-        <div class="offcanvas offcanvas-end" style=" width: 90%;"  tabindex="-1" id="data" aria-labelledby="offcanvasBottomLabel">
-            <div class="offcanvas-header" id="kepala">
-
-            </div>
-            <div class="offcanvas-body large" id="canvas_body_tampil">
-                <div class="row">
-                    <div class="col-3 border border-primary rounded" id="canvas_tree">
-
-
-                    </div>
-                    <div class="col border border-primary rounded"><br>
-                        <div class="container">
-                            <div class="card">
-                                <div class="card-header" id="card-header"></div>
-                                <div class="card-body" id="card-body">
-
-
                                 </div>
                             </div><br>
                          </div>

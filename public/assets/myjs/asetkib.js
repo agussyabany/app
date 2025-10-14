@@ -15,77 +15,77 @@ $(document).ready(function() {
   
 
     //TANAH
-    $(document).on('click', '#detail_tanah', function() {
-        var id = $(this).data('id');
-        $.ajax({
-                type: "GET",
-                url: "/tanah.detail/"+ id,
-                success: function (data) {
-                $.each(data.data, function (index, item) {
-                    $('#judul_modalLG_detail').html(item.lokasi);
-                    $('#alamat_D').html(item.alamat);
-                    $('#nama_barang_D').html(item.nama_barang);
-                    $('#guna_D').html(item.guna);
-                    $('#asal_D').html(item.asal);
-                    $('#tahun_D').html(item.tahun);
-                    $('#guna_D').html(item.guna);
-                    $('#no_tunjuk_D').html(item.no_tunjuk);
+    // $(document).on('click', '#', function() {
+    //     var id = $(this).data('id');
+    //     $.ajax({
+    //             type: "GET",
+    //             url: "/tanah.detail/"+ id,
+    //             success: function (data) {
+    //             $.each(data.data, function (index, item) {
+    //                 $('#judul_modalLG_detail').html(item.lokasi);
+    //                 $('#alamat_D').html(item.alamat);
+    //                 $('#nama_barang_D').html(item.nama_barang);
+    //                 $('#guna_D').html(item.guna);
+    //                 $('#asal_D').html(item.asal);
+    //                 $('#tahun_D').html(item.tahun);
+    //                 $('#guna_D').html(item.guna);
+    //                 $('#no_tunjuk_D').html(item.no_tunjuk);
 
-                    if (item.tgl_tunjuk == '1000-01-01') {
-                        var tglTnjk = '-'
-                    }else{
-                        var tglTnjk = item.tgl_tunjuk;
-                    }
-                    $('#tgl_tunjuk_D').html(tglTnjk);
+    //                 if (item.tgl_tunjuk == '1000-01-01') {
+    //                     var tglTnjk = '-'
+    //                 }else{
+    //                     var tglTnjk = item.tgl_tunjuk;
+    //                 }
+    //                 $('#tgl_tunjuk_D').html(tglTnjk);
 
 
-                    $('#luas_tunjuk_D').html(item.luas_tunjuk);
-                    $('#sertifikat_D').html(item.sertifikat);
-                    if (item.tgl_sertifikat == '1000-01-01') {
-                        var tglSertfkt = '-'
-                    }else{
-                        var tglSertfkt = item.sertifikat;
-                    }
-                    $('#tgl_sertifikat_D').html(tglSertfkt);
-                    $('#luas_sertifikat_D').html(item.luas_sertifikat);
-                    $('#no_gambar_D').html(item.no_gambar);
-                    if (item.tgl_gambar == '1000-01-01') {
-                        var tglGmbr = '-'
-                    }else{
-                        var tglGmbr = item.tgl_tunjuk;
-                    }
-                    $('#tgl_gambar_D').html(tglGmbr);
-                    $('#luas_gambar_D').html(item.luas_gambar);
-                    $('#hak_D').html(item.hak);
-                    $('#asal_D').html(item.asal);
-                    $('#pemilik_D').html(item.pemilik);
-                    $('#ket_D').html(item.ket);
-                    $('#gambar_D').attr('src', 'https://app.perumdamtirtakencana.id/assets/img/lokasi/' + item.img);
+    //                 $('#luas_tunjuk_D').html(item.luas_tunjuk);
+    //                 $('#sertifikat_D').html(item.sertifikat);
+    //                 if (item.tgl_sertifikat == '1000-01-01') {
+    //                     var tglSertfkt = '-'
+    //                 }else{
+    //                     var tglSertfkt = item.sertifikat;
+    //                 }
+    //                 $('#tgl_sertifikat_D').html(tglSertfkt);
+    //                 $('#luas_sertifikat_D').html(item.luas_sertifikat);
+    //                 $('#no_gambar_D').html(item.no_gambar);
+    //                 if (item.tgl_gambar == '1000-01-01') {
+    //                     var tglGmbr = '-'
+    //                 }else{
+    //                     var tglGmbr = item.tgl_tunjuk;
+    //                 }
+    //                 $('#tgl_gambar_D').html(tglGmbr);
+    //                 $('#luas_gambar_D').html(item.luas_gambar);
+    //                 $('#hak_D').html(item.hak);
+    //                 $('#asal_D').html(item.asal);
+    //                 $('#pemilik_D').html(item.pemilik);
+    //                 $('#ket_D').html(item.ket);
+    //                 $('#gambar_D').attr('src', 'https://app.perumdamtirtakencana.id/assets/img/lokasi/' + item.img);
                     
-                    $('#kode_D').html(item.kode_barang);
+    //                 $('#kode_D').html(item.kode_barang);
 
-                });
+    //             });
 
-                $.get('/show/' + id, function (data) {
-                    $('#filed').empty();
-                     // misalnya: http://127.0.0.1:8000
+    //             $.get('/show/' + id, function (data) {
+    //                 $('#filed').empty();
+    //                  // misalnya: http://127.0.0.1:8000
 
-                    $.each(data.data, function (index, items) {
-                        var fullPath = fileUrl + '/assets/img/lokasi/' + items.dok;
+    //                 $.each(data.data, function (index, items) {
+    //                     var fullPath = fileUrl + '/assets/img/lokasi/' + items.dok;
 
-                        var thumbnail = $(
-                            '<div class="pdf-thumbnail col">' +
-                                '<embed width="150px" height="200px" src="' + fullPath + '" type="application/pdf">' +
-                                '<p><a href="#" onclick="window.open(\'' + fullPath + '\', \'_blank\'); return false;">' + items.dok + '</a></p>' +
-                            '</div>'
-                        );
+    //                     var thumbnail = $(
+    //                         '<div class="pdf-thumbnail col">' +
+    //                             '<embed width="150px" height="200px" src="' + fullPath + '" type="application/pdf">' +
+    //                             '<p><a href="#" onclick="window.open(\'' + fullPath + '\', \'_blank\'); return false;">' + items.dok + '</a></p>' +
+    //                         '</div>'
+    //                     );
 
-                        $('#filed').append(thumbnail);
-                    });
-                });
-            }
-        });
-    })
+    //                     $('#filed').append(thumbnail);
+    //                 });
+    //             });
+    //         }
+    //     });
+    // })
     //Detail Nilai Tanah
     $(document).on('click', '#klik_nilai', function() {
         var id = $(this).data('id');
@@ -146,48 +146,145 @@ $(document).ready(function() {
         
     })
     //Edit tanah
-    $(document).on('click', '.updateA', function() {
+    $(document).on('click', '#updateA', function() {
         var id = $(this).data('id');
-        $('#modal_tanah').modal('show');
-        $('#form_a').attr('action', '/tanah.update/' + id);
+        //alert(id);
+        // $('#modal_tanah').modal('show');
+        // $('#form_a').attr('action', '/tanah.update/' + id);
+        // $.ajax({
+        //         type: "GET",
+        //         url: "/tanah.detail/"+id,
+        //         success: function (data) {
+        //         $.each(data.data, function (index, item) {
+
+        //         $('#judul_modalLG').html('UPDATE DATA TANAH ' + item.lokasi);
+                  
+        //           $('#lokasi_kir').empty;
+        //           $('#lokasi_kir').append('<option value="' + item.id_lokasi + '" selected>' + item.lokasi + '</option>');
+
+        //           $('#nama').empty();
+        //          $.get('/barang.tanah', function (data) {
+        //             $.each(data.data, function (index, item) {
+        //                 $('#nama').append('<option value="' + item.id + '">' + item.nama_barang + '</option>');
+        //             });
+        //         });
+
+        //           $('#tahun').val(item.tahun);
+        //           $('#guna').val(item.guna);
+        //           $('#no_tunjuk').val(item.no_tunjuk);
+        //           $('#tgl_tunjuk').val(item.tgl_tunjuk);//
+        //           $('#luas_tunjuk').val(item.luas_tunjuk);
+        //           $('#sertifikat').val(item.sertifikat);
+        //           $('#tgl_sertifikat').val(item.tgl_sertifikat);//
+        //           $('#luas_sertifikat').val(item.luas_sertifikat);
+        //           $('#no_gambar').val(item.no_gambar);
+        //           $('#tgl_gambar').val(item.tgl_gambar);//
+        //           $('#luas_gambar').val(item.luas_gambar);
+
+        //           $('#hak').append('<option value="' + item.hak + '" selected>' + item.hak + '</option>');
+
+        //           $('#asal').append('<option value="' + item.asal + '" selected>' + item.asal + '</option>');
+
+        //           $('#pemilik').val(item.pemilik);
+        //           $('#ket').val(item.ket);
+
+        //           $('#dok').attr('disabled', true);
+        //         });
+        //     }
+        // });
+    })
+    //Data Tanah
+     $(document).on('click', '#detail_tanah', function() {
+        var id = $(this).data('id');
+        $('#canvas_tree').empty();
+        $('#card-header').empty();
+        
         $.ajax({
                 type: "GET",
-                url: "/tanah.detail/"+id,
+                url: "/tanah/"+ id,
                 success: function (data) {
                 $.each(data.data, function (index, item) {
+                    $('#kepala').html('DATA TANAH <strong>' + item.lokasi + '<strong>');
+                    $('#canvas_tree').append(
+                        '<li><span><strong><a href="#" data-id="'+ item.idT +'" id="tanah_terpilih">'+ item.pemilik +'</a></strong></span>'+
+                               
+                            '</li>');
+                            $('#tanah_terpilih').trigger('click');
+                        });
+                    }
+                });
+             })
 
-                $('#judul_modalLG').html('UPDATE DATA TANAH ' + item.lokasi);
-                  
-                  $('#lokasi_kir').empty;
-                  $('#lokasi_kir').append('<option value="' + item.id_lokasi + '" selected>' + item.lokasi + '</option>');
+        $(document).on('click', '#tanah_terpilih', function() {
+        var id = $(this).data('id');
+        //$('#updateA').attr('data-id').empty;
+        $.ajax({
+                type: "GET",
+                url: "/tanah.detail/"+ id,
+                success: function (data) {
+                $.each(data.data, function (index, item) {
+                    $('#updateA').attr('data-id', id);
+                    $('#card-header').html(item.guna);
+                    $('#judul_modalLG_detail').html(item.lokasi);
+                    $('#alamat_D').html(item.alamat);
+                    $('#nama_barang_D').html(item.nama_barang);
+                    $('#guna_D').html(item.guna);
+                    $('#asal_D').html(item.asal);
+                    $('#tahun_D').html(item.tahun);
+                    $('#guna_D').html(item.guna);
+                    $('#no_tunjuk_D').html(item.no_tunjuk);
 
-                  $('#nama').empty();
-                 $.get('/barang.tanah', function (data) {
-                    $.each(data.data, function (index, item) {
-                        $('#nama').append('<option value="' + item.id + '">' + item.nama_barang + '</option>');
-                    });
+                    if (item.tgl_tunjuk == '1000-01-01') {
+                        var tglTnjk = '-'
+                    }else{
+                        var tglTnjk = item.tgl_tunjuk;
+                    }
+                    $('#tgl_tunjuk_D').html(tglTnjk);
+
+
+                    $('#luas_tunjuk_D').html(item.luas_tunjuk);
+                    $('#sertifikat_D').html(item.sertifikat);
+                    if (item.tgl_sertifikat == '1000-01-01') {
+                        var tglSertfkt = '-'
+                    }else{
+                        var tglSertfkt = item.sertifikat;
+                    }
+                    $('#tgl_sertifikat_D').html(tglSertfkt);
+                    $('#luas_sertifikat_D').html(item.luas_sertifikat);
+                    $('#no_gambar_D').html(item.no_gambar);
+                    if (item.tgl_gambar == '1000-01-01') {
+                        var tglGmbr = '-'
+                    }else{
+                        var tglGmbr = item.tgl_tunjuk;
+                    }
+                    $('#tgl_gambar_D').html(tglGmbr);
+                    $('#luas_gambar_D').html(item.luas_gambar);
+                    $('#hak_D').html(item.hak);
+                    $('#asal_D').html(item.asal);
+                    $('#pemilik_D').html(item.pemilik);
+                    $('#ket_D').html(item.ket);
+                    $('#gambar_D').attr('src', 'https://app.perumdamtirtakencana.id/assets/img/lokasi/' + item.img);
+                    
+                    $('#kode_D').html(item.kode_barang);
+
                 });
 
-                  $('#tahun').val(item.tahun);
-                  $('#guna').val(item.guna);
-                  $('#no_tunjuk').val(item.no_tunjuk);
-                  $('#tgl_tunjuk').val(item.tgl_tunjuk);//
-                  $('#luas_tunjuk').val(item.luas_tunjuk);
-                  $('#sertifikat').val(item.sertifikat);
-                  $('#tgl_sertifikat').val(item.tgl_sertifikat);//
-                  $('#luas_sertifikat').val(item.luas_sertifikat);
-                  $('#no_gambar').val(item.no_gambar);
-                  $('#tgl_gambar').val(item.tgl_gambar);//
-                  $('#luas_gambar').val(item.luas_gambar);
+                $.get('/show/' + id, function (data) {
+                    $('#filed').empty();
+                     // misalnya: http://127.0.0.1:8000
 
-                  $('#hak').append('<option value="' + item.hak + '" selected>' + item.hak + '</option>');
+                    $.each(data.data, function (index, items) {
+                        var fullPath = fileUrl + '/assets/img/lokasi/' + items.dok;
 
-                  $('#asal').append('<option value="' + item.asal + '" selected>' + item.asal + '</option>');
+                        var thumbnail = $(
+                            '<div class="pdf-thumbnail col">' +
+                                '<embed width="150px" height="200px" src="' + fullPath + '" type="application/pdf">' +
+                                '<p><a href="#" onclick="window.open(\'' + fullPath + '\', \'_blank\'); return false;">' + items.dok + '</a></p>' +
+                            '</div>'
+                        );
 
-                  $('#pemilik').val(item.pemilik);
-                  $('#ket').val(item.ket);
-
-                  $('#dok').attr('disabled', true);
+                        $('#filed').append(thumbnail);
+                    });
                 });
             }
         });

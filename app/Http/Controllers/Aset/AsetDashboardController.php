@@ -363,19 +363,41 @@ class AsetDashboardController extends Controller
                     ->where('users.id',$idUSer)
                     ->first();
 
-        $tanah = Tanah::select('tanahs.id as id_tanah','lokasi','nama_barang','guna','alamat','no_tunjuk','tgl_tunjuk','img','tanahs.id_lokasi as idLok')
-                        ->join('lokasis','tanahs.id_lokasi','=','lokasis.id')
-                        // ->join('nilai_aktivas','tanahs.id_lokasi','=','nilai_aktivas.id_lokasi')
-                        ->join('barangs','tanahs.id_barang','=','barangs.id')
-                        // ->where('nilai_aktivas.cat',1)
-                        ->orderBy('lokasis.lokasi', 'ASC')
-                        // ->groupBy('tanahs.id', 'lokasi', 'nama_barang', 'guna', 'alamat', 'no_tunjuk', 'tgl_tunjuk', 'img', 'tanahs.id_lokasi','id_aktiva')
-                        ->get();
+        // $tanah = Tanah::select('tanahs.id as id_tanah','lokasi','nama_barang','guna','alamat','no_tunjuk','tgl_tunjuk','img','tanahs.id_lokasi as idLok')
+        //                 ->join('lokasis','tanahs.id_lokasi','=','lokasis.id')
+        //                 ->join('barangs','tanahs.id_barang','=','barangs.id')
+        //                 ->orderBy('lokasis.lokasi', 'ASC')
+        //                 ->distinct('idLok')
+        //                 ->get();
+        $tanah = Tanah::select(
+            DB::raw('MIN(tanahs.id) as id_tanah'),
+            'lokasis.lokasi',
+            DB::raw('MIN(barangs.nama_barang) as nama_barang'),
+            DB::raw('MIN(tanahs.guna) as guna'),
+            DB::raw('MIN(lokasis.alamat) as alamat'),
+            DB::raw('MIN(tanahs.no_tunjuk) as no_tunjuk'),
+            DB::raw('MIN(tanahs.tgl_tunjuk) as tgl_tunjuk'),
+            DB::raw('MIN(lokasis.img) as img'),
+            'tanahs.id_lokasi as idLok'
+        )
+        ->join('lokasis', 'tanahs.id_lokasi', '=', 'lokasis.id')
+        ->join('barangs', 'tanahs.id_barang', '=', 'barangs.id')
+        ->groupBy('tanahs.id_lokasi', 'lokasis.lokasi')
+        ->orderBy('lokasis.lokasi', 'ASC')
+        ->get();
         $jabat = $user['jabat'];
         $divisi = $user['nama_div'];
 
         $totalTanah = NilaiAktiva::join('aktivas', 'nilai_aktivas.id_aktiva', '=', 'aktivas.id')->where('kib', 'TANAH')->sum('nilai');
         return view('admin.pages.aset.kib.tanah',compact(['jabat','divisi','tanah','no','on','totalTanah']));
+    }
+
+    public function idTanah($id)
+    {
+        $idTanah = Tanah::select('tanahs.id as idT','id_lokasi','lokasi','guna','pemilik')->join('lokasis', 'tanahs.id_lokasi', '=', 'lokasis.id')->where('id_lokasi',$id)->get();
+         return response()->json([
+            'data' => $idTanah
+          ]);
     }
 
     public function mesin()
@@ -490,5 +512,7 @@ class AsetDashboardController extends Controller
         $divisi = $user['nama_div'];
         return view('admin.pages.aset.kib.kir',compact(['jabat','divisi','kir','no','on']));
     }
+
+    
 
 }
