@@ -199,18 +199,52 @@ $(document).ready(function() {
         $('#canvas_tree').empty();
         $('#card-header').empty();
         
-        $.ajax({
-                type: "GET",
-                url: "/tanah/"+ id,
-                success: function (data) {
-                $.each(data.data, function (index, item) {
-                    $('#kepala').html('DATA TANAH <strong>' + item.lokasi + '<strong>');
-                    $('#canvas_tree').append(
-                        '<li><span><strong><a href="#" data-id="'+ item.idT +'" id="tanah_terpilih">'+ item.pemilik +'</a></strong></span>'+
-                               
-                            '</li>');
-                            $('#tanah_terpilih').trigger('click');
+                        $.ajax({
+                    type: "GET",
+                    url: "/tanah/" + id,
+                    success: function (data) {
+                        // Kosongkan dulu isi div
+                        $('#canvas_tree').empty();
+
+                        // Buat header tabel
+                        let table = `<br>
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Pemilik Asal</th>
+                                        <th>Ukuran</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbody_tanah"></tbody>
+                            </table>
+                        `;
+
+                        // Masukkan tabel ke dalam #canvas_tree
+                        $('#canvas_tree').html(table);
+
+                        // Isi data baris tabel
+                        $.each(data.data, function (index, item) {
+                            $('#tbody_tanah').append(`
+                                <tr>
+                                    <td>${index + 1}</td>
+                                    <td>
+                                        <a href="#" id="tanah_terpilih" data-id="${item.idT}" class="tanah_terpilih">
+                                            ${item.pemilik}
+                                        </a>
+                                    </td>
+                                    <td>${item.luas_sertifikat + ' m2'}</td>
+                                </tr>
+                            `);
                         });
+
+                        // Ubah judul atau header
+                        if (data.data.length > 0) {
+                            $('#kepala').html('DATA TANAH <strong>' + data.data[0].lokasi + '</strong>');
+                        }
+
+                        // Trigger klik pertama otomatis jika ingin langsung tampilkan detail tanah pertama
+                        $('.tanah_terpilih').first().trigger('click');
                     }
                 });
              })

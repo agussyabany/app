@@ -394,7 +394,7 @@ class AsetDashboardController extends Controller
 
     public function idTanah($id)
     {
-        $idTanah = Tanah::select('tanahs.id as idT','id_lokasi','lokasi','guna','pemilik')->join('lokasis', 'tanahs.id_lokasi', '=', 'lokasis.id')->where('id_lokasi',$id)->get();
+        $idTanah = Tanah::select('tanahs.id as idT','id_lokasi','lokasi','guna','pemilik','luas_sertifikat')->join('lokasis', 'tanahs.id_lokasi', '=', 'lokasis.id')->where('id_lokasi',$id)->get();
          return response()->json([
             'data' => $idTanah
           ]);
