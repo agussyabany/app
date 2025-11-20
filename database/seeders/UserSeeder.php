@@ -149,7 +149,7 @@ class UserSeeder extends Seeder
             'email'=>'soc@liveline.smd',
             'password'=>bcrypt('soc2024')
 
-        // ]);
-        // $liveLine->assignRole('LiveLine');
+        ]);
+        $liveLine->assignRole('LiveLine');
     }
 }

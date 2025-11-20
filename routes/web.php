@@ -316,7 +316,7 @@ Route::middleware('auth','verified','role:soc')->group(function () {
 //LIVE LINE DASHBOARD
 Route::middleware('auth','verified','role:LiveLine')->group(function () {
     Route::get('/', function () {
-        return redirect('/ll.dashboard');
+     return redirect('/ll.dashboard');
     });
     Route::get('/ll.dashboard',[Llcontroller::class, 'index']);
     Route::get('/donut',[Llcontroller::class, 'donut']);
