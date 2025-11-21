@@ -100,6 +100,21 @@
     .highlighted-row {
     background-color: red !important; /* Use !important only if necessary to override other styles */
 }
+
+.btn-notif {
+    position: relative; /* Wajib supaya badge bisa nempel */
+}
+
+.btn-notif .notif-badge {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    background: red;
+    color: white;
+    padding: 2px 7px;
+    font-size: 11px;
+    border-radius: 50%;
+}
     
   </style>
 

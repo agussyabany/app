@@ -64,6 +64,7 @@ class AsetDashboardController extends Controller
                     ->get();
         $jabat = $user['jabat'];
         $divisi = $user['nama_div'];
+        
         return view('admin.pages.aset.master.barang',compact(['jabat','divisi','barang','no','on']));
     }
 
@@ -389,7 +390,15 @@ class AsetDashboardController extends Controller
         $divisi = $user['nama_div'];
 
         $totalTanah = NilaiAktiva::join('aktivas', 'nilai_aktivas.id_aktiva', '=', 'aktivas.id')->where('kib', 'TANAH')->sum('nilai');
-        return view('admin.pages.aset.kib.tanah',compact(['jabat','divisi','tanah','no','on','totalTanah']));
+        $notif = NilaiAktiva::where('stat',0)->where('cat',1)->count();
+        $baru = NilaiAktiva::select('nilai_aktivas.id as idAk','lokasis.id as idLok','lokasis.lokasi as lok','departemens.id as idDep','departemens.kode_dep as dep','divisis.id as idDiv','divisis.nama_div as namDiv','urai','nilai_aktivas.cat')
+                            ->join('lokasis','nilai_aktivas.id_lokasi','=','lokasis.id')
+                            ->join('departemens','nilai_aktivas.dep','=','departemens.id')
+                            ->join('divisis','nilai_aktivas.div','=','divisis.id')
+                            ->where('stat',0)
+                            ->where('nilai_aktivas.cat',1)
+                            ->get();
+        return view('admin.pages.aset.kib.tanah',compact(['jabat','divisi','tanah','no','on','totalTanah','notif','baru']));
     }
 
     public function idTanah($id)

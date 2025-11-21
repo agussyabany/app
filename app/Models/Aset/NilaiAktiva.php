@@ -19,7 +19,8 @@ class NilaiAktiva extends Model
         'id_lokasi',
         'dep',
         'div',
-        'cat'
+        'cat',
+        'stat'
 
     ];
 }

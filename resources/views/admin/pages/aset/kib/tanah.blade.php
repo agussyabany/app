@@ -12,15 +12,16 @@ $no = 0;
 @section('content')
 
     <div class="col container">
-        <br>        
-                    
-
-
-                 
-                <div class="container card"><br>
+        <br>
+        <div class="container card"><br><br>
                     <div class="float-end">
                          <button class="btn  btn-outline-success"   onclick="window.open('/tanah.print', '_blank')"><i class="fa fa-print"></i>&nbsp;CETAK</button>
-                        <button class="btn  btn-outline-primary"  data-bs-toggle="modal" id="add" data-bs-target="#modal_tanah">TAMBAH</button>
+                        <button class="btn btn-outline-primary btn-notif" data-bs-toggle="modal" id="add" data-bs-target="#modal_tanah">
+                            TAMBAH
+                            @if ($notif > 0)
+                                <span class="notif-badge"><strong>{{ $notif }}</strong></span>
+                            @endif
+                        </button>
                     </div><br><br>
                         <div class="card-header d-flex justify-content-between">
                             <span>DATA TANAH</span>
@@ -93,49 +94,34 @@ $no = 0;
               <form action="/tanah.save" id="form_a" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="container">
-                  {{-- <div class="row  border border-primary rounded">
+                  <div class="row  border border-primary rounded">
                     <div class="container"><br>
                         <table class="table table-striped table-bordered rounded">
                             <thead>
                                 <tr class="text-center">
-                                    <th>No Voucher</th>
-                                    <th>Kode Aktiva</th>
-                                    <th>Bulan</th>
+                                    <th>No</th>
+                                    <th>Lokasi</th>
+                                    <th>Departemen</th>
+                                    <th>Divisi</th>
                                     <th>Uraian</th>
                                   </tr>
                             </thead>
                         <tbody>
-                                <tr>
-                                    <td>
-                                        <div class="input-group input-group-sm mb-1">
-                                            <select class="select2 form-control" name="voucher_kir" id="voucher_tanah" style="width:100%;" required>
-                                                <option>- NO VOUCHER -</option>
-                                            </select>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="input-group input-group-sm mb-1">
-                                            <select class="select2 form-control" name="kode_aktiva" id="kode_aktiva" style="width:100%;" required>
-                                                <option>- PILIH KODE AKTIVA -</option>
-                                            </select>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="input-group input-group-sm mb-1">
-                                            <input type="text" class="form-control" name="bulan_voc" id="bulan_voc" disabled>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="input-group input-group-sm mb-1">
-                                            <input type="text" class="form-control" disabled value="text" id="urai_voc">
-                                        </div>
-                                    </td>
 
+                            @foreach ($baru as $item )
+                                 <tr>
+                                    <td>{{ $loop->iteration}}</td>
+                                    <td>{{$item->lok }}</td>
+                                    <td>{{$item->dep }}</td>
+                                    <td>{{$item->namDiv }}</td>
+                                    <td>{{$item->urai }}</td>
                                 </tr>
+                            @endforeach
+                               
                             </tbody>
                         </table>
                     </div>
-                </div><br> --}}
+                </div><br>
                         <div class="row  border border-primary rounded">
                             <div class="container"><br>
                                 <table class="table table-striped table-bordered rounded">

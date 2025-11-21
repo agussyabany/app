@@ -37,6 +37,7 @@ class NilaiController extends Controller
             'dep'=>$dep,
             'div'=>$div,
             'cat'=>$cat,
+            'stat'=>0,
             'user'=>Auth::user()->id,
             'created_at'=>Carbon::now()
 
