@@ -155,6 +155,11 @@ class GedungController extends Controller
             }
 
             $gedung->save();
+            $upNilai = $request->idAk;
+            NilaiAktiva::where('id',$upNilai)
+                ->update([
+                    'stat' => 1,
+                ]);
 
             return response()->json(['success' => true]);
         } catch (\Exception $e) {

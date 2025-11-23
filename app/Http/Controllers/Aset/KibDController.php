@@ -120,6 +120,11 @@ class KibDController extends Controller
             }
 
             $jalan->save();
+            $upNilai = $request->idAk;
+            NilaiAktiva::where('id',$upNilai)
+                ->update([
+                    'stat' => 1,
+                ]);
 
             return response()->json(['success' => true]);
         } catch (\Exception $e) {
@@ -133,7 +138,7 @@ class KibDController extends Controller
         $data = KibD::select('kib_d_s.id as idb','nama_barang','kode_barang','luas','struktur')
                         ->join('barangs','kib_d_s.id_barang','barangs.id')
                         ->where('input',0)
-                        ->where('id_user',$user)
+                        ->where('user',$user)
                         ->get();
         return response()->json([
             'data' => $data

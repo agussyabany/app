@@ -61,6 +61,7 @@ function klir()
 
 function selectOptAll()
 {
+    
     $.get('/lok', function (data) {
         $.each(data.data, function (index, item) {
             $('#lokasi_kir').append('<option value="' + item.id + '">' + item.lokasi + '</option>');

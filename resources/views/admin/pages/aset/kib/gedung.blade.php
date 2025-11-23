@@ -15,7 +15,11 @@ $no = 0;
                     
                     <div class="container">
                         <div class="float-end">
-                        <button class="btn btn-outline-primary"  data-bs-toggle="modal" id="add_gedung" data-bs-target="#modal_gedung">Tambah</button>
+                        <button class="btn btn-outline-primary btn-notif"  data-bs-toggle="modal" id="add_gedung" data-bs-target="#modal_gedung">Tambah
+                             @if ($notif > 0)
+                                <span class="notif-badge"><strong>{{ $notif }}</strong></span>
+                            @endif
+                        </button>
                     </div>
                         <div class="card">
                    
@@ -83,6 +87,36 @@ $no = 0;
                 <form action="" id="form_c" enctype="multipart/form-data">
                     <input type="hidden" id="id_c" name="id" value="">
                     <div class="container">
+                        <div class="row  border border-primary rounded">
+                    <div class="container"><br>
+                        <table class="table table-striped table-bordered rounded">
+                            <thead>
+                                <tr class="text-center">
+                                    <th>No</th>
+                                    <th>Lokasi</th>
+                                    <th>Departemen</th>
+                                    <th>Divisi</th>
+                                    <th>Uraian</th>
+                                    <th></th>
+                                  </tr>
+                            </thead>
+                        <tbody>
+
+                            @foreach ($baru as $item )
+                                 <tr class="row-pilihC">
+                                    <td>{{ $loop->iteration}}</td>
+                                    <td>{{$item->lok }}</td>
+                                    <td>{{$item->dep }}</td>
+                                    <td>{{$item->namDiv }}</td>
+                                    <td>{{$item->urai }}</td>
+                                    <td><button type="button" data-idlokc="{{ $item->idLok }}" data-idakc="{{ $item->idAk }}" data-iddep="{{$item->idDep}}" data-iddiv="{{$item->idDiv}}" class="btn btn-sm btn-success btn-pilihC" id="">Pilih</button></td>
+                                </tr>
+                            @endforeach
+                               
+                            </tbody>
+                        </table>
+                    </div>
+                </div><br>
                         <div class="row  border border-primary rounded" id="vMesin">
                             <div class="container"><br>
                                 <table class="table table-striped table-bordered rounded">
@@ -128,6 +162,7 @@ $no = 0;
                         </div><br>
                             <div class="row  border border-primary rounded">
                                 <div class="container"><br>
+                                    
                                     <table class="table table-striped table-bordered rounded">
                                         <thead>
                                             <tr class="text-center">
@@ -140,6 +175,7 @@ $no = 0;
                                             <tr>
                                                 <td>
                                                     <div class="input-group input-group-sm mb-1">
+                                                        <input type="text" id="idAkC" name="idAk">
                                                         <select class="select2 form-control" name="id_lokasi" id="lokasi_kir" style="width:100%;">
                                                             <option>- PILIH LOKASI -</option>
                                                         </select>

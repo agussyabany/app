@@ -128,7 +128,11 @@ class MesinController extends Controller
             }
 
             $mesin->save();
-
+            $upNilai = $request->idAk;
+            NilaiAktiva::where('id',$upNilai)
+                ->update([
+                    'stat' => 1,
+                ]);
             return response()->json(['success' => true]);
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'error' => $e->getMessage()]);
@@ -150,10 +154,11 @@ class MesinController extends Controller
    
     }
 
-    public function clear()
+    public function clear(Request $request)
     {
         try {
             Mesin::where('input', 0)->update(['input' => 1]);
+           
             return response()->json(['success' => true]);
         } catch (\Exception $e) {
             return response()->json(['success' => false]);

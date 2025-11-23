@@ -35,6 +35,7 @@ class TanahController extends Controller
         $asal = $request->input('asal');
         $pemilik = $request->input('pemilik');
         $ket = $request->input('ket');
+        $upNilai = $request->input('idAk');
         //$dok = $request->input('dok');
 
         $tanah = new  Tanah();
@@ -77,6 +78,10 @@ class TanahController extends Controller
                 ]);
             }
         }
+        NilaiAktiva::where('id',$upNilai)
+                ->update([
+                    'stat' => 1,
+                ]);
         Alert::success('BERHASIL','DATA BERHASIL DITAMBAH');
         return redirect('/tanah');
         //return response()->json(['message' => 'Data inserted successfully']);

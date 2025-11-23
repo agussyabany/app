@@ -104,17 +104,19 @@ $no = 0;
                                     <th>Departemen</th>
                                     <th>Divisi</th>
                                     <th>Uraian</th>
+                                    <th></th>
                                   </tr>
                             </thead>
                         <tbody>
 
                             @foreach ($baru as $item )
-                                 <tr>
+                                 <tr class="row-pilih">
                                     <td>{{ $loop->iteration}}</td>
                                     <td>{{$item->lok }}</td>
                                     <td>{{$item->dep }}</td>
                                     <td>{{$item->namDiv }}</td>
                                     <td>{{$item->urai }}</td>
+                                    <td><button type="button" data-idlok="{{ $item->idLok }}" data-idak="{{ $item->idAk }}" class="btn btn-sm btn-success btn-pilih" id="">Pilih</button></td>
                                 </tr>
                             @endforeach
                                
@@ -138,6 +140,7 @@ $no = 0;
                                         <tr>
                                             <td>
                                                 <div class="input-group input-group-sm mb-1">
+                                                    <input type="text" id="idAk" name="idAk">
                                                     <select class="select2 form-control" name="lokasi" id="lokasi_kir" style="width:100%;" required>
                                                         <option>- PILIH LOKASI -</option>
 

@@ -15,77 +15,37 @@ $(document).ready(function() {
   
 
     //TANAH
-    // $(document).on('click', '#', function() {
-    //     var id = $(this).data('id');
-    //     $.ajax({
-    //             type: "GET",
-    //             url: "/tanah.detail/"+ id,
-    //             success: function (data) {
-    //             $.each(data.data, function (index, item) {
-    //                 $('#judul_modalLG_detail').html(item.lokasi);
-    //                 $('#alamat_D').html(item.alamat);
-    //                 $('#nama_barang_D').html(item.nama_barang);
-    //                 $('#guna_D').html(item.guna);
-    //                 $('#asal_D').html(item.asal);
-    //                 $('#tahun_D').html(item.tahun);
-    //                 $('#guna_D').html(item.guna);
-    //                 $('#no_tunjuk_D').html(item.no_tunjuk);
+    //Pilih data dari nilai baru
+    $(document).on('click', '.btn-pilih', function () {
 
-    //                 if (item.tgl_tunjuk == '1000-01-01') {
-    //                     var tglTnjk = '-'
-    //                 }else{
-    //                     var tglTnjk = item.tgl_tunjuk;
-    //                 }
-    //                 $('#tgl_tunjuk_D').html(tglTnjk);
+    let idLok = $(this).data('idlok');
+    let idAk = $(this).data('idak');
+    $('#idAk').val(idAk);
 
+    // 1. Reset semua tombol kembali normal
+    $('.btn-pilih')
+        .prop('disabled', false)
+        .removeClass('btn-secondary')
+        .addClass('btn-success')
+        .text('Pilih');
 
-    //                 $('#luas_tunjuk_D').html(item.luas_tunjuk);
-    //                 $('#sertifikat_D').html(item.sertifikat);
-    //                 if (item.tgl_sertifikat == '1000-01-01') {
-    //                     var tglSertfkt = '-'
-    //                 }else{
-    //                     var tglSertfkt = item.sertifikat;
-    //                 }
-    //                 $('#tgl_sertifikat_D').html(tglSertfkt);
-    //                 $('#luas_sertifikat_D').html(item.luas_sertifikat);
-    //                 $('#no_gambar_D').html(item.no_gambar);
-    //                 if (item.tgl_gambar == '1000-01-01') {
-    //                     var tglGmbr = '-'
-    //                 }else{
-    //                     var tglGmbr = item.tgl_tunjuk;
-    //                 }
-    //                 $('#tgl_gambar_D').html(tglGmbr);
-    //                 $('#luas_gambar_D').html(item.luas_gambar);
-    //                 $('#hak_D').html(item.hak);
-    //                 $('#asal_D').html(item.asal);
-    //                 $('#pemilik_D').html(item.pemilik);
-    //                 $('#ket_D').html(item.ket);
-    //                 $('#gambar_D').attr('src', 'https://app.perumdamtirtakencana.id/assets/img/lokasi/' + item.img);
-                    
-    //                 $('#kode_D').html(item.kode_barang);
+    // 2. Hilangkan highlight dari semua baris
+    $('.row-pilih').removeClass('bg-success bg-opacity-25');
 
-    //             });
+    // 3. Ubah tombol yang diklik
+    $(this)
+        .prop('disabled', true)
+        .removeClass('btn-success')
+        .addClass('btn-secondary')
+        .text('✔');
 
-    //             $.get('/show/' + id, function (data) {
-    //                 $('#filed').empty();
-    //                  // misalnya: http://127.0.0.1:8000
+    // 4. Beri highlight pada baris yang dipilih
+    $(this).closest('tr').addClass('bg-success bg-opacity-25');
 
-    //                 $.each(data.data, function (index, items) {
-    //                     var fullPath = fileUrl + '/assets/img/lokasi/' + items.dok;
+    // 5. Pilih lokasi otomatis
+    $("#lokasi_kir").val(idLok).trigger('change');
+});
 
-    //                     var thumbnail = $(
-    //                         '<div class="pdf-thumbnail col">' +
-    //                             '<embed width="150px" height="200px" src="' + fullPath + '" type="application/pdf">' +
-    //                             '<p><a href="#" onclick="window.open(\'' + fullPath + '\', \'_blank\'); return false;">' + items.dok + '</a></p>' +
-    //                         '</div>'
-    //                     );
-
-    //                     $('#filed').append(thumbnail);
-    //                 });
-    //             });
-    //         }
-    //     });
-    // })
     //Detail Nilai Tanah
     $(document).on('click', '#klik_nilai', function() {
         var id = $(this).data('id');
@@ -328,6 +288,41 @@ $(document).ready(function() {
 
 
     //MESIN
+    //Pilih data dari nilai baru
+    $(document).on('click', '.btn-pilihB', function () {
+
+    let idLokB = $(this).data('idlokb');
+    let idAkB = $(this).data('idakb');
+    let idDep = $(this).data('iddep');
+    let idDiv = $(this).data('iddiv');
+    
+    $('#idAkB').val(idAkB);
+
+    // 1. Reset semua tombol kembali normal
+    $('.btn-pilihB')
+        .prop('disabled', false)
+        .removeClass('btn-secondary')
+        .addClass('btn-success')
+        .text('Pilih');
+
+    // 2. Hilangkan highlight dari semua baris
+    $('.row-pilihB').removeClass('bg-success bg-opacity-25');
+
+    // 3. Ubah tombol yang diklik
+    $(this)
+        .prop('disabled', true)
+        .removeClass('btn-success')
+        .addClass('btn-secondary')
+        .text('✔');
+
+    // 4. Beri highlight pada baris yang dipilih
+    $(this).closest('tr').addClass('bg-success bg-opacity-25');
+
+    // 5. Pilih lokasi otomatis
+    $("#lokasi_kir").val(idLokB).trigger('change');
+    $("#dep").val(idDep).trigger('change');
+    $("#div").val(idDiv).trigger('change'); 
+});
     $(document).on('click', '#klik_nilai_mesin', function() {
         var id = $(this).data('id');
 
@@ -519,21 +514,32 @@ $(document).on('click', '.btn-hapus', function () {
 });
 //CHECKOUT MESIN
 $('#checkoutBtn').click(function () {
-        if (confirm("Yakin ingin menyimpan semua data secara permanen?")) {
-            $.ajax({
-                url: '/mesin.clear',
-                type: 'POST',
-                success: function (res) {
-                    if (res.success) {
-                        alert('Data berhasil difinalisasi!');
-                        fetchKeranjang();
-                    } else {
-                        alert('Gagal checkout');
-                    }
+
+    if (confirm("Yakin ingin menyimpan semua data secara permanen?")) {
+
+        let idAk  = $('#idAkB').val();
+        
+
+        $.ajax({
+            url: '/mesin.clear',
+            type: 'POST',
+            data: {
+                idAk: idAk,
+                _token: $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function (res) {
+                if (res.success) {
+                    alert('Data berhasil difinalisasi!');
+                    fetchKeranjang();
+                } else {
+                    alert('Gagal checkout');
                 }
-            });
-        }
-    });
+            }
+        });
+
+    }
+
+});
 
 
 
@@ -857,6 +863,41 @@ $(document).on('click', '.editB', function () {
     })
 
     //GEDUNG
+    //Pilih data dari nilai baru
+    $(document).on('click', '.btn-pilihC', function () {
+
+    let idLokC = $(this).data('idlokc');
+    let idAkC = $(this).data('idakc');
+    let idDep = $(this).data('iddep');
+    let idDiv = $(this).data('iddiv');
+    
+    $('#idAkC').val(idAkC);
+
+    // 1. Reset semua tombol kembali normal
+    $('.btn-pilihC')
+        .prop('disabled', false)
+        .removeClass('btn-secondary')
+        .addClass('btn-success')
+        .text('Pilih');
+
+    // 2. Hilangkan highlight dari semua baris
+    $('.row-pilihC').removeClass('bg-success bg-opacity-25');
+
+    // 3. Ubah tombol yang diklik
+    $(this)
+        .prop('disabled', true)
+        .removeClass('btn-success')
+        .addClass('btn-secondary')
+        .text('✔');
+
+    // 4. Beri highlight pada baris yang dipilih
+    $(this).closest('tr').addClass('bg-success bg-opacity-25');
+
+    // 5. Pilih lokasi otomatis
+    $("#lokasi_kir").val(idLokC).trigger('change');
+    $("#dep").val(idDep).trigger('change');
+    $("#div").val(idDiv).trigger('change'); 
+});
     $(document).on('click', '#klik_nilai_gedung', function() {
         var id = $(this).data('id');
 
@@ -1221,6 +1262,7 @@ $('#checkoutBtnC').click(function () {
                     if (res.success) {
                         alert('Data berhasil difinalisasi!');
                         fetchKeranjangC();
+                        location.reload();
                     } else {
                         alert('Gagal checkout');
                     }
@@ -1318,6 +1360,41 @@ $(document).on('click', '.editC', function () {
 
 
     //JALAN
+    //Pilih data dari nilai baru
+    $(document).on('click', '.btn-pilihD', function () {
+
+    let idLokD = $(this).data('idlokd');
+    let idAkD = $(this).data('idakd');
+    let idDep = $(this).data('iddep');
+    let idDiv = $(this).data('iddiv');
+    
+    $('#idAkD').val(idAkD);
+
+    // 1. Reset semua tombol kembali normal
+    $('.btn-pilihD')
+        .prop('disabled', false)
+        .removeClass('btn-secondary')
+        .addClass('btn-success')
+        .text('Pilih');
+
+    // 2. Hilangkan highlight dari semua baris
+    $('.row-pilihD').removeClass('bg-success bg-opacity-25');
+
+    // 3. Ubah tombol yang diklik
+    $(this)
+        .prop('disabled', true)
+        .removeClass('btn-success')
+        .addClass('btn-secondary')
+        .text('✔');
+
+    // 4. Beri highlight pada baris yang dipilih
+    $(this).closest('tr').addClass('bg-success bg-opacity-25');
+
+    // 5. Pilih lokasi otomatis
+    $("#lokasi_kir").val(idLokD).trigger('change');
+    $("#dep").val(idDep).trigger('change');
+    $("#div").val(idDiv).trigger('change'); 
+});
     $(document).on('click', '#klik_nilai_d', function() {
         var id = $(this).data('id');
 
@@ -1674,6 +1751,7 @@ $('#checkoutBtnD').click(function () {
                     if (res.success) {
                         alert('Data berhasil difinalisasi!');
                         fetchKeranjangD();
+                        location.reload();
                     } else {
                         alert('Gagal checkout');
                     }
