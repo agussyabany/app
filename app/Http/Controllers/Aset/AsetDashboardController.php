@@ -543,6 +543,14 @@ class AsetDashboardController extends Controller
                         ->get();
         $jabat = $user['jabat'];
         $divisi = $user['nama_div'];
+        $notif = NilaiAktiva::where('stat',0)->where('cat',4)->count();
+        $baru = NilaiAktiva::select('nilai_aktivas.id as idAk','lokasis.id as idLok','lokasis.lokasi as lok','departemens.id as idDep','departemens.kode_dep as dep','divisis.id as idDiv','divisis.nama_div as namDiv','urai','nilai_aktivas.cat')
+                            ->join('lokasis','nilai_aktivas.id_lokasi','=','lokasis.id')
+                            ->join('departemens','nilai_aktivas.dep','=','departemens.id')
+                            ->join('divisis','nilai_aktivas.div','=','divisis.id')
+                            ->where('stat',0)
+                            ->where('nilai_aktivas.cat',4)
+                            ->get();
         return view('admin.pages.aset.kib.kir',compact(['jabat','divisi','kir','no','on']));
     }
 

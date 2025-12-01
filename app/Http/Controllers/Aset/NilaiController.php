@@ -24,6 +24,7 @@ class NilaiController extends Controller
         $dep = $request->input('dep');
         $div = $request->input('div');
         $cat = $request->input('cat');
+        $jenisn =$request->input('jenisn');
 
         NilaiAktiva::create([
             'no_voucher' => $no_voucher,
@@ -38,6 +39,7 @@ class NilaiController extends Controller
             'div'=>$div,
             'cat'=>$cat,
             'stat'=>0,
+            'jenisn'=>$jenisn,
             'user'=>Auth::user()->id,
             'created_at'=>Carbon::now()
 

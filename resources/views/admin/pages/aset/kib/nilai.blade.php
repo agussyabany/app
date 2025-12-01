@@ -163,6 +163,14 @@
                      @endforeach
                     </select>
                   </div>
+                  <div class="col">
+                    <select class="select2 form-control" style="width:100%;" name="jenisn" id="" required>
+                      <option value="">-JENIS-</option>
+                      <option value="1">Penambahan Aset</option>
+                      <option value="2">Penambahan Nilai</option>
+                    
+                    </select>
+                  </div>
 
                   <div class="col">
                     <input type="text" class="form-control" name="nilai" id="nominal">

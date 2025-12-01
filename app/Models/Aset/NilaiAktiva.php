@@ -20,7 +20,8 @@ class NilaiAktiva extends Model
         'dep',
         'div',
         'cat',
-        'stat'
+        'stat',
+        'jenisn'
 
     ];
 }
