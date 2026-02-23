@@ -290,26 +290,31 @@ class AsetDashboardController extends Controller
     public function nilaiData()
     {
         $sumNilai = NilaiAktiva::sum('nilai');
-        $data = NilaiAktiva::select(
-                    'nilai_aktivas.id as idNilai',
-                    'no_voucher',
-                    'tgl_voucher',
-                    'aktiva',
-                    'tahun',
-                    'nilai',
-                    'urai',
-                    'kib',
-                    'kode'
-                )
-                // ->join('lokasis','nilai_aktivas.id_lokasi','lokasis.id')
-                ->join('aktivas','nilai_aktivas.id_aktiva','aktivas.id')
-                ->orderBy('idNilai','DESC');
-            
 
-        return DataTables::of($data)
-            ->addIndexColumn()
-            ->addColumn('aksi', function($row){
-                return '<div class="btn-group">
+    $data = NilaiAktiva::query()
+        ->join('aktivas', 'nilai_aktivas.id_aktiva', '=', 'aktivas.id')
+        ->select([
+            'nilai_aktivas.id as idNilai',
+            'nilai_aktivas.no_voucher',
+            'nilai_aktivas.tgl_voucher',
+            'aktivas.aktiva as nama_aktiva',
+            'nilai_aktivas.tahun',
+            'nilai_aktivas.nilai',
+            'nilai_aktivas.urai',
+            'aktivas.kib',
+            'aktivas.kode'
+        ])
+        ->orderByDesc('nilai_aktivas.id');
+
+    return DataTables::of($data)
+        ->addIndexColumn()
+
+        ->editColumn('nilai', function ($row) {
+            return number_format($row->nilai, 0, ',', '.');
+        })
+
+        ->addColumn('aksi', function ($row) {
+            return '<div class="btn-group">
                             <button class="btn btn-default border border-primary btn-sm detail" data-id="'.$row->idNilai.'" type="button"></button>
                             <button type="button" class="btn btn-sm btn-default border border-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
                                 <span class="visually-hidden">Toggle Dropdown</span>
@@ -330,12 +335,12 @@ class AsetDashboardController extends Controller
                                 </li>
                             </ul>
                         </div>';
-            })
-            ->rawColumns(['aksi'])
-            ->with([
-            'sumNilai' => $sumNilai
-            ])
-            ->make(true);
+
+        })
+
+        ->rawColumns(['aksi'])
+        ->with(['sumNilai' => number_format($sumNilai, 0, ',', '.')])
+        ->make(true);
         }
 
 

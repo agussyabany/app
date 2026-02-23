@@ -3422,28 +3422,21 @@ $(document).on('click', '#isi_arsip', function() {
 //------NILAI-----//
 //DATA TABEL NILAI
 $('#tbl_sside').DataTable({
-        processing: true,
-        serverSide: true,
-        ajax: "nilai/data",
-        columns: [
-            
-            { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
-            { data: 'no_voucher', name: 'no_voucher' },
-            { data: 'tgl_voucher', name: 'tgl_voucher' },
-            { data: 'aktiva', name: 'aktiva' },
-            { data: 'tahun', name: 'tahun' },
-            { data: 'nilai', name: 'nilai' },
-            { data: 'urai', name: 'urai' },
-            { data: 'kib', name: 'kib' },
-            { data: 'aksi', name: 'aksi', orderable: false, searchable: false }
-        ],
-         initComplete: function(settings, json) {
-        // Ambil sumNilai dari response
-            $('#totalNilai').text(
-            parseInt(json.sumNilai).toLocaleString('id-ID')
-        );
-    }
-    });
+    processing: true,
+    serverSide: true,
+    ajax: '/nilai/data',
+    columns: [
+        { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable:false, searchable:false },
+        { data: 'no_voucher', name: 'nilai_aktivas.no_voucher' },
+        { data: 'tgl_voucher', name: 'nilai_aktivas.tgl_voucher' },
+        { data: 'nama_aktiva', name: 'aktivas.aktiva' }, // WAJIB
+        { data: 'tahun', name: 'nilai_aktivas.tahun' },
+        { data: 'nilai', name: 'nilai_aktivas.nilai' },
+        { data: 'urai', name: 'nilai_aktivas.urai' },
+        { data: 'kib', name: 'aktivas.kib' },
+        { data: 'aksi', orderable:false, searchable:false }
+    ]
+});
 
 //EDIT NILAI
     $(document).on('click', '.editNilai', function() {
