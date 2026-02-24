@@ -290,8 +290,7 @@ class AsetDashboardController extends Controller
     public function nilaiData()
     {
         $sumNilai = NilaiAktiva::sum('nilai');
-
-    $data = NilaiAktiva::query()
+        $data = NilaiAktiva::query()
         ->join('aktivas', 'nilai_aktivas.id_aktiva', '=', 'aktivas.id')
         ->select([
             'nilai_aktivas.id as idNilai',

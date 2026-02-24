@@ -3416,15 +3416,22 @@ $(document).on('click', '#isi_arsip', function() {
 
             })
         })
-
-
-})
+    })
 //------NILAI-----//
 //DATA TABEL NILAI
 $('#tbl_sside').DataTable({
     processing: true,
     serverSide: true,
-    ajax: '/nilai/data',
+   ajax: {
+        url: '/nilai/data',
+        dataSrc: function (json) {
+
+            // ⬇️ ambil sumNilai dari backend
+            $('#totalNilai').html(json.sumNilai);
+
+            return json.data;
+        }
+    },
     columns: [
         { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable:false, searchable:false },
         { data: 'no_voucher', name: 'nilai_aktivas.no_voucher' },
