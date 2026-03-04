@@ -131,7 +131,7 @@
                      <select   class="select2 form-control" style="width:100%;" name="dep" id="dep" required>
                       <option value="">-DEPARTEMEN-</option>
                      @foreach ($dep as $item)
-                       <option value="{{$item->id}}">{{$item->kode_dep}}</option>
+                       <option value="{{$item->id}}">{{$item->nama_dep}}</option>
                      @endforeach
                     </select>
                   </div>
