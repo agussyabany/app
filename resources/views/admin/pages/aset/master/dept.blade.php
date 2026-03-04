@@ -19,8 +19,8 @@
                                     <thead>
                                         <tr>
                                             <th>NO</th>
-                                            <th>DEPARTEMEN</th>
                                             <th>KODE DEPARTEMEN</th>
+                                            <th>DEPARTEMEN</th>
                                             <th>AKSI</th>
                                         </tr>
                                     </thead>
