@@ -394,7 +394,7 @@ class AsetDashboardController extends Controller
         $divisi = $user['nama_div'];
 
         $totalTanah = NilaiAktiva::join('aktivas', 'nilai_aktivas.id_aktiva', '=', 'aktivas.id')->where('kib', 'TANAH')->sum('nilai');
-        $notif = NilaiAktiva::where('stat',0)->where('cat',1)->count();
+        $notif = NilaiAktiva::where('jenisn',1)->where('cat',1)->count();
         $baru = NilaiAktiva::select('nilai_aktivas.id as idAk','lokasis.id as idLok','lokasis.lokasi as lok','departemens.id as idDep','departemens.kode_dep as dep','divisis.id as idDiv','divisis.nama_div as namDiv','urai','nilai_aktivas.cat')
                             ->join('lokasis','nilai_aktivas.id_lokasi','=','lokasis.id')
                             ->join('departemens','nilai_aktivas.dep','=','departemens.id')

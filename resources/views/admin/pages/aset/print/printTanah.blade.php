@@ -1516,6 +1516,31 @@ x\:* {behavior:url(#default#VML);}
 	white-space:normal;}
 -->
 </style>
+<style>
+@media print {
+
+    thead {
+        display: table-header-group;
+    }
+
+    tfoot {
+        display: table-footer-group;
+    }
+
+    tr {
+        page-break-inside: avoid;
+    }
+
+    body {
+        margin: 0;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+}
+</style>
 </head>
 
 <body>
@@ -2111,6 +2136,7 @@ AADqRgAAZHJzL19yZWxzL3BpY3R1cmV4bWwueG1sLnJlbHNQSwUGAAAAAAYABgCFAQAA30cAAAAA
   <td class=xl1520975></td>
   <td class=xl1520975></td>
  </tr>
+ 
  <tr height=28 style='mso-height-source:userset;height:21.0pt'>
   <td rowspan=3 height=68 class=xl11320975 width=51 style='border-bottom:1.0pt solid black;
   height:51.0pt;width:39pt'>NO</td>
@@ -2142,6 +2168,8 @@ AADqRgAAZHJzL19yZWxzL3BpY3R1cmV4bWwueG1sLnJlbHNQSwUGAAAAAAYABgCFAQAA30cAAAAA
   <td rowspan=3 class=xl13020975 width=163 style='border-bottom:1.0pt solid black;
   width:123pt'>KETERANGAN</td>
  </tr>
+ 
+
  <tr height=20 style='mso-height-source:userset;height:15.0pt'>
   <td rowspan=2 height=40 class=xl11920975 width=121 style='border-bottom:1.0pt solid black;
   height:30.0pt;width:91pt'>KODE BARANG</td>
@@ -2176,7 +2204,9 @@ AADqRgAAZHJzL19yZWxzL3BpY3R1cmV4bWwueG1sLnJlbHNQSwUGAAAAAAYABgCFAQAA30cAAAAA
   <td class=xl8220975 style='border-top:none;border-left:none'>15</td>
   <td class=xl8420975 width=163 style='border-left:none;width:123pt'>16</td>
  </tr>
+<thead>
 
+<tbody>
  @foreach ($tanah as $item)
      
  
@@ -2220,6 +2250,8 @@ AADqRgAAZHJzL19yZWxzL3BpY3R1cmV4bWwueG1sLnJlbHNQSwUGAAAAAAYABgCFAQAA30cAAAAA
   <td height=32 class=xl8520975 style='height:24.0pt;border-left:none'>11-7-1972</td>
  </tr>
  @endforeach
+ </tbody>
+
  <tr height=32 style='mso-height-source:userset;height:24.0pt'>
   <td height=32 class=xl9420975 style='height:24.0pt'>&nbsp;</td>
   <td class=xl9520975>&nbsp;</td>
