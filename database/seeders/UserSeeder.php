@@ -21,7 +21,7 @@ class UserSeeder extends Seeder
         // ]);
         // $admin->assignRole('admin');
 
-        //$aset = User::create(
+        $aset = User::create(
             // [
             //     'name' => 'AAM ROBIDIN NOOR, S.E.',
             //     'email'=>'robi@aset.smd',
@@ -95,30 +95,64 @@ class UserSeeder extends Seeder
             //     'img' => '-',
             //     'password' => bcrypt('erwin2024')
             // ]
-            // [
-            //     'name' => 'ARYO ARIADI',
-            //     'email' => 'aryo@aset.smd',
-            //     'nip' => '1994.2020.1.660',
-            //     'jabat' => '3',
-            //     'divisi' => 27,
-            //     'img' => '-',
-            //     'password' => bcrypt('aryo2024')
-            // ]
-        //);
-        //$aset->assignRole('aset');
-
-        $diklat = User::create(
-             [
-                'name' => 'KIKI',
-                'email' => 'kiki@diklat.smd',
-                'nip' => '-',
-                'jabat' => '3',
-                'divisi' => 0,
-                'img' => '-',
-                'password' => bcrypt('654321')
-            ],
+             //[
+                 //'name' => 'BPK',
+                 //'email' => 'bpk@aset.smd',
+                 //'nip' => '0.0.0.0',
+                 //'jabat' => '3',
+                 //'divisi' => 27,
+                 //'img' => '-',
+                 //'password' => bcrypt('bpk2026')
+             //],
+		//[
+                 //'name' => 'ARYO ARIADI',
+                 //'email' => 'aryo@aset.smd',
+                 //'nip' => '1994.2020.1.660',
+                 //'jabat' => '3',
+                 //'divisi' => 27,
+                 //'img' => '-',
+                 //'password' => bcrypt('aryo2026')
+             //],
+[
+                 'name' => 'AMIE ZULHERMA',
+                 'email' => 'ami@aset.smd',
+                 'nip' => '0.0.0.0',
+                 'jabat' => '3',
+                 'divisi' => 27,
+                 'img' => '-',
+                 'password' => bcrypt('ami2026')
+             ],[
+                 'name' => 'VIVI EKA SAPUTRI',
+                 'email' => 'vivi@aset.smd',
+                 'nip' => '1990.2012.2.537',
+                 'jabat' => '3',
+                 'divisi' => 27,
+                 'img' => '-',
+                 'password' => bcrypt('vivi2026')
+             ],[
+                 'name' => 'INDAH SARASWATI SABRI',
+                 'email' => 'indah@aset.smd',
+                 'nip' => '0.0.0.0',
+                 'jabat' => '3',
+                 'divisi' => 27,
+                 'img' => '-',
+                 'password' => bcrypt('indah2026')
+             ]
         );
-        $diklat->assignRole('diklat');
+        $aset->assignRole('aset');
+
+        //$diklat = User::create(
+             //[
+                //'name' => 'KIKI',
+                //'email' => 'kiki@diklat.smd',
+                //'nip' => '-',
+                //'jabat' => '3',
+                //'divisi' => 0,
+                //'img' => '-',
+                //'password' => bcrypt('654321')
+            //],
+        //);
+        //$diklat->assignRole('diklat');
 
         // $soc = User::create([
         //     'name' => 'Muhammad Agus Syabany',
@@ -144,12 +178,12 @@ class UserSeeder extends Seeder
         // ]);
         // $bppl->assignRole('bppl');
 
-        $liveLine = User::create([
-            'name' => 'Service & Opertion Center',
-            'email'=>'soc@liveline.smd',
-            'password'=>bcrypt('soc2024')
+        //$liveLine = User::create([
+            //'name' => 'Service & Opertion Center',
+            //'email'=>'soc@liveline.smd',
+            //'password'=>bcrypt('soc2024')
 
-        ]);
-        $liveLine->assignRole('LiveLine');
+        //]);
+        //$liveLine->assignRole('LiveLine');
     }
 }
