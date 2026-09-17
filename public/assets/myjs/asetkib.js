@@ -106,53 +106,53 @@ $(document).ready(function() {
         
     })
     //Edit tanah
-    $(document).on('click', '#updateA', function() {
-        var id = $(this).data('id');
-        //alert(id);
-        // $('#modal_tanah').modal('show');
-        // $('#form_a').attr('action', '/tanah.update/' + id);
-        // $.ajax({
-        //         type: "GET",
-        //         url: "/tanah.detail/"+id,
-        //         success: function (data) {
-        //         $.each(data.data, function (index, item) {
+    // $(document).on('click', '#updateA', function() {
+    //     var id = $(this).data('id');
+    //     alert(id);
+    //     $('#modal_tanah').modal('show');
+    //     $('#form_a').attr('action', '/tanah.update/' + id);
+    //     $.ajax({
+    //             type: "GET",
+    //             url: "/tanah.detail/"+id,
+    //             success: function (data) {
+    //             $.each(data.data, function (index, item) {
 
-        //         $('#judul_modalLG').html('UPDATE DATA TANAH ' + item.lokasi);
+    //             $('#judul_modalLG').html('UPDATE DATA TANAH ' + item.lokasi);
                   
-        //           $('#lokasi_kir').empty;
-        //           $('#lokasi_kir').append('<option value="' + item.id_lokasi + '" selected>' + item.lokasi + '</option>');
+    //               $('#lokasi_kir').empty;
+    //               $('#lokasi_kir').append('<option value="' + item.id_lokasi + '" selected>' + item.lokasi + '</option>');
 
-        //           $('#nama').empty();
-        //          $.get('/barang.tanah', function (data) {
-        //             $.each(data.data, function (index, item) {
-        //                 $('#nama').append('<option value="' + item.id + '">' + item.nama_barang + '</option>');
-        //             });
-        //         });
+    //               $('#nama').empty();
+    //              $.get('/barang.tanah', function (data) {
+    //                 $.each(data.data, function (index, item) {
+    //                     $('#nama').append('<option value="' + item.id + '">' + item.nama_barang + '</option>');
+    //                 });
+    //             });
 
-        //           $('#tahun').val(item.tahun);
-        //           $('#guna').val(item.guna);
-        //           $('#no_tunjuk').val(item.no_tunjuk);
-        //           $('#tgl_tunjuk').val(item.tgl_tunjuk);//
-        //           $('#luas_tunjuk').val(item.luas_tunjuk);
-        //           $('#sertifikat').val(item.sertifikat);
-        //           $('#tgl_sertifikat').val(item.tgl_sertifikat);//
-        //           $('#luas_sertifikat').val(item.luas_sertifikat);
-        //           $('#no_gambar').val(item.no_gambar);
-        //           $('#tgl_gambar').val(item.tgl_gambar);//
-        //           $('#luas_gambar').val(item.luas_gambar);
+    //               $('#tahun').val(item.tahun);
+    //               $('#guna').val(item.guna);
+    //               $('#no_tunjuk').val(item.no_tunjuk);
+    //               $('#tgl_tunjuk').val(item.tgl_tunjuk);//
+    //               $('#luas_tunjuk').val(item.luas_tunjuk);
+    //               $('#sertifikat').val(item.sertifikat);
+    //               $('#tgl_sertifikat').val(item.tgl_sertifikat);//
+    //               $('#luas_sertifikat').val(item.luas_sertifikat);
+    //               $('#no_gambar').val(item.no_gambar);
+    //               $('#tgl_gambar').val(item.tgl_gambar);//
+    //               $('#luas_gambar').val(item.luas_gambar);
 
-        //           $('#hak').append('<option value="' + item.hak + '" selected>' + item.hak + '</option>');
+    //               $('#hak').append('<option value="' + item.hak + '" selected>' + item.hak + '</option>');
 
-        //           $('#asal').append('<option value="' + item.asal + '" selected>' + item.asal + '</option>');
+    //               $('#asal').append('<option value="' + item.asal + '" selected>' + item.asal + '</option>');
 
-        //           $('#pemilik').val(item.pemilik);
-        //           $('#ket').val(item.ket);
+    //               $('#pemilik').val(item.pemilik);
+    //               $('#ket').val(item.ket);
 
-        //           $('#dok').attr('disabled', true);
-        //         });
-        //     }
-        // });
-    })
+    //               $('#dok').attr('disabled', true);
+    //             });
+    //         }
+    //     });
+    // })
     //Data Tanah
      $(document).on('click', '#detail_tanah', function() {
         var id = $(this).data('id');

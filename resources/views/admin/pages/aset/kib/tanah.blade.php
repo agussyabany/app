@@ -56,7 +56,7 @@ $no = 0;
 
                                                         <button type="button" class="btn btn-sm btn-default border border-secondary  dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"><span class="visually-hidden">Toggle Dropdown</span></button>
                                                         <ul class="dropdown-menu">
-                                                            <li><a class="dropdown-item  updateA text-primary" data-id="{{ $item->id_tanah}}" href="#"><i class="fa-solid fa-edit"></i>&nbsp;EDIT</a></li>
+                                                            <li><a class="dropdown-item  updateA text-primary" data-id="{{ $item->id_tanah}}" href="#"><i class="fa-solid fa-edit" id="updateA"></i>&nbsp;EDIT</a></li>
                                                             <li>
                                                             <form action="/del.tanah/{{ $item->id_tanah }}" method="POST" style="display:inline;">
                                                                 @csrf
